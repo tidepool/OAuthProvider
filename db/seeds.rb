@@ -3,5 +3,17 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
+#   Mayor.create(:name => 'Emanuel', :city => cities.first)
+# require 'csv'
+require File.expand_path('../seeds_helper', __FILE__)
+
+Dir[File.expand_path('../seeds/*.rb', __FILE__)].each do |file| 
+	require file
+
+	filename = File.basename(file, '.rb')
+	klass_name = "#{filename.camelize}"
+  seed = klass_name.constantize.new
+  seed.create_seed()
+end
+

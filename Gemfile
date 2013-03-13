@@ -5,11 +5,15 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+# gem 'sqlite3'
 
 gem 'devise'
 
 gem 'doorkeeper', '~> 0.6.7'
+
+gem 'pg'
+
+gem 'tidepool_analyze', :path => '/Users/keremk/Developer/Tidepool/tidepool_analyze'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,8 +31,14 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+# API (Serializers)
+gem "active_model_serializers", :github => "rails-api/active_model_serializers"
 
 gem 'jquery-rails'
+
+gem 'redis'
+
+gem 'thin'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

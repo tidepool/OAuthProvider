@@ -11,7 +11,76 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130309022807) do
+ActiveRecord::Schema.define(:version => 20130312185704) do
+
+  create_table "adjective_circles", :force => true do |t|
+    t.string   "name_pair"
+    t.string   "version"
+    t.float    "size_weight"
+    t.float    "size_sd"
+    t.float    "size_mean"
+    t.float    "distance_weight"
+    t.float    "distance_sd"
+    t.float    "distance_mean"
+    t.float    "overlap_weight"
+    t.float    "overlap_sd"
+    t.float    "overlap_mean"
+    t.string   "maps_to"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "assessments", :force => true do |t|
+    t.date     "date_taken"
+    t.string   "score"
+    t.integer  "definition_id"
+    t.integer  "user_id"
+    t.text     "event_log"
+    t.text     "intermediate_results"
+    t.text     "stages"
+    t.boolean  "results_ready"
+    t.integer  "profile_description_id"
+    t.text     "aggregate_results"
+    t.string   "big5_dimension"
+    t.string   "holland6_dimension"
+    t.string   "emo8_dimension"
+    t.integer  "stage_completed"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "definitions", :force => true do |t|
+    t.string   "name"
+    t.text     "stages"
+    t.text     "instructions"
+    t.text     "end_remarks"
+    t.string   "experiment"
+    t.string   "icon"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "elements", :force => true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.float    "standard_deviation"
+    t.float    "mean"
+    t.float    "weight_extraversion"
+    t.float    "weight_conscientiousness"
+    t.float    "weight_neuroticism"
+    t.float    "weight_openness"
+    t.float    "weight_agreeableness"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  create_table "images", :force => true do |t|
+    t.string   "name"
+    t.text     "elements"
+    t.string   "primary_color"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "oauth_access_grants", :force => true do |t|
     t.integer  "resource_owner_id", :null => false
@@ -51,6 +120,19 @@ ActiveRecord::Schema.define(:version => 20130309022807) do
   end
 
   add_index "oauth_applications", ["uid"], :name => "index_oauth_applications_on_uid", :unique => true
+
+  create_table "profile_descriptions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "one_liner"
+    t.text     "bullet_description"
+    t.string   "big5_dimension"
+    t.string   "holland6_dimension"
+    t.string   "code"
+    t.string   "logo_url"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

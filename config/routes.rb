@@ -1,9 +1,16 @@
-ApiServer::Application.routes.draw do
+OAuthProvider::Application.routes.draw do
   use_doorkeeper
 
   devise_for :users
 
   root :to => 'home#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :assessments
+      post "/user_event" => "user_events#create"
+    end
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
