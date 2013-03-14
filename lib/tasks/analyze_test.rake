@@ -12,10 +12,10 @@ task :analyze_test => :environment do |t|
   $redis_analyze.subscribe(ACTION_EVENT_QUEUE) do |on|
     on.message do |channel, msg|
       data = JSON.parse(msg)
-      puts "Message received at ##{channel} - [#{data['user_id']}]: #{data['assessment_id']}"
+      puts "Message received at ##{channel} - #{data['assessment_id']}"
 
       assessment = Assessment.find(data['assessment_id'])
-      key = "user:#{data['user_id']}:test:#{data['assessment_id']}"
+      key = "assessment:#{data['assessment_id']}"
       user_events_json = $redis.lrange(key, 0, MAX_NUM_EVENTS)
       
       assessment.event_log = user_events_json
@@ -57,9 +57,9 @@ task :analyze_test => :environment do |t|
       assessment.results_ready = true
       assessment.save
 
-      user = User.find(data['user_id'])
-      user.profile_description = assessment.profile_description
-      user.save
+      # user = User.find(data['user_id'])
+      # user.profile_description = assessment.profile_description
+      # user.save
     end
   end
   puts 'analyze finished'

@@ -1,5 +1,5 @@
 class AssessmentSerializer < ActiveModel::Serializer
-  attributes :id, :guest_user, :date_taken, :stage_completed,  :aggregate_results, :stages,
+  attributes :id, :date_taken, :stage_completed,  :aggregate_results, :stages,
              :results_ready, :big5_dimension, :holland6_dimension,
              :emo8_dimension
 
@@ -7,8 +7,8 @@ class AssessmentSerializer < ActiveModel::Serializer
   has_one :user, embed: :ids
   has_one :definition, embed: :objects
 
-  def guest_user
-    object.user.nil? ? nil : object.user.guest
-  end
+  # def guest_user
+  #   object.user.nil? ? nil : object.user.guest
+  # end
 
 end

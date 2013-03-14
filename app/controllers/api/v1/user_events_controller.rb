@@ -9,7 +9,7 @@ class Api::V1::UserEventsController < ApplicationController
       respond_with user_event
     rescue ArgumentError => error
       logger.info("#{error}")
-      respond_with :status => :bad_request
+      respond_with status: :bad_request
     end
   end
 end
