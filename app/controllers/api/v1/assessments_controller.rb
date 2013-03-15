@@ -38,6 +38,8 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   end
 
   def create
+    user = params[:user_id].nil? ? nil : User.where('id = ?', params[:user_id]).first
+    
     definition = Definition.find_or_return_default(params[:def_id])
     @assessment = Assessment.create_with_definition_and_user(definition, current_resource_owner)
     # respond_with @assessment

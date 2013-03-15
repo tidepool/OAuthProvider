@@ -8,6 +8,9 @@ OAuthProvider::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :assessments
+      resources :users do 
+        resources :assessments
+      end
       post "/user_event" => "user_events#create"
     end
   end

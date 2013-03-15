@@ -29,6 +29,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'oauth2'
+  gem 'jazz_hands'
 end
 
 # API (Serializers)
