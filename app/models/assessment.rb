@@ -1,3 +1,4 @@
+require 'pry' if Rails.env.test? || Rails.env.development?
 
 class Assessment < ActiveRecord::Base
   serialize :event_log, JSON
@@ -6,9 +7,9 @@ class Assessment < ActiveRecord::Base
   serialize :aggregate_results, JSON
 
   # Assessment status: :not_started, :in_progress, :completed, :results_ready
-  attr_accessible :date_taken, :score, :stages, :event_log, :intermediate_results, :stage_completed,
-                  :aggregate_results, :results_ready, :big5_dimension, :holland6_dimension, :emo8_dimension, :status,
-                  :user_id
+  attr_accessible :date_taken, :score, :intermediate_results, :stage_completed,
+                  :aggregate_results, :results_ready, :big5_dimension, :holland6_dimension, :emo8_dimension, :status
+                  
 
   # IMPORTANT: user_id is specifically left as an id and not as a belongs_to relationship,
   #            In the future, the users table may live elsewhere.
@@ -36,6 +37,19 @@ class Assessment < ActiveRecord::Base
       assessment.stage_completed = -1
       assessment.status = :not_started
     end    
+  end
+
+  def update_attributes_with_caller(attributes, caller)
+    assessment_user_id = attributes[:user_id]
+    if assessment_user_id
+      assessment_user = User.where('id = ?', assessment_user_id).first
+      self.add_to_user(caller, assessment_user)
+
+      # Clear the :user_id, it should not be set directly
+      attributes = attributes.except(:user_id)
+    end
+
+    update_attributes(attributes)
   end
 
   def add_to_user(caller, user)

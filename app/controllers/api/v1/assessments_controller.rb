@@ -1,3 +1,5 @@
+require 'pry' if Rails.env.test? || Rails.env.development?
+
 class Api::V1::AssessmentsController < Api::V1::ApiController
   doorkeeper_for :all, :except => :create
   respond_to :json
@@ -38,10 +40,10 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   end
 
   def create
-    user = params[:user_id].nil? ? nil : User.where('id = ?', params[:user_id]).first
-    
+    user = params[:user_id].nil? ? current_resource_owner : User.where('id = ?', params[:user_id]).first
+
     definition = Definition.find_or_return_default(params[:def_id])
-    @assessment = Assessment.create_with_definition_and_user(definition, current_resource_owner)
+    @assessment = Assessment.create_or_find(definition, current_resource_owner, user)
     # respond_with @assessment
 
     respond_to do |format|
@@ -51,16 +53,20 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
 
   def update
     @assessment = Assessment.find(params[:id])
-
     attributes = params[:assessment]
-    if attributes[:status] == 'completed' 
+    if attributes[:status.to_s] == 'completed' 
       # Trigger the calculation in the backend
       event_data = { assessment_id: @assessment.id } 
       $redis.publish(ACTION_EVENT_QUEUE, event_data.to_json)
     end
 
-    @assessment.update_attributes(attributes)
-    respond_with @assessment 
+    @assessment.update_attributes_with_caller(attributes, current_resource_owner)
+    # binding.pry
+    # respond_with @assessment 
+    respond_to do |format|
+      format.json { render :json => @assessment}
+    end
+
   end
 
 end
