@@ -12,7 +12,7 @@ describe Assessment do
   end
   
   it 'should not allow me to create if no definition is specified' do
-    lambda {Assessment.create_or_find(nil, nil, nil)}.should raise_error(ArgumentError)
+    lambda {Assessment.create_by_caller(nil, nil, nil)}.should raise_error(ArgumentError)
   end
 
   it 'should create an assessment for anonymous user' do
@@ -20,48 +20,48 @@ describe Assessment do
     # Just create an anonymous assessment
     # (This supports the first time user case, so they don't need to create a user account
     # before taking assessment)
-    assessment = Assessment.create_or_find(@definition, nil, nil)
+    assessment = Assessment.create_by_caller(@definition, nil, nil)
     assessment.should_not be_nil
     assessment.user_id.should == 0
   end
 
   it 'should create an assessment for a user if the caller is admin' do
-    assessment = Assessment.create_or_find(@definition, @admin, @user)
+    assessment = Assessment.create_by_caller(@definition, @admin, @user)
     assessment.should_not be_nil
     assessment.user_id.should == @user.id
   end
 
   it 'should create an assessment if the caller is the user' do
-    assessment = Assessment.create_or_find(@definition, @user, @user)
+    assessment = Assessment.create_by_caller(@definition, @user, @user)
     assessment.should_not be_nil
     assessment.user_id.should == @user.id
   end
 
   it 'should not be able to create an assessment for a user if the caller is nil' do
-    lambda {Assessment.create_or_find(@definition, nil, @user2)}.should raise_error(Assessment::UnauthorizedError)
+    lambda {Assessment.create_by_caller(@definition, nil, @user2)}.should raise_error(Assessment::UnauthorizedError)
   end
 
   it 'should not be able to create an assessment for a user if the caller is not admin or the user themselves' do
-    lambda {Assessment.create_or_find(@definition, @user, @user2)}.should raise_error(Assessment::UnauthorizedError)
+    lambda {Assessment.create_by_caller(@definition, @user, @user2)}.should raise_error(Assessment::UnauthorizedError)
   end  
 
   it 'should be able to add to user if caller is user' do
-    assessment = Assessment.create_or_find(@definition, nil, nil)
+    assessment = Assessment.create_by_caller(@definition, nil, nil)
     assessment.add_to_user(@user, @user) 
     assessment.user_id.should == @user.id   
   end
 
   it 'should be able to add to user if caller is admin' do
-    assessment = Assessment.create_or_find(@definition, nil, nil)
+    assessment = Assessment.create_by_caller(@definition, nil, nil)
     assessment.add_to_user(@admin, @user)    
     assessment.user_id.should == @user.id
   end
 
   it 'should not be able to add to user if caller is nil' do
-    lambda {Assessment.create_or_find(@definition, nil, @user)}.should raise_error(Assessment::UnauthorizedError)
+    lambda {Assessment.create_by_caller(@definition, nil, @user)}.should raise_error(Assessment::UnauthorizedError)
   end
 
   it 'should not be able to create an assessment for a user if the caller is not admin or the user themselves' do
-    lambda {Assessment.create_or_find(@definition, @user, @user2)}.should raise_error(Assessment::UnauthorizedError)
+    lambda {Assessment.create_by_caller(@definition, @user, @user2)}.should raise_error(Assessment::UnauthorizedError)
   end  
 end

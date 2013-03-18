@@ -20,7 +20,7 @@ class Assessment < ActiveRecord::Base
   class UnauthorizedError < StandardError
   end
 
-  def self.create_or_find(definition, caller, user)
+  def self.create_by_caller(definition, caller, user)
     raise ArgumentError.new('No definition specified') if definition.nil?
 
     if user && caller != user
@@ -37,6 +37,19 @@ class Assessment < ActiveRecord::Base
       assessment.stage_completed = -1
       assessment.status = :not_started
     end    
+  end
+
+  def self.find_by_caller_and_user(id, caller, user)
+    raise UnauthorizedError.new('Needs a caller') if caller.nil?
+    assessment = Assessment.find(id)
+    raise UnauthorizedError.new('Only admins or users themselves can see their assessments') unless assessment.user_id == user.id || caller.admin?
+    assessment 
+  end
+
+  def self.find_all_by_caller_and_user(caller, user)
+    raise UnauthorizedError.new('Needs a caller') if caller.nil?
+    raise UnauthorizedError.new('Only admins or users themselves can see their assessments') unless caller.admin? || caller.id == user.id
+    assessments = Assessment.includes(:definition).where('user_id = ?', user.id).order(:date_taken).all
   end
 
   def update_attributes_with_caller(attributes, caller)

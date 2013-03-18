@@ -11,6 +11,14 @@ describe 'Results API' do
     token = client.password.get_token(@user_email, @user_pass)
   end
 
+  def create_assessment(caller, user)
+    definition = Definition.find_or_return_default(nil)
+    assessment = Assessment.create_by_caller(definition, caller, user)
+    assessment.add_to_user(caller, user)
+    assessment.save!
+    assessment
+  end
+
   before :all do 
     @user_email = 'user@example.com'
     @user_pass = 'tidepool'
@@ -28,12 +36,6 @@ describe 'Results API' do
       app.redirect_uri = 'urn:ietf:wg:oauth:2.0:oob'
     end
     @app.save! 
-
-    definition = Definition.find_or_return_default(nil)
-    @assessment = Assessment.create_or_find(definition, @user, @user)
-    @assessment.add_to_user(@user, @user)
-    @assessment.save!
-
   end
 
   it 'should be able to start the results calculation' do 
@@ -43,8 +45,9 @@ describe 'Results API' do
       assessment.save!
     end
 
+    assessment = create_assessment(@user, @user)
     token = get_token    
-    response = token.post("/api/v1/assessments/#{@assessment.id}/results.json")
+    response = token.post("/api/v1/assessments/#{assessment.id}/results.json")
     response.status.should == 202
   end
 
@@ -55,9 +58,9 @@ describe 'Results API' do
       assessment.save!
     end
 
-    token = get_token
-    
-    response = token.post("/api/v1/assessments/#{@assessment.id}/results.json")
+    assessment = create_assessment(@user, @user)
+    token = get_token    
+    response = token.post("/api/v1/assessments/#{assessment.id}/results.json")
     status = JSON.parse(response.body, :symbolize_names => true)
     progress_url = "#{status[:status][:link]}.json"
     response = token.get(progress_url)
@@ -67,29 +70,31 @@ describe 'Results API' do
   end
 
   it 'should be able to get the show url from progress endpoint' do
-    @assessment.status = :results_ready
-    @assessment.save!
+    assessment = create_assessment(@user, @user)
+    assessment.status = :results_ready
+    assessment.save!
 
     token = get_token
 
-    progress_url = "/api/v1/assessments/#{@assessment.id}/progress.json"
+    progress_url = "/api/v1/assessments/#{assessment.id}/progress.json"
     response = token.get(progress_url)
     response.status.should == 200
 
     status = JSON.parse(response.body, :symbolize_names => true)
     status[:status][:link].should == "http://example.org#{progress_url}".chomp('.json')
 
-    expected_url = "http://example.org/api/v1/assessments/#{@assessment.id}/results"
+    expected_url = "http://example.org/api/v1/assessments/#{assessment.id}/results"
     response.headers['Location'].should == expected_url
   end
 
   it 'should be able to get the error state if results are not calculated from progress url' do
-    @assessment.status = :no_results
-    @assessment.save!
+    assessment = create_assessment(@user, @user)
+    assessment.status = :no_results
+    assessment.save!
 
     token = get_token
 
-    progress_url = "/api/v1/assessments/#{@assessment.id}/progress.json"
+    progress_url = "/api/v1/assessments/#{assessment.id}/progress.json"
     response = token.get(progress_url)
     response.status.should == 200
     status = JSON.parse(response.body, :symbolize_names => true)
@@ -98,18 +103,19 @@ describe 'Results API' do
   end
 
   it 'should be able to show the results if they are calculated' do
-    @assessment.status = :results_ready
-    @assessment.intermediate_results = "Hello World"
-    @assessment.save!
+    assessment = create_assessment(@user, @user)
+    assessment.status = :results_ready
+    assessment.intermediate_results = "Hello World"
+    assessment.save!
 
     token = get_token
 
-    results_url = "/api/v1/assessments/#{@assessment.id}/results.json"
+    results_url = "/api/v1/assessments/#{assessment.id}/results.json"
     response = token.get(results_url)
     response.status.should == 200
     
     results = JSON.parse(response.body, :symbolize_names => true)
-    results[:intermediate_results].should == @assessment.intermediate_results
+    results[:intermediate_results].should == assessment.intermediate_results
   end
 
 end
