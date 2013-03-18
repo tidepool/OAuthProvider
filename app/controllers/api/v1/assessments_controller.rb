@@ -18,24 +18,12 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
 
   def show 
     @assessment = Assessment.find(params[:id])
-    if @assessment.user != current_resource_owner
+    if @assessment.user != current_resource_owner || !current_resource_owner.admin?
       respond_to do |format|
         format.json { render :json => {}, :status => :unauthorized }
       end
     else
-      if params[:results]
-        if @assessment.results_ready?
-          respond_to do |format|
-            format.json { render :json => @assessment}
-          end
-        else
-          respond_to do |format|
-            format.json { render :json => {}, :status => :partial_content}
-          end
-        end
-      else
-        respond_with @assessment
-      end
+      respond_with @assessment
     end
   end
 
@@ -54,11 +42,6 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   def update
     @assessment = Assessment.find(params[:id])
     attributes = params[:assessment]
-    if attributes[:status.to_s] == 'completed' 
-      # Trigger the calculation in the backend
-      event_data = { assessment_id: @assessment.id } 
-      $redis.publish(ACTION_EVENT_QUEUE, event_data.to_json)
-    end
 
     @assessment.update_attributes_with_caller(attributes, current_resource_owner)
     # binding.pry

@@ -7,7 +7,11 @@ OAuthProvider::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :assessments
+      resources :assessments do
+        get 'results' => 'results#show'
+        post 'results' => 'results#create'
+        get 'progress' => 'results#progress'
+      end
       resources :users do 
         resources :assessments
       end

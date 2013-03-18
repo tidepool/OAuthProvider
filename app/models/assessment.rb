@@ -58,4 +58,14 @@ class Assessment < ActiveRecord::Base
 
     self.user_id = user.id
   end
+
+  def results
+    {
+      :intermediate_results => self.intermediate_results,
+      :aggregate_results => self.aggregate_results,
+      :big5_dimension => self.big5_dimension,
+      :holland6_dimension => self.holland6_dimension,
+      :emo8_dimension => self.emo8_dimension
+    }
+  end    
 end

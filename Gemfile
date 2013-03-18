@@ -13,7 +13,7 @@ gem 'doorkeeper', '~> 0.6.7'
 
 gem 'pg'
 
-gem 'tidepool_analyze', :path => '/Users/keremk/Developer/Tidepool/tidepool_analyze'
+gem 'tidepool_analyze', :path => './lib/analyze'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -39,6 +39,8 @@ gem "active_model_serializers", :github => "rails-api/active_model_serializers"
 gem 'jquery-rails'
 
 gem 'redis'
+
+gem 'sidekiq'
 
 gem 'thin'
 

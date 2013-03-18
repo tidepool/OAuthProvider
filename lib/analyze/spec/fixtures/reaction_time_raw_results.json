@@ -1,0 +1,58 @@
+{
+    "reaction_time": [
+        {
+            "results": {
+                "green": {
+                    "average_correct_time_to_click": null,
+                    "average_time": 910,
+                    "average_time_with_threshold": 0,
+                    "total_clicks": 1,
+                    "total_clicks_with_threshold": 0,
+                    "total_correct_clicks_with_threshold": null
+                },
+                "red": {
+                    "average_correct_time_to_click": null,
+                    "average_time": 3208,
+                    "average_time_with_threshold": 120,
+                    "total_clicks": 2,
+                    "total_clicks_with_threshold": 1,
+                    "total_correct_clicks_with_threshold": null
+                },
+                "test_duration": 15502,
+                "test_type": "simple",
+                "yellow": {
+                    "average_correct_time_to_click": null,
+                    "average_time": 0,
+                    "average_time_with_threshold": 0,
+                    "total_clicks": 0,
+                    "total_clicks_with_threshold": 0,
+                    "total_correct_clicks_with_threshold": null
+                }
+            },
+            "stage": "0"
+        },
+        {
+            "results": {
+                "red": {
+                    "average_correct_time_to_click": 350,
+                    "average_time": 585,
+                    "average_time_with_threshold": 180,
+                    "total_clicks": 1,
+                    "total_clicks_with_threshold": 1,
+                    "total_correct_clicks_with_threshold": 1
+                },
+                "test_duration": 3805,
+                "test_type": "complex",
+                "yellow": {
+                    "average_correct_time_to_click": null,
+                    "average_time": 24,
+                    "average_time_with_threshold": 24,
+                    "total_clicks": 1,
+                    "total_clicks_with_threshold": 1,
+                    "total_correct_clicks_with_threshold": null
+                }
+            },
+            "stage": "1"
+        }
+    ]
+}
