@@ -1,8 +1,12 @@
+require 'sidekiq/web'
+
 OAuthProvider::Application.routes.draw do
   use_doorkeeper
 
   devise_for :users
 
+  mount Sidekiq::Web, at: "/sidekiq"
+  
   root :to => 'home#index'
 
   namespace :api do
