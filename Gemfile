@@ -27,6 +27,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'oauth2'
+  gem 'spork', '~> 1.0rc'
   gem 'jazz_hands'
 end
 

@@ -1,7 +1,7 @@
 require 'pry' if Rails.env.test? || Rails.env.development?
 
 class Api::V1::ResultsController < Api::V1::ApiController
-  # doorkeeper_for :all
+  doorkeeper_for :all
   respond_to :json
 
   def show
