@@ -3,10 +3,14 @@ require 'sidekiq/web'
 OAuthProvider::Application.routes.draw do
   use_doorkeeper
 
-  devise_for :users
+  devise_for :users, :controllers => { :sessions => 'sessions'}
 
-  mount Sidekiq::Web, at: "/sidekiq"
-  
+  devise_scope :user do
+    get 'login', :to => 'sessions#new'
+  end
+
+  mount Sidekiq::Web, at: '/sidekiq'
+
   root :to => 'home#index'
 
   namespace :api do
@@ -14,12 +18,13 @@ OAuthProvider::Application.routes.draw do
       resources :assessments do
         get 'results' => 'results#show'
         post 'results' => 'results#create'
+        put 'results' => 'results#update'
         get 'progress' => 'results#progress'
       end
       resources :users do 
         resources :assessments
       end
-      post "/user_event" => "user_events#create"
+      post '/user_events' => 'user_events#create'
     end
   end
   

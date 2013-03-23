@@ -10,6 +10,8 @@ gem 'rails', '3.2.13'
 gem 'devise'
 gem 'doorkeeper', '~> 0.6.7'
 
+# To support CORS
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'tidepool_analyze', :path => './lib/analyze'
 

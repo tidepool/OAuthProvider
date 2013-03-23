@@ -1,3 +1,5 @@
+require Rails.root + 'app/models/events/user_event.rb'
+
 class Api::V1::UserEventsController < ApplicationController
   respond_to :json
 
@@ -6,7 +8,9 @@ class Api::V1::UserEventsController < ApplicationController
       user_event = UserEvent.new(params[:user_event])
       user_event.record
       
-      respond_with user_event
+      respond_to do |format|
+        format.json { render :json => @user_event}
+      end
     rescue ArgumentError => error
       logger.info("#{error}")
       respond_with status: :bad_request

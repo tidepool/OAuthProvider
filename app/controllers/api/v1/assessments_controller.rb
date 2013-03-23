@@ -1,8 +1,8 @@
 require 'pry' if Rails.env.test? || Rails.env.development?
 
 class Api::V1::AssessmentsController < Api::V1::ApiController
-  doorkeeper_for :all, :except => :create
-  respond_to :json
+  doorkeeper_for :index, :show, :destroy
+  doorkeeper_for :update, :if => lambda { Assessment.find(params[:id]).user_id != 0 }
   before_filter :setup_users
 
   def index
@@ -23,7 +23,6 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   def create
     definition = Definition.find_or_return_default(params[:def_id])
     @assessment = Assessment.create_by_caller(definition, @caller, @user)
-    # respond_with @assessment
 
     respond_to do |format|
       format.json { render :json => @assessment}
@@ -35,12 +34,9 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
     attributes = params[:assessment]
 
     @assessment.update_attributes_with_caller(attributes, @caller)
-    # binding.pry
-    # respond_with @assessment 
     respond_to do |format|
       format.json { render :json => @assessment}
     end
-
   end
 
   private
