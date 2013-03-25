@@ -72,6 +72,11 @@ module OAuthProvider
     # or load models when precompiling your assets.
     config.assets.initialize_on_precompile = false
 
-
+    config.middleware.use Rack::Cors do
+    allow do
+        origins '*'
+          resource '*', :headers => :any, :methods => [:get, :post, :put, :options]
+        end
+    end
   end
 end

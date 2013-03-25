@@ -78,6 +78,8 @@ GEM
     facter (1.6.18)
     faraday (0.8.6)
       multipart-post (~> 1.1)
+    foreman (0.62.0)
+      thor (>= 0.13.6)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -242,6 +244,7 @@ DEPENDENCIES
   active_model_serializers!
   devise
   doorkeeper (~> 0.6.7)
+  foreman
   jazz_hands
   jquery-rails
   oauth2

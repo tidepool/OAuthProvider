@@ -37,4 +37,8 @@ OAuthProvider::Application.configure do
 
   # configure for Devise
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # Without this Foreman does not show the buffer..
+  # https://github.com/ddollar/foreman/wiki/Missing-Output
+  $stdout.sync = true
 end

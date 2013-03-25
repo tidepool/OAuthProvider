@@ -3,7 +3,7 @@ require 'sidekiq/web'
 OAuthProvider::Application.routes.draw do
   use_doorkeeper
 
-  devise_for :users, :controllers => { :sessions => 'sessions'}
+  devise_for :users, :controllers => { :sessions => 'sessions', :registrations => 'registrations'}
 
   devise_scope :user do
     get 'login', :to => 'sessions#new'

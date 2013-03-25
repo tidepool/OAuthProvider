@@ -46,6 +46,7 @@ gem 'redis'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'foreman'
 
 gem 'thin'
 
