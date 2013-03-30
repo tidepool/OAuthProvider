@@ -17,9 +17,9 @@ class ImageRankGenerator
         image_url = ""
         if (Rails.env.production?)
           # TODO: S3 based location for the images
-          image_url = "/assets/devtest_images/#{image_id}.jpg"
+          image_url = "/images/devtest_images/#{image_id}.jpg"
         else
-          image_url = "/assets/devtest_images/#{image_id}.jpg"
+          image_url = "/images/devtest_images/#{image_id}.jpg"
         end        
         image_sequence << { image_id: image_id, elements: image.elements, url: image_url}
       end

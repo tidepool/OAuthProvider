@@ -1,0 +1,16 @@
+{
+    "name" : "Just Images",
+    "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
+    "end_remarks" : "Congratulations. Please take a moment to register!",
+    "experiment" : "",
+    "stages" :
+        [
+            {
+                "friendly_name" : "Image Ranking",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "assessment_type" : "Big5",
+                "image_sequence" : ["F2a", "F2b", "F2c", "F2d", "F2e"]
+            }
+        ]
+}
