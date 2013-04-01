@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315003317) do
+ActiveRecord::Schema.define(:version => 20130401003928) do
 
   create_table "adjective_circles", :force => true do |t|
     t.string   "name_pair"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20130315003317) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.boolean  "admin"
+    t.boolean  "guest"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

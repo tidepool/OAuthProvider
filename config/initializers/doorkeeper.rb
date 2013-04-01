@@ -1,3 +1,5 @@
+require 'pry-remote' if Rails.env.test? || Rails.env.development?
+
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use.
   # Currently supported options are :active_record, :mongoid2, :mongoid3, :mongo_mapper
@@ -8,10 +10,14 @@ Doorkeeper.configure do
     # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
     # Put your resource owner authentication logic here.
     # Example implementation:
-    current_user || warden.authenticate!(:scope => :user)
+    puts "Resource_owner authenticator called #{request.params}"
+    guest_ok = params[:guest]
+    puts "Creating a guest user" if guest_ok
+    current_or_guest_user || warden.authenticate!(:scope => :user)
   end
 
   resource_owner_from_credentials do |routes|
+    puts "Resource_owner from credendtials called"
     user = User.find_for_database_authentication(:email => params[:username])
     user if user && user.valid_password?(params[:password])
   end
@@ -31,7 +37,7 @@ Doorkeeper.configure do
   # access_token_expires_in 2.hours
 
   # Issue access tokens with refresh token (disabled by default)
-  # use_refresh_token
+  use_refresh_token
 
   # Provide support for an owner to be assigned to each registered application (disabled by default)
   # Optional parameter :confirmation => true (default false) if you want to enforce ownership of
