@@ -11,9 +11,14 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     puts "Resource_owner authenticator called #{request.params}"
-    guest_ok = params[:guest]
-    puts "Creating a guest user" if guest_ok
-    current_or_guest_user || warden.authenticate!(:scope => :user)
+    force_no_guest = params[:force_no_guest]
+    if force_no_guest
+      puts "Has to use a real user not guest"
+      current_user || warden.authenticate!(:scope => :user)
+    else  
+      puts "Ok to creating a guest user" 
+      current_or_guest_user || warden.authenticate!(:scope => :user)
+    end
   end
 
   resource_owner_from_credentials do |routes|

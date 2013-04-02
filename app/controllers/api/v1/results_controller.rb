@@ -10,7 +10,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       status = :ok
       response_body = {}
       if assessment.status == :results_ready.to_s
-        response_body = assessment.results
+        response_body = assessment.profile_description
       else
         response_body = {
           :status => {
@@ -31,7 +31,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
     assessment = Assessment.find(params[:assessment_id])
     if current_resource_owner && (current_resource_owner.admin? || current_resource_owner.id == assessment.user_id)
       # Trigger the calculation in the backend
-      ResultsCalculator.performAsync(assessment.id)
+      ResultsCalculator.perform_async(assessment.id)
       respond_to do |format|
         response_body = {
           :status => {

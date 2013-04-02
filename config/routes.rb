@@ -20,7 +20,7 @@ OAuthProvider::Application.routes.draw do
       resources :assessments do
         get 'results' => 'results#show'
         post 'results' => 'results#create'
-        put 'results' => 'results#update'
+        # put 'results' => 'results#update'
         get 'progress' => 'results#progress'
       end
       resources :users do 

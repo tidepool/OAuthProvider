@@ -1,8 +1,12 @@
+require 'redis'
 require 'json'
+require 'tidepool_analyze'
 
 class ResultsCalculator
   include Sidekiq::Worker
    
+  MAX_NUM_EVENTS = 10000
+ 
   def perform(assessment_id)
     assessment = Assessment.find(assessment_id)
     key = "assessment:#{assessment_id}"
@@ -12,7 +16,7 @@ class ResultsCalculator
     if Rails.env.development? || Rails.env.test? 
       #date = DateTime.now
       # stamp = date.strftime("%Y%m%d_%H%M")
-      log_file_path = Rails.root.join('spec', 'lib', 'tasks', 'fixtures', 'event_log.json')
+      log_file_path = Rails.root.join('log', 'event_log.json')
       File.open(log_file_path, 'w+') do |file|
         output = "[\n"
         user_events_json.each { |event| output += "#{event},\n" }
@@ -31,7 +35,7 @@ class ResultsCalculator
       circles[entry[:name_pair]] = entry.attributes
     end
 
-    analyze_dispatcher = AnalyzeDispatcher.new(assessment.definition.stages, elements, circles)
+    analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(assessment.definition.stages, elements, circles)
     
     user_events = []
     user_events_json.each do |user_event| 
