@@ -8,7 +8,8 @@ OAuthProvider::Application.routes.draw do
   devise_for :users, :controllers => { :sessions => 'sessions', :registrations => 'registrations' }
 
   devise_scope :user do
-    get 'login', :to => 'sessions#new'
+    get 'login', :to => 'sessions#new'  
+    delete 'logout', :to => 'sessions#destroy'  
   end
 
   mount Sidekiq::Web, at: '/sidekiq'

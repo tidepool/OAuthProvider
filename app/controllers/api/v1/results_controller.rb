@@ -43,7 +43,17 @@ class Api::V1::ResultsController < Api::V1::ApiController
         format.json { render :json => response_body, :status => :accepted }
       end
     else
-      respond_with({}, status: :unauthorized)
+      if current_resource_owner
+        error_message = "User #{current_resource_owner.id} trying to access user #{assessment.user_id} assessment"
+      else
+        error_message = "No user logged in"
+      end
+      respond_to do |format|
+        response_body = {
+          :error => error_message
+        }
+        format.json { render :json => response_body, :status => :unauthorized }        
+      end
     end
 
   end

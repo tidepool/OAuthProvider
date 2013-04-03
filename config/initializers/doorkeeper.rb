@@ -17,12 +17,16 @@ Doorkeeper.configure do
       current_user || warden.authenticate!(:scope => :user)
     else  
       puts "Ok to creating a guest user" 
+      user = current_user
+      if user
+        puts "Current User id is #{user.id}"
+      end
       current_or_guest_user || warden.authenticate!(:scope => :user)
     end
   end
 
   resource_owner_from_credentials do |routes|
-    puts "Resource_owner from credendtials called"
+    puts "Resource_owner from credentials called"
     user = User.find_for_database_authentication(:email => params[:username])
     user if user && user.valid_password?(params[:password])
   end

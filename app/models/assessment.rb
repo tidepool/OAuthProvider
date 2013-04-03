@@ -7,7 +7,7 @@ class Assessment < ActiveRecord::Base
   serialize :aggregate_results, JSON
 
   # Assessment status: :not_started, :in_progress, :completed, :results_ready
-  attr_accessible :date_taken, :score, :intermediate_results, :stage_completed,
+  attr_accessible :date_taken, :score, :intermediate_results, :stage_completed, :user_id,
                   :aggregate_results, :results_ready, :big5_dimension, :holland6_dimension, :emo8_dimension, :status
                   
 
@@ -69,7 +69,11 @@ class Assessment < ActiveRecord::Base
     raise UnauthorizedError.new('Need a caller or user') if user.nil? || caller.nil?
     raise UnauthorizedError.new('Only admins or users themselves can add user') if user != caller && !caller.admin
 
+    puts "Before Updating #{self.id} user_id = #{self.user_id}"
     self.user_id = user.id
+    self.save
+    puts "After Updating #{self.id} user_id = #{self.user_id}"
+
   end
 
   def results
