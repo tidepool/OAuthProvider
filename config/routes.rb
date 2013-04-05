@@ -5,12 +5,19 @@ OAuthProvider::Application.routes.draw do
     controllers :authorizations => 'authorizations'
   end
 
-  devise_for :users, :controllers => { :sessions => 'sessions', :registrations => 'registrations' }
+  # devise_for :users, :controllers => { :sessions => 'sessions', :registrations => 'registrations' }
 
-  devise_scope :user do
-    get 'login', :to => 'sessions#new'  
-    delete 'logout', :to => 'sessions#destroy'  
-  end
+  # devise_scope :user do
+  #   get 'login', :to => 'sessions#new'  
+  #   delete 'logout', :to => 'sessions#destroy'  
+  # end
+
+  get 'signup', to: 'users#new', as: 'signup'
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  
+  resources :sessions
+  resources :users
 
   mount Sidekiq::Web, at: '/sidekiq'
 

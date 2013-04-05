@@ -39,6 +39,14 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
     # end
   end
 
+  def current_user 
+    if session[:user_id]
+      @current_user ||= User.find(session[:user_id])
+    else
+      @current_user = nil
+    end
+  end
+
   def create_guest_user
     u = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
     u.guest = true

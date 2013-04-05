@@ -7,7 +7,7 @@ gem 'rails', '3.2.13'
 # gem 'sqlite3'
 
 # Authentication:
-gem 'devise'
+# gem 'devise'
 gem 'doorkeeper', '~> 0.6.7'
 
 # To support CORS
@@ -52,7 +52,7 @@ gem 'foreman'
 gem 'thin'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

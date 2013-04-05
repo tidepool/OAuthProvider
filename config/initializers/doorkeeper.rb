@@ -11,25 +11,31 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     puts "Resource_owner authenticator called #{request.params}"
-    force_no_guest = params[:force_no_guest]
+    force_no_guest = params[:force_no_guest]  
+    session[:user_return_to] = request.fullpath
+
+    puts "Session in Authenticator #{session}"    
+    # binding.remote_pry
+
     if force_no_guest
       puts "Has to use a real user not guest"
-      current_user || warden.authenticate!(:scope => :user)
+      current_user || redirect_to(login_url)
     else  
       puts "Ok to creating a guest user" 
       user = current_user
       if user
         puts "Current User id is #{user.id}"
       end
-      current_or_guest_user || warden.authenticate!(:scope => :user)
+      current_or_guest_user || redirect_to(login_url)
     end
   end
 
-  # resource_owner_from_credentials do |routes|
-  #   puts "Resource_owner from credentials called"
-  #   user = User.find_for_database_authentication(:email => params[:username])
-  #   user if user && user.valid_password?(params[:password])
-  # end
+  # Below gets called in our tests so keep!
+  resource_owner_from_credentials do |routes|
+    puts "Resource_owner from credentials called"
+    user = User.find_for_database_authentication(:email => params[:username])
+    user if user && user.valid_password?(params[:password])
+  end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   # admin_authenticator do
