@@ -13,7 +13,7 @@ module TidepoolAnalyze
         raw_results_by_type = {}
         @raw_results.each do |entry|
           stage_no = entry[:stage].to_i
-          assessment_type = @stages[stage_no][:assessment_type.to_s]
+          assessment_type = @stages[stage_no][:assessment_type.to_s].downcase
           raw_results_by_type[assessment_type.to_sym] = [] if raw_results_by_type[assessment_type.to_sym].nil?
           raw_results_by_type[assessment_type.to_sym] |= entry[:results]
         end
@@ -22,11 +22,11 @@ module TidepoolAnalyze
 
       # The final result is in the form of:
       # {
-      #   :Big5 => {
-      #       :Openness => {:weighted_total => num, :count => count, :average => average },
-      #       :Agreeableness => {:weighted_total => num, :count => count, :average => average }
+      #   :big5 => {
+      #       :openness => {:weighted_total => num, :count => count, :average => average },
+      #       :agreeableness => {:weighted_total => num, :count => count, :average => average }
       #    },
-      #   :Holland6 => {
+      #   :holland6 => {
       #    }
       # }
 
@@ -58,8 +58,8 @@ module TidepoolAnalyze
       # 5. Average the weighted z-scores
       # The output is in the form of:
       # {
-      #   :Openness => {:weighted_total => num, :count => count, :average => average },
-      #   :Agreeableness => {:weighted_total => num, :count => count, :average => average }
+      #   :openness => {:weighted_total => num, :count => count, :average => average },
+      #   :agreeableness => {:weighted_total => num, :count => count, :average => average }
       # }
 
       def result_by_assessment_type(raw_results)
@@ -75,11 +75,12 @@ module TidepoolAnalyze
                 distance_zscore * circle.distance_weight +
                 overlap_zscore * circle.overlap_weight
 
-            if aggregate_weighted_total[circle.maps_to.to_sym].nil?
-              aggregate_weighted_total[circle.maps_to.to_sym] = { weighted_total: 0, count: 0 }
+            maps_to = circle.maps_to.downcase.to_sym
+            if aggregate_weighted_total[maps_to].nil?
+              aggregate_weighted_total[maps_to] = { weighted_total: 0, count: 0 }
             end
-            aggregate_weighted_total[circle.maps_to.to_sym][:weighted_total] += weighted_total
-            aggregate_weighted_total[circle.maps_to.to_sym][:count] += 1
+            aggregate_weighted_total[maps_to][:weighted_total] += weighted_total
+            aggregate_weighted_total[maps_to][:count] += 1
           end
         end
         aggregate_weighted_total.each do |maps_to, value|

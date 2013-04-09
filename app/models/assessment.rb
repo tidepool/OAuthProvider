@@ -1,21 +1,16 @@
 require 'pry' if Rails.env.test? || Rails.env.development?
 
 class Assessment < ActiveRecord::Base
-  serialize :event_log, JSON
-  serialize :intermediate_results, JSON
   serialize :stages, JSON
-  serialize :aggregate_results, JSON
 
   # Assessment status: :not_started, :in_progress, :completed, :results_ready
-  attr_accessible :date_taken, :score, :intermediate_results, :stage_completed, :user_id,
-                  :aggregate_results, :results_ready, :big5_dimension, :holland6_dimension, :emo8_dimension, :status
+  attr_accessible :date_taken, :stage_completed, :user_id, :status
                   
-
   # IMPORTANT: user_id is specifically left as an id and not as a belongs_to relationship,
   #            In the future, the users table may live elsewhere.
 
   belongs_to :definition
-  belongs_to :profile_description
+  has_one :result
 
   class UnauthorizedError < StandardError
   end
@@ -33,7 +28,6 @@ class Assessment < ActiveRecord::Base
       assessment.stages = definition.stages_from_stage_definition
       assessment.user_id = user.nil? ? 0 : user.id
       assessment.date_taken = DateTime.now
-      assessment.results_ready = false
       assessment.stage_completed = -1
       assessment.status = :not_started
     end    
@@ -76,13 +70,13 @@ class Assessment < ActiveRecord::Base
 
   end
 
-  def results
-    {
-      :intermediate_results => self.intermediate_results,
-      :aggregate_results => self.aggregate_results,
-      :big5_dimension => self.big5_dimension,
-      :holland6_dimension => self.holland6_dimension,
-      :emo8_dimension => self.emo8_dimension
-    }
-  end    
+  # def results
+  #   {
+  #     :intermediate_results => self.intermediate_results,
+  #     :aggregate_results => self.aggregate_results,
+  #     :big5_dimension => self.big5_dimension,
+  #     :holland6_dimension => self.holland6_dimension,
+  #     :emo8_dimension => self.emo8_dimension
+  #   }
+  # end    
 end

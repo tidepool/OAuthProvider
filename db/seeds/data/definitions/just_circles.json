@@ -2,6 +2,8 @@
     "name" : "Just Circles",
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
+    "score_names" : ["big5", "holland6"],
+    "calculates" : ["scores", "profile"],
     "stages":
         [
             {
@@ -11,7 +13,7 @@
                     "When you are ready hit button below to exit this stage."
                 ],
                 "view_name" : "CirclesTest",
-                "assessment_type" : "Big5",
+                "assessment_type" : "big5",
                 "circles" : [{
                     "trait1" : "Self-Disciplined",
                     "trait2" : "Persistent",
@@ -45,7 +47,7 @@
                     "When you are ready hit button below to exit this stage."
                 ],
                 "view_name" : "CirclesTest",
-                "assessment_type" : "Big5",
+                "assessment_type" : "big5",
                 "circles" : [{
                     "trait1" : "Independent",
                     "trait2" : "Aloof",
@@ -79,7 +81,7 @@
                     "When you are ready hit button below to exit this stage."
                 ],
                 "view_name" : "CirclesTest",
-                "assessment_type" : "Holland6",
+                "assessment_type" : "holland6",
                 "circles" : [{
                     "trait1" : "Mechanical",
                     "trait2" : "Hands-on",

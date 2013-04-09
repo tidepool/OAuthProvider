@@ -3,13 +3,15 @@
     "instructions" : "This test assesses your reaction time. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
     "experiment" : "",
+    "score_names" : ["reaction_time"],
+    "calculates" : ["scores"],
     "stages" :
         [
             {
                 "friendly_name" : "Reaction Time 1",
                 "instructions" : "Click the circle on the screen as soon as it turns red.",
                 "view_name": "ReactionTime",
-                "assessment_type" : "Cognition",
+                "assessment_type" : "cognition",
                 "colors": ["red", "yellow", "green"],
                 "sequence_type": "simple",
                 "number_of_reds": "3",
@@ -21,7 +23,7 @@
                 "friendly_name" : "Reaction Time 2",
                 "instructions" : "Click the red circle only when it appears AFTER a yellow circle.",
                 "view_name": "ReactionTime",
-                "assessment_type" : "Cognition",
+                "assessment_type" : "cognition",
                 "colors": ["red", "yellow", "green"],
                 "sequence_type": "complex",
                 "number_of_reds": "3",

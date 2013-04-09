@@ -10,7 +10,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       status = :ok
       response_body = {}
       if assessment.status == :results_ready.to_s
-        response_body = assessment.profile_description
+        response_body = assessment.result
       else
         response_body = {
           :status => {

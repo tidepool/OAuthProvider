@@ -56,20 +56,20 @@ module TidepoolAnalyze
         openness_average = (openness_count == 0) ? 0 : openness/openness_count
         agreeableness_average = (agreeableness_count == 0) ? 0 : agreeableness/agreeableness_count
         {
-          Big5: {
-              Extraversion: { weighted_total: extraversion,
+          big5: {
+              extraversion: { weighted_total: extraversion,
                               count: extraversion_count,
                               average: extraversion_average },
-              Conscientiousness: {  weighted_total: conscientiousness,
+              conscientiousness: {  weighted_total: conscientiousness,
                                     count: conscientiousness_count,
                                     average: conscientiousness_average },
-              Neuroticism: { weighted_total: neuroticism,
+              neuroticism: { weighted_total: neuroticism,
                              count: neuroticism_count,
                              average: neuroticism_average },
-              Openness: { weighted_total: openness,
+              openness: { weighted_total: openness,
                           count: openness_count,
                           average: openness_average },
-              Agreeableness: { weighted_total: agreeableness,
+              agreeableness: { weighted_total: agreeableness,
                                count: agreeableness_count,
                                average: agreeableness_average }
             }
