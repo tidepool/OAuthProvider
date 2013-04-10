@@ -11,13 +11,21 @@ module TidepoolAnalyze
             investigative: 0,
             conventional: 0
         }
+        count = 0
         aggregate_results.each do | module_name, result |
           if result && result[:holland6]
+            count += 1
             result[:holland6].each do |dimension, value|
-              holland6_scores[dimension] += value[:average]
+              holland6_scores[dimension] += value[:average] if holland6_scores[dimension]
             end
           end
         end
+
+        # Now average each dimension:
+        holland6_scores.each do |dimension, value| 
+          holland6_scores[dimension] = value / count if count > 0
+        end
+
         holland6_value = 0
         holland6_dimension = :realistic
         holland6_scores.each do |dimension, value|

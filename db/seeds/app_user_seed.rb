@@ -9,8 +9,9 @@ class AppUserSeed
       if user.nil?
         user = User.create! :email => 'user@example.com', 
                             :password => 'tidepool', 
-                            :password_confirmation => 'tidepool', 
-                            :admin => false
+                            :password_confirmation => 'tidepool' 
+        user.admin = false
+        user.save
       end
 
       user2 = User.where('email = ?', 'user2@example.com').first
@@ -18,8 +19,9 @@ class AppUserSeed
       if user2.nil?
         user2 = User.create! :email => 'user2@example.com', 
                             :password => 'tidepool', 
-                            :password_confirmation => 'tidepool', 
-                            :admin => false
+                            :password_confirmation => 'tidepool' 
+        user2.admin = false
+        user2.save
       end
 
       admin_user = User.where('email = ?', 'admin@example.com').first
@@ -27,8 +29,9 @@ class AppUserSeed
       if admin_user.nil?
         admin_user = User.create! :email => 'admin@example.com', 
                                   :password => 'tidepool', 
-                                  :password_confirmation => 'tidepool', 
-                                  :admin => true
+                                  :password_confirmation => 'tidepool'
+        admin_user.admin = true
+        admin_user.save
       end
 
       app = Doorkeeper::Application.where('name = ?', 'tidepool_test').first_or_create do |app|

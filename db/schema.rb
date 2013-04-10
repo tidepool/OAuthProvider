@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404200515) do
+ActiveRecord::Schema.define(:version => 20130410031449) do
 
   create_table "adjective_circles", :force => true do |t|
     t.string   "name_pair"
@@ -32,21 +32,13 @@ ActiveRecord::Schema.define(:version => 20130404200515) do
 
   create_table "assessments", :force => true do |t|
     t.date     "date_taken"
-    t.string   "score"
     t.integer  "definition_id"
     t.integer  "user_id"
-    t.text     "event_log"
-    t.text     "intermediate_results"
     t.text     "stages"
     t.boolean  "results_ready"
-    t.integer  "profile_description_id"
-    t.text     "aggregate_results"
-    t.string   "big5_dimension"
-    t.string   "holland6_dimension"
-    t.string   "emo8_dimension"
     t.integer  "stage_completed"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "status"
   end
 
@@ -59,6 +51,8 @@ ActiveRecord::Schema.define(:version => 20130404200515) do
     t.string   "icon"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.text     "score_names"
+    t.text     "calculates"
   end
 
   create_table "elements", :force => true do |t|
@@ -135,13 +129,27 @@ ActiveRecord::Schema.define(:version => 20130404200515) do
     t.datetime "updated_at",         :null => false
   end
 
+  create_table "results", :force => true do |t|
+    t.integer  "assessment_id",          :null => false
+    t.text     "event_log"
+    t.text     "intermediate_results"
+    t.text     "scores"
+    t.integer  "profile_description_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.text     "aggregate_results"
+  end
+
+  add_index "results", ["assessment_id"], :name => "index_results_on_assessment_id", :unique => true
+
   create_table "users", :force => true do |t|
-    t.string   "email",           :default => "",    :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "password_digest", :default => "",    :null => false
-    t.boolean  "admin",           :default => false, :null => false
-    t.boolean  "guest",           :default => false, :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "password_digest",        :default => "",    :null => false
+    t.boolean  "admin",                  :default => false, :null => false
+    t.boolean  "guest",                  :default => false, :null => false
+    t.integer  "profile_description_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

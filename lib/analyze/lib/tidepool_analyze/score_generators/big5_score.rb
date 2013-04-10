@@ -11,12 +11,19 @@ module TidepoolAnalyze
         }
 
         # Aggregate all Big5 values across modules
+        count = 0
         aggregate_results.each do | module_name, result |
           if result && result[:big5]
+            count += 1
             result[:big5].each do |dimension, value|
-              big5_scores[dimension] += value[:average]
+              big5_scores[dimension] += value[:average] if big5_scores[dimension]
             end
           end
+        end
+
+        # Now average each dimension:
+        big5_scores.each do |dimension, value| 
+          big5_scores[dimension] = value / count if count > 0
         end
 
         # Find the average value across all dimensions

@@ -10,7 +10,7 @@ class Assessment < ActiveRecord::Base
   #            In the future, the users table may live elsewhere.
 
   belongs_to :definition
-  has_one :result
+  has_one :result, :inverse_of => :assessment, :dependent => :delete
 
   class UnauthorizedError < StandardError
   end

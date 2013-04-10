@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module TidepoolAnalyze
-  module Analyzer
+  module ScoreGenerator
 
     describe 'Holland6 Score Spec' do
       before(:all) do

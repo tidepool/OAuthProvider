@@ -10,7 +10,6 @@ module TidepoolAnalyze
       @stages = stages
       @elements = elements
       @circles = circles
-      @current_analysis_version = '1.0'
     end
 
     # score_names expected are: :big5, :holland6, :reaction_time

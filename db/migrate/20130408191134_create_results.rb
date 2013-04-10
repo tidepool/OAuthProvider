@@ -12,7 +12,8 @@ class CreateResults < ActiveRecord::Migration
       t.integer   :profile_description_id
       t.timestamps
     end
+    
+    add_index :results, :assessment_id, :unique => true
   end
 
-  add_index :results, :assessment_id, :unique => true
 end

@@ -1,8 +1,7 @@
 require 'spec_helper'
 
 module TidepoolAnalyze
-  module Analyzer
-
+  module ScoreGenerator
     describe 'Big5 Score Spec' do
       before(:all) do
         @aggregate_results = {
@@ -42,5 +41,4 @@ module TidepoolAnalyze
       end
     end
   end
-
 end

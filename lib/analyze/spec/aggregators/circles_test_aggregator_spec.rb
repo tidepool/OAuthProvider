@@ -10,7 +10,6 @@ module TidepoolAnalyze
         @stages = JSON.parse stages_json
         circles_raw_results_json =  IO.read(File.expand_path('../../fixtures/circles_raw_results.json', __FILE__))
         @circles_raw_results = JSON.parse circles_raw_results_json, :symbolize_names => true
-        @current_analysis_version = '1.0'
 
         circles = YAML::load(IO.read(File.expand_path('../../fixtures/circles.yaml', __FILE__)))
         new_circles = {}
@@ -23,9 +22,9 @@ module TidepoolAnalyze
       it 'should break into 3 different assessment types' do
         raw_results_by_type = @aggregator.break_into_assessment_types
         raw_results_by_type.length.should == 3
-        raw_results_by_type[:Big5].length.should == 10
-        raw_results_by_type[:Emo8].length.should == 8
-        raw_results_by_type[:Holland6].length.should == 6
+        raw_results_by_type[:big5].length.should == 10
+        raw_results_by_type[:emo8].length.should == 8
+        raw_results_by_type[:holland6].length.should == 6
       end
 
       it 'should calculate the z-score correctly' do
@@ -73,33 +72,33 @@ module TidepoolAnalyze
                        }
                       ]
         weighted_result = @aggregator.result_by_assessment_type(raw_results)
-        weighted_result[:Extraversion].should_not be_nil
+        weighted_result[:extraversion].should_not be_nil
         weighted_result.length.should == 1
-        weighted_result[:Extraversion][:count].should == 2
-        weighted_result[:Extraversion][:weighted_total].should be_within(0.0005).of(-2.1749)
-        weighted_result[:Extraversion][:average].should be_within(0.0005).of(-1.0874)
+        weighted_result[:extraversion][:count].should == 2
+        weighted_result[:extraversion][:weighted_total].should be_within(0.0005).of(-2.1749)
+        weighted_result[:extraversion][:average].should be_within(0.0005).of(-1.0874)
       end
 
       it 'should calculate all 3 assessment types' do
         result = @aggregator.calculate_result
         result.length.should == 3
-        result[:Big5].should_not be_nil
-        result[:Holland6].should_not be_nil
+        result[:big5].should_not be_nil
+        result[:holland6].should_not be_nil
         #result[:Emo8].should_not be_nil
       end
 
       it 'should have all 5 dimensions for Big5 and calculated from 2 sets of name-pairs' do
         result = @aggregator.calculate_result
-        result[:Big5][:Openness].should_not be_nil
-        result[:Big5][:Openness][:count].should == 2
-        result[:Big5][:Agreeableness].should_not be_nil
-        result[:Big5][:Agreeableness][:count] == 2
-        result[:Big5][:Conscientiousness].should_not be_nil
-        result[:Big5][:Conscientiousness][:count] == 2
-        result[:Big5][:Extraversion].should_not be_nil
-        result[:Big5][:Extraversion][:count] == 2
-        result[:Big5][:Neuroticism].should_not be_nil
-        result[:Big5][:Neuroticism][:count] == 2
+        result[:big5][:openness].should_not be_nil
+        result[:big5][:openness][:count].should == 2
+        result[:big5][:agreeableness].should_not be_nil
+        result[:big5][:agreeableness][:count] == 2
+        result[:big5][:conscientiousness].should_not be_nil
+        result[:big5][:conscientiousness][:count] == 2
+        result[:big5][:extraversion].should_not be_nil
+        result[:big5][:extraversion][:count] == 2
+        result[:big5][:neuroticism].should_not be_nil
+        result[:big5][:neuroticism][:count] == 2
       end
     end
   end

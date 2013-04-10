@@ -11,7 +11,7 @@ module TidepoolAnalyze
     end
 
     before(:all) do
-      events_json = IO.read(File.expand_path('../fixtures/event_log.json', __FILE__))
+      events_json = IO.read(File.expand_path('../fixtures/test_event_log.json', __FILE__))
       @events = JSON.parse(events_json)
       stages_json = IO.read(File.expand_path('../fixtures/assessment.json', __FILE__))
       @stages = JSON.parse stages_json
