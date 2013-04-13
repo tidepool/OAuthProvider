@@ -37,8 +37,9 @@ module TidepoolAnalyze
         final_score = "#{holland6_dimension.to_s}"
 
         {
-          holland6_dimension: final_score,
-          holland6_scores: holland6_scores
+          friendly_name: 'Interests - Holland6',
+          dimension: final_score,
+          score: holland6_scores
         }
       end
     end

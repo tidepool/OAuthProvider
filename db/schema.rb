@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410031449) do
+ActiveRecord::Schema.define(:version => 20130411180020) do
 
   create_table "adjective_circles", :force => true do |t|
     t.string   "name_pair"
@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(:version => 20130410031449) do
     t.text     "stages"
     t.text     "instructions"
     t.text     "end_remarks"
-    t.string   "experiment"
     t.string   "icon"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.text     "score_names"
     t.text     "calculates"
+    t.string   "result_view"
   end
 
   create_table "elements", :force => true do |t|

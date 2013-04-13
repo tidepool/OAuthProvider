@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   belongs_to :profile_description
+
+  def self.find_or_create_from_auth_hash(auth_hash)
+    
+  end
 end

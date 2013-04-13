@@ -28,10 +28,11 @@ module TidepoolAnalyze
       it 'should calculate the Big5 score correctly' do
         big5Score = Big5Score.new
         result = big5Score.calculate_score(@aggregate_results)
-        result[:big5_dimension].should_not be_nil
-        result[:big5_scores].should_not be_nil
-        result[:big5_dimension].should == 'high_openness'
-        result[:big5_scores].should == {
+        result[:dimension].should_not be_nil
+        result[:score].should_not be_nil
+        result[:friendly_name].should == 'Personality - Big5'
+        result[:dimension].should == 'high_openness'
+        result[:score].should == {
           openness: (10+4)/2,
           agreeableness: (3+6)/2,
           conscientiousness: (8+2)/2,

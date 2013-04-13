@@ -2,9 +2,9 @@
     "name" : "Just Reaction",
     "instructions" : "This test assesses your reaction time. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
-    "experiment" : "",
     "score_names" : ["reaction_time"],
     "calculates" : ["scores"],
+    "result_view": "Scores",
     "stages" :
         [
             {

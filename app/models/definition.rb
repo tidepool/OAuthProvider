@@ -5,7 +5,7 @@ class Definition < ActiveRecord::Base
   serialize :score_names, JSON
   serialize :calculates, JSON
   
-  attr_accessible :name, :stages, :instructions, :end_remarks, :experiment, :icon, :score_names, :calculates
+  attr_accessible :name, :stages, :instructions, :end_remarks, :icon, :score_names, :calculates, :result_view
 
   def self.find_or_return_default(def_id)
     begin

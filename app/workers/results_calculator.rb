@@ -28,8 +28,7 @@ class ResultsCalculator
     AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
       circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
     end
-    binding.pry
-
+    # binding.remote_pry
     assessment = Assessment.find(assessment_id)
     analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(assessment.definition.stages, elements, circles)
     

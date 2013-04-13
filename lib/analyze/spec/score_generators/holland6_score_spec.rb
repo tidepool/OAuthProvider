@@ -21,10 +21,11 @@ module TidepoolAnalyze
       it 'should calculate the Holland6 score correctly' do
         holland6Score = Holland6Score.new
         result = holland6Score.calculate_score(@aggregate_results)
-        result[:holland6_dimension].should_not be_nil
-        result[:holland6_scores].should_not be_nil
-        result[:holland6_dimension].should == 'artistic'
-        result[:holland6_scores].should == {
+        result[:dimension].should_not be_nil
+        result[:score].should_not be_nil
+        result[:friendly_name].should == 'Interests - Holland6'
+        result[:dimension].should == 'artistic'
+        result[:score].should == {
           realistic: 8,
           artistic: 12,
           social: 4,

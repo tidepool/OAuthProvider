@@ -5,16 +5,13 @@ OAuthProvider::Application.routes.draw do
     controllers :authorizations => 'authorizations'
   end
 
-  # devise_for :users, :controllers => { :sessions => 'sessions', :registrations => 'registrations' }
-
-  # devise_scope :user do
-  #   get 'login', :to => 'sessions#new'  
-  #   delete 'logout', :to => 'sessions#destroy'  
-  # end
-
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  # OmniAuth routes:
+  match '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/failure', to: 'sessions#failure'
   
   resources :sessions
   resources :users

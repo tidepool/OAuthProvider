@@ -12,8 +12,8 @@ class PersistProfile
     scores = results[:scores]
     return if !scores
 
-    big5_dimension = (scores[:big5] && scores[:big5][:big5_dimension]) ? scores[:big5][:big5_dimension] : nil 
-    holland6_dimension = (scores[:holland6] && scores[:holland6][:holland6_dimension] ? scores[:holland6][:holland6_dimension] : nil)
+    big5_dimension = (scores[:big5] && scores[:big5][:dimension]) ? scores[:big5][:dimension] : nil 
+    holland6_dimension = (scores[:holland6] && scores[:holland6][:dimension] ? scores[:holland6][:dimension] : nil)
 
     return if big5_dimension == nil || holland6_dimension == nil
 

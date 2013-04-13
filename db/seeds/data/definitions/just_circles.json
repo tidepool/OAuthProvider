@@ -4,6 +4,7 @@
     "end_remarks" : "Congratulations. Please take a moment to register!",
     "score_names" : ["big5", "holland6"],
     "calculates" : ["scores", "profile"],
+    "result_view": "Profile",
     "stages":
         [
             {
