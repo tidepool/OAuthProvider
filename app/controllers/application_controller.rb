@@ -9,5 +9,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # helper :current_user
+  def sign_in_and_redirect(user)
+    session[:user_id] = user.id
+    redirect_to session[:user_return_to], notice: "Logged in!"
+  end 
+
+  helper :current_user
+  helper :sign_in_and_redirect
 end

@@ -10,11 +10,12 @@ OAuthProvider::Application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   # OmniAuth routes:
-  match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure', to: 'sessions#failure'
+  match '/auth/:provider/callback', to: 'authentications#create'
+  match '/auth/failure', to: 'authentications#failure'
   
   resources :sessions
   resources :users
+  resources :authentications
 
   mount Sidekiq::Web, at: '/sidekiq'
 

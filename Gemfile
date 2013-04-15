@@ -11,6 +11,8 @@ gem 'rails', '3.2.13'
 gem 'doorkeeper', '~> 0.6.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-fitbit'
+gem 'omniauth-twitter'
 
 # To support CORS
 gem 'rack-cors', :require => 'rack/cors'
