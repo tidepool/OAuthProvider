@@ -11,30 +11,51 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     puts "Resource_owner authenticator called #{request.params}"
-    force_no_guest = params[:force_no_guest]  
-    session[:user_return_to] = request.fullpath
+    # force_no_guest = params[:force_no_guest]  
+    # session[:user_return_to] = request.fullpath
 
     puts "Session in Authenticator #{session}"    
     # binding.remote_pry
-
-    if force_no_guest
-      puts "Has to use a real user not guest"
-      current_user || redirect_to(login_url)
-    else  
-      puts "Ok to creating a guest user" 
-      user = current_user
-      if user
-        puts "Current User id is #{user.id}"
+    user_id = params[:user_id]
+    if user_id 
+      user = User.find(user_id)
+    else
+      authorize_through = params[:authorize_through]
+      if authorize_through
+        redirect_to("/auth/#{authorize_through}")
+        session[:user_return_to] = request.fullpath
       end
-      current_or_guest_user || redirect_to(login_url)
     end
+    # user = User.find_by_email(params[:username])
+    # user if user && user.authenticate(params[:password])
+    # if force_no_guest
+    #   puts "Has to use a real user not guest"
+    #   current_user || redirect_to(login_url)
+    # else  
+    #   puts "Ok to creating a guest user" 
+    #   user = current_user
+    #   if user
+    #     puts "Current User id is #{user.id}"
+    #   end
+    #   current_or_guest_user || redirect_to(login_url)
+    # end
   end
 
-  # Below gets called in our tests so keep!
+  # Below gets called in from our client when:
+  # response_type: password
   resource_owner_from_credentials do |routes|
+    #binding.remote_pry
+
     puts "Resource_owner from credentials called"
-    user = User.find_for_database_authentication(:email => params[:username])
-    user if user && user.valid_password?(params[:password])
+    if params[:email] == "guest"
+      user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+      user.guest = true
+      user.save!(:validate => false)   
+      user   
+    else
+      user = User.find_by_email(params[:email])
+      user if user && user.authenticate(params[:password])
+    end
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
@@ -87,7 +108,9 @@ Doorkeeper.configure do
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.
-  # skip_authorization do |resource_owner, client|
-  #   client.superapp? or resource_owner.admin?
-  # end
+  skip_authorization do |resource_owner, client|
+    # TODO: When API is public, we should include our app as a super app and not skip authorization
+    true
+    # client.superapp? or resource_owner.admin?
+  end
 end

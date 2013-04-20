@@ -1,5 +1,5 @@
 module TwitterPopulate
-  def populate_from_twitter(auth_hash, authentication)
+  def populate_from_twitter(auth, authentication)
     set_if_empty(:name, auth.info.name, authentication)
     set_if_empty(:display_name, auth.info.nickname, authentication)
     set_if_empty(:city, auth.info.location, authentication)

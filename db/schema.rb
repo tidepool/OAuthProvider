@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411180020) do
+ActiveRecord::Schema.define(:version => 20130415040729) do
 
   create_table "adjective_circles", :force => true do |t|
     t.string   "name_pair"
@@ -40,6 +40,29 @@ ActiveRecord::Schema.define(:version => 20130411180020) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "status"
+  end
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.string   "email"
+    t.string   "name"
+    t.string   "display_name"
+    t.string   "description"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "timezone"
+    t.string   "locale"
+    t.string   "image"
+    t.string   "gender"
+    t.date     "date_of_birth"
+    t.date     "member_since"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "definitions", :force => true do |t|
@@ -150,6 +173,17 @@ ActiveRecord::Schema.define(:version => 20130411180020) do
     t.boolean  "admin",                  :default => false, :null => false
     t.boolean  "guest",                  :default => false, :null => false
     t.integer  "profile_description_id"
+    t.string   "name"
+    t.string   "display_name"
+    t.string   "description"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "timezone"
+    t.string   "locale"
+    t.string   "image"
+    t.string   "gender"
+    t.date     "date_of_birth"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

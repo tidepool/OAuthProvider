@@ -1,6 +1,15 @@
 <h1>Sign In</h1>
 
-<a href="/auth/facebook">Sign in using Facebook</a>
+<script>
+  var fbClicked = function(e) {
+    // e.preventDefault();
+    FB.login( function(response){
+      window.location = '/auth/facebook/callback' 
+    });
+  }
+</script>
+<a  target="loginIframe" id="facebook_signin" onclick="fbClicked();">Sign in using Facebook</a>
+<a href="/auth/fitbit">Sign in using Fitbit</a>
 
 <p>Or</p>
 
