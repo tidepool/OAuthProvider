@@ -46,7 +46,7 @@ Doorkeeper.configure do
   resource_owner_from_credentials do |routes|
     #binding.remote_pry
 
-    puts "Resource_owner from credentials called"
+    puts "Resource_owner from credentials called #{routes}"
     if params[:email] == "guest"
       user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
       user.guest = true
