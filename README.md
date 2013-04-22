@@ -52,6 +52,8 @@ Installation:
 * Setting up the .env file (Create a .env file in your root Rails folder with the following)
 
         RACK_ENV=development
+        API_SERVER=http://api-server.dev
+        OAUTH_REDIRECT=http://assessments-front.dev/
         FACEBOOK_KEY=
         FACEBOOK_SECRET=
         FITBIT_KEY=

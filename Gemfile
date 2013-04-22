@@ -36,6 +36,7 @@ group :development, :test do
   gem 'oauth2'
   gem 'spork', '~> 1.0rc'
   gem 'jazz_hands'
+  gem 'dotenv-rails'
 end
 
 # API (Serializers)

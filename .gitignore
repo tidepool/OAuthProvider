@@ -19,3 +19,5 @@
 .env
 *.DS_Store
 dump.rdb
+
+app_secrets_dev.js

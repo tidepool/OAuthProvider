@@ -66,6 +66,9 @@ GEM
     diffy (2.1.3)
     doorkeeper (0.6.7)
       railties (~> 3.1)
+    dotenv (0.7.0)
+    dotenv-rails (0.7.0)
+      dotenv (= 0.7.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -258,6 +261,7 @@ DEPENDENCIES
   active_model_serializers!
   bcrypt-ruby (~> 3.0.0)
   doorkeeper (~> 0.6.7)
+  dotenv-rails
   foreman
   jazz_hands
   jquery-rails
