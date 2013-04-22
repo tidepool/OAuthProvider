@@ -15,6 +15,9 @@
 /log
 /tmp
 
+# Ignore IDE project files
+.idea
+
 /vendor/bundle/*
 .env
 *.DS_Store
