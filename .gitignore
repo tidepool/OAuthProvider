@@ -15,9 +15,13 @@
 /log
 /tmp
 
+# Ignore IDE project files
+.idea
+
 /vendor/bundle/*
 .env
 *.DS_Store
 dump.rdb
 
 app_secrets_dev.js
+/bin/

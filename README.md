@@ -7,7 +7,7 @@ Pre-requisites:
         brew install rbenv
         brew install ruby-build
   
-  DONOT Forget to add this to your .zshrc or .profile (depending on your shell)
+  DO NOT Forget to add this to your .zshrc or .profile (depending on your shell)
   
         if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
   
@@ -43,11 +43,13 @@ Installation:
 
         bundle install --path vendor/bundle
 
+* Start up the Postgres database server
+
 * Setting up the database
 
-        rake db:setup
-        rake db:migrate
-        rake db:seed
+        bundle exec rake db:setup
+        bundle exec rake db:migrate
+        bundle exec rake db:seed
 
 * Setting up the .env file (Create a .env file in your root Rails folder with the following)
 
