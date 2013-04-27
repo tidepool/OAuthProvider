@@ -107,30 +107,39 @@ module TidepoolAnalyze
 
             # We are using a Hash instead of an Array
             # We will look for each sequence in the event processing later on
-            @circles[color] ||= {}
             sequence_no = entry['sequence_no']
-            @circles[color][sequence_no] = {
+            create_circles_entry(color, sequence_no, {
               :shown_at => entry['record_time'],
               :clicked => false,
               :clicked_at => 0, 
-              :expected => true
-            }
+              :expected => true 
+              })
           when 'correct_circle_clicked'
             color = entry['circle_color']
             sequence_no = entry['sequence_no']
-            @circles[color][sequence_no][:clicked] = true
-            @circles[color][sequence_no][:clicked_at] = entry['record_time']
-            @circles[color][sequence_no][:expected] = true
+            create_circles_entry(color, sequence_no, {
+                :clicked => true,
+                :clicked_at => entry['record_time'],
+                :expected => true
+              })
           when 'wrong_circle_clicked'
             color = entry['circle_color']
             sequence_no = entry['sequence_no']
-            @circles[color][sequence_no][:clicked] = true
-            @circles[color][sequence_no][:clicked_at] = entry['record_time']
-            @circles[color][sequence_no][:expected] = false
+            create_circles_entry(color, sequence_no, {
+              :clicked => true,
+              :clicked_at => entry['record_time'],
+              :expected => false              
+              })
           else
             puts "Wrong Event: #{entry}"
           end
         end
+      end
+
+      def create_circles_entry(color, sequence_no, values)
+        @circles[color] ||= {}
+        @circles[color][sequence_no] ||= {}
+        @circles[color][sequence_no] = @circles[color][sequence_no].merge(values)
       end
     end
   end

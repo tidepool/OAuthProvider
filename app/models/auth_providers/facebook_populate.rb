@@ -4,5 +4,7 @@ module FacebookPopulate
     set_if_empty(:email, auth.info.email, authentication)
     set_if_empty(:city, auth.info.location, authentication)
     set_if_empty(:image, auth.info.image, authentication)
+    set_if_empty(:gender, auth.extra.raw_info.gender, authentication)
+    set_if_empty(:timezone, auth.extra.raw_info.timezone, authentication)
   end
 end

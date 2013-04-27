@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  doorkeeper_for :index, :show, :destroy
+  doorkeeper_for :index, :show, :update, :destroy
 
   def index
 
@@ -34,6 +34,10 @@ class Api::V1::UsersController < Api::V1::ApiController
       }
       format.json { render :json => response_body, :status => :internal_server_error }
     end
+  end
+
+  def update
+
   end
 
 end

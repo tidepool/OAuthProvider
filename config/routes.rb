@@ -13,9 +13,9 @@ OAuthProvider::Application.routes.draw do
   match '/auth/:provider/callback', to: 'authentications#create'
   match '/auth/failure', to: 'authentications#failure'
   
-  resources :sessions
-  resources :users
-  resources :authentications
+  match '/auth/additional', to: 'authentications#additional'  
+  # resources :sessions
+  # resources :users
 
   mount Sidekiq::Web, at: '/sidekiq'
 
@@ -24,13 +24,14 @@ OAuthProvider::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :assessments do
-        get 'results' => 'results#show'
-        post 'results' => 'results#create'
+        get 'result' => 'results#show'
+        post 'result' => 'results#create'
         # put 'results' => 'results#update'
         get 'progress' => 'results#progress'
       end
       resources :users do 
         resources :assessments
+        resources :authentications
       end
       post '/user_events' => 'user_events#create'
 

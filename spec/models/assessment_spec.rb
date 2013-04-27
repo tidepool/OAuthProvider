@@ -64,4 +64,23 @@ describe Assessment do
   it 'should not be able to create an assessment for a user if the caller is not admin or the user themselves' do
     lambda {Assessment.create_by_caller(@definition, @user, @user2)}.should raise_error(Assessment::UnauthorizedError)
   end  
+
+  it 'should be able to get an assessment by id' do
+    assessment = Assessment.create_by_caller(@definition, @user, @user)
+
+    found_assessment = Assessment.find_by_caller_and_user(assessment.id, @user, @user)
+    found_assessment.id.should == assessment.id
+  end
+
+  it 'should be able to get the latest assessment' do 
+    assessment1 = Assessment.create_by_caller(@definition, @user, @user)
+    sleep(1)
+    assessment2 = Assessment.create_by_caller(@definition, @user, @user)
+    sleep(1)
+    assessment3 = Assessment.create_by_caller(@definition, @user, @user)
+
+    found_assessment = Assessment.find_latest_by_caller_and_user(@user, @user)
+    found_assessment.id.should == assessment3.id
+  end
+
 end

@@ -33,11 +33,27 @@ class Assessment < ActiveRecord::Base
     end    
   end
 
+
   def self.find_by_caller_and_user(id, caller, user)
-    raise UnauthorizedError.new('Needs a caller') if caller.nil?
-    assessment = Assessment.find(id)
-    raise UnauthorizedError.new('Only admins or users themselves can see their assessments') unless assessment.user_id == user.id || caller.admin?
+    assessment = nil
+    self.check_and_execute(caller, user) do |caller, user|
+      assessment = Assessment.includes(:definition, :result).find(id)
+    end
     assessment 
+  end
+
+  def self.find_latest_by_caller_and_user(caller, user)
+    assessment = nil
+    self.check_and_execute(caller, user) do |caller, user|
+      assessment = Assessment.includes(:definition, :result).where('user_id = ?', user.id).order(:date_taken).last
+    end
+    assessment 
+  end
+
+  def self.check_and_execute(caller, user, &block) 
+    raise UnauthorizedError.new('Needs a caller') if caller.nil?
+    assessment = yield caller, user
+    raise UnauthorizedError.new('Only admins or users themselves can see their assessments') unless assessment.user_id == user.id || caller.admin?    
   end
 
   def self.find_all_by_caller_and_user(caller, user)

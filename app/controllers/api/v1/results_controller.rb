@@ -72,7 +72,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
             :message => 'Results are ready.'
           }
         }
-        location = api_v1_assessment_results_url
+        location = api_v1_assessment_result_url
         http_status = :ok
       elsif assessment.status == :no_results.to_s
         response_body = {

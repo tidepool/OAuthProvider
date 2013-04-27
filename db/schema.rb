@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415040729) do
+ActiveRecord::Schema.define(:version => 20130423214158) do
 
   create_table "adjective_circles", :force => true do |t|
     t.string   "name_pair"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20130415040729) do
   end
 
   create_table "assessments", :force => true do |t|
-    t.date     "date_taken"
+    t.datetime "date_taken"
     t.integer  "definition_id"
     t.integer  "user_id"
     t.text     "stages"

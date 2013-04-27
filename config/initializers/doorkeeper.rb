@@ -7,13 +7,7 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
-    # Put your resource owner authentication logic here.
-    # Example implementation:
     puts "Resource_owner authenticator called #{request.params}"
-    # force_no_guest = params[:force_no_guest]  
-    # session[:user_return_to] = request.fullpath
-
     puts "Session in Authenticator #{session}"    
     # binding.remote_pry
     user_id = params[:user_id]
@@ -22,23 +16,10 @@ Doorkeeper.configure do
     else
       authorize_through = params[:authorize_through]
       if authorize_through
-        redirect_to("/auth/#{authorize_through}")
         session[:user_return_to] = request.fullpath
+        redirect_to("/auth/#{authorize_through}")
       end
     end
-    # user = User.find_by_email(params[:username])
-    # user if user && user.authenticate(params[:password])
-    # if force_no_guest
-    #   puts "Has to use a real user not guest"
-    #   current_user || redirect_to(login_url)
-    # else  
-    #   puts "Ok to creating a guest user" 
-    #   user = current_user
-    #   if user
-    #     puts "Current User id is #{user.id}"
-    #   end
-    #   current_or_guest_user || redirect_to(login_url)
-    # end
   end
 
   # Below gets called in from our client when:

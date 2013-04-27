@@ -6,15 +6,18 @@ class AuthenticationsController < ApplicationController
     user = nil
     if authentication
       user = authentication.user
-    elsif current_user
-      user = current_user
+    elsif session[:user_id]
+      # We are trying to add the new authentication by provider to the user
+      user = session[:user_id]
       user.populate_from_auth_hash!(auth_hash)
+      # We do not want the session variable to stick around after
+      session[:user_id] = nil
     else
       user = User.new
       user.populate_from_auth_hash!(auth_hash)
     end
-    redirect_url = "#{session[:user_return_to]}&user_id=#{user.id}" 
-
+    redirect_url = "#{session[:user_return_to]}&user_id=#{user.id}&provider=#{auth_hash.provider}" 
+    session[:user_return_to] = nil
     redirect_to redirect_url
   end
 
@@ -22,15 +25,16 @@ class AuthenticationsController < ApplicationController
     # Omniauth failure
     flash.now.alert = "Facebook login invalid."
     redirect_url = "#{session[:user_return_to]}" 
-
+    session[:user_return_to] = nil
     redirect_to redirect_url
   end
 
-  def destroy
-    # TODO: Currently there is no UI to invoke this!
-    authentication = current_user.authentications.find(params[:id])
-    authentication.destroy
-    flash[:notice] = "Successfully destroyed authentication."
-    redirect_to login_url
+  def additional
+    # We are creating this authentication using the browser redirect method  
+    session[:user_return_to] = params[:redirect_uri]
+    session[:user_id] = params[:user_id]
+    authentication_uri = "/auth/#{params[:provider]}"
+
+    redirect_to authentication_uri    
   end
 end

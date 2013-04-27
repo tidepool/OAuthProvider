@@ -1,6 +1,5 @@
 class AssessmentSerializer < ActiveModel::Serializer
-  attributes :id, :date_taken, :stage_completed, :stages,
-             :results_ready, :user_id
+  attributes :id, :date_taken, :stage_completed, :stages, :user_id, :status
 
   has_one :definition, embed: :objects
 

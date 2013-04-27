@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     provider = auth_hash.provider
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
     authentication.oauth_token = auth_hash.credentials.token
-    binding.remote_pry
+    # binding.remote_pry
     if auth_hash.credentials.expires_at
       authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
     end

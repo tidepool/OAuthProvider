@@ -14,7 +14,11 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   end
 
   def show 
-    @assessment = Assessment.find_by_caller_and_user(params[:id], @caller, @user)
+    if params[:id] == 'latest'
+      @assessment = Assessment.find_latest_by_caller_and_user(@caller, @user)
+    else   
+      @assessment = Assessment.find_by_caller_and_user(params[:id], @caller, @user)
+    end
     respond_to do |format|
       format.json { render :json => @assessment }
     end
@@ -42,6 +46,6 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   private
   def setup_users
     @caller = current_resource_owner
-    @user = params[:user_id].nil? ? @caller : User.where('id = ?', params[:user_id]).first
+    @user = params[:user_id].nil? || params[:user_id] == '-' ? @caller : User.where('id = ?', params[:user_id]).first
   end
 end
