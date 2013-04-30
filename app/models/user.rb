@@ -23,15 +23,24 @@ class User < ActiveRecord::Base
 
   def populate_from_auth_hash!(auth_hash)
     provider = auth_hash.provider
-    authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
-    authentication.oauth_token = auth_hash.credentials.token
     # binding.remote_pry
+
+    authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
+    if authentication 
+      # An authentication already exists for the user, just attach it
+      authentication.user_id = self.id
+    else
+      # Create a new authentication
+      authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
+    end 
+    authentication.oauth_token = auth_hash.credentials.token
     if auth_hash.credentials.expires_at
       authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
     end
 
     method_name = "populate_from_#{provider.underscore}"
     self.method(method_name.to_sym).call(auth_hash, authentication)
+    authentication.save!
     self.save!(:validate => false)
   end
 end

@@ -6,17 +6,29 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def show
-    if params[:id] == "-"
+    user = nil
+    if params[:id] == "-" ||  params[:id].to_i == current_resource_owner.id
       # Get the resource owner
       user = current_resource_owner
+
+      respond_to do |format|
+        format.json { render :json => user }
+      end
     elsif current_resource_owner.admin?
-      user = User.find(params[:id]) 
+      user = User.find(params[:id])
+      respond_to do |format|
+        format.json { render :json => user }
+      end
+    else
+      response_body = {
+        :error => {
+          :message => 'Only users themselves and admins can get user info'
+        }
+      }
+      respond_to do |format|
+        format.json { render :json => response_body, :status => :unauthorized }
+      end
     end
-
-    respond_to do |format|
-      format.json { render :json => user }
-    end
-
   end
 
   def create

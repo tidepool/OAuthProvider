@@ -5,8 +5,8 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
     # called :redirectable, so we need to check to make sure this is checked?
 
     auth = authorization.authorize
-    puts("REDIRECT URI !!!!! => #{auth.redirect_uri}")
     if auth.class.method_defined?(:redirectable) && auth.redirectable?
+      puts("REDIRECT URI !!!!! => #{auth.redirect_uri}")
       redirect_to auth.redirect_uri
     else
       render :json => auth.body, :status => auth.status

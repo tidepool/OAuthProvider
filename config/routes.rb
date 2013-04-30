@@ -28,6 +28,7 @@ OAuthProvider::Application.routes.draw do
         post 'result' => 'results#create'
         # put 'results' => 'results#update'
         get 'progress' => 'results#progress'
+        get 'latest' => 'results#show'
       end
       resources :users do 
         resources :assessments

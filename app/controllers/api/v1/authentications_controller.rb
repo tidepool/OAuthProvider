@@ -10,12 +10,13 @@ class Api::V1::AuthenticationsController < Api::V1::ApiController
         format.json { render :json => response_body, :status => :ok }   
       end
     else
-     response_body = {
+      response_body = {
        :error => "Only admins or current user can invoke this operation."
-     }
-     respond_to do |format|
+      }
+      respond_to do |format|
        format.json { render :json => response_body, :status => :unauthorized }  
-    end  
+      end  
+    end
   end
 
   def create
@@ -43,11 +44,12 @@ class Api::V1::AuthenticationsController < Api::V1::ApiController
         end
       end
     else
-     response_body = {
-       :error => "Only admins or current user can invoke this operation."
-     }
-     respond_to do |format|
-       format.json { render :json => response_body, :status => :unauthorized }  
+      response_body = {
+        :error => "Only admins or current user can invoke this operation."
+      }
+      respond_to do |format|
+        format.json { render :json => response_body, :status => :unauthorized }  
+      end
     end
   end
 
