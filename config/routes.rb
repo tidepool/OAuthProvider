@@ -5,9 +5,9 @@ OAuthProvider::Application.routes.draw do
     controllers :authorizations => 'authorizations'
   end
 
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
+  # get 'signup', to: 'users#new', as: 'signup'
+  # get 'login', to: 'sessions#new', as: 'login'
+  # get 'logout', to: 'sessions#destroy', as: 'logout'
 
   # OmniAuth routes:
   match '/auth/:provider/callback', to: 'authentications#create'
@@ -26,7 +26,6 @@ OAuthProvider::Application.routes.draw do
       resources :assessments do
         get 'result' => 'results#show'
         post 'result' => 'results#create'
-        # put 'results' => 'results#update'
         get 'progress' => 'results#progress'
         get 'latest' => 'results#show'
       end
@@ -35,8 +34,6 @@ OAuthProvider::Application.routes.draw do
         resources :authentications
       end
       post '/user_events' => 'user_events#create'
-
-      get '/me' => 'profiles#me'
     end
   end
   

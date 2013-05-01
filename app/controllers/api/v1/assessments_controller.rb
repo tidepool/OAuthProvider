@@ -16,7 +16,9 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   def show 
     if params[:id] == 'latest'
       @assessment = Assessment.find_latest_by_caller_and_user(@caller, @user)
-    else   
+    elsif params[:id] == 'latest_with_profile'
+      @assessment = Assessment.find_latest_with_profile_by_caller_and_user(@caller, @user)
+    else  
       @assessment = Assessment.find_by_caller_and_user(params[:id], @caller, @user)
     end
     respond_to do |format|

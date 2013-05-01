@@ -6,4 +6,5 @@ class UserSerializer < ActiveModel::Serializer
             :city, :state, :country
 
   has_many :authentications
+  has_one :profile_description
 end

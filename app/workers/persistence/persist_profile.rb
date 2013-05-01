@@ -20,9 +20,9 @@ class PersistProfile
     profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
 
     user.profile_description = profile_description
-    user.save
+    user.save!(:validate => false)
 
     result.profile_description = profile_description
-    result.save
+    result.save!
   end
 end

@@ -50,6 +50,16 @@ class Assessment < ActiveRecord::Base
     assessment 
   end
 
+  def self.find_latest_with_profile_by_caller_and_user(caller, user)
+    assessment = nil
+    self.check_and_execute(caller, user) do |caller, user|
+      definitions = Definition.where("calculates like '%profile%'").all
+      query = (definitions.reduce("") { |out, definition| out + "definition_id = #{definition.id} or " }).chomp(" or ")
+      assessment = Assessment.includes(:definition, :result).joins(:definition).where("(#{query}) and user_id = ? and status = 'results_ready'", 113).order(:date_taken).last
+    end
+    assessment 
+  end
+
   def self.check_and_execute(caller, user, &block) 
     raise UnauthorizedError.new('Needs a caller') if caller.nil?
     assessment = yield caller, user

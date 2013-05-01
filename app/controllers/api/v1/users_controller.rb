@@ -7,7 +7,17 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def show
     user = nil
-    if params[:id] == "-" ||  params[:id].to_i == current_resource_owner.id
+    if params[:id] == "finish_login" 
+      user = current_resource_owner
+      assessment = Assessment.where('user_id = ?', params[:guest_id]).last
+      if assessment
+        assessment.user_id = user.id 
+        assessment.save!
+      end 
+      respond_to do |format|
+        format.json { render :json => user }
+      end
+    elsif params[:id] == "-" ||  params[:id].to_i == current_resource_owner.id
       # Get the resource owner
       user = current_resource_owner
 
@@ -33,7 +43,13 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def create
     # binding.remote_pry
-    @user = User.new(params[:user])
+    if params[:guest_id]
+      # Transfer a Guest User to registered user
+      @user = User.find(params[:guest_id])
+      @user.update(params[:user])
+    else
+      @user = User.new(params[:user])
+    end
     if @user.save
       respond_to do |format|
         format.json { render :json => @user }
@@ -51,5 +67,4 @@ class Api::V1::UsersController < Api::V1::ApiController
   def update
 
   end
-
 end
