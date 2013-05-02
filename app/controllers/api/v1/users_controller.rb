@@ -9,11 +9,14 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = nil
     if params[:id] == "finish_login" 
       user = current_resource_owner
-      assessment = Assessment.where('user_id = ?', params[:guest_id]).last
-      if assessment
-        assessment.user_id = user.id 
-        assessment.save!
-      end 
+      if params[:guest_id] && params[:guest_id] != 'null'
+        # There is a prior guest, we need to transfer their assessment to the new user
+        assessment = Assessment.where('user_id = ?', params[:guest_id]).last
+        if assessment
+          assessment.user_id = user.id 
+          assessment.save!
+        end 
+      end
       respond_to do |format|
         format.json { render :json => user }
       end
