@@ -68,6 +68,22 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def update
+    if current_resource_owner.admin? || params[:id].to_i == current_resource_owner.id
+      @user = User.find(params[:id])
+      @user.update_attributes(params[:user])
 
+      respond_to do |format|
+        format.json { render :json => @user}
+      end
+    else
+      response_body = {
+        :error => {
+          :message => 'Only users themselves and admins can update user info'
+        }
+      }
+      respond_to do |format|
+        format.json { render :json => response_body, :status => :unauthorized }
+      end 
+    end
   end
 end
