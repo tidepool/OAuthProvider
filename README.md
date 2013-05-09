@@ -45,13 +45,7 @@ Installation:
 
 * Start up the Postgres database server
 
-* Setting up the database
-
-        bundle exec rake db:setup
-        bundle exec rake db:migrate
-        bundle exec rake db:seed
-
-* Setting up the .env file (Create a .env file in your root Rails folder with the following)
+* Set up the .env file (Create a .env file in your root Rails folder with the following)
 
         RACK_ENV=development
         API_SERVER=http://api-server.dev
@@ -63,11 +57,17 @@ Installation:
         TWITTER_KEY=
         TWITTER_SECRET=
 
+* Set up the database
+
+        bundle exec rake db:setup
+        bundle exec rake db:migrate
+        bundle exec rake db:seed
+
 * Setting up POW (http://pow.cx/): 
   (We are just using POW as a proxy/DNS server, it is not a web server.)
-  
-        echo 7004 > ~/.pow/api-server
 
+        curl get.pow.cx | sh
+        echo 7004 > ~/.pow/api-server
 
 Start the server now:
 
