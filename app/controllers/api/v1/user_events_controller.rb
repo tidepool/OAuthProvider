@@ -1,5 +1,3 @@
-require Rails.root + 'app/models/events/user_event.rb'
-
 class Api::V1::UserEventsController < ApplicationController
   respond_to :json
 

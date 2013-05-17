@@ -1,5 +1,3 @@
-require 'pry' if Rails.env.test? || Rails.env.development?
-
 class Api::V1::AssessmentsController < Api::V1::ApiController
   doorkeeper_for :index, :show, :destroy
   doorkeeper_for :update, :if => lambda { Assessment.find(params[:id]).user_id != 0 }

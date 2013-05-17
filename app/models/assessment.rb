@@ -1,5 +1,3 @@
-require 'pry' if Rails.env.test? || Rails.env.development?
-
 class Assessment < ActiveRecord::Base
   serialize :stages, JSON
 

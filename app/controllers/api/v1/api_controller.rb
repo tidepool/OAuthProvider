@@ -1,4 +1,6 @@
 class Api::V1::ApiController < ApplicationController
+  # before_filter :authorize
+
   protected
 
   def current_resource_owner
@@ -8,4 +10,13 @@ class Api::V1::ApiController < ApplicationController
       @current_resource_owner = nil
     end
   end
+
+  def current_permission
+    @current_permission ||= Permission.new(current_resource_owner)
+  end
+
+  def authorize
+    
+  end
+
 end
