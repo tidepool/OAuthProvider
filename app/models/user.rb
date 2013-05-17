@@ -7,9 +7,6 @@ class User < ActiveRecord::Base
     include Object.const_get(module_name)
   end
 
-  attr_accessible :email, :password, :password_confirmation, :name, :display_name,
-                  :description, :city, :state, :country, :timezone, :gender,
-                  :date_of_birth, :locale
   validates_uniqueness_of :email
 
   belongs_to :profile_description

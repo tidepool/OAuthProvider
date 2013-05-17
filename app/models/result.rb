@@ -1,6 +1,4 @@
 class Result < ActiveRecord::Base
-  attr_accessible :assessment_id
-
   serialize :event_log, JSON
   serialize :intermediate_results, JSON
   serialize :aggregate_results, JSON

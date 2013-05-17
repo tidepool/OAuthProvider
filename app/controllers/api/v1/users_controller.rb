@@ -86,4 +86,16 @@ class Api::V1::UsersController < Api::V1::ApiController
       end 
     end
   end
+
+  private 
+  def user_attributes
+    if (current_resource_owner && current_resource_owner.admin?)
+      params.require(:user).permit!
+    else
+      params.require(:user).permit
+        :email, :password, :name, :display_name, 
+        :description, :city, :state, :country, :timezone, 
+        :locale, :image, :gender, :date_of_birth
+    end
+  end
 end

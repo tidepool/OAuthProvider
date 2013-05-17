@@ -2,7 +2,6 @@ class Assessment < ActiveRecord::Base
   serialize :stages, JSON
 
   # Assessment status: :not_started, :in_progress, :completed, :results_ready
-  attr_accessible :date_taken, :stage_completed, :user_id, :status
                   
   # IMPORTANT: user_id is specifically left as an id and not as a belongs_to relationship,
   #            In the future, the users table may live elsewhere.

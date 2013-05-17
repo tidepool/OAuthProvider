@@ -24,4 +24,4 @@
 dump.rdb
 
 app_secrets_dev.js
-/bin/
+# /bin/ -> Rails4 requires bin files to be versioned in Git

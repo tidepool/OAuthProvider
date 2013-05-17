@@ -35,9 +35,8 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
 
   def update
     @assessment = Assessment.find(params[:id])
-    attributes = params[:assessment]
 
-    @assessment.update_attributes_with_caller(attributes, @caller)
+    @assessment.update_attributes_with_caller(assessment_params, @caller)
     respond_to do |format|
       format.json { render :json => @assessment}
     end
@@ -47,5 +46,9 @@ class Api::V1::AssessmentsController < Api::V1::ApiController
   def setup_users
     @caller = current_resource_owner
     @user = params[:user_id].nil? || params[:user_id] == '-' ? @caller : User.where('id = ?', params[:user_id]).first
+  end
+
+  def assessment_params
+    params.require[:assessment].permit(:stage_completed, :status)  
   end
 end
