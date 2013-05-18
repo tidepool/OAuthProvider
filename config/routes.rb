@@ -10,10 +10,10 @@ OAuthProvider::Application.routes.draw do
   # get 'logout', to: 'sessions#destroy', as: 'logout'
 
   # OmniAuth routes:
-  match '/auth/:provider/callback', to: 'authentications#create'
-  match '/auth/failure', to: 'authentications#failure'
+  get '/auth/:provider/callback', to: 'authentications#create'
+  get '/auth/failure', to: 'authentications#failure'
   
-  match '/auth/additional', to: 'authentications#additional'  
+  get '/auth/additional', to: 'authentications#additional'  
   # resources :sessions
   # resources :users
 
