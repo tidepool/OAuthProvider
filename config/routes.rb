@@ -33,6 +33,9 @@ OAuthProvider::Application.routes.draw do
         resources :assessments
         resources :authentications
       end
+      get '/users/:user_id/trackers/:tracker/:date', to: 'trackers#show'
+      get '/trackers/:id', to: 'trackers#show'
+
       post '/user_events' => 'user_events#create'
     end
   end
