@@ -20,10 +20,10 @@ class Api::V1::AuthenticationsController < Api::V1::ApiController
   end
 
   def create
-    if current_resource_owner
+    if caller
       # This is an API call:
       # We expect the authentication token to passed to us.
-      user = current_resource_owner
+      user = caller
       # TODO: create the auth_hash here from parameters passed-in
       # auth_hash = {}
       # user.populate_from_auth_hash(auth_hash)
@@ -55,8 +55,8 @@ class Api::V1::AuthenticationsController < Api::V1::ApiController
 
   private
   def determine_user
-    # Only current_resource_owner or an admin can interact with authentications
-    user = current_resource_owner
+    # Only caller or an admin can interact with authentications
+    user = caller
     if user.nil?
       # Could be an admin calling this?
       user = User.find(params[:id])

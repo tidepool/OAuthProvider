@@ -73,6 +73,11 @@ GEM
       dotenv (= 0.7.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     foreman (0.63.0)
@@ -247,6 +252,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   doorkeeper!
   dotenv-rails
+  factory_girl_rails
   foreman
   jazz_hands
   jquery-rails

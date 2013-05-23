@@ -1,22 +1,34 @@
 class Api::V1::ApiController < ApplicationController
-  # before_filter :authorize
+  before_filter :authorize
+
+  class UnauthorizedError < StandardError
+  end
 
   protected
 
-  def current_resource_owner
+  def caller
     if doorkeeper_token
-      @current_resource_owner ||= User.includes(:profile_description).find(doorkeeper_token.resource_owner_id)
+      @caller ||= User.includes(:profile_description).find(doorkeeper_token.resource_owner_id)
     else
-      @current_resource_owner = nil
+      @caller = nil
     end
   end
 
+  def target_user
+    @target_user ||= params[:user_id].nil? || params[:user_id] == '-' ? caller : User.find(params[:user_id])
+  end
+
   def current_permission
-    @current_permission ||= Permission.new(current_resource_owner)
+    @current_permission ||= Permissions::permissions_for(caller)
+  end
+
+  def current_resource
+    nil
   end
 
   def authorize
-    
+    if !current_permission.allow?(params[:controller], params[:action], current_resource)
+      raise UnauthorizedError.new('Not Authorized')
+    end
   end
-
 end

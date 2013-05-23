@@ -29,6 +29,9 @@ OAuthProvider::Application.routes.draw do
         get 'progress' => 'results#progress'
         get 'latest' => 'results#show'
       end
+
+      get '/assessments/latest', to: 'assessments#latest'
+      get '/assessments/latest_with_profile', to: 'assessments#latest_with_profile'
       resources :users do 
         resources :assessments
         resources :authentications
@@ -36,6 +39,7 @@ OAuthProvider::Application.routes.draw do
       get '/users/:user_id/trackers/:tracker/:date', to: 'trackers#show'
       get '/trackers/:id', to: 'trackers#show'
 
+      get '/users/finish_login', to: 'users#finish_login'
       post '/user_events' => 'user_events#create'
     end
   end

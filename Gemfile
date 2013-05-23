@@ -42,6 +42,10 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
+group :test, :development do
+  gem 'factory_girl_rails'
+end
+
 # API (Serializers)
 gem "active_model_serializers", :github => "rails-api/active_model_serializers"
 
