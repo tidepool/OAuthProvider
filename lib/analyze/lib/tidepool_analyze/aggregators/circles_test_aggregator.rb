@@ -9,13 +9,13 @@ module TidepoolAnalyze
         @circles = {}
       end
 
-      def break_into_assessment_types
+      def break_into_game_types
         raw_results_by_type = {}
         @raw_results.each do |entry|
           stage_no = entry[:stage].to_i
-          assessment_type = @stages[stage_no][:assessment_type.to_s].downcase
-          raw_results_by_type[assessment_type.to_sym] = [] if raw_results_by_type[assessment_type.to_sym].nil?
-          raw_results_by_type[assessment_type.to_sym] |= entry[:results]
+          game_type = @stages[stage_no][:game_type.to_s].downcase
+          raw_results_by_type[game_type.to_sym] = [] if raw_results_by_type[game_type.to_sym].nil?
+          raw_results_by_type[game_type.to_sym] |= entry[:results]
         end
         raw_results_by_type
       end
@@ -31,10 +31,10 @@ module TidepoolAnalyze
       # }
 
       def calculate_result
-        raw_results_by_type = break_into_assessment_types
+        raw_results_by_type = break_into_game_types
         final_results = {}
-        raw_results_by_type.each do |assessment_type, raw_results|
-          final_results[assessment_type] = result_by_assessment_type(raw_results)
+        raw_results_by_type.each do |game_type, raw_results|
+          final_results[game_type] = result_by_game_type(raw_results)
         end
         final_results
       end
@@ -52,9 +52,9 @@ module TidepoolAnalyze
       # ]
       # Algorithm:
       # 1. Calculate the z-scores for each of size, distance and overlap
-      # 2. Each name_pair (trait1/trait2) maps to an attribute of the assessment type (E.g. Openness for Big5)
+      # 2. Each name_pair (trait1/trait2) maps to an attribute of the game type (E.g. Openness for Big5)
       # 3. Multiply the z-scores by corresponding weights
-      # 4. Add the weighted z-scores per attribute of assessment type.
+      # 4. Add the weighted z-scores per attribute of game type.
       # 5. Average the weighted z-scores
       # The output is in the form of:
       # {
@@ -62,7 +62,7 @@ module TidepoolAnalyze
       #   :agreeableness => {:weighted_total => num, :count => count, :average => average }
       # }
 
-      def result_by_assessment_type(raw_results)
+      def result_by_game_type(raw_results)
         aggregate_weighted_total = {}
         raw_results.each do |result|
           name_pair = "#{result[:trait1]}/#{result[:trait2]}"

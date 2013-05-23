@@ -1,4 +1,4 @@
-class AssessmentSummarySerializer < ActiveModel::Serializer
+class GameSummarySerializer < ActiveModel::Serializer
   attributes :id, :date_taken, :icon, :title, :completion, :num_of_stages
 
   def title

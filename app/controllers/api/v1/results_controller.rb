@@ -10,7 +10,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
     else
       response_body = {
         :status => {
-          :message => 'Results not calculated for this assessment'
+          :message => 'Results not calculated for this game'
         }
       }
       status = :not_found
@@ -27,7 +27,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       response_body = {
         :status => {
           :state => :pending,
-          :link => api_v1_assessment_progress_url,
+          :link => api_v1_game_progress_url,
           :message => 'Results are being calculated.'
         }
       }
@@ -45,22 +45,22 @@ class Api::V1::ResultsController < Api::V1::ApiController
   def progress
     http_status = :ok
     response_body = {}
-    location = api_v1_assessment_progress_url
+    location = api_v1_game_progress_url
     if current_resource.status == :results_ready.to_s
       response_body = {
         :status => {
           :state => :done,
-          :link => api_v1_assessment_progress_url,
+          :link => api_v1_game_progress_url,
           :message => 'Results are ready.'
         }
       }
-      location = api_v1_assessment_result_url
+      location = api_v1_game_result_url
       http_status = :ok
     elsif current_resource.status == :no_results.to_s
       response_body = {
         :status => {
           :state => :error,
-          :link => api_v1_assessment_progress_url,
+          :link => api_v1_game_progress_url,
           :message => 'Error calculating results'
         }
       }
@@ -69,7 +69,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       response_body = {
         :status => {
           :state => :pending,
-          :link => api_v1_assessment_progress_url,
+          :link => api_v1_game_progress_url,
           :message => 'Results are still being calculated'
         }
       }
@@ -85,6 +85,6 @@ class Api::V1::ResultsController < Api::V1::ApiController
   protected
 
   def current_resource 
-    @assessment ||= Assessment.find(params[:assessment_id]) if params[:assessment_id]
+    @game ||= Game.find(params[:game_id]) if params[:game_id]
   end
 end

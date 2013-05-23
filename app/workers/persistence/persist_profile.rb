@@ -1,13 +1,13 @@
 require 'pry' if Rails.env.test? || Rails.env.development?
 
 class PersistProfile 
-  def persist(assessment, results)
-    return if !assessment && !assessment.user_id
+  def persist(game, results)
+    return if !game && !game.user_id
 
-    user = User.find(assessment.user_id)
+    user = User.find(game.user_id)
     return if !user
 
-    result = assessment.result.nil? ? assessment.create_result : assessment.result
+    result = game.result.nil? ? game.create_result : game.result
 
     scores = results[:scores]
     return if !scores

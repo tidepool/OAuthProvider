@@ -14,16 +14,16 @@ module Permissions
   class GuestPermission < BasePermission
     def initialize(caller, target_user)
       if caller == target_user      
-        allow :assessments, :create
-        allow :assessments, [:update, :show] do |assessment|
-          assessment.user_id == caller.id 
+        allow :games, :create
+        allow :games, [:update, :show] do |game|
+          game.user_id == caller.id 
         end
-        allow :assessments, [:latest, :latest_with_profile] do |assessment|
-          assessment.user_id == caller.id 
+        allow :games, [:latest, :latest_with_profile] do |game|
+          game.user_id == caller.id 
         end
 
-        allow :results, [:create, :show, :progress] do |assessment|
-          assessment.user_id == caller.id 
+        allow :results, [:create, :show, :progress] do |game|
+          game.user_id == caller.id 
         end
 
         allow :users, [:show] do |user|

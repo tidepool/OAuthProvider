@@ -19,8 +19,8 @@ module TidepoolAnalyze
         @aggregator.circles = new_circles
       end
 
-      it 'should break into 3 different assessment types' do
-        raw_results_by_type = @aggregator.break_into_assessment_types
+      it 'should break into 3 different game types' do
+        raw_results_by_type = @aggregator.break_into_game_types
         raw_results_by_type.length.should == 3
         raw_results_by_type[:big5].length.should == 10
         raw_results_by_type[:emo8].length.should == 8
@@ -71,7 +71,7 @@ module TidepoolAnalyze
                           :overlap => 1
                        }
                       ]
-        weighted_result = @aggregator.result_by_assessment_type(raw_results)
+        weighted_result = @aggregator.result_by_game_type(raw_results)
         weighted_result[:extraversion].should_not be_nil
         weighted_result.length.should == 1
         weighted_result[:extraversion][:count].should == 2
@@ -79,7 +79,7 @@ module TidepoolAnalyze
         weighted_result[:extraversion][:average].should be_within(0.0005).of(-1.0874)
       end
 
-      it 'should calculate all 3 assessment types' do
+      it 'should calculate all 3 game types' do
         result = @aggregator.calculate_result
         result.length.should == 3
         result[:big5].should_not be_nil

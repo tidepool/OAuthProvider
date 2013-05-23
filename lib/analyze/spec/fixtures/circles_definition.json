@@ -6,7 +6,7 @@
       "When you are ready hit button below to exit this stage."
     ],
     "view_name" : "CirclesTest",
-    "assessment_type" : "Big5",
+    "game_type" : "Big5",
     "circles" : [{
         "trait1" : "Self-Disciplined",
         "trait2" : "Persistent",
@@ -40,7 +40,7 @@
       "When you are ready hit button below to exit this stage."
     ],
     "view_name" : "CirclesTest",
-    "assessment_type" : "Big5",
+    "game_type" : "Big5",
     "circles" : [{
         "trait1" : "Independent",
         "trait2" : "Aloof",
@@ -74,7 +74,7 @@
       "When you are ready hit button below to exit this stage."
     ],
     "view_name" : "CirclesTest",
-    "assessment_type" : "Holland6",
+    "game_type" : "Holland6",
     "circles" : [{
         "trait1" : "Mechanical",
         "trait2" : "Hands-on",
@@ -113,7 +113,7 @@
       "When you are ready hit button below to exit this stage."
     ],
     "view_name" : "CirclesTest",
-    "assessment_type" : "Emo8",
+    "game_type" : "Emo8",
     "circles" : [{
         "trait1" : "Anger",
         "trait2" : "Annoyance",
@@ -142,7 +142,7 @@
       "When you are ready hit button below to exit this stage."
     ],
     "view_name" : "CirclesTest",
-    "assessment_type" : "Emo8",
+    "game_type" : "Emo8",
     "circles" : [{
         "trait1" : "Fear",
         "trait2" : "Apprehension",

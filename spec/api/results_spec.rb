@@ -11,12 +11,12 @@ describe 'Results API' do
     token = client.password.get_token(@user_email, @user_pass)
   end
 
-  def create_assessment(caller, user)
+  def create_game(caller, user)
     definition = Definition.find_or_return_default(nil)
-    assessment = Assessment.create_by_caller(definition, caller, user)
-    assessment.add_to_user(caller, user)
-    assessment.save!
-    assessment
+    game = Game.create_by_caller(definition, caller, user)
+    game.add_to_user(caller, user)
+    game.save!
+    game
   end
 
   before :all do 
@@ -39,28 +39,28 @@ describe 'Results API' do
   end
 
   it 'should be able to start the results calculation' do 
-    ResultsCalculator.stub(:performAsync) do |assessment_id|
-      assessment = Assessment.find(assessment_id)
-      assessment.status = :results_ready
-      assessment.save!
+    ResultsCalculator.stub(:performAsync) do |game_id|
+      game = Game.find(game_id)
+      game.status = :results_ready
+      game.save!
     end
 
-    assessment = create_assessment(@user, @user)
+    game = create_game(@user, @user)
     token = get_token    
-    response = token.post("/api/v1/assessments/#{assessment.id}/results.json")
+    response = token.post("/api/v1/games/#{game.id}/results.json")
     response.status.should == 202
   end
 
   it 'should be able to keep checking progress' do
-    ResultsCalculator.stub(:performAsync) do |assessment_id|
-      assessment = Assessment.find(assessment_id)
-      assessment.status = :completed
-      assessment.save!
+    ResultsCalculator.stub(:performAsync) do |game_id|
+      game = Game.find(game_id)
+      game.status = :completed
+      game.save!
     end
 
-    assessment = create_assessment(@user, @user)
+    game = create_game(@user, @user)
     token = get_token    
-    response = token.post("/api/v1/assessments/#{assessment.id}/results.json")
+    response = token.post("/api/v1/games/#{game.id}/results.json")
     status = JSON.parse(response.body, :symbolize_names => true)
     progress_url = "#{status[:status][:link]}.json"
     response = token.get(progress_url)
@@ -70,31 +70,31 @@ describe 'Results API' do
   end
 
   it 'should be able to get the show url from progress endpoint' do
-    assessment = create_assessment(@user, @user)
-    assessment.status = :results_ready
-    assessment.save!
+    game = create_game(@user, @user)
+    game.status = :results_ready
+    game.save!
 
     token = get_token
 
-    progress_url = "/api/v1/assessments/#{assessment.id}/progress.json"
+    progress_url = "/api/v1/games/#{game.id}/progress.json"
     response = token.get(progress_url)
     response.status.should == 200
 
     status = JSON.parse(response.body, :symbolize_names => true)
     status[:status][:link].should == "http://example.org#{progress_url}".chomp('.json')
 
-    expected_url = "http://example.org/api/v1/assessments/#{assessment.id}/results"
+    expected_url = "http://example.org/api/v1/games/#{game.id}/results"
     response.headers['Location'].should == expected_url
   end
 
   it 'should be able to get the error state if results are not calculated from progress url' do
-    assessment = create_assessment(@user, @user)
-    assessment.status = :no_results
-    assessment.save!
+    game = create_game(@user, @user)
+    game.status = :no_results
+    game.save!
 
     token = get_token
 
-    progress_url = "/api/v1/assessments/#{assessment.id}/progress.json"
+    progress_url = "/api/v1/games/#{game.id}/progress.json"
     response = token.get(progress_url)
     response.status.should == 200
     status = JSON.parse(response.body, :symbolize_names => true)
@@ -103,19 +103,19 @@ describe 'Results API' do
   end
 
   it 'should be able to show the results if they are calculated' do
-    assessment = create_assessment(@user, @user)
-    assessment.status = :results_ready
-    assessment.intermediate_results = "Hello World"
-    assessment.save!
+    game = create_game(@user, @user)
+    game.status = :results_ready
+    game.intermediate_results = "Hello World"
+    game.save!
 
     token = get_token
 
-    results_url = "/api/v1/assessments/#{assessment.id}/results.json"
+    results_url = "/api/v1/games/#{game.id}/results.json"
     response = token.get(results_url)
     response.status.should == 200
     
     results = JSON.parse(response.body, :symbolize_names => true)
-    results[:intermediate_results].should == assessment.intermediate_results
+    results[:intermediate_results].should == game.intermediate_results
   end
 
 end

@@ -11,7 +11,7 @@
                 "friendly_name" : "Image Ranking",
                 "instructions" : "Pick your favorite picture and rank them in order.",
                 "view_name" : "ImageRank",
-                "assessment_type" : "big5",
+                "game_type" : "big5",
                 "image_sequence" : ["F2a", "F2b", "F2c", "F2d", "F2e"]
             }
         ]

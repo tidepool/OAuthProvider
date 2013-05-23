@@ -1,9 +1,9 @@
 class PersistScores
 
-  def persist(assessment, results)
-    return if !assessment
+  def persist(game, results)
+    return if !game
 
-    result = assessment.result.nil? ? assessment.create_result : assessment.result
+    result = game.result.nil? ? game.create_result : game.result
 
     result.event_log = results[:event_log]
     result.intermediate_results = results[:intermediate_results]

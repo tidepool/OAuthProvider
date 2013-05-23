@@ -1,4 +1,4 @@
-class AssessmentSerializer < ActiveModel::Serializer
+class GameSerializer < ActiveModel::Serializer
   attributes :id, :date_taken, :stage_completed, :stages, :user_id, :status
 
   has_one :definition, embed: :objects

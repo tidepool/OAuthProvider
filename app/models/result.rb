@@ -5,7 +5,7 @@ class Result < ActiveRecord::Base
   serialize :scores, JSON
 
   belongs_to :profile_description
-  belongs_to :assessment, :inverse_of => :result
+  belongs_to :game, :inverse_of => :result
 
   
 end

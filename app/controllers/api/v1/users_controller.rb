@@ -16,11 +16,11 @@ class Api::V1::UsersController < Api::V1::ApiController
   def finish_login
     user = current_resource
     if params[:guest_id] && params[:guest_id] != 'null'
-      # There is a prior guest, we need to transfer their assessment to the new user
-      assessment = Assessment.where('user_id = ?', params[:guest_id]).last
-      if assessment
-        assessment.user_id = user.id 
-        assessment.save!
+      # There is a prior guest, we need to transfer their game to the new user
+      game = Game.where('user_id = ?', params[:guest_id]).last
+      if game
+        game.user_id = user.id 
+        game.save!
       end 
     end
 

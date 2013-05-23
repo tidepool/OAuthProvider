@@ -5,10 +5,6 @@ OAuthProvider::Application.routes.draw do
     controllers :authorizations => 'authorizations'
   end
 
-  # get 'signup', to: 'users#new', as: 'signup'
-  # get 'login', to: 'sessions#new', as: 'login'
-  # get 'logout', to: 'sessions#destroy', as: 'logout'
-
   # OmniAuth routes:
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/auth/failure', to: 'authentications#failure'
@@ -23,17 +19,17 @@ OAuthProvider::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :assessments do
+      resources :games do
         get 'result' => 'results#show'
         post 'result' => 'results#create'
         get 'progress' => 'results#progress'
         get 'latest' => 'results#show'
       end
 
-      get '/assessments/latest', to: 'assessments#latest'
-      get '/assessments/latest_with_profile', to: 'assessments#latest_with_profile'
+      get '/games/latest', to: 'games#latest'
+      get '/games/latest_with_profile', to: 'games#latest_with_profile'
       resources :users do 
-        resources :assessments
+        resources :games
         resources :authentications
       end
       get '/users/:user_id/trackers/:tracker/:date', to: 'trackers#show'

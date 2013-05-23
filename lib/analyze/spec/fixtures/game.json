@@ -3,7 +3,7 @@
 		"friendly_name" : "Reaction Time 1",
 		"instructions" : "Click the circle on the screen as soon as it turns red.",
 		"view_name": "ReactionTime",
-		"assessment_type" : "cognition",
+		"game_type" : "cognition",
 		"colors": ["red", "yellow", "green"],
 		"sequence_type": "simple",
 		"number_of_reds": "3",
@@ -15,7 +15,7 @@
 		"friendly_name" : "Reaction Time 2",
 		"instructions" : "Click the red circle only when it appears AFTER a yellow circle.",
 		"view_name": "ReactionTime",
-		"assessment_type" : "cognition",		
+		"game_type" : "cognition",		
 		"colors": ["red", "yellow", "green"],
 		"sequence_type": "complex",
 		"number_of_reds": "3",
@@ -27,7 +27,7 @@
 		"friendly_name" : "Image Ranking 1",
 		"instructions" : "Pick your favorite picture and rank them in order.",
 		"view_name" : "ImageRank",
-		"assessment_type" : "big5",
+		"game_type" : "big5",
 		"image_sequence" : ["F1a", "F1b", "F1c", "F1d", "F1e"]
 	},
 	{
@@ -37,7 +37,7 @@
 			"When you are ready hit button below to exit this stage."
 		],
 		"view_name" : "CirclesTest",
-		"assessment_type" : "big5",
+		"game_type" : "big5",
 		"circles" : [{
 				"trait1" : "Self-Disciplined",
 				"trait2" : "Persistent",
@@ -71,7 +71,7 @@
 			"When you are ready hit button below to exit this stage."
 		],
 		"view_name" : "CirclesTest",
-		"assessment_type" : "big5",
+		"game_type" : "big5",
 		"circles" : [{
 				"trait1" : "Independent",
 				"trait2" : "Aloof",
@@ -105,7 +105,7 @@
 			"When you are ready hit button below to exit this stage."
 		],
 		"view_name" : "CirclesTest",
-		"assessment_type" : "holland6",
+		"game_type" : "holland6",
 		"circles" : [{
 				"trait1" : "Mechanical",
 				"trait2" : "Hands-on",
@@ -144,7 +144,7 @@
 			"When you are ready hit button below to exit this stage."
 		],
 		"view_name" : "CirclesTest",
-		"assessment_type" : "emo8",
+		"game_type" : "emo8",
 		"circles" : [{
 				"trait1" : "Anger",
 				"trait2" : "Annoyance",
@@ -173,7 +173,7 @@
 			"When you are ready hit button below to exit this stage."
 		],
 		"view_name" : "CirclesTest",
-		"assessment_type" : "emo8",
+		"game_type" : "emo8",
 		"circles" : [{
 				"trait1" : "Fear",
 				"trait2" : "Apprehension",

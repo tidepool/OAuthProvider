@@ -60,14 +60,14 @@ module TidepoolAnalyze
       { "url":"assets/devtest_images/F1e.jpg",
         "elements":"male,man_made,pair,reflection,whole",
         "image_id":"F1e","rank":-1}
-        ],"assessment_id":329,"user_id":21},
+        ],"game_id":329,"user_id":21},
   { "event_type":"0",
     "module":"image_rank",
     "stage":2,
     "record_time":1358880386090,
     "final_rank":[1,4,2,3,0],
     "event_desc":"test_completed",
-    "assessment_id":329,"user_id":21}
+    "game_id":329,"user_id":21}
 ]
 JSONSTRING
           events = JSON.parse(events_json)

@@ -6,32 +6,32 @@ module Permissions
     describe 'caller and target_user are the same user' do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) } 
-      let(:assessment) { create(:assessment, user: user) }
-      let(:others_assessment) { create(:assessment, user: other_user) }
+      let(:game) { create(:game, user: user) }
+      let(:others_game) { create(:game, user: other_user) }
       subject { Permissions.permission_for(user, user) }
 
-      it 'allows assessments' do
-        should allow(:assessments, :create)
-        should allow(:assessments, :destroy, assessment)
-        should_not allow(:assessments, :destroy, others_assessment)
-        should allow(:assessments, :update, assessment)
-        should_not allow(:assessments, :update, others_assessment)
-        should allow(:assessments, :show, assessment)
-        should_not allow(:assessments, :show, others_assessment)
-        should allow(:assessments, :index)
-        should allow(:assessments, :latest, assessment)
-        should_not allow(:assessments, :latest, others_assessment)
-        should allow(:assessments, :latest_with_profile, assessment)
-        should_not allow(:assessments, :latest_with_profile, others_assessment)
+      it 'allows games' do
+        should allow(:games, :create)
+        should allow(:games, :destroy, game)
+        should_not allow(:games, :destroy, others_game)
+        should allow(:games, :update, game)
+        should_not allow(:games, :update, others_game)
+        should allow(:games, :show, game)
+        should_not allow(:games, :show, others_game)
+        should allow(:games, :index)
+        should allow(:games, :latest, game)
+        should_not allow(:games, :latest, others_game)
+        should allow(:games, :latest_with_profile, game)
+        should_not allow(:games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
-        should allow(:results, :create, assessment)
-        should_not allow(:results, :create, others_assessment)
-        should allow(:results, :show, assessment)
-        should_not allow(:results, :show, others_assessment)
-        should allow(:results, :progress, assessment)
-        should_not allow(:results, :progress, others_assessment)
+        should allow(:results, :create, game)
+        should_not allow(:results, :create, others_game)
+        should allow(:results, :show, game)
+        should_not allow(:results, :show, others_game)
+        should allow(:results, :progress, game)
+        should_not allow(:results, :progress, others_game)
       end
 
       it 'allows users' do 
@@ -46,32 +46,32 @@ module Permissions
     describe 'caller and target_user are NOT the same user' do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) } 
-      let(:assessment) { create(:assessment, user: user) }
-      let(:others_assessment) { create(:assessment, user: other_user) }
+      let(:game) { create(:game, user: user) }
+      let(:others_game) { create(:game, user: other_user) }
       subject { Permissions.permission_for(user, other_user) }
 
-      it 'allows assessments' do
-        should_not allow(:assessments, :create)
-        should_not allow(:assessments, :destroy, assessment)
-        should_not allow(:assessments, :destroy, others_assessment)
-        should_not allow(:assessments, :update, assessment)
-        should_not allow(:assessments, :update, others_assessment)
-        should_not allow(:assessments, :show, assessment)
-        should_not allow(:assessments, :show, others_assessment)
-        should_not allow(:assessments, :index)
-        should_not allow(:assessments, :latest, assessment)
-        should_not allow(:assessments, :latest, others_assessment)
-        should_not allow(:assessments, :latest_with_profile, assessment)
-        should_not allow(:assessments, :latest_with_profile, others_assessment)
+      it 'allows games' do
+        should_not allow(:games, :create)
+        should_not allow(:games, :destroy, game)
+        should_not allow(:games, :destroy, others_game)
+        should_not allow(:games, :update, game)
+        should_not allow(:games, :update, others_game)
+        should_not allow(:games, :show, game)
+        should_not allow(:games, :show, others_game)
+        should_not allow(:games, :index)
+        should_not allow(:games, :latest, game)
+        should_not allow(:games, :latest, others_game)
+        should_not allow(:games, :latest_with_profile, game)
+        should_not allow(:games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
-        should_not allow(:results, :create, assessment)
-        should_not allow(:results, :create, others_assessment)
-        should_not allow(:results, :show, assessment)
-        should_not allow(:results, :show, others_assessment)
-        should_not allow(:results, :progress, assessment)
-        should_not allow(:results, :progress, others_assessment)
+        should_not allow(:results, :create, game)
+        should_not allow(:results, :create, others_game)
+        should_not allow(:results, :show, game)
+        should_not allow(:results, :show, others_game)
+        should_not allow(:results, :progress, game)
+        should_not allow(:results, :progress, others_game)
       end
 
       it 'allows users' do 

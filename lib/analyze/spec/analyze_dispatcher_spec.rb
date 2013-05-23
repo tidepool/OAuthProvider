@@ -13,7 +13,7 @@ module TidepoolAnalyze
     before(:all) do
       events_json = IO.read(File.expand_path('../fixtures/test_event_log.json', __FILE__))
       @events = JSON.parse(events_json)
-      stages_json = IO.read(File.expand_path('../fixtures/assessment.json', __FILE__))
+      stages_json = IO.read(File.expand_path('../fixtures/game.json', __FILE__))
       @stages = JSON.parse stages_json
       elements = YAML::load(IO.read(File.expand_path('../fixtures/elements.yaml', __FILE__)))
       new_elements = {}

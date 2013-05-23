@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe TrackersController do
+describe Api::V1::TrackersController do
 
 end

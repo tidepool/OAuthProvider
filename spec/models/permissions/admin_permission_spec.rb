@@ -5,32 +5,32 @@ module Permissions
   describe AdminPermission do
     let(:user) { create(:admin) }
     let(:other_user) { create(:user) } 
-    let(:assessment) { create(:assessment, user: user) }
-    let(:others_assessment) { create(:assessment, user: other_user) }
+    let(:game) { create(:game, user: user) }
+    let(:others_game) { create(:game, user: other_user) }
     subject { Permissions.permission_for(user, other_user) }
 
-    it 'allows assessments' do
-      should allow(:assessments, :create)
-      should allow(:assessments, :destroy, assessment)
-      should allow(:assessments, :destroy, others_assessment)
-      should allow(:assessments, :update, assessment)
-      should allow(:assessments, :update, others_assessment)
-      should allow(:assessments, :show, assessment)
-      should allow(:assessments, :show, others_assessment)
-      should allow(:assessments, :index)
-      should allow(:assessments, :latest, assessment)
-      should allow(:assessments, :latest, others_assessment)
-      should allow(:assessments, :latest_with_profile, assessment)
-      should allow(:assessments, :latest_with_profile, others_assessment)
+    it 'allows games' do
+      should allow(:games, :create)
+      should allow(:games, :destroy, game)
+      should allow(:games, :destroy, others_game)
+      should allow(:games, :update, game)
+      should allow(:games, :update, others_game)
+      should allow(:games, :show, game)
+      should allow(:games, :show, others_game)
+      should allow(:games, :index)
+      should allow(:games, :latest, game)
+      should allow(:games, :latest, others_game)
+      should allow(:games, :latest_with_profile, game)
+      should allow(:games, :latest_with_profile, others_game)
     end
 
     it 'allows results' do
-      should allow(:results, :create, assessment)
-      should allow(:results, :create, others_assessment)
-      should allow(:results, :show, assessment)
-      should allow(:results, :show, others_assessment)
-      should allow(:results, :progress, assessment)
-      should allow(:results, :progress, others_assessment)
+      should allow(:results, :create, game)
+      should allow(:results, :create, others_game)
+      should allow(:results, :show, game)
+      should allow(:results, :show, others_game)
+      should allow(:results, :progress, game)
+      should allow(:results, :progress, others_game)
     end
 
     it 'allows users' do 

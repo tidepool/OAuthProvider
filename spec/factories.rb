@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :assessment do
+  factory :game do
     definition_id 1
   end
 
