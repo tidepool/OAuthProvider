@@ -3,7 +3,6 @@ class Api::V1::GamesController < Api::V1::ApiController
 
   def index
     games = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).all
-
     respond_to do |format|
       format.json { render :json => games, :each_serializer => GameSummarySerializer }
     end
@@ -34,9 +33,8 @@ class Api::V1::GamesController < Api::V1::ApiController
   def create
     definition = Definition.find_or_return_default(params[:def_id])
     game = Game.create_by_definition(definition, target_user)
-
     respond_to do |format|
-      format.json { render :json => game}
+      format.json { render :json => game }
     end
   end
 
@@ -61,7 +59,7 @@ class Api::V1::GamesController < Api::V1::ApiController
       @current_resource ||= Game.includes(:definition, :result).find(params[:id])
     else
       resource_method = "find_#{params[:action]}".to_sym
-      @current_resource ||= Game.send(resource_method, target_user) if Game.respond_to(resource_method)  
+      @current_resource ||= Game.send(resource_method, target_user) if Game.respond_to?(resource_method)  
     end
   end
 

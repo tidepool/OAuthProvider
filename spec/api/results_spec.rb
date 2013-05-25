@@ -13,7 +13,7 @@ describe 'Results API' do
 
   def create_game(caller, user)
     definition = Definition.find_or_return_default(nil)
-    game = Game.create_by_caller(definition, caller, user)
+    game = Game.create_by_definition(definition, user)
     game.add_to_user(caller, user)
     game.save!
     game

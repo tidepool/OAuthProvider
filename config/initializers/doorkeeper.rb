@@ -26,16 +26,18 @@ Doorkeeper.configure do
   # response_type: password
   resource_owner_from_credentials do |routes|
     #binding.remote_pry
+    username = params[:email] || params[:username]
+    password = params[:password]
 
     puts "Resource_owner from credentials called #{routes}"
-    if params[:email] == "guest"
+    if username == "guest"
       user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
       user.guest = true
       user.save!(:validate => false)   
       user   
     else
-      user = User.find_by_email(params[:email])
-      user if user && user.authenticate(params[:password])
+      user = User.find_by_email(username)
+      user if user && user.authenticate(password)
     end
   end
 

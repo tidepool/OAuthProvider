@@ -1,5 +1,12 @@
 module Permissions
   class BasePermission
+    def initialize
+      # Initialize controller names
+      @games = "#{controller_prefix}/games"
+      @results = "#{controller_prefix}/results"
+      @users = "#{controller_prefix}/users"
+    end
+
     def allow?(controller, action, resource = nil)  
       allowed = @allow_all || (@allowed_actions && @allowed_actions[[controller.to_s, action.to_s]])
       allowed && (allowed == true || resource && allowed.call(resource))
@@ -18,6 +25,10 @@ module Permissions
 
     def allow_all
       @allow_all = true
+    end
+
+    def controller_prefix
+      'api/v1'
     end
 
   end

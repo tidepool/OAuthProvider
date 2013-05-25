@@ -1,8 +1,9 @@
 class Api::V1::ApiController < ApplicationController
   before_filter :authorize
 
-  class UnauthorizedError < StandardError
+  class Api::V1::UnauthorizedError < StandardError
   end
+
 
   protected
 
@@ -19,7 +20,7 @@ class Api::V1::ApiController < ApplicationController
   end
 
   def current_permission
-    @current_permission ||= Permissions::permissions_for(caller)
+    @current_permission ||= Permissions.permission_for(caller, target_user)
   end
 
   def current_resource
@@ -28,7 +29,7 @@ class Api::V1::ApiController < ApplicationController
 
   def authorize
     if !current_permission.allow?(params[:controller], params[:action], current_resource)
-      raise UnauthorizedError.new('Not Authorized')
+      raise Api::V1::UnauthorizedError.new('Not Authorized')
     end
   end
 end

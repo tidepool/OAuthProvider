@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :game do
     definition_id 1
+    sequence(:date_taken) { |n| Time.zone.now - (n*1000) }
   end
 
   factory :user do

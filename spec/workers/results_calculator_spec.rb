@@ -31,7 +31,7 @@ describe ResultsCalculator do
 
     definition = Definition.first
     user, user2 = setup_users
-    game = Game.create_by_caller(definition, user, user)
+    game = Game.create_by_definition(definition, user)
     record_events_in_redis(game, events)
     @game_id = game.id
   end

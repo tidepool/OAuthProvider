@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   end
 
   validates_uniqueness_of :email
+  validates_format_of :email, :with => /.+@.+\..+/i
 
   belongs_to :profile_description
   has_many :authentications

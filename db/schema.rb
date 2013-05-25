@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130518011937) do
+ActiveRecord::Schema.define(version: 20130523190530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,18 +32,6 @@ ActiveRecord::Schema.define(version: 20130518011937) do
     t.string   "maps_to"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-  end
-
-  create_table "assessments", force: true do |t|
-    t.datetime "date_taken"
-    t.integer  "definition_id"
-    t.integer  "user_id"
-    t.text     "stages"
-    t.boolean  "results_ready"
-    t.integer  "stage_completed"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "status"
   end
 
   create_table "authentications", force: true do |t|
@@ -123,6 +111,18 @@ ActiveRecord::Schema.define(version: 20130518011937) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "games", force: true do |t|
+    t.datetime "date_taken"
+    t.integer  "definition_id"
+    t.integer  "user_id"
+    t.text     "stages"
+    t.boolean  "results_ready"
+    t.integer  "stage_completed"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "status"
+  end
+
   create_table "images", force: true do |t|
     t.string   "name"
     t.text     "elements"
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20130518011937) do
   end
 
   create_table "results", force: true do |t|
-    t.integer  "assessment_id",          null: false
+    t.integer  "game_id",                null: false
     t.text     "event_log"
     t.text     "intermediate_results"
     t.text     "scores"
@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 20130518011937) do
     t.text     "aggregate_results"
   end
 
-  add_index "results", ["assessment_id"], name: "index_results_on_assessment_id", unique: true, using: :btree
+  add_index "results", ["game_id"], name: "index_results_on_game_id", unique: true, using: :btree
 
   create_table "tracker_settings", force: true do |t|
     t.integer  "user_id"
