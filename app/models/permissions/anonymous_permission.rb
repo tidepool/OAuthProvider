@@ -2,7 +2,7 @@ module Permissions
   class AnonymousPermission < BasePermission
     def initialize(caller, target_user)
       super()
-      # Nothing for now!
+      allow @users, [:create]
     end
   end
 end

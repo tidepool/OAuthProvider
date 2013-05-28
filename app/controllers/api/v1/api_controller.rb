@@ -1,10 +1,6 @@
 class Api::V1::ApiController < ApplicationController
   before_filter :authorize
 
-  class Api::V1::UnauthorizedError < StandardError
-  end
-
-
   protected
 
   def caller

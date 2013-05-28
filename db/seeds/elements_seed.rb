@@ -4,7 +4,6 @@ class ElementsSeed
   include SeedsHelper
 
   def create_seed
-    puts 'Seeding elements with weights'
     element = Element.first
     element_path = File.expand_path('../data/element_weights.csv', __FILE__)
 
@@ -34,13 +33,15 @@ class ElementsSeed
         end
         count += 1
       end
+      puts 'Creating Elements'
       elements.each do |content|
         content[:version] = '1.0'
         element = Element.where(name: content[:name]).first_or_initialize(content)
         element.update_attributes(content)
-        puts "Element created = #{element.to_s}"
         element.save
+        print '.'
       end
     end
+    puts
   end
 end

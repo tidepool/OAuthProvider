@@ -27,40 +27,33 @@ class Api::V1::ResultsController < Api::V1::ApiController
       response_body = {
         :status => {
           :state => :pending,
-          :link => api_v1_game_progress_url,
+          :link => api_v1_user_game_progress_url,
           :message => 'Results are being calculated.'
         }
       }
       format.json { render :json => response_body, :status => :accepted }
-    end
-
-    respond_to do |format|
-      response_body = {
-        :error => error_message
-      }
-      format.json { render :json => response_body, :status => :unauthorized }        
     end
   end
 
   def progress
     http_status = :ok
     response_body = {}
-    location = api_v1_game_progress_url
+    location = api_v1_user_game_progress_url
     if current_resource.status == :results_ready.to_s
       response_body = {
         :status => {
           :state => :done,
-          :link => api_v1_game_progress_url,
+          :link => api_v1_user_game_result_url,
           :message => 'Results are ready.'
         }
       }
-      location = api_v1_game_result_url
+      location = api_v1_user_game_result_url
       http_status = :ok
     elsif current_resource.status == :no_results.to_s
       response_body = {
         :status => {
           :state => :error,
-          :link => api_v1_game_progress_url,
+          :link => api_v1_user_game_result_url,
           :message => 'Error calculating results'
         }
       }
@@ -69,7 +62,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       response_body = {
         :status => {
           :state => :pending,
-          :link => api_v1_game_progress_url,
+          :link => api_v1_user_game_progress_url,
           :message => 'Results are still being calculated'
         }
       }

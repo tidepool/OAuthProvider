@@ -19,6 +19,7 @@ OAuthProvider::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
         get 'games/latest', to: 'games#latest'
         get 'games/latest_with_profile', to: 'games#latest_with_profile'          
@@ -33,10 +34,8 @@ OAuthProvider::Application.routes.draw do
 
         resources :trackers do 
           # get '/trackers/:tracker/:date', to: 'trackers#show'
-        end
-        get 'finish_login', to: 'users#finish_login'        
-      end
-      
+        end     
+      end      
       post '/user_events' => 'user_events#create'
     end
   end

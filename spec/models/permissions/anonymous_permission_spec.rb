@@ -27,7 +27,7 @@ module Permissions
       target_user = other_user
 
       should_not allow(:users, :show, target_user)
-      should_not allow(:users, :create, target_user)
+      should allow(:users, :create)
       should_not allow(:users, :update, target_user)
       should_not allow(:users, :destroy, target_user)
     end

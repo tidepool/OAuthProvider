@@ -40,6 +40,7 @@ module Permissions
         should allow(:users, :create, target_user)
         should allow(:users, :update, target_user)
         should allow(:users, :destroy, target_user)
+        should allow(:users, :finish_login)
       end
     end
 

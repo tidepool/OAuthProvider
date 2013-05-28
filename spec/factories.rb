@@ -1,6 +1,11 @@
 FactoryGirl.define do
+  factory :result do 
+    intermediate_results "{\"message\":\"Hello World\"}"        
+  end
+
   factory :game do
     definition_id 1
+    status 'not_started'
     sequence(:date_taken) { |n| Time.zone.now - (n*1000) }
   end
 

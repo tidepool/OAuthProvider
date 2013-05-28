@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::V1::ApiController
-  doorkeeper_for :index, :show, :create, :update, :destroy
+  doorkeeper_for :index, :show, :update, :destroy
 
   def index
     # TODO: Consider queries like friends, latest_users etc.
@@ -55,15 +55,20 @@ class Api::V1::UsersController < Api::V1::ApiController
   def destroy
     user = current_resource
     user.destroy
+    respond_to do |format|
+      format.json { render :json => {}}
+    end
   end 
 
   private 
 
   def current_resource
-    if params[:id] == '-' || params[:id] == 'finish_login'
+    if params[:id] == '-' || params[:action] == 'finish_login'
       @user ||= caller
-    else
+    elsif params[:id]
       @user ||= User.find(params[:id])
+    else
+      @user = nil
     end
   end
 
@@ -71,10 +76,10 @@ class Api::V1::UsersController < Api::V1::ApiController
     if (caller && caller.admin?)
       params.require(:user).permit!
     else
-      params.require(:user).permit
-        :email, :password, :name, :display_name, 
+      params.require(:user).permit(
+        :email, :password, :password_confirmation, :name, :display_name, 
         :description, :city, :state, :country, :timezone, 
-        :locale, :image, :gender, :date_of_birth
+        :locale, :image, :gender, :date_of_birth)
     end
   end
 end

@@ -11,6 +11,7 @@ class ProfileDescriptionSeed
     if modified
       # Use the :encoding to make sure the strings are properly converted to UTF-8
       attributes = [:big5_dimension, :holland6_dimension, :code, :name, :p1, :p2, :p3, :one_liner, :b1, :b2, :b3]
+      puts 'Creating ProfileDescriptions'
       CSV.foreach(profile_path, :encoding => 'windows-1251:utf-8') do |row|
         profile_attr = {}
         profile_attr[:description] = []
@@ -32,10 +33,10 @@ class ProfileDescriptionSeed
         profile_attr[:logo_url] = "#{profile_attr[:name]}.png"
         profile = ProfileDescription.where(name: profile_attr[:name]).first_or_initialize(profile_attr)
         profile.update_attributes(profile_attr)
-        puts "Profile Description created = #{profile.to_s}"
-
         profile.save
+        print '.'
       end
+      puts
     end
   end
 end

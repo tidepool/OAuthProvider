@@ -4,14 +4,13 @@ class ImageElementsSeed
   include SeedsHelper
 
   def create_seed
-    puts "Seeding images with elements"
     image = Image.first
     image_elements_path = File.expand_path('../data/image_elements.csv', __FILE__)
     image_coding_path = File.expand_path('../data/image_codings.csv', __FILE__)
 
     modified = check_if_inputs_modified(image, image_elements_path, image_coding_path)
     if image.nil? or modified
-      puts "Elements changes, seeding now..."
+      puts "Creating ImageElements"
       image_elements = []
       CSV.foreach(image_elements_path) do |row|
         image_elements = row
@@ -41,10 +40,11 @@ class ImageElementsSeed
         if !image.nil?
           image.elements = element_list.chomp(',')
           image.primary_color = primary_color
-          puts "Image created - #{image.name}, #{image.elements}, Color:#{image.primary_color}"
           image.save
+          print '.'
         end
       end
     end
+    puts
   end
 end

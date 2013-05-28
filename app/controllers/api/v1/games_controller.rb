@@ -40,7 +40,6 @@ class Api::V1::GamesController < Api::V1::ApiController
 
   def update
     game = current_resource
-
     game.update_attributes(game_params)
     respond_to do |format|
       format.json { render :json => game}
@@ -50,6 +49,9 @@ class Api::V1::GamesController < Api::V1::ApiController
   def destroy
     game = current_resource
     game.destroy
+    respond_to do |format|
+      format.json { render :json => {} }
+    end
   end
 
   private
@@ -64,6 +66,6 @@ class Api::V1::GamesController < Api::V1::ApiController
   end
 
   def game_params
-    params.require[:game].permit(:stage_completed, :status)  
+    params.require(:game).permit(:stage_completed, :status)  
   end
 end

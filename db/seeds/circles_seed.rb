@@ -4,7 +4,7 @@ class CirclesSeed
   include SeedsHelper
 
   def create_seed
-    puts "Seeding elements with weights"
+    puts "Creating Circles"
     circle = AdjectiveCircle.first
     circle_path = File.expand_path('../data/circles.csv', __FILE__)
 
@@ -33,9 +33,10 @@ class CirclesSeed
         content[:version] = "1.0"
         circle = AdjectiveCircle.where(name_pair: content[:name_pair]).first_or_initialize(content)
         circle.update_attributes(content)
-        puts "Circle created = #{circle.to_s}" 
         circle.save
+        print '.'
       end
     end
+    puts
   end
 end
