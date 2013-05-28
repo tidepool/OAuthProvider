@@ -28,7 +28,6 @@ class ResultsCalculator
     AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
       circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
     end
-    # binding.remote_pry
     game = Game.find(game_id)
     analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
     
@@ -48,5 +47,8 @@ class ResultsCalculator
 
     game.status = :results_ready
     game.save
+
+    # Now we can cleanup the events from the redis server
+    $redis.del(key)
   end
 end

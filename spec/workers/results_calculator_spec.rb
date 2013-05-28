@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'redis'
 require Rails.root + 'app/models/events/user_event.rb'
 
 describe ResultsCalculator do
@@ -15,10 +16,7 @@ describe ResultsCalculator do
     end
   end
 
-  let(:user1) { create(:user) }
-  let(:user2) { create(:user) }
   let(:guest) { create(:guest) }
-  let(:admin) { create(:admin) }
   let(:game) { create(:game, user: guest) }
 
   before(:each) do
@@ -38,5 +36,14 @@ describe ResultsCalculator do
     updated_game.result.profile_description.should_not be_nil
     # Below result depends on the exact dataset we fed from test_event_log.json
     updated_game.result.profile_description.name.should == "The Floodlight"
+  end
+
+  it 'should cleanup Redis after succesful calculation' do
+    key = "game:#{game.id}"
+    $redis.exists(key).should == true
+    resultsCalc = ResultsCalculator.new 
+    resultsCalc.perform(game.id)
+
+    $redis.exists(key).should == false
   end
 end
