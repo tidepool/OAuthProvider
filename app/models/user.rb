@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
   validates_format_of :email, :with => /.+@.+\..+/i
+  validates :password, :length => { :minimum => 8 }
 
   belongs_to :profile_description
   has_many :authentications

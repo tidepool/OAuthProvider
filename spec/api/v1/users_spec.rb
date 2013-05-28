@@ -97,5 +97,11 @@ describe 'Users API' do
       user = User.find(user_id)
       user.email.should == user1.email
     end
+
+    it 'doesnot allow a user to have password less than 8 length' do
+      token = get_conn()
+      user_params = { email: 'test_user@example.com', password: '1234567', password_confirmation: '1234567' }
+      lambda {token.post("#{@endpoint}/users.json", { user: user_params } )}.should raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 end
