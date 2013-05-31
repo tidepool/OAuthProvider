@@ -7,6 +7,7 @@ module Permissions
     let(:games) { "#{controller_prefix}/games" }
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
+    
     let(:user) { create(:admin) }
     let(:other_user) { create(:user) } 
     let(:game) { create(:game, user: user) }

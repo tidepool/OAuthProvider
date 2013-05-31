@@ -13,31 +13,8 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
-  def finish_login
-    user = current_resource
-    if params[:guest_id] && params[:guest_id] != 'null'
-      # There is a prior guest, we need to transfer their game to the new user
-      game = Game.where('user_id = ?', params[:guest_id]).last
-      if game
-        game.user_id = user.id 
-        game.save!
-      end 
-    end
-
-    respond_to do |format|
-      format.json { render :json => user }
-    end    
-  end
-
   def create
-    # if params[:guest_id]
-    #   # Transfer a Guest User to registered user
-    #   @user = User.find(params[:guest_id])
-    #   @user.update(params[:user])
-    # else
-    #   @user = User.new(params[:user])
-    # end
-    user = User.create!(user_attributes)
+    user = User.create_guest_or_registered!(user_attributes)
     respond_to do |format|
       format.json { render :json => user }
     end
@@ -45,6 +22,12 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def update
     user = current_resource
+    if user.guest == false && params[:user][:guest]
+      raise Api::V1::UnauthorizedError.new('Not Authorized')
+    end
+
+    # TODO: We should be using the ! version here, but
+    # looks like it fails even no password is supposed to be set.
     user.update_attributes(user_attributes)
 
     respond_to do |format|
@@ -75,8 +58,13 @@ class Api::V1::UsersController < Api::V1::ApiController
   def user_attributes
     if (caller && caller.admin?)
       params.require(:user).permit!
+    elsif params[:action] == 'create'
+      params.require(:user).permit(:guest,
+      :email, :password, :password_confirmation, :name, :display_name, 
+      :description, :city, :state, :country, :timezone, 
+      :locale, :image, :gender, :date_of_birth)        
     else
-      params.require(:user).permit(
+      params.require(:user).permit(:guest,
         :email, :password, :password_confirmation, :name, :display_name, 
         :description, :city, :state, :country, :timezone, 
         :locale, :image, :gender, :date_of_birth)

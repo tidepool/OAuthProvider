@@ -8,16 +8,21 @@ Doorkeeper.configure do
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
     puts "Resource_owner authenticator called #{request.params}"
-    puts "Session in Authenticator #{session}"    
     # binding.remote_pry
     user_id = params[:user_id]
-    if user_id 
+    guest_id = params[:guest_id]
+    provider = params[:provider]
+
+    if user_id && user_id != -1
       user = User.find(user_id)
     else
-      authorize_through = params[:authorize_through]
-      if authorize_through
-        session[:user_return_to] = request.fullpath
-        redirect_to("/auth/#{authorize_through}")
+      if provider
+        session[:user_id] = guest_id if guest_id
+        # The & at the end is necessary as we will tack parameters
+        session[:return_after_external] = "#{request.fullpath}&"
+        redirect_to("/auth/#{provider}")
+        # Once the authentication is complete (success of fail), 
+        # we will be redirected back here with a user_id in the params
       end
     end
   end
@@ -30,15 +35,18 @@ Doorkeeper.configure do
     password = params[:password]
 
     puts "Resource_owner from credentials called #{routes}"
-    if username == "guest"
-      user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
-      user.guest = true
-      user.save!(:validate => false)   
-      user   
-    else
-      user = User.find_by_email(username)
-      user if user && user.authenticate(password)
-    end
+    user = User.where('email = ?', username).first
+    return_user = user && (user.guest || user.authenticate(password)) ? user : nil 
+
+    # if username == "guest"
+    #   user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+    #   user.guest = true
+    #   user.save!(:validate => false)   
+    #   user   
+    # else
+    #   user = User.find_by_email(username)
+    #   user if user && user.authenticate(password)
+    # end
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.

@@ -250,6 +250,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers!
   bcrypt-ruby (~> 3.0.0)
+  debugger-ruby_core_source (~> 1.2.2)
   doorkeeper!
   dotenv-rails
   factory_girl_rails

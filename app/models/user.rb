@@ -9,39 +9,105 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
   validates_format_of :email, :with => /.+@.+\..+/i
-  validates :password, :length => { :minimum => 8 }
+  validates :password, :length => { :minimum => 8 }, :if => :needs_password?
 
   belongs_to :profile_description
   has_many :authentications
 
+  def self.create_guest_or_registered(attributes)
+    begin
+      User.create_guest_or_registered!(attributes)
+    rescue Exception => e
+      # TODO: needs logging...
+      nil
+    end
+  end
+
+  def self.create_guest_or_registered!(attributes)
+    user = User.new(attributes)
+    if user.guest
+      user.email = "guest_#{Time.now.to_i}#{rand(99)}@example.com"
+      user.password = user.password_confirmation = "12345678"
+      user.password_digest = "Tidepool-Guest-User"
+    end
+    user.save!
+    user
+  end
+
+  def self.create_or_find(auth_hash, user_id = nil)
+    begin
+      User.create_or_find!(auth_hash, user_id)
+    rescue Exception => e
+      # TODO: needs logging...
+      nil
+    end
+  end
+
+  def self.create_or_find!(auth_hash, user_id = nil)
+    user = nil
+    if user_id
+      # We are trying to add the new authentication by provider to the user
+      user = User.where('id = ?', user_id).first
+      if user 
+        user.populate_from_auth_hash!(auth_hash)
+        user.guest = false # The user is no longer a guest
+      end
+    else
+      # We are authenticating the user during sign-up or login
+      authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
+      if authentication
+        user = authentication.user
+      else
+        user = User.new
+        user.populate_from_auth_hash!(auth_hash) if user
+      end  
+    end
+    user
+  end
+
+  def needs_password?
+    guest == false
+  end
+
   def set_if_empty(property, value, authentication)
     authentication[property] = value
-    puts("Property: #{property}, Value: #{value}")
-    if self[property].nil? || self[property].empty?
+    if self[property].nil? || self[property].empty? || self.guest
       self[property] = value
     end
   end
 
+  def update_attributes(attributes)
+    begin
+      self.update_attributes!(attributes)
+    rescue Exception => e
+      false
+    end
+  end
+
+  def update_attributes!(attributes)
+    super
+    self.guest = false # The user is no longer a guest
+  end
+
   def populate_from_auth_hash!(auth_hash)
     provider = auth_hash.provider
-    # binding.remote_pry
 
-    authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
-    if authentication 
-      # An authentication already exists for the user, just attach it
-      authentication.user_id = self.id
-    else
-      # Create a new authentication
-      authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
-    end 
+    authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
     authentication.oauth_token = auth_hash.credentials.token
     if auth_hash.credentials.expires_at
       authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
     end
 
-    method_name = "populate_from_#{provider.underscore}"
-    self.method(method_name.to_sym).call(auth_hash, authentication)
+    method_name = "populate_from_#{provider.underscore}".to_sym
+    if self.method(method_name)
+      self.method(method_name).call(auth_hash, authentication)
+    end
     authentication.save!
-    self.save!(:validate => false)
+    # As suggested here: (to prevent the password validation failing)
+    # http://stackoverflow.com/questions/11917340/how-can-i-sometimes-require-password-and-sometimes-not-with-has-secure-password
+    self.password = self.password_confirmation = "12345678"
+    self.password_digest = "external-authorized account"
+    self.save!
   end
+
 end

@@ -48,17 +48,24 @@ describe 'Users API' do
     lambda { User.find(user_id) }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
-  it 'transfers the guests game to a registered user' do
-    game_id = game.id
-    game.user_id.should == guest.id
-
-    token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/finish_login.json", {params: {guest_id: guest.id}})
-    response.status.should == 200
+  it 'creates a guest user' do
+    token = get_conn()
+    user_params = { guest: true }
+    response = token.post("#{@endpoint}/users.json", { user: user_params } )
     user_info = JSON.parse(response.body, symbolize_names: true)
-    user_info[:email].should == user1.email
-    updated_game = Game.where('user_id = ?', user1.id).last
-    updated_game.id.should == game_id
+    user_info[:guest].should == true
+    user = User.find(user_info[:id])
+    user.guest.should == true
+    expect(user.email.index('guest')).to eq(0)
+  end
+
+  it 'updates a guest user to a registered user using email, password' do
+    token = get_conn(guest)
+    user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '12345678' }
+    response = token.put("#{@endpoint}/users/#{guest.id}.json", {body: {user: user_params}})
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:guest].should == false
+    user_info[:email].should == user_params[:email]
   end
 
   describe 'Error and Edge Cases' do
@@ -103,5 +110,12 @@ describe 'Users API' do
       user_params = { email: 'test_user@example.com', password: '1234567', password_confirmation: '1234567' }
       lambda {token.post("#{@endpoint}/users.json", { user: user_params } )}.should raise_error(ActiveRecord::RecordInvalid)
     end
+
+    it 'doesnot allow a user to change its status to be guest' do
+      token = get_conn(user1)
+      user_params = { guest: true }
+      lambda {token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})}.should raise_error(Api::V1::UnauthorizedError)
+    end
+      
   end
 end

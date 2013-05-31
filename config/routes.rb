@@ -9,7 +9,7 @@ OAuthProvider::Application.routes.draw do
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/auth/failure', to: 'authentications#failure'
   
-  get '/auth/additional', to: 'authentications#additional'  
+  get '/auth/add_new', to: 'authentications#add_new_authentication'  
   # resources :sessions
   # resources :users
 
@@ -19,7 +19,7 @@ OAuthProvider::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get 'users/finish_login', to: 'users#finish_login'   
+      # get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
         get 'games/latest', to: 'games#latest'
         get 'games/latest_with_profile', to: 'games#latest_with_profile'          
@@ -30,7 +30,7 @@ OAuthProvider::Application.routes.draw do
           get 'progress' => 'results#progress'
           # get 'latest' => 'results#show'
         end
-        resources :authentications
+        # resources :authentications
 
         resources :trackers do 
           # get '/trackers/:tracker/:date', to: 'trackers#show'

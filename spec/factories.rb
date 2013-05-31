@@ -3,6 +3,11 @@ FactoryGirl.define do
     intermediate_results "{\"message\":\"Hello World\"}"        
   end
 
+  factory :authentication do
+    provider 'facebook'
+    sequence(:uid) {|n| "1234#{n}" }
+  end
+
   factory :game do
     definition_id 1
     status 'not_started'
@@ -12,6 +17,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:email) { |n| "spec_user#{n}@example.com" }
     password "12345678"
+    password_confirmation "12345678"
     guest false
     admin false
 
