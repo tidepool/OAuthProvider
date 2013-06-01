@@ -18,7 +18,7 @@ test:
 
 teamcity:
   adapter: postgresql
-  database: tidepool_auth_test
+  database: d3j58parq65vlr
   host: ec2-54-227-252-82.compute-1.amazonaws.com
   username: <%= ENV['HEROKU_TEST_USER'] %>
   password: <%= ENV['HEROKU_TEST_PASS'] %>
