@@ -16,6 +16,13 @@ test:
   database: tidepool_auth_test
   host: localhost
 
+teamcity:
+  adapter: postgresql
+  database: tidepool_auth_test
+  host: ec2-54-227-252-82.compute-1.amazonaws.com
+  username: <%= ENV['HEROKU_TEST_USER'] %>
+  password: <%= ENV['HEROKU_TEST_PASS'] %>
+
 production:
   adapter: postgresql
   database: tidepool_auth_prod
