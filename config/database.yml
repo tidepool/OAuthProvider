@@ -15,6 +15,8 @@ test:
   adapter: postgresql
   database: tidepool_auth_test
   host: localhost
+  username: <%= ENV['TEST_USER'] %>
+  password: <%= ENV['TEST_PASS'] %>
 
 teamcity:
   adapter: postgresql
