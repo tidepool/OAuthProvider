@@ -19,19 +19,25 @@ describe 'Game API' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/-/games.json")
     response.status.should == 200        
-  end
-
-  it 'creates a game when a user_id is specified in URI' do 
-    token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
-    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:user_id].should == user1.id
   end
 
   it 'creates a game which has the user_id in the URI' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
+    response.status.should == 200
     game_result = JSON.parse(response.body, symbolize_names: true)
     game_result[:user_id].should == user1.id
+  end
+
+  it 'creates a game with a def_id in the parameters' do
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
+      { body: { definition_id: 1} })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:id].should == 1
   end
 
   it 'shows an existing game' do

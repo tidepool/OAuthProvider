@@ -7,8 +7,7 @@ Doorkeeper.configure do
 
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator do
-    puts "Resource_owner authenticator called #{request.params}"
-    # binding.remote_pry
+    # puts "Resource_owner authenticator called #{request.params}"
     user_id = params[:user_id]
     guest_id = params[:guest_id]
     provider = params[:provider]
@@ -19,7 +18,7 @@ Doorkeeper.configure do
       if provider
         session[:user_id] = guest_id if guest_id
         # The & at the end is necessary as we will tack parameters
-        session[:return_after_external] = "#{request.fullpath}&"
+        session[:redirect_after_external] = "#{request.fullpath}&"
         redirect_to("/auth/#{provider}")
         # Once the authentication is complete (success of fail), 
         # we will be redirected back here with a user_id in the params
@@ -34,7 +33,7 @@ Doorkeeper.configure do
     username = params[:email] || params[:username]
     password = params[:password]
 
-    puts "Resource_owner from credentials called #{routes}"
+    # puts "Resource_owner from credentials called #{routes}"
     user = User.where('email = ?', username).first
     return_user = user && (user.guest || user.authenticate(password)) ? user : nil 
 

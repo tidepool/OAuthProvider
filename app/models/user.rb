@@ -45,19 +45,22 @@ class User < ActiveRecord::Base
 
   def self.create_or_find!(auth_hash, user_id = nil)
     user = nil
-    if user_id
-      # We are trying to add the new authentication by provider to the user
-      user = User.where('id = ?', user_id).first
-      if user 
-        user.populate_from_auth_hash!(auth_hash)
-        user.guest = false # The user is no longer a guest
-      end
+    # binding.remote_pry
+
+    # First check if the authentication already exists:
+    authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
+    if authentication
+      user = authentication.user
     else
-      # We are authenticating the user during sign-up or login
-      authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
-      if authentication
-        user = authentication.user
+      if user_id      
+        # We are trying to add the new authentication by provider to the user (The user can be a guest)
+        user = User.where('id = ?', user_id).first
+        if user 
+          user.populate_from_auth_hash!(auth_hash)
+          user.guest = false # The user is no longer a guest
+        end
       else
+        # The user does not exist (even no guest existed that needs mutation)
         user = User.new
         user.populate_from_auth_hash!(auth_hash) if user
       end  

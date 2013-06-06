@@ -1,6 +1,14 @@
 class Api::V1::UsersController < Api::V1::ApiController
   doorkeeper_for :index, :show, :update, :destroy
 
+  # TODO: This is stupid!
+  # https://github.com/rails/rails/issues/10630
+  
+  wrap_parameters User, include: [:guest,
+      :email, :password, :password_confirmation, :name, :display_name, 
+      :description, :city, :state, :country, :timezone, 
+      :locale, :image, :gender, :date_of_birth]
+
   def index
     # TODO: Consider queries like friends, latest_users etc.
   end
@@ -14,6 +22,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def create
+    # binding.pry_remote
     user = User.create_guest_or_registered!(user_attributes)
     respond_to do |format|
       format.json { render :json => user }
@@ -22,13 +31,20 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def update
     user = current_resource
-    if user.guest == false && params[:user][:guest]
-      raise Api::V1::UnauthorizedError.new('Not Authorized')
-    end
+    # This is an extra authorizations so that registered users can not convert 
+    # themselves to guest users.
+    # if user.guest == false && params[:user][:guest]
+    #   params[:user][:guest] = false
+    #   # raise Api::V1::UnauthorizedError.new('Not Authorized')
+    # end
 
     # TODO: We should be using the ! version here, but
     # looks like it fails even no password is supposed to be set.
     user.update_attributes(user_attributes)
+
+    # Whenever guest calls update, they are not guest anymore!    
+    user.guest = false
+    user.save
 
     respond_to do |format|
       format.json { render :json => @user}
@@ -46,7 +62,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   private 
 
   def current_resource
-    if params[:id] == '-' || params[:action] == 'finish_login'
+    if params[:id] == '-' 
       @user ||= caller
     elsif params[:id]
       @user ||= User.find(params[:id])

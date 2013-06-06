@@ -2,7 +2,7 @@ class Api::V1::GamesController < Api::V1::ApiController
   doorkeeper_for :index, :show, :destroy, :update
 
   def index
-    games = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).all
+    games = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).load
     respond_to do |format|
       format.json { render :json => games, :each_serializer => GameSummarySerializer }
     end

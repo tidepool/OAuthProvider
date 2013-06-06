@@ -69,7 +69,7 @@ describe User do
     expect(user.id).to eq(user1.id)
   end
 
-  it 'attaches the authentication to a guest and guest becomes registered' do
+  it 'attaches the new authentication to a guest and guest becomes registered' do
     expect(guest.guest).to eq(true)
     user = User.create_or_find(@facebook_hash, guest.id)
 
@@ -91,6 +91,23 @@ describe User do
     user = User.create_or_find(@test_hash)
 
     expect(user.id).to eq(user3.id)
+  end
+
+  it 'returns the existing user if there is an existing authentication and ignores the guest' do 
+    # This will leave a potential guest user dangling, but it is ok.
+    expect(guest.guest).to eq(true)
+    @test_hash = Hashie::Mash.new(
+          {
+            "provider" => "facebook",
+                 "uid" => "5555",
+                "info" => { "email" => "test@example.com" }
+          })      
+    expect(auth3.user).to eq(user3)
+    expect(user3.authentications[0].uid).to eq("5555")
+    user = User.create_or_find(@test_hash, guest.id)
+
+    expect(user.id).to eq(user3.id)
+    expect(user.guest).to eq(false)
   end
 
   it 'finds no user if the user_id does not exist' do

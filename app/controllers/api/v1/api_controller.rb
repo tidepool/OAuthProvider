@@ -24,6 +24,7 @@ class Api::V1::ApiController < ApplicationController
   end
 
   def authorize
+    # binding.remote_pry
     if !current_permission.allow?(params[:controller], params[:action], current_resource)
       raise Api::V1::UnauthorizedError.new('Not Authorized')
     end
