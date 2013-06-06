@@ -114,7 +114,9 @@ describe 'Users API' do
     it 'doesnot allow a user to change its status to be guest' do
       token = get_conn(user1)
       user_params = { guest: true }
-      lambda {token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})}.should raise_error(Api::V1::UnauthorizedError)
+      response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
+      user_info = JSON.parse(response.body, symbolize_names: true)
+      user_info[:guest].should == false
     end
       
   end
