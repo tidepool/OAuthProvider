@@ -6,23 +6,25 @@ class DoorkeeperSeed
 
   def create_seed
     Dotenv.load
-    @app = Doorkeeper::Application.where('name = ?', 'tidepool_client_dev').first_or_create do |app|
-      app.name = 'tidepool_client_dev'
-      app.redirect_uri = "#{ENV['OAUTH_REDIRECT']}"
+    if Rails.env.development? || Rails.env.test?
+      @app = Doorkeeper::Application.where('name = ?', 'tidepool_client_dev').first_or_create do |app|
+        app.name = 'tidepool_client_dev'
+        app.redirect_uri = "#{ENV['OAUTH_REDIRECT']}"
+      end
+      app_secrets_dev_path = Rails.root.join('.client_env')
+      File.open(app_secrets_dev_path, 'w+') do |file|
+        # Generate an AMD wrapped app.config file:
+        output = "DEV_APISERVER=#{ENV['API_SERVER']}\n"
+        output += "DEV_APPSECRET=#{@app.secret}\n"
+        output += "DEV_APPID=#{@app.uid}"
+        file.write output
+      end        
+    elsif Rails.env.production?
+      @app = Doorkeeper::Application.where('name = ?', 'tidepool_client_prod').first_or_create do |app|
+        app.name = 'tidepool_client_prod'
+        app.redirect_uri = "#{ENV['OAUTH_REDIRECT']}"
+      end
     end
     @app.save!
-    app_secrets_dev_path = Rails.root.join('app_secrets_dev.js')
-    File.open(app_secrets_dev_path, 'w+') do |file|
-      # Generate an AMD wrapped app.config file:
-      output = "define([], function(){\n"
-      output += "var appConfig = {\n"
-      output += " appId: '#{@app.uid}', \n"
-      output += " appSecret: '#{@app.secret}', \n"
-      output += " apiServer: '#{ENV['API_SERVER']}' \n"
-      output += "}; \n"
-      output += "return appConfig;\n"
-      output += "});"
-      file.write output
-    end
   end
 end
