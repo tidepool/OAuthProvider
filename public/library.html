@@ -1,0 +1,267 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>TidePool Component Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="all-min.css">
+    <link href="library.css" rel="stylesheet">
+</head>
+<body>
+<header class="mainNav navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="spec.html?catch=false">Run Specs</a></li>
+            <li class="active"><a href="library.html">Component Library</a></li>
+        </ul>
+    </div>
+</header>
+
+    <section class="padder">
+
+        <h1>TidePool Component Library</h1>
+        <p>This page holds UI components so people can see how to implement various options of them and see how they look in one place.</p>
+
+
+        <h2>`Proceed` ui_widget</h2>
+        <p>This is a gui element that allows the user to indicate when he or she is ready to proceed, but does not block them from continuing their present activity.</p>
+        <button id="ActionShowProceed" class="btn btn-large btn-primary">Show `Proceed`</button>
+        <button id="ActionHideProceed" class="btn btn-large">Hide</button>
+
+
+        <h2>Colors</h2>
+        <p>These colors are used to build all colors in the interface. They are used as a base, and <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">SASS functions</a> like `transparentize` are used to make blends and variations.</p>
+        <p class="muted">Brand Colors</p>
+        <p class="colors">
+            <b class="swatch colorBrand" title="colorBrand"></b>
+            <b class="swatch colorBrand1" title="colorBrand1"></b>
+            <b class="swatch colorBrand2" title="colorBrand2"></b>
+            <b class="swatch colorBrand3" title="colorBrand3"></b>
+            <b class="swatch colorBrand4" title="colorBrand4"></b>
+        </p>
+        <p class="muted">Semantic Colors</p>
+        <p class="colors">
+            <b class="swatch colorGood"></b>
+            <b class="swatch colorGoodLight"></b>
+            <b class="swatch colorInfo"></b>
+            <b class="swatch colorInfoLight"></b>
+            <b class="swatch colorQuestion"></b>
+            <b class="swatch colorWarn"></b>
+            <b class="swatch colorWarnBright"></b>
+            <b class="swatch colorBad"></b>
+            <b class="swatch colorQuiet"></b>
+            <b class="swatch colorVeryQuiet"></b>
+            <b class="swatch colorLink"></b>
+        </p>
+        <p class="muted">Gender Colors</p>
+        <p class="colors">
+            <b class="swatch colorMale"></b>
+            <b class="swatch colorFemale"></b>
+        </p>
+
+
+        <h2>Buttons</h2>
+        <p>You can use the <code>a</code>, <code>button</code>, <code>div</code>, or most any other tag, and you can put any kind of <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icon in them.</p>
+        <p><a class="btn btn-link" href="" data-printClasses></a></p>
+        <p><a class="btn btn-link btn-large" href="" data-printClasses></a></p>
+        <p>
+            <button id="PlainButton" class="btn" data-printClasses></button>
+        </p>
+        <p>
+            <div class="btn btn-large" data-printClasses></div>
+        </p>
+        <p>
+            <button class="btn btn-primary" data-printClasses></button>
+        </p>
+        <p>
+            <button class="btn btn-large btn-primary" data-printClasses></button>
+        </p>
+        <p><a class="btn btn-success" data-printClasses href=""></a></p>
+        <p>
+            <button class="btn btn-success btn-large" data-printClasses></button>
+        </p>
+        <p><a class="btn btn-inverse" href="" data-printClasses></a></p>
+        <p>
+            <button class="btn btn-inverse btn-large" data-printClasses></button>
+        </p>
+        <p>
+            <button class="btn btn-inverse btn-large" data-printClasses><i class="icon-thumbs-up icon-large"></i></button>
+        </p>
+
+
+        <h2>Decision Groups</h2>
+        <p>These follow the naming conventions and behavior rules from <a href="http://twitter.github.io/bootstrap/javascript.html#buttons">Bootstrap</a> but have overridden styles.</p>
+        <p class="muted">.btn-group.btn-radio</p>
+        <div class="btn-group" data-toggle="buttons-radio">
+            <button class="btn" data-printClasses></button>
+            <button class="btn active" data-printClasses></button>
+            <button class="btn" data-printClasses></button>
+        </div>
+
+        <p class="muted">.btn-group.btn-rocker</p>
+        <div class="btn-group btn-rocker" data-toggle="buttons-radio">
+            <button class="btn active">Apples</button>
+            <button class="btn">Oranges</button>
+        </div>
+
+        <p class="muted">.btn-group.btn-rocker.gendered</p>
+        <div class="btn-group btn-rocker gendered" data-toggle="buttons-radio">
+            <button class="btn active">Boys</button>
+            <button class="btn">Girls</button>
+        </div>
+
+        <h2>Forms</h2>
+        <form action="">
+            <label>Label</label>
+            <input type="text"/>
+        </form>
+        <form action="">
+            <input class="large" type="text" data-printClasses />
+        </form>
+
+        <h2>Divider</h2>
+        <div id="DividerHolder"></div>
+
+        <h2>ui_widgets/steps_remaining</h2>
+        <div id="StepsRemainingHolder"></div>
+
+        <h2>`holdPlease` Loader</h2>
+        <p>
+            <button id="HoldBtn" class="btn btn-large">
+                holdPlease('#HoldBtn')
+            </button>
+        </p>
+        <p>
+            <button id="HoldBtnSmall" class="btn">
+                holdPlease('#HoldBtnSmall')
+            </button>
+        </p>
+        <p>
+            <button class="btn btn-link" id="HideLoading">holdPlease.hide()</button>
+        </p>
+
+        <h2>`psst` Notifications</h2>
+        <p>
+            <button id="ShowNotification" class="btn btn-large" title="psst({ sel:'...', msg:'...' })">Add Notification</button>
+        </p>
+        <p id="NotificationArea"></p>
+        <p>
+            <button class="btn btn-link" id="HideNotifications">psst.hide()</button>
+        </p>
+
+        <h2>`perch` Lightbox</h2>
+        <p>The lightbox can accept any of the following: a simple message string, an object of options like msg and title, or a Backbone View.</p>
+        <form id="LightboxData">
+            <input name="title" type="text" placeholder="lightbox .title" />
+            <textarea name="content" rows="3">The rain in spain stays mainly in the plain.</textarea>
+            <button class="btn btn-block btn-large">Launch Lightbox</button>
+        </form>
+
+    </section>
+
+    <script src="bower_components/requirejs/require.js"></script>
+    <script>
+
+        require(['require_config'], function (){
+            require(['bootstrap', 'jquery'],function(){
+                var $classPrintList = $('[data-printClasses]');
+
+                // Print the class name of a thing inside itself
+                $classPrintList.each(function(){
+                    console.log( $(this).prop('tagName') )
+                    if( $(this).prop('tagName') === 'INPUT' ) {
+                        $(this).attr('placeholder', $(this).attr('class') )
+                    } else {
+                        $(this).append($(this).attr('class'))
+                    }
+
+                });
+
+                require([
+                    'backbone',
+                    'syphon',
+                    'text!ui_widgets/divider.hbs',
+                    'ui_widgets/steps_remaining',
+                    'ui_widgets/hold_please',
+                    'ui_widgets/psst',
+                    'composite_views/perch',
+                    'ui_widgets/proceed'
+                ], function (
+                    Backbone,
+                    Syphon,
+                    dividerMarkup,
+                    StepsRemaining,
+                    holdPlease,
+                    psst,
+                    perch,
+                    proceed
+                ) {
+                    $('#DividerHolder').append( dividerMarkup )
+
+                    var _steps = [ {isComplete:true}, {isComplete:true}, {}, {}, {}, {}, {}, {} ]
+                    steps = new StepsRemaining({
+                            collection: new Backbone.Collection(_steps)
+                    });
+                    $('#StepsRemainingHolder').append( steps.render().el );
+
+
+                    $("#HoldBtn, #HoldBtnSmall").click(function(){ holdPlease.show(this) })
+                    $("#HideLoading").click(function(){ holdPlease.hide() })
+                    $("#HoldBtn, #HoldBtnSmall").trigger('click')
+
+
+                    function pickRandomProperty(obj) {
+                        var result;
+                        var count = 0;
+                        for (var prop in obj)
+                            if (Math.random() < 1/++count)
+                                result = prop;
+                        return result;
+                    }
+                    $('#ShowNotification').click(function(){
+                        var type = pickRandomProperty(psst.TYPES)
+                        psst({
+                            sel: '#NotificationArea',
+                            title: type,
+                            msg: 'Hello, you special person.',
+                            type: type
+                        })
+                    })
+                    $('#ShowNotification').trigger('click')
+                    $('#HideNotifications').click(function(){
+                        psst.hide()
+                    })
+
+
+                    $('#LightboxData').submit(function(e){
+                        e.preventDefault()
+                        data = Syphon.serialize(e.target)
+                        console.log(data)
+                        perch.show(data)
+                    })
+
+
+                    addColorNames = function () {
+                        $('.colors .swatch').each(function(){
+                            className = $(this).prop('class').replace('swatch ', '')
+                            $(this).prop('title', className)
+                        })
+                    }
+                    addColorNames()
+
+                    $('#ActionShowProceed').on('click', proceed.show)
+                    $('#ActionHideProceed').on('click', proceed.hide)
+
+                });
+            });
+        });
+    </script>
+</body>
+</html>
