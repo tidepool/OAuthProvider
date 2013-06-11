@@ -1,5 +1,3 @@
-require 'pry' if Rails.env.test? || Rails.env.development?
-
 class PersistProfile 
   def persist(game, results)
     return if !game && !game.user_id
@@ -17,12 +15,10 @@ class PersistProfile
 
     return if big5_dimension == nil || holland6_dimension == nil
 
-    profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
-
-    user.profile_description = profile_description
+    result.profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
+    # user.profile_description = profile_description
+    user.profile_result = result
     user.save!(:validate => false)
-
-    result.profile_description = profile_description
     result.save!
   end
 end

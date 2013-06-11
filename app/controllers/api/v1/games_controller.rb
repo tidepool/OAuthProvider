@@ -31,8 +31,9 @@ class Api::V1::GamesController < Api::V1::ApiController
   end
 
   def create
+    calling_ip = request.remote_ip
     definition = Definition.find_or_return_default(params[:def_id])
-    game = Game.create_by_definition(definition, target_user)
+    game = Game.create_by_definition(definition, target_user, calling_ip)
     respond_to do |format|
       format.json { render :json => game }
     end

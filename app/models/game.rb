@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   belongs_to :definition
   has_one :result, :inverse_of => :game, :dependent => :delete
 
-  def self.create_by_definition(definition, target_user)
+  def self.create_by_definition(definition, target_user, calling_ip = nil)
     raise ArgumentError.new('No definition specified') if definition.nil?
     raise ArgumentError.new('Requires a target user') if target_user.nil?   
 
@@ -15,6 +15,7 @@ class Game < ActiveRecord::Base
       game.definition = definition
       game.stages = definition.stages_from_stage_definition
       game.user = target_user
+      game.calling_ip = calling_ip
       game.date_taken = Time.zone.now # Always use Time.zone not Time
       game.stage_completed = -1
       game.status = :not_started

@@ -68,6 +68,11 @@ describe 'Users API' do
     user_info[:email].should == user_params[:email]
   end
 
+  it 'gets a users profile results' do
+    token = get_conn(user1)
+    response = token.get("")
+  end
+
   describe 'Error and Edge Cases' do
     it 'doesnot show other users information' do 
       token = get_conn(user1)

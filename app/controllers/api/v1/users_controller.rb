@@ -21,6 +21,15 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
+  def profile
+    user = current_resource
+
+    profile_result = user.profile_result
+    respond_to do |format|
+      format.json { render :json => profile_result }
+    end
+  end
+
   def create
     # binding.pry_remote
     user = User.create_guest_or_registered!(user_attributes)
