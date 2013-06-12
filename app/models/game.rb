@@ -26,9 +26,13 @@ class Game < ActiveRecord::Base
     game = Game.includes(:definition, :result).where('user_id = ?', target_user.id).order(:date_taken).last
   end
 
-  def self.find_latest_with_profile(target_user)
-    definitions = Definition.where("calculates like '%profile%'").all
-    query = (definitions.reduce("") { |out, definition| out + "definition_id = #{definition.id} or " }).chomp(" or ")
-    game = Game.includes(:definition, :result).joins(:definition).where("(#{query}) and user_id = ? and status = 'results_ready'", target_user.id).order(:date_taken).last
+  def calculates_personality?
+    self.definition.calculates.index("profile") != nil
   end
+
+  # def self.find_latest_with_profile(target_user)
+  #   definitions = Definition.where("calculates like '%profile%'").all
+  #   query = (definitions.reduce("") { |out, definition| out + "definition_id = #{definition.id} or " }).chomp(" or ")
+  #   game = Game.includes(:definition, :result).joins(:definition).where("(#{query}) and user_id = ? and status = 'results_ready'", target_user.id).order(:date_taken).last
+  # end
 end

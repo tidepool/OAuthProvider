@@ -24,9 +24,8 @@ class Api::V1::UsersController < Api::V1::ApiController
   def profile
     user = current_resource
 
-    profile_result = user.profile_result
     respond_to do |format|
-      format.json { render :json => profile_result }
+      format.json { render :json => user.personality }
     end
   end
 

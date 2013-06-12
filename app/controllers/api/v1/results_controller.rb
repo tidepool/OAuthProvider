@@ -40,10 +40,16 @@ class Api::V1::ResultsController < Api::V1::ApiController
     response_body = {}
     location = api_v1_user_game_progress_url
     if current_resource.status == :results_ready.to_s
+      if current_resource.calculates_personality?
+        result_url = api_v1_user_personality_url
+      else
+        result_url = api_v1_user_game_result_url
+      end
+
       response_body = {
         :status => {
           :state => :done,
-          :link => api_v1_user_game_result_url,
+          :link => result_url,
           :message => 'Results are ready.'
         }
       }

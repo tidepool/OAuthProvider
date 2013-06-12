@@ -23,12 +23,12 @@ class Api::V1::GamesController < Api::V1::ApiController
     end
   end
 
-  def latest_with_profile
-    game = current_resource
-    respond_to do |format|
-      format.json { render :json => game }
-    end
-  end
+  # def latest_with_profile
+  #   game = current_resource
+  #   respond_to do |format|
+  #     format.json { render :json => game }
+  #   end
+  # end
 
   def create
     calling_ip = request.remote_ip

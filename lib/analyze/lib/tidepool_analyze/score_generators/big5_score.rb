@@ -53,9 +53,10 @@ module TidepoolAnalyze
         # Pick either the lowest or the highest values depending on its absolute difference from average
         final_score = (high_big5_value - average_big5).abs > (low_big5_value - average_big5).abs ? "high_#{high_big5_dimension.to_s}" : "low_#{low_big5_dimension.to_s}"
         {
-          friendly_name: 'Personality - Big5',
           dimension: final_score,
-          score: big5_scores
+          score: big5_scores,
+          low_dimension: low_big5_dimension,
+          high_dimension: high_big5_dimension 
         }
       end
     end

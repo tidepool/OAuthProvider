@@ -21,9 +21,9 @@ OAuthProvider::Application.routes.draw do
     namespace :v1 do
       # get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
-        get 'profile', to: 'users#profile'
+        get 'personality', to: 'users#personality'
         get 'games/latest', to: 'games#latest'
-        get 'games/latest_with_profile', to: 'games#latest_with_profile'          
+        # get 'games/latest_with_profile', to: 'games#latest_with_profile'          
 
         resources :games do
           get 'result' => 'results#show'

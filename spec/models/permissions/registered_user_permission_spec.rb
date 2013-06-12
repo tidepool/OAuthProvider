@@ -26,8 +26,8 @@ module Permissions
         should allow(games, :index)
         should allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
+        # should allow(games, :latest_with_profile, game)
+        # should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
@@ -45,6 +45,7 @@ module Permissions
         should allow(users, :create, target_user)
         should allow(users, :update, target_user)
         should allow(users, :destroy, target_user)
+        should allow(users, :personality, target_user)
       end
     end
 
@@ -66,8 +67,8 @@ module Permissions
         should_not allow(games, :index)
         should_not allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should_not allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
+        # should_not allow(games, :latest_with_profile, game)
+        # should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
@@ -85,6 +86,7 @@ module Permissions
         should_not allow(users, :create, target_user)
         should_not allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
+        should_not allow(users, :personality, target_user)
       end
     end
 

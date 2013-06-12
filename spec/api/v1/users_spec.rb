@@ -12,6 +12,7 @@ describe 'Users API' do
   let(:user2) { create(:user) }
   let(:guest) { create(:guest) }
   let(:admin) { create(:admin) }
+  let(:personality) { create(:personality) }
   let(:game) { create(:game, user: guest) }
 
   it 'shows the users own information' do    
@@ -68,9 +69,13 @@ describe 'Users API' do
     user_info[:email].should == user_params[:email]
   end
 
-  it 'gets a users profile results' do
+  it 'gets a users personality' do
+    personality 
     token = get_conn(user1)
-    response = token.get("")
+    response = token.get("#{@endpoint}/users/#{guest.id}.json/personality")
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:big5_dimension].should == personality.big5_dimension
+    user_info[:holland6_dimension].should == personality.holland6_dimension
   end
 
   describe 'Error and Edge Cases' do
