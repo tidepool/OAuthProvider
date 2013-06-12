@@ -38,7 +38,6 @@ class Api::V1::ResultsController < Api::V1::ApiController
   def progress
     http_status = :ok
     response_body = {}
-    location = api_v1_user_game_progress_url
     if current_resource.status == :results_ready.to_s
       if current_resource.calculates_personality?
         result_url = api_v1_user_personality_url
@@ -53,22 +52,23 @@ class Api::V1::ResultsController < Api::V1::ApiController
           :message => 'Results are ready.'
         }
       }
-      location = api_v1_user_game_result_url
       http_status = :ok
     elsif current_resource.status == :no_results.to_s
+      result_url = api_v1_user_game_result_url
       response_body = {
         :status => {
           :state => :error,
-          :link => api_v1_user_game_result_url,
+          :link => result_url,
           :message => 'Error calculating results'
         }
       }
       http_status = :ok
     else
+      result_url = api_v1_user_game_progress_url
       response_body = {
         :status => {
           :state => :pending,
-          :link => api_v1_user_game_progress_url,
+          :link => result_url,
           :message => 'Results are still being calculated'
         }
       }
@@ -77,7 +77,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
 
     respond_to do |format|
       format.json { render :json => response_body, 
-        :status => http_status, :location => location}
+        :status => http_status, :location => result_url}
     end
   end
 

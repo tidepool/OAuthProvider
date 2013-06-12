@@ -8,7 +8,7 @@ module Permissions
         allow @games, [:show, :update, :destroy] do |game|
           game.user_id == caller.id
         end    
-        allow @games, [:latest, :latest_with_profile] do |game|
+        allow @games, [:latest] do |game|
           game.user_id == caller.id
         end
 

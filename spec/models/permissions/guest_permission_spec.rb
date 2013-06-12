@@ -25,8 +25,6 @@ module Permissions
 
         should allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
@@ -67,8 +65,6 @@ module Permissions
 
         should_not allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should_not allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do

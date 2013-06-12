@@ -21,7 +21,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
-  def profile
+  def personality
     user = current_resource
 
     respond_to do |format|
@@ -74,6 +74,8 @@ class Api::V1::UsersController < Api::V1::ApiController
       @user ||= caller
     elsif params[:id]
       @user ||= User.find(params[:id])
+    elsif params[:user_id]
+      @user ||= User.find(params[:user_id])
     else
       @user = nil
     end

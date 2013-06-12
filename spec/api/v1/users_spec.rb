@@ -13,6 +13,7 @@ describe 'Users API' do
   let(:guest) { create(:guest) }
   let(:admin) { create(:admin) }
   let(:personality) { create(:personality) }
+  let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
 
   it 'shows the users own information' do    
@@ -71,11 +72,15 @@ describe 'Users API' do
 
   it 'gets a users personality' do
     personality 
-    token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/#{guest.id}.json/personality")
+    token = get_conn(user3)
+    response = token.get("#{@endpoint}/users/#{user3.id}/personality.json")
     user_info = JSON.parse(response.body, symbolize_names: true)
     user_info[:big5_dimension].should == personality.big5_dimension
     user_info[:holland6_dimension].should == personality.holland6_dimension
+    user_info[:big5_high].should == personality.big5_high
+    user_info[:big5_low].should == personality.big5_low
+    user_info[:big5_score].should == personality.big5_score.symbolize_keys
+    user_info[:holland6_score].should == personality.holland6_score.symbolize_keys
   end
 
   describe 'Error and Edge Cases' do

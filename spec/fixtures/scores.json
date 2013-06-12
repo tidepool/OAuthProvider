@@ -1,15 +1,15 @@
 {
   "big5": {
     "dimension": "high_openness",
+    "low_dimension": "neuroticism",
+    "high_dimension": "openness", 
     "score": {
       "openness": 8,
       "agreeableness": 2,
       "conscientiousness": 3,
       "extraversion": 6,
       "neuroticism": 1
-    },
-    "low_dimension": "neuroticism",
-    "high_dimension": "openness", 
+    }
   },
   "holland6": {
     "dimension": "artistic",
@@ -20,6 +20,6 @@
       "enterprising": 5,
       "investigative": 1,
       "conventional": 4
-    },
+    }
   }
 }
