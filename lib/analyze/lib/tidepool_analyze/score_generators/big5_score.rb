@@ -50,6 +50,15 @@ module TidepoolAnalyze
           end
         end
 
+        # Adjust the numbers so that the big5 scores are distributed > 0 
+        # 1. Pick the min value
+        # 2. If min_value < 0, add abs(min_value) to all values
+        # 3. Multiply all values by 10 
+        adjust_by = low_big5_value.abs if (low_big5_value < 0)
+        big5_scores.each do |dimension, value|
+          big5_scores[dimension] = (value + adjust_by) * 10
+        end
+
         # Pick either the lowest or the highest values depending on its absolute difference from average
         final_score = (high_big5_value - average_big5).abs > (low_big5_value - average_big5).abs ? "high_#{high_big5_dimension.to_s}" : "low_#{low_big5_dimension.to_s}"
         {
