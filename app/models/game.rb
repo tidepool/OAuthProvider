@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   serialize :stages, JSON
 
-  # Game status: :not_started, :in_progress, :completed, :results_ready
+  # Game status: :not_started, :in_progress, :completed, :results_ready, :no_results
                   
   belongs_to :user
   belongs_to :definition

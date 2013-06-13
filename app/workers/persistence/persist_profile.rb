@@ -1,11 +1,11 @@
 class PersistProfile 
-  def persist(game, results)
+  def persist(game, result, analysis_results)
     return if !game && !game.user_id
 
     user = User.find(game.user_id)
     return if !user
 
-    scores = results[:scores]
+    scores = analysis_results[:scores]
     return if !scores
 
     big5_dimension = (scores[:big5] && scores[:big5][:dimension]) ? scores[:big5][:dimension] : nil 
@@ -29,6 +29,5 @@ class PersistProfile
 
     personality.save!
     user.save!(:validate => false)
-    # result.save!
   end
 end

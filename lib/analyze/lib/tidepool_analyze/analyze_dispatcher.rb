@@ -91,7 +91,6 @@ module TidepoolAnalyze
     def aggregate_results(intermediate_results)
       aggregate_results = {}
       intermediate_results.each do |module_name, results_across_stages|
-        puts "Raw Result = #{results_across_stages}"
         klass_name = "TidepoolAnalyze::Aggregator::#{module_name.to_s.camelize}Aggregator"
         begin
           aggregator = klass_name.constantize.new(results_across_stages, @stages)

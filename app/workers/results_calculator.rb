@@ -11,44 +11,81 @@ class ResultsCalculator
  
   def perform(game_id)
     key = "game:#{game_id}"
-    # Get the user events for a given game
-    # TODO: DONOT forget to remove the items from Redis after calculation ends with success
-    user_events_json = $redis.lrange(key, 0, MAX_NUM_EVENTS)
-    user_events = []
-    user_events_json.each do |user_event| 
-      user_events << JSON.parse(user_event)
+    game = Game.where('id = ?', game_id).first
+    if game.nil?
+      $redis.del(key)
+      return
     end
-    
-    # Get the elements and circles information
-    elements = {}
-    Element.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-      elements[entry[:name]] = ::OpenStruct.new(entry.attributes) 
+
+    user_events = user_events_from_redis(key)
+    if user_events.empty?
+      if game.result && game.result.event_log
+        # We are recalculating results
+        user_events = game.result.event_log
+      else
+        # No User events collected either in Redis or in Postgres (from prior run)
+        game.status = :no_results
+        game.save
+        logger.error("Game #{game_id} does not have any user_events collected.")
+        return
+      end
     end
-    circles = {}
-    AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-      circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
+
+    result = game.result.nil? ? game.create_result : game.result
+    result.event_log = user_events
+    if result.save  
+      # Make sure we don't lose the event results
+      # It is safe to delete from Redis, they are saved in Postgres
+      $redis.del(key)
+    else
+      logger.error("Game #{game_id} result not saved, user_events still in Redis")
+      return
     end
-    game = Game.find(game_id)
+
     analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
     
-    score_names = game.definition.score_names
-
-    results = analyze_dispatcher.analyze(user_events, score_names)
+    analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
 
     game.definition.calculates.each do |calculation|
       klass_name = "Persist#{calculation.to_s.camelize}"
       begin
         persist_calculation = klass_name.constantize.new()
-        persist_calculation.persist(game, results)
+        persist_calculation.persist(game, result, analysis_results)
       rescue Exception => e
+        game.status = :no_results
+        game.save
+        logger.error("Game #{game_id} cannot persist #{klass_name} calculation. #{e.message}")
         raise e
       end
     end    
 
     game.status = :results_ready
     game.save
+  end
 
-    # Now we can cleanup the events from the redis server
-    $redis.del(key)
+  def user_events_from_redis(key)
+    # Get the user events for a given game
+    user_events_json = $redis.lrange(key, 0, MAX_NUM_EVENTS)
+    user_events = []
+    user_events_json.each do |user_event| 
+      user_events << JSON.parse(user_event)
+    end
+    user_events
+  end
+
+  def circles
+    circles = {}
+    AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
+      circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
+    end
+    circles    
+  end
+
+  def elements
+    elements = {}
+    Element.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
+      elements[entry[:name]] = ::OpenStruct.new(entry.attributes) 
+    end
+    elements
   end
 end
