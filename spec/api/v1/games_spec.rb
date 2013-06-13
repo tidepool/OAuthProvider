@@ -40,6 +40,18 @@ describe 'Game API' do
     game_result[:definition][:id].should == 1
   end
 
+  it 'records the ip of the caller when the game is created' do
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
+      { body: { definition_id: 1} })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:id].should_not be_nil
+
+    newGame = Game.find(game_result[:id])
+    newGame.calling_ip.should_not be_nil
+  end
+
   it 'shows an existing game' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json")
