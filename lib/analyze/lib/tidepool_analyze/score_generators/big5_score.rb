@@ -50,12 +50,11 @@ module TidepoolAnalyze
           end
         end
 
-        # Adjust the numbers so that the big5 scores are distributed > 0 
+        # Adjust the numbers so that the big5 scores are distributed >= (1 * 10) 
         # 1. Pick the min value
-        # 2. If min_value < 0, add abs(min_value) to all values
+        # 2. Add abs(min_value) + 1 to all values 
         # 3. Multiply all values by 10 
-        adjust_by = 0
-        adjust_by = low_big5_value.abs if (low_big5_value < 0)
+        adjust_by = low_big5_value.abs + 1
         big5_scores.each do |dimension, value|
           big5_scores[dimension] = (value + adjust_by) * 10
         end
