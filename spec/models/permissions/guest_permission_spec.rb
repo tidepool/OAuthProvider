@@ -6,6 +6,7 @@ module Permissions
     let(:games) { "#{controller_prefix}/games" }
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
+    let(:recommendations) { "#{controller_prefix}/recommendations" }
 
     describe 'caller and target_user are the same user' do
       let(:user) { create(:guest) }
@@ -45,6 +46,11 @@ module Permissions
         should allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
       end
+
+      it 'allows recommendations' do 
+        should_not allow(recommendations, :latest)
+      end
+
     end
 
     describe 'caller and target_user are not the same user' do
@@ -83,6 +89,11 @@ module Permissions
         should_not allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
       end
+
+      it 'allows recommendations' do 
+        should_not allow(recommendations, :latest)
+      end
+
     end
   end
 end

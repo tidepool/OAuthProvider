@@ -22,8 +22,9 @@ OAuthProvider::Application.routes.draw do
       # get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
         get 'personality', to: 'users#personality'
+       
+        get 'recommendations/latest', to: 'recommendations#latest'
         get 'games/latest', to: 'games#latest'
-        # get 'games/latest_with_profile', to: 'games#latest_with_profile'          
 
         resources :games do
           get 'result' => 'results#show'

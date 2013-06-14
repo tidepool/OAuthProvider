@@ -21,6 +21,8 @@ module Permissions
         allow @users, [:show, :create, :update, :destroy, :personality] do |user|
           user.id == caller.id 
         end
+
+        allow @recommendations, :latest
       end
     end
   end

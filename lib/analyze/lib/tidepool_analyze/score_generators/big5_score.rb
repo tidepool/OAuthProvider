@@ -54,6 +54,7 @@ module TidepoolAnalyze
         # 1. Pick the min value
         # 2. If min_value < 0, add abs(min_value) to all values
         # 3. Multiply all values by 10 
+        adjust_by = 0
         adjust_by = low_big5_value.abs if (low_big5_value < 0)
         big5_scores.each do |dimension, value|
           big5_scores[dimension] = (value + adjust_by) * 10
