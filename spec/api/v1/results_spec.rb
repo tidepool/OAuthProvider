@@ -13,7 +13,7 @@ describe 'Results API' do
   let(:admin) { create(:admin) }
   let(:profile_def) { create(:profile_game)}
   let(:non_profile_def) { create(:other_game)}
-  let(:game) { create(:game, user: user1) }
+  let(:game) { create(:game, user: user1, status: :in_progress) }
   let(:game_no_results) { create(:game, {user: user1, status: :no_results}) }
   let(:profile_game_with_results) { create(:game, {user: user1, status: :results_ready, definition: profile_def}) }
   let(:non_profile_game_with_results) { create(:game, {user: user1, status: :results_ready, definition: non_profile_def}) }

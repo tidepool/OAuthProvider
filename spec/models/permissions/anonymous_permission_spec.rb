@@ -6,7 +6,8 @@ module Permissions
     let(:games) { "#{controller_prefix}/games" }
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
-    
+    let(:recommendations) { "#{controller_prefix}/recommendations" }
+
     let(:other_user) { create(:user) }
     let(:others_game) { create(:game, user: other_user) }
     subject { Permissions.permission_for(nil, other_user) }
@@ -35,6 +36,10 @@ module Permissions
       should allow(users, :create)
       should_not allow(users, :update, target_user)
       should_not allow(users, :destroy, target_user)
+    end
+
+    it 'allows recommendations' do 
+      should_not allow(recommendations, :latest)
     end
   end
 end

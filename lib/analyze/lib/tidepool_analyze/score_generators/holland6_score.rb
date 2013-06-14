@@ -42,12 +42,11 @@ module TidepoolAnalyze
           min_holland6_value = value if value < min_holland6_value
         end
 
-        # Adjust the numbers so that the big5 scores are distributed > 0 
+        # Adjust the numbers so that the holland6 scores are distributed >= (1 * 10) 
         # 1. Pick the min value
-        # 2. If min_value < 0, add abs(min_value) to all values
-        # 3. Multiply all values by 10 
-        
-        adjust_by = min_holland6_value.abs if min_holland6_value < 0
+        # 2. Add abs(min_value) + 1 to all values 
+        # 3. Multiply all values by 10      
+        adjust_by = min_holland6_value.abs + 1
         holland6_scores.each do |dimension, value|
           holland6_scores[dimension] = (value + adjust_by) * 10
         end

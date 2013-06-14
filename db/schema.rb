@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130612165220) do
+ActiveRecord::Schema.define(version: 20130613221409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,7 +116,6 @@ ActiveRecord::Schema.define(version: 20130612165220) do
     t.integer  "definition_id"
     t.integer  "user_id"
     t.text     "stages"
-    t.boolean  "results_ready"
     t.integer  "stage_completed"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -197,6 +196,19 @@ ActiveRecord::Schema.define(version: 20130612165220) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  create_table "recommendations", force: true do |t|
+    t.string   "big5_dimension", null: false
+    t.string   "link_type"
+    t.string   "icon_url"
+    t.string   "sentence"
+    t.string   "link_title"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recommendations", ["big5_dimension"], name: "index_recommendations_on_big5_dimension", using: :btree
 
   create_table "results", force: true do |t|
     t.integer  "game_id",              null: false
