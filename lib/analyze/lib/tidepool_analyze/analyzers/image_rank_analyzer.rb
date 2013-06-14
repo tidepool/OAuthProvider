@@ -44,7 +44,7 @@ module TidepoolAnalyze
           when 'image_ranked'
           when 'image_rank_cleared'
           else
-            puts "Wrong Event: #{entry}"
+            puts "Unknown Event: #{entry}"
           end
         end
       end

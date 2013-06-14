@@ -131,7 +131,7 @@ module TidepoolAnalyze
               :expected => false              
               })
           else
-            puts "Wrong Event: #{entry}"
+            puts "Unknown Event: #{entry}"
           end
         end
       end
