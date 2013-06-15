@@ -1,7 +1,7 @@
 
 define([], function() {
   return require.config({
-    packages: ['core', 'game/levels/rank_images', 'game/levels/circle_proximity'],
+    packages: ['core', 'game/levels/reaction_time_disc', 'game/levels/rank_images', 'game/levels/circle_size', 'game/levels/circle_proximity'],
     paths: {
       Handlebars: "bower_components/require-handlebars-plugin/Handlebars",
       underscore: "bower_components/underscore-amd/underscore",
@@ -11,12 +11,9 @@ define([], function() {
       syphon: 'bower_components/backbone.syphon/lib/amd/backbone.syphon',
       text: "bower_components/requirejs-text/text",
       toastr: "bower_components/toastr",
+      chart: "bower_components/Chart.js/Chart.min",
       nested_view: "scripts/vendor/nested_view",
       bootstrap: "scripts/vendor/bootstrap",
-      chart: "scripts/vendor/Chart",
-      assessments: "scripts/views/assessments",
-      dashboard: "scripts/views/dashboard",
-      components: "scripts/views/components",
       results: "scripts/views/results",
       routers: "scripts/routers",
       models: "scripts/models",
