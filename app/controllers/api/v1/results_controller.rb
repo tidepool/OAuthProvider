@@ -52,21 +52,21 @@ class Api::V1::ResultsController < Api::V1::ApiController
     status = current_resource && current_resource.status.to_sym
     result_response = {}    
     case status
-    when :not_started
-      # This is an error we need to first start the game
-      result_response = {
-        body: {
-          status: {
-            state: :error,
-            message: 'Game has not been started, results can not be calculated'
-          }
-        },
-        header: {
-          http_status: :precondition_failed,
-          location: ''
-        }
-      }
-    when :completed, :in_progress
+    # when :not_started
+    #   # This is an error we need to first start the game
+    #   result_response = {
+    #     body: {
+    #       status: {
+    #         state: :error,
+    #         message: 'Game has not been started, results can not be calculated'
+    #       }
+    #     },
+    #     header: {
+    #       http_status: :precondition_failed,
+    #       location: ''
+    #     }
+    #   }
+    when :completed, :in_progress, :not_started
       # TODO: We need to enforce that game is not in-progress state
       # We will change this later. For now we are treating :in_progress same as
       # :completed
