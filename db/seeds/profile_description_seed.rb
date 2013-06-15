@@ -20,14 +20,15 @@ class ProfileDescriptionSeed
 
       CSV.foreach(profile_path, :encoding => 'windows-1251:utf-8') do |row|
         profile_attr = {}
-        profile_attr[:description] = []
+        profile_attr[:description] = ""
         profile_attr[:bullet_description] = []
         row.each_with_index do |value, i|
           case i
             when 0..3
               profile_attr[attributes[i]] = value
             when 4..6
-              profile_attr[:description] << value
+              # profile_attr[:description] << value
+              profile_attr[:description] += value + "\n\n"
             when 7
               profile_attr[attributes[i]] = value
             when 8..10
@@ -36,7 +37,11 @@ class ProfileDescriptionSeed
               #Ignore
           end
         end
-        profile_attr[:logo_url] = "#{profile_attr[:name]}.png"
+        name = profile_attr[:name]
+        filename = name.gsub(/ /, '-').gsub(/\'/, '')
+        display_id = filename.downcase
+        profile_attr[:logo_url] = "#{filename}.png"
+        profile_attr[:display_id] = display_id
         profile = ProfileDescription.create(profile_attr)
         print '.'
       end
