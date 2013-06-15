@@ -21,61 +21,140 @@ class Api::V1::ResultsController < Api::V1::ApiController
   end
 
   def create
-    # Trigger the calculation in the backend
-    ResultsCalculator.perform_async(current_resource.id)
+    result_response = determine_result_response
+
+    if result_response[:header][:http_status] == :accepted
+      # Change the state of the game to :calculating_results
+      current_resource.status = :calculating_results
+      current_resource.save
+
+      # Trigger the calculation in the backend
+      ResultsCalculator.perform_async(current_resource.id)
+    end
+
     respond_to do |format|
-      response_body = {
-        :status => {
-          :state => :pending,
-          :link => api_v1_user_game_progress_url,
-          :message => 'Results are being calculated.'
-        }
-      }
-      format.json { render :json => response_body, :status => :accepted }
+      format.json { render :json => result_response[:body], :status => result_response[:header][:http_status] }
     end
   end
 
   def progress
-    http_status = :ok
-    response_body = {}
-    location = api_v1_user_game_progress_url
-    if current_resource.status == :results_ready.to_s
-      response_body = {
-        :status => {
-          :state => :done,
-          :link => api_v1_user_game_result_url,
-          :message => 'Results are ready.'
-        }
-      }
-      location = api_v1_user_game_result_url
-      http_status = :ok
-    elsif current_resource.status == :no_results.to_s
-      response_body = {
-        :status => {
-          :state => :error,
-          :link => api_v1_user_game_result_url,
-          :message => 'Error calculating results'
-        }
-      }
-      http_status = :ok
-    else
-      response_body = {
-        :status => {
-          :state => :pending,
-          :link => api_v1_user_game_progress_url,
-          :message => 'Results are still being calculated'
-        }
-      }
-      http_status = :ok
-    end
+    result_response = determine_result_response
 
     respond_to do |format|
-      format.json { render :json => response_body, 
-        :status => http_status, :location => location}
+      format.json { render :json => result_response[:body], 
+        :status => result_response[:header][:http_status], :location => result_response[:header][:location]}
     end
   end
 
   protected
+
+  def determine_result_response
+    status = current_resource && current_resource.status.to_sym
+    result_response = {}    
+    case status
+    when :not_started
+      # This is an error we need to first start the game
+      result_response = {
+        body: {
+          status: {
+            state: :error,
+            message: 'Game has not been started, results can not be calculated'
+          }
+        },
+        header: {
+          http_status: :precondition_failed,
+          location: ''
+        }
+      }
+    when :completed, :in_progress
+      # TODO: We need to enforce that game is not in-progress state
+      # We will change this later. For now we are treating :in_progress same as
+      # :completed
+      result_url = api_v1_user_game_progress_url
+      result_response = {
+        body: {
+          status: {
+            state: :pending,
+            link: result_url,
+            message: 'Starting to calculate results.'
+          }
+        },
+        header: {
+          http_status: :accepted,
+          location: result_url
+        }
+      }
+    when :calculating_results
+      result_url = api_v1_user_game_progress_url
+      result_response = {
+        body: {
+          status: {
+            state: :pending,
+            link: result_url,
+            message: 'Results are still being calculated.'
+          }
+        },
+        header: {
+          http_status: :ok,
+          location: result_url
+        }
+      }
+    when :results_ready      
+      result_url = result_url(current_resource)
+      result_response = {
+        body: {
+          status: {
+            state: :done,
+            link: result_url,
+            message: 'Results are ready.'
+          }
+        },
+        header: {
+          http_status: :ok,
+          location: result_url
+        }
+      }
+    when :no_results
+      result_url = api_v1_user_game_result_url
+      result_response = {
+        body: {
+          status: {
+            state: :error,
+            link: result_url,
+            message: 'Error calculating results.'
+          }
+        },
+        header: {
+          http_status: :ok,
+          location: result_url
+        }
+      }
+    else
+      logger.error("Game #{params[:game_id]} does not exist or unknown status.")
+      result_response = {
+        body: {
+          status: {
+            state: :error,
+            message: 'Game does not exist, or in unknown status'
+          }
+        },
+        header: {
+          http_status: :bad_request,
+          location: ''
+        }
+      }
+    end
+    result_response
+  end
+
+  def result_url(resource)
+    if current_resource.calculates_personality?
+      result_url = api_v1_user_personality_url
+    else
+      result_url = api_v1_user_game_result_url
+    end
+    result_url
+  end  
 
   def current_resource 
     @game ||= Game.find(params[:game_id]) if params[:game_id]

@@ -21,6 +21,14 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
+  def personality
+    user = current_resource
+
+    respond_to do |format|
+      format.json { render :json => user.personality }
+    end
+  end
+
   def create
     # binding.pry_remote
     user = User.create_guest_or_registered!(user_attributes)
@@ -66,6 +74,13 @@ class Api::V1::UsersController < Api::V1::ApiController
       @user ||= caller
     elsif params[:id]
       @user ||= User.find(params[:id])
+    elsif params[:user_id]
+      user_id = params[:user_id]
+      if user_id && user_id == '-'
+        @user = caller
+      elsif user_id 
+        @user = User.find(params[:user_id])
+      end
     else
       @user = nil
     end

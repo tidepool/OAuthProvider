@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /.+@.+\..+/i
   validates :password, :length => { :minimum => 8 }, :if => :needs_password?
 
-  belongs_to :profile_description
+  has_one :personality
+  # belongs_to :profile_description
   has_many :authentications
 
   def self.create_guest_or_registered(attributes)

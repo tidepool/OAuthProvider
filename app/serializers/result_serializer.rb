@@ -1,5 +1,4 @@
 class ResultSerializer < ActiveModel::Serializer
-  attributes :id, :aggregate_results, :scores, :game_id, :intermediate_results
+  attributes :id, :aggregate_results, :intermediate_results, :game_id
 
-  has_one :profile_description
 end

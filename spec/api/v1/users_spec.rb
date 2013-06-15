@@ -12,6 +12,8 @@ describe 'Users API' do
   let(:user2) { create(:user) }
   let(:guest) { create(:guest) }
   let(:admin) { create(:admin) }
+  let(:personality) { create(:personality) }
+  let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
 
   it 'shows the users own information' do    
@@ -66,6 +68,32 @@ describe 'Users API' do
     user_info = JSON.parse(response.body, symbolize_names: true)
     user_info[:guest].should == false
     user_info[:email].should == user_params[:email]
+  end
+
+  it 'gets a users personality when user_id is specified' do
+    personality 
+    token = get_conn(user3)
+    response = token.get("#{@endpoint}/users/#{user3.id}/personality.json")
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:big5_dimension].should == personality.big5_dimension
+    user_info[:holland6_dimension].should == personality.holland6_dimension
+    user_info[:big5_high].should == personality.big5_high
+    user_info[:big5_low].should == personality.big5_low
+    user_info[:big5_score].should == personality.big5_score.symbolize_keys
+    user_info[:holland6_score].should == personality.holland6_score.symbolize_keys
+  end
+
+  it 'gets a users personality when user_id is -' do
+    personality 
+    token = get_conn(user3)
+    response = token.get("#{@endpoint}/users/-/personality.json")
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:big5_dimension].should == personality.big5_dimension
+    user_info[:holland6_dimension].should == personality.holland6_dimension
+    user_info[:big5_high].should == personality.big5_high
+    user_info[:big5_low].should == personality.big5_low
+    user_info[:big5_score].should == personality.big5_score.symbolize_keys
+    user_info[:holland6_score].should == personality.holland6_score.symbolize_keys
   end
 
   describe 'Error and Edge Cases' do

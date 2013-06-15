@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130523190530) do
+ActiveRecord::Schema.define(version: 20130615013346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,11 +116,11 @@ ActiveRecord::Schema.define(version: 20130523190530) do
     t.integer  "definition_id"
     t.integer  "user_id"
     t.text     "stages"
-    t.boolean  "results_ready"
     t.integer  "stage_completed"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "status"
+    t.string   "calling_ip"
   end
 
   create_table "images", force: true do |t|
@@ -170,6 +170,20 @@ ActiveRecord::Schema.define(version: 20130523190530) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "personalities", force: true do |t|
+    t.integer  "profile_description_id"
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.text     "big5_score"
+    t.text     "holland6_score"
+    t.string   "big5_dimension"
+    t.string   "holland6_dimension"
+    t.string   "big5_low"
+    t.string   "big5_high"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "profile_descriptions", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -181,16 +195,28 @@ ActiveRecord::Schema.define(version: 20130523190530) do
     t.string   "logo_url"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "display_id"
   end
 
+  create_table "recommendations", force: true do |t|
+    t.string   "big5_dimension", null: false
+    t.string   "link_type"
+    t.string   "icon_url"
+    t.string   "sentence"
+    t.string   "link_title"
+    t.string   "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recommendations", ["big5_dimension"], name: "index_recommendations_on_big5_dimension", using: :btree
+
   create_table "results", force: true do |t|
-    t.integer  "game_id",                null: false
+    t.integer  "game_id",              null: false
     t.text     "event_log"
     t.text     "intermediate_results"
-    t.text     "scores"
-    t.integer  "profile_description_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.text     "aggregate_results"
   end
 
@@ -226,13 +252,12 @@ ActiveRecord::Schema.define(version: 20130523190530) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "password_digest",        default: "",    null: false
-    t.boolean  "admin",                  default: false, null: false
-    t.boolean  "guest",                  default: false, null: false
-    t.integer  "profile_description_id"
+    t.string   "email",           default: "",    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "password_digest", default: "",    null: false
+    t.boolean  "admin",           default: false, null: false
+    t.boolean  "guest",           default: false, null: false
     t.string   "name"
     t.string   "display_name"
     t.string   "description"
@@ -244,6 +269,8 @@ ActiveRecord::Schema.define(version: 20130523190530) do
     t.string   "image"
     t.string   "gender"
     t.date     "date_of_birth"
+    t.string   "handedness"
+    t.string   "orientation"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -6,6 +6,7 @@ module Permissions
     let(:games) { "#{controller_prefix}/games" }
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
+    let(:recommendations) { "#{controller_prefix}/recommendations" }
 
 
     describe 'caller and target_user are the same user' do
@@ -26,8 +27,8 @@ module Permissions
         should allow(games, :index)
         should allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
+        # should allow(games, :latest_with_profile, game)
+        # should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
@@ -45,6 +46,11 @@ module Permissions
         should allow(users, :create, target_user)
         should allow(users, :update, target_user)
         should allow(users, :destroy, target_user)
+        should allow(users, :personality, target_user)
+      end
+
+      it 'allows recommendations' do
+        should allow(recommendations, :latest)
       end
     end
 
@@ -66,8 +72,8 @@ module Permissions
         should_not allow(games, :index)
         should_not allow(games, :latest, game)
         should_not allow(games, :latest, others_game)
-        should_not allow(games, :latest_with_profile, game)
-        should_not allow(games, :latest_with_profile, others_game)
+        # should_not allow(games, :latest_with_profile, game)
+        # should_not allow(games, :latest_with_profile, others_game)
       end
 
       it 'allows results' do
@@ -85,6 +91,11 @@ module Permissions
         should_not allow(users, :create, target_user)
         should_not allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
+        should_not allow(users, :personality, target_user)
+      end
+
+      it 'allows recommendations' do
+        should_not allow(recommendations, :latest)
       end
     end
 

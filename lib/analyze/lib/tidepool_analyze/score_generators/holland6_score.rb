@@ -26,6 +26,7 @@ module TidepoolAnalyze
           holland6_scores[dimension] = value / count if count > 0
         end
 
+        # Find the highest valued Holland6 Dimension
         holland6_value = 0
         holland6_dimension = :realistic
         holland6_scores.each do |dimension, value|
@@ -34,12 +35,27 @@ module TidepoolAnalyze
             holland6_value = value
           end
         end
+
+        # Find the lowest valued Holland6 Dimension
+        min_holland6_value = 100000
+        holland6_scores.each do |dimension, value|
+          min_holland6_value = value if value < min_holland6_value
+        end
+
+        # Adjust the numbers so that the holland6 scores are distributed >= (1 * 10) 
+        # 1. Pick the min value
+        # 2. Add abs(min_value) + 1 to all values 
+        # 3. Multiply all values by 10      
+        adjust_by = min_holland6_value.abs + 1
+        holland6_scores.each do |dimension, value|
+          holland6_scores[dimension] = (value + adjust_by) * 10
+        end
+
         final_score = "#{holland6_dimension.to_s}"
 
         {
-          friendly_name: 'Interests - Holland6',
           dimension: final_score,
-          score: holland6_scores
+          score: holland6_scores,
         }
       end
     end

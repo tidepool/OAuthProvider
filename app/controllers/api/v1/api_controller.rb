@@ -5,7 +5,7 @@ class Api::V1::ApiController < ApplicationController
 
   def caller
     if doorkeeper_token
-      @caller ||= User.includes(:profile_description).find(doorkeeper_token.resource_owner_id)
+      @caller ||= User.find(doorkeeper_token.resource_owner_id)
     else
       @caller = nil
     end
@@ -24,7 +24,7 @@ class Api::V1::ApiController < ApplicationController
   end
 
   def authorize
-    # binding.remote_pry
+    
     if !current_permission.allow?(params[:controller], params[:action], current_resource)
       raise Api::V1::UnauthorizedError.new('Not Authorized')
     end
