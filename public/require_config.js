@@ -12,6 +12,7 @@ define([], function() {
       text: "bower_components/requirejs-text/text",
       toastr: "bower_components/toastr",
       chart: "bower_components/Chart.js/Chart.min",
+      markdown: 'bower_components/markdown/lib/markdown',
       nested_view: "scripts/vendor/nested_view",
       bootstrap: "scripts/vendor/bootstrap",
       results: "scripts/views/results",
@@ -29,6 +30,9 @@ define([], function() {
       },
       chart: {
         exports: "Chart"
+      },
+      markdown: {
+        exports: 'markdown'
       }
     }
   });
