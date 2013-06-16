@@ -56,6 +56,7 @@ describe User do
     expect(user.image).to eq("http://graph.facebook.com/1222/picture?type=square")
     expect(user.gender).to eq("male")
     expect(user.timezone).to eq(-7)
+    expect(user.guest).to eq(false)
 
     expect(user.authentications).not_to be_nil
     expect(user.authentications[0].email).to eq(user.email)    
@@ -67,6 +68,7 @@ describe User do
     expect(user.email).to eq(user1.email)
     expect(user.authentications[0].email).to eq(@facebook_hash.info.email)
     expect(user.id).to eq(user1.id)
+    expect(user.guest).to eq(false)
   end
 
   it 'attaches the new authentication to a guest and guest becomes registered' do
@@ -91,6 +93,7 @@ describe User do
     user = User.create_or_find(@test_hash)
 
     expect(user.id).to eq(user3.id)
+    expect(user.guest).to eq(false)
   end
 
   it 'returns the existing user if there is an existing authentication and ignores the guest' do 
