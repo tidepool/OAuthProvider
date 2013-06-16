@@ -7,6 +7,7 @@ module Permissions
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
     let(:recommendations) { "#{controller_prefix}/recommendations" }
+    let(:preorders) { "#{controller_prefix}/preorders" }
 
     describe 'caller and target_user are the same user' do
       let(:user) { create(:guest) }
@@ -45,10 +46,15 @@ module Permissions
         should_not allow(users, :create, target_user)
         should allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
+        should allow(users, :personality, target_user)
       end
 
       it 'allows recommendations' do 
         should_not allow(recommendations, :latest)
+      end
+
+      it 'allows preorders' do
+        should_not allow(preorders, :create)
       end
 
     end
@@ -88,10 +94,15 @@ module Permissions
         should_not allow(users, :create, target_user)
         should_not allow(users, :update, target_user)
         should_not allow(users, :destroy, target_user)
+        should_not allow(users, :personality, target_user)
       end
 
       it 'allows recommendations' do 
         should_not allow(recommendations, :latest)
+      end
+
+      it 'allows preorders' do
+        should_not allow(preorders, :create)
       end
 
     end

@@ -77,13 +77,14 @@ class Api::V1::UsersController < Api::V1::ApiController
     elsif params[:user_id]
       user_id = params[:user_id]
       if user_id && user_id == '-'
-        @user = caller
+        @user ||= caller
       elsif user_id 
-        @user = User.find(params[:user_id])
+        @user ||= User.find(params[:user_id])
       end
     else
       @user = nil
     end
+    @user
   end
 
   def user_attributes

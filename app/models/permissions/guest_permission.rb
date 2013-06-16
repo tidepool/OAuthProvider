@@ -27,9 +27,10 @@ module Permissions
           game.user_id == caller.id 
         end
 
-        allow @users, [:show, :update] do |user|
+        allow @users, [:show, :update, :personality] do |user|
           user.id == caller.id 
         end
+
       end
     end
   end

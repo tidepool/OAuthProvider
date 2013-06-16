@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_one :personality
   # belongs_to :profile_description
   has_many :authentications
+  has_many :preorders
 
   def self.create_guest_or_registered(attributes)
     begin

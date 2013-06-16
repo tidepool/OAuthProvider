@@ -23,6 +23,8 @@ module Permissions
         end
 
         allow @recommendations, :latest
+
+        allow @preorders, :create
       end
     end
   end

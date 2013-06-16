@@ -144,64 +144,6 @@
                         "trait2" : "Thorough",
                         "size" : "5"
                     }]
-            },
-            {
-                "friendly_name" : "Circles 4",
-                "instructions" : ["Here are a number of psychological traits that may or may not describe you. Simply collapse or expand each circle to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each of the five circles in position to the new circle representing your self.<br/>Place each trait anywhere on the screen so that it best represents how important that trait is to your self.",
-                    "When you are ready hit button below to exit this stage."
-                ],
-                "view_name" : "CirclesTest",
-                "game_type" : "emo8",
-                "circles" : [{
-                        "trait1" : "Anger",
-                        "trait2" : "Annoyance",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Disgust",
-                        "trait2" : "Boredom",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Sadness",
-                        "trait2" : "Blue",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Surprise",
-                        "trait2" : "Tickled",
-                        "size" : "5"
-                    }]
-            },
-            {
-                "friendly_name" : "Circles 5",
-                "instructions" : ["Here are a number of psychological traits that may or may not describe you. Simply collapse or expand each circle to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each of the five circles in position to the new circle representing your self.<br/>Place each trait anywhere on the screen so that it best represents how important that trait is to your self.",
-                    "When you are ready hit button below to exit this stage."
-                ],
-                "view_name" : "CirclesTest",
-                "game_type" : "emo8",
-                "circles" : [{
-                        "trait1" : "Fear",
-                        "trait2" : "Apprehension",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Trust",
-                        "trait2" : "Acceptance",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Happiness",
-                        "trait2" : "Satisfaction",
-                        "size" : "5"
-                    },
-                    {
-                        "trait1" : "Anticipation",
-                        "trait2" : "Interest",
-                        "size" : "5"
-                    }]
             }
         ]
 }

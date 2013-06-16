@@ -8,6 +8,7 @@ module Permissions
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
     let(:recommendations) { "#{controller_prefix}/recommendations" }
+    let(:preorders) { "#{controller_prefix}/preorders" }
     
     let(:user) { create(:admin) }
     let(:other_user) { create(:user) } 
@@ -26,8 +27,6 @@ module Permissions
       should allow(games, :index)
       should allow(games, :latest, game)
       should allow(games, :latest, others_game)
-      should allow(games, :latest_with_profile, game)
-      should allow(games, :latest_with_profile, others_game)
     end
 
     it 'allows results' do
@@ -45,10 +44,15 @@ module Permissions
       should allow(users, :create, target_user)
       should allow(users, :update, target_user)
       should allow(users, :destroy, target_user)
+      should allow(users, :personality, target_user)
     end
 
     it 'allows recommendations' do
       should allow(recommendations, :latest)
+    end
+
+    it 'allows preorders' do
+      should allow(preorders, :create)
     end
 
   end
