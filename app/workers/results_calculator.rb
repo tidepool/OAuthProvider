@@ -41,7 +41,6 @@ class ResultsCalculator
       logger.error("Game #{game_id} result not saved, user_events still in Redis")
       return
     end
-
     analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
     
     analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)

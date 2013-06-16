@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130615013346) do
+ActiveRecord::Schema.define(version: 20130615225625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 20130615013346) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
+  add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "data_source_settings", force: true do |t|
     t.integer  "user_id"
@@ -123,6 +127,8 @@ ActiveRecord::Schema.define(version: 20130615013346) do
     t.string   "calling_ip"
   end
 
+  add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
+
   create_table "images", force: true do |t|
     t.string   "name"
     t.text     "elements"
@@ -184,6 +190,12 @@ ActiveRecord::Schema.define(version: 20130615013346) do
     t.datetime "updated_at"
   end
 
+  create_table "preorders", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "profile_descriptions", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -198,6 +210,9 @@ ActiveRecord::Schema.define(version: 20130615013346) do
     t.string   "display_id"
   end
 
+  add_index "profile_descriptions", ["big5_dimension"], name: "index_profile_descriptions_on_big5_dimension", using: :btree
+  add_index "profile_descriptions", ["holland6_dimension"], name: "index_profile_descriptions_on_holland6_dimension", using: :btree
+
   create_table "recommendations", force: true do |t|
     t.string   "big5_dimension", null: false
     t.string   "link_type"
@@ -207,6 +222,7 @@ ActiveRecord::Schema.define(version: 20130615013346) do
     t.string   "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "display_id"
   end
 
   add_index "recommendations", ["big5_dimension"], name: "index_recommendations_on_big5_dimension", using: :btree

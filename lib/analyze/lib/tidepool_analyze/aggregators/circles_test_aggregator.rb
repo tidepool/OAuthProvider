@@ -13,9 +13,11 @@ module TidepoolAnalyze
         raw_results_by_type = {}
         @raw_results.each do |entry|
           stage_no = entry[:stage].to_i
-          game_type = @stages[stage_no][:game_type.to_s].downcase
-          raw_results_by_type[game_type.to_sym] = [] if raw_results_by_type[game_type.to_sym].nil?
-          raw_results_by_type[game_type.to_sym] |= entry[:results]
+          if @stages[stage_no]
+            game_type = @stages[stage_no][:game_type.to_s].downcase
+            raw_results_by_type[game_type.to_sym] = [] if raw_results_by_type[game_type.to_sym].nil?
+            raw_results_by_type[game_type.to_sym] |= entry[:results]
+          end
         end
         raw_results_by_type
       end

@@ -13,11 +13,6 @@ class ProfileDescriptionSeed
       attributes = [:big5_dimension, :holland6_dimension, :code, :name, :p1, :p2, :p3, :one_liner, :b1, :b2, :b3]
       puts 'Creating ProfileDescriptions'
 
-      # TODO: This is very inefficient for a large number of records
-      # For now we are creating these by seeding, but we should have a 
-      # better way of loading in recommendation in batch.
-      ProfileDescription.destroy_all
-
       CSV.foreach(profile_path, :encoding => 'windows-1251:utf-8') do |row|
         profile_attr = {}
         profile_attr[:description] = ""
@@ -42,7 +37,8 @@ class ProfileDescriptionSeed
         display_id = filename.downcase
         profile_attr[:logo_url] = "#{filename}.png"
         profile_attr[:display_id] = display_id
-        profile = ProfileDescription.create(profile_attr)
+        profile = ProfileDescription.where(display_id: display_id).first_or_initialize(profile_attr)
+        profile.save
         print '.'
       end
       puts
