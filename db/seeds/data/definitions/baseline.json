@@ -1,42 +1,19 @@
 {
     "name" : "Baseline game",
+    "unique_name": "baseline",
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["big5", "holland6", "reaction_time"],
+    "score_names" : ["big5", "holland6"],
     "calculates" : ["scores", "profile"],
     "result_view": "Profile",
     "stages" :
         [
             {
-                "friendly_name" : "Reaction Time 1",
-                "instructions" : "Click the circle on the screen as soon as it turns red.",
-                "view_name": "ReactionTime",
-                "game_type" : "cognition",
-                "colors": ["red", "yellow", "green"],
-                "sequence_type": "simple",
-                "number_of_reds": "3",
-                "interval_floor": "500",
-                "interval_ceil": "1500",
-                "limit_to": "15"
-            },
-            {
-                "friendly_name" : "Reaction Time 2",
-                "instructions" : "Click the red circle only when it appears AFTER a yellow circle.",
-                "view_name": "ReactionTime",
-                "game_type" : "cognition",
-                "colors": ["red", "yellow", "green"],
-                "sequence_type": "complex",
-                "number_of_reds": "3",
-                "interval_floor": "500",
-                "interval_ceil": "1500",
-                "limit_to": "15"
-            },
-            {
                 "friendly_name" : "Image Ranking 1",
                 "instructions" : "Pick your favorite picture and rank them in order.",
                 "view_name" : "ImageRank",
                 "game_type" : "big5",
-                "image_sequence" : ["F1a", "F1b", "F1c", "F1d", "F1e"]
+                "image_sequence" : ["F2a", "F2b", "F2c", "F2d", "F2e"]
             },
             {
                 "friendly_name" : "Circles 1",
@@ -49,28 +26,35 @@
                 "circles" : [{
                         "trait1" : "Self-Disciplined",
                         "trait2" : "Persistent",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Anxious",
                         "trait2" : "Dramatic",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Curious",
                         "trait2" : "Cultured",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Sociable",
                         "trait2" : "Adventurous",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Cooperative",
                         "trait2" : "Friendly",
-                        "size" : "5"
+                        "size" : "2"
                     }]
+            },
+            {
+                "friendly_name" : "Image Ranking 2",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F4a", "F4b", "F4c", "F4d", "F4e"]
             },
             {
                 "friendly_name" : "Circles 2",
@@ -83,27 +67,27 @@
                 "circles" : [{
                         "trait1" : "Independent",
                         "trait2" : "Aloof",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Self-Reflective",
                         "trait2" : "Reserved",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Disorganized",
                         "trait2" : "Unconventional",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Calm",
                         "trait2" : "Consistent",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Adamant",
                         "trait2" : "Focused",
-                        "size" : "5"
+                        "size" : "2"
                     }]
             },
             {
@@ -117,35 +101,48 @@
                 "circles" : [{
                         "trait1" : "Mechanical",
                         "trait2" : "Hands-on",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Creative",
                         "trait2" : "Intuitive",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Teacher",
                         "trait2" : "Helpful",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Persuasive",
                         "trait2" : "Enthusiastic",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Inquisitive",
                         "trait2" : "Analytical",
-                        "size" : "5"
+                        "size" : "2"
                     },
                     {
                         "trait1" : "Detail-Oriented",
                         "trait2" : "Thorough",
-                        "size" : "5"
+                        "size" : "2"
                     }]
+            },
+            {
+                "friendly_name" : "Image Ranking 3",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F7a", "F7b", "F7c", "F7d", "F7e"]
+            },
+            {
+                "friendly_name" : "Image Ranking 4",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F8a", "F8b", "F8c", "F8d", "F8e"]
             }
         ]
 }
 
-        

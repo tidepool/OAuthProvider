@@ -20,7 +20,7 @@ describe ResultsCalculator do
     let(:guest) { create(:guest) }
 
     before(:each) do
-      definition = Definition.where('name = ?', 'Baseline game').first
+      definition = Definition.where(unique_name: 'baseline').first
       @game  = Game.create_by_definition(definition, guest)
 
       events_json = IO.read(File.expand_path('../../fixtures/test_event_log.json', __FILE__))
@@ -69,7 +69,7 @@ describe ResultsCalculator do
     let(:user) { create(:user) }
 
     before(:each) do
-      definition = Definition.where('name = ?', 'Baseline game').first
+      definition = Definition.where(unique_name: 'baseline').first
       @game  = Game.create_by_definition(definition, user)
 
       events_json = IO.read(File.expand_path('../../fixtures/test_event_log.json', __FILE__))

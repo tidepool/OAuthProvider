@@ -42,7 +42,9 @@ module TidepoolAnalyze
           @results << result
         end
 
-        distance_rank = 1
+        # Consistent ranges for size and distance rank -> [0..4]
+        # This change required us to change the means in circles.csv to be mean - 1
+        distance_rank = 0 # Changed this to start from 0.
         @results.sort {|p1, p2| p1[:distance] <=> p2[:distance] }.each do |result| 
           result[:distance_rank] = distance_rank
           distance_rank += 1

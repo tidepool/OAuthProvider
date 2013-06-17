@@ -34,16 +34,16 @@ describe 'Game API' do
   it 'creates a game with a def_id in the parameters' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
-      { body: { definition_id: 1} })
+      { body: { def_id: 'baseline' } })
     response.status.should == 200
     game_result = JSON.parse(response.body, symbolize_names: true)
-    game_result[:definition][:id].should == 1
+    game_result[:definition][:unique_name].should == 'baseline'
   end
 
   it 'records the ip of the caller when the game is created' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
-      { body: { definition_id: 1} })
+      { body: { def_id: 'baseline' } })
     response.status.should == 200
     game_result = JSON.parse(response.body, symbolize_names: true)
     game_result[:id].should_not be_nil
