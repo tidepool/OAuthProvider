@@ -47,19 +47,22 @@ class User < ActiveRecord::Base
 
   def self.create_or_find!(auth_hash, user_id = nil)
     user = nil
-    # binding.remote_pry
 
     # First check if the authentication already exists:
     authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
     if authentication
       user = authentication.user
+      if user.guest
+        # Ensure that user is not guest
+        user.guest = false
+        user.save
+      end
     else
       if user_id      
         # We are trying to add the new authentication by provider to the user (The user can be a guest)
         user = User.where('id = ?', user_id).first
         if user 
           user.populate_from_auth_hash!(auth_hash)
-          user.guest = false # The user is no longer a guest
         end
       else
         # The user does not exist (even no guest existed that needs mutation)
@@ -90,8 +93,8 @@ class User < ActiveRecord::Base
   end
 
   def update_attributes!(attributes)
-    super
     self.guest = false # The user is no longer a guest
+    super
   end
 
   def populate_from_auth_hash!(auth_hash)
@@ -112,6 +115,9 @@ class User < ActiveRecord::Base
     # http://stackoverflow.com/questions/11917340/how-can-i-sometimes-require-password-and-sometimes-not-with-has-secure-password
     self.password = self.password_confirmation = "12345678"
     self.password_digest = "external-authorized account"
+
+    # At this point user is no longer guest
+    self.guest = false
     self.save!
   end
 
