@@ -90,6 +90,7 @@ describe 'Results API' do
     response = token.get("#{@endpoint}/users/-/games/#{non_profile_game_with_results.id}/result.json")
     response.status.should == 200
     results = JSON.parse(response.body, :symbolize_names => true)
+    # results[:status][:state].should == :done.to_s
     intermediate_results = JSON.parse(results[:intermediate_results])
     intermediate_results['message'].should == 'Hello World'
     aggregate_results = JSON.parse(results[:aggregate_results])

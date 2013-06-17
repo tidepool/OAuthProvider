@@ -9,8 +9,9 @@ class Api::V1::ResultsController < Api::V1::ApiController
       response_body = current_resource.result
     else
       response_body = {
-        :status => {
-          :message => 'Results not calculated for this game'
+        status: {
+          state: :error,
+          message: 'Results not calculated for this game.'
         }
       }
       status = :not_found
