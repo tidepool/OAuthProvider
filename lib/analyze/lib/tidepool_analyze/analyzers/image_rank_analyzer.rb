@@ -9,6 +9,9 @@ module TidepoolAnalyze
         process_events(events)
       end
       
+      # The image ranking comes in the range of [0..4]
+      # This is the correct behaviour:
+      # The lowest ranked image (4) will get a rank_multiplier 1
       def calculate_result
         elements = {}
         return elements if @final_rank.nil? or @final_rank.length != 5
