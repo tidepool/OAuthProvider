@@ -5,12 +5,13 @@ class Definition < ActiveRecord::Base
   serialize :score_names, JSON
   serialize :calculates, JSON
   
-
   def self.find_or_return_default(def_id)
-    begin
-      definition = self.find(def_id)
-    rescue ActiveRecord::RecordNotFound
-      definition = self.first
+    if def_id.nil?
+      def_id = 'baseline'
+    end
+    definition = self.where(unique_name: def_id).first
+    if definition.nil?
+      definition = self.where(unique_name: 'baseline').first 
     end
     definition
   end

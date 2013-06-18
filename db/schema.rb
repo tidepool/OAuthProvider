@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130615225625) do
+ActiveRecord::Schema.define(version: 20130617220447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,10 @@ ActiveRecord::Schema.define(version: 20130615225625) do
     t.text     "score_names"
     t.text     "calculates"
     t.string   "result_view"
+    t.string   "unique_name"
   end
+
+  add_index "definitions", ["unique_name"], name: "index_definitions_on_unique_name", unique: true, using: :btree
 
   create_table "elements", force: true do |t|
     t.string   "name"
