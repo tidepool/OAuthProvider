@@ -23,7 +23,6 @@ module TidepoolAnalyze
         result = holland6Score.calculate_score(@aggregate_results)
         result[:dimension].should_not be_nil
         result[:score].should_not be_nil
-        result[:friendly_name].should == 'Interests - Holland6'
         result[:dimension].should == 'artistic'
         result[:score].should == {
           realistic: 8,

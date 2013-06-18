@@ -38,28 +38,30 @@ module TidepoolAnalyze
         }
         
         @circles.each do |color, value|
-          result[color.to_sym] = {}
-          total_clicks_with_threshold, average_time_with_threshold = 
-            clicks_and_average_time(color, @TIME_THRESHOLD)
-          total_clicks, average_time =  clicks_and_average_time(color)
-          total_correct_clicks_with_threshold, average_correct_time_to_click = 0, 0
-          if @test_type == 'complex' and color == 'red'
-            total_correct_clicks_with_threshold, average_correct_time_to_click_w_threshold = 
-              clicks_and_average_time(color, @TIME_THRESHOLD, true)
-            total_correct_clicks, average_correct_time_to_click = 
-              clicks_and_average_time(color, 100000, true)
-          end              
+          if color
+            result[color.to_sym] = {}
+            total_clicks_with_threshold, average_time_with_threshold = 
+              clicks_and_average_time(color, @TIME_THRESHOLD)
+            total_clicks, average_time =  clicks_and_average_time(color)
+            total_correct_clicks_with_threshold, average_correct_time_to_click = 0, 0
+            if @test_type == 'complex' and color == 'red'
+              total_correct_clicks_with_threshold, average_correct_time_to_click_w_threshold = 
+                clicks_and_average_time(color, @TIME_THRESHOLD, true)
+              total_correct_clicks, average_correct_time_to_click = 
+                clicks_and_average_time(color, 100000, true)
+            end              
 
-          result[color.to_sym] = {
-            :total_clicks_with_threshold => total_clicks_with_threshold, 
-            :total_clicks => total_clicks,
-            :average_time_with_threshold => average_time_with_threshold,
-            :average_time => average_time,
-            :total_correct_clicks_with_threshold => total_correct_clicks_with_threshold,
-            :average_correct_time_to_click_w_threshold => average_correct_time_to_click_w_threshold,
-            :total_correct_clicks => total_correct_clicks,
-            :average_correct_time_to_click => average_correct_time_to_click
-          }
+            result[color.to_sym] = {
+              :total_clicks_with_threshold => total_clicks_with_threshold, 
+              :total_clicks => total_clicks,
+              :average_time_with_threshold => average_time_with_threshold,
+              :average_time => average_time,
+              :total_correct_clicks_with_threshold => total_correct_clicks_with_threshold,
+              :average_correct_time_to_click_w_threshold => average_correct_time_to_click_w_threshold,
+              :total_correct_clicks => total_correct_clicks,
+              :average_correct_time_to_click => average_correct_time_to_click
+            }
+          end
         end
         result
       end
@@ -108,28 +110,34 @@ module TidepoolAnalyze
             # We are using a Hash instead of an Array
             # We will look for each sequence in the event processing later on
             sequence_no = entry['sequence_no']
-            create_circles_entry(color, sequence_no, {
-              :shown_at => entry['record_time'],
-              :clicked => false,
-              :clicked_at => 0, 
-              :expected => true 
-              })
+            if color && sequence_no
+              create_circles_entry(color, sequence_no, {
+                :shown_at => entry['record_time'],
+                :clicked => false,
+                :clicked_at => 0, 
+                :expected => true 
+                })
+            end
           when 'correct_circle_clicked'
             color = entry['circle_color']
             sequence_no = entry['sequence_no']
-            create_circles_entry(color, sequence_no, {
-                :clicked => true,
-                :clicked_at => entry['record_time'],
-                :expected => true
-              })
+            if color && sequence_no
+              create_circles_entry(color, sequence_no, {
+                  :clicked => true,
+                  :clicked_at => entry['record_time'],
+                  :expected => true
+                })
+            end
           when 'wrong_circle_clicked'
             color = entry['circle_color']
             sequence_no = entry['sequence_no']
-            create_circles_entry(color, sequence_no, {
-              :clicked => true,
-              :clicked_at => entry['record_time'],
-              :expected => false              
-              })
+            if color && sequence_no
+              create_circles_entry(color, sequence_no, {
+                :clicked => true,
+                :clicked_at => entry['record_time'],
+                :expected => false              
+                })
+            end
           else
             puts "Wrong Event: #{entry}"
           end
