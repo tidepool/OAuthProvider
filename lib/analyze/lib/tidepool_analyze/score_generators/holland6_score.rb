@@ -27,7 +27,7 @@ module TidepoolAnalyze
         end
 
         # Find the highest valued Holland6 Dimension
-        holland6_value = 0
+        holland6_value = -100000
         holland6_dimension = :realistic
         holland6_scores.each do |dimension, value|
           if value > holland6_value

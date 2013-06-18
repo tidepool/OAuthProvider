@@ -31,7 +31,7 @@ module TidepoolAnalyze
         average_big5 = total_big5 / 5
 
         # Find the highest valued Big5 Dimension
-        high_big5_value = 0
+        high_big5_value = -100000
         high_big5_dimension = :openness
         big5_scores.each do |dimension, value|
           if value > high_big5_value
