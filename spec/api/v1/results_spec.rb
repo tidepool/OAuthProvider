@@ -19,6 +19,7 @@ describe 'Results API' do
   let(:non_profile_game_with_results) { create(:game, {user: user1, status: :results_ready, definition: non_profile_def}) }
   let(:result) { create(:result, game: non_profile_game_with_results) } 
 
+  let(:games_with_results) { create_list(:game_with_result, 10, user: user1)}
  
   it 'starts the results calculation' do 
     ResultsCalculator.stub(:performAsync) do |game_id|
@@ -95,6 +96,17 @@ describe 'Results API' do
     intermediate_results['message'].should == 'Hello World'
     aggregate_results = JSON.parse(results[:aggregate_results])
     aggregate_results['message'].should == 'Hello Aggregates'
+  end
+
+  it 'gets the results collection for a given user' do
+    games_with_results
+    results = Result.joins(:game).where('games.user_id' => user1.id)
+    results.length.should == 10
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/results.json")
+    response.status.should == 200
+    user_results = JSON.parse(response.body, :symbolize_names => true)
+    user_results[:results].length.should == 10
   end
 
   describe 'Error and Edge Cases' do

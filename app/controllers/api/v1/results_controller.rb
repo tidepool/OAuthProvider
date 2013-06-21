@@ -2,6 +2,13 @@ class Api::V1::ResultsController < Api::V1::ApiController
   doorkeeper_for :all
   respond_to :json
 
+  def index 
+    results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
+    respond_to do |format|
+      format.json { render :json => results, :status => status}
+    end    
+  end
+
   def show
     status = :ok
     response_body = {}
@@ -158,6 +165,10 @@ class Api::V1::ResultsController < Api::V1::ApiController
   end  
 
   def current_resource 
-    @game ||= Game.find(params[:game_id]) if params[:game_id]
+    if params[:action] == 'index'
+      target_user
+    else
+      @game ||= Game.find(params[:game_id]) if params[:game_id]
+    end
   end
 end

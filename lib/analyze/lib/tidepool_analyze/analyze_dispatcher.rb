@@ -12,37 +12,82 @@ module TidepoolAnalyze
       @circles = circles
     end
 
-    # score_names expected are: :big5, :holland6, :reaction_time
     def analyze(user_events, score_names)
-      modules = sort_events_to_modules(user_events)
-
-      # Analyze events per module with their corresponding analyzer
-      intermediate_results = intermediate_results(modules)
-
-      # Aggregate results of all occurrences of each module
-      aggregate_results = aggregate_results(intermediate_results)
-
-      # Calculate the scores for a given set of score names
-      scores = calculate_scores(aggregate_results, score_names)
-
-      {
-        :event_log => user_events,
-        :intermediate_results => intermediate_results,
-        :aggregate_results => aggregate_results,
-        :scores => scores
+      score_names_whitelist = { 
+        big5: 'big5',
+        holland6: 'holland6',
+        emo: 'emo',
+        reaction: 'reaction'
       }
+      mini_game_events = events_by_mini_game(user_events)
+
+      score_names.each do |score_name|
+        # Load the recipe for the score
+        scores = {}
+        if score_names_whitelist[score_name.to_sym]
+          recipe_json = IO.read(File.expand_path("../recipes/#{score_name}_recipe.json", __FILE__))
+          recipe = JSON.parse(recipe_json, symbolize_names: true)
+          klass_name = "TidepoolAnalyze::ScoreGenerator::#{score_name.to_s.camelize}Score"
+          
+          begin
+            score_generator = klass_name.constantize.new()
+            score = score_generator.generate(mini_game_events, recipe)
+            scores[score_name.to_sym] = score
+          rescue Exception => e
+            raise e
+          end
+        end
+        scores
+      end
     end
 
-    def sort_events_to_modules(user_events)
-      # Collect all events for each module
-      modules = {}
+    
+
+    def events_by_mini_game(user_events)
+      mini_game_events = {}
       user_events.each do |user_event|
-        module_name = "#{user_event['module']}:#{user_event['stage']}"
-        modules[module_name] = [] unless modules.has_key?(module_name)
-        modules[module_name] << user_event
-      end  
-      modules   
+        mini_game = user_event['module']
+        stage = user_event['stage']
+        mini_game_events[mini_game] = {} unless mini_game_events.has_key?(mini_game)
+        mini_game_events[mini_game][stage] = [] unless mini_game_events[mini_game].has_key?(stage)
+        mini_game_events[mini_game][stage] << user_event
+      end
     end
+
+
+
+    # # score_names expected are: :big5, :holland6, :reaction_time
+    # def analyze(user_events, score_names)
+    #   mini_games = events_by_mini_game(user_events)
+
+    #   # Analyze events per module with their corresponding analyzer
+    #   intermediate_results = intermediate_results(mini_games)
+
+    #   # Aggregate results of all occurrences of each module
+    #   aggregate_results = aggregate_results(intermediate_results)
+
+    #   # Calculate the scores for a given set of score names
+    #   scores = calculate_scores(aggregate_results, score_names)
+
+    #   {
+    #     :event_log => user_events,
+    #     :intermediate_results => intermediate_results,
+    #     :aggregate_results => aggregate_results,
+    #     :scores => scores
+    #   }
+    # end
+
+
+    # def events_by_mini_game(user_events)
+    #   # Collect all events for each module
+    #   mini_games = {}
+    #   user_events.each do |user_event|
+    #     mini_game = "#{user_event['module']}:#{user_event['stage']}"
+    #     mini_games[mini_game] = [] unless mini_games.has_key?(mini_game)
+    #     mini_games[mini_game] << user_event
+    #   end  
+    #   mini_games   
+    # end
 
     # Intermediate Results:
     #
@@ -69,16 +114,16 @@ module TidepoolAnalyze
     #   :circles_test => {
     #   }
     # }
-    def intermediate_results(modules)
+    def intermediate_results(mini_games)
       intermediate_results = {}
-      modules.each do |key, events|
-        module_name, stage = key.split(':')
-        klass_name = "TidepoolAnalyze::Analyzer::#{module_name.camelize}Analyzer"
+      mini_games.each do |key, events|
+        mini_game, stage = key.split(':')
+        klass_name = "TidepoolAnalyze::Analyzer::#{mini_game.camelize}Analyzer"
         begin
           analyzer = klass_name.constantize.new(events)
           result = analyzer.calculate_result()
-          intermediate_results[module_name.to_sym] = [] if intermediate_results[module_name.to_sym].nil?
-          intermediate_results[module_name.to_sym] << { stage: stage, results: result }
+          intermediate_results[mini_game.to_sym] = [] if intermediate_results[mini_game.to_sym].nil?
+          intermediate_results[mini_game.to_sym] << { stage: stage, results: result }
         rescue Exception => e
            raise e 
         end
@@ -90,13 +135,13 @@ module TidepoolAnalyze
     #
     def aggregate_results(intermediate_results)
       aggregate_results = {}
-      intermediate_results.each do |module_name, results_across_stages|
-        klass_name = "TidepoolAnalyze::Aggregator::#{module_name.to_s.camelize}Aggregator"
+      intermediate_results.each do |mini_game, results_across_stages|
+        klass_name = "TidepoolAnalyze::Aggregator::#{mini_game.to_s.camelize}Aggregator"
         begin
           aggregator = klass_name.constantize.new(results_across_stages, @stages)
           aggregator.elements = @elements if aggregator.respond_to?(:elements)
           aggregator.circles = @circles if aggregator.respond_to?(:circles)
-          aggregate_results[module_name] = aggregator.calculate_result
+          aggregate_results[mini_game] = aggregator.calculate_result
         rescue Exception => e
           raise e
         end

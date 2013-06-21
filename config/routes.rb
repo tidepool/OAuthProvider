@@ -27,6 +27,9 @@ OAuthProvider::Application.routes.draw do
         get 'games/latest', to: 'games#latest'
         post 'preorders', to: 'preorders#create'
 
+        get 'results', to: 'results#index'
+        get 'results/latest', to: 'results#latest'
+
         resources :games do
           get 'result' => 'results#show'
           post 'result' => 'results#create'

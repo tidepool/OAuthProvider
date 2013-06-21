@@ -33,11 +33,17 @@ module TidepoolAnalyze
           elsif result[:distance] <= self_circle_radius - circle_radius
             result[:overlap] = 1.0
           else
-            result[:total_radius] = total_radius
-            result[:circle_radius] = circle_radius
-            result[:self_circle_radius] = self_circle_radius
             result[:overlap_distance] = total_radius - result[:distance]
             result[:overlap] = (total_radius - result[:distance]) / (2 * circle_radius)
+          end
+          result[:total_radius] = total_radius
+          result[:circle_radius] = circle_radius
+          result[:self_circle_radius] = self_circle_radius
+          
+          if self_circle_radius && self_circle_radius != 0
+            result[:distance_standard] = result[:distance] / self_circle_radius
+          else
+            # Log this, very unexpected!
           end
           @results << result
         end
