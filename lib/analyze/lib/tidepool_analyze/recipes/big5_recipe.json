@@ -1,14 +1,16 @@
 [
   {
+    "user_event_source": "circles_test",
     "analyzer": "CirclesTestAnalyzer", 
     "formulator": "CirclesFormulator",  
-    "sheet_loader": "CirclesSheetLoader",    
-    "formula_sheet": "circles.csv"
+    "formula_sheet": "big5_circles.csv",
+    "formula_key": "name_pair"
   },
   {
+    "user_event_source": "image_rank",
     "analyzer": "ImageRankAnalyzer", 
-    "formulator": "ElementsFormulator",
-    "sheet_loader": "ElementsSheetLoader",      
-    "formula_sheet": "element_weights.csv"
+    "formulator": "ElementFormulator",
+    "formula_sheet": "elements.csv",
+    "formula_key": "name"
   }
 ]

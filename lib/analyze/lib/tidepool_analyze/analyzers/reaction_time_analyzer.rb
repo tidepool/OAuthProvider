@@ -5,7 +5,7 @@ module TidepoolAnalyze
 
       #threshold is used to figure out clicks within and total and then subtract out
 
-      def initialize(events)
+      def initialize(events, formula)
         @TIME_THRESHOLD = 200
         @circles = {}
         @start_time = 0

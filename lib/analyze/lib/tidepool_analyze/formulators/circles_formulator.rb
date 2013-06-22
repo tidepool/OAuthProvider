@@ -1,72 +1,102 @@
 module TidepoolAnalyze 
   module Formulator
     class CirclesFormulator
-      attr_accessor :circles, :raw_results, :stages
-
-      def initialize(raw_results, stages)
-        @raw_results = raw_results
-        @stages = stages
-        @circles = {}
+      # Input Data Format
+      # [
+      #   [
+      #     {
+      #       :trait1 => "Sociable",
+      #       :trait2 => "Adventurous",
+      #       :size => 3,
+      #       :distance_rank => 2,
+      #       :overlap => 0.34, 
+      #       :maps_to => 'big5'
+      #     },
+      #     ...
+      #   ],
+      #   [
+      #     {
+      #       :trait1 => "Independent",
+      #       :trait2 => "Aloof",
+      #       :size => 3,
+      #       :distance_rank => 2,
+      #       :overlap => 0.34, 
+      #       :maps_to => 'big5'
+      #     },
+      #     ...
+      #   ]
+      # ]
+      # Output Data Format
+      #   Depending on the big5 vs. holland6 outputs
+      #   If "big5":
+      #   {
+      #     extraversion: { weighted_total: 1,
+      #                     count: 1,
+      #                     average: 1 },
+      #     conscientiousness: {  weighted_total: 1,
+      #                           count: 1,
+      #                           average: 1 },
+      #     neuroticism: { weighted_total: 1,
+      #                    count: 1,
+      #                    average: 1 },
+      #     openness: { weighted_total: 1,
+      #                 count: 1,
+      #                 average: 1 },
+      #     agreeableness: { weighted_total: 1,
+      #                      count: 1,
+      #                      average: 1 }
+      #   }      
+      #   If "holland6":
+      #   {
+      #     realistic: { weighted_total: 1,
+      #                     count: 1,
+      #                     average: 1 },
+      #     artistic: {  weighted_total: 1,
+      #                           count: 1,
+      #                           average: 1 },
+      #     social: { weighted_total: 1,
+      #                    count: 1,
+      #                    average: 1 },
+      #     investigative: { weighted_total: 1,
+      #                 count: 1,
+      #                 average: 1 },
+      #     enterprising: { weighted_total: 1,
+      #                      count: 1,
+      #                      average: 1 },
+      #     conventional: { weighted_total: 1,
+      #                     count: 1,
+      #                     average: 1 }
+      #   }      
+      def initialize(input_data, formula)
+        @raw_results = merge_across_stages(input_data)
+        @circles = formula
       end
 
-      def break_into_game_types
-        raw_results_by_type = {}
-        @raw_results.each do |entry|
-          stage_no = entry[:stage].to_i
-          if @stages[stage_no]
-            game_type = @stages[stage_no][:game_type.to_s].downcase
-            raw_results_by_type[game_type.to_sym] = [] if raw_results_by_type[game_type.to_sym].nil?
-            raw_results_by_type[game_type.to_sym] |= entry[:results]
+      def merge_across_stages(input_data)
+        # Merges array of arrays into one array with contents of the inside arrays
+        single_array = []
+        input_data.each do | result |
+          result.each do | raw_result |
+            single_array << raw_result
           end
         end
-        raw_results_by_type
+        single_array
       end
 
-      # The final result is in the form of:
-      # {
-      #   :big5 => {
-      #       :openness => {:weighted_total => num, :count => count, :average => average },
-      #       :agreeableness => {:weighted_total => num, :count => count, :average => average }
-      #    },
-      #   :holland6 => {
-      #    }
-      # }
-
-      def calculate_result
-        raw_results_by_type = break_into_game_types
-        final_results = {}
-        raw_results_by_type.each do |game_type, raw_results|
-          final_results[game_type] = result_by_game_type(raw_results)
-        end
-        final_results
-      end
-
-      # The raw results are expected in the form of:
-      # [
-      #   {
-      #     :trait1 => "Sociable",
-      #     :trait2 => "Adventurous",
-      #     :size => 3,
-      #     :distance_rank => 2,
-      #     :overlap => 0.34
-      #   },
-      #   ...
-      # ]
       # Algorithm:
       # 1. Calculate the z-scores for each of size, distance and overlap
       # 2. Each name_pair (trait1/trait2) maps to an attribute of the game type (E.g. Openness for Big5)
       # 3. Multiply the z-scores by corresponding weights
       # 4. Add the weighted z-scores per attribute of game type.
       # 5. Average the weighted z-scores
-      # The output is in the form of:
+      # The output is in the form of: (depending on big5 vs. holland6)
       # {
       #   :openness => {:weighted_total => num, :count => count, :average => average },
       #   :agreeableness => {:weighted_total => num, :count => count, :average => average }
       # }
-
-      def result_by_game_type(raw_results)
+      def calculate_result
         aggregate_weighted_total = {}
-        raw_results.each do |result|
+        @raw_results.each do |result|
           name_pair = "#{result[:trait1]}/#{result[:trait2]}"
           circle = @circles[name_pair]
           if !circle.nil? && circle.size_sd != 0 && circle.distance_sd != 0 && circle.overlap_sd != 0

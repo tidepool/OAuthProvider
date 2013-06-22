@@ -1,32 +1,10 @@
 module TidepoolAnalyze
   module ScoreGenerator
     class Big5Score
-      def generate(mini_game_events, recipe)
-        final_results = [] 
-        recipe.each do |step|
-          klass_name = "TidepoolAnalyze::Analyzer::#{step[:analyzer]}"
-          intermediate_results = []
-          mini_game_events[:big5].each do |stage, user_events|
-            begin
-              analyzer = klass_name.constantize.new(user_events)
-              result = analyzer.calculate_result()
-              intermediate_results << { stage: stage, results: result }
-            rescue Exception => e
-               raise e 
-            end
-          end
 
-          klass_name = "TidepoolAnalyze::Formulator::#{step[:formulator]}"
-          formula_loader.load(step[:formula_sheet])
-
-          final_results <<  
-
-        end
-
-        calculate_score(final_results)
-       end
-
-      def calculate_score(aggregate_results)
+      def calculate_score(input_data)
+        return {} if input_data.class.to_s != 'Array'
+        
         big5_scores = {
             openness: 0,
             agreeableness: 0,
@@ -34,13 +12,12 @@ module TidepoolAnalyze
             extraversion: 0,
             neuroticism: 0
         }
-
-        # Aggregate all Big5 values across modules
+        # Aggregate all Big5 values passed on to us
         count = 0
-        aggregate_results.each do | module_name, result |
-          if result && result[:big5]
+        input_data.each do | result |
+          if result 
             count += 1
-            result[:big5].each do |dimension, value|
+            result.each do |dimension, value|
               big5_scores[dimension] += value[:average] if big5_scores[dimension]
             end
           end

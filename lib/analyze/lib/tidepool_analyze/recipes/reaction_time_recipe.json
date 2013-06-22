@@ -1,0 +1,7 @@
+[
+  {
+    "user_event_source": "reaction_time",
+    "analyzer": "ReactionTimeAnalyzer", 
+    "formulator": "ReactionTimeFormulator"  
+  }
+]
