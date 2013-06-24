@@ -63,7 +63,6 @@ describe 'Users API' do
     user_info[:locale].should == user_params[:locale]
     user_info[:image].should == user_params[:image]
     user_info[:gender].should == user_params[:gender]
-    binding.pry
     user_info[:education].should == user_params[:education]
     user_info[:handedness].should == user_params[:handedness]
     user_info[:referred_by].should == user_params[:referred_by]
