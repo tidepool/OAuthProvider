@@ -71,5 +71,5 @@ Installation:
 
 Start the server now:
 
-        foreman start
+        RACK_ENV=development foreman start
 
