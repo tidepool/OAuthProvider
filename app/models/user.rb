@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password validations: false
   
   Dir[File.expand_path('../auth_providers/*.rb', __FILE__)].each do |file|
     require file 
@@ -9,8 +9,9 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
   validates_format_of :email, :with => /.+@.+\..+/i
-  validates :password, :length => { :minimum => 8 }, :if => :needs_password?
-
+  validates :password, :length => { :minimum => 8 }, :if => :needs_password?, on: :create
+  validates_confirmation_of :password
+  
   has_one :personality
   # belongs_to :profile_description
   has_many :authentications
