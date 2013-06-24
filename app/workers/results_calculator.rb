@@ -41,7 +41,8 @@ class ResultsCalculator
       logger.error("Game #{game_id} result not saved, user_events still in Redis")
       return
     end
-    analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
+    # analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
+    analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new
     
     analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
 
@@ -72,19 +73,19 @@ class ResultsCalculator
     user_events
   end
 
-  def circles
-    circles = {}
-    AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-      circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
-    end
-    circles    
-  end
+  # def circles
+  #   circles = {}
+  #   AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
+  #     circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
+  #   end
+  #   circles    
+  # end
 
-  def elements
-    elements = {}
-    Element.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-      elements[entry[:name]] = ::OpenStruct.new(entry.attributes) 
-    end
-    elements
-  end
+  # def elements
+  #   elements = {}
+  #   Element.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
+  #     elements[entry[:name]] = ::OpenStruct.new(entry.attributes) 
+  #   end
+  #   elements
+  # end
 end

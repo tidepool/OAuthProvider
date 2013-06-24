@@ -5,11 +5,16 @@ class PersistProfile
     user = User.find(game.user_id)
     return if !user
 
-    scores = analysis_results[:scores]
-    return if !scores
+    # scores = analysis_results[:scores]
+    # return if !scores
+    return unless analysis_results && analysis_results[:big5] && analysis_results[:big5][:score]
+    return unless analysis_results && analysis_results[:holland6] && analysis_results[:holland6][:score]
 
-    big5_dimension = (scores[:big5] && scores[:big5][:dimension]) ? scores[:big5][:dimension] : nil 
-    holland6_dimension = (scores[:holland6] && scores[:holland6][:dimension] ? scores[:holland6][:dimension] : nil)
+    big5_score = analysis_results[:big5][:score]
+    holland6_score = analysis_results[:holland6][:score]
+
+    big5_dimension = big5_score[:dimension] ? big5_score[:dimension] : nil 
+    holland6_dimension = holland6_score[:dimension] ? holland6_score[:dimension] : nil)
 
     return if big5_dimension == nil || holland6_dimension == nil
 
