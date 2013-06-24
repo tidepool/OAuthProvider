@@ -24,7 +24,7 @@ PATH
   remote: ./lib/analyze
   specs:
     tidepool_analyze (0.0.1)
-      activesupport
+      activesupport (= 4.0.0.rc1)
 
 GEM
   remote: https://rubygems.org/
