@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130617220447) do
+ActiveRecord::Schema.define(version: 20130624205339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 20130617220447) do
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
   add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "career_recommendations", force: true do |t|
+    t.integer  "profile_description_id"
+    t.string   "careers",                array: true
+    t.string   "skills",                 array: true
+    t.string   "tools",                  array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "data_source_settings", force: true do |t|
     t.integer  "user_id"
@@ -290,9 +299,12 @@ ActiveRecord::Schema.define(version: 20130617220447) do
     t.date     "date_of_birth"
     t.string   "handedness"
     t.string   "orientation"
+    t.string   "education"
+    t.string   "referred_by"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["referred_by"], name: "index_users_on_referred_by", using: :btree
 
   create_table "vs_database_diagrams", id: false, force: true do |t|
     t.string   "name",     limit: 80

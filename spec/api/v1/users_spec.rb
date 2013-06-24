@@ -36,11 +36,51 @@ describe 'Users API' do
 
   it 'updates a users information' do 
     token = get_conn(user1)
-    user_params = { name: 'John Doe', city: 'Istanbul' }
+    user_params = { name: 'John Doe', 
+      display_name: 'johndoe', 
+      description: 'I am John Doe',
+      city: 'Istanbul',
+      state: 'CA',
+      country: 'Turkey',
+      timezone: 2,
+      locale: 'en-us',
+      image: 'http://example.com/image.jpg',
+      gender: 'male',
+      date_of_birth: Date.new(1970, 3, 25), 
+      education: 'High School',
+      handedness: 'left', 
+      referred_by: 'Hesston'
+    }
     response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
     user_info = JSON.parse(response.body, symbolize_names: true)
     user_info[:name].should == user_params[:name]
     user_info[:city].should == user_params[:city]
+    user_info[:date_of_birth].should == user_params[:date_of_birth].to_s
+    user_info[:description].should == user_params[:description]
+    user_info[:state].should == user_params[:state]
+    user_info[:country].should == user_params[:country]
+    user_info[:timezone].should == user_params[:timezone].to_s
+    user_info[:locale].should == user_params[:locale]
+    user_info[:image].should == user_params[:image]
+    user_info[:gender].should == user_params[:gender]
+    user_info[:education].should == user_params[:education]
+    user_info[:handedness].should == user_params[:handedness]
+    user_info[:referred_by].should == user_params[:referred_by]
+  end
+
+  it 'updates a users information also in the database' do
+    # There is a bug which fails the validations for user due to has_secure_password
+    # To make sure it does not creep in, I added this test
+    # https://github.com/rails/rails/pull/6215
+
+    token = get_conn(user1)
+    user_params = { name: 'John Doe', city: 'Istanbul'}
+    response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
+    user_info = JSON.parse(response.body, symbolize_names: true)
+
+    updated_user = User.find(user_info[:id])
+    updated_user.city.should == user_params[:city]
+    updated_user.name.should == user_params[:name]
   end
 
   it 'deletes a user' do
