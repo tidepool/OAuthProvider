@@ -7,7 +7,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   wrap_parameters User, include: [:guest,
       :email, :password, :password_confirmation, :name, :display_name, 
       :description, :city, :state, :country, :timezone, 
-      :locale, :image, :gender, :date_of_birth]
+      :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by]
 
   def index
     # TODO: Consider queries like friends, latest_users etc.
@@ -52,8 +52,10 @@ class Api::V1::UsersController < Api::V1::ApiController
 
     # Whenever guest calls update, they are not guest anymore!    
     user.guest = false
-    user.save
 
+    # TODO: THIS NEEDS TO BE BETTER HANDLED!
+    status = user.save!
+    
     respond_to do |format|
       format.json { render :json => user}
     end
@@ -103,12 +105,12 @@ class Api::V1::UsersController < Api::V1::ApiController
       params.require(:user).permit(:guest,
       :email, :password, :password_confirmation, :name, :display_name, 
       :description, :city, :state, :country, :timezone, 
-      :locale, :image, :gender, :date_of_birth)        
+      :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by)        
     else
       params.require(:user).permit(:guest,
         :email, :password, :password_confirmation, :name, :display_name, 
         :description, :city, :state, :country, :timezone, 
-        :locale, :image, :gender, :date_of_birth)
+        :locale, :image, :gender, :date_of_birth, :education, :handedness)
     end
   end
 end

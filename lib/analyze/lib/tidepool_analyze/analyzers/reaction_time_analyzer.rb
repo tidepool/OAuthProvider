@@ -139,7 +139,7 @@ module TidepoolAnalyze
                 })
             end
           else
-            puts "Wrong Event: #{entry}"
+            puts "Unknown Event: #{entry}"
           end
         end
       end

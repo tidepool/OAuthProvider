@@ -24,6 +24,7 @@ OAuthProvider::Application.routes.draw do
         get 'personality', to: 'users#personality'
        
         get 'recommendations/latest', to: 'recommendations#latest'
+        get 'recommendations/career', to: 'recommendations#career'
         get 'games/latest', to: 'games#latest'
         post 'preorders', to: 'preorders#create'
 
