@@ -101,7 +101,7 @@ class Api::V1::UsersController < Api::V1::ApiController
       params.require(:user).permit(:guest,
         :email, :password, :password_confirmation, :name, :display_name, 
         :description, :city, :state, :country, :timezone, 
-        :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by)
+        :locale, :image, :gender, :date_of_birth, :education, :handedness)
     end
   end
 end

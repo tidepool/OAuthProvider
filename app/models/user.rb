@@ -11,9 +11,8 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /.+@.+\..+/i
   validates :password, :length => { :minimum => 8 }, :if => :needs_password?, on: :create
   validates_confirmation_of :password
-  
+
   has_one :personality
-  # belongs_to :profile_description
   has_many :authentications
   has_many :preorders
 
@@ -75,7 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def needs_password?
-    guest == false
+    guest == false #&& (password.present? || password_confirmation.present?)
   end
 
   def set_if_empty(property, value, authentication)

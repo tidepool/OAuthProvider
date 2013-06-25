@@ -30,8 +30,20 @@ describe 'Users API' do
     response = token.post("#{@endpoint}/users.json", { user: user_params } )
     user_info = JSON.parse(response.body, symbolize_names: true)
     user_info[:email].should == user_params[:email]
+
     user = User.find(user_info[:id])
     user.email.should == user_params[:email]
+  end
+
+  it 'creates a registered user with the referred_by attribute' do 
+    token = get_conn()
+    user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '12345678', referred_by: 'Hesston' }
+    response = token.post("#{@endpoint}/users.json", { user: user_params } )
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:referred_by].should == user_params[:referred_by]
+    
+    user = User.find(user_info[:id])
+    user.referred_by.should == user_params[:referred_by]
   end
 
   it 'updates a users information' do 
@@ -65,7 +77,7 @@ describe 'Users API' do
     user_info[:gender].should == user_params[:gender]
     user_info[:education].should == user_params[:education]
     user_info[:handedness].should == user_params[:handedness]
-    user_info[:referred_by].should == user_params[:referred_by]
+    user_info[:referred_by].should_not == user_params[:referred_by] # Change is only allowed for creation time
   end
 
   it 'updates a users information also in the database' do
@@ -99,6 +111,19 @@ describe 'Users API' do
     user = User.find(user_info[:id])
     user.guest.should == true
     expect(user.email.index('guest')).to eq(0)
+  end
+
+  it 'creates a guest user with referred_by attribute' do
+    token = get_conn()
+    user_params = { guest: true, referred_by: 'Hesston' }
+    response = token.post("#{@endpoint}/users.json", { user: user_params } )
+    user_info = JSON.parse(response.body, symbolize_names: true)
+    user_info[:guest].should == true
+    user_info[:referred_by].should == 'Hesston'
+
+    user = User.find(user_info[:id])
+    user.guest.should == true
+    user.referred_by.should == user_params[:referred_by]
   end
 
   it 'updates a guest user to a registered user using email, password' do
@@ -186,6 +211,16 @@ describe 'Users API' do
       user_info = JSON.parse(response.body, symbolize_names: true)
       user_info[:guest].should == false
     end
-      
+    
+    it 'doesnot allow to change the referred_by attribute' do 
+      token = get_conn(user1)
+      user_params = { referred_by: 'Hesston' }
+      response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
+      user_info = JSON.parse(response.body, symbolize_names: true)
+
+      user = User.find(user_info[:id])
+      user.referred_by.should_not == 'Hesston'
+    end
+
   end
 end
