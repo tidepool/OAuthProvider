@@ -98,7 +98,7 @@ module TidepoolAnalyze
           when 'circle_end_move'
           when 'circle_resized'
           else
-            puts "Wrong Event: #{entry}"
+            puts "Unknown Event: #{entry}"
           end
         end
       end

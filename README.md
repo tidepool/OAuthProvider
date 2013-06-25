@@ -71,5 +71,17 @@ Installation:
 
 Start the server now:
 
-        foreman start
+        RACK_ENV=development foreman start
+
+
+
+Updating
+--------
+
+Every time you do a git pull, run these commands to ensure a properly set up back end environment:
+
+    bundle install # check for and install any missing dependencies
+    rake db:migrate # migrate database schema if it has changed
+    rake db:seed # seed the database with intended starter data
+
 

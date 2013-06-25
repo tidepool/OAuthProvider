@@ -12,6 +12,15 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
     end
   end
 
+  def career
+    profile_description_id = current_resource.personality.profile_description_id
+    career_reco = CareerRecommendation.where(profile_description_id: profile_description_id).first
+
+    respond_to do |format|
+      format.json { render :json => career_reco }
+    end
+  end
+
   private 
 
   def current_resource

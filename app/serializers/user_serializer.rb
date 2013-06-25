@@ -3,7 +3,8 @@ class UserSerializer < ActiveModel::Serializer
             :date_of_birth, :gender, :image, 
             :timezone, :locale, 
             :description, 
-            :city, :state, :country
+            :city, :state, :country, 
+            :education, :referred_by, :handedness
 
   has_many :authentications
 end
