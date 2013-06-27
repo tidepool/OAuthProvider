@@ -1,7 +1,7 @@
 
 define([], function() {
   return require.config({
-    packages: ['core', 'game/levels/reaction_time_disc', 'game/levels/rank_images', 'game/levels/circle_size', 'game/levels/circle_proximity', 'dashboard/widgets/base', 'dashboard/widgets/lister', 'ui_widgets/formation'],
+    packages: ['core', 'game/levels/_base', 'game/levels/reaction_time_disc', 'game/levels/rank_images', 'game/levels/circle_size', 'game/levels/circle_proximity', 'game/levels/alex_trebek', 'dashboard/widgets/base', 'dashboard/widgets/lister', 'ui_widgets/formation'],
     paths: {
       Handlebars: "bower_components/require-handlebars-plugin/Handlebars",
       underscore: "bower_components/underscore-amd/underscore",
