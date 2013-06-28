@@ -1,5 +1,5 @@
 class PersistProfile 
-  def persist(game, result, analysis_results)
+  def persist(game, analysis_results)
     return if !game && !game.user_id
 
     user = User.find(game.user_id)

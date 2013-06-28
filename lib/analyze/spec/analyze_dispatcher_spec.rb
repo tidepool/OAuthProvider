@@ -184,7 +184,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('big5', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:low_dimension].should_not be_nil
       score[:high_dimension].should_not be_nil
       score[:adjust_by].should_not be_nil
@@ -201,7 +201,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('big5', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:low_dimension].should_not be_nil
       score[:high_dimension].should_not be_nil
       score[:adjust_by].should_not be_nil
@@ -218,7 +218,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('holland6', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:adjust_by].should_not be_nil
     end
 

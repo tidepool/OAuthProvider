@@ -12,7 +12,7 @@ module TidepoolAnalyze
       it 'calculates capacity score correctly' do
         capacity_score = CapacityScore.new
         result = capacity_score.calculate_score(@input_data)
-
+        
         
       end
     end

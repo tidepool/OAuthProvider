@@ -3,6 +3,18 @@ module TidepoolAnalyze
     class ImageRankAnalyzer
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
+      # Output Data Format:
+      # [
+      #   {
+      #     "animal" => 10,
+      #     "sunset" => 6
+      #      ...
+      #    },
+      #   {
+      #     "animal" => 5,
+      #     ...
+      #   }
+      # ]
       def initialize(events, formula)
         @images = []
         @final_rank = []

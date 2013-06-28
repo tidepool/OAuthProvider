@@ -19,9 +19,9 @@ class ResultsCalculator
 
     user_events = user_events_from_redis(key)
     if user_events.empty?
-      if game.result && game.result.event_log
+      if game.event_log
         # We are recalculating results
-        user_events = game.result.event_log
+        user_events = game.event_log
       else
         # No User events collected either in Redis or in Postgres (from prior run)
         game.status = :no_results
@@ -31,14 +31,14 @@ class ResultsCalculator
       end
     end
 
-    result = game.result.nil? ? game.create_result : game.result
-    result.event_log = user_events
-    if result.save  
+    # result = game.result.nil? ? game.create_result : game.result
+    game.event_log = user_events
+    if game.save  
       # Make sure we don't lose the event results
       # It is safe to delete from Redis, they are saved in Postgres
       $redis.del(key)
     else
-      logger.error("Game #{game_id} result not saved, user_events still in Redis")
+      logger.error("Game #{game_id} event_log not saved, user_events still in Redis")
       return
     end
     # analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
@@ -50,7 +50,7 @@ class ResultsCalculator
       klass_name = "Persist#{calculation.to_s.camelize}"
       begin
         persist_calculation = klass_name.constantize.new()
-        persist_calculation.persist(game, result, analysis_results)
+        persist_calculation.persist(game, analysis_results)
       rescue Exception => e
         game.status = :no_results
         game.save

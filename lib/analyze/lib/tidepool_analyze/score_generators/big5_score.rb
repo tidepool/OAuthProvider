@@ -64,7 +64,7 @@ module TidepoolAnalyze
         final_score = (high_big5_value - average_big5).abs > (low_big5_value - average_big5).abs ? "high_#{high_big5_dimension.to_s}" : "low_#{low_big5_dimension.to_s}"
         {
           dimension: final_score,
-          score: big5_scores,
+          dimension_values: big5_scores,
           low_dimension: low_big5_dimension,
           high_dimension: high_big5_dimension,
           adjust_by: adjust_by 

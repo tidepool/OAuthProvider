@@ -26,7 +26,7 @@ module TidepoolAnalyze
         result = big5Score.calculate_score(@aggregate_results)
         result[:dimension].should == 'high_openness'
         result[:low_dimension].should == :extraversion
-        result[:score].should_not be_nil
+        result[:dimension_values].should_not be_nil
       end
     end
   end

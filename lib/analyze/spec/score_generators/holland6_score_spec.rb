@@ -19,7 +19,7 @@ module TidepoolAnalyze
       it 'calculates the Holland6 score correctly' do
         holland6_score = Holland6Score.new
         result = holland6_score.calculate_score(@aggregate_results)
-        result[:score].should_not be_nil
+        result[:dimension_values].should_not be_nil
         result[:dimension].should == 'artistic'
       end
     end
