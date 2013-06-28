@@ -5,7 +5,8 @@ class Game < ActiveRecord::Base
                   
   belongs_to :user
   belongs_to :definition
-  has_one :result, :inverse_of => :game, :dependent => :delete
+  # has_one :result, :inverse_of => :game, :dependent => :delete
+  has_many :results
 
   def self.create_by_definition(definition, target_user, calling_ip = nil)
     raise ArgumentError.new('No definition specified') if definition.nil?

@@ -3,7 +3,7 @@ require 'spec_helper'
 module TidepoolAnalyze
   module ScoreGenerator
 
-    describe 'Holland6 Score Spec' do
+    describe Holland6Score do
       before(:all) do
         @aggregate_results = [
           {
@@ -16,9 +16,9 @@ module TidepoolAnalyze
           }
         ]
       end
-      it 'should calculate the Holland6 score correctly' do
-        holland6Score = Holland6Score.new
-        result = holland6Score.calculate_score(@aggregate_results)
+      it 'calculates the Holland6 score correctly' do
+        holland6_score = Holland6Score.new
+        result = holland6_score.calculate_score(@aggregate_results)
         result[:score].should_not be_nil
         result[:dimension].should == 'artistic'
       end

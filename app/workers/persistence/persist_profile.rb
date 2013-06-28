@@ -14,7 +14,7 @@ class PersistProfile
     holland6_score = analysis_results[:holland6][:score]
 
     big5_dimension = big5_score[:dimension] ? big5_score[:dimension] : nil 
-    holland6_dimension = holland6_score[:dimension] ? holland6_score[:dimension] : nil)
+    holland6_dimension = holland6_score[:dimension] ? holland6_score[:dimension] : nil
 
     return if big5_dimension == nil || holland6_dimension == nil
 

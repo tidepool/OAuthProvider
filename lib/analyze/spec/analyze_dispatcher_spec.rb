@@ -8,14 +8,14 @@ module TidepoolAnalyze
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
       input_data = mini_game_events[mini_game]
 
-      formula = analyze_dispatcher.load_formula(formula_desc)
+      formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
 
       results = analyze_dispatcher.run_analyzer(analyzer_class, formula, input_data)
     end
 
     def run_formulator(input_data, formula_desc, formulator_class)
       analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
+      formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
       analyze_dispatcher.run_formulator(formulator_class, formula, input_data)
     end
 
@@ -39,7 +39,7 @@ module TidepoolAnalyze
     it 'sorts user_events into mini_game_events' do
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
-      mini_game_events.length.should == 3
+      mini_game_events.length.should == 4
       mini_game_events['reaction_time'].should_not be_nil
       mini_game_events['reaction_time'].length.should == 2
       mini_game_events['reaction_time'].each do |stage, stage_events|
@@ -51,6 +51,9 @@ module TidepoolAnalyze
       mini_game_events['image_rank'].length.should == 1
       mini_game_events['circles_test'].should_not be_nil
       mini_game_events['circles_test'].length.should == 5
+      mini_game_events['survey'].should_not be_nil
+      mini_game_events['survey'].length.should == 1
+
     end
 
     it 'reads the recipes for given score_name' do
@@ -62,57 +65,6 @@ module TidepoolAnalyze
       recipe[0][:formulator].should == 'CirclesFormulator'
       recipe[0][:formula_sheet].should == 'big5_circles.csv'
       recipe[0][:formula_key].should == 'name_pair'
-    end
-
-    it 'loads the formula for big5 circles' do
-      formula_desc = {
-              formula_sheet: 'big5_circles.csv',
-              formula_key: 'name_pair' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["Sociable/Adventurous"].should_not be_nil
-      formula.length.should == 10
-
-      circle_data = formula["Sociable/Adventurous"] 
-      circle_data.name_pair.should == "Sociable/Adventurous"
-      circle_data.id == 1
-      circle_data.size_weight.should == 0.9
-      circle_data.size_sd.should == 1.3
-      circle_data.size_mean.should == 2.5
-    end
-
-    it 'loads the formula for holland6 circles' do
-      formula_desc = {
-              formula_sheet: 'holland6_circles.csv',
-              formula_key: 'name_pair' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["Persuasive/Enthusiastic"].should_not be_nil
-      formula.length.should == 6
-
-      circle_data = formula["Persuasive/Enthusiastic"] 
-      circle_data.name_pair.should == "Persuasive/Enthusiastic"
-      circle_data.id == 14
-      circle_data.size_weight.should == 0.9
-      circle_data.size_sd.should == 1.4
-      circle_data.size_mean.should == 3.34
-    end
-
-    it 'loads the formula for elements' do
-      formula_desc = {
-              formula_sheet: 'elements.csv',
-              formula_key: 'name' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["caucasian"].should_not be_nil
-      formula.length.should == 172
-      
-      element_data = formula["caucasian"] 
-      element_data.name.should == "caucasian"
-      element_data.id == 35
-      element_data.standard_deviation.should == 3.376691
-      element_data.mean.should == 9.29876
-      element_data.weight_extraversion.should == 0
     end
 
     it 'runs the analyzer for big5 circles_test' do
@@ -282,6 +234,23 @@ module TidepoolAnalyze
 
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
+    end
+
+    it 'executes a reaction_time recipe' do 
+      analysis = execute_recipe('reaction_time')      
+      analysis.should_not be_nil
+      analysis[:final_results].length.should == 2
+      analysis[:final_results][0][:demand].should_not be_nil
+
+      analysis[:final_results][1][:min_time].should_not be_nil
+
+      analysis[:score].should_not be_nil
+    end
+
+    it 'executes a capacity recipe' do
+      analysis = execute_recipe('capacity')
+      analysis.should_not be_nil
+
     end
 
     it 'analyzes the user_events and scores' do

@@ -1,7 +1,6 @@
 module TidepoolAnalyze
   module ScoreGenerator
     class Big5Score
-
       def calculate_score(input_data)
         return {} if input_data.class.to_s != 'Array'
         

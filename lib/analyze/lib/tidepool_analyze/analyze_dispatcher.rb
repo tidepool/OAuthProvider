@@ -1,3 +1,4 @@
+Dir[File.expand_path('../utils/*.rb', __FILE__)].each {|file| require file }
 Dir[File.expand_path('../analyzers/*.rb', __FILE__)].each {|file| require file }
 Dir[File.expand_path('../formulators/*.rb', __FILE__)].each {|file| require file }
 Dir[File.expand_path('../score_generators/*.rb', __FILE__)].each {|file| require file }
@@ -21,7 +22,8 @@ module TidepoolAnalyze
         big5: 'big5',
         holland6: 'holland6',
         emo: 'emo',
-        reaction: 'reaction'
+        reaction_time: 'reaction_time',
+        capacity: 'capacity'
       }
       mini_game_events = events_by_mini_game(user_events)
 
@@ -67,14 +69,16 @@ module TidepoolAnalyze
           }
         end
 
-        formula = load_formula(formula_desc)
+        formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
 
         if step[:analyzer] && !step[:analyzer].empty?
           input_data = mini_game_events[step[:user_event_source]]
+          # Analyzers will be called for each stage of the game with subset
+          # of the user_events for that stage only
           results = run_analyzer(step[:analyzer], formula, input_data)
         end
 
-        if step[:formulator] && !step[:formulator].empty? && results
+        if step[:formulator] && !step[:formulator].empty? && results && !results.empty?
           final_results << run_formulator(step[:formulator], formula, results)
         end
       end
@@ -85,7 +89,8 @@ module TidepoolAnalyze
 
       {
         final_results: final_results,
-        score: score
+        score: score,
+        version: '2.0'
       }
     end
 
@@ -105,6 +110,8 @@ module TidepoolAnalyze
     def run_analyzer(analyzer_class, formula, input_data)
       klass_name = "TidepoolAnalyze::Analyzer::#{analyzer_class}"
       results = []
+      return results if input_data.nil?
+
       input_data.each do |stage, data|
         analyzer = klass_name.constantize.new(data, formula)
         result = analyzer.calculate_result
@@ -163,45 +170,45 @@ module TidepoolAnalyze
       score = score_generator.calculate_score(input_data)
     end
 
-    def load_formula(formula_desc)
-      formula_path = File.expand_path("../formula_sheets/#{formula_desc[:formula_sheet]}", __FILE__)
-      formula_key = formula_desc[:formula_key].to_sym
+    # def load_formula(formula_desc)
+    #   formula_path = File.expand_path("../formula_sheets/#{formula_desc[:formula_sheet]}", __FILE__)
+    #   formula_key = formula_desc[:formula_key].to_sym
 
-      i = 0
-      attributes = []
-      types = []
-      formula = {}
-      CSV.foreach(formula_path) do |row|
-        if i == 0
-          # First row contains the attribute names 
-          row.each do |value|
-            attributes << value.to_sym
-          end
-        elsif i == 1
-          # Second row contains the types
-          row.each do |value|
-            types << value.to_sym
-          end
-        else
-          values = {}
-          row.each_with_index do |value, index|
-            case types[index]
-            when :integer
-              values[attributes[index]] = value.to_i
-            when :float
-              values[attributes[index]] = value.to_f
-            when :string
-              values[attributes[index]] = value
-            else
-              # Error case 
-            end
-          end
-          formula[values[formula_key]] = ::OpenStruct.new(values)
-        end
-        i += 1
-      end
-      formula
-    end
+    #   i = 0
+    #   attributes = []
+    #   types = []
+    #   formula = {}
+    #   CSV.foreach(formula_path) do |row|
+    #     if i == 0
+    #       # First row contains the attribute names 
+    #       row.each do |value|
+    #         attributes << value.to_sym
+    #       end
+    #     elsif i == 1
+    #       # Second row contains the types
+    #       row.each do |value|
+    #         types << value.to_sym
+    #       end
+    #     else
+    #       values = {}
+    #       row.each_with_index do |value, index|
+    #         case types[index]
+    #         when :integer
+    #           values[attributes[index]] = value.to_i
+    #         when :float
+    #           values[attributes[index]] = value.to_f
+    #         when :string
+    #           values[attributes[index]] = value
+    #         else
+    #           # Error case 
+    #         end
+    #       end
+    #       formula[values[formula_key]] = ::OpenStruct.new(values)
+    #     end
+    #     i += 1
+    #   end
+    #   formula
+    # end
 
     # # score_names expected are: :big5, :holland6, :reaction_time
     # def analyze(user_events, score_names)

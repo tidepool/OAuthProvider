@@ -144,5 +144,29 @@
 {"event_type":"0","module":"circles_test","stage":7,"record_time":1360195137268,"event_desc":"circle_end_move","circle_no":"0","circle":{"trait1":"Fear","trait2":"Apprehension","size":4,"changed":true,"moved":true,"top":140,"left":499,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},"game_id":461,"user_id":43},
 {"event_type":"0","module":"circles_test","stage":7,"record_time":1360195138803,"event_desc":"circle_start_move","circle_no":"3","circle":{"trait1":"Anticipation","trait2":"Interest","size":2,"changed":true,"moved":false,"top":400,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},"game_id":461,"user_id":43},
 {"event_type":"0","module":"circles_test","stage":7,"record_time":1360195140806,"event_desc":"circle_end_move","circle_no":"3","circle":{"trait1":"Anticipation","trait2":"Interest","size":2,"changed":true,"moved":true,"top":400,"left":790,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},"game_id":461,"user_id":43},
-{"event_type":"0","module":"circles_test","stage":7,"record_time":1360195167148,"event_desc":"test_completed","circles":[{"trait1":"Fear","trait2":"Apprehension","size":4,"changed":true,"moved":true,"top":140,"left":499,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Trust","trait2":"Acceptance","size":0,"changed":true,"moved":true,"top":284,"left":699,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Happiness","trait2":"Satisfaction","size":4,"changed":true,"moved":true,"top":131,"left":801,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Anticipation","trait2":"Interest","size":2,"changed":true,"moved":true,"top":400,"left":790,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}],"self_coord":{"top":138,"left":634,"size":386},"game_id":461,"user_id":43}
+{"event_type":"0","module":"circles_test","stage":7,"record_time":1360195167148,"event_desc":"test_completed","circles":[{"trait1":"Fear","trait2":"Apprehension","size":4,"changed":true,"moved":true,"top":140,"left":499,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Trust","trait2":"Acceptance","size":0,"changed":true,"moved":true,"top":284,"left":699,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Happiness","trait2":"Satisfaction","size":4,"changed":true,"moved":true,"top":131,"left":801,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Anticipation","trait2":"Interest","size":2,"changed":true,"moved":true,"top":400,"left":790,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}],"self_coord":{"top":138,"left":634,"size":386},"game_id":461,"user_id":43},
+{
+  "event_type":"0",
+  "module":"survey",
+  "stage":8,
+  "record_time":1360195167248,
+  "event_desc":"test_started"
+},
+{
+  "event_type":"0",
+  "module":"survey",
+  "stage":8,
+  "record_time":1360195167548,
+  "event_desc":"test_completed"
+},
+{
+  "event_type":"0",
+  "module":"survey",
+  "stage":8,
+  "record_time":1360195167848,
+  "event_desc":"changed",
+  "question_id": "demand_1234", 
+  "question_topic": "demand",
+  "answer": 5
+}
 ]
