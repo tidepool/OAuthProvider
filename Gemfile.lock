@@ -73,7 +73,7 @@ GEM
       debugger-linecache (~> 1.2.0)
       debugger-ruby_core_source (~> 1.2.1)
     debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.2)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     diffy (2.1.4)
     erubis (2.7.0)
@@ -255,7 +255,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers!
   bcrypt-ruby (~> 3.0.0)
-  debugger-ruby_core_source (~> 1.2.2)
+  debugger-ruby_core_source (~> 1.2.3)
   doorkeeper!
   dotenv-rails!
   factory_girl_rails
