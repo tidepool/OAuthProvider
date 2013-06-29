@@ -83,6 +83,12 @@
         <p>
             <button class="btn btn-large btn-primary" data-printClasses></button>
         </p>
+        <p>
+            <button class="btn btn-primary btn-alt" data-printClasses></button>
+        </p>
+        <p>
+            <button class="btn btn-large btn-primary btn-alt" data-printClasses></button>
+        </p>
         <p><a class="btn btn-success" data-printClasses href=""></a></p>
         <p>
             <button class="btn btn-success btn-large" data-printClasses></button>
@@ -93,6 +99,9 @@
         </p>
         <p>
             <button class="btn btn-inverse btn-large" data-printClasses><i class="icon-thumbs-up icon-large"></i></button>
+        </p>
+        <p>
+            <button class="btn btn-tall btn-large" data-printClasses></button>
         </p>
 
 
@@ -125,6 +134,10 @@
         <form action="">
             <input class="large" type="text" data-printClasses />
         </form>
+
+        <h2>ui_widgets/formation/select_by_icon</h2>
+        <div id="SelectByIconHolder"></div>
+
 
         <h2>Divider</h2>
         <div id="DividerHolder"></div>
@@ -192,7 +205,8 @@
                     'ui_widgets/hold_please',
                     'ui_widgets/psst',
                     'composite_views/perch',
-                    'ui_widgets/proceed'
+                    'ui_widgets/proceed',
+                    'ui_widgets/formation/select_by_icon'
                 ], function (
                     Backbone,
                     Syphon,
@@ -201,7 +215,8 @@
                     holdPlease,
                     psst,
                     perch,
-                    proceed
+                    proceed,
+                    SelectByIcon
                 ) {
                     $('#DividerHolder').append( dividerMarkup )
 
@@ -258,6 +273,35 @@
 
                     $('#ActionShowProceed').on('click', proceed.show)
                     $('#ActionHideProceed').on('click', proceed.hide)
+
+                    hands = new SelectByIcon({
+                        model: new Backbone.Model({
+                            string_id: 'handedness',
+                            type: 'select_by_icon',
+                            multiselect: true,
+                            'options': [
+                                'left',
+                                'right'
+                            ]
+                        })
+                    })
+                    socialz = new SelectByIcon({
+                        model: new Backbone.Model({
+                            string_id: 'socialz',
+                            type: 'select_by_icon',
+                            'options': [
+                                'smile',
+                                'meh',
+                                'frown',
+                                'other'
+                            ]
+                        })
+                    })
+                    $('#SelectByIconHolder').append(
+                            hands.render().el
+                    ).append('<br/>').append(
+                            socialz.render().el
+                    )
 
                 });
             });
