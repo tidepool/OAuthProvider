@@ -3,7 +3,7 @@ class AddColumnsToResults < ActiveRecord::Migration
     add_column :results, :result_type, :string
     add_column :results, :score, :hstore 
     add_column :results, :calculations, :text
-    add_column :results, :user_id, :integer, null: false
+    add_column :results, :user_id, :integer
 
     add_index :results, :user_id
     add_index :results, :result_type

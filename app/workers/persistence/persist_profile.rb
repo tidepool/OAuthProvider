@@ -24,15 +24,15 @@ class PersistProfile
     personality.profile_description = profile_description
     personality.game = game
 
-    personality.big5_score = scores[:big5][:score]
-    personality.big5_dimension = scores[:big5][:dimension]
-    personality.big5_low = scores[:big5][:low_dimension]    
-    personality.big5_high = scores[:big5][:high_dimension]
+    personality.big5_score = big5_score[:dimension_values]
+    personality.big5_dimension = big5_dimension
+    personality.big5_low = big5_score[:low_dimension]    
+    personality.big5_high = big5_score[:high_dimension]
 
-    personality.holland6_score = scores[:holland6][:score]
-    personality.holland6_dimension = scores[:holland6][:dimension]
+    personality.holland6_score = holland6_score[:dimension_values]
+    personality.holland6_dimension = holland6_dimension
 
     personality.save!
-    user.save!(:validate => false)
+    user.save!
   end
 end

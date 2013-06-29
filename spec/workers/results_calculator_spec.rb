@@ -35,7 +35,6 @@ describe ResultsCalculator do
     it 'calculates the results and the profile description' do
       resultsCalc = ResultsCalculator.new 
       @game.status.should == :not_started
-      binding.pry
       resultsCalc.perform(@game.id)
 
       updated_game = Game.find(@game.id)
@@ -51,7 +50,7 @@ describe ResultsCalculator do
       guest.personality.should_not be_nil    
       guest.personality.profile_description.name.should == 'The Charger'
       guest.personality.big5_dimension.should == 'low_conscientiousness'
-      guest.personality.holland6_dimension.should == 'realistic'
+      guest.personality.holland6_dimension.should == 'social'
       guest.personality.big5_low.should == 'conscientiousness'
       guest.personality.big5_high.should == 'neuroticism'
       guest.personality.holland6_score.should_not be_nil
@@ -86,9 +85,8 @@ describe ResultsCalculator do
     it 'uses the events in the game.result.event_log if redis queue is empty' do
       # This is a scenario we may use to rerun some existing tests
       # This scenario should not happen normally in production
-      result = @game.create_result
-      result.event_log = @events
-      result.save
+      @game.event_log = @events
+      @game.save
 
       resultsCalc = ResultsCalculator.new 
       @game.status.should == :not_started
@@ -99,7 +97,6 @@ describe ResultsCalculator do
       # updated_game.result.event_log.should_not be_nil
       # updated_game.result.intermediate_results.should_not be_nil
       # updated_game.result.aggregate_results.should_not be_nil
-
       user.personality.should_not be_nil    
       user.personality.profile_description.name.should == 'The Charger'
     end
@@ -112,8 +109,8 @@ describe ResultsCalculator do
       updated_game.status.should == :no_results.to_s
     end
 
-    it 'leaves the user events in redis if result.save fails' do
-      Result.any_instance.stub(:save).and_return(false)
+    it 'leaves the user events in redis if game.save for the event_log fails' do
+      Game.any_instance.stub(:save).and_return(false)
       key = "game:#{@game.id}"
       record_events_in_redis(@game, @events)
       $redis.exists(key).should == true

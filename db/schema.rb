@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130624205339) do
+ActiveRecord::Schema.define(version: 20130628180100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.datetime "updated_at",      null: false
     t.string   "status"
     t.string   "calling_ip"
+    t.text     "event_log"
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
@@ -246,9 +247,16 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.text     "aggregate_results"
+    t.string   "result_type"
+    t.hstore   "score"
+    t.text     "calculations"
+    t.integer  "user_id"
   end
 
-  add_index "results", ["game_id"], name: "index_results_on_game_id", unique: true, using: :btree
+  add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree
+  add_index "results", ["result_type"], name: "index_results_on_result_type", using: :btree
+  add_index "results", ["score"], name: "index_results_on_score", using: :gin
+  add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
 
   create_table "tracker_settings", force: true do |t|
     t.integer  "user_id"
@@ -301,6 +309,7 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.string   "orientation"
     t.string   "education"
     t.string   "referred_by"
+    t.hstore   "stats"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

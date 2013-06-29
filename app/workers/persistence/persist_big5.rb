@@ -8,13 +8,13 @@ class PersistBig5
     result.result_type = :big5
     score = analysis_results[:big5][:score]
     result.score = {
-      dimension: score[:dimension]
-      low_dimension: score[:low_dimension]
-      high_dimension: score[:high_dimension]
+      dimension: score[:dimension],
+      low_dimension: score[:low_dimension],
+      high_dimension: score[:high_dimension],
       adjust_by: score[:adjust_by]
     }
     result.calculations = {
-      dimension_values: score[:dimension_values]
+      dimension_values: score[:dimension_values],
       final_results: analysis_results[:big5][:final_results]
     }
     result.save!

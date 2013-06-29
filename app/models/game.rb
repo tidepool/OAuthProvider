@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   serialize :stages, JSON
+  serialize :event_log, JSON
 
   # Game status: :not_started, :in_progress, :completed, :calculating_results, :results_ready, :no_results
                   
