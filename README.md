@@ -63,7 +63,7 @@ Installation:
         bundle exec rake db:migrate
         bundle exec rake db:seed
 
-* Setting up POW (http://pow.cx/): 
+* Setting up POW ( http://pow.cxi /): 
   (We are just using POW as a proxy/DNS server, it is not a web server.)
 
         curl get.pow.cx | sh

@@ -40,7 +40,7 @@ group :teamcity do
   # The below debugger-ruby_core_source is a dependency 
   # of debugger gem and it is failing to install before 1.2.2
   # https://github.com/cldwalker/debugger/issues/12
-  gem 'debugger-ruby_core_source', '~> 1.2.2'
+  gem 'debugger-ruby_core_source', '~> 1.2.3'
 end
 
 group :development, :test, :teamcity do
