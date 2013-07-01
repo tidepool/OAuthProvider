@@ -7,6 +7,7 @@ define([], function() {
       underscore: "bower_components/underscore-amd/underscore",
       jquery: "bower_components/jquery/jquery",
       jqueryui: "bower_components/jquery-ui/jqueryui",
+      jquiTouchPunch: 'bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch',
       backbone: "bower_components/backbone-amd/backbone",
       syphon: 'bower_components/tidepool-backbone.syphon/lib/amd/backbone.syphon',
       text: "bower_components/requirejs-text/text",
