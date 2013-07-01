@@ -4,6 +4,14 @@ describe PersistReactionTime do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }
 
+  let(:user_to_updated) { create(:user, stats: {"fastest_time" => "465",
+      "slowest_time" => "590" })}
+  let(:user_not_updated) { create(:user, stats: {"fastest_time" => "435",
+      "slowest_time" => "610" })}
+
+  let(:game_to_updated) { create(:game, user: user_to_updated) }
+  let(:game_not_updated) { create(:game, user: user_not_updated) }
+
   before(:all) do 
     @analysis_results = {
       reaction_time: {
@@ -71,14 +79,14 @@ describe PersistReactionTime do
   end
 
   it 'updates the user stats with the fastest and slowest if it is the fastest or slowest ever' do 
-    user.stats = {
-      "fastest_time" => "465",
-      "slowest_time" => "590"      
-    }
-    user.save!
+    # user.stats = {
+    #   "fastest_time" => "465",
+    #   "slowest_time" => "590"      
+    # }
+    # user.save!
+    user = user_to_updated
     persist_rt = PersistReactionTime.new
-    binding.pry
-    persist_rt.persist(game, @analysis_results)
+    persist_rt.persist(game_to_updated, @analysis_results)
 
     updated_user = User.find(user.id)
     updated_user.stats.should == {
@@ -88,13 +96,14 @@ describe PersistReactionTime do
   end
 
   it 'does not update the user stats with the fastest and slowest if it is not the fastest or slowest ever' do
-    user.stats = {
-      "fastest_time" => "435",
-      "slowest_time" => "610"      
-    }
-    user.save!
+    # user.stats = {
+    #   "fastest_time" => "435",
+    #   "slowest_time" => "610"      
+    # }
+    # user.save!
+    user = user_not_updated
     persist_rt = PersistReactionTime.new
-    persist_rt.persist(game, @analysis_results)
+    persist_rt.persist(game_not_updated, @analysis_results)
 
     updated_user = User.find(user.id)
     updated_user.stats.should == {

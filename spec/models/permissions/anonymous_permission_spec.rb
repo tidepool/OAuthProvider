@@ -24,7 +24,6 @@ module Permissions
     end
 
     it 'allows results' do
-      should_not allow(results, :create, others_game)
       should_not allow(results, :show, others_game)
       should_not allow(results, :progress, others_game)
     end

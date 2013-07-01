@@ -29,12 +29,14 @@ OAuthProvider::Application.routes.draw do
         post 'preorders', to: 'preorders#create'
 
         get 'results', to: 'results#index'
-        get 'results/latest', to: 'results#latest'
+        # get 'results/latest', to: 'results#latest'
+        get 'results/:id', to: 'results#show'
 
         resources :games do
-          get 'result' => 'results#show'
-          post 'result' => 'results#create'
-          get 'progress' => 'results#progress'
+          # get 'result' => 'results#show'
+          get 'results', to: 'results#index'
+          # post 'result' => 'results#create'
+          get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
         end
         # resources :authentications

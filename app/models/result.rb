@@ -9,5 +9,8 @@ class Result < ActiveRecord::Base
   # belongs_to :profile_description
   belongs_to :game
   belongs_to :user
-  
+
+  def self.find_for_type(game, result_type)
+    result = Result.where('game_id = ? and result_type = ?', game.id, result_type).first
+  end  
 end

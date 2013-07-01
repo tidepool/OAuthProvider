@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628180100) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "hstore"
+ActiveRecord::Schema.define(version: 20130630162536) do
 
   create_table "adjective_circles", force: true do |t|
     t.string   "name_pair"
@@ -251,6 +247,8 @@ ActiveRecord::Schema.define(version: 20130628180100) do
     t.hstore   "score"
     t.text     "calculations"
     t.integer  "user_id"
+    t.datetime "time_played"
+    t.datetime "time_calculated"
   end
 
   add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree
@@ -314,15 +312,5 @@ ActiveRecord::Schema.define(version: 20130628180100) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["referred_by"], name: "index_users_on_referred_by", using: :btree
-
-  create_table "vs_database_diagrams", id: false, force: true do |t|
-    t.string   "name",     limit: 80
-    t.text     "diadata"
-    t.string   "comment",  limit: 1022
-    t.text     "preview"
-    t.string   "lockinfo", limit: 80
-    t.datetime "locktime"
-    t.string   "version",  limit: 80
-  end
 
 end

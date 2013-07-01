@@ -41,15 +41,12 @@ describe ResultsCalculator do
       updated_game.status.should == :results_ready.to_s
       updated_game.results.length.should == 2
 
-      # updated_game.result.should_not be_nil
-      # updated_game.result.event_log.should_not be_nil
-      # updated_game.result.intermediate_results.should_not be_nil
-      # updated_game.result.aggregate_results.should_not be_nil
-
       # Below result depends on the exact dataset we fed from test_event_log.json
       guest.personality.should_not be_nil    
-      guest.personality.profile_description.name.should == 'The Charger'
-      guest.personality.big5_dimension.should == 'low_conscientiousness'
+      # guest.personality.profile_description.name.should == 'The Charger'
+      # guest.personality.big5_dimension.should == 'low_conscientiousness'
+      guest.personality.profile_description.name.should == 'The Shelter'
+      guest.personality.big5_dimension.should == 'high_neuroticism'
       guest.personality.holland6_dimension.should == 'social'
       guest.personality.big5_low.should == 'conscientiousness'
       guest.personality.big5_high.should == 'neuroticism'
@@ -98,7 +95,8 @@ describe ResultsCalculator do
       # updated_game.result.intermediate_results.should_not be_nil
       # updated_game.result.aggregate_results.should_not be_nil
       user.personality.should_not be_nil    
-      user.personality.profile_description.name.should == 'The Charger'
+      # user.personality.profile_description.name.should == 'The Charger'
+      user.personality.profile_description.name.should == 'The Shelter'
     end
 
     it 'changes the game status to :no_results if there are no user_events anywhere' do

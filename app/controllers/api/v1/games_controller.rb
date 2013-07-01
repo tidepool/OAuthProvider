@@ -52,7 +52,7 @@ class Api::V1::GamesController < Api::V1::ApiController
 
   def current_resource
     if params[:id]
-      @current_resource ||= Game.includes(:definition, :result).find(params[:id])
+      @current_resource ||= Game.includes(:definition).find(params[:id])
     else
       resource_method = "find_#{params[:action]}".to_sym
       @current_resource ||= Game.send(resource_method, target_user) if Game.respond_to?(resource_method)  
@@ -60,6 +60,6 @@ class Api::V1::GamesController < Api::V1::ApiController
   end
 
   def game_params
-    params.require(:game).permit(:stage_completed, :status)  
+    params.require(:game).permit(:stage_completed)  
   end
 end

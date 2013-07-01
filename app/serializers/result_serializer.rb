@@ -1,4 +1,4 @@
 class ResultSerializer < ActiveModel::Serializer
-  attributes :id, :aggregate_results, :intermediate_results, :game_id
+  attributes :id, :game_id, :user_id, :result_type, :score, :calculations, :time_played, :time_calculated
 
 end

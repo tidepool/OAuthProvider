@@ -1,4 +1,6 @@
 class PersistProfile 
+  include CalculationUtils
+
   def persist(game, analysis_results)
     return if !game && !game.user_id
 
@@ -34,5 +36,16 @@ class PersistProfile
 
     personality.save!
     user.save!
+
+    # There is only one result instance if this type per game
+    result = Result.find_for_type(game, 'profile')
+    result = game.results.build if result.nil?
+    result.score = {
+      "name" => profile_description.name,
+      "one_liner" => profile_description.one_liner,
+      "profile_description_id" => profile_description.id
+    }
+    record_times(game, result)
+    result.save!
   end
 end
