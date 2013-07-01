@@ -96,14 +96,14 @@ describe 'Game API' do
     lambda { Game.find(game_id) }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
-  it 'updates the stage_completed and status of the game' do
+  it 'updates the stage_completed but the status remains the same' do
     token = get_conn(user1)
     game_params = { stage_completed: 2, status: 'completed'}
     response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
         { body: { game: game_params } })
     updated_game = JSON.parse(response.body, symbolize_names: true)
     updated_game[:stage_completed].should == 2
-    updated_game[:status].should == 'completed'
+    updated_game[:status].should == 'not_started'
   end
 
   pending 'gets the latest game with profile calculation' 
