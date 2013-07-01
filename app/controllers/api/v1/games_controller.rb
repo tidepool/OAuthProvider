@@ -60,6 +60,6 @@ class Api::V1::GamesController < Api::V1::ApiController
   end
 
   def game_params
-    params.require(:game).permit(:stage_completed, :status)  
+    params.require(:game).permit(:stage_completed)  
   end
 end
