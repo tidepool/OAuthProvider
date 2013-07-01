@@ -29,9 +29,9 @@ class Api::V1::ResultsController < Api::V1::ApiController
       # Called for a user
       user = target_user
       if params[:type]
-        results = Result.where('user_id = ? and result_type = ?', user.id, params[:type])
+        results = Result.where('user_id = ? and result_type = ?', user.id, params[:type]).order('time_played')
       else
-        results = Result.where('user_id = ?', user.id)      
+        results = Result.where('user_id = ?', user.id).order('time_played')      
       end
       response_body = results
     end
@@ -42,7 +42,8 @@ class Api::V1::ResultsController < Api::V1::ApiController
   end
 
   def show
-    result = Result.find[params[:id]]
+    binding.pry
+    result = Result.find(params[:id])
     respond_to do |format|
       format.json { render :json => result, :status => :ok}
     end

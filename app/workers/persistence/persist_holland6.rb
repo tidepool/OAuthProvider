@@ -20,6 +20,7 @@ class PersistHolland6
       dimension_values: score[:dimension_values],
       final_results: analysis_results[:holland6][:final_results]
     }
+    result.analysis_version = score[:version]
     record_times(game, result)
     result.save!
   end

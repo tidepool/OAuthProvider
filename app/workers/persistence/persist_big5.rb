@@ -22,6 +22,7 @@ class PersistBig5
       dimension_values: score[:dimension_values],
       final_results: analysis_results[:big5][:final_results]
     }
+    result.analysis_version = score[:version]
     record_times(game, result)
     result.save!
   end

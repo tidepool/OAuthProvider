@@ -96,14 +96,13 @@ describe 'Game API' do
     lambda { Game.find(game_id) }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
-  it 'update to the the stage_completed' do
+  it 'updates to the the stage_completed' do
     token = get_conn(user1)
     game_params = { stage_completed: 1 }
     response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
         { body: { game: game_params } })
     updated_game = JSON.parse(response.body, symbolize_names: true)
     updated_game[:stage_completed].should == 1
-    updated_game[:status].should == 'completed'
   end
 
   describe 'Error and Edge Cases' do
@@ -115,5 +114,13 @@ describe 'Game API' do
       updated_game = JSON.parse(response.body, symbolize_names: true)
       updated_game[:status].should == 'not_started'
     end
+
+    # it 'should not update the status based on stage_completed if game playing is finished' do 
+    #   token = get_conn(user1)
+    #   game_params = { stage_completed: 1 }
+    #   response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
+    #       { body: { game: game_params } })
+    #   updated_game
+    # end
   end
 end

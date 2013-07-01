@@ -21,8 +21,9 @@ class PersistReactionTime
       "average_time" => score[:average_time]
     }
     result.calculations = {
-      final_results: analysis_results[:reaction_time][:final_results]
+      "final_results" => analysis_results[:reaction_time][:final_results]
     }
+    result.analysis_version = score[:version]
     record_times(game, result)
     result.save!
 

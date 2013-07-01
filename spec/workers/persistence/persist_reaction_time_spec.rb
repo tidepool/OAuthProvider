@@ -48,6 +48,17 @@ describe PersistReactionTime do
       "slowest_time" => "600", 
       "average_time" => "520"      
     }
+    result.analysis_version.should == '2.0'
+  end
+
+  it 'persists the time_played and time_calculated' do
+    persist_rt = PersistReactionTime.new
+    persist_rt.persist(game, @analysis_results)
+    game.results.should_not be_nil
+    game.results.length.should == 1
+    result = game.results[0]
+    result.time_played.should == game.date_taken
+    result.time_calculated.should > result.time_played
   end
 
   it 'has the demand calculation in the final results' do 
