@@ -37,12 +37,11 @@ class Api::V1::ResultsController < Api::V1::ApiController
     end
 
     respond_to do |format|
-      format.json { render :json => response_body, :status => status}
+      format.json { render :json => response_body, :status => status, :each_serializer => ResultSerializer}
     end    
   end
 
   def show
-    binding.pry
     result = Result.find(params[:id])
     respond_to do |format|
       format.json { render :json => result, :status => :ok}

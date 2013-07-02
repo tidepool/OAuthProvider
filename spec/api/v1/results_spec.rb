@@ -15,8 +15,8 @@ describe 'Results API' do
   let(:game_no_results) { create(:game, {user: user1, status: :no_results}) }
   let(:game_with_results) { create(:game, {user: user1, status: :results_ready}) }
 
-  let(:reaction_results) { create_list(:result, 10, game: game, user: user1, type: 'reaction_time')}
-  let(:emo_results) { create_list(:result, 5, game: game,  user: user1, type: 'emo')}
+  let(:reaction_results) { create_list(:result, 10, game: game, user: user1, type: 'ReactionTimeResult')}
+  let(:emo_results) { create_list(:result, 5, game: game,  user: user1, type: 'EmoResult')}
   let(:result) { create(:result, game: game_with_results, user: user1) }
  
   it 'starts the results calculation' do 
@@ -24,8 +24,8 @@ describe 'Results API' do
       fake_game = Game.find(game_id)
       fake_game.status = :results_ready
       fake_game.save!
-      fake_game.results.create(type: 'big5', score: {'bar' => 'foo'})
-      fake_game.results.create(type: 'holland6', score: {'bar' => 'foo'})      
+      fake_game.results.create(type: 'Big5Result', score: {'bar' => 'foo'})
+      fake_game.results.create(type: 'Holland6Result', score: {'bar' => 'foo'})      
     end
 
     token = get_conn(user1)
@@ -73,8 +73,8 @@ describe 'Results API' do
       fake_game = Game.find(game_id)
       fake_game.status = :results_ready
       fake_game.save!
-      fake_game.results.create(type: 'big5', score: {'bar' => 'foo'}, user_id: fake_game.user.id)
-      fake_game.results.create(type: 'holland6', score: {'bar' => 'foo'}, user_id: fake_game.user.id)      
+      fake_game.results.create(type: 'Big5Result', score: {'bar' => 'foo'}, user_id: fake_game.user.id)
+      fake_game.results.create(type: 'Holland6Result', score: {'bar' => 'foo'}, user_id: fake_game.user.id)      
     end
 
     token = get_conn(user1)
@@ -98,7 +98,7 @@ describe 'Results API' do
     results = Result.where(user: user1)
     results.length.should == 15
     token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/-/results.json?type=reaction_time")
+    response = token.get("#{@endpoint}/users/-/results.json?type=ReactionTimeResult")
     response.status.should == 200
     user_results = JSON.parse(response.body, :symbolize_names => true)
     user_results[:results].length.should == 10

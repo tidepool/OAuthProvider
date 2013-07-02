@@ -1,0 +1,3 @@
+class EmoResult < Result
+
+end

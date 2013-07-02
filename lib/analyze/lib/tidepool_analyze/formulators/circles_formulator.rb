@@ -125,22 +125,17 @@ module TidepoolAnalyze
       def calculate_zscores(size, distance_rank, overlap, circle)
         return 0.0, 0.0, 0.0 if circle.nil?
 
-        size_zscore = zscore(size, circle.size_mean, circle.size_sd)
-        distance_zscore = zscore(distance_rank, circle.distance_mean, circle.distance_sd)
+        size_zscore = TidepoolAnalyze::Utils::zscore(size, circle.size_mean, circle.size_sd)
+        distance_zscore = TidepoolAnalyze::Utils::zscore(distance_rank, circle.distance_mean, circle.distance_sd)
 
         # Circle overlaps are stored in % in the db, convert to 0..1
         overlap_mean = circle.overlap_mean / 100
         overlap_sd = circle.overlap_sd / 100
-        overlap_zscore = zscore(overlap, overlap_mean, overlap_sd)
+        overlap_zscore = TidepoolAnalyze::Utils::zscore(overlap, overlap_mean, overlap_sd)
 
         return size_zscore, distance_zscore, overlap_zscore
       end
 
-      # See for definition: http://en.wikipedia.org/wiki/Standard_score
-      def zscore(value, mean, sd)
-        return 0.0 if sd == 0
-        (value - mean) / sd
-      end
     end
   end
 end

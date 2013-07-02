@@ -14,7 +14,7 @@ module TidepoolAnalyze
         # Aggregate all Big5 values passed on to us
         count = 0
         input_data.each do | result |
-          if result 
+          if result && result[:big5]
             count += 1
             result.each do |dimension, value|
               big5_scores[dimension] += value[:average] if big5_scores[dimension]

@@ -10,6 +10,10 @@ module TidepoolAnalyze
       (zscore * 10) + 50
     end
 
+    def self.average(value, count)
+      (count == 0) ? 0 : value/count
+    end
+
     def self.load_formula(formula_desc)
       if formula_desc[:formula_path]
         formula_path = formula_desc[:formula_path]
