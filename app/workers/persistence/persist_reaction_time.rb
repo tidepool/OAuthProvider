@@ -9,11 +9,11 @@ class PersistReactionTime
     return if !user
 
     # There is only one result instance if this type per game
-    result = Result.find_for_type(game, 'big5')
+    result = Result.find_for_type(game, 'ReactionTimeResult')
     result = game.results.build if result.nil?
 
     result.user = user
-    result.result_type = :reaction_time
+    result.type = "ReactionTimeResult"
     score = analysis_results[:reaction_time][:score]
     result.score = {
       "fastest_time" => score[:fastest_time],

@@ -18,7 +18,8 @@ describe PersistReactionTime do
         score: {
           fastest_time: 455,
           slowest_time: 600, 
-          average_time: 520
+          average_time: 520,
+          version: "2.0"
         },
         final_results: [
           {
@@ -37,22 +38,26 @@ describe PersistReactionTime do
   end
 
   it 'persists the reaction_time results' do 
+    length = game.results.length
     persist_rt = PersistReactionTime.new
+
     persist_rt.persist(game, @analysis_results)
     game.results.should_not be_nil
     game.results.length.should == 1
     result = game.results[0]
-    result.result_type.should == 'reaction_time'
+    result.type.should == 'ReactionTimeResult'
     result.score.should == {
-      "fastest_time" => "455",
-      "slowest_time" => "600", 
-      "average_time" => "520"      
+      "fastest_time" => 455,
+      "slowest_time" => 600, 
+      "average_time" => 520      
     }
     result.analysis_version.should == '2.0'
   end
 
   it 'persists the time_played and time_calculated' do
+    length = game.results.length
     persist_rt = PersistReactionTime.new
+
     persist_rt.persist(game, @analysis_results)
     game.results.should_not be_nil
     game.results.length.should == 1

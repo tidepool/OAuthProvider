@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PersistProfile do
+describe PersistPersonality do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }
 
@@ -31,7 +31,7 @@ describe PersistProfile do
   end
 
   it 'persists the reaction_time results' do 
-    persist_pr = PersistProfile.new
+    persist_pr = PersistPersonality.new
 
   end
 end

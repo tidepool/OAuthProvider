@@ -6,11 +6,11 @@ class PersistBig5
     return unless analysis_results && analysis_results[:big5] && analysis_results[:big5][:score]
 
     # There is only one result instance if this type per game
-    result = Result.find_for_type(game, 'big5')
+    result = Result.find_for_type(game, 'Big5Result')
     result = game.results.build if result.nil?
 
     result.user_id = game.user_id
-    result.result_type = :big5
+    result.type = 'Big5Result'
     score = analysis_results[:big5][:score]
     result.score = {
       dimension: score[:dimension],

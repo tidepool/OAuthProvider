@@ -39,7 +39,7 @@ describe ResultsCalculator do
 
       updated_game = Game.find(@game.id)
       updated_game.status.should == :results_ready.to_s
-      updated_game.results.length.should == 2
+      updated_game.results.length.should == 3
 
       # Below result depends on the exact dataset we fed from test_event_log.json
       guest.personality.should_not be_nil    
@@ -118,7 +118,7 @@ describe ResultsCalculator do
     end
 
     it 'changes the game status to :no_results if one of the Persist calculators fail' do
-      PersistProfile.any_instance.stub(:persist) do |game, result, analysis_results|
+      PersistPersonality.any_instance.stub(:persist) do |game, result, analysis_results|
         raise Exception.new
       end
       key = "game:#{@game.id}"

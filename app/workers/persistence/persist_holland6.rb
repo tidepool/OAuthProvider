@@ -6,11 +6,11 @@ class PersistHolland6
     return unless analysis_results && analysis_results[:holland6] && analysis_results[:holland6][:score]
 
     # There is only one result instance if this type per game
-    result = Result.find_for_type(game, 'big5')
+    result = Result.find_for_type(game, 'Holland6Result')
     result = game.results.build if result.nil?
 
     result.user_id = game.user_id
-    result.result_type = :holland6
+    result.type = "Holland6Result"
     score = analysis_results[:holland6][:score]
     result.score = {
       dimension: score[:dimension],

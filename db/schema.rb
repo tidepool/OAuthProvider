@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130630162536) do
+ActiveRecord::Schema.define(version: 20130702013611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,17 +247,19 @@ ActiveRecord::Schema.define(version: 20130630162536) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.text     "aggregate_results"
-    t.string   "result_type"
     t.hstore   "score"
     t.text     "calculations"
     t.integer  "user_id"
     t.datetime "time_played"
     t.datetime "time_calculated"
+    t.string   "analysis_version"
+    t.string   "type"
   end
 
   add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree
-  add_index "results", ["result_type"], name: "index_results_on_result_type", using: :btree
   add_index "results", ["score"], name: "index_results_on_score", using: :gin
+  add_index "results", ["time_played"], name: "index_results_on_time_played", using: :btree
+  add_index "results", ["type"], name: "index_results_on_type", using: :btree
   add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
 
   create_table "tracker_settings", force: true do |t|

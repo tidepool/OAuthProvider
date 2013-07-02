@@ -29,7 +29,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       # Called for a user
       user = target_user
       if params[:type]
-        results = Result.where('user_id = ? and result_type = ?', user.id, params[:type]).order('time_played')
+        results = Result.where('user_id = ? and type = ?', user.id, params[:type]).order('time_played')
       else
         results = Result.where('user_id = ?', user.id).order('time_played')      
       end

@@ -15,8 +15,8 @@ describe 'Results API' do
   let(:game_no_results) { create(:game, {user: user1, status: :no_results}) }
   let(:game_with_results) { create(:game, {user: user1, status: :results_ready}) }
 
-  let(:reaction_results) { create_list(:result, 10, game: game, user: user1, result_type: 'reaction_time')}
-  let(:emo_results) { create_list(:result, 5, game: game,  user: user1, result_type: 'emo')}
+  let(:reaction_results) { create_list(:result, 10, game: game, user: user1, type: 'reaction_time')}
+  let(:emo_results) { create_list(:result, 5, game: game,  user: user1, type: 'emo')}
   let(:result) { create(:result, game: game_with_results, user: user1) }
  
   it 'starts the results calculation' do 
@@ -24,8 +24,8 @@ describe 'Results API' do
       fake_game = Game.find(game_id)
       fake_game.status = :results_ready
       fake_game.save!
-      fake_game.results.create(result_type: 'big5', score: {'bar' => 'foo'})
-      fake_game.results.create(result_type: 'holland6', score: {'bar' => 'foo'})      
+      fake_game.results.create(type: 'big5', score: {'bar' => 'foo'})
+      fake_game.results.create(type: 'holland6', score: {'bar' => 'foo'})      
     end
 
     token = get_conn(user1)
@@ -73,8 +73,8 @@ describe 'Results API' do
       fake_game = Game.find(game_id)
       fake_game.status = :results_ready
       fake_game.save!
-      fake_game.results.create(result_type: 'big5', score: {'bar' => 'foo'}, user_id: fake_game.user.id)
-      fake_game.results.create(result_type: 'holland6', score: {'bar' => 'foo'}, user_id: fake_game.user.id)      
+      fake_game.results.create(type: 'big5', score: {'bar' => 'foo'}, user_id: fake_game.user.id)
+      fake_game.results.create(type: 'holland6', score: {'bar' => 'foo'}, user_id: fake_game.user.id)      
     end
 
     token = get_conn(user1)
@@ -85,8 +85,8 @@ describe 'Results API' do
 
     response = JSON.parse(response.body, :symbolize_names => true)
     response[:results].length.should == 2
-    response[:results][0][:result_type].should_not be_nil
-    response[:results][1][:result_type].should_not be_nil
+    response[:results][0][:type].should_not be_nil
+    response[:results][1][:type].should_not be_nil
     response[:results][0][:score].should == { :bar => 'foo'}
     response[:results][0][:user_id].should_not be_nil
   end
