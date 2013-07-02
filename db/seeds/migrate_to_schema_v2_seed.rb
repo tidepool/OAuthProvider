@@ -4,7 +4,8 @@ class MigrateToSchemaV2Seed
     # event_log, aggregate_results, intermediate_results
     # Results new columns:
     # user_id, time_played, time_calculated, result_type, analysis_version, score, calculations
-
+    puts 'Creating the migration'
+    count = 0
     results = Result.all do |result|
       if result.analysis_version.nil?
         # Skip the already generated result
@@ -55,10 +56,12 @@ class MigrateToSchemaV2Seed
           end
           new_result.save
         end
+        count += 1
+        result.analysis_version = '1.0'
+        result.save
       end
-      
-      result.analysis_version = '1.0'
-      result.save
     end
+    puts "Results migrated: #{count}\n"
+    puts "Total results: #{Result.all.length}"
   end
 end
