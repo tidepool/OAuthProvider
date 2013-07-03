@@ -39,15 +39,18 @@ class PersistPersonality
 
     # There is only one result instance if this type per game
     result = Result.find_for_type(game, 'PersonalityResult')
-    result = game.results.build if result.nil?
+    result = game.results.build(:type => 'PersonalityResult') if result.nil?
 
-    result.type = "PersonalityResult"
-    result.score = {
-      "name" => profile_description.name,
-      "one_liner" => profile_description.one_liner,
-      "logo_url" => profile_description.logo_url,
-      "profile_description_id" => profile_description.id
-    }
+    result.name = profile_description.name
+    result.one_liner = profile_description.one_liner
+    result.logo_url = profile_description.logo_url
+    result.profile_description_id = profile_description.id # This is an HStore accessor so needs to use id
+    # result.score = {
+    #   "name" => profile_description.name,
+    #   "one_liner" => profile_description.one_liner,
+    #   "logo_url" => profile_description.logo_url,
+    #   "profile_description_id" => profile_description.id
+    # }
     result.calculations = {}
     result.analysis_version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
     record_times(game, result)

@@ -1,0 +1,82 @@
+{
+    "name" : "Just Reaction",
+    "unique_name": "reaction_time",
+    "instructions" : "",
+    "end_remarks" : "Congratulations. Please take a moment to register!",
+    "score_names" : ["reaction_time"],
+    "calculates" : ["reaction_time"],
+    "result_view": "Scores",
+    "stages" : [
+        {
+          "friendly_name": "Getting to Know You",
+          "view_name": "Survey",
+          "data": [
+            {
+              "question_id": "demand1-7",
+              "question_topic": "demand",
+              "question_type": "icon_slider",
+              "icon": "gfx-clock",
+              "steps": 7,
+              "question": "Have your skills, knowledge, or network been in demand over the past hour?",
+              "labels": [
+                  { "position": 0, "label": "Not at all" },
+                  { "position": "50%", "label": "Somewhat" },
+                  { "position": "100%", "label": "Very much" }
+              ]
+            },
+            {
+              "question_id": "stress1-7",
+              "question_topic": "stress",
+              "question_type": "icon_slider",
+              "icon": "gfx-stress",
+              "steps": 7,
+              "question": "How stressed have you been over the past hour?",
+              "labels": [
+                { "position": 0, "label": "Not at all" },
+                { "position": "50%", "label": "Somewhat" },
+                { "position": "100%", "label": "Very much" }
+              ]
+            }, 
+            {
+              "question_id": "stress1-7",
+              "question_topic": "productivity",
+              "question_type": "icon_slider",
+              "icon": "gfx-productive",
+              "steps": 7,
+              "question": "How productive have you been over the past hour?",
+              "labels": [
+                  { "position": 0, "label": "Not at all" },
+                  { "position": "50%", "label": "Somewhat" },
+                  { "position": "100%", "label": "Very much" }
+              ]
+            }
+          ]
+        },
+        {
+            "friendly_name" : "Reaction Time 1",
+            "instructions" : "Click the circle on the screen as soon as it turns red.",
+            "view_name": "ReactionTime",
+            "game_type" : "cognition",
+            "colors": ["red", "yellow", "green"],
+            "sequence_type": "simple",
+            "correct_sequence": "red",
+            "number_of_reds": "4",
+            "interval_floor": "500",
+            "interval_ceil": "1500",
+            "limit_to": "15"
+        },
+        {
+            "friendly_name" : "Reaction Time 2",
+            "instructions" : "Click the red circle only when it appears AFTER a yellow circle.",
+            "view_name": "ReactionTime",
+            "game_type" : "cognition",
+            "colors": ["red", "yellow", "green"],
+            "sequence_type": "complex",
+            "correct_sequence": ["red", "yellow"],
+            "number_of_reds": "4",
+            "interval_floor": "500",
+            "interval_ceil": "1500",
+            "limit_to": "15"
+        }
+      ]
+}

@@ -10,16 +10,19 @@ class PersistReactionTime
 
     # There is only one result instance if this type per game
     result = Result.find_for_type(game, 'ReactionTimeResult')
-    result = game.results.build if result.nil?
+    result = game.results.build(:type => 'ReactionTimeResult') if result.nil?
 
     result.user = user
-    result.type = "ReactionTimeResult"
     score = analysis_results[:reaction_time][:score]
-    result.score = {
-      "fastest_time" => score[:fastest_time],
-      "slowest_time" => score[:slowest_time],
-      "average_time" => score[:average_time]
-    }
+    result.fastest_time = score[:fastest_time]
+    result.slowest_time = score[:slowest_time]
+    result.average_time = score[:average_time]
+        
+    # result.score = {
+    #   "fastest_time" => score[:fastest_time],
+    #   "slowest_time" => score[:slowest_time],
+    #   "average_time" => score[:average_time]
+    # }
     result.calculations = {
       "final_results" => analysis_results[:reaction_time][:final_results]
     }

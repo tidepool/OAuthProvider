@@ -83,13 +83,12 @@ describe 'Results API' do
     response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
     response.status.should == 200
 
-    response = JSON.parse(response.body, :symbolize_names => true)
-    binding.pry
-    response[:results].length.should == 2
-    response[:results][0][:type].should_not be_nil
-    response[:results][1][:type].should_not be_nil
-    response[:results][0][:score].should == { :bar => 'foo'}
-    response[:results][0][:user_id].should_not be_nil
+    results = JSON.parse(response.body, :symbolize_names => true)
+    results.length.should == 2
+    results[0][:type].should_not be_nil
+    results[1][:type].should_not be_nil
+    results[0][:score].should == { :bar => 'foo'}
+    results[0][:user_id].should_not be_nil
   end
 
   it 'gets the results collection of a given type for a given user' do
@@ -102,7 +101,7 @@ describe 'Results API' do
     response = token.get("#{@endpoint}/users/-/results.json?type=ReactionTimeResult")
     response.status.should == 200
     user_results = JSON.parse(response.body, :symbolize_names => true)
-    user_results[:results].length.should == 10
+    user_results.length.should == 10
   end
 
   it 'gets the results collection for all types for a given user' do
@@ -114,7 +113,7 @@ describe 'Results API' do
     response = token.get("#{@endpoint}/users/-/results.json")
     response.status.should == 200
     user_results = JSON.parse(response.body, :symbolize_names => true)
-    user_results[:results].length.should == 15
+    user_results.length.should == 15
   end
 
   it 'shows a result given its id' do 

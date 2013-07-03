@@ -7,17 +7,20 @@ class PersistBig5
 
     # There is only one result instance if this type per game
     result = Result.find_for_type(game, 'Big5Result')
-    result = game.results.build if result.nil?
+    result = game.results.build(:type => 'Big5Result') if result.nil?
 
     result.user_id = game.user_id
-    result.type = 'Big5Result'
     score = analysis_results[:big5][:score]
-    result.score = {
-      dimension: score[:dimension],
-      low_dimension: score[:low_dimension],
-      high_dimension: score[:high_dimension],
-      adjust_by: score[:adjust_by]
-    }
+    result.dimension = score[:dimension]
+    result.low_dimension = score[:low_dimension]
+    result.high_dimension = score[:high_dimension]
+    result.adjust_by = score[:adjust_by]
+    # result.score = {
+    #   dimension: score[:dimension],
+    #   low_dimension: score[:low_dimension],
+    #   high_dimension: score[:high_dimension],
+    #   adjust_by: score[:adjust_by]
+    # }
     result.calculations = {
       dimension_values: score[:dimension_values],
       final_results: analysis_results[:big5][:final_results]

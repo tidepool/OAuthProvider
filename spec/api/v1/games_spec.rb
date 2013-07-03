@@ -77,8 +77,8 @@ describe 'Game API' do
     expected_games = game_list 
     response = token.get("#{@endpoint}/users/#{user2.id}/games.json")
     games = JSON.parse(response.body, symbolize_names: true)
-    games[:games].length.should == game_list.length
-    games[:games][0][:user_id].to_i.should == user2.id
+    games.length.should == game_list.length
+    games[0][:user_id].to_i.should == user2.id
   end
 
   it 'gets the latest game of the user' do
