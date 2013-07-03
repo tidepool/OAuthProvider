@@ -7,15 +7,7 @@ require 'csv'
 module TidepoolAnalyze
   class AnalyzeDispatcher
     def initialize
-
     end
-    # def initialize(stages, elements, circles)
-    #   # TODO: Remove dependency to stages, only used by CirclesTestAggregator.
-    #   #       Needs to record the game_type in the user events.
-    #   # @stages = stages
-    #   # @elements = elements
-    #   # @circles = circles
-    # end
 
     def analyze(user_events, score_names)
       score_names_whitelist = { 

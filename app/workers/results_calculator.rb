@@ -11,6 +11,7 @@ class ResultsCalculator
  
   def perform(game_id)
     key = "game:#{game_id}"
+
     game = Game.where('id = ?', game_id).first
     if game.nil?
       $redis.del(key)
@@ -52,6 +53,7 @@ class ResultsCalculator
         persist_calculation = klass_name.constantize.new()
         persist_calculation.persist(game, analysis_results)
       rescue Exception => e
+
         game.status = :no_results
         game.save
         logger.error("Game #{game_id} cannot persist #{klass_name} calculation. #{e.message}")

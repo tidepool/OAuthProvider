@@ -84,6 +84,7 @@ describe 'Results API' do
     response.status.should == 200
 
     response = JSON.parse(response.body, :symbolize_names => true)
+    binding.pry
     response[:results].length.should == 2
     response[:results][0][:type].should_not be_nil
     response[:results][1][:type].should_not be_nil

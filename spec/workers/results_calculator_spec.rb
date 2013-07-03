@@ -124,7 +124,7 @@ describe ResultsCalculator do
     end
 
     it 'changes the game status to :no_results if one of the Persist calculators fail' do
-      PersistPersonality.any_instance.stub(:persist) do |game, result, analysis_results|
+      PersistPersonality.any_instance.stub(:persist) do |game, analysis_results|
         raise Exception.new
       end
       key = "game:#{@game.id}"
