@@ -22,7 +22,8 @@ class PersistPersonality
 
     profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
 
-    personality = user.create_personality
+    personality = user.personality 
+    personality = user.create_personality if personality.nil?
     personality.profile_description = profile_description
     personality.game = game
 
