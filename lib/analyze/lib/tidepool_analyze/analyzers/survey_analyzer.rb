@@ -24,7 +24,14 @@ module TidepoolAnalyze
       #   ...
       # ]
       def calculate_result
-        @questions
+        result = @questions.map do |question| 
+          {
+            question_id: question["question_id"],
+            answer: question["answer"],
+            question_topic: question["question_topic"]
+          }
+        end
+        result
       end
 
       private
@@ -35,12 +42,13 @@ module TidepoolAnalyze
             @start_time = entry['record_time']
           when 'test_completed'
             @end_time = entry['record_time']
+            @questions = entry['questions']
           when 'changed'
-            @questions << {
-              question_id: entry['question_id'],
-              answer: entry['answer'],
-              question_topic: entry['question_topic']
-            }
+            # @questions << {
+            #   question_id: entry['question_id'],
+            #   answer: entry['answer'],
+            #   question_topic: entry['question_topic']
+            # }
           else
             puts "Unknown Event: #{entry}"
           end

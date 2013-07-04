@@ -3,7 +3,6 @@ module TidepoolAnalyze
     class Big5Score
       def calculate_score(input_data)
         return {} if input_data.class.to_s != 'Array'
-        
         big5_scores = {
             openness: 0,
             agreeableness: 0,
@@ -14,7 +13,7 @@ module TidepoolAnalyze
         # Aggregate all Big5 values passed on to us
         count = 0
         input_data.each do | result |
-          if result && result[:big5]
+          if result && result.has_key?(:conscientiousness)
             count += 1
             result.each do |dimension, value|
               big5_scores[dimension] += value[:average] if big5_scores[dimension]

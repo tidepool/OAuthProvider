@@ -25,19 +25,22 @@ module TidepoolAnalyze
         # We will take the last demand question from the input_data
         values = @formula['demand_for_user_time']
         answer_zscore = 0.0
+        answers = {}
         @questions.each do | question |
-          question_topic = question[:question_topic]
+          question_topic = question[:question_topic]     
+          answers[question_topic.to_sym] = {}     
+          answers[question_topic.to_sym][:answer] = question[:answer]
           if question_topic == 'demand'
-            answer = question[:answer]
-            answer_zscore = TidepoolAnalyze::Utils::zscore(answer, values.mean, values.std) 
+            # For now we are only calculating zscore and tscore for demand
+            # I am just recording the answers to the other question_topics 
+            answers[question_topic.to_sym][:zscore] = TidepoolAnalyze::Utils::zscore(answers[question_topic.to_sym][:answer], values.mean, values.std) 
+            
+            values = @formula['demand_and_reaction_time_correction']
+            corrected_answer = answers[question_topic.to_sym][:zscore] * values.correction_coefficient
+            answers[question_topic.to_sym][:tscore] = TidepoolAnalyze::Utils::tscore(corrected_answer)
           end
         end
-        values = @formula['demand_and_reaction_time_correction']
-        corrected_answer = answer_zscore * values.correction_coefficient
-        corrected_answer_tscore = TidepoolAnalyze::Utils::tscore(answer_zscore)
-        {
-          demand: corrected_answer_tscore
-        }
+        answers
       end
     end
   end

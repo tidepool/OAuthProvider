@@ -17,7 +17,7 @@ module TidepoolAnalyze
       it 'analyzes the user events and returns questions' do
         survey_analyzer = SurveyAnalyzer.new(@user_events, nil)
         questions = survey_analyzer.calculate_result
-        questions.length.should == 1
+        questions.length.should == 3
         question = questions[0]
         question[:question_id].should == 'demand_1234'
         question[:question_topic].should == 'demand'

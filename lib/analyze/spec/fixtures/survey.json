@@ -2,22 +2,39 @@
   {
     "event_type":"0",
     "module":"survey",
-    "stage":0,
-    "record_time":1360194757876,
+    "stage":8,
+    "record_time":1360195167248,
     "event_desc":"test_started"
   },
   {
     "event_type":"0",
     "module":"survey",
-    "stage":0,
-    "record_time":1360194757876,
-    "event_desc":"test_completed"
+    "stage":8,
+    "record_time":1360195167548,
+    "event_desc":"test_completed",
+    "questions":[
+      {
+       "question_id": "demand_1234", 
+       "question_topic": "demand",
+       "answer": 5
+      }, 
+      {
+       "question_id": "productivity_1234", 
+       "question_topic": "productivity",
+       "answer": 3      
+      },
+      {
+       "question_id": "stress_1111", 
+       "question_topic": "stress",
+       "answer": 2      
+      }
+    ]
   },
   {
     "event_type":"0",
     "module":"survey",
-    "stage":0,
-    "record_time":1360194757876,
+    "stage":8,
+    "record_time":1360195167848,
     "event_desc":"changed",
     "question_id": "demand_1234", 
     "question_topic": "demand",

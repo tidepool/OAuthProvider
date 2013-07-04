@@ -33,7 +33,6 @@ class PersistReactionTime
     # Update the User stats by the new fastest and slowest time if they are fastest and slowest
     new_fastest_time = fastest_time = user.stats ? user.stats["fastest_time"].to_i : nil
     new_slowest_time = slowest_time = user.stats ? user.stats["slowest_time"].to_i : nil
-
     new_fastest_time = score[:fastest_time] unless fastest_time && fastest_time < score[:fastest_time]
     new_slowest_time = score[:slowest_time] unless slowest_time && slowest_time > score[:slowest_time]
 

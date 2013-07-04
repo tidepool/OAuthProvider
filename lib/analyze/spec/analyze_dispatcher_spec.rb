@@ -253,7 +253,7 @@ module TidepoolAnalyze
 
     end
 
-    it 'analyzes the user_events and scores' do
+    it 'calculates the big5 and holland6 scores' do
       score_names = ['big5', 'holland6']
 
       analyze_dispatcher = AnalyzeDispatcher.new
@@ -265,83 +265,40 @@ module TidepoolAnalyze
       analysis[:holland6][:score].should_not be_nil
     end  
 
-    # it 'should generate intermediate results from modules' do
-    #   modules = @analyze_dispatcher.sort_events_to_modules(@events)
-    #   intermediate_results = @analyze_dispatcher.intermediate_results(modules)
-    #   intermediate_results.length.should == 3
-    #   intermediate_results[:image_rank].should_not be_nil
-    #   intermediate_results[:circles_test].should_not be_nil
-    #   intermediate_results[:reaction_time].should_not be_nil
-    # end
+    it 'calculates the reaction_time score' do
+      score_names = ['reaction_time']
 
-    # it 'should generate intermediate results in correct format' do
-    #   modules = @analyze_dispatcher.sort_events_to_modules(@events)
-    #   intermediate_results = @analyze_dispatcher.intermediate_results(modules)
-    #   intermediate_results.each do |module_name, module_results |
-    #     module_results.each do |module_result|
-    #       module_result[:results].should_not be_nil
-    #       module_result[:stage].should_not be_nil
-    #     end
-    #   end
-    # end
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis.length.should == 1
+      analysis[:reaction_time].should_not be_nil
+      analysis[:reaction_time][:score].should_not be_nil
+      analysis[:reaction_time][:final_results].should_not be_nil 
+      analysis[:reaction_time][:version].should == '2.0'
+      score = analysis[:reaction_time][:score]
+      final_results = analysis[:reaction_time][:final_results]
+      final_results.length.should > 0
 
-    # it 'should generate aggregate results from intermediate results' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results.length.should == 3
-    # end
+      score[:fastest_time].should_not be_nil
+      score[:slowest_time].should_not be_nil
+      score[:average_time].should_not be_nil
+    end
 
-    # it 'should generate aggregate results for image_rank module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:image_rank].should_not be_nil
+    it 'calculates the capacity score' do
+      score_names = ['capacity']
 
-    #   aggregate_results[:image_rank][:big5].should_not be_nil
-    #   dimensions = [:openness, :agreeableness, :conscientiousness, :extraversion, :neuroticism]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:image_rank][:big5][dimension].should_not be_nil
-    #   end
-    # end
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis.length.should == 1
+      analysis[:capacity].should_not be_nil
+      analysis[:capacity][:score].should_not be_nil
+      analysis[:capacity][:final_results].should_not be_nil 
+      analysis[:capacity][:version].should == '2.0'
+      score = analysis[:capacity][:score]
+      final_results = analysis[:capacity][:final_results]
+      final_results.length.should > 0
 
-    # it 'should generate aggregate results for circles_test module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:circles_test].should_not be_nil
-
-    #   aggregate_results[:circles_test][:big5].should_not be_nil
-    #   dimensions = [:openness, :agreeableness, :conscientiousness, :extraversion, :neuroticism]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:circles_test][:big5][dimension].should_not be_nil
-    #   end
-
-    #   aggregate_results[:circles_test][:holland6].should_not be_nil
-    #   dimensions = [:realistic, :artistic, :social, :enterprising, :investigative, :conventional]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:circles_test][:holland6][dimension].should_not be_nil
-    #   end
-    # end
-
-    # it 'should generate aggregate results for reaction_time module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:reaction_time].should_not be_nil
-
-    #   colors = [:red]
-    #   colors.each do |color|
-    #     aggregate_results[:reaction_time][color].should_not be_nil
-    #     measures = [:total_clicks_with_threshold, :total_clicks, :total_correct_clicks_with_threshold,
-    #       :average_time, :average_time_with_threshold, :average_correct_time_to_click,
-    #       :at_results, :atwt_results, :actc_results]
-
-    #     measures.each do |measure|
-    #       aggregate_results[:reaction_time][color][measure].should_not be_nil
-    #     end
-    #   end
-    # end
-
-    # it 'should analyze from saved events' do
-    #   score_names = ["big5", "holland6"]
-    #   results = @analyze_dispatcher.analyze(@events, score_names)
-    #   results[:event_log].should_not be_nil
-    #   results[:intermediate_results].should_not be_nil
-    #   results[:aggregate_results].should_not be_nil
-    #   results[:scores].should_not be_nil
-    # end
+      score[:demand].should_not be_nil
+    end
   end
 end

@@ -37,14 +37,18 @@ module TidepoolAnalyze
         formulator = DemandFormulator.new(@input_data, @formula)
         result = formulator.flatten_results_to_array(@input_data)
 
-        result.length.should == 3
+        result.length.should == 3        
         result[2][:question_topic].should == 'test'
       end
 
       it 'calculates the demand for demand topic questions' do
         formulator = DemandFormulator.new(@input_data, @formula)
-        result = formulator.calculate_result
+        result = formulator.calculate_result        
+        result.length.should == 3
         result[:demand].should_not be_nil
+        result[:demand][:answer].should == @input_data[0][0][:answer]
+        result[:demand][:zscore].should_not be_nil
+        result[:demand][:tscore].should_not be_nil
       end
     end
   end
