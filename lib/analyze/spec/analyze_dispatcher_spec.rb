@@ -227,6 +227,26 @@ module TidepoolAnalyze
 
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
+      analysis[:score].should == {
+        :dimension => "low_conscientiousness",
+        :dimension_values => {
+            :openness => 13.545517101280748,
+            :agreeableness => 18.956322022270864,
+            :conscientiousness => 10.0,
+            :extraversion => 22.453501732805346,
+            :neuroticism => 21.267963651267777 },
+        :low_dimension => :conscientiousness,
+        :high_dimension => :extraversion,
+        :adjust_by => 1.7080919421487604
+      }
+    end
+
+    it 'executes a big5_with_images recipe' do 
+      #TODO: Changethe recipe format!!
+      analysis = execute_recipe('big5_with_images')
+
+      analysis[:final_results].should_not be_nil
+      analysis[:score].should_not be_nil
     end
 
     it 'executes a holland6 recipe' do
