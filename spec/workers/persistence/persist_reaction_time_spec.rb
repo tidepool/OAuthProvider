@@ -40,9 +40,10 @@ describe PersistReactionTime do
   it 'persists the reaction_time results' do 
     persist_rt = PersistReactionTime.new
     persist_rt.persist(game, @analysis_results)
-    game.results.should_not be_nil
-    game.results.length.should == 1
-    result = game.results[0]
+    updated_game = Game.find(game.id)
+    updated_game.results.should_not be_nil
+    updated_game.results.length.should == 1
+    result = updated_game.results[0]
     result.type.should == 'ReactionTimeResult'
     result.score.should == {
       "fastest_time" => "455",
@@ -55,18 +56,20 @@ describe PersistReactionTime do
   it 'persists the time_played and time_calculated' do
     persist_rt = PersistReactionTime.new
     persist_rt.persist(game, @analysis_results)
-    game.results.should_not be_nil
-    game.results.length.should == 1
-    result = game.results[0]
-    result.time_played.should == game.date_taken
+    updated_game = Game.find(game.id)
+    updated_game.results.should_not be_nil
+    updated_game.results.length.should == 1
+    result = updated_game.results[0]
+    result.time_played.should == updated_game.date_taken
     result.time_calculated.should > result.time_played
   end
 
   it 'has the demand calculation in the final results' do 
     persist_rt = PersistReactionTime.new
     persist_rt.persist(game, @analysis_results)
-    game.results.should_not be_nil
-    result = game.results[0]
+    updated_game = Game.find(game.id)
+    updated_game.results.should_not be_nil
+    result = updated_game.results[0]
     result.calculations["final_results"].should_not be_nil
     result.calculations["final_results"].length.should == 2
     result.calculations["final_results"][0]["total_average_time_zscore"].should == -3.2
