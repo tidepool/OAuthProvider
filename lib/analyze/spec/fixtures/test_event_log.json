@@ -148,6 +148,7 @@
 {
   "event_type":"0",
   "module":"survey",
+  "game_id":461,
   "stage":8,
   "record_time":1360195167248,
   "event_desc":"test_started"
@@ -155,6 +156,7 @@
 {
   "event_type":"0",
   "module":"survey",
+  "game_id":461,
   "stage":8,
   "record_time":1360195167548,
   "event_desc":"test_completed",
@@ -179,6 +181,7 @@
 {
   "event_type":"0",
   "module":"survey",
+  "game_id":461,
   "stage":8,
   "record_time":1360195167848,
   "event_desc":"changed",

@@ -1,12 +1,15 @@
 module TidepoolAnalyze
   module Analyzer
     class ReactionTimeAnalyzer
+      include TidepoolAnalyze::Utils::EventValidator
+
       attr_reader :start_time, :end_time, :test_type, :click_targets, :color_sequence 
       attr_accessor :time_threshold
 
       #threshold is used to figure out clicks within and total and then subtract out
 
       def initialize(events, formula)
+        @events = events
         @click_targets = {}
         @start_time = 0
         @end_time = 0
@@ -14,8 +17,6 @@ module TidepoolAnalyze
         @correct_color = 'red'
         @time_threshold = 200
         @color_sequence = []
-        
-        process_events events
       end
 
       # Raw results are returned for each stage:
@@ -32,6 +33,9 @@ module TidepoolAnalyze
       # Time is coming from the browsers as EpochTime in number of miliseconds since Jan 1, 1970.
       # Ruby (and Unix) Epoch time is measured in seconds since Jan 1, 1970.
       def calculate_result
+        is_valid = process_events(@events)
+        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
+
         total_clicks = 0
         correct_clicks = 0
         average_time = 0
@@ -67,7 +71,13 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
+        is_valid = true
         events.each do |entry|
+          unless user_event_valid?(entry)
+            is_valid = false
+            break
+          end
+
           case entry['event_desc']
           when 'test_started'
             @test_type = entry['sequence_type']
@@ -114,10 +124,9 @@ module TidepoolAnalyze
                 :expected => false              
                 })
             end
-          else
-            puts "Unknown Event: #{entry}"
           end
         end
+        is_valid
       end
 
       def create_click_target_entry(color, sequence_no, values)

@@ -1,32 +1,31 @@
 module TidepoolAnalyze
   module Analyzer
     class ImageRankAnalyzer
+      include TidepoolAnalyze::Utils::EventValidator
+
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
       # Output Data Format:
-      # [
       #   {
       #     "animal" => 10,
-      #     "sunset" => 6
+      #     "sunset" => 6,
       #      ...
-      #    },
-      #   {
-      #     "animal" => 5,
-      #     ...
-      #   }
-      # ]
+      #    }
       def initialize(events, formula)
         @images = []
         @final_rank = []
-        process_events(events)
+        @events = events
       end
       
       # The image ranking comes in the range of [0..4]
       # This is the correct behaviour:
       # The lowest ranked image (4) will get a rank_multiplier 1
       def calculate_result
+        is_valid = process_events(@events)
+        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
+        raise RuntimeError, "final_rank not supplied: #{@final_rank}" if @final_rank.nil? or @final_rank.length != 5
+
         elements = {}
-        return elements if @final_rank.nil? or @final_rank.length != 5
         i = 0
         @images.each do |image|
           element_list = image['elements'].split(',')
@@ -46,22 +45,23 @@ module TidepoolAnalyze
       private
 
       def process_events(events)
+        is_valid = true
         events.each do |entry|
+          unless user_event_valid?(entry)
+            is_valid = false
+            break
+          end
+
           case entry['event_desc']
           when 'test_started'
-            @stage = entry['stage']
             @start_time = entry['record_time']
             @images = entry['image_sequence']
           when 'test_completed'
             @end_time = entry['record_time']
             @final_rank = entry['final_rank']
-          when 'image_drag_start'
-          when 'image_ranked'
-          when 'image_rank_cleared'
-          else
-            puts "Unknown Event: #{entry}"
           end
         end
+        is_valid
       end
     end
   end
