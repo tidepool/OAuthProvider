@@ -19,7 +19,7 @@ class EmotionsCirclesGenerator
         image_url = "/images/emotions_images/#{image["image_id"]}.jpg"
       end        
 
-      image_sequence << { trait: image["trait", 
+      image_sequence << { trait: image["trait"], 
         image_id: image["image_id"], 
         url: image_url
       }
