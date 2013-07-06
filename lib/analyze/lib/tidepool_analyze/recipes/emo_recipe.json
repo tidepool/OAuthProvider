@@ -1,0 +1,9 @@
+[
+  {
+    "user_event_source": "circles_test",
+    "analyzer": "CirclesTestAnalyzer", 
+    "formulator": "EmoFormulator",  
+    "formula_sheet": "emo_circles.csv",
+    "formula_key": "name"
+  }
+]

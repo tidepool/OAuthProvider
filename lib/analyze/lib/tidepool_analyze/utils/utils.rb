@@ -14,6 +14,17 @@ module TidepoolAnalyze
       (count == 0) ? 0 : value/count
     end
 
+    def self.merge_across_stages(input_data)
+      # Merges array of arrays into one array with contents of the inside arrays
+      single_array = []
+      input_data.each do | result |
+        result.each do | raw_result |
+          single_array << raw_result
+        end
+      end
+      single_array
+    end
+
     def self.load_formula(formula_desc)
       if formula_desc[:formula_path]
         formula_path = formula_desc[:formula_path]

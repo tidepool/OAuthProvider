@@ -68,19 +68,8 @@ module TidepoolAnalyze
       #                     average: 1 }
       #   }      
       def initialize(input_data, formula)
-        @raw_results = merge_across_stages(input_data)
+        @raw_results = TidepoolAnalyze::Utils::merge_across_stages(input_data)
         @circles = formula
-      end
-
-      def merge_across_stages(input_data)
-        # Merges array of arrays into one array with contents of the inside arrays
-        single_array = []
-        input_data.each do | result |
-          result.each do | raw_result |
-            single_array << raw_result
-          end
-        end
-        single_array
       end
 
       # Algorithm:

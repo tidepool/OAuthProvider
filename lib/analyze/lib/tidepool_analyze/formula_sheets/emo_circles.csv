@@ -1,6 +1,1 @@
-value,mean,std
-string,float,float
-Factor 1,1.37236,0.77857
-Factor 2,0.930758,0.573019
-Factor 3,1.170394,0.749148
-Factor 4,1.377737,0.919911
+name,mean,std,maps_tostring,float,float,stringanger,1.496121,0.886891,factor1disgust,1.496121,0.886891,factor1fear,1.496121,0.886891,factor1pain,1.496121,0.886891,factor1sadness,1.496121,0.886891,factor1surprise,1.496121,0.886891,factor1sympathy,1.496121,0.886891,factor1confused,1.155778,0.710837,factor2coyness,1.155778,0.710837,factor2embarrassment,1.155778,0.710837,factor2shame,1.155778,0.710837,factor2contentment,0.897779,0.591149,factor3happiness,0.897779,0.591149,factor3interest,0.897779,0.591149,factor3awe,0.897779,0.591149,factor3amused,1.148849,0.704299,factor4pride,1.148849,0.704299,factor4relief,1.148849,0.704299,factor4triumph,1.148849,0.704299,factor4desire_food,1.148849,0.704299,factor4desire_sex,1.377737,0.919911,factor5boredom,1.377737,0.919911,factor5
