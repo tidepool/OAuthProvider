@@ -23,7 +23,7 @@ module TidepoolAnalyze
 
         {
           factors: emo_scores,
-          all_under_20_percentile: input_data[:all_under_20_percentile],
+          flagged_result1: input_data[:flagged_result1],
           weakest_emotion: input_data[:weakest_emotion],
           strongest_emotion: input_data[:strongest_emotion]
         }

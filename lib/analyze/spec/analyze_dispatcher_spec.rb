@@ -316,6 +316,47 @@ module TidepoolAnalyze
       analysis = analyze_dispatcher.analyze(events, score_names)      
       analysis.should_not be_nil
       binding.pry
+      analysis[:emo][:score].should == {
+        :factors=> {
+          :factor1=>41.66610693205314,
+          :factor2=>44.92791625293482,
+          :factor3=>45.71085593272107,
+          :factor4=>46.654220307040134,
+          :factor5=>46.58723907733867
+        },
+        :flagged_result1=>false,
+        :weakest_emotion=> {
+          :emotion=>"amused", 
+          :distance_standard=>1.421512765416739},
+        :strongest_emotion=> {
+          :emotion=>"awe", 
+          :distance_standard=>0.3851313146973706}
+        }
+      analysis[:emo][:final_results].should_not be_nil
+      analysis[:emo][:final_results][0][:emo_distances].should == {
+        :amused=>1.421512765416739,
+        :awe=>0.3851313146973706,
+        :anger=>0.6871490010404313,
+        :boredom=>0.7060739719579999,
+        :confused=>1.421512765416739,
+        :contentment=>0.3851313146973706,
+        :coyness=>0.6871490010404313,
+        :desire_food=>0.7154387934587391,
+        :desire_sex=>1.421512765416739,
+        :disgust=>0.3851313146973706,
+        :embarrassment=>0.6871490010404313,
+        :fear=>0.7154387934587391,
+        :happiness=>1.421512765416739,
+        :interest=>0.3851313146973706,
+        :pain=>0.6871490010404313,
+        :pride=>0.7154387934587391,
+        :relief=>0.8568200008399066,
+        :sadness=>1.421512765416739,
+        :shame=>0.3851313146973706,
+        :surprise=>0.6871490010404313,
+        :sympathy=>0.7154387934587391,
+        :triumph=>0.8568200008399066
+      }
     end
 
     it 'calculates the capacity score' do

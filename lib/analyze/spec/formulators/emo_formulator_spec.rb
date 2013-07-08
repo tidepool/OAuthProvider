@@ -28,8 +28,37 @@ module TidepoolAnalyze
         @formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
       end
     
-      it 'calculates' do
+      it 'checks if a particular result needs to be flagged' do
+        analyzer = EmoFormulator.new([], nil)
+        aggregate_weighted_total = {
+          factor1: { average_zscore: -1.2 },
+          factor2: { average_zscore: -1.0 },
+          factor3: { average_zscore: -1.0 },
+          factor4: { average_zscore: -1.5 },
+          factor5: { average_zscore: 0.2 }
+        }
+        flagged = analyzer.check_if_flagged(aggregate_weighted_total, :factor5)
+        flagged.should == true
 
+        aggregate_weighted_total = {
+          factor1: { average_zscore: -1.2 },
+          factor2: { average_zscore: -1.0 },
+          factor3: { average_zscore: 1.0 },
+          factor4: { average_zscore: -1.5 },
+          factor5: { average_zscore: 0.2 }
+        }
+        flagged = analyzer.check_if_flagged(aggregate_weighted_total, :factor5)
+        flagged.should == false
+
+        aggregate_weighted_total = {
+          factor1: { average_zscore: -1.2 },
+          factor2: { average_zscore: -1.0 },
+          factor3: { average_zscore: -1.0 },
+          factor4: { average_zscore: -1.5 },
+          factor5: { average_zscore: 0.4 }
+        }
+        flagged = analyzer.check_if_flagged(aggregate_weighted_total, :factor5)
+        flagged.should == false
       end
 
     end

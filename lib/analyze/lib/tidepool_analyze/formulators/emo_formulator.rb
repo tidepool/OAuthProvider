@@ -54,11 +54,13 @@ module TidepoolAnalyze
       end
 
       ZSCORE_FOR_20_PERCENTILE = -0.8416
+      ZSCORE_FOR_FACTOR5 = 0.3186
       def calculate_result
         max_distance_standard, max_emotion = calculate_max_distance_standard(@raw_results)
         min_distance_standard, min_emotion = calculate_min_distance_standard(@raw_results)
 
         aggregate_weighted_total = {}
+        emo_distances = {}
         @raw_results.each do |result|
           emo_name = result[:trait1]
           circle = @circles[emo_name]
@@ -72,6 +74,7 @@ module TidepoolAnalyze
             else
               value = result[:distance_standard]
             end
+            emo_distances[emo_name.to_sym] = value
             aggregate_weighted_total[maps_to][:weighted_total] += value
             aggregate_weighted_total[maps_to][:count] += 1
             aggregate_weighted_total[maps_to][:mean] = circle.mean # Mean is the same for all maps_to factors
@@ -79,19 +82,17 @@ module TidepoolAnalyze
           end
         end
       
-        is_all_under_20_percentile = true
         # See for calculating percentiles for z-scores http://easycalculation.com/statistics/percentile-to-z-score.php
         aggregate_weighted_total.each do |maps_to, value|
           value[:average] = value[:weighted_total] / value[:count] if value[:count] != 0
           value[:average_zscore] = TidepoolAnalyze::Utils::zscore(value[:average], value[:mean], value[:std])
-          if value[:average_zscore] > ZSCORE_FOR_20_PERCENTILE
-            is_all_under_20_percentile = false
-          end
         end
+        flagged_result1 = check_if_flagged(aggregate_weighted_total, :factor5)
 
         {
           factors: aggregate_weighted_total,
-          all_under_20_percentile: is_all_under_20_percentile,
+          flagged_result1: flagged_result1,
+          emo_distances: emo_distances,
           weakest_emotion: {
             emotion: max_emotion,
             distance_standard: max_distance_standard
@@ -101,6 +102,16 @@ module TidepoolAnalyze
             distance_standard: min_distance_standard
           }
         }
+      end
+
+      def check_if_flagged(aggregate_weighted_total, factor_name)
+        flagged_result = true
+        aggregate_weighted_total.each do |maps_to, value|
+          if (maps_to != factor_name && value[:average_zscore] > ZSCORE_FOR_20_PERCENTILE) || (maps_to == factor_name && value[:average_zscore] > ZSCORE_FOR_FACTOR5)
+            flagged_result = false
+          end
+        end
+        flagged_result
       end
 
       def calculate_max_distance_standard(input)

@@ -45,7 +45,7 @@ describe PersistBig5 do
                 :std=>0.710837,
                 :average=>0.7952355205487431,
                 :average_zscore=>-0.5072083747065176}},
-            :all_under_20_percentile=>false,
+            :flagged_result1=>false,
             :weakest_emotion=>
              {:emotion=>"amused", :distance_standard=>1.421512765416739},
             :strongest_emotion=>
@@ -57,7 +57,7 @@ describe PersistBig5 do
              :factor3=>45.71085593272107,
              :factor4=>46.654220307040134,
              :factor5=>46.58723907733867},
-           :all_under_20_percentile=>false,
+           :flagged_result1=>false,
            :weakest_emotion=>
             {:emotion=>"amused", :distance_standard=>1.421512765416739},
            :strongest_emotion=>
@@ -81,7 +81,7 @@ describe PersistBig5 do
     result.factor5.should == "46.58723907733867"
     result.strongest_emotion.should == "awe"
     result.weakest_emotion.should == "amused"
-    result.all_under_20_percentile == "false"
+    result.flagged_result1 == "false"
   end
 
 end
