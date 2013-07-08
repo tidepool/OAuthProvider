@@ -65,7 +65,16 @@
             <b class="swatch colorMale"></b>
             <b class="swatch colorFemale"></b>
         </p>
+        <p class="muted">Game Colors</p>
+        <p class="colors">
+            <b class="swatch colorFastest"></b>
+            <b class="swatch colorSlowest"></b>
+        </p>
 
+
+        <h2>`Share` ui_widget</h2>
+        <p>This component abstracts away the differet share APIs and provides a common programatic and user interface for providing sharing functionality</p>
+        <p id="ShareContainer"></p>
 
         <h2>Buttons</h2>
         <p>You can use the <code>a</code>, <code>button</code>, <code>div</code>, or most any other tag, and you can put any kind of <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icon in them.</p>
@@ -206,7 +215,8 @@
                     'ui_widgets/psst',
                     'composite_views/perch',
                     'ui_widgets/proceed',
-                    'ui_widgets/formation/select_by_icon'
+                    'ui_widgets/formation/select_by_icon',
+                    'ui_widgets/share'
                 ], function (
                     Backbone,
                     Syphon,
@@ -216,7 +226,8 @@
                     psst,
                     perch,
                     proceed,
-                    SelectByIcon
+                    SelectByIcon,
+                    ShareView
                 ) {
                     $('#DividerHolder').append( dividerMarkup )
 
@@ -302,6 +313,23 @@
                     ).append('<br/>').append(
                             socialz.render().el
                     )
+
+                    tmi = new ShareView({ data: {
+                        title: "My personality is 'The Calculator'",
+                        text: 'You can find out your personality, too, at https://alpha.tidepool.co',
+                        link: 'https://alpha.tidepool.co',
+                        image: "https://alpha.tidepool.co/images/badges/The-Calculator.png"
+                    }})
+                    $('#ShareContainer').css({
+                        position: 'relative',
+                        height: '75px',
+                        border: '1px solid #ccc',
+                        'border-radius': '5px',
+                        background: 'white'
+                    }).html(
+                        tmi.render().el
+                    )
+
 
                 });
             });
