@@ -6,8 +6,8 @@ module TidepoolAnalyze
           input_data = input_data[0]
         end
         raise RuntimeError, "Factors are missing" if input_data[:factors].nil? || input_data[:factors].empty?
-        raise RuntimeError, "Furthest emotion missing" if input_data[:furthest_emotion].nil?
-        raise RuntimeError, "Closest emotion missing" if input_data[:closest_emotion].nil?
+        raise RuntimeError, "Furthest emotion missing" if input_data[:weakest_emotion].nil?
+        raise RuntimeError, "Closest emotion missing" if input_data[:strongest_emotion].nil?
 
         emo_scores = {
           factor1: 0,
@@ -23,8 +23,9 @@ module TidepoolAnalyze
 
         {
           factors: emo_scores,
-          furthest_emotion: input_data[:furthest_emotion],
-          closest_emotion: input_data[:closest_emotion]
+          all_under_20_percentile: input_data[:all_under_20_percentile],
+          weakest_emotion: input_data[:weakest_emotion],
+          strongest_emotion: input_data[:strongest_emotion]
         }
       end
     end

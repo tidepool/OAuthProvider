@@ -315,7 +315,7 @@ module TidepoolAnalyze
       analyze_dispatcher = AnalyzeDispatcher.new
       analysis = analyze_dispatcher.analyze(events, score_names)      
       analysis.should_not be_nil
-
+      binding.pry
     end
 
     it 'calculates the capacity score' do

@@ -16,8 +16,9 @@ class PersistEmo
     result.factor3 = score[:factors][:factor3]
     result.factor4 = score[:factors][:factor4]
     result.factor5 = score[:factors][:factor5]
-    result.furthest_emotion = score[:furthest_emotion][:emotion]
-    result.closest_emotion = score[:closest_emotion][:emotion]
+    result.weakest_emotion = score[:weakest_emotion][:emotion]
+    result.strongest_emotion = score[:strongest_emotion][:emotion]
+    result.all_under_20_percentile = score[:all_under_20_percentile]
 
     result.calculations = {
       final_results: analysis_results[:emo][:final_results]

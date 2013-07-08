@@ -37,12 +37,12 @@ module TidepoolAnalyze
       #       },
       #       ...
       #     },
-      #   furthest_emotion:
+      #   weakest_emotion:
       #     {
       #       emotion: "anger"
       #       distance_standard: 1.8
       #     },
-      #   closest_emotion:
+      #   strongest_emotion:
       #     {
       #       emotion: "boredom"
       #       distance_standard: 1.2
@@ -53,6 +53,7 @@ module TidepoolAnalyze
         @circles = formula
       end
 
+      ZSCORE_FOR_20_PERCENTILE = -0.8416
       def calculate_result
         max_distance_standard, max_emotion = calculate_max_distance_standard(@raw_results)
         min_distance_standard, min_emotion = calculate_min_distance_standard(@raw_results)
@@ -77,18 +78,25 @@ module TidepoolAnalyze
             aggregate_weighted_total[maps_to][:std] = circle.std # Std is the same for all maps_to factors            
           end
         end
-
+      
+        is_all_under_20_percentile = true
+        # See for calculating percentiles for z-scores http://easycalculation.com/statistics/percentile-to-z-score.php
         aggregate_weighted_total.each do |maps_to, value|
           value[:average] = value[:weighted_total] / value[:count] if value[:count] != 0
           value[:average_zscore] = TidepoolAnalyze::Utils::zscore(value[:average], value[:mean], value[:std])
+          if value[:average_zscore] > ZSCORE_FOR_20_PERCENTILE
+            is_all_under_20_percentile = false
+          end
         end
+
         {
           factors: aggregate_weighted_total,
-          furthest_emotion: {
+          all_under_20_percentile: is_all_under_20_percentile,
+          weakest_emotion: {
             emotion: max_emotion,
             distance_standard: max_distance_standard
           },
-          closest_emotion: {
+          strongest_emotion: {
             emotion: min_emotion,
             distance_standard: min_distance_standard
           }
