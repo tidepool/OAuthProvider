@@ -3,6 +3,11 @@ require 'spec_helper'
 
 module TidepoolAnalyze
   describe AnalyzeDispatcher do
+    def load_event_fixtures(filename) 
+      events_json = IO.read(File.expand_path("../fixtures/#{filename}", __FILE__))
+      events = JSON.parse(events_json)
+    end
+
     def run_analyzer(mini_game, formula_desc, analyzer_class)
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
@@ -302,6 +307,15 @@ module TidepoolAnalyze
       score[:fastest_time].should_not be_nil
       score[:slowest_time].should_not be_nil
       score[:average_time].should_not be_nil
+    end
+
+    it 'calculates the emotion score' do 
+      score_names = ['emo']
+      events = load_event_fixtures('emotions.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, score_names)      
+      analysis.should_not be_nil
+
     end
 
     it 'calculates the capacity score' do

@@ -48,13 +48,15 @@ module TidepoolAnalyze
       #       distance_standard: 1.2
       #     }
       # }
-      def initialize(input_data, formula)        
+      def initialize(input_data, formula)  
         @raw_results = TidepoolAnalyze::Utils::merge_across_stages(input_data)
         @circles = formula
       end
 
       def calculate_result
         max_distance_standard, max_emotion = calculate_max_distance_standard(@raw_results)
+        min_distance_standard, min_emotion = calculate_min_distance_standard(@raw_results)
+
         aggregate_weighted_total = {}
         @raw_results.each do |result|
           emo_name = result[:trait1]
@@ -99,10 +101,10 @@ module TidepoolAnalyze
         input.each do | circle |
           if circle[:distance_standard] > max_distance_standard
             max_distance_standard = circle[:distance_standard]
-            max_emo = circle[:trait]
+            max_emo = circle[:trait1]
           end
         end
-        max_distance_standard, max_emo
+        return max_distance_standard, max_emo
       end
 
       def calculate_min_distance_standard(input)
@@ -111,10 +113,10 @@ module TidepoolAnalyze
         input.each do | circle |
           if circle[:distance_standard] < min_distance_standard
             min_distance_standard = circle[:distance_standard]
-            min_emo = circle[:trait]
+            min_emo = circle[:trait1]
           end
         end
-        min_distance_standard, min_emo
+        return min_distance_standard, min_emo
       end
     end
   end

@@ -2,6 +2,9 @@ module TidepoolAnalyze
   module ScoreGenerator
     class EmoScore
       def calculate_score(input_data)
+        if input_data && input_data.class.to_s == 'Array' && !input_data.empty?
+          input_data = input_data[0]
+        end
         raise RuntimeError, "Factors are missing" if input_data[:factors].nil? || input_data[:factors].empty?
         raise RuntimeError, "Furthest emotion missing" if input_data[:furthest_emotion].nil?
         raise RuntimeError, "Closest emotion missing" if input_data[:closest_emotion].nil?
