@@ -67,7 +67,7 @@ module TidepoolAnalyze
       def result_by_game_type(raw_results)
         aggregate_weighted_total = {}
         raw_results.each do |result|
-          name_pair = "#{result[:trait1]}/#{result[:trait2]}"
+          name_pair = result[:name_pair]
           circle = @circles[name_pair]
           if !circle.nil? && circle.size_sd != 0 && circle.distance_sd != 0 && circle.overlap_sd != 0
             size_zscore, distance_zscore, overlap_zscore =

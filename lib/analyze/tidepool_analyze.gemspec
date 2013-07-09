@@ -19,5 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "activesupport"
   gem.add_development_dependency "rspec", "~> 2.13"
-  
+  gem.add_development_dependency "pry-debugger", "~> 0.2"
+  gem.add_development_dependency "pry-stack_explorer", "~> 0.4"
 end

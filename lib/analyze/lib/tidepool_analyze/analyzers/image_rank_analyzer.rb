@@ -3,7 +3,7 @@ module TidepoolAnalyze
     class ImageRankAnalyzer
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
-      def initialize(events)
+      def initialize(events, formula)
         @images = []
         @final_rank = []
         process_events(events)

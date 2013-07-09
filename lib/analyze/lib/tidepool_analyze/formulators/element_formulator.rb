@@ -1,26 +1,56 @@
 module TidepoolAnalyze 
   module Formulator
-    class ElementsFormulator
-      attr_accessor :elements
-
-      def initialize(raw_results, stages)
-        @raw_results = raw_results
-        @stages = stages
-        @elements = {}
+    class ElementFormulator
+      # Input Data Format:
+      # [
+      #   {
+      #     "animal" => 10,
+      #     "sunset" => 6
+      #      ...
+      #    },
+      #   {
+      #     "animal" => 5,
+      #     ...
+      #   }
+      # ]
+      # Output Data Format:
+      # {
+      #   extraversion: { weighted_total: extraversion,
+      #                   count: extraversion_count,
+      #                   average: extraversion_average },
+      #   conscientiousness: {  weighted_total: conscientiousness,
+      #                         count: conscientiousness_count,
+      #                         average: conscientiousness_average },
+      #   neuroticism: { weighted_total: neuroticism,
+      #                  count: neuroticism_count,
+      #                  average: neuroticism_average },
+      #   openness: { weighted_total: openness,
+      #               count: openness_count,
+      #               average: openness_average },
+      #   agreeableness: { weighted_total: agreeableness,
+      #                    count: agreeableness_count,
+      #                    average: agreeableness_average }
+      # }      
+      def initialize(input_data, formula)
+        @elements_across_stages = add_up_elements_from_stages(input_data)
+        @elements = formula
       end
 
-      # Raw Result Format:
-      #[
-      #    :stage => "0",
-      #    :results => {
-      #      "animal" => 10,
-      #      "sunset" => 6
-      #      ...
-      #    }
-      #]
-      def calculate_result
-        results_across_stages = flatten_stages_to_results
+      def add_up_elements_from_stages(input_data)
+        merged_results = {}
+        input_data.each do |entry|
+          entry.each do |element, value|
+            if merged_results[element]
+              merged_results[element] += value
+            else
+              merged_results[element] = value
+            end
+          end
+        end
+        merged_results
+      end
 
+      def calculate_result
         extraversion = 0.0
         conscientiousness = 0.0
         neuroticism = 0.0
@@ -32,7 +62,7 @@ module TidepoolAnalyze
         neuroticism_count = 0
         openness_count = 0
         agreeableness_count = 0
-        results_across_stages.each do |element_name, value|
+        @elements_across_stages.each do |element_name, value|
           # "cf:" is a legacy prefix, if it exists remove it.
           element_name = element_name[3..-1] if element_name[0..2] == 'cf:'
           if @elements[element_name] && @elements[element_name].standard_deviation != 0
@@ -56,38 +86,22 @@ module TidepoolAnalyze
         openness_average = (openness_count == 0) ? 0 : openness/openness_count
         agreeableness_average = (agreeableness_count == 0) ? 0 : agreeableness/agreeableness_count
         {
-          big5: {
-              extraversion: { weighted_total: extraversion,
-                              count: extraversion_count,
-                              average: extraversion_average },
-              conscientiousness: {  weighted_total: conscientiousness,
-                                    count: conscientiousness_count,
-                                    average: conscientiousness_average },
-              neuroticism: { weighted_total: neuroticism,
-                             count: neuroticism_count,
-                             average: neuroticism_average },
-              openness: { weighted_total: openness,
-                          count: openness_count,
-                          average: openness_average },
-              agreeableness: { weighted_total: agreeableness,
-                               count: agreeableness_count,
-                               average: agreeableness_average }
-            }
+          extraversion: { weighted_total: extraversion,
+                          count: extraversion_count,
+                          average: extraversion_average },
+          conscientiousness: {  weighted_total: conscientiousness,
+                                count: conscientiousness_count,
+                                average: conscientiousness_average },
+          neuroticism: { weighted_total: neuroticism,
+                         count: neuroticism_count,
+                         average: neuroticism_average },
+          openness: { weighted_total: openness,
+                      count: openness_count,
+                      average: openness_average },
+          agreeableness: { weighted_total: agreeableness,
+                           count: agreeableness_count,
+                           average: agreeableness_average }
         }
-      end
-
-      def flatten_stages_to_results
-        merged_results = {}
-        @raw_results.each do |entry|
-          entry[:results].each do |element, value|
-            if merged_results[element]
-              merged_results[element] += value
-            else
-              merged_results[element] = value
-            end
-          end
-        end
-        merged_results
       end
     end
   end
