@@ -32,25 +32,35 @@ module TidepoolAnalyze
       #                    average: agreeableness_average }
       # }      
       def initialize(input_data, formula)
-        @elements_across_stages = add_up_elements_from_stages(input_data)
+        # @elements_across_stages = add_up_elements_from_stages(input_data)
+        @elements_per_stage = input_data
         @elements = formula
       end
 
-      def add_up_elements_from_stages(input_data)
-        merged_results = {}
-        input_data.each do |entry|
-          entry.each do |element, value|
-            if merged_results[element]
-              merged_results[element] += value
-            else
-              merged_results[element] = value
-            end
+      def calculate_result
+        results = []
+        @elements_per_stage.each do |element_set|
+          results << calculate_result_per_stage(element_set)
+        end
+
+        final_result = {}
+        results.each do |result|
+          result.each do |dimension, value|
+            weighted_total = final_result[dimension] ? final_result[dimension][:weighted_total] + value[:weighted_total] : value[:weighted_total]
+            count = final_result[dimension] ? final_result[dimension][:count] + value[:count] : value[:count]
+            final_result[dimension] = {
+              weighted_total: weighted_total,
+              count: count
+            }
           end
         end
-        merged_results
+        final_result.each do |dimension, value|
+          final_result[dimension][:average] = TidepoolAnalyze::Utils::average(value[:weighted_total], value[:count])
+        end
+        final_result
       end
 
-      def calculate_result
+      def calculate_result_per_stage(element_set)
         extraversion = 0.0
         conscientiousness = 0.0
         neuroticism = 0.0
@@ -62,11 +72,12 @@ module TidepoolAnalyze
         neuroticism_count = 0
         openness_count = 0
         agreeableness_count = 0
-        @elements_across_stages.each do |element_name, value|
+        element_set.each do |element_name, value|
           # "cf:" is a legacy prefix, if it exists remove it.
           element_name = element_name[3..-1] if element_name[0..2] == 'cf:'
           if @elements[element_name] && @elements[element_name].standard_deviation != 0
-            zscore = (value - @elements[element_name].mean) / @elements[element_name].standard_deviation
+            zscore = TidepoolAnalyze::Utils::zscore(value, @elements[element_name].mean, @elements[element_name].standard_deviation)
+            # zscore = (value - @elements[element_name].mean) / @elements[element_name].standard_deviation
 
             extraversion += @elements[element_name].weight_extraversion * zscore
             extraversion_count += 1 if @elements[element_name].weight_extraversion != 0
@@ -80,11 +91,11 @@ module TidepoolAnalyze
             agreeableness_count += 1 if @elements[element_name].weight_agreeableness != 0
           end
         end
-        extraversion_average = (extraversion_count == 0) ? 0 : extraversion/extraversion_count
-        conscientiousness_average = (conscientiousness_count == 0) ? 0 : conscientiousness/conscientiousness_count
-        neuroticism_average = (neuroticism_count == 0) ? 0 : neuroticism/neuroticism_count
-        openness_average = (openness_count == 0) ? 0 : openness/openness_count
-        agreeableness_average = (agreeableness_count == 0) ? 0 : agreeableness/agreeableness_count
+        extraversion_average = TidepoolAnalyze::Utils::average(extraversion, extraversion_count)
+        conscientiousness_average = TidepoolAnalyze::Utils::average(conscientiousness, conscientiousness_count)
+        neuroticism_average = TidepoolAnalyze::Utils::average(neuroticism, neuroticism_count)
+        openness_average = TidepoolAnalyze::Utils::average(openness, openness_count)
+        agreeableness_average = TidepoolAnalyze::Utils::average(agreeableness, agreeableness_count)
         {
           extraversion: { weighted_total: extraversion,
                           count: extraversion_count,
@@ -103,6 +114,7 @@ module TidepoolAnalyze
                            average: agreeableness_average }
         }
       end
+
     end
   end
 end

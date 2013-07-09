@@ -1,10 +1,8 @@
 module TidepoolAnalyze
   module ScoreGenerator
     class Big5Score
-
       def calculate_score(input_data)
         return {} if input_data.class.to_s != 'Array'
-        
         big5_scores = {
             openness: 0,
             agreeableness: 0,
@@ -15,7 +13,7 @@ module TidepoolAnalyze
         # Aggregate all Big5 values passed on to us
         count = 0
         input_data.each do | result |
-          if result 
+          if result && result.has_key?(:conscientiousness)
             count += 1
             result.each do |dimension, value|
               big5_scores[dimension] += value[:average] if big5_scores[dimension]
@@ -65,7 +63,7 @@ module TidepoolAnalyze
         final_score = (high_big5_value - average_big5).abs > (low_big5_value - average_big5).abs ? "high_#{high_big5_dimension.to_s}" : "low_#{low_big5_dimension.to_s}"
         {
           dimension: final_score,
-          score: big5_scores,
+          dimension_values: big5_scores,
           low_dimension: low_big5_dimension,
           high_dimension: high_big5_dimension,
           adjust_by: adjust_by 

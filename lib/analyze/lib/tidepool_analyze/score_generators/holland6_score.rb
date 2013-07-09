@@ -14,7 +14,7 @@ module TidepoolAnalyze
         }
         count = 0
         input_data.each do | result |
-          if result
+          if result && result.has_key?(:realistic)
             count += 1
             result.each do |dimension, value|
               holland6_scores[dimension] += value[:average] if holland6_scores[dimension]
@@ -56,7 +56,7 @@ module TidepoolAnalyze
 
         {
           dimension: final_score,
-          score: holland6_scores,
+          dimension_values: holland6_scores,
           adjust_by: adjust_by
         }
       end

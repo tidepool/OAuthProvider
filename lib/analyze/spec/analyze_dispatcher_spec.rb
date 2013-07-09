@@ -3,19 +3,24 @@ require 'spec_helper'
 
 module TidepoolAnalyze
   describe AnalyzeDispatcher do
+    def load_event_fixtures(filename) 
+      events_json = IO.read(File.expand_path("../fixtures/#{filename}", __FILE__))
+      events = JSON.parse(events_json)
+    end
+
     def run_analyzer(mini_game, formula_desc, analyzer_class)
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
       input_data = mini_game_events[mini_game]
 
-      formula = analyze_dispatcher.load_formula(formula_desc)
+      formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
 
       results = analyze_dispatcher.run_analyzer(analyzer_class, formula, input_data)
     end
 
     def run_formulator(input_data, formula_desc, formulator_class)
       analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
+      formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
       analyze_dispatcher.run_formulator(formulator_class, formula, input_data)
     end
 
@@ -39,7 +44,7 @@ module TidepoolAnalyze
     it 'sorts user_events into mini_game_events' do
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
-      mini_game_events.length.should == 3
+      mini_game_events.length.should == 4
       mini_game_events['reaction_time'].should_not be_nil
       mini_game_events['reaction_time'].length.should == 2
       mini_game_events['reaction_time'].each do |stage, stage_events|
@@ -51,6 +56,9 @@ module TidepoolAnalyze
       mini_game_events['image_rank'].length.should == 1
       mini_game_events['circles_test'].should_not be_nil
       mini_game_events['circles_test'].length.should == 5
+      mini_game_events['survey'].should_not be_nil
+      mini_game_events['survey'].length.should == 1
+
     end
 
     it 'reads the recipes for given score_name' do
@@ -62,57 +70,6 @@ module TidepoolAnalyze
       recipe[0][:formulator].should == 'CirclesFormulator'
       recipe[0][:formula_sheet].should == 'big5_circles.csv'
       recipe[0][:formula_key].should == 'name_pair'
-    end
-
-    it 'loads the formula for big5 circles' do
-      formula_desc = {
-              formula_sheet: 'big5_circles.csv',
-              formula_key: 'name_pair' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["Sociable/Adventurous"].should_not be_nil
-      formula.length.should == 10
-
-      circle_data = formula["Sociable/Adventurous"] 
-      circle_data.name_pair.should == "Sociable/Adventurous"
-      circle_data.id == 1
-      circle_data.size_weight.should == 0.9
-      circle_data.size_sd.should == 1.3
-      circle_data.size_mean.should == 2.5
-    end
-
-    it 'loads the formula for holland6 circles' do
-      formula_desc = {
-              formula_sheet: 'holland6_circles.csv',
-              formula_key: 'name_pair' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["Persuasive/Enthusiastic"].should_not be_nil
-      formula.length.should == 6
-
-      circle_data = formula["Persuasive/Enthusiastic"] 
-      circle_data.name_pair.should == "Persuasive/Enthusiastic"
-      circle_data.id == 14
-      circle_data.size_weight.should == 0.9
-      circle_data.size_sd.should == 1.4
-      circle_data.size_mean.should == 3.34
-    end
-
-    it 'loads the formula for elements' do
-      formula_desc = {
-              formula_sheet: 'elements.csv',
-              formula_key: 'name' }
-      analyze_dispatcher = AnalyzeDispatcher.new
-      formula = analyze_dispatcher.load_formula(formula_desc)
-      formula["caucasian"].should_not be_nil
-      formula.length.should == 172
-      
-      element_data = formula["caucasian"] 
-      element_data.name.should == "caucasian"
-      element_data.id == 35
-      element_data.standard_deviation.should == 3.376691
-      element_data.mean.should == 9.29876
-      element_data.weight_extraversion.should == 0
     end
 
     it 'runs the analyzer for big5 circles_test' do
@@ -232,7 +189,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('big5', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:low_dimension].should_not be_nil
       score[:high_dimension].should_not be_nil
       score[:adjust_by].should_not be_nil
@@ -249,7 +206,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('big5', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:low_dimension].should_not be_nil
       score[:high_dimension].should_not be_nil
       score[:adjust_by].should_not be_nil
@@ -266,7 +223,7 @@ module TidepoolAnalyze
       score_input << result
       score = run_score_generator('holland6', score_input)
       score[:dimension].should_not be_nil
-      score[:score].should_not be_nil
+      score[:dimension_values].should_not be_nil
       score[:adjust_by].should_not be_nil
     end
 
@@ -275,6 +232,27 @@ module TidepoolAnalyze
 
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
+      analysis[:score].should == {
+        :dimension => "low_conscientiousness",
+        :dimension_values => {
+            :openness => 13.545517101280748,
+            :agreeableness => 18.956322022270864,
+            :conscientiousness => 10.0,
+            :extraversion => 22.453501732805346,
+            :neuroticism => 21.267963651267777 },
+        :low_dimension => :conscientiousness,
+        :high_dimension => :extraversion,
+        :adjust_by => 1.7080919421487604
+      }
+    end
+
+    it 'executes a big5_with_images recipe' do 
+      #TODO: Changethe recipe format!!
+      pending
+      # analysis = execute_recipe('big5_with_images')
+
+      # analysis[:final_results].should_not be_nil
+      # analysis[:score].should_not be_nil
     end
 
     it 'executes a holland6 recipe' do
@@ -284,7 +262,24 @@ module TidepoolAnalyze
       analysis[:score].should_not be_nil
     end
 
-    it 'analyzes the user_events and scores' do
+    it 'executes a reaction_time recipe' do 
+      analysis = execute_recipe('reaction_time')      
+      analysis.should_not be_nil
+      analysis[:final_results].length.should == 2
+      analysis[:final_results][0][:demand].should_not be_nil
+
+      analysis[:final_results][1][:min_time].should_not be_nil
+
+      analysis[:score].should_not be_nil
+    end
+
+    it 'executes a capacity recipe' do
+      analysis = execute_recipe('capacity')
+      analysis.should_not be_nil
+
+    end
+
+    it 'calculates the big5 and holland6 scores' do
       score_names = ['big5', 'holland6']
 
       analyze_dispatcher = AnalyzeDispatcher.new
@@ -296,83 +291,89 @@ module TidepoolAnalyze
       analysis[:holland6][:score].should_not be_nil
     end  
 
-    # it 'should generate intermediate results from modules' do
-    #   modules = @analyze_dispatcher.sort_events_to_modules(@events)
-    #   intermediate_results = @analyze_dispatcher.intermediate_results(modules)
-    #   intermediate_results.length.should == 3
-    #   intermediate_results[:image_rank].should_not be_nil
-    #   intermediate_results[:circles_test].should_not be_nil
-    #   intermediate_results[:reaction_time].should_not be_nil
-    # end
+    it 'calculates the reaction_time score' do
+      score_names = ['reaction_time']
 
-    # it 'should generate intermediate results in correct format' do
-    #   modules = @analyze_dispatcher.sort_events_to_modules(@events)
-    #   intermediate_results = @analyze_dispatcher.intermediate_results(modules)
-    #   intermediate_results.each do |module_name, module_results |
-    #     module_results.each do |module_result|
-    #       module_result[:results].should_not be_nil
-    #       module_result[:stage].should_not be_nil
-    #     end
-    #   end
-    # end
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis.length.should == 1
+      analysis[:reaction_time].should_not be_nil
+      analysis[:reaction_time][:score].should_not be_nil
+      analysis[:reaction_time][:final_results].should_not be_nil 
+      analysis[:reaction_time][:version].should == '2.0'
+      score = analysis[:reaction_time][:score]
+      final_results = analysis[:reaction_time][:final_results]
+      final_results.length.should > 0
 
-    # it 'should generate aggregate results from intermediate results' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results.length.should == 3
-    # end
+      score[:fastest_time].should_not be_nil
+      score[:slowest_time].should_not be_nil
+      score[:average_time].should_not be_nil
+    end
 
-    # it 'should generate aggregate results for image_rank module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:image_rank].should_not be_nil
+    it 'calculates the emotion score' do 
+      score_names = ['emo']
+      events = load_event_fixtures('emotions.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, score_names)      
+      analysis.should_not be_nil
+      analysis[:emo][:score].should == {
+        :factors=> {
+          :factor1=>41.66610693205314,
+          :factor2=>44.92791625293482,
+          :factor3=>45.71085593272107,
+          :factor4=>46.654220307040134,
+          :factor5=>46.58723907733867
+        },
+        :flagged_result1=>false,
+        :weakest_emotion=> {
+          :emotion=>"amused", 
+          :distance_standard=>1.421512765416739},
+        :strongest_emotion=> {
+          :emotion=>"awe", 
+          :distance_standard=>0.3851313146973706}
+        }
+      analysis[:emo][:final_results].should_not be_nil
+      analysis[:emo][:final_results][0][:emo_distances].should == {
+        :amused=>1.421512765416739,
+        :awe=>0.3851313146973706,
+        :anger=>0.6871490010404313,
+        :boredom=>0.7060739719579999,
+        :confused=>1.421512765416739,
+        :contentment=>0.3851313146973706,
+        :coyness=>0.6871490010404313,
+        :desire_food=>0.7154387934587391,
+        :desire_sex=>1.421512765416739,
+        :disgust=>0.3851313146973706,
+        :embarrassment=>0.6871490010404313,
+        :fear=>0.7154387934587391,
+        :happiness=>1.421512765416739,
+        :interest=>0.3851313146973706,
+        :pain=>0.6871490010404313,
+        :pride=>0.7154387934587391,
+        :relief=>0.8568200008399066,
+        :sadness=>1.421512765416739,
+        :shame=>0.3851313146973706,
+        :surprise=>0.6871490010404313,
+        :sympathy=>0.7154387934587391,
+        :triumph=>0.8568200008399066
+      }
+    end
 
-    #   aggregate_results[:image_rank][:big5].should_not be_nil
-    #   dimensions = [:openness, :agreeableness, :conscientiousness, :extraversion, :neuroticism]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:image_rank][:big5][dimension].should_not be_nil
-    #   end
-    # end
+    it 'calculates the capacity score' do
+      score_names = ['capacity']
 
-    # it 'should generate aggregate results for circles_test module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:circles_test].should_not be_nil
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis.length.should == 1
+      analysis[:capacity].should_not be_nil
+      analysis[:capacity][:score].should_not be_nil
+      analysis[:capacity][:final_results].should_not be_nil 
+      analysis[:capacity][:version].should == '2.0'
+      score = analysis[:capacity][:score]
+      final_results = analysis[:capacity][:final_results]
+      final_results.length.should > 0
 
-    #   aggregate_results[:circles_test][:big5].should_not be_nil
-    #   dimensions = [:openness, :agreeableness, :conscientiousness, :extraversion, :neuroticism]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:circles_test][:big5][dimension].should_not be_nil
-    #   end
-
-    #   aggregate_results[:circles_test][:holland6].should_not be_nil
-    #   dimensions = [:realistic, :artistic, :social, :enterprising, :investigative, :conventional]
-    #   dimensions.each do |dimension|
-    #     aggregate_results[:circles_test][:holland6][dimension].should_not be_nil
-    #   end
-    # end
-
-    # it 'should generate aggregate results for reaction_time module in correct format' do
-    #   aggregate_results = calculate_aggregate_results
-    #   aggregate_results[:reaction_time].should_not be_nil
-
-    #   colors = [:red]
-    #   colors.each do |color|
-    #     aggregate_results[:reaction_time][color].should_not be_nil
-    #     measures = [:total_clicks_with_threshold, :total_clicks, :total_correct_clicks_with_threshold,
-    #       :average_time, :average_time_with_threshold, :average_correct_time_to_click,
-    #       :at_results, :atwt_results, :actc_results]
-
-    #     measures.each do |measure|
-    #       aggregate_results[:reaction_time][color][measure].should_not be_nil
-    #     end
-    #   end
-    # end
-
-    # it 'should analyze from saved events' do
-    #   score_names = ["big5", "holland6"]
-    #   results = @analyze_dispatcher.analyze(@events, score_names)
-    #   results[:event_log].should_not be_nil
-    #   results[:intermediate_results].should_not be_nil
-    #   results[:aggregate_results].should_not be_nil
-    #   results[:scores].should_not be_nil
-    # end
+      score[:demand].should_not be_nil
+    end
   end
 end

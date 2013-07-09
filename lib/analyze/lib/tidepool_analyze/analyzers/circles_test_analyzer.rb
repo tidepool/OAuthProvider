@@ -1,6 +1,8 @@
 module TidepoolAnalyze 
   module Analyzer
     class CirclesTestAnalyzer
+      include TidepoolAnalyze::Utils::EventValidator
+
       attr_reader :start_time, :end_time, :circles, :radii, :start_coords, :self_circle
 
       # Output Format:
@@ -41,17 +43,33 @@ module TidepoolAnalyze
       # ]
       def initialize(events, formula)
         @formula = formula
-        process_events events
+        @events = events
       end
 
       def calculate_result
-        @results = []
-        return @results if @circles.nil? 
+        is_valid = process_events(@events)
+        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
+        raise RuntimeError, "circles are not provided" if @circles.nil?
+
+
+        raise RuntimeError, "self_coord top not provided" if @self_circle['top'].nil?
+        raise RuntimeError, "self_coord left not provided" if @self_circle['left'].nil?
+        raise RuntimeError, "self_coord size not provided" if @self_circle['size'].nil?
         
         self_circle_radius = @self_circle['size'] / 2.0
         self_circle_origin_x = @self_circle['left'] + self_circle_radius
         self_circle_origin_y = @self_circle['top'] + self_circle_radius
+
+        raise RuntimeError, "self circle radius can not be zero" if self_circle_radius.nil? || self_circle_radius == 0
+
+        @results = []
         @circles.each do |circle|
+          raise RuntimeError, "trait1 not provided" if circle['trait1'].nil?
+          raise RuntimeError, "size not provided" if circle['size'].nil?
+          raise RuntimeError, "width not provided" if circle['width'].nil?
+          raise RuntimeError, "left not provided" if circle['left'].nil?
+          raise RuntimeError, "top not provided" if circle['top'].nil?
+
           if circle['trait2'].nil? || circle['trait2'].empty?
             name_pair = circle['trait1']
           else
@@ -142,22 +160,23 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
+        is_valid = true
         events.each do |entry|
+          unless user_event_valid?(entry)
+            is_valid = false
+            break
+          end
+
           case entry['event_desc']
           when 'test_started'
             @start_time = entry['record_time']
-          when 'move_circles_started'
           when 'test_completed'
             @end_time = entry['record_time']
             @circles = entry['circles']
             @self_circle = entry['self_coord']
-          when 'circle_start_move'
-          when 'circle_end_move'
-          when 'circle_resized'
-          else
-            puts "Unknown Event: #{entry}"
           end
         end
+        is_valid
       end
     end
   end

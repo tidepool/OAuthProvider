@@ -9,7 +9,7 @@
   {
     "user_event_source": "image_rank",
     "analyzer": "ImageRankAnalyzer", 
-    "formulator": "ElementFormulator",
+    "formulator": "NullFormulator",
     "formula_sheet": "elements.csv",
     "formula_key": "name"
   }

@@ -68,4 +68,42 @@ module SeedsHelper
       'Detail-Oriented/Thorough' => 'Detail-Oriented/Thorough'
     }
   end
+
+  def emo_whitelist 
+    whitelist = {
+      'amused' => 'amused',
+      'anger' => 'anger',
+      'awe' => 'awe',
+      'boredom' => 'boredom',
+      'confused' => 'confused',
+      'contentment' => 'contentment',
+      'coyness' => 'coyness',
+      'desire_food' => 'desire_food',
+      'desire_sex' => 'desire_sex',
+      'disgust' => 'disgust',
+      'embarrassment' => 'embarrassment',
+      'fear' => 'fear',
+      'happiness' => 'happiness',
+      'interest' => 'interest',
+      'pain' => 'pain',
+      'pride' => 'pride',
+      'relief' => 'relief',
+      'sadness' => 'sadness',
+      'shame' => 'shame',
+      'surprise' => 'surprise',
+      'sympathy' => 'sympathy',
+      'triumph' => 'triumph',
+      'flagged_result1' => 'flagged_result1'
+    }
+  end
+
+  def emo_factor_whitelist
+    whitelist = {
+      'factor1' => 'factor1',
+      'factor2' => 'factor2',
+      'factor3' => 'factor3',
+      'factor4' => 'factor4',
+      'factor5' => 'factor5'      
+    }
+  end
 end

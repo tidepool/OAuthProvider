@@ -25,16 +25,20 @@ OAuthProvider::Application.routes.draw do
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
+        get 'recommendations/emotion', to: 'recommendations#emotion'
+        
         get 'games/latest', to: 'games#latest'
         post 'preorders', to: 'preorders#create'
 
         get 'results', to: 'results#index'
-        get 'results/latest', to: 'results#latest'
+        # get 'results/latest', to: 'results#latest'
+        get 'results/:id', to: 'results#show'
 
         resources :games do
-          get 'result' => 'results#show'
-          post 'result' => 'results#create'
-          get 'progress' => 'results#progress'
+          # get 'result' => 'results#show'
+          get 'results', to: 'results#index'
+          # post 'result' => 'results#create'
+          get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
         end
         # resources :authentications
@@ -42,7 +46,8 @@ OAuthProvider::Application.routes.draw do
         resources :trackers do 
           # get '/trackers/:tracker/:date', to: 'trackers#show'
         end     
-      end      
+      end
+            
       post '/user_events' => 'user_events#create'
     end
   end
