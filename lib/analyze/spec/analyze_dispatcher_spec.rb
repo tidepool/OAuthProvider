@@ -292,6 +292,8 @@ module TidepoolAnalyze
       analysis.length.should == 2
       analysis[:big5].should_not be_nil
       analysis[:holland6].should_not be_nil
+      analysis[:big5][:score].should_not be_nil
+      analysis[:holland6][:score].should_not be_nil
     end  
 
     # it 'should generate intermediate results from modules' do

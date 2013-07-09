@@ -19,6 +19,7 @@
 .idea
 
 /vendor/bundle/*
+/lib/analyze/vendor
 .env
 *.DS_Store
 dump.rdb
