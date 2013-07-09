@@ -72,21 +72,30 @@ class Api::V1::UsersController < Api::V1::ApiController
   private 
 
   def current_resource
-    if params[:id] == '-' 
-      @user ||= caller
-    elsif params[:id]
-      @user ||= User.find(params[:id])
+    # binding.pry
+    if params[:id]
+      target_user_for(params[:id])
     elsif params[:user_id]
-      user_id = params[:user_id]
-      if user_id && user_id == '-'
-        @user ||= caller
-      elsif user_id 
-        @user ||= User.find(params[:user_id])
-      end
+      target_user_for(params[:user_id])
     else
-      @user = nil
+      nil
     end
-    @user
+
+    # if params[:id] == '-' 
+    #   @user ||= caller
+    # elsif params[:id]
+    #   @user ||= User.find(params[:id])
+    # elsif params[:user_id]
+    #   user_id = params[:user_id]
+    #   if user_id && user_id == '-'
+    #     @user ||= caller
+    #   elsif user_id 
+    #     @user ||= User.find(params[:user_id])
+    #   end
+    # else
+    #   @user = nil
+    # end
+    # @user
   end
 
   def user_attributes

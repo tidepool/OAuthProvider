@@ -1,0 +1,26 @@
+{
+  "test_started": {
+    "sequence_type":"simple",
+    "record_time": 1360195167248,
+    "color_sequence": ["yellow:843", "green:759"]    
+  },
+  "test_completed": {
+    "record_time":1360195167548    
+  },
+  "circle_shown": {
+    "circle_color": "yellow",
+    "record_time": 1360194758722,
+    "sequence_no": 2
+  },
+  "correct_circle_clicked": {
+    "circle_color": "green",
+    "sequence_no": 2,
+    "record_time": 1360194761777    
+  },
+  "wrong_circle_clicked": {
+    "circle_color": "green",
+    "sequence_no": 2,
+    "record_time": 1360194761777
+  }
+}
+

@@ -30,8 +30,7 @@ module Permissions
       end
 
       it 'allows results' do
-        should allow(results, :create, game)
-        should_not allow(results, :create, others_game)
+        should allow(results, :index)
         should allow(results, :show, game)
         should_not allow(results, :show, others_game)
         should allow(results, :progress, game)
@@ -52,6 +51,7 @@ module Permissions
       it 'allows recommendations' do 
         should_not allow(recommendations, :latest)
         should_not allow(recommendations, :career)
+        should_not allow(recommendations, :emotion)
       end
 
       it 'allows preorders' do
@@ -81,8 +81,6 @@ module Permissions
       end
 
       it 'allows results' do
-        should_not allow(results, :create, game)
-        should_not allow(results, :create, others_game)
         should_not allow(results, :show, game)
         should_not allow(results, :show, others_game)
         should_not allow(results, :progress, game)
@@ -101,6 +99,7 @@ module Permissions
       it 'allows recommendations' do 
         should_not allow(recommendations, :latest)
         should_not allow(recommendations, :career)
+        should_not allow(recommendations, :emotion)
       end
 
       it 'allows preorders' do
