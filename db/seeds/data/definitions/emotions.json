@@ -13,28 +13,28 @@
         "view_name" : "emotions_circles",
         "circles" : [
             { 
-              "trait1" : "amused",
-              "image_id": "E1a"
-            },
-            { 
               "trait1" : "anger",
               "image_id": "E1b"
             },
             { 
-              "trait1" : "awe",
-              "image_id": "E1c"
+              "trait1" : "sadness",
+              "image_id": "E1r"
             },
             { 
-              "trait1" : "boredom",
-              "image_id": "E1d"
+              "trait1" : "coyness",
+              "image_id": "E1g"
             },
             { 
-              "trait1" : "confused",
-              "image_id": "E1e"
+              "trait1" : "desire_sex",
+              "image_id": "E1i"
             },
             { 
-              "trait1" : "contentment",
-              "image_id": "E1f"
+              "trait1" : "amused",
+              "image_id": "E1a"
+            },
+            { 
+              "trait1" : "interest",
+              "image_id": "E1n"
             }
           ]
       },
@@ -44,28 +44,28 @@
         "view_name" : "emotions_circles",
         "circles" : [
             { 
-              "trait1" : "coyness",
-              "image_id": "E1g"
-            },
-            { 
-              "trait1" : "desire_food",
-              "image_id": "E1h"
-            },
-            { 
-              "trait1" : "desire_sex",
-              "image_id": "E1i"
-            },
-            { 
-              "trait1" : "disgust",
-              "image_id": "E1j"
+              "trait1" : "fear",
+              "image_id": "E1l"
             },
             { 
               "trait1" : "embarrassment",
               "image_id": "E1k"
             },
             { 
-              "trait1" : "fear",
-              "image_id": "E1l"
+              "trait1" : "confused",
+              "image_id": "E1e"
+            },
+            { 
+              "trait1" : "pride",
+              "image_id": "E1p"
+            },
+            { 
+              "trait1" : "boredom",
+              "image_id": "E1d"
+            },
+            { 
+              "trait1" : "contentment",
+              "image_id": "E1f"
             }
           ]
       },
@@ -75,28 +75,24 @@
         "view_name" : "emotions_circles",
         "circles" : [
             { 
-              "trait1" : "happiness",
-              "image_id": "E1m"
+              "trait1" : "disgust",
+              "image_id": "E1j"
             },
             { 
-              "trait1" : "interest",
-              "image_id": "E1n"
+              "trait1" : "sympathy",
+              "image_id": "E1u"
             },
             { 
-              "trait1" : "pain",
-              "image_id": "E1o"
+              "trait1" : "awe",
+              "image_id": "E1c"
             },
             { 
-              "trait1" : "pride",
-              "image_id": "E1p"
+              "trait1" : "triumph",
+              "image_id": "E1v"
             },
             { 
               "trait1" : "relief",
               "image_id": "E1q"
-            },
-            { 
-              "trait1" : "sadness",
-              "image_id": "E1r"
             }
           ]
       },
@@ -106,20 +102,24 @@
         "view_name" : "emotions_circles",
         "circles" : [
             { 
-              "trait1" : "shame",
-              "image_id": "E1s"
-            },
-            { 
               "trait1" : "surprise",
               "image_id": "E1t"
             },
             { 
-              "trait1" : "sympathy",
-              "image_id": "E1u"
+              "trait1" : "shame",
+              "image_id": "E1s"
             },
             { 
-              "trait1" : "triumph",
-              "image_id": "E1v"
+              "trait1" : "pain",
+              "image_id": "E1o"
+            },
+            { 
+              "trait1" : "desire_food",
+              "image_id": "E1h"
+            },
+            { 
+              "trait1" : "happiness",
+              "image_id": "E1m"
             }
           ]
       }      
