@@ -20,6 +20,20 @@ class PersistEmo
     result.strongest_emotion = score[:strongest_emotion][:emotion]
     result.flagged_result1 = score[:flagged_result1]
 
+    emo_name = result.strongest_emotion
+    if result.flagged_result1 && result.flagged_result1.to_bool
+      emo_name = "flagged_result1"
+    end
+
+    # TODO: This is a bit too denormalized to store the emotion
+    # descriptions in the results. Reconsider this...
+    emo_desc = EmotionDescription.where(name: emo_name).first
+
+    result.display_emotion_name = emo_name
+    result.display_emotion_friendly = emo_desc.friendly_name 
+    result.display_emotion_title = emo_desc.title
+    result.display_emotion_description = emo_desc.description
+
     result.calculations = {
       final_results: analysis_results[:emo][:final_results]
     }

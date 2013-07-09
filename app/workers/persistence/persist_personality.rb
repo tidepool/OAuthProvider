@@ -46,12 +46,7 @@ class PersistPersonality
     result.one_liner = profile_description.one_liner
     result.logo_url = profile_description.logo_url
     result.profile_description_id = profile_description.id # This is an HStore accessor so needs to use id
-    # result.score = {
-    #   "name" => profile_description.name,
-    #   "one_liner" => profile_description.one_liner,
-    #   "logo_url" => profile_description.logo_url,
-    #   "profile_description_id" => profile_description.id
-    # }
+
     result.calculations = {}
     result.analysis_version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
     record_times(game, result)

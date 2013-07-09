@@ -18,11 +18,6 @@ class PersistReactionTime
     result.slowest_time = score[:slowest_time]
     result.average_time = score[:average_time]
         
-    # result.score = {
-    #   "fastest_time" => score[:fastest_time],
-    #   "slowest_time" => score[:slowest_time],
-    #   "average_time" => score[:average_time]
-    # }
     result.calculations = {
       "final_results" => analysis_results[:reaction_time][:final_results]
     }

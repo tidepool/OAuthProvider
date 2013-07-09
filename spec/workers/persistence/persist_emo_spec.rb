@@ -82,6 +82,8 @@ describe PersistBig5 do
     result.strongest_emotion.should == "awe"
     result.weakest_emotion.should == "amused"
     result.flagged_result1 == "false"
+    result.display_emotion_name = "awe"
+    result.display_emotion_friendly.should_not be_nil
   end
 
 end

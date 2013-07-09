@@ -13,10 +13,6 @@ class PersistHolland6
     score = analysis_results[:holland6][:score]
     result.dimension = score[:dimension]
     result.adjust_by = score[:adjust_by]
-    # result.score = {
-    #   dimension: score[:dimension],
-    #   adjust_by: score[:adjust_by]
-    # }
     result.calculations = {
       dimension_values: score[:dimension_values],
       final_results: analysis_results[:holland6][:final_results]

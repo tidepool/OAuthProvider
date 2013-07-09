@@ -7,5 +7,9 @@ class EmoResult < Result
   store_accessor :score, :strongest_emotion
   store_accessor :score, :weakest_emotion
   store_accessor :score, :flagged_result1
+  store_accessor :score, :display_emotion_name
+  store_accessor :score, :display_emotion_friendly
+  store_accessor :score, :display_emotion_title
+  store_accessor :score, :display_emotion_description
 
 end
