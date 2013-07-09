@@ -13,7 +13,7 @@ class EmotionDescriptionSeed
       # Personality,Type of Recommendation,Sentence Summary,Title,Link
       whitelist = emo_whitelist
 
-      attributes = [:name, :title, :description]
+      attributes = [:name, :friendly_name, :title, :description]
       puts 'Creating Emotion Descriptions'
       CSV.foreach(desc_path, :encoding => 'windows-1251:utf-8') do |row|
         desc_attr = {}
@@ -26,7 +26,6 @@ class EmotionDescriptionSeed
           puts "Wrong dimension: #{desc_attr[:name]}"
           raise Exception.new
         end
-        desc_attr[:icon_url] = "#{desc_attr[:name]}.png"
 
         desc = EmotionDescription.where(name: desc_attr[:name]).first_or_initialize(desc_attr)
         desc.update_attributes(desc_attr)

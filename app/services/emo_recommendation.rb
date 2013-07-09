@@ -21,6 +21,7 @@ class EmoRecommendation
 
     {
       emotion: emo_desc.name,
+      friendly_name: emo_desc.friendly_name,
       title: emo_desc.title,
       description: emo_desc.description,
       factor_recommendation: factor_recommendation,
