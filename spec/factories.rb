@@ -38,8 +38,14 @@ FactoryGirl.define do
 
   factory :game do
     definition_id 1
+    stages [{}, {}]
+    stage_completed -1
     status 'not_started'
     sequence(:date_taken) { |n| Time.zone.now - (n*1000) }
+
+    factory :game_with_result do 
+      after(:create) { |game| create(:result, game: game)}   
+    end  
   end
 
   factory :user do

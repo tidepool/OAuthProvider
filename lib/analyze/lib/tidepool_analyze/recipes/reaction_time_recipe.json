@@ -1,0 +1,16 @@
+[
+  {
+    "user_event_source": "survey",
+    "analyzer": "SurveyAnalyzer",
+    "formulator": "DemandFormulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
+  },
+  {
+    "user_event_source": "reaction_time",
+    "analyzer": "ReactionTimeAnalyzer", 
+    "formulator": "ReactionTimeFormulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
+  }
+]

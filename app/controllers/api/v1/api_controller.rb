@@ -12,7 +12,11 @@ class Api::V1::ApiController < ApplicationController
   end
 
   def target_user
-    @target_user ||= params[:user_id].nil? || params[:user_id] == '-' ? caller : User.find(params[:user_id])
+    @target_user ||= target_user_for(params[:user_id])
+  end
+
+  def target_user_for(user_id)
+    user_id.nil? || user_id == '-' ? caller : User.find(user_id)
   end
 
   def current_permission
@@ -23,8 +27,7 @@ class Api::V1::ApiController < ApplicationController
     nil
   end
 
-  def authorize
-    
+  def authorize    
     if !current_permission.allow?(params[:controller], params[:action], current_resource)
       raise Api::V1::UnauthorizedError.new('Not Authorized')
     end

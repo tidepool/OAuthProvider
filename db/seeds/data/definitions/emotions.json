@@ -1,0 +1,127 @@
+{
+  "name" : "Emotions via Circles",
+  "unique_name": "emotions",
+  "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
+  "end_remarks" : "Congratulations. Please take a moment to register!",
+  "score_names" : ["emo"],
+  "calculates" : ["emo"],
+  "stages":
+    [
+      {
+        "friendly_name" : "Circles 1",
+        "instructions" : "",
+        "view_name" : "emotions_circles",
+        "circles" : [
+            { 
+              "trait1" : "anger",
+              "image_id": "E1b"
+            },
+            { 
+              "trait1" : "sadness",
+              "image_id": "E1r"
+            },
+            { 
+              "trait1" : "coyness",
+              "image_id": "E1g"
+            },
+            { 
+              "trait1" : "desire_sex",
+              "image_id": "E1i"
+            },
+            { 
+              "trait1" : "amused",
+              "image_id": "E1a"
+            },
+            { 
+              "trait1" : "interest",
+              "image_id": "E1n"
+            }
+          ]
+      },
+      {
+        "friendly_name" : "Circles 2",
+        "instructions" : "",
+        "view_name" : "emotions_circles",
+        "circles" : [
+            { 
+              "trait1" : "fear",
+              "image_id": "E1l"
+            },
+            { 
+              "trait1" : "embarrassment",
+              "image_id": "E1k"
+            },
+            { 
+              "trait1" : "confused",
+              "image_id": "E1e"
+            },
+            { 
+              "trait1" : "pride",
+              "image_id": "E1p"
+            },
+            { 
+              "trait1" : "boredom",
+              "image_id": "E1d"
+            },
+            { 
+              "trait1" : "contentment",
+              "image_id": "E1f"
+            }
+          ]
+      },
+      {
+        "friendly_name" : "Circles 3",
+        "instructions" : "",
+        "view_name" : "emotions_circles",
+        "circles" : [
+            { 
+              "trait1" : "disgust",
+              "image_id": "E1j"
+            },
+            { 
+              "trait1" : "sympathy",
+              "image_id": "E1u"
+            },
+            { 
+              "trait1" : "awe",
+              "image_id": "E1c"
+            },
+            { 
+              "trait1" : "triumph",
+              "image_id": "E1v"
+            },
+            { 
+              "trait1" : "relief",
+              "image_id": "E1q"
+            }
+          ]
+      },
+      {
+        "friendly_name" : "Circles 4",
+        "instructions" : "",
+        "view_name" : "emotions_circles",
+        "circles" : [
+            { 
+              "trait1" : "surprise",
+              "image_id": "E1t"
+            },
+            { 
+              "trait1" : "shame",
+              "image_id": "E1s"
+            },
+            { 
+              "trait1" : "pain",
+              "image_id": "E1o"
+            },
+            { 
+              "trait1" : "desire_food",
+              "image_id": "E1h"
+            },
+            { 
+              "trait1" : "happiness",
+              "image_id": "E1m"
+            }
+          ]
+      }      
+    ]
+}

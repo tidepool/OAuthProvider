@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130624205339) do
+ActiveRecord::Schema.define(version: 20130709172302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,26 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "emotion_descriptions", force: true do |t|
+    t.string   "name",          null: false
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "friendly_name"
+  end
+
+  add_index "emotion_descriptions", ["name"], name: "index_emotion_descriptions_on_name", using: :btree
+
+  create_table "emotion_factor_recommendations", force: true do |t|
+    t.string   "name",                           null: false
+    t.string   "recommendations_per_percentile",              array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "emotion_factor_recommendations", ["name"], name: "index_emotion_factor_recommendations_on_name", using: :btree
+
   create_table "games", force: true do |t|
     t.datetime "date_taken"
     t.integer  "definition_id"
@@ -137,6 +157,7 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.datetime "updated_at",      null: false
     t.string   "status"
     t.string   "calling_ip"
+    t.text     "event_log"
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
@@ -246,9 +267,20 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.text     "aggregate_results"
+    t.hstore   "score"
+    t.text     "calculations"
+    t.integer  "user_id"
+    t.datetime "time_played"
+    t.datetime "time_calculated"
+    t.string   "analysis_version"
+    t.string   "type"
   end
 
-  add_index "results", ["game_id"], name: "index_results_on_game_id", unique: true, using: :btree
+  add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree
+  add_index "results", ["score"], name: "index_results_on_score", using: :gin
+  add_index "results", ["time_played"], name: "index_results_on_time_played", using: :btree
+  add_index "results", ["type"], name: "index_results_on_type", using: :btree
+  add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
 
   create_table "tracker_settings", force: true do |t|
     t.integer  "user_id"
@@ -301,6 +333,7 @@ ActiveRecord::Schema.define(version: 20130624205339) do
     t.string   "orientation"
     t.string   "education"
     t.string   "referred_by"
+    t.hstore   "stats"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

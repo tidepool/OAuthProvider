@@ -30,8 +30,7 @@ module Permissions
     end
 
     it 'allows results' do
-      should allow(results, :create, game)
-      should allow(results, :create, others_game)
+      should allow(results, :index)
       should allow(results, :show, game)
       should allow(results, :show, others_game)
       should allow(results, :progress, game)
@@ -50,6 +49,7 @@ module Permissions
     it 'allows recommendations' do
       should allow(recommendations, :latest)
       should allow(recommendations, :career)
+      should allow(recommendations, :emotion)
     end
 
     it 'allows preorders' do

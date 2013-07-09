@@ -1,11 +1,27 @@
 class Game < ActiveRecord::Base
   serialize :stages, JSON
+  serialize :event_log, JSON
 
-  # Game status: :not_started, :in_progress, :completed, :calculating_results, :results_ready, :no_results
+  # Game status: :not_started, :calculating_results, :results_ready, :no_results
+  # status, is only used in calculating the results for a game.
+  # It cannot be set publicly from the API, that may cause race conditions.
+  # Use the helper methods: in_progress?, completed? for figuring out game status during gameplay.
                   
   belongs_to :user
   belongs_to :definition
-  has_one :result, :inverse_of => :game, :dependent => :delete
+  has_many :results
+
+  # after_update do |game|
+  #   unless game.game_completed?
+  #     # We should not allow any more status changes based on stage_completed after the game is completed
+  #     # That can potentially create race conditions.
+  #     if game.stages && game.stages.length > 0
+  #       game.status = :in_progress if game.stage_completed == 0
+  #       game.status = :completed if (game.stage_completed == game.stages.length - 1)
+  #       game.save
+  #     end
+  #   end
+  # end
 
   def self.create_by_definition(definition, target_user, calling_ip = nil)
     raise ArgumentError.new('No definition specified') if definition.nil?
@@ -23,7 +39,19 @@ class Game < ActiveRecord::Base
   end
 
   def self.find_latest(target_user)
-    game = Game.includes(:definition, :result).where('user_id = ?', target_user.id).order(:date_taken).last
+    game = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).last
+  end
+
+  def results_calculated?
+    self.status.to_sym == :results_ready 
+  end
+
+  def in_progress?
+    self.stage_completed > -1 
+  end
+
+  def completed?
+    self.stages && self.stages.length > 0 && self.stage_completed == self.stages.length - 1  
   end
 
   def calculates_personality?
