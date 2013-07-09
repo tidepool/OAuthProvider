@@ -79,7 +79,7 @@ module TidepoolAnalyze
           events_json = IO.read(File.expand_path('../../fixtures/reaction_time_malformed.json', __FILE__))
           user_events = JSON.parse(events_json)
           reaction_time_analyzer = ReactionTimeAnalyzer.new(user_events, nil)
-          expect { reaction_time_analyzer.calculate_result }.to raise_error(RuntimeError)
+          expect { reaction_time_analyzer.calculate_result }.to raise_error(TidepoolAnalyze::UserEventValidatorError)
         end
       end
     end

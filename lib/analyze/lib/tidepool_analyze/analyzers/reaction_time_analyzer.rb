@@ -34,7 +34,7 @@ module TidepoolAnalyze
       # Ruby (and Unix) Epoch time is measured in seconds since Jan 1, 1970.
       def calculate_result
         is_valid = process_events(@events)
-        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
+        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
 
         total_clicks = 0
         correct_clicks = 0

@@ -52,7 +52,7 @@ module TidepoolAnalyze
           events_json = IO.read(File.expand_path('../../fixtures/image_rank_malformed.json', __FILE__))
           user_events = JSON.parse(events_json)
           image_rank_analyzer = ImageRankAnalyzer.new(user_events, nil)
-          expect { image_rank_analyzer.calculate_result }.to raise_error(RuntimeError)
+          expect { image_rank_analyzer.calculate_result }.to raise_error(TidepoolAnalyze::UserEventValidatorError)
         end
       end
     end

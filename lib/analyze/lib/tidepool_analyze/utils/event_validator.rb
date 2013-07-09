@@ -17,6 +17,7 @@ module TidepoolAnalyze
             unless user_event.has_key?(event_name)
               is_valid = false
               @invalid_event = user_event
+              @missing_key = event_name
               break
             end
           end
@@ -31,6 +32,10 @@ module TidepoolAnalyze
 
       def invalid_event
         @invalid_event
+      end
+
+      def missing_key
+        @missing_key
       end
     end
   end
