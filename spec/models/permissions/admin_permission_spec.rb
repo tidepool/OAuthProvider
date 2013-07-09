@@ -49,6 +49,7 @@ module Permissions
     it 'allows recommendations' do
       should allow(recommendations, :latest)
       should allow(recommendations, :career)
+      should allow(recommendations, :emotion)
     end
 
     it 'allows preorders' do

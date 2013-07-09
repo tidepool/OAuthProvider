@@ -41,6 +41,7 @@ module Permissions
     it 'allows recommendations' do 
       should_not allow(recommendations, :latest)
       should_not allow(recommendations, :career)
+      should_not allow(recommendations, :emotion)
     end
 
     it 'allows preorders' do
