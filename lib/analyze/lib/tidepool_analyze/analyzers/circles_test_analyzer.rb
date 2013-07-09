@@ -51,7 +51,10 @@ module TidepoolAnalyze
         raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
         raise RuntimeError, "circles are not provided" if @circles.nil?
 
-        @results = []
+
+        raise RuntimeError, "self_coord top not provided" if @self_circle['top'].nil?
+        raise RuntimeError, "self_coord left not provided" if @self_circle['left'].nil?
+        raise RuntimeError, "self_coord size not provided" if @self_circle['size'].nil?
         
         self_circle_radius = @self_circle['size'] / 2.0
         self_circle_origin_x = @self_circle['left'] + self_circle_radius
@@ -59,7 +62,14 @@ module TidepoolAnalyze
 
         raise RuntimeError, "self circle radius can not be zero" if self_circle_radius.nil? || self_circle_radius == 0
 
+        @results = []
         @circles.each do |circle|
+          raise RuntimeError, "trait1 not provided" if circle['trait1'].nil?
+          raise RuntimeError, "size not provided" if circle['size'].nil?
+          raise RuntimeError, "width not provided" if circle['width'].nil?
+          raise RuntimeError, "left not provided" if circle['left'].nil?
+          raise RuntimeError, "top not provided" if circle['top'].nil?
+
           if circle['trait2'].nil? || circle['trait2'].empty?
             name_pair = circle['trait1']
           else
