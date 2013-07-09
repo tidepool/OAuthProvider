@@ -94,6 +94,13 @@ JSONString
             expected_rank[result[:trait1]].should == result[:distance_rank]
           end
         end
+
+        it 'should create standard distances for circles based on the size of the self-circle' do
+          @results.each do |result|
+            result[:distance_standard].should == result[:distance] / result[:self_circle_radius]
+          end
+        end
+
       end
     end
   end

@@ -1,0 +1,14 @@
+[
+  {
+    "analyzer": "CirclesTestAnalyzer", 
+    "formulator": "CirclesFormulator",  
+    "sheet_loader": "CirclesSheetLoader",    
+    "formula_sheet": "circles.csv"
+  },
+  {
+    "analyzer": "ImageRankAnalyzer", 
+    "formulator": "ElementsFormulator",
+    "sheet_loader": "ElementsSheetLoader",      
+    "formula_sheet": "element_weights.csv"
+  }
+]

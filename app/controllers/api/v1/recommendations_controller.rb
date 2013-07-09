@@ -24,14 +24,7 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
   private 
 
   def current_resource
-    user = nil
-    user_id = params[:user_id]
-    if user_id && user_id == '-'
-      user = caller
-    elsif user_id 
-      user = User.find(params[:user_id])
-    end
-    user
+    target_user
   end
 
 end

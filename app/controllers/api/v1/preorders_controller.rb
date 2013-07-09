@@ -12,15 +12,7 @@ class Api::V1::PreordersController < Api::V1::ApiController
   protected
 
   def current_resource
-    if params[:user_id]
-      user_id = params[:user_id]
-      if user_id && user_id == '-'
-        @user = caller
-      elsif user_id 
-        @user = User.find(params[:user_id])
-      end
-    end
-    @user
+    target_user
   end
 
   def preorder_attributes

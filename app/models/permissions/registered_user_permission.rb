@@ -14,6 +14,10 @@ module Permissions
 
         allow @games, :index 
 
+        allow @results, :index do |user|
+          user.id == caller.id
+        end
+
         allow @results, [:create, :show, :progress] do |game|
           game.user_id == caller.id 
         end
