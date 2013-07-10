@@ -31,7 +31,7 @@ module TidepoolAnalyze
           events_json = IO.read(File.expand_path('../../fixtures/survey_malformed.json', __FILE__))
           user_events = JSON.parse(events_json)
           survey_analyzer = SurveyAnalyzer.new(user_events, nil)
-          expect { survey_analyzer.calculate_result }.to raise_error(RuntimeError)
+          expect { survey_analyzer.calculate_result }.to raise_error(TidepoolAnalyze::UserEventValidatorError)
         end
       end
     end

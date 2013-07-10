@@ -73,7 +73,7 @@ module TidepoolAnalyze
           events_json = IO.read(File.expand_path('../../fixtures/circles_test_malformed.json', __FILE__))
           user_events = JSON.parse(events_json)
           analyzer = CirclesTestAnalyzer.new(user_events, @formula)
-          expect { analyzer.calculate_result }.to raise_error(RuntimeError)
+          expect { analyzer.calculate_result }.to raise_error(TidepoolAnalyze::UserEventValidatorError)
         end
       end
     end
