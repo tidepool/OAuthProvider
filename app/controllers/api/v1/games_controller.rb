@@ -25,7 +25,14 @@ class Api::V1::GamesController < Api::V1::ApiController
 
   def create
     calling_ip = request.remote_ip
-    definition = Definition.find_or_return_default(params[:def_id])
+    if params[:def_id]
+      definition = Definition.where(unique_name: params[:def_id]).first      
+      definition = Definition.default if definition.nil?
+    elsif params[:same_as]
+      definition = Definition.same_as_game(params[:same_as])
+    else
+      definition = Definition.default
+    end
     game = Game.create_by_definition(definition, target_user, calling_ip)
     respond_to do |format|
       format.json { render :json => game }

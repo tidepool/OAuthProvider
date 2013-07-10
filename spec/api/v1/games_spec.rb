@@ -40,6 +40,34 @@ describe 'Game API' do
     game_result[:definition][:unique_name].should == 'baseline'
   end
 
+  it 'creates a game that has the default definition if def_id is omitted' do 
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
+      { body: { def_id: 'foobar' } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == 'baseline'
+  end
+
+  it 'creates a game that is the default definition if def_id cannot be found' do
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
+      { body: { def_id: 'foobar' } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == 'baseline'
+  end
+
+  it 'creates a game with a definition that is same as the game in the same_as parameter' do
+    token = get_conn(user1)
+    definition = game.definition
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
+      { body: { same_as: game.id } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == definition.unique_name
+  end
+
   it 'records the ip of the caller when the game is created' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
