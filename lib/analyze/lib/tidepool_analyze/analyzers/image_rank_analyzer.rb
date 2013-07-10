@@ -22,8 +22,8 @@ module TidepoolAnalyze
       # The lowest ranked image (4) will get a rank_multiplier 1
       def calculate_result
         is_valid = process_events(@events)
-        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
-        raise RuntimeError, "final_rank not supplied: #{@final_rank}" if @final_rank.nil? or @final_rank.length != 5
+        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
+        raise TidepoolAnalyze::UserEventValidatorError, "final_rank not supplied: #{@final_rank}" if @final_rank.nil? or @final_rank.length != 5
 
         elements = {}
         i = 0

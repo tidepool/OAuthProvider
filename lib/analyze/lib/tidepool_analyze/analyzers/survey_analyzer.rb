@@ -27,10 +27,10 @@ module TidepoolAnalyze
       # ]
       def calculate_result
         is_valid = process_events(@events)
-        raise RuntimeError, "user_event invalid: #{invalid_event}" unless is_valid
+        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
 
         results = @questions.map do |question| 
-          raise RuntimeError, "question not provided properly: #{question}" if question["question_id"].nil? || question["answer"].nil? || question["question_topic"].nil?
+          raise TidepoolAnalyze::UserEventValidatorError, "question not provided properly: #{question}" if question["question_id"].nil? || question["answer"].nil? || question["question_topic"].nil?
           {
             question_id: question["question_id"],
             answer: question["answer"],
