@@ -5,15 +5,13 @@ class Definition < ActiveRecord::Base
   serialize :score_names, JSON
   serialize :calculates, JSON
   
-  def self.find_or_return_default(def_id)
-    if def_id.nil?
-      def_id = 'baseline'
-    end
-    definition = self.where(unique_name: def_id).first
-    if definition.nil?
-      definition = self.where(unique_name: 'baseline').first 
-    end
-    definition
+  def self.default
+    definition = self.where(unique_name: 'baseline').first 
+  end
+
+  def self.same_as_game(game_id)
+    game = Game.find(game_id)
+    game.definition
   end
 
   def stages_from_stage_definition
