@@ -1,7 +1,7 @@
 {
   "name" : "Emotions via Circles",
   "unique_name": "emotions",
-  "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
+  "instructions" : "This game helps you identify the emotions you may be currently experiencing.",
   "end_remarks" : "Congratulations. Please take a moment to register!",
   "score_names" : ["emo"],
   "calculates" : ["emo"],
