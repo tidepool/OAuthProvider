@@ -1,5 +1,5 @@
 class Api::V1::RecommendationsController < Api::V1::ApiController
-  doorkeeper_for :latest
+  doorkeeper_for :all
 
   def latest
     personality = current_resource.personality
