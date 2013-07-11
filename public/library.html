@@ -73,6 +73,23 @@
         </p>
 
 
+        <h2><i class="icon-circle"></i> Icons with Text</h2>
+        <p class="large"><i class="gfx-male"></i> You're a manly man.</p>
+        <p class="large"><i class="gfx-female"></i> You're a classy lady.</p>
+        <p class="large"><i class="icon-male"></i> Many Gargoyles protrude prodigously.</p>
+        <p class="large">
+            <i class="gfx-surprise"></i> Suprised Much?
+        </p>
+        <p class="large">
+            <i class="gfx-clock"></i> This special ends soon.
+        </p>
+        <p class="large">
+            <i class="icon-circle-blank"></i> Will the circle be unbroken.
+        </p>
+        <p class="large">
+            <i class="icon-briefcase"></i> Take your kids to work day
+        </p>
+
         <h2>`Share` ui_widget</h2>
         <p>This component abstracts away the differet share APIs and provides a common programatic and user interface for providing sharing functionality</p>
         <p id="ShareContainer"></p>
@@ -291,9 +308,10 @@
                             string_id: 'handedness',
                             type: 'select_by_icon',
                             multiselect: true,
+                            label: 'Rockets or Bugs?',
                             'options': [
-                                'left',
-                                'right'
+                                { value:'rockets', icon:'icon-rocket' },
+                                { value:'bugs', icon:'icon-bug' }
                             ]
                         })
                     })
@@ -301,11 +319,13 @@
                         model: new Backbone.Model({
                             string_id: 'socialz',
                             type: 'select_by_icon',
+                            label: 'How Ya Feelin\'?',
                             'options': [
-                                'smile',
-                                'meh',
-                                'frown',
-                                'other'
+                                { value:'smile', icon:'icon-smile' },
+                                { value:'meh', icon:'icon-meh' },
+                                { value:'frown', icon:'icon-frown' },
+                                { value:'lovey', icon:'icon-heart' },
+                                { value:'other', icon:'gfx-dottedcircle' }
                             ]
                         })
                     })
