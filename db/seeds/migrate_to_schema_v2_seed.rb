@@ -7,8 +7,10 @@ class MigrateToSchemaV2Seed
     puts 'Creating the migration'
     count = 0
     Result.all.each do |result|
-      if result.analysis_version.nil?
-        # Skip the already generated result
+      # Skip the already generated result or the new type of results (v2.0)
+      # TODO: When we have version 3.0 of results this may break
+      # We should remove this file after a successful migration 
+      if result.analysis_version.nil? && result.analysis_version != '2.0'
         game = result.game
         user = game.user
         personality = user.personality
