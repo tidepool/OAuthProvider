@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :preorders
   has_many :results
+  has_many :preferences
 
   def self.create_guest_or_registered(attributes)
     begin

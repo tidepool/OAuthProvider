@@ -47,6 +47,8 @@ OAuthProvider::Application.routes.draw do
         resources :trackers do 
           # get '/trackers/:tracker/:date', to: 'trackers#show'
         end     
+
+        resource :preferences
       end
             
       post '/user_events' => 'user_events#create'
