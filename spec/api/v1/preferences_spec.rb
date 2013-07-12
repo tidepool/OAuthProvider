@@ -69,8 +69,7 @@ describe 'Preferences API' do
     preference_params = {
       type: 'TrainingPreference',
       data: {
-        :daily_emotion => "false",
-        :learn_emotion => "true"
+        :daily_emotion => "false"
       }
     }
     token = get_conn(user1)
@@ -78,14 +77,14 @@ describe 'Preferences API' do
     response.status.should == 200
     reco_result = JSON.parse(response.body, symbolize_names: true)
     reco_result.should_not be_nil
-
+    binding.pry
     user = User.find(user1.id)
     preferences = user.preferences
     preferences.should_not be_nil
     preferences[0].type.should == 'TrainingPreference'
     preferences[0].data.should == {
       "daily_emotion" => "false",
-      "learn_emotion" => "true"
+      "learn_emotion" => "false"
     }
 
   end

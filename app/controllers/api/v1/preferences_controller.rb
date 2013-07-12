@@ -27,10 +27,8 @@ class Api::V1::PreferencesController < Api::V1::ApiController
     pref_type = params[:user][:type]
     pref_data = params[:user][:data]
     preference = Preference.where('user_id = ? and type = ?', target_user.id, pref_type).first
-    if preference
-      preference.data = pref_data
-      preference.save!
-    end
+    
+    preference.update(pref_data) if preference
 
     respond_to do |format|
       format.json { render :json => preference, :serializer => PreferenceSerializer }

@@ -47,6 +47,7 @@ group :development, :test, :teamcity do
   gem 'rspec-rails'
   gem 'oauth2'
   gem 'jazz_hands'
+  gem 'single_test'
   # gem 'dotenv-rails'
   # https://github.com/bkeepers/dotenv/commit/5084756968badfc1fd783242db093fb9996d6537
   gem 'dotenv-rails', :github => 'bkeepers/dotenv'
