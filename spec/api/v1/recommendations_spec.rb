@@ -141,4 +141,12 @@ describe 'Recommendations API' do
     reco_result[:friendly_name].should_not be_nil
   end
 
+  it 'gets actions for only recommended items and not games' do 
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/recommendations/actions.json")
+    response.status.should == 200
+    reco_result = JSON.parse(response.body, symbolize_names: true)
+    reco_result.length.should == 3
+  end
+
 end

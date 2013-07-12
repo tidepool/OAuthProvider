@@ -31,6 +31,14 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
     end
   end
 
+  def actions
+    builder = RecommendationBuilder.new(target_user)
+
+    respond_to do |format|
+      format.json { render :json => builder.recommendations }
+    end    
+  end
+
   private 
 
   def current_resource
