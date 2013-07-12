@@ -77,7 +77,6 @@ describe 'Preferences API' do
     response.status.should == 200
     reco_result = JSON.parse(response.body, symbolize_names: true)
     reco_result.should_not be_nil
-    binding.pry
     user = User.find(user1.id)
     preferences = user.preferences
     preferences.should_not be_nil
