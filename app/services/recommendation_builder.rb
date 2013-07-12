@@ -50,9 +50,9 @@ class RecommendationBuilder
     
     personality_recos = Recommendation.where('big5_dimension = ?', personality.big5_dimension)
 
-    (1..3).each do |n|
-      random_generator = Random.new
-      rec_no = random_generator.rand(0...5)
+    numbers = generate_non_repeating_random(3, 0...5)
+    (0..2).each do |n|
+      rec_no = numbers[n]      
       if rec_no <= personality_recos.length - 1
         reco = Hashie::Mash.new
         reco.title = personality_recos[rec_no].link_title
@@ -63,6 +63,24 @@ class RecommendationBuilder
         @recommendations << reco
       end
     end
+  end
+
+  def generate_non_repeating_random(count, working_set)
+    selected_nums = {}
+    numbers = []
+    (1..count).each do |n|
+      random_generator = Random.new
+      bad_selection = true
+      while bad_selection
+        random_number = random_generator.rand(working_set)
+        unless selected_nums.key?(random_number.to_s)
+          selected_nums[random_number.to_s] = random_number
+          bad_selection = false
+          numbers << random_number
+        end
+      end
+    end
+    numbers
   end
 
   def build_preferences_recommendation
