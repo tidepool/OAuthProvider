@@ -66,7 +66,8 @@ module TidepoolAnalyze
           dimension_values: big5_scores,
           low_dimension: low_big5_dimension,
           high_dimension: high_big5_dimension,
-          adjust_by: adjust_by 
+          adjust_by: adjust_by,
+          version: '2.0' 
         }
       end
     end

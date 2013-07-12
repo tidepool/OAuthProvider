@@ -122,6 +122,112 @@
               "image_id": "E1m"
             }
           ]
+      },
+      {
+        "friendly_name": "What's Your Mood?",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "emotion22",
+            "question_topic": "emotion",
+            "question_type": "select_by_icon",
+            "question": "How do you feel right now?",
+            "options": [
+                {
+                    "icon": "gfx-amused",
+                    "value": "amused",
+                    "label": "amusement"
+                },
+                {
+                    "icon": "gfx-anger",
+                    "value": "anger"
+                },
+                {
+                    "icon": "gfx-awe",
+                    "value": "awe"
+                },
+                {
+                    "icon": "gfx-boredom",
+                    "value": "boredom"
+                },
+                {
+                    "icon": "gfx-confused",
+                    "value": "confused",
+                    "label": "confusion"
+                },
+                {
+                    "icon": "gfx-contentment",
+                    "value": "contentment"
+                },
+                {
+                    "icon": "gfx-coyness",
+                    "value": "coyness"
+                },
+                {
+                    "icon": "gfx-desire_food",
+                    "value": "desire_food",
+                    "label": "desire for food"
+                },
+                {
+                    "icon": "gfx-desire_sex",
+                    "value": "desire_sex",
+                    "label": "desire for sex"
+                },
+                {
+                    "icon": "gfx-disgust",
+                    "value": "disgust"
+                },
+                {
+                    "icon": "gfx-embarrassment",
+                    "value": "embarrassment"
+                },
+                {
+                    "icon": "gfx-fear",
+                    "value": "fear"
+                },
+                {
+                    "icon": "gfx-happiness",
+                    "value": "happiness"
+                },
+                {
+                    "icon": "gfx-interest",
+                    "value": "interest"
+                },
+                {
+                    "icon": "gfx-pain",
+                    "value": "pain"
+                },
+                {
+                    "icon": "gfx-pride",
+                    "value": "pride"
+                },
+                {
+                    "icon": "gfx-relief",
+                    "value": "relief"
+                },
+                {
+                    "icon": "gfx-sadness",
+                    "value": "sadness"
+                },
+                {
+                    "icon": "gfx-shame",
+                    "value": "shame"
+                },
+                {
+                    "icon": "gfx-surprise",
+                    "value": "surprise"
+                },
+                {
+                    "icon": "gfx-sympathy",
+                    "value": "sympathy"
+                },
+                {
+                    "icon": "gfx-triumph",
+                    "value": "triumph"
+                }
+            ]
+          }
+        ]
       }      
     ]
 }

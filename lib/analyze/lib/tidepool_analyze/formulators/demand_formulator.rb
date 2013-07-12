@@ -5,21 +5,37 @@ module TidepoolAnalyze
     class DemandFormulator
 
       def initialize(input_data, formula)        
-        @questions = flatten_results_to_array(input_data)
+        @questions = TidepoolAnalyze::Utils::merge_across_stages(input_data)
         @formula = formula
       end
 
-      def flatten_results_to_array(input_data)
-        single_array = []
-        input_data.each do | result |
-          result.each do | raw_result |
-            single_array << raw_result
-          end
-        end
-        single_array
-      end
-
       # Input Data Format
+      # [
+      #   {
+      #     question_id: "id123"
+      #     answer: 5,
+      #     question_topic: "foo"
+      #   },
+      #   { 
+      #     question_id: "id12345"
+      #     ...
+      #   },
+      #   ...
+      # ]
+      # Output Data Format
+      # {
+      #   question_topic1: {
+      #     answer: ...
+      #   },
+      #   question_topic2: {
+      #     ...
+      #   },
+      #   demand: {
+      #     answer:
+      #     zscore: ...
+      #     tscore: ...
+      #   }
+      # }
       def calculate_result
         # TODO: Currently we only expect to have one demand question
         # We will take the last demand question from the input_data

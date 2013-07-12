@@ -15,7 +15,8 @@ module TidepoolAnalyze
             output = {
               fastest_time: data[:min_time],
               slowest_time: data[:max_time],
-              average_time: data[:average_time] 
+              average_time: data[:average_time],
+              version: '2.0' 
             }
           end
         end

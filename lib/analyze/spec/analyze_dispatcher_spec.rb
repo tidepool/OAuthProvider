@@ -242,7 +242,8 @@ module TidepoolAnalyze
             :neuroticism => 21.267963651267777 },
         :low_dimension => :conscientiousness,
         :high_dimension => :extraversion,
-        :adjust_by => 1.7080919421487604
+        :adjust_by => 1.7080919421487604,
+        :version => "2.0"
       }
     end
 
@@ -263,12 +264,22 @@ module TidepoolAnalyze
     end
 
     it 'executes a reaction_time recipe' do 
-      analysis = execute_recipe('reaction_time')      
+      analysis = execute_recipe('reaction_time')   
       analysis.should_not be_nil
       analysis[:final_results].length.should == 2
-      analysis[:final_results][0][:demand].should_not be_nil
+      analysis[:final_results][0].should == {
+        :demand=> {:answer=>5, :zscore=>0.6709893546422306, :tscore=>51.1827730651085},
+        :productivity=>{:answer=>3},
+        :stress=> {:answer=>2}
+      }
 
-      analysis[:final_results][1][:min_time].should_not be_nil
+      analysis[:final_results][1].should == { 
+        :total_average_time_zscore=>-0.3573482938607396,
+        :total_average_time=>1310,
+        :average_time=>655,
+        :min_time=>532,
+        :max_time=>905
+      }
 
       analysis[:score].should_not be_nil
     end
@@ -300,7 +311,7 @@ module TidepoolAnalyze
       analysis[:reaction_time].should_not be_nil
       analysis[:reaction_time][:score].should_not be_nil
       analysis[:reaction_time][:final_results].should_not be_nil 
-      analysis[:reaction_time][:version].should == '2.0'
+      analysis[:reaction_time][:score][:version].should == '2.0'
       score = analysis[:reaction_time][:score]
       final_results = analysis[:reaction_time][:final_results]
       final_results.length.should > 0
@@ -308,6 +319,20 @@ module TidepoolAnalyze
       score[:fastest_time].should_not be_nil
       score[:slowest_time].should_not be_nil
       score[:average_time].should_not be_nil
+    end
+
+    it 'calculates the survey score' do 
+      score_names = ['survey']
+      analyze_dispatcher = AnalyzeDispatcher.new
+
+      analysis = analyze_dispatcher.analyze(@events, score_names)   
+      analysis.length.should == 1
+      analysis[:survey][:score].should == {
+        :demand => {:answer=>5, :zscore=>0.6709893546422306, :tscore=>51.1827730651085},
+        :productivity => {:answer=>3},
+        :stress => {:answer=>2},
+        :version =>"2.0"
+      }
     end
 
     it 'calculates the emotion score' do 
@@ -322,16 +347,16 @@ module TidepoolAnalyze
           :factor2=>44.92791625293482,
           :factor3=>45.71085593272107,
           :factor4=>46.654220307040134,
-          :factor5=>46.58723907733867
-        },
-        :flagged_result1=>false,
-        :weakest_emotion=> {
-          :emotion=>"amused", 
-          :distance_standard=>1.421512765416739},
-        :strongest_emotion=> {
-          :emotion=>"awe", 
-          :distance_standard=>0.3851313146973706}
-        }
+          :factor5=>46.58723907733867},
+        :weakest_emotion=>
+          {:emotion=>"amused", :distance_standard=>1.421512765416739},
+        :strongest_emotion=>
+          {:emotion=>"awe", :distance_standard=>0.3851313146973706},
+        :reported_emotion=>"sadness",
+        :calculated_emotion=>"awe",
+        :version=>"2.0"
+      }
+
       analysis[:emo][:final_results].should_not be_nil
       analysis[:emo][:final_results][0][:emo_distances].should == {
         :amused=>1.421512765416739,
@@ -368,7 +393,7 @@ module TidepoolAnalyze
       analysis[:capacity].should_not be_nil
       analysis[:capacity][:score].should_not be_nil
       analysis[:capacity][:final_results].should_not be_nil 
-      analysis[:capacity][:version].should == '2.0'
+      analysis[:capacity][:score][:version].should == '2.0'
       score = analysis[:capacity][:score]
       final_results = analysis[:capacity][:final_results]
       final_results.length.should > 0
