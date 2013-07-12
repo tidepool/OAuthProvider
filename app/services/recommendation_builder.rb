@@ -19,9 +19,9 @@ class RecommendationBuilder
   end
 
   def check_preference_setup
-    # if @user.preferences.nil?
-    #   build_preferences_recommendation
-    # end
+    if @user.preferences.nil? || @user.preferences.empty?
+      build_preferences_recommendation
+    end
   end
 
   def check_last_played_time
