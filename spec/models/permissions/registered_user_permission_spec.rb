@@ -7,6 +7,7 @@ module Permissions
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
     let(:recommendations) { "#{controller_prefix}/recommendations" }
+    let(:preferences) { "#{controller_prefix}/preferences" }
     let(:preorders) { "#{controller_prefix}/preorders" }
 
     describe 'caller and target_user are the same user' do
@@ -52,6 +53,13 @@ module Permissions
         should allow(recommendations, :emotion)
         should allow(recommendations, :actions)
       end
+
+      it 'allows preferences' do 
+        should allow(preferences, :show)
+        should allow(preferences, :create)
+        should allow(preferences, :update)      
+      end
+
 
       it 'allows preorders' do
         should allow(preorders, :create)
@@ -101,6 +109,13 @@ module Permissions
         should_not allow(recommendations, :emotion)
         should_not allow(recommendations, :actions)
       end
+
+      it 'allows preferences' do 
+        should_not allow(preferences, :show)
+        should_not allow(preferences, :create)
+        should_not allow(preferences, :update)      
+      end
+
 
       it 'allows preorders' do
         should_not allow(preorders, :create)
