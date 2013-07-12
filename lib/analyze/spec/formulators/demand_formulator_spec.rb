@@ -34,8 +34,7 @@ module TidepoolAnalyze
       end
     
       it 'flattens all results to one array' do
-        formulator = DemandFormulator.new(@input_data, @formula)
-        result = formulator.flatten_results_to_array(@input_data)
+        result = TidepoolAnalyze::Utils::merge_across_stages(@input_data)
 
         result.length.should == 3        
         result[2][:question_topic].should == 'test'

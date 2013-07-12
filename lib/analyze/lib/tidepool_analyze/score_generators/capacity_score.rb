@@ -9,7 +9,7 @@ module TidepoolAnalyze
             # The score is merely the output of the corrected demand survey.
             # The correction coefficient of demand survey takes into account the
             # results of other participants' reaction time results. 
-            output = result
+            output = result.merge({ version: '2.0' })
           end
         end
         output 

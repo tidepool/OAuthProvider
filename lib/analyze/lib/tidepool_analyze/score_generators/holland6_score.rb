@@ -57,7 +57,8 @@ module TidepoolAnalyze
         {
           dimension: final_score,
           dimension_values: holland6_scores,
-          adjust_by: adjust_by
+          adjust_by: adjust_by,
+          version: '2.0'
         }
       end
     end

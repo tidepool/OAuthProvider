@@ -9,13 +9,25 @@ module TidepoolAnalyze
     def initialize
     end
 
+    # Output Format:
+    # {
+    #   score_name1: {
+    #     final_results: []
+    #     score: {}
+    #   },
+    #   score_name2: {
+    #     ...
+    #   },
+    #   ...
+    # }
     def analyze(user_events, score_names)
       score_names_whitelist = { 
         big5: 'big5',
         holland6: 'holland6',
         emo: 'emo',
         reaction_time: 'reaction_time',
-        capacity: 'capacity'
+        capacity: 'capacity',
+        survey: 'survey'
       }
       mini_game_events = events_by_mini_game(user_events)
 
@@ -81,8 +93,7 @@ module TidepoolAnalyze
 
       {
         final_results: final_results,
-        score: score,
-        version: '2.0'
+        score: score
       }
     end
 
