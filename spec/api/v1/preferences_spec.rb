@@ -25,10 +25,10 @@ describe 'Preferences API' do
       :learn_emotion => "false"
     }
     reco_result[:description][0].should == {
-             :name => "daily_emotion",
-      :description => "Track my emotions daily so I can see how often I change my mood",
+             :name => "more_in_less_time",
+      :description => "Accomplish more in less time",
              :type => "checkbox",
-         :category => "emotions"
+         :category => "productivity"
     }
   end
 
@@ -43,10 +43,12 @@ describe 'Preferences API' do
     preferences = user2.preferences
     preferences.should be_empty
     token = get_conn(user2)
-    response = token.post("#{@endpoint}/users/-/preferences.json", {body: {user: preference_params}})
+
+    response = token.post("#{@endpoint}/users/-/preferences.json", {body: {preference: preference_params}})
     response.status.should == 200
     reco_result = JSON.parse(response.body, symbolize_names: true)
     reco_result.should_not be_nil
+
 
     preferences = user2.preferences
     preferences.should_not be_nil
@@ -73,7 +75,7 @@ describe 'Preferences API' do
       }
     }
     token = get_conn(user1)
-    response = token.put("#{@endpoint}/users/-/preferences.json", {body: {user: preference_params}})
+    response = token.put("#{@endpoint}/users/-/preferences.json", {body: {preference: preference_params}})
     response.status.should == 200
     reco_result = JSON.parse(response.body, symbolize_names: true)
     reco_result.should_not be_nil
