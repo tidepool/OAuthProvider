@@ -30,7 +30,7 @@ module Permissions
 
         allow @recommendations, [:latest, :career, :emotion, :actions] 
 
-        allow @preferences, [:show, :create, :update]
+        allow @preferences, [:show, :create, :update, :description]
 
         allow @preorders, :create
       end

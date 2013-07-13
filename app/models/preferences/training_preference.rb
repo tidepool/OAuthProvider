@@ -1,6 +1,6 @@
 class TrainingPreference < Preference
 
-  def description
+  def self.description
     [
       {
         name: 'more_in_less_time',
