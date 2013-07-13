@@ -35,6 +35,15 @@ class Api::V1::PreferencesController < Api::V1::ApiController
     end    
   end
 
+  def description
+    pref_type = params[:type].underscore.camelize
+    pref_class = pref_type.constantize
+
+    respond_to do |format|
+      format.json { render :json => pref_class.description }
+    end              
+  end
+
   protected
 
   def current_resource

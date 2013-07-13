@@ -52,6 +52,9 @@ OAuthProvider::Application.routes.draw do
       end
             
       post '/user_events' => 'user_events#create'
+
+      get 'preferences/:type/description', to: 'preferences#description'
+
     end
   end
   

@@ -12,6 +12,14 @@ describe 'Preferences API' do
   let(:training_preference) { create(:preference, user: user1, type: 'TrainingPreference')}
   let(:user2) { create(:user) }
 
+  it 'gets the description of a preference' do 
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/preferences/training-preference/description.json")
+    response.status.should == 200
+    reco_result = JSON.parse(response.body, symbolize_names: true)
+    reco_result.should_not be_nil
+  end
+
   it 'receives the preferences of a user' do 
     training_preference
     token = get_conn(user1)
