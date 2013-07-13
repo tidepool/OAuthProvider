@@ -14,7 +14,7 @@ describe RecommendationBuilder do
       builder = RecommendationBuilder.new(user_no_preferences)
       recos = builder.recommendations
       recos.length.should == 5
-      recos[0].link_type.should == 'TidePoolPreferences'
+      recos[0].link_type.should == 'Preferences'
     end
 
     it 'can select random numbers that are not repeated' do 
@@ -46,7 +46,6 @@ describe RecommendationBuilder do
       builder = RecommendationBuilder.new(user)
       recos = builder.recommendations
       recos.length.should == 3
-      recos[0].link_type.should_not == 'TidePoolGame'
     end
   end
 
@@ -60,7 +59,7 @@ describe RecommendationBuilder do
       builder = RecommendationBuilder.new(user)
       recos = builder.recommendations
       recos.length.should == 4
-      recos[0].link_type.should == 'TidePoolGame'
+      recos[0].link_type.should == 'ReactionTime'
       recos[0].link.should == '#game/reaction_time'
     end
   end
@@ -77,7 +76,7 @@ describe RecommendationBuilder do
       builder = RecommendationBuilder.new(user)
       recos = builder.recommendations
       recos.length.should == 4
-      recos[0].link_type.should == 'TidePoolGame'
+      recos[0].link_type.should == 'Emotions'
       recos[0].link.should == '#game/emotions'
     end
   end
