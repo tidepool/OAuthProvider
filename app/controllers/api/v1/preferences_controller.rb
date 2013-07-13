@@ -9,8 +9,8 @@ class Api::V1::PreferencesController < Api::V1::ApiController
   end
 
   def create
-    pref_type = params[:user][:type]
-    pref_data = params[:user][:data]
+    pref_type = params[:preference][:type]
+    pref_data = params[:preference][:data]
     preference = Preference.where('user_id = ? and type = ?', target_user.id, pref_type).first
     if preference.nil?      
       preference = target_user.preferences.build(:type => pref_type)
@@ -24,8 +24,8 @@ class Api::V1::PreferencesController < Api::V1::ApiController
   end
 
   def update
-    pref_type = params[:user][:type]
-    pref_data = params[:user][:data]
+    pref_type = params[:preference][:type]
+    pref_data = params[:preference][:data]
     preference = Preference.where('user_id = ? and type = ?', target_user.id, pref_type).first
     
     preference.update(pref_data) if preference
