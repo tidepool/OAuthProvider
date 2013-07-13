@@ -16,7 +16,6 @@ describe 'Preferences API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/preferences/training-preference/description.json")
     response.status.should == 200
-    binding.pry
     reco_result = JSON.parse(response.body, symbolize_names: true)
     reco_result.should_not be_nil
   end
