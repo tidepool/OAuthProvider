@@ -146,7 +146,7 @@ describe 'Recommendations API' do
     response = token.get("#{@endpoint}/users/-/recommendations/actions.json")
     response.status.should == 200
     reco_result = JSON.parse(response.body, symbolize_names: true)
-    reco_result.length.should == 4
+    reco_result.length.should >= 3
   end
 
 end
