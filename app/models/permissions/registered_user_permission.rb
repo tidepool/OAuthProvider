@@ -28,7 +28,9 @@ module Permissions
           user.id == caller.id 
         end
 
-        allow @recommendations, [:latest, :career, :emotion] 
+        allow @recommendations, [:latest, :career, :emotion, :actions] 
+
+        allow @preferences, [:show, :create, :update, :description]
 
         allow @preorders, :create
       end

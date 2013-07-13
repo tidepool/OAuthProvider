@@ -7,6 +7,7 @@ module Permissions
       @users = "#{controller_prefix}/users"
       @recommendations = "#{controller_prefix}/recommendations"
       @preorders = "#{controller_prefix}/preorders"
+      @preferences = "#{controller_prefix}/preferences" 
     end
 
     def allow?(controller, action, resource = nil)  

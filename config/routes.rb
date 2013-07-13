@@ -26,6 +26,7 @@ OAuthProvider::Application.routes.draw do
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
         get 'recommendations/emotion', to: 'recommendations#emotion'
+        get 'recommendations/actions', to: 'recommendations#actions'
         
         get 'games/latest', to: 'games#latest'
         post 'preorders', to: 'preorders#create'
@@ -46,9 +47,14 @@ OAuthProvider::Application.routes.draw do
         resources :trackers do 
           # get '/trackers/:tracker/:date', to: 'trackers#show'
         end     
+
+        resource :preferences
       end
             
       post '/user_events' => 'user_events#create'
+
+      get 'preferences/:type/description', to: 'preferences#description'
+
     end
   end
   

@@ -1,9 +1,6 @@
 class EmoRecommendation
   def initialize(result) 
-    @emo_name = result.strongest_emotion
-    if result.flagged_result1 && result.flagged_result1.to_bool
-      @emo_name = "flagged_result1"
-    end
+    @emo_name = result.calculated_emotion
 
     factor1 = result.calculations["final_results"][0]["factors"]["factor1"]
     factor1_zscore = factor1["average_zscore"]

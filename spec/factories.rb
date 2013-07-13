@@ -1,7 +1,15 @@
 FactoryGirl.define do
   factory :result do 
     intermediate_results "{\"message\":\"Hello World\"}" 
-    aggregate_results "{\"message\":\"Hello Aggregates\"}"       
+    aggregate_results "{\"message\":\"Hello Aggregates\"}" 
+
+    factory :old_result do 
+      sequence(:time_played) { |n| Time.zone.now - 5.hours - (n * 1000) }
+    end  
+
+    factory :new_result do 
+      sequence(:time_played) { |n| Time.zone.now - (n * 1000) }
+    end    
   end
 
   factory :personality do 

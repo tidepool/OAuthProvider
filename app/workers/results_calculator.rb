@@ -74,20 +74,4 @@ class ResultsCalculator
     end
     user_events
   end
-
-  # def circles
-  #   circles = {}
-  #   AdjectiveCircle.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-  #     circles[entry[:name_pair]] = ::OpenStruct.new(entry.attributes)
-  #   end
-  #   circles    
-  # end
-
-  # def elements
-  #   elements = {}
-  #   Element.where(version: CURRENT_ANALYSIS_VERSION).each do |entry|
-  #     elements[entry[:name]] = ::OpenStruct.new(entry.attributes) 
-  #   end
-  #   elements
-  # end
 end

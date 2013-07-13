@@ -1,5 +1,5 @@
 class Api::V1::RecommendationsController < Api::V1::ApiController
-  doorkeeper_for :latest
+  doorkeeper_for :all
 
   def latest
     personality = current_resource.personality
@@ -29,6 +29,14 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
     respond_to do |format|
       format.json { render :json => emotion_reco.recommendation }
     end
+  end
+
+  def actions
+    builder = RecommendationBuilder.new(target_user)
+
+    respond_to do |format|
+      format.json { render :json => builder.recommendations }
+    end    
   end
 
   private 

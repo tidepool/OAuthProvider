@@ -4,7 +4,7 @@ class Result < ActiveRecord::Base
   serialize :aggregate_results, JSON # deprecated DONOT use
 
   serialize :calculations, JSON
-
+  store_accessor :score, :version
 
   # belongs_to :profile_description
   belongs_to :game
