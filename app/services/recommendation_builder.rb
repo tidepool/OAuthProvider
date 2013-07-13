@@ -94,7 +94,7 @@ class RecommendationBuilder
   def build_preferences_recommendation
     reco = Hashie::Mash.new
     reco.title = "LET'S GET PERSONAL-IZED"
-    reco.link_type = 'TidePoolPreferences'
+    reco.link_type = 'Preferences'
     reco.link = "#preferences-training"
     reco.sentence = 'Set up your preferences and TidePool will guide you daily.'
 
@@ -106,18 +106,20 @@ class RecommendationBuilder
       "ReactionTimeResult" => {
         title: "THE REACTION TIME GAME",
         link: "#game/reaction_time",
+        link_type: "ReactionTime",
         sentence: "Measure your efficiency throughout the day."
       },
       "EmoResult" => {
         title: "THE EMOTIONS GAME",
         link: "#game/emotions",
+        link_type: "Emotions",
         sentence: "Track your daily emotions and watch how they impact your life."        
       }
     }
 
     reco = Hashie::Mash.new
     reco.title = game_map[game_def_id][:title]
-    reco.link_type = 'TidePoolGame'
+    reco.link_type = game_map[game_def_id][:link_type]
     reco.link = game_map[game_def_id][:link]
     reco.sentence = game_map[game_def_id][:sentence]
    
