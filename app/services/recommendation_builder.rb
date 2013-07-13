@@ -9,6 +9,7 @@ class RecommendationBuilder
   # Check both:
   #   Have they played reaction_time game? (n hours)
   #   Have they played emotion_time game?
+  # If they played 
   # If they played have then randomize the recommendations in the reco widget
   def recommendations
     check_preference_setup 
@@ -25,23 +26,30 @@ class RecommendationBuilder
   end
 
   def check_last_played_time
-    recent_results = Result.where('user_id = ?', @user.id).order(:time_played).limit(5)
-    return if recent_results.nil? || recent_results.empty?
+    game_types = ['EmoResult', 'ReactionTimeResult']
 
-    last_played = recent_results[0].time_played 
-    time_now = Time.zone.now
-    if time_now - last_played > LAST_PLAY_HOURS
-      recent_results.each do |result|
-        case result.type
-        when 'EmoResult'
-          build_game_recommendation(:reaction_time)
-          break;
-        when 'ReactionTimeResult'
-          build_game_recommendation(:emotions)
-          break;
+    selected_game = nil
+    selected_time_since_play = 0
+    game_types.each do |game_type| 
+      recent_result = Result.where('user_id = ? and type = ?', @user.id, game_type).order(:time_played).first
+      if recent_result
+        last_played = recent_result.time_played 
+        time_now = Time.zone.now
+        time_since_play = time_now - last_played
+        if time_since_play > LAST_PLAY_HOURS && time_since_play > selected_time_since_play
+          selected_time_since_play = time_since_play
+          selected_game = game_type
         end
+      else
+        # They never played the game
+        selected_game = game_type
       end
     end
+
+    if selected_game
+      build_game_recommendation(selected_game)
+    end
+
   end
 
   def add_personality_recommendations
@@ -85,25 +93,33 @@ class RecommendationBuilder
 
   def build_preferences_recommendation
     reco = Hashie::Mash.new
-    reco.title = 'Preferences'
-    reco.link_type = ''
-    reco.link = "#preferences"
-    reco.sentence = 'You have not set your preferences, would you like to set them now?'
+    reco.title = "LET'S GET PERSONAL-IZED"
+    reco.link_type = 'TidePoolPreferences'
+    reco.link = "#preferences-training"
+    reco.sentence = 'Set up your preferences and TidePool will guide you daily.'
 
     @recommendations << reco
   end
 
   def build_game_recommendation(game_def_id)
-    game_name = {
-      reaction_time: 'Reaction Time',
-      emotions: 'Emotions'
+    game_map = {
+      "ReactionTimeResult" => {
+        title: "THE REACTION TIME GAME",
+        link: "#game/reaction_time",
+        sentence: "Measure your efficiency throughout the day."
+      },
+      "EmoResult" => {
+        title: "THE EMOTIONS GAME",
+        link: "#game/emotions",
+        sentence: "Track your daily emotions and watch how they impact your life."        
+      }
     }
 
     reco = Hashie::Mash.new
-    reco.title = 'Game'
+    reco.title = game_map[game_def_id][:title]
     reco.link_type = 'TidePoolGame'
-    reco.link = "#game/#{game_def_id.to_s}"
-    reco.sentence = "You have not played any games for a while, would you like to play an #{game_name[game_def_id]} game?"
+    reco.link = game_map[game_def_id][:link]
+    reco.sentence = game_map[game_def_id][:sentence]
    
     @recommendations << reco
   end
