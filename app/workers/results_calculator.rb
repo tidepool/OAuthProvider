@@ -25,7 +25,7 @@ class ResultsCalculator
         user_events = game.event_log
       else
         # No User events collected either in Redis or in Postgres (from prior run)
-        game.status = :no_results
+        game.status = :incomplete_results
         game.save
         logger.error("Game #{game_id} does not have any user_events collected.")
         return
@@ -54,7 +54,7 @@ class ResultsCalculator
         persist_calculation.persist(game, analysis_results)
       rescue Exception => e
 
-        game.status = :no_results
+        game.status = :incomplete_results
         game.save
         logger.error("Game #{game_id} cannot persist #{klass_name} calculation. #{e.message}")
         raise e
