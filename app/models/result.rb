@@ -13,4 +13,10 @@ class Result < ActiveRecord::Base
   def self.find_for_type(game, result_type)
     result = Result.where('game_id = ? and type = ?', game.id, result_type).first
   end  
+
+  def record_times(game)
+    self.time_played = game.date_taken
+    self.time_calculated = Time.zone.now
+  end
+
 end
