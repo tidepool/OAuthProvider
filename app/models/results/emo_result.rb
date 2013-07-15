@@ -67,6 +67,6 @@ class EmoResult < Result
     }
     result.analysis_version = score[:version]
     result.record_times(game)
-    result.save
+    result.save ? result : nil
   end
 end

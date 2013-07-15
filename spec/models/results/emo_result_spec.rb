@@ -89,9 +89,19 @@ describe EmoResult do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }
 
+  it 'correctly saves the result played and calculated times' do 
+    binding.pry
+    result = EmoResult.create_from_analysis(game, @analysis_results)
+    result.time_played.should_not be_nil
+    result.time_calculated.should_not be_nil
+
+    result = Result.where(game_id: game.id).first
+    result.should_not be_nil        
+  end
+
   it 'does not raise exception or create a result if reported_emotion does not exist'  do
     @analysis_results[:emo][:score].delete(:reported_emotion)
-    result = EmoResult.create_from_analysis(@analysis_results, game)
+    result = EmoResult.create_from_analysis(game, @analysis_results)
     result.should be_nil
 
     result = Result.where(game_id: game.id).first
@@ -100,7 +110,7 @@ describe EmoResult do
 
   it 'does not raise exception or create a result if score does not exist'  do
     @analysis_results[:emo].delete(:score)
-    result = EmoResult.create_from_analysis(@analysis_results, game)
+    result = EmoResult.create_from_analysis(game, @analysis_results)
     result.should be_nil
 
     result = Result.where(game_id: game.id).first
@@ -109,7 +119,7 @@ describe EmoResult do
 
   it 'does not raise exception or create a result if reported_emotion is not a known EmotionDescription'  do
     @analysis_results[:emo][:score][:reported_emotion] = "foobar"
-    result = EmoResult.create_from_analysis(@analysis_results, game)
+    result = EmoResult.create_from_analysis(game, @analysis_results)
     result.should be_nil
 
     result = Result.where(game_id: game.id).first
