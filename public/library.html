@@ -9,7 +9,8 @@
     <title>TidePool Component Library</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.0/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="all-min.css">
     <link href="library.css" rel="stylesheet">
 </head>
@@ -65,7 +66,33 @@
             <b class="swatch colorMale"></b>
             <b class="swatch colorFemale"></b>
         </p>
+        <p class="muted">Game Colors</p>
+        <p class="colors">
+            <b class="swatch colorFastest"></b>
+            <b class="swatch colorSlowest"></b>
+        </p>
 
+
+        <h2><i class="icon-circle"></i> Icons with Text</h2>
+        <p class="large"><i class="gfx-male"></i> You're a manly man.</p>
+        <p class="large"><i class="gfx-female"></i> You're a classy lady.</p>
+        <p class="large"><i class="icon-male"></i> Many Gargoyles protrude prodigously.</p>
+        <p class="large">
+            <i class="gfx-surprise"></i> Suprised Much?
+        </p>
+        <p class="large">
+            <i class="gfx-clock"></i> This special ends soon.
+        </p>
+        <p class="large">
+            <i class="icon-circle-blank"></i> Will the circle be unbroken.
+        </p>
+        <p class="large">
+            <i class="icon-briefcase"></i> Take your kids to work day
+        </p>
+
+        <h2>`Share` ui_widget</h2>
+        <p>This component abstracts away the differet share APIs and provides a common programatic and user interface for providing sharing functionality</p>
+        <p id="ShareContainer"></p>
 
         <h2>Buttons</h2>
         <p>You can use the <code>a</code>, <code>button</code>, <code>div</code>, or most any other tag, and you can put any kind of <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icon in them.</p>
@@ -206,7 +233,8 @@
                     'ui_widgets/psst',
                     'composite_views/perch',
                     'ui_widgets/proceed',
-                    'ui_widgets/formation/select_by_icon'
+                    'ui_widgets/formation/select_by_icon',
+                    'ui_widgets/share'
                 ], function (
                     Backbone,
                     Syphon,
@@ -216,7 +244,8 @@
                     psst,
                     perch,
                     proceed,
-                    SelectByIcon
+                    SelectByIcon,
+                    ShareView
                 ) {
                     $('#DividerHolder').append( dividerMarkup )
 
@@ -279,9 +308,10 @@
                             string_id: 'handedness',
                             type: 'select_by_icon',
                             multiselect: true,
+                            label: 'Rockets or Bugs?',
                             'options': [
-                                'left',
-                                'right'
+                                { value:'rockets', icon:'icon-rocket' },
+                                { value:'bugs', icon:'icon-bug' }
                             ]
                         })
                     })
@@ -289,11 +319,13 @@
                         model: new Backbone.Model({
                             string_id: 'socialz',
                             type: 'select_by_icon',
+                            label: 'How Ya Feelin\'?',
                             'options': [
-                                'smile',
-                                'meh',
-                                'frown',
-                                'other'
+                                { value:'smile', icon:'icon-smile' },
+                                { value:'meh', icon:'icon-meh' },
+                                { value:'frown', icon:'icon-frown' },
+                                { value:'lovey', icon:'icon-heart' },
+                                { value:'other', icon:'gfx-dottedcircle' }
                             ]
                         })
                     })
@@ -302,6 +334,23 @@
                     ).append('<br/>').append(
                             socialz.render().el
                     )
+
+                    tmi = new ShareView({ data: {
+                        title: "My personality is 'The Calculator'",
+                        text: 'You can find out your personality, too, at https://alpha.tidepool.co',
+                        link: 'https://alpha.tidepool.co',
+                        image: "https://alpha.tidepool.co/images/badges/The-Calculator.png"
+                    }})
+                    $('#ShareContainer').css({
+                        position: 'relative',
+                        height: '75px',
+                        border: '1px solid #ccc',
+                        'border-radius': '5px',
+                        background: 'white'
+                    }).html(
+                        tmi.render().el
+                    )
+
 
                 });
             });
