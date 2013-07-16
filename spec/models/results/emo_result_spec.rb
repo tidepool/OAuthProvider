@@ -90,7 +90,6 @@ describe EmoResult do
   let(:game) { create(:game, user: user) }
 
   it 'correctly saves the result played and calculated times' do 
-    binding.pry
     result = EmoResult.create_from_analysis(game, @analysis_results)
     result.time_played.should_not be_nil
     result.time_calculated.should_not be_nil

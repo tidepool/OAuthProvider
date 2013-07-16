@@ -159,7 +159,7 @@ describe ResultsCalculator do
       $redis.exists(key).should == true
       resultsCalc = ResultsCalculator.new 
       @game.status.should == :not_started
-      lambda { resultsCalc.perform(@game.id) }.should raise_error(Exception)
+      resultsCalc.perform(@game.id) 
       updated_game = Game.find(@game.id)
       updated_game.status.should == :incomplete_results.to_s
       updated_game.event_log.should_not be_nil
