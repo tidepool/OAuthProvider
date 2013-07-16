@@ -12,7 +12,7 @@ describe 'Results API' do
   let(:user2) { create(:user) }
   let(:admin) { create(:admin) }
   let(:game) { create(:game, user: user1, status: :not_started) }
-  let(:game_no_results) { create(:game, {user: user1, status: :no_results}) }
+  let(:game_no_results) { create(:game, {user: user1, status: :incomplete_results}) }
   let(:game_with_results) { create(:game, {user: user1, status: :results_ready}) }
 
   let(:reaction_results) { create_list(:result, 10, game: game, user: user1, type: 'ReactionTimeResult')}

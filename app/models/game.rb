@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   serialize :stages, JSON
   serialize :event_log, JSON
 
-  # Game status: :not_started, :calculating_results, :results_ready, :no_results
+  # Game status: :not_started, :calculating_results, :results_ready, :incomplete_results
   # status, is only used in calculating the results for a game.
   # It cannot be set publicly from the API, that may cause race conditions.
   # Use the helper methods: in_progress?, completed? for figuring out game status during gameplay.
