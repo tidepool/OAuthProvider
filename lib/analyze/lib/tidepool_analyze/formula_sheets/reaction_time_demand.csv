@@ -1,0 +1,5 @@
+calculation,mean,std,correction_coefficient
+string,float,float,float
+average_simple_complex_reaction_time,1.070448,0.197141,
+demand_for_user_time,3.671429,1.980018,
+demand_and_reaction_time_correction,,,0.176273

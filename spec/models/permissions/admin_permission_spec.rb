@@ -8,6 +8,7 @@ module Permissions
     let(:results) { "#{controller_prefix}/results" }
     let(:users) { "#{controller_prefix}/users" }
     let(:recommendations) { "#{controller_prefix}/recommendations" }
+    let(:preferences) { "#{controller_prefix}/preferences" }
     let(:preorders) { "#{controller_prefix}/preorders" }
     
     let(:user) { create(:admin) }
@@ -30,8 +31,7 @@ module Permissions
     end
 
     it 'allows results' do
-      should allow(results, :create, game)
-      should allow(results, :create, others_game)
+      should allow(results, :index)
       should allow(results, :show, game)
       should allow(results, :show, others_game)
       should allow(results, :progress, game)
@@ -50,6 +50,14 @@ module Permissions
     it 'allows recommendations' do
       should allow(recommendations, :latest)
       should allow(recommendations, :career)
+      should allow(recommendations, :emotion)
+      should allow(recommendations, :actions)
+    end
+
+    it 'allows preferences' do 
+      should allow(preferences, :show)
+      should allow(preferences, :create)
+      should allow(preferences, :update)      
     end
 
     it 'allows preorders' do

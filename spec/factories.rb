@@ -1,7 +1,15 @@
 FactoryGirl.define do
   factory :result do 
     intermediate_results "{\"message\":\"Hello World\"}" 
-    aggregate_results "{\"message\":\"Hello Aggregates\"}"       
+    aggregate_results "{\"message\":\"Hello Aggregates\"}" 
+
+    factory :old_result do 
+      sequence(:time_played) { |n| Time.zone.now - 5.hours - (n * 1000) }
+    end  
+
+    factory :new_result do 
+      sequence(:time_played) { |n| Time.zone.now - (n * 1000) }
+    end    
   end
 
   factory :personality do 
@@ -38,8 +46,14 @@ FactoryGirl.define do
 
   factory :game do
     definition_id 1
+    stages [{}, {}]
+    stage_completed -1
     status 'not_started'
     sequence(:date_taken) { |n| Time.zone.now - (n*1000) }
+
+    factory :game_with_result do 
+      after(:create) { |game| create(:result, game: game)}   
+    end  
   end
 
   factory :user do

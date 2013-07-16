@@ -1,7 +1,8 @@
 module TidepoolAnalyze
   module ScoreGenerator
     class Holland6Score
-      def calculate_score(aggregate_results)
+      def calculate_score(input_data)
+        return {} if input_data.class.to_s != 'Array'
         # Holland6 comes from the Circles_Test modules
         holland6_scores = {
             realistic: 0,
@@ -12,10 +13,10 @@ module TidepoolAnalyze
             conventional: 0
         }
         count = 0
-        aggregate_results.each do | module_name, result |
-          if result && result[:holland6]
+        input_data.each do | result |
+          if result && result.has_key?(:realistic)
             count += 1
-            result[:holland6].each do |dimension, value|
+            result.each do |dimension, value|
               holland6_scores[dimension] += value[:average] if holland6_scores[dimension]
             end
           end
@@ -55,8 +56,9 @@ module TidepoolAnalyze
 
         {
           dimension: final_score,
-          score: holland6_scores,
-          adjust_by: adjust_by
+          dimension_values: holland6_scores,
+          adjust_by: adjust_by,
+          version: '2.0'
         }
       end
     end

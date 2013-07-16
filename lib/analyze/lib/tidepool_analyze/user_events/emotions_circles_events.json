@@ -1,0 +1,22 @@
+{
+  "test_started": {
+    "record_time": 1360195167248
+  },
+  "test_completed": {
+    "record_time":1360195167548,
+    "circles": [
+      { 
+        "trait1": "fear",
+        "size": 4,
+        "top": 140,
+        "left": 499,
+        "width": 156
+      }
+    ],
+    "self_coord": {
+      "top":138,
+      "left":634,
+      "size":386
+    }
+  }
+}

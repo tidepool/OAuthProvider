@@ -14,15 +14,23 @@ module Permissions
 
         allow @games, :index 
 
-        allow @results, [:create, :show, :progress] do |game|
-          game.user_id == caller.id 
+        allow @results, :index 
+
+        allow @results, [:show, :progress] do |item|
+          if item.class == Game
+            item.user_id == caller.id 
+          elsif item.class == Result
+            item.user_id == caller.id
+          end
         end
 
         allow @users, [:show, :create, :update, :destroy, :personality] do |user|
           user.id == caller.id 
         end
 
-        allow @recommendations, [:latest, :career] 
+        allow @recommendations, [:latest, :career, :emotion, :actions] 
+
+        allow @preferences, [:show, :create, :update, :description]
 
         allow @preorders, :create
       end

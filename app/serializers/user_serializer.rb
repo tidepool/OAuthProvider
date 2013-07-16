@@ -7,4 +7,5 @@ class UserSerializer < ActiveModel::Serializer
             :education, :referred_by, :handedness
 
   has_many :authentications
+  has_one :personality
 end

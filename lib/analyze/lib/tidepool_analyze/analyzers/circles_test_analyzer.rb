@@ -1,54 +1,129 @@
 module TidepoolAnalyze 
   module Analyzer
     class CirclesTestAnalyzer
+      include TidepoolAnalyze::Utils::EventValidator
+
       attr_reader :start_time, :end_time, :circles, :radii, :start_coords, :self_circle
 
-      def initialize(events)
-        process_events events
+      # Output Format:
+      # [
+      #   [
+      #     {:trait1=>"Self-Disciplined",
+      #      :trait2=>"Persistent",
+      #      :name_pair=>"Self-Disciplined/Persistent",
+      #      :size=>2,
+      #      :origin_x=>441.0,
+      #      :origin_y=>215.0,
+      #      :distance=>403.05334634512093,
+      #      :overlap=>0.0,
+      #      :total_radius=>259.0,
+      #      :circle_radius=>66.0,
+      #      :self_circle_radius=>193.0,
+      #      :distance_standard=>2.088359307487673,
+      #      :distance_rank=>4},
+      #     {...},
+      #   ],
+      #   [
+      #     {:trait1=>"Cooperative",
+      #      :trait2=>"Friendly",
+      #      :name_pair=>"Cooperative/Friendly",
+      #      :size=>2,
+      #      :origin_x=>953.0,
+      #      :origin_y=>192.0,
+      #      :distance=>187.608635195718,
+      #      :overlap_distance=>71.391364804282,
+      #      :overlap=>0.5408436727597121,
+      #      :total_radius=>259.0,
+      #      :circle_radius=>66.0,
+      #      :self_circle_radius=>193.0,
+      #      :distance_standard=>0.9720654673353264,
+      #      :distance_rank=>2},
+      #     {...}
+      #   ]
+      # ]
+      def initialize(events, formula)
+        @formula = formula
+        @events = events
       end
 
       def calculate_result
-        @results = []
-        return @results if @circles.nil? 
+        is_valid = process_events(@events)
+        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
+        raise TidepoolAnalyze::UserEventValidatorError, "circles are not provided" if @circles.nil?
+
+
+        raise TidepoolAnalyze::UserEventValidatorError, "self_coord top not provided" if @self_circle['top'].nil?
+        raise TidepoolAnalyze::UserEventValidatorError, "self_coord left not provided" if @self_circle['left'].nil?
+        raise TidepoolAnalyze::UserEventValidatorError, "self_coord size not provided" if @self_circle['size'].nil?
         
         self_circle_radius = @self_circle['size'] / 2.0
         self_circle_origin_x = @self_circle['left'] + self_circle_radius
         self_circle_origin_y = @self_circle['top'] + self_circle_radius
+
+        raise TidepoolAnalyze::UserEventValidatorError, "self circle radius can not be zero" if self_circle_radius.nil? || self_circle_radius == 0
+
+        @results = []
         @circles.each do |circle|
-          result = {}
-          result[:trait1] = circle['trait1']
-          result[:trait2] = circle['trait2']
-          result[:size] = circle['size']
+          raise TidepoolAnalyze::UserEventValidatorError, "trait1 not provided" if circle['trait1'].nil?
+          raise TidepoolAnalyze::UserEventValidatorError, "size not provided" if circle['size'].nil?
+          raise TidepoolAnalyze::UserEventValidatorError, "width not provided" if circle['width'].nil?
+          raise TidepoolAnalyze::UserEventValidatorError, "left not provided" if circle['left'].nil?
+          raise TidepoolAnalyze::UserEventValidatorError, "top not provided" if circle['top'].nil?
 
-          circle_radius = circle['width'] / 2.0
-
-          result[:origin_x] = circle['left'] + circle_radius
-          result[:origin_y] = circle['top'] + circle_radius
-          result[:distance] = Math.sqrt((result[:origin_x] - self_circle_origin_x)**2 + (result[:origin_y] - self_circle_origin_y)**2)
-
-          total_radius = circle_radius + self_circle_radius
-          if result[:distance] >= total_radius
-            # There is no overlap
-            result[:overlap] = 0.0
-          elsif result[:distance] <= self_circle_radius - circle_radius
-            result[:overlap] = 1.0
+          if circle['trait2'].nil? || circle['trait2'].empty?
+            name_pair = circle['trait1']
           else
+            name_pair = "#{circle['trait1']}/#{circle['trait2']}"
+          end
+
+          # Check if this name_pair needs to be processed based on the formula given?
+          if @formula.has_key?(name_pair)
+            result = {}
+
+            result[:trait1] = circle['trait1']
+            result[:trait2] = circle['trait2']
+            result[:name_pair] = name_pair
+
+            result[:size] = circle['size']
+
+            circle_radius = circle['width'] / 2.0
+
+            result[:origin_x] = circle['left'] + circle_radius
+            result[:origin_y] = circle['top'] + circle_radius
+            result[:distance] = Math.sqrt((result[:origin_x] - self_circle_origin_x)**2 + (result[:origin_y] - self_circle_origin_y)**2)
+
+            total_radius = circle_radius + self_circle_radius
+            if result[:distance] >= total_radius
+              # There is no overlap
+              result[:overlap] = 0.0
+            elsif result[:distance] <= self_circle_radius - circle_radius
+              result[:overlap] = 1.0
+            else
+              result[:overlap_distance] = total_radius - result[:distance]
+              result[:overlap] = (total_radius - result[:distance]) / (2 * circle_radius)
+            end
             result[:total_radius] = total_radius
             result[:circle_radius] = circle_radius
             result[:self_circle_radius] = self_circle_radius
-            result[:overlap_distance] = total_radius - result[:distance]
-            result[:overlap] = (total_radius - result[:distance]) / (2 * circle_radius)
+            
+            if self_circle_radius && self_circle_radius != 0
+              result[:distance_standard] = result[:distance] / self_circle_radius
+            else
+              # Log this, very unexpected!
+            end
+            @results << result
           end
-          @results << result
         end
 
-        # Consistent ranges for size and distance rank -> [0..4]
-        # This change required us to change the means in circles.csv to be mean - 1
-        distance_rank = 0 # Changed this to start from 0.
-        @results.sort {|p1, p2| p1[:distance] <=> p2[:distance] }.each do |result| 
-          result[:distance_rank] = distance_rank
-          distance_rank += 1
-        end      
+        if @results.length > 0
+          # Consistent ranges for size and distance rank -> [0..4]
+          # This change required us to change the means in circles.csv to be mean - 1
+          distance_rank = 0 # Changed this to start from 0.
+          @results.sort {|p1, p2| p1[:distance] <=> p2[:distance] }.each do |result| 
+            result[:distance_rank] = distance_rank
+            distance_rank += 1
+          end   
+        end   
         @results
       end
 
@@ -85,22 +160,23 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
+        is_valid = true
         events.each do |entry|
+          unless user_event_valid?(entry)
+            is_valid = false
+            break
+          end
+
           case entry['event_desc']
           when 'test_started'
             @start_time = entry['record_time']
-          when 'move_circles_started'
           when 'test_completed'
             @end_time = entry['record_time']
             @circles = entry['circles']
             @self_circle = entry['self_coord']
-          when 'circle_start_move'
-          when 'circle_end_move'
-          when 'circle_resized'
-          else
-            puts "Unknown Event: #{entry}"
           end
         end
+        is_valid
       end
     end
   end

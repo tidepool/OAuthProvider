@@ -4,7 +4,7 @@
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
     "score_names" : ["big5"],
-    "calculates" : ["scores"],
+    "calculates" : ["big5"],
     "result_view": "MT",
     "stages" :
         [

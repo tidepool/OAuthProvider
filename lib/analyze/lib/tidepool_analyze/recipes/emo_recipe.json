@@ -1,0 +1,16 @@
+[
+  {
+    "user_event_source": "emotions_circles",
+    "analyzer": "CirclesTestAnalyzer", 
+    "formulator": "EmoFormulator",  
+    "formula_sheet": "emo_circles.csv",
+    "formula_key": "name"
+  },
+  {
+    "user_event_source": "survey",
+    "analyzer": "SurveyAnalyzer",
+    "formulator": "DemandFormulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
+  }
+]

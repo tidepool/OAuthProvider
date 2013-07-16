@@ -40,6 +40,34 @@ describe 'Game API' do
     game_result[:definition][:unique_name].should == 'baseline'
   end
 
+  it 'creates a game that has the default definition if def_id is omitted' do 
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
+      { body: { def_id: 'foobar' } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == 'baseline'
+  end
+
+  it 'creates a game that is the default definition if def_id cannot be found' do
+    token = get_conn(user1)
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
+      { body: { def_id: 'foobar' } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == 'baseline'
+  end
+
+  it 'creates a game with a definition that is same as the game in the same_as parameter' do
+    token = get_conn(user1)
+    definition = game.definition
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
+      { body: { same_as: game.id } })
+    response.status.should == 200
+    game_result = JSON.parse(response.body, symbolize_names: true)
+    game_result[:definition][:unique_name].should == definition.unique_name
+  end
+
   it 'records the ip of the caller when the game is created' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
@@ -77,8 +105,8 @@ describe 'Game API' do
     expected_games = game_list 
     response = token.get("#{@endpoint}/users/#{user2.id}/games.json")
     games = JSON.parse(response.body, symbolize_names: true)
-    games[:games].length.should == game_list.length
-    games[:games][0][:user_id].to_i.should == user2.id
+    games.length.should == game_list.length
+    games[0][:user_id].to_i.should == user2.id
   end
 
   it 'gets the latest game of the user' do
@@ -96,19 +124,23 @@ describe 'Game API' do
     lambda { Game.find(game_id) }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
-  it 'updates the stage_completed but the status remains the same' do
+  it 'updates to the the stage_completed' do
     token = get_conn(user1)
-    game_params = { stage_completed: 2, status: 'completed'}
+    game_params = { stage_completed: 1 }
     response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
         { body: { game: game_params } })
     updated_game = JSON.parse(response.body, symbolize_names: true)
-    updated_game[:stage_completed].should == 2
-    updated_game[:status].should == 'not_started'
+    updated_game[:stage_completed].should == 1
   end
 
-  pending 'gets the latest game with profile calculation' 
-
   describe 'Error and Edge Cases' do
-
+    it 'does not let API to update status directly' do 
+      token = get_conn(user1)
+      game_params = { status: :incomplete_results }
+      response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
+          { body: { game: game_params } })
+      updated_game = JSON.parse(response.body, symbolize_names: true)
+      updated_game[:status].should == 'not_started'
+    end
   end
 end
