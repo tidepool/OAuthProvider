@@ -7,8 +7,8 @@ class ResultsCalculator
   include Sidekiq::Worker
    
   MAX_NUM_EVENTS = 10000
-  CURRENT_ANALYSIS_VERSION = '1.0'
- 
+  RETRY_COUNT = 3
+
   def perform(game_id)
     key = "game:#{game_id}"
 
@@ -18,51 +18,96 @@ class ResultsCalculator
       return
     end
 
-    user_events = user_events_from_redis(key)
-    if user_events.empty?
-      if game.event_log
-        # We are recalculating results
-        user_events = game.event_log
+    # This retry is introduced to fix a problem we were having 
+    # based on user events not arriving before the calculation begins.
+    
+    retries = 0
+    while retries < RETRY_COUNT
+      user_events = pull_events_from_redis(game, key)
+
+      #TODO: Hate the nested if's, should refactor!
+      if user_events && !user_events.empty?
+        if store_events_in_event_log(game, user_events, key)
+          analysis_results = analyze_results(game, user_events)
+          if analysis_results
+            game.status = persist_results(game, analysis_results)
+          else
+            game.status = :incomplete_results
+          end        
+        else
+          game.status = :incomplete_results
+        end        
       else
-        # No User events collected either in Redis or in Postgres (from prior run)
-        game.status = :no_results
-        game.save
-        logger.error("Game #{game_id} does not have any user_events collected.")
-        return
+        game.status = :incomplete_results
+      end
+
+      if game.status == :incomplete_results
+        retries += 1
+        logger.warn("Game #{game_id} is being retried, retry #{retries}")
+      else
+        break
       end
     end
 
-    # result = game.result.nil? ? game.create_result : game.result
-    game.event_log = user_events
-    if game.save  
-      # Make sure we don't lose the event results
-      # It is safe to delete from Redis, they are saved in Postgres
+    if game.status == :results_ready && game.event_log && !game.event_log.empty?
       $redis.del(key)
     else
-      logger.error("Game #{game_id} event_log not saved, user_events still in Redis")
-      return
+      logger.error("Game #{game_id} events left in the Redis queue, needs to be cleaned up.")
     end
-    # analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new(game.definition.stages, elements, circles)
-    analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new
-    
-    analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
 
-    game.definition.calculates.each do |calculation|
-      klass_name = "Persist#{calculation.to_s.camelize}"
-      begin
-        persist_calculation = klass_name.constantize.new()
-        persist_calculation.persist(game, analysis_results)
-      rescue Exception => e
+    unless game.save
+      logger.error("Game #{game_id} cannot be saved after all results are calculated.")
+    end
+  end
 
-        game.status = :no_results
-        game.save
-        logger.error("Game #{game_id} cannot persist #{klass_name} calculation. #{e.message}")
-        raise e
-      end
-    end    
+  def pull_events_from_redis(game, key)
+    user_events = user_events_from_redis(key)
+    if user_events.empty?
+      # No User events collected either in Redis or in Postgres (from prior run)
+      logger.error("Game #{game.id} does not have any user_events collected.")
+    end
+    user_events
+  end
 
-    game.status = :results_ready
-    game.save
+  def store_events_in_event_log(game, user_events, key)
+    game.event_log = user_events
+    if game.save  
+      # # Make sure we don't lose the event results
+      # # It is safe to delete from Redis, they are saved in Postgres
+      # $redis.del(key)
+      return true
+    else
+      logger.error("Game #{game.id} event_log not saved, user_events still in Redis")
+      return false
+    end
+  end
+
+  def analyze_results(game, user_events)
+    analysis_results = nil
+    begin
+      analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new
+      analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
+    rescue Exception => e
+      logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
+    end
+    analysis_results
+  end
+
+  def persist_results(game, analysis_results)
+    status = :results_ready
+    if game.definition.calculates
+      game.definition.calculates.each do |calculation|
+        klass_name = "Persist#{calculation.to_s.camelize}"
+        begin
+          persist_calculation = klass_name.constantize.new()
+          persist_calculation.persist(game, analysis_results)
+        rescue Exception => e
+          logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
+          status = :incomplete_results
+        end
+      end  
+    end
+    status  
   end
 
   def user_events_from_redis(key)

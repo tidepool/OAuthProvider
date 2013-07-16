@@ -77,7 +77,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
           link: api_v1_user_game_results_url,
           message: 'Results are ready.'
         })        
-    when :no_results
+    when :incomplete_results
       api_status = ApiStatus.new(
         {
           state: :error,

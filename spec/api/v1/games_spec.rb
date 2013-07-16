@@ -136,7 +136,7 @@ describe 'Game API' do
   describe 'Error and Edge Cases' do
     it 'does not let API to update status directly' do 
       token = get_conn(user1)
-      game_params = { status: :no_results }
+      game_params = { status: :incomplete_results }
       response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}.json",
           { body: { game: game_params } })
       updated_game = JSON.parse(response.body, symbolize_names: true)
