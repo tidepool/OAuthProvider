@@ -116,21 +116,23 @@ describe ResultsCalculator do
       UserEvent.cleanup(@game.id)
     end
 
-    it 'uses the events in the game.result.event_log if redis queue is empty' do
-      # This is a scenario we may use to rerun some existing tests
-      # This scenario should not happen normally in production
-      @game.event_log = @events
-      @game.save
+    # This is really not used by anyone, so took it off the feature list for now.
 
-      resultsCalc = ResultsCalculator.new 
-      @game.status.should == :not_started
-      resultsCalc.perform(@game.id)
-      updated_game = Game.find(@game.id)
-      updated_game.status.should == :results_ready.to_s
-      user.personality.should_not be_nil    
-      # user.personality.profile_description.name.should == 'The Charger'
-      # user.personality.profile_description.name.should == 'The Shelter'      
-    end
+    # it 'uses the events in the game.result.event_log if redis queue is empty' do
+    #   # This is a scenario we may use to rerun some existing tests
+    #   # This scenario should not happen normally in production
+    #   @game.event_log = @events
+    #   @game.save
+
+    #   resultsCalc = ResultsCalculator.new 
+    #   @game.status.should == :not_started
+    #   resultsCalc.perform(@game.id)
+    #   updated_game = Game.find(@game.id)
+    #   updated_game.status.should == :results_ready.to_s
+    #   user.personality.should_not be_nil    
+    #   # user.personality.profile_description.name.should == 'The Charger'
+    #   # user.personality.profile_description.name.should == 'The Shelter'      
+    # end
 
     it 'changes the game status to :incomplete_results if there are no user_events anywhere' do
       resultsCalc = ResultsCalculator.new 
@@ -163,7 +165,12 @@ describe ResultsCalculator do
       updated_game = Game.find(@game.id)
       updated_game.status.should == :incomplete_results.to_s
       updated_game.event_log.should_not be_nil
-      $redis.exists(key).should == false
+
+      # We changed the behavior so that we keep the 
+      # events in the Redis, this way the client can keep asking the results in
+      # case the results are :incomplete_results
+      $redis.exists(key).should == true
+      # $redis.exists(key).should == false
     end
   end
 end
