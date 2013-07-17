@@ -17,52 +17,52 @@ module Permissions
       let(:others_game) { create(:game, user: other_user) }
       subject { Permissions.permission_for(user, user) }
 
-      it 'allows games' do
-        should allow(games, :create)
-        should allow(games, :destroy, game)
-        should_not allow(games, :destroy, others_game)
-        should allow(games, :update, game)
-        should_not allow(games, :update, others_game)
-        should allow(games, :show, game)
-        should_not allow(games, :show, others_game)
-        should allow(games, :index)
-        should allow(games, :latest, game)
-        should_not allow(games, :latest, others_game)
+      it 'registered user permissions for games' do
+        expect(subject.allow?(games, :create)).to be_true
+        expect(subject.allow?(games, :destroy, game)).to be_true
+        expect(subject.allow?(games, :destroy, others_game)).to be_false
+        expect(subject.allow?(games, :update, game)).to be_true
+        expect(subject.allow?(games, :update, others_game)).to be_false
+        expect(subject.allow?(games, :show, game)).to be_true
+        expect(subject.allow?(games, :show, others_game)).to be_false
+        expect(subject.allow?(games, :index)).to be_true
+        expect(subject.allow?(games, :latest, game)).to be_true
+        expect(subject.allow?(games, :latest, others_game)).to be_false
       end
 
-      it 'allows results' do
-        should allow(results, :index)
-        should allow(results, :show, game)
-        should_not allow(results, :show, others_game)
-        should allow(results, :progress, game)
-        should_not allow(results, :progress, others_game)
+      it 'registered user permissions for results' do
+        expect(subject.allow?(results, :index)).to be_true
+        expect(subject.allow?(results, :show, game)).to be_true
+        expect(subject.allow?(results, :show, others_game)).to be_false
+        expect(subject.allow?(results, :progress, game)).to be_true
+        expect(subject.allow?(results, :progress, others_game)).to be_false
       end
 
-      it 'allows users' do 
+      it 'registered user permissions for users' do 
         target_user = user
-        should allow(users, :show, target_user)
-        should allow(users, :create, target_user)
-        should allow(users, :update, target_user)
-        should allow(users, :destroy, target_user)
-        should allow(users, :personality, target_user)
+        expect(subject.allow?(users, :show, target_user)).to be_true
+        expect(subject.allow?(users, :create, target_user)).to be_true
+        expect(subject.allow?(users, :update, target_user)).to be_true
+        expect(subject.allow?(users, :destroy, target_user)).to be_true
+        expect(subject.allow?(users, :personality, target_user)).to be_true
       end
 
-      it 'allows recommendations' do
-        should allow(recommendations, :latest)
-        should allow(recommendations, :career)
-        should allow(recommendations, :emotion)
-        should allow(recommendations, :actions)
+      it 'registered user permissions for recommendations' do
+        expect(subject.allow?(recommendations, :latest)).to be_true
+        expect(subject.allow?(recommendations, :career)).to be_true
+        expect(subject.allow?(recommendations, :emotion)).to be_true
+        expect(subject.allow?(recommendations, :actions)).to be_true
       end
 
-      it 'allows preferences' do 
-        should allow(preferences, :show)
-        should allow(preferences, :create)
-        should allow(preferences, :update)      
+      it 'registered user permissions for preferences' do 
+        expect(subject.allow?(preferences, :show)).to be_true
+        expect(subject.allow?(preferences, :create)).to be_true
+        expect(subject.allow?(preferences, :update)).to be_true      
       end
 
 
-      it 'allows preorders' do
-        should allow(preorders, :create)
+      it 'registered user permissions for preorders' do
+        expect(subject.allow?(preorders, :create)).to be_true
       end
 
     end
@@ -74,51 +74,51 @@ module Permissions
       let(:others_game) { create(:game, user: other_user) }
       subject { Permissions.permission_for(user, other_user) }
 
-      it 'allows games' do
-        should_not allow(games, :create)
-        should_not allow(games, :destroy, game)
-        should_not allow(games, :destroy, others_game)
-        should_not allow(games, :update, game)
-        should_not allow(games, :update, others_game)
-        should_not allow(games, :show, game)
-        should_not allow(games, :show, others_game)
-        should_not allow(games, :index)
-        should_not allow(games, :latest, game)
-        should_not allow(games, :latest, others_game)
+      it 'registered user permissions for games' do
+        expect(subject.allow?(games, :create)).to be_false
+        expect(subject.allow?(games, :destroy, game)).to be_false
+        expect(subject.allow?(games, :destroy, others_game)).to be_false
+        expect(subject.allow?(games, :update, game)).to be_false
+        expect(subject.allow?(games, :update, others_game)).to be_false
+        expect(subject.allow?(games, :show, game)).to be_false
+        expect(subject.allow?(games, :show, others_game)).to be_false
+        expect(subject.allow?(games, :index)).to be_false
+        expect(subject.allow?(games, :latest, game)).to be_false
+        expect(subject.allow?(games, :latest, others_game)).to be_false
       end
 
-      it 'allows results' do
-        should_not allow(results, :show, game)
-        should_not allow(results, :show, others_game)
-        should_not allow(results, :progress, game)
-        should_not allow(results, :progress, others_game)
+      it 'registered user permissions for results' do
+        expect(subject.allow?(results, :show, game)).to be_false
+        expect(subject.allow?(results, :show, others_game)).to be_false
+        expect(subject.allow?(results, :progress, game)).to be_false
+        expect(subject.allow?(results, :progress, others_game)).to be_false
       end
 
-      it 'allows users' do 
+      it 'registered user permissions for users' do 
         target_user = other_user
-        should_not allow(users, :show, target_user)
-        should_not allow(users, :create, target_user)
-        should_not allow(users, :update, target_user)
-        should_not allow(users, :destroy, target_user)
-        should_not allow(users, :personality, target_user)
+        expect(subject.allow?(users, :show, target_user)).to be_false
+        expect(subject.allow?(users, :create, target_user)).to be_false
+        expect(subject.allow?(users, :update, target_user)).to be_false
+        expect(subject.allow?(users, :destroy, target_user)).to be_false
+        expect(subject.allow?(users, :personality, target_user)).to be_false
       end
 
-      it 'allows recommendations' do
-        should_not allow(recommendations, :latest)
-        should_not allow(recommendations, :career)
-        should_not allow(recommendations, :emotion)
-        should_not allow(recommendations, :actions)
+      it 'registered user permissions for recommendations' do
+        expect(subject.allow?(recommendations, :latest)).to be_false
+        expect(subject.allow?(recommendations, :career)).to be_false
+        expect(subject.allow?(recommendations, :emotion)).to be_false
+        expect(subject.allow?(recommendations, :actions)).to be_false
       end
 
-      it 'allows preferences' do 
-        should_not allow(preferences, :show)
-        should_not allow(preferences, :create)
-        should_not allow(preferences, :update)      
+      it 'registered user permissions for preferences' do 
+        expect(subject.allow?(preferences, :show)).to be_false
+        expect(subject.allow?(preferences, :create)).to be_false
+        expect(subject.allow?(preferences, :update)).to be_false      
       end
 
 
-      it 'allows preorders' do
-        should_not allow(preorders, :create)
+      it 'registered user permissions for preorders' do
+        expect(subject.allow?(preorders, :create)).to be_false
       end
 
     end
