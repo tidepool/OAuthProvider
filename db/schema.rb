@@ -11,28 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130712170115) do
+ActiveRecord::Schema.define(version: 20130718173821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
-
-  create_table "adjective_circles", force: true do |t|
-    t.string   "name_pair"
-    t.string   "version"
-    t.float    "size_weight"
-    t.float    "size_sd"
-    t.float    "size_mean"
-    t.float    "distance_weight"
-    t.float    "distance_sd"
-    t.float    "distance_mean"
-    t.float    "overlap_weight"
-    t.float    "overlap_sd"
-    t.float    "overlap_mean"
-    t.string   "maps_to"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -70,33 +53,6 @@ ActiveRecord::Schema.define(version: 20130712170115) do
     t.datetime "updated_at"
   end
 
-  create_table "data_source_settings", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "data_source_id"
-    t.string   "auth_token"
-    t.datetime "expires"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "data_sources", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "logo_url"
-    t.string   "end_point_url"
-    t.string   "api_key"
-    t.string   "api_secret"
-    t.string   "retention_policy"
-    t.string   "rate_limit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "data_sources_tracker_types", id: false, force: true do |t|
-    t.integer "data_source_id"
-    t.integer "tracker_type_id"
-  end
-
   create_table "definitions", force: true do |t|
     t.string   "name"
     t.text     "stages"
@@ -112,20 +68,6 @@ ActiveRecord::Schema.define(version: 20130712170115) do
   end
 
   add_index "definitions", ["unique_name"], name: "index_definitions_on_unique_name", unique: true, using: :btree
-
-  create_table "elements", force: true do |t|
-    t.string   "name"
-    t.string   "version"
-    t.float    "standard_deviation"
-    t.float    "mean"
-    t.float    "weight_extraversion"
-    t.float    "weight_conscientiousness"
-    t.float    "weight_neuroticism"
-    t.float    "weight_openness"
-    t.float    "weight_agreeableness"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
   create_table "emotion_descriptions", force: true do |t|
     t.string   "name",          null: false
@@ -289,35 +231,6 @@ ActiveRecord::Schema.define(version: 20130712170115) do
   add_index "results", ["time_played"], name: "index_results_on_time_played", using: :btree
   add_index "results", ["type"], name: "index_results_on_type", using: :btree
   add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
-
-  create_table "tracker_settings", force: true do |t|
-    t.integer  "user_id"
-    t.string   "data_methods",   array: true
-    t.hstore   "config"
-    t.hstore   "privacy_config"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tracker_types", force: true do |t|
-    t.string   "name"
-    t.string   "category"
-    t.boolean  "isCalculated"
-    t.text     "schema"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "trackers", force: true do |t|
-    t.integer  "tracker_type_id"
-    t.integer  "user_id"
-    t.datetime "date_started"
-    t.datetime "date_ended"
-    t.hstore   "data"
-    t.datetime "date_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", force: true do |t|
     t.string   "email",           default: "",    null: false
