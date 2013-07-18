@@ -1,17 +1,11 @@
 module Permissions
   class BasePermission
     def initialize
-      # Initialize controller names
-      @games = "#{controller_prefix}/games"
-      @results = "#{controller_prefix}/results"
-      @users = "#{controller_prefix}/users"
-      @recommendations = "#{controller_prefix}/recommendations"
-      @preorders = "#{controller_prefix}/preorders"
-      @preferences = "#{controller_prefix}/preferences" 
     end
 
-    def allow?(controller, action, resource = nil)  
-      allowed = @allow_all || (@allowed_actions && @allowed_actions[[controller.to_s, action.to_s]])
+    def allow?(controller, action, resource = nil)
+      controller_name = controller_name_with_version(controller)
+      allowed = @allow_all || (@allowed_actions && @allowed_actions[[controller_name, action.to_s]])
       allowed && (allowed == true || resource && allowed.call(resource))
     end
 
@@ -20,8 +14,9 @@ module Permissions
       @allowed_actions ||= {}
 
       Array(controllers).each do |controller|
+        controller_name = controller_name_with_version(controller)
         Array(actions).each do |action|
-          @allowed_actions[[controller.to_s, action.to_s]] = block || true
+          @allowed_actions[[controller_name, action.to_s]] = block || true
         end
       end
     end
@@ -30,9 +25,13 @@ module Permissions
       @allow_all = true
     end
 
-    def controller_prefix
-      'api/v1'
+    def controller_name_with_version(controller)
+      prefix = 'api/v1'
+      controller_name = controller.to_s
+      unless controller_name.match(prefix)  
+        controller_name = "#{prefix}/#{controller_name}" 
+      end
+      controller_name
     end
-
   end
 end
