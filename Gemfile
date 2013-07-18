@@ -1,16 +1,15 @@
 source 'https://rubygems.org'
 ruby "1.9.3"
 
-gem 'rails', '4.0.0.rc1'
+gem 'rails', '4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-# gem 'sqlite3'
 
 # Authentication:
 # gem 'doorkeeper', '~> 0.6.7'
 gem 'doorkeeper', :github => 'applicake/doorkeeper'  # For Rails 4rc1 support
-gem 'omniauth'
+gem 'omniauth', :github => 'tidepool/omniauth' # We need a way to iterate over all providers
 gem 'omniauth-facebook'
 gem 'omniauth-fitbit'
 gem 'omniauth-twitter'
@@ -24,12 +23,10 @@ gem 'tidepool_analyze', :path => './lib/analyze'
 # in production environments by default.
 group :assets do
   # gem 'sass-rails',   '~> 3.2.3'
-  # gem 'twitter-bootstrap-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  # gem 'uglifier', '>= 1.0.3'
 end
 
 group :production do
@@ -73,14 +70,6 @@ gem 'thin'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

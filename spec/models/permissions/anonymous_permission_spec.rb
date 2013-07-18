@@ -2,59 +2,54 @@ require 'spec_helper'
 
 module Permissions
   describe AnonymousPermission do
-    let(:controller_prefix) { 'api/v1' }
-    let(:games) { "#{controller_prefix}/games" }
-    let(:results) { "#{controller_prefix}/results" }
-    let(:users) { "#{controller_prefix}/users" }
-    let(:recommendations) { "#{controller_prefix}/recommendations" }
-    let(:preferences) { "#{controller_prefix}/preferences" }
-    let(:preorders) { "#{controller_prefix}/preorders" }
-
     let(:other_user) { create(:user) }
     let(:others_game) { create(:game, user: other_user) }
     subject { Permissions.permission_for(nil, other_user) }
 
-    it 'allows games' do
-      should_not allow(games, :create)
-      should_not allow(games, :destroy)
-      should_not allow(games, :update, others_game)
-      should_not allow(games, :show, others_game)
-      should_not allow(games, :index)
+    it 'anonymous permissions for games' do
+      expect(subject.allow?(:games, :create)).to be_false
+      expect(subject.allow?(:games, :destroy)).to be_false
+      expect(subject.allow?(:games, :update, others_game)).to be_false
+      expect(subject.allow?(:games, :show, others_game)).to be_false
+      expect(subject.allow?(:games, :index)).to be_false
 
-      should_not allow(games, :latest, others_game)
+      expect(subject.allow?(:games, :latest, others_game)).to be_false
     end
 
-    it 'allows results' do
-      should_not allow(results, :show, others_game)
-      should_not allow(results, :progress, others_game)
+    it 'anonymous permissions for results' do
+      expect(subject.allow?(:results, :show, others_game)).to be_false
+      expect(subject.allow?(:results, :progress, others_game)).to be_false
     end
 
-    it 'allows users' do 
+    it 'anonymous permissions for users' do 
       target_user = other_user
 
-      should_not allow(users, :show, target_user)
-      should allow(users, :create)
-      should_not allow(users, :update, target_user)
-      should_not allow(users, :destroy, target_user)
-      should_not allow(users, :personality, target_user)
+      expect(subject.allow?(:users, :show, target_user)).to be_false
+      expect(subject.allow?(:users, :create)).to be_true
+      expect(subject.allow?(:users, :update, target_user)).to be_false
+      expect(subject.allow?(:users, :destroy, target_user)).to be_false
+      expect(subject.allow?(:users, :personality, target_user)).to be_false
     end
 
-    it 'allows recommendations' do 
-      should_not allow(recommendations, :latest)
-      should_not allow(recommendations, :career)
-      should_not allow(recommendations, :emotion)
-      should_not allow(recommendations, :actions)
+    it 'anonymous permissions for recommendations' do 
+      expect(subject.allow?(:recommendations, :latest)).to be_false
+      expect(subject.allow?(:recommendations, :career)).to be_false
+      expect(subject.allow?(:recommendations, :emotion)).to be_false
+      expect(subject.allow?(:recommendations, :actions)).to be_false
     end
 
-    it 'allows preferences' do 
-      should_not allow(preferences, :show)
-      should_not allow(preferences, :create)
-      should_not allow(preferences, :update)      
+    it 'anonymous permissions for preferences' do 
+      expect(subject.allow?(:preferences, :show)).to be_false
+      expect(subject.allow?(:preferences, :create)).to be_false
+      expect(subject.allow?(:preferences, :update)).to be_false      
     end
 
-    it 'allows preorders' do
-      should_not allow(preorders, :create)
+    it 'anonymous permissions for preorders' do
+      expect(subject.allow?(:preorders, :create)).to be_false
     end
 
+    it 'anonymous permissions for connections' do
+      expect(subject.allow?(:connections, :index)).to be_false
+    end
   end
 end

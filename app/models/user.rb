@@ -62,10 +62,9 @@ class User < ActiveRecord::Base
     else
       if user_id      
         # We are trying to add the new authentication by provider to the user (The user can be a guest)
+        # Note that user_id being nil means we are not even trying to find the user.
         user = User.where('id = ?', user_id).first
-        if user 
-          user.populate_from_auth_hash!(auth_hash)
-        end
+        user.populate_from_auth_hash!(auth_hash) if user
       else
         # The user does not exist (even no guest existed that needs mutation)
         user = User.new
