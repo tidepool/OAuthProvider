@@ -13,10 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20130719203946) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "hstore"
-
   create_table "activities", force: true do |t|
     t.integer  "user_id",         null: false
     t.date     "date_recorded",   null: false
@@ -326,15 +322,5 @@ ActiveRecord::Schema.define(version: 20130719203946) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["referred_by"], name: "index_users_on_referred_by", using: :btree
-
-  create_table "vs_database_diagrams", id: false, force: true do |t|
-    t.string   "name",     limit: 80
-    t.text     "diadata"
-    t.string   "comment",  limit: 1022
-    t.text     "preview"
-    t.string   "lockinfo", limit: 80
-    t.datetime "locktime"
-    t.string   "version",  limit: 80
-  end
 
 end

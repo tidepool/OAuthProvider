@@ -8,10 +8,14 @@ handler do |job|
   # do something
   puts "Running #{job}"
   last_accessed = Time.zone.now - 2.hours
-  Authentication.where('last_accessed < ? or last_accessed = ?', last_accessed, nil).limit(1000) do |authentication|
-    puts "Dispatching #{authentication.email}"
-    TrackerDispatcher.perform_async(authentication.user_id)
-  end 
+  connections = Authentication.where('last_accessed < ? or last_accessed is NULL', last_accessed).limit(1000) 
+
+  if connections 
+    connections.each do |connection|
+      puts "Dispatching #{connection.email}"
+      TrackerDispatcher.perform_async(connection.user_id)
+    end 
+  end
 end
  
-every(1.minute, 'update_trackers')
+every(2.hours, 'update_trackers')

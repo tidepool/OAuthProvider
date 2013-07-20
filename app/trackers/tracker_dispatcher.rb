@@ -9,8 +9,7 @@ class TrackerDispatcher
 
   def perform(user_id)
     user = User.where(id: user_id).first
-    return user.nil?
-
+    return if user.nil?
     supported_providers = {
       fitbit: true,
       facebook: false,
@@ -24,8 +23,10 @@ class TrackerDispatcher
         begin
           tracker = klass_name.constantize.new(user, connection)
           tracker.synchronize
+          connection.last_accessed = Time.zone.now
+          connection.save!
         rescue Exception => e
-          logger.error("Cannot syncronize")
+          logger.error("Provider #{provider} cannot synchronize - #{e.message}")
         end
       end         
     end

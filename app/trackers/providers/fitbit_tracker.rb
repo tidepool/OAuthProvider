@@ -8,12 +8,12 @@ class FitbitTracker
   def synchronize(sync_list = nil)
     return if @connection.nil? || @connection.provider != 'fitbit'
 
-    if @client.nil?
-      @client = Fitgem::Client.new(client_config(@connection))
-    end
+    last_synchronized = @connection.last_synchronized
+    last_synchronized = {} if last_synchronized.nil?
 
+    @client = Fitgem::Client.new(client_config) if @client.nil?
     if @client
-      sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list = nil
+      sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
 
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
@@ -29,8 +29,10 @@ class FitbitTracker
             sync_item.save!
           end
         end 
-        connection.last_synchronized[item.to_s] = Time.zone.now
+        last_synchronized[item.to_s] = Time.zone.now
       end
+      @connection.last_synchronized = last_synchronized
+      @connection.save!
     end
   end
 
@@ -50,8 +52,10 @@ class FitbitTracker
   end  
 
   def days_to_retrieve(type_of_data)
-    last_synchronized = @connection.last_synchronized[type_of_data.to_s]
     number_of_days = 3 # If not synchronized ever then make it 3 days
+    return number_of_days if @connection.last_synchronized.nil?
+
+    last_synchronized = @connection.last_synchronized[type_of_data.to_s]
     if last_synchronized
       last_synchronized = Time.parse(last_synchronized)
       number_of_days = ((Time.zone.now - last_synchronized) / 1.day).ceil
@@ -169,7 +173,7 @@ class FitbitTracker
       food.water =  summary["water"]
     end
 
-    goals = measurement_hash["goals"]
+    goals = food_hash["goals"]
     if goals
       food.calories_goal = goals["calories"]
     end
