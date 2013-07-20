@@ -41,6 +41,7 @@ group :teamcity do
 end
 
 group :development, :test, :teamcity do
+  gem 'annotate', ">=2.5.0"
   gem 'rspec-rails'
   gem 'oauth2'
   gem 'jazz_hands'
@@ -49,6 +50,12 @@ group :development, :test, :teamcity do
   gem 'dotenv-rails', :github => 'bkeepers/dotenv'
   gem 'factory_girl_rails'
 end
+
+# Cron replacement
+gem 'clockwork'
+
+# Data Sources
+gem 'fitgem'
 
 # API (Serializers)
 gem "active_model_serializers", :github => "rails-api/active_model_serializers"

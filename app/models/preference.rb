@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: preferences
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  type       :string(255)
+#  data       :hstore
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Preference < ActiveRecord::Base
   belongs_to :user
 

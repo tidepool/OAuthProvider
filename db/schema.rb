@@ -11,11 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718173821) do
+ActiveRecord::Schema.define(version: 20130719203946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "activities", force: true do |t|
+    t.integer  "user_id",         null: false
+    t.date     "date_recorded",   null: false
+    t.integer  "type_id"
+    t.string   "name"
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "daily_breakdown"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["date_recorded"], name: "index_activities_on_date_recorded", using: :btree
+  add_index "activities", ["provider"], name: "index_activities_on_provider", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -36,8 +53,13 @@ ActiveRecord::Schema.define(version: 20130718173821) do
     t.string   "gender"
     t.date     "date_of_birth"
     t.date     "member_since"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "oauth_secret"
+    t.boolean  "is_activated"
+    t.datetime "last_accessed"
+    t.hstore   "last_synchronized"
+    t.hstore   "profile"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -89,6 +111,21 @@ ActiveRecord::Schema.define(version: 20130718173821) do
 
   add_index "emotion_factor_recommendations", ["name"], name: "index_emotion_factor_recommendations_on_name", using: :btree
 
+  create_table "foods", force: true do |t|
+    t.integer  "user_id",       null: false
+    t.date     "date_recorded", null: false
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "details"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "foods", ["date_recorded"], name: "index_foods_on_date_recorded", using: :btree
+  add_index "foods", ["provider"], name: "index_foods_on_provider", using: :btree
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id", using: :btree
+
   create_table "games", force: true do |t|
     t.datetime "date_taken"
     t.integer  "definition_id"
@@ -111,6 +148,21 @@ ActiveRecord::Schema.define(version: 20130718173821) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "measurements", force: true do |t|
+    t.integer  "user_id",       null: false
+    t.date     "date_recorded", null: false
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "details"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "measurements", ["date_recorded"], name: "index_measurements_on_date_recorded", using: :btree
+  add_index "measurements", ["provider"], name: "index_measurements_on_provider", using: :btree
+  add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: true do |t|
     t.integer  "resource_owner_id", null: false
@@ -231,6 +283,21 @@ ActiveRecord::Schema.define(version: 20130718173821) do
   add_index "results", ["time_played"], name: "index_results_on_time_played", using: :btree
   add_index "results", ["type"], name: "index_results_on_type", using: :btree
   add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
+
+  create_table "sleeps", force: true do |t|
+    t.integer  "user_id",        null: false
+    t.date     "date_recorded",  null: false
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "sleep_activity"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sleeps", ["date_recorded"], name: "index_sleeps_on_date_recorded", using: :btree
+  add_index "sleeps", ["provider"], name: "index_sleeps_on_provider", using: :btree
+  add_index "sleeps", ["user_id"], name: "index_sleeps_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",           default: "",    null: false
