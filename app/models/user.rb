@@ -83,6 +83,12 @@ class User < ActiveRecord::Base
     # First check if the authentication already exists:
     authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
     if authentication
+      authentication.oauth_token = auth_hash.credentials.token
+      authentication.oauth_secret = auth_hash.credentials.secret
+      if auth_hash.credentials.expires_at
+        authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
+      end
+      authentication.save
       user = authentication.user
       if user.guest
         # Ensure that user is not guest
