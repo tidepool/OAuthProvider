@@ -61,6 +61,11 @@ module Permissions
       it 'registered user permissions for connections' do
         expect(subject.allow?(:connections, :index)).to be_true
       end
+
+      it 'anonymous permissions for activities' do
+        expect(subject.allow?(:activities, :index)).to be_true
+      end
+
     end
 
     # describe 'caller and target_user are NOT the same user' do

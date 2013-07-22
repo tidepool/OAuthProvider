@@ -59,5 +59,10 @@ module Permissions
     it 'admin permissions for connections' do
       expect(subject.allow?(:connections, :index)).to be_true
     end
+
+    it 'admin permissions for activities' do
+      expect(subject.allow?(:activities, :index)).to be_true
+    end
+
   end
 end

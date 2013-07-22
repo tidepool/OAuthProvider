@@ -18,7 +18,7 @@ class FitbitTracker
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
         number_of_days.times do | day |
-          date = Date.current - (number_of_days - day).days        
+          date = Date.current - (number_of_days - day - 1).days        
           method_name = "persist_#{item}".to_sym
           sync_item = self.method(method_name).call(date) if self.method(method_name)
 

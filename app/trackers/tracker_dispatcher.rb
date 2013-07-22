@@ -9,13 +9,13 @@ class TrackerDispatcher
 
   def perform(user_id)
     user = User.where(id: user_id).first
-    return if user.nil?
+    return if user.nil? || user.authentications.nil?
+
     supported_providers = {
       fitbit: true,
       facebook: false,
       twitter: false
     }
-
     user.authentications.each do | connection |
       provider = connection.provider
       if supported_providers[provider.to_sym]
@@ -23,9 +23,12 @@ class TrackerDispatcher
         begin
           tracker = klass_name.constantize.new(user, connection)
           tracker.synchronize
+          connection.sync_status = :synchronized
           connection.last_accessed = Time.zone.now
           connection.save!
         rescue Exception => e
+          connection.sync_status = :sync_error
+          connection.save
           logger.error("Provider #{provider} cannot synchronize - #{e.message}")
         end
       end         

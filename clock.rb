@@ -13,6 +13,9 @@ handler do |job|
   if connections 
     connections.each do |connection|
       puts "Dispatching #{connection.email}"
+      connection.sync_status = :synchronizing
+      connection.save
+
       TrackerDispatcher.perform_async(connection.user_id)
     end 
   end

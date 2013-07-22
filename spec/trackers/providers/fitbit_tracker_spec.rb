@@ -19,6 +19,23 @@ describe FitbitTracker do
     days.should == 3
   end
 
+  it 'calls the APIs for the correct number of days back' do
+    tracker = FitbitTracker.new(user, connection, nil)
+    sync_list = [:activities]
+    Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+      "summary" => {
+        "steps"=>9663,
+        "veryActiveMinutes"=>30
+        }
+      })
+    tracker.synchronize(sync_list)
+
+    activities = Activity.where('user_id = ? and provider = ?', user.id, 'fitbit').order(:date_recorded)
+    activities.length.should == 3
+    binding.pry
+    activities[2].date_recorded.should == Date.current
+  end
+
   describe 'Activity storage' do
     let(:activity) { create(:activity, user: user) }
     before(:each) do 

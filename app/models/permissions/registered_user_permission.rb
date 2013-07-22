@@ -35,6 +35,8 @@ module Permissions
         allow :preorders, :create
 
         allow :connections, :index
+
+        allow :activities, :index
       end
     end
   end

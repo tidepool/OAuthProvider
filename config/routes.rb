@@ -53,6 +53,10 @@ OAuthProvider::Application.routes.draw do
         resource :preferences
 
         get 'connections', to: 'connections#index'
+        get 'connections/synchronize/:provider', to: 'connections#synchronize'
+        get 'connections/progress/:provider', to: 'connections#progress'
+
+        get 'activities', to: 'activities#index'
       end
             
       post '/user_events' => 'user_events#create'
