@@ -60,6 +60,8 @@ module Permissions
 
       it 'registered user permissions for connections' do
         expect(subject.allow?(:connections, :index)).to be_true
+        expect(subject.allow?(:connections, :synchronize)).to be_true
+        expect(subject.allow?(:connections, :progress)).to be_true
       end
 
       it 'anonymous permissions for activities' do

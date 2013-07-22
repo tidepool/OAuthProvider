@@ -59,6 +59,8 @@ module Permissions
 
       it 'guest permissions for connections' do
         expect(subject.allow?(:connections, :index)).to be_false
+        expect(subject.allow?(:connections, :synchronize)).to be_false
+        expect(subject.allow?(:connections, :progress)).to be_false
       end
 
       it 'anonymous permissions for activities' do
