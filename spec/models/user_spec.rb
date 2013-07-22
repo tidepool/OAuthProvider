@@ -107,8 +107,8 @@ describe User do
           })      
     expect(auth3.user).to eq(user3)
     expect(user3.authentications[0].uid).to eq("5555")
-    user = User.create_or_find(@test_hash, guest.id)
 
+    user = User.create_or_find(@test_hash, guest.id)
     expect(user.id).to eq(user3.id)
     expect(user.guest).to eq(false)
   end

@@ -32,7 +32,6 @@ describe FitbitTracker do
 
     activities = Activity.where('user_id = ? and provider = ?', user.id, 'fitbit').order(:date_recorded)
     activities.length.should == 3
-    binding.pry
     activities[2].date_recorded.should == Date.current
   end
 
