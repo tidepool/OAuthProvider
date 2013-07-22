@@ -12,6 +12,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 Dir[Rails.root.join('app/workers/persistence/*.rb')].each {|f| require f}
 
+Dir[Rails.root.join('app/trackers/providers/*.rb')].each {|f| require f}
+
 Rails.application.load_seed
 
 RSpec.configure do |config|

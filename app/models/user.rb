@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string(255)      default(""), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)      default(""), not null
+#  admin           :boolean          default(FALSE), not null
+#  guest           :boolean          default(FALSE), not null
+#  name            :string(255)
+#  display_name    :string(255)
+#  description     :string(255)
+#  city            :string(255)
+#  state           :string(255)
+#  country         :string(255)
+#  timezone        :string(255)
+#  locale          :string(255)
+#  image           :string(255)
+#  gender          :string(255)
+#  date_of_birth   :date
+#  handedness      :string(255)
+#  orientation     :string(255)
+#  education       :string(255)
+#  referred_by     :string(255)
+#  stats           :hstore
+#
+
 class User < ActiveRecord::Base
   has_secure_password validations: false
   
@@ -17,6 +46,7 @@ class User < ActiveRecord::Base
   has_many :preorders
   has_many :results
   has_many :preferences
+  has_many :activities
 
   def self.create_guest_or_registered(attributes)
     begin
@@ -53,6 +83,16 @@ class User < ActiveRecord::Base
     # First check if the authentication already exists:
     authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
     if authentication
+      if auth_hash.credentials
+        authentication.oauth_token = auth_hash.credentials.token
+        authentication.oauth_secret = auth_hash.credentials.secret
+        if auth_hash.credentials.expires_at
+          authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
+        end
+        authentication.save
+      else
+        logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
+      end
       user = authentication.user
       if user.guest
         # Ensure that user is not guest
@@ -102,11 +142,15 @@ class User < ActiveRecord::Base
     provider = auth_hash.provider
 
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
-    authentication.oauth_token = auth_hash.credentials.token
-    if auth_hash.credentials.expires_at
-      authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
+    if auth_hash.credentials
+      authentication.oauth_token = auth_hash.credentials.token
+      authentication.oauth_secret = auth_hash.credentials.secret
+      if auth_hash.credentials.expires_at
+        authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
+      end
+    else
+      logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
     end
-
     method_name = "populate_from_#{provider.underscore}".to_sym
     if self.method(method_name)
       self.method(method_name).call(auth_hash, authentication)

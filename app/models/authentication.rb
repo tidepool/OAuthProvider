@@ -1,15 +1,42 @@
+# == Schema Information
+#
+# Table name: authentications
+#
+#  id               :integer          not null, primary key
+#  user_id          :integer
+#  provider         :string(255)
+#  uid              :string(255)
+#  oauth_token      :string(255)
+#  oauth_expires_at :datetime
+#  email            :string(255)
+#  name             :string(255)
+#  display_name     :string(255)
+#  description      :string(255)
+#  city             :string(255)
+#  state            :string(255)
+#  country          :string(255)
+#  timezone         :string(255)
+#  locale           :string(255)
+#  image            :string(255)
+#  gender           :string(255)
+#  date_of_birth    :date
+#  member_since     :date
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class Authentication < ActiveRecord::Base
   belongs_to :user
   
-  def self.find_by_provider_and_user(provider, user) 
-    @authentications ||= Authentication.where(user_id: user.id).all
-    found = nil
-    @authentications.each do |authentication|
-      if authentication.provider == provider
-        found = authentication 
-        break
-      end
-    end
-    found
-  end
+  # def self.find_by_provider_and_user(provider, user) 
+  #   @authentications ||= Authentication.where(user_id: user.id).all
+  #   found = nil
+  #   @authentications.each do |authentication|
+  #     if authentication.provider == provider
+  #       found = authentication 
+  #       break
+  #     end
+  #   end
+  #   found
+  # end
 end
