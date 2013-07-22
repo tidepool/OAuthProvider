@@ -23,5 +23,9 @@ FactoryGirl.define do
         "calories_goal" => "2184"   
       }   
     end
+
+    factory :activities do 
+      sequence(:date_recorded) { |n| Date.current - n.days }
+    end
   end
 end

@@ -44,17 +44,12 @@ OAuthProvider::Application.routes.draw do
           get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
         end
-        # resources :authentications
-
-        resources :trackers do 
-          # get '/trackers/:tracker/:date', to: 'trackers#show'
-        end     
 
         resource :preferences
 
         get 'connections', to: 'connections#index'
-        get 'connections/synchronize/:provider', to: 'connections#synchronize'
-        get 'connections/progress/:provider', to: 'connections#progress'
+        get 'connections/:provider/synchronize', to: 'connections#synchronize'
+        get 'connections/:provider/progress', to: 'connections#progress'
 
         get 'activities', to: 'activities#index'
       end

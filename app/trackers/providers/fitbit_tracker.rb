@@ -63,6 +63,24 @@ class FitbitTracker
     number_of_days
   end
 
+  # "errors"=>
+  #    [{"errorType"=>"oauth",
+  #      "fieldName"=>"oauth_access_token",
+  #      "message"=>
+  #       "Invalid signature or token 'a29kGlKEW3YHCIH8JZM/WUVE6uw=' or token '4b8f3d3eae93411192c491939c07808e'"}]},
+  def check_for_errors(result_hash)
+    if result_hash.has_key?('errors')
+      errors = result_hash["errors"]
+      errors.each do |error|
+        if error["errorType"] == "oauth"
+          raise Trackers::AuthenticationError, error["message"]
+        else
+          logger.error(error["message"])
+        end
+      end
+    end
+  end
+
   # {"activities"=>[],
   #  "goals"=>
   #   {"activeScore"=>1000,
@@ -96,6 +114,7 @@ class FitbitTracker
     return if @client.nil?
 
     activity_hash = @client.activities_on_date(date.to_s)
+    check_for_errors(activity_hash)
 
     activity = Activity.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
 
@@ -139,6 +158,7 @@ class FitbitTracker
     return if @client.nil?
 
     sleep_hash = @client.sleep_on_date date.to_s
+    check_for_errors(sleep_hash)
 
     sleep = Sleep.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
 
@@ -164,6 +184,7 @@ class FitbitTracker
     return if @client.nil?
 
     food_hash = @client.foods_on_date date.to_s
+    check_for_errors(food_hash)
 
     food = Food.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
 
@@ -198,6 +219,7 @@ class FitbitTracker
     return if @client.nil?
 
     measurement_hash = @client.body_measurements_on_date date.to_s
+    check_for_errors(measurement_hash)
 
     measurement = Measurement.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
 

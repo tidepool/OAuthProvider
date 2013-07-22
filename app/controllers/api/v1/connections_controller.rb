@@ -12,7 +12,9 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
     strategy_list.each do |strategy|
       provider = /(?<=^OmniAuth::Strategies::)\S*/m.match(strategy.to_s).to_s.downcase
       
-      authentication = Authentication.find_by_provider_and_user(provider, target_user)
+      # TODO : Calling the database in an inner loop is not a good idea!
+      # See if caching works
+      authentication = Authentication.where('provider = ? and user_id = ?', provider, target_user.id).first
       activated = !authentication.nil? 
       connections << {
         provider: provider,
@@ -27,16 +29,16 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
 
   def synchronize
     provider = params[:provider]
-    connection = Authentication.find_by_provider_and_user(provider, target_user)
-    if connection && connection.sync_status != :synchronizing
-      connection.sync_status = :synchronizing
+    connection = Authentication.where('provider = ? and user_id = ?', provider, target_user.id).first
+    if connection && connection.sync_status != 'synchronizing'
+      connection.sync_status = 'synchronizing'
       connection.save
 
       TrackerDispatcher.perform_async(target_user.id)    
 
       api_status = ApiStatus.new({
         state: :pending, 
-        link: api_v1_user_connection_progress_url(provider),
+        link: api_v1_user_connection_progress_url,
         message: "Starting to synchronize #{provider}"
         })
       response_body = api_status
@@ -48,11 +50,11 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
           message: "Provider #{provider} connection is not active."
         })
         status = :bad_request
-      elsif connection.sync_status == :synchronizing
+      elsif connection.sync_status == 'synchronizing'
         api_status = ApiStatus.new({
           state: :pending,
           message: "Synchronization is already in progress.",
-          link: api_v1_user_connection_progress_url(provider),
+          link: api_v1_user_connection_progress_url
         })
         status = :ok 
       else
@@ -72,7 +74,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
 
   def progress 
     provider = params[:provider]
-    connection = Authentication.find_by_provider_and_user(provider, target_user)
+    connection = Authentication.where('provider = ? and user_id = ?', provider, target_user.id).first
 
     if connection
       api_status = response_for_status(connection.sync_status, provider)
@@ -96,13 +98,23 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
     target_user
   end
 
+  def api_v1_user_connection_progress_url
+    provider = params[:provider]
+    user = params[:user_id]
+    host = request.host
+    protocol = request.protocol
+    format = ''
+    format = ".#{params[:format]}" if params[:format]
+    "#{protocol}#{host}/api/v1/users/#{user}/connections/#{provider}/progress#{format}"
+  end
+
   def response_for_status(status, provider)
     api_status = nil
     case status.to_sym
     when :synchronizing
       api_status = ApiStatus.new({
         state: :pending,
-        link: api_v1_user_connection_progress_url(provider),
+        link: api_v1_user_connection_progress_url,
         message: 'Synchronization is in progress.'
       })        
     when :synchronized
@@ -114,7 +126,12 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       api_status = ApiStatus.new({
         state: :error,
         message: 'Error synchronizing.'
-      })         
+      })     
+    when :authentication_error        
+      api_status = ApiStatus.new({
+        state: :authentication_error,
+        message: 'Error authenticating.'
+      })     
     end
     api_status
   end
