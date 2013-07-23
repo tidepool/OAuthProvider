@@ -27,7 +27,7 @@ OAuthProvider::Application.routes.draw do
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
-        get 'recommendations/emotion', to: 'recommendations#emotion'
+        # get 'recommendations/emotion', to: 'recommendations#emotion'
         get 'recommendations/actions', to: 'recommendations#actions'
         
         get 'games/latest', to: 'games#latest'

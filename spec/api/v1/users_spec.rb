@@ -19,7 +19,8 @@ describe 'Users API' do
   it 'shows the users own information' do    
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-.json")
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:email].should == user1.email
   end
 
@@ -28,7 +29,8 @@ describe 'Users API' do
     token = get_conn()
     user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '12345678' }
     response = token.post("#{@endpoint}/users.json", { user: user_params } )
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:email].should == user_params[:email]
 
     user = User.find(user_info[:id])
@@ -39,7 +41,8 @@ describe 'Users API' do
     token = get_conn()
     user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '12345678', referred_by: 'Hesston' }
     response = token.post("#{@endpoint}/users.json", { user: user_params } )
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:referred_by].should == user_params[:referred_by]
     
     user = User.find(user_info[:id])
@@ -64,7 +67,9 @@ describe 'Users API' do
       referred_by: 'Hesston'
     }
     response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
+
     user_info[:name].should == user_params[:name]
     user_info[:city].should == user_params[:city]
     user_info[:date_of_birth].should == user_params[:date_of_birth].to_s
@@ -88,8 +93,8 @@ describe 'Users API' do
     token = get_conn(user1)
     user_params = { name: 'John Doe', city: 'Istanbul'}
     response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
-    user_info = JSON.parse(response.body, symbolize_names: true)
-
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     updated_user = User.find(user_info[:id])
     updated_user.city.should == user_params[:city]
     updated_user.name.should == user_params[:name]
@@ -106,7 +111,8 @@ describe 'Users API' do
     token = get_conn()
     user_params = { guest: true }
     response = token.post("#{@endpoint}/users.json", { user: user_params } )
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:guest].should == true
     user = User.find(user_info[:id])
     user.guest.should == true
@@ -117,7 +123,9 @@ describe 'Users API' do
     token = get_conn()
     user_params = { guest: true, referred_by: 'Hesston' }
     response = token.post("#{@endpoint}/users.json", { user: user_params } )
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
+
     user_info[:guest].should == true
     user_info[:referred_by].should == 'Hesston'
 
@@ -130,7 +138,8 @@ describe 'Users API' do
     token = get_conn(guest)
     user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '12345678' }
     response = token.put("#{@endpoint}/users/#{guest.id}.json", {body: {user: user_params}})
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:guest].should == false
     user_info[:email].should == user_params[:email]
   end
@@ -139,7 +148,8 @@ describe 'Users API' do
     personality 
     token = get_conn(user3)
     response = token.get("#{@endpoint}/users/#{user3.id}/personality.json")
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:big5_dimension].should == personality.big5_dimension
     user_info[:holland6_dimension].should == personality.holland6_dimension
     user_info[:big5_high].should == personality.big5_high
@@ -152,7 +162,8 @@ describe 'Users API' do
     personality 
     token = get_conn(user3)
     response = token.get("#{@endpoint}/users/-/personality.json")
-    user_info = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
     user_info[:big5_dimension].should == personality.big5_dimension
     user_info[:holland6_dimension].should == personality.holland6_dimension
     user_info[:big5_high].should == personality.big5_high
@@ -208,7 +219,8 @@ describe 'Users API' do
       token = get_conn(user1)
       user_params = { guest: true }
       response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
-      user_info = JSON.parse(response.body, symbolize_names: true)
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
       user_info[:guest].should == false
     end
     
@@ -216,8 +228,8 @@ describe 'Users API' do
       token = get_conn(user1)
       user_params = { referred_by: 'Hesston' }
       response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
-      user_info = JSON.parse(response.body, symbolize_names: true)
-
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
       user = User.find(user_info[:id])
       user.referred_by.should_not == 'Hesston'
     end

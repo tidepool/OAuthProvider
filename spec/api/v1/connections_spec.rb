@@ -49,7 +49,8 @@ describe 'Connections API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/connections.json")
     response.status.should == 200        
-    connections = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    connections = output[:data]
     expect(connections).to_not be_nil
 
     connections.each do |connection|

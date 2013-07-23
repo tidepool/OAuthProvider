@@ -32,4 +32,15 @@ class Api::V1::ApiController < ApplicationController
       raise Api::V1::UnauthorizedError.new('Not Authorized')
     end
   end
+
+  def check_pagination
+    @current_page = params[:page]    
+  end
+
+  def api_defaults
+    {
+      meta_key: 'status',
+      root: 'data'
+    }
+  end
 end

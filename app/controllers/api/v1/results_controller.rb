@@ -12,16 +12,17 @@ class Api::V1::ResultsController < Api::V1::ApiController
       if game && game.results_calculated?
         results = Result.where(game_id: game.id)
         response_body = results
+        api_status = {}
       elsif game && game.status.to_sym != :calculating_results
         game.status = :calculating_results
         game.save
         ResultsCalculator.perform_async(game.id)
-        api_status = ApiStatus.new({
+        api_status = Hashie::Mash.new({
           state: :pending, 
           link: api_v1_user_game_progress_url,
           message: 'Starting to calculate results.'
           })
-        response_body = api_status
+        response_body = []
         status = :accepted
       end
     else 
@@ -36,14 +37,27 @@ class Api::V1::ResultsController < Api::V1::ApiController
     end
 
     respond_to do |format|
-      format.json { render :json => response_body, :status => status, :each_serializer => ResultSerializer}
+      format.json { 
+        render({  
+          json: response_body, 
+          status: status, 
+          each_serializer: ResultSerializer,
+          meta: api_status 
+          }.merge(api_defaults))
+      }
     end    
   end
 
   def show
     result = Result.find(params[:id])
     respond_to do |format|
-      format.json { render :json => result, :status => :ok}
+      format.json { 
+        render({
+          json: result, 
+          status: :ok,
+          meta: {}
+          }.merge(api_defaults))
+        }
     end
   end
 
@@ -52,8 +66,15 @@ class Api::V1::ResultsController < Api::V1::ApiController
 
     api_status = response_for_status(game.status)
     respond_to do |format|
-      format.json { render :json => api_status, 
-        :status => :ok, :location => api_status.status[:link] }
+      format.json { 
+        render({
+          json: nil,
+          status: :ok,
+          serializer: ResultSerializer,
+          location: api_status.link,
+          meta: api_status
+          }.merge(api_defaults))
+      }
     end
   end
 
@@ -63,21 +84,21 @@ class Api::V1::ResultsController < Api::V1::ApiController
     api_status = nil
     case status.to_sym
     when :calculating_results
-      api_status = ApiStatus.new(
+      api_status = Hashie::Mash.new(
         {
           state: :pending,
           link: api_v1_user_game_progress_url,
           message: 'Results are still being calculated.'
         })        
     when :results_ready
-      api_status = ApiStatus.new(
+      api_status = Hashie::Mash.new(
         {
           state: :done,
           link: api_v1_user_game_results_url,
           message: 'Results are ready.'
         })        
     when :incomplete_results
-      api_status = ApiStatus.new(
+      api_status = Hashie::Mash.new(
         {
           state: :error,
           link: api_v1_user_game_results_url,
@@ -85,7 +106,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
         })        
     else
       logger.error("Game #{params[:game_id]} does not exist or unknown status.")
-      api_status = ApiStatus.new(
+      api_status = Hashie::Mash.new(
         {
           state: :precondition_failed,
           link: '',

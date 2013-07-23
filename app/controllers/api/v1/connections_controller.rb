@@ -23,7 +23,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
     end
 
     respond_to do |format|
-      format.json { render :json => connections }
+      format.json { render({ json: connections, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -36,39 +36,37 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
 
       TrackerDispatcher.perform_async(target_user.id)    
 
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
         state: :pending, 
         link: api_v1_user_connection_progress_url,
         message: "Starting to synchronize #{provider}"
         })
-      response_body = api_status
       status = :accepted
     else
       if connection.nil?
-        api_status = ApiStatus.new({
+        api_status = Hashie::Mash.new({
           status: :error,
           message: "Provider #{provider} connection is not active."
         })
         status = :bad_request
       elsif connection.sync_status == 'synchronizing'
-        api_status = ApiStatus.new({
+        api_status = Hashie::Mash.new({
           state: :pending,
           message: "Synchronization is already in progress.",
           link: api_v1_user_connection_progress_url
         })
         status = :ok 
       else
-        api_status = ApiStatus.new({
+        api_status = Hashie::Mash.new({
           status: :error,
           message: "Unknown error."          
           })
         status = :not_acceptable
       end
-      response_body = api_status
     end
 
     respond_to do |format|
-      format.json { render :json => response_body, :status => status }
+      format.json { render({ json: nil, status: status, meta: api_status, serializer: ResultSerializer }.merge(api_defaults)) }
     end    
   end
 
@@ -80,15 +78,14 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       api_status = response_for_status(connection.sync_status, provider)
       status = :ok
     else
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
        status: :error,
        message: "Provider #{provider} connection is not active."       
         })
       status = :bad_request
     end
     respond_to do |format|
-      format.json { render :json => api_status, 
-        :status => status, :location => api_status.status[:link] }
+      format.json { render({ json: nil, status: status, meta: api_status, serializer: ResultSerializer, location: api_status.link }.merge(api_defaults)) }
     end
 
   end
@@ -112,23 +109,23 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
     api_status = nil
     case status.to_sym
     when :synchronizing
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
         state: :pending,
         link: api_v1_user_connection_progress_url,
         message: 'Synchronization is in progress.'
       })        
     when :synchronized
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
         state: :done,
         message: 'Synchronization is complete.'
       })        
     when :sync_error
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
         state: :error,
         message: 'Error synchronizing.'
       })     
     when :authentication_error        
-      api_status = ApiStatus.new({
+      api_status = Hashie::Mash.new({
         state: :authentication_error,
         message: 'Error authenticating.'
       })     

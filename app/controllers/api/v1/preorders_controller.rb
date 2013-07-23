@@ -4,7 +4,7 @@ class Api::V1::PreordersController < Api::V1::ApiController
   def create
     preorder = current_resource.preorders.create
     respond_to do |format|
-      format.json { render :json => preorder }
+      format.json { render({ json: preorder, meta: {} }.merge(api_defaults)) }
     end
 
   end
