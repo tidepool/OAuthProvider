@@ -1,10 +1,12 @@
 module Api
   module V1
     class ExternalConnectionError < ::RuntimeError; end
+    class ExternalAuthenticationError < ::SecurityError; end
     class ConnectionsController < Api::V1::ApiController
       doorkeeper_for :all
       rescue_from ExternalConnectionError, with: external_connection_error
-
+      rescue_from ExternalAuthenticationError, with: external_connection_error
+      
       def index
         strategy_list = OmniAuth.all_strategies 
 
@@ -137,11 +139,26 @@ module Api
 
       def external_connection_error
         api_status = Hashie::Mash.new({
-          status: :error,
-          message: "Provider #{provider} connection is not active."
+          code: 2001,
+          message: "Provider #{provider} connection is not activated yet. User needs to authenticate and activate."
         })
-        status = :bad_request
+        http_status = :bad_request   
+        respond_with_error(api_status, http_status)     
+      end
 
+      def external_authentication_error
+        api_status = Hashie::Mash.new({
+          code: 2002,
+          message: "Provider #{provider} connection is denying access. Authentication may need renewal."
+        })
+        http_status = :bad_request   
+        respond_with_error(api_status, http_status)     
+      end
+
+      def respond_with_error(api_status, http_status)
+        respond_to do |format|
+          format.json { render({ json: nil, status: http_status, meta: api_status, serializer: ErrorSerializer }.merge(api_defaults)) }
+        end
       end
     end
   end
