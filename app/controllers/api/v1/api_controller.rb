@@ -1,5 +1,9 @@
 class Api::V1::ApiController < ApplicationController
   before_filter :authorize
+  skip_before_action :verify_authenticity_token
+
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
   protected
 
@@ -42,5 +46,15 @@ class Api::V1::ApiController < ApplicationController
       meta_key: 'status',
       root: 'data'
     }
+  end
+
+  private
+
+  def record_not_found 
+    
+  end
+
+  def record_invalid
+
   end
 end
