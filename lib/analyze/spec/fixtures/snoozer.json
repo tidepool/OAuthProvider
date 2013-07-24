@@ -1,0 +1,13 @@
+[
+  {
+    "event_type":"0",
+    "game_id": 123,
+    "module":"snoozer",
+    "record_time": 1360195167248,
+    "stage":0,
+    "event_desc":"level_summary",
+    "fastest_time": 300,
+    "slowest_time": 500, 
+    "average_time": 400
+  }
+]

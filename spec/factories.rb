@@ -32,6 +32,17 @@ FactoryGirl.define do
   factory :authentication do
     provider 'facebook'
     sequence(:uid) {|n| "1234#{n}" }
+
+    factory :fitbit do 
+      provider 'fitbit'
+      last_synchronized do 
+        { 
+          'activities' => (Time.zone.now - 2.days).to_s, 
+          'sleeps' => (Time.zone.now - 2.hours).to_s,
+          'foods' => (Time.zone.now - 5.days).to_s
+        }
+      end 
+    end
   end
 
   factory :definition do

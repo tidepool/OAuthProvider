@@ -6,7 +6,7 @@ class Api::V1::UserEventsController < ApplicationController
     user_event.record
     
     respond_to do |format|
-      format.json { render :json => @user_event}
+      format.json { render :json => user_event }
     end
   end
 

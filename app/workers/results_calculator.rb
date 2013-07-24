@@ -88,7 +88,7 @@ class ResultsCalculator
       analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new
       analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
     rescue Exception => e
-      logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
+      logger.error("Game #{game.id} cannot analyze calculation. #{e.message}")
     end
     analysis_results
   end

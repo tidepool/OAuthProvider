@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id              :integer          not null, primary key
+#  date_taken      :datetime
+#  definition_id   :integer
+#  user_id         :integer
+#  stages          :text
+#  stage_completed :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  status          :string(255)
+#  calling_ip      :string(255)
+#  event_log       :text
+#
+
 class Game < ActiveRecord::Base
   serialize :stages, JSON
   serialize :event_log, JSON

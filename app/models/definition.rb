@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: definitions
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  stages       :text
+#  instructions :text
+#  end_remarks  :text
+#  icon         :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  score_names  :text
+#  calculates   :text
+#  result_view  :string(255)
+#  unique_name  :string(255)
+#
+
 Dir[File.expand_path('../generators/*.rb', __FILE__)].each {|file| require file }
 
 class Definition < ActiveRecord::Base

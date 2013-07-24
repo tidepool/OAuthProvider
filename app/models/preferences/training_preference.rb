@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: preferences
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  type       :string(255)
+#  data       :hstore
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class TrainingPreference < Preference
 
   def self.description
@@ -28,13 +40,13 @@ class TrainingPreference < Preference
       },
       {
         name: 'support_networks',
-        description: 'Develop support networks for personal and professional fufillment',
+        description: 'Develop support networks for personal and professional fulfillment',
         type: 'checkbox',
         category: 'productivity'
       },
       {
         name: 'emotional_energy',
-        description: 'Channel your emotional energy to confront and conquor problems',
+        description: 'Channel your emotional energy to confront and conquer problems',
         type: 'checkbox',
         category: 'mood'
       },

@@ -11,28 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130712170115) do
+ActiveRecord::Schema.define(version: 20130722005105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "adjective_circles", force: true do |t|
-    t.string   "name_pair"
-    t.string   "version"
-    t.float    "size_weight"
-    t.float    "size_sd"
-    t.float    "size_mean"
-    t.float    "distance_weight"
-    t.float    "distance_sd"
-    t.float    "distance_mean"
-    t.float    "overlap_weight"
-    t.float    "overlap_sd"
-    t.float    "overlap_mean"
-    t.string   "maps_to"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "activities", force: true do |t|
+    t.integer  "user_id",         null: false
+    t.date     "date_recorded",   null: false
+    t.integer  "type_id"
+    t.string   "name"
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "daily_breakdown"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "activities", ["date_recorded"], name: "index_activities_on_date_recorded", using: :btree
+  add_index "activities", ["provider"], name: "index_activities_on_provider", using: :btree
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -53,8 +53,14 @@ ActiveRecord::Schema.define(version: 20130712170115) do
     t.string   "gender"
     t.date     "date_of_birth"
     t.date     "member_since"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "oauth_secret"
+    t.boolean  "is_activated"
+    t.datetime "last_accessed"
+    t.hstore   "last_synchronized"
+    t.hstore   "profile"
+    t.string   "sync_status"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -68,33 +74,6 @@ ActiveRecord::Schema.define(version: 20130712170115) do
     t.string   "tools",                  array: true
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "data_source_settings", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "data_source_id"
-    t.string   "auth_token"
-    t.datetime "expires"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "data_sources", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "logo_url"
-    t.string   "end_point_url"
-    t.string   "api_key"
-    t.string   "api_secret"
-    t.string   "retention_policy"
-    t.string   "rate_limit"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "data_sources_tracker_types", id: false, force: true do |t|
-    t.integer "data_source_id"
-    t.integer "tracker_type_id"
   end
 
   create_table "definitions", force: true do |t|
@@ -112,20 +91,6 @@ ActiveRecord::Schema.define(version: 20130712170115) do
   end
 
   add_index "definitions", ["unique_name"], name: "index_definitions_on_unique_name", unique: true, using: :btree
-
-  create_table "elements", force: true do |t|
-    t.string   "name"
-    t.string   "version"
-    t.float    "standard_deviation"
-    t.float    "mean"
-    t.float    "weight_extraversion"
-    t.float    "weight_conscientiousness"
-    t.float    "weight_neuroticism"
-    t.float    "weight_openness"
-    t.float    "weight_agreeableness"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
   create_table "emotion_descriptions", force: true do |t|
     t.string   "name",          null: false
@@ -146,6 +111,21 @@ ActiveRecord::Schema.define(version: 20130712170115) do
   end
 
   add_index "emotion_factor_recommendations", ["name"], name: "index_emotion_factor_recommendations_on_name", using: :btree
+
+  create_table "foods", force: true do |t|
+    t.integer  "user_id",       null: false
+    t.date     "date_recorded", null: false
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "details"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "foods", ["date_recorded"], name: "index_foods_on_date_recorded", using: :btree
+  add_index "foods", ["provider"], name: "index_foods_on_provider", using: :btree
+  add_index "foods", ["user_id"], name: "index_foods_on_user_id", using: :btree
 
   create_table "games", force: true do |t|
     t.datetime "date_taken"
@@ -169,6 +149,21 @@ ActiveRecord::Schema.define(version: 20130712170115) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  create_table "measurements", force: true do |t|
+    t.integer  "user_id",       null: false
+    t.date     "date_recorded", null: false
+    t.hstore   "data"
+    t.hstore   "goals"
+    t.text     "details"
+    t.string   "provider"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "measurements", ["date_recorded"], name: "index_measurements_on_date_recorded", using: :btree
+  add_index "measurements", ["provider"], name: "index_measurements_on_provider", using: :btree
+  add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree
 
   create_table "oauth_access_grants", force: true do |t|
     t.integer  "resource_owner_id", null: false
@@ -290,34 +285,20 @@ ActiveRecord::Schema.define(version: 20130712170115) do
   add_index "results", ["type"], name: "index_results_on_type", using: :btree
   add_index "results", ["user_id"], name: "index_results_on_user_id", using: :btree
 
-  create_table "tracker_settings", force: true do |t|
-    t.integer  "user_id"
-    t.string   "data_methods",   array: true
-    t.hstore   "config"
-    t.hstore   "privacy_config"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tracker_types", force: true do |t|
-    t.string   "name"
-    t.string   "category"
-    t.boolean  "isCalculated"
-    t.text     "schema"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "trackers", force: true do |t|
-    t.integer  "tracker_type_id"
-    t.integer  "user_id"
-    t.datetime "date_started"
-    t.datetime "date_ended"
+  create_table "sleeps", force: true do |t|
+    t.integer  "user_id",        null: false
+    t.date     "date_recorded",  null: false
     t.hstore   "data"
-    t.datetime "date_updated_at"
+    t.hstore   "goals"
+    t.text     "sleep_activity"
+    t.string   "provider"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sleeps", ["date_recorded"], name: "index_sleeps_on_date_recorded", using: :btree
+  add_index "sleeps", ["provider"], name: "index_sleeps_on_provider", using: :btree
+  add_index "sleeps", ["user_id"], name: "index_sleeps_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",           default: "",    null: false
