@@ -15,7 +15,6 @@ class Api::V1::ResultsController < Api::V1::ApiController
       elsif game && game.status.to_sym != :calculating_results
         game.status = :calculating_results
         game.save
-
         ResultsCalculator.perform_async(game.id)
         api_status = ApiStatus.new({
           state: :pending, 

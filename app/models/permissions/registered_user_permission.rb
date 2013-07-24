@@ -4,19 +4,19 @@ module Permissions
       super()
       if caller == target_user
 
-        allow @games, :create
-        allow @games, [:show, :update, :destroy] do |game|
+        allow :games, :create
+        allow :games, [:show, :update, :destroy] do |game|
           game.user_id == caller.id
         end    
-        allow @games, [:latest] do |game|
+        allow :games, [:latest] do |game|
           game.user_id == caller.id
         end
 
-        allow @games, :index 
+        allow :games, :index 
 
-        allow @results, :index 
+        allow :results, :index 
 
-        allow @results, [:show, :progress] do |item|
+        allow :results, [:show, :progress] do |item|
           if item.class == Game
             item.user_id == caller.id 
           elsif item.class == Result
@@ -24,15 +24,19 @@ module Permissions
           end
         end
 
-        allow @users, [:show, :create, :update, :destroy, :personality] do |user|
+        allow :users, [:show, :create, :update, :destroy, :personality] do |user|
           user.id == caller.id 
         end
 
-        allow @recommendations, [:latest, :career, :emotion, :actions] 
+        allow :recommendations, [:latest, :career, :emotion, :actions] 
 
-        allow @preferences, [:show, :create, :update, :description]
+        allow :preferences, [:show, :create, :update, :description]
 
-        allow @preorders, :create
+        allow :preorders, :create
+
+        allow :connections, [:index, :synchronize, :progress]
+
+        allow :activities, :index
       end
     end
   end

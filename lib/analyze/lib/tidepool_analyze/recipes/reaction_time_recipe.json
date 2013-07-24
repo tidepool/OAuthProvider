@@ -12,5 +12,12 @@
     "formulator": "ReactionTimeFormulator",
     "formula_sheet": "reaction_time_demand.csv",
     "formula_key": "calculation"
+  }, 
+  {
+    "user_event_source": "snoozer",
+    "analyzer": "SnoozerAnalyzer", 
+    "formulator": "ReactionTimeFormulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
   }
 ]

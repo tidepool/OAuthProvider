@@ -9,13 +9,15 @@ OAuthProvider::Application.routes.draw do
   get '/auth/:provider/callback', to: 'authentications#create'
   get '/auth/failure', to: 'authentications#failure'
   
-  get '/auth/add_new', to: 'authentications#add_new_authentication'  
+  get '/auth/new', to: 'authentications#add_new'  
   # resources :sessions
   # resources :users
 
   mount Sidekiq::Web, at: '/sidekiq'
 
   root :to => 'home#index'
+
+  resources :connections
 
   namespace :api do
     namespace :v1 do
@@ -42,13 +44,14 @@ OAuthProvider::Application.routes.draw do
           get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
         end
-        # resources :authentications
-
-        resources :trackers do 
-          # get '/trackers/:tracker/:date', to: 'trackers#show'
-        end     
 
         resource :preferences
+
+        get 'connections', to: 'connections#index'
+        get 'connections/:provider/synchronize', to: 'connections#synchronize'
+        get 'connections/:provider/progress', to: 'connections#progress'
+
+        get 'activities', to: 'activities#index'
       end
             
       post '/user_events' => 'user_events#create'
