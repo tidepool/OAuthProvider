@@ -4,7 +4,9 @@ class Api::V1::ApiController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
-
+  rescue_from Api::V1::UnauthorizedError, with: :unauthorized_access
+  rescue_from Api::V1::PreconditionFailedError, with: :precondition_failed
+  
   protected
 
   def caller
@@ -33,7 +35,7 @@ class Api::V1::ApiController < ApplicationController
 
   def authorize    
     if !current_permission.allow?(params[:controller], params[:action], current_resource)
-      raise Api::V1::UnauthorizedError.new('Not Authorized')
+      raise Api::V1::UnauthorizedError, "User not allowed to call #{params[:controller]}, with #{params[:action]}."
     end
   end
 
@@ -48,13 +50,46 @@ class Api::V1::ApiController < ApplicationController
     }
   end
 
-  private
-
-  def record_not_found 
-    
+  def respond_with_error(api_status, http_status)
+    respond_to do |format|
+      format.json { render({ json: nil, status: http_status, meta: api_status, serializer: ErrorSerializer }.merge(api_defaults)) }
+    end
   end
 
-  def record_invalid
+  private
+  def record_not_found(exception) 
+    api_status = Hashie::Mash.new({
+      code: 1001,
+      message: exception.message
+    })
+    http_status = :not_found   
+    respond_with_error(api_status, http_status)     
+  end
 
+  def record_invalid(exception)
+    api_status = Hashie::Mash.new({
+      code: 1002,
+      message: exception.message
+    })
+    http_status = :unprocessable_entity   
+    respond_with_error(api_status, http_status)     
+  end
+
+  def precondition_failed(exception)
+    api_status = Hashie::Mash.new({
+      code: 1003,
+      message: exception.message
+    })
+    http_status = :precondition_failed   
+    respond_with_error(api_status, http_status)     
+  end
+
+  def unauthorized_access(exception)
+    api_status = Hashie::Mash.new({
+      code: 1000,
+      message: exception.message
+    })
+    http_status = :unauthorized   
+    respond_with_error(api_status, http_status)     
   end
 end

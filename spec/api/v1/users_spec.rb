@@ -175,36 +175,54 @@ describe 'Users API' do
   describe 'Error and Edge Cases' do
     it 'doesnot show other users information' do 
       token = get_conn(user1)
-      lambda { token.get("#{@endpoint}/users/#{guest.id}.json") }.should raise_error(Api::V1::UnauthorizedError)
+      response = token.get("#{@endpoint}/users/#{guest.id}.json") 
+      response.status.should == 401
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1000
     end
 
     it 'doesnot give anonymous access to user info' do 
       token = get_conn()
-      lambda { token.get("#{@endpoint}/users/#{guest.id}.json") }.should raise_error(Api::V1::UnauthorizedError)      
+      response = token.get("#{@endpoint}/users/#{guest.id}.json")
+      response.status.should == 401
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1000           
     end
 
     it 'doesnot update another users information' do
       token = get_conn(user1)
       user_params = { name: 'John Doe', city: 'Istanbul' }
-      lambda { token.put("#{@endpoint}/users/#{user2.id}.json", {body: {user: user_params}})}.should raise_error(Api::V1::UnauthorizedError)
+      response = token.put("#{@endpoint}/users/#{user2.id}.json", {body: {user: user_params}})
+      response.status.should == 401
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1000                 
     end
 
     it 'doesnot create a user with overlapping email' do 
       token = get_conn()
       user_params = { email: user1.email, password: '12345678', password_confirmation: '12345678' }
-      lambda {token.post("#{@endpoint}/users.json", { user: user_params } )}.should raise_error(ActiveRecord::RecordInvalid)
+      response = token.post("#{@endpoint}/users.json", { user: user_params } )
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1002                 
     end    
 
     it 'doesnot create a user with wrong password_confirmation' do
       token = get_conn()
       user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '22225678' }
-      lambda {token.post("#{@endpoint}/users.json", { user: user_params } )}.should raise_error(ActiveRecord::RecordInvalid)
+      response = token.post("#{@endpoint}/users.json", { user: user_params } )
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1002                       
     end
 
     it 'doesnot delete another user than the caller' do
       token = get_conn(user1)
       user_id = user1.id
-      lambda { token.delete("#{@endpoint}/users/#{user2.id}.json")}.should raise_error(Api::V1::UnauthorizedError)
+      response = token.delete("#{@endpoint}/users/#{user2.id}.json")
+      response.status.should == 401
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1000                       
       user = User.find(user_id)
       user.email.should == user1.email
     end
@@ -212,7 +230,10 @@ describe 'Users API' do
     it 'doesnot allow a user to have password less than 8 length' do
       token = get_conn()
       user_params = { email: 'test_user@example.com', password: '1234567', password_confirmation: '1234567' }
-      lambda {token.post("#{@endpoint}/users.json", { user: user_params } )}.should raise_error(ActiveRecord::RecordInvalid)
+      response = token.post("#{@endpoint}/users.json", { user: user_params } )
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1002                             
     end
 
     it 'doesnot allow a user to change its status to be guest' do

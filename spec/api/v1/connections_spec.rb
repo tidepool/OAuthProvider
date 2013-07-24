@@ -71,6 +71,26 @@ describe 'Connections API' do
     api_status[:status][:state].should == 'pending'
   end
 
+  it 'updates the connection status correctly after synchronization' do 
+    fitbit
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
+
+    response = token.get("#{@endpoint}/users/-/connections.json")
+    response.status.should == 200        
+    output = JSON.parse(response.body, symbolize_names: true)
+    connections = output[:data]
+    connections.each do |connection|
+      if connection[:provider] == 'fitbit'
+        connection[:last_accessed].should_not be_nil 
+        connection[:activated].should == true
+        connection[:sync_status].should == "synchronized"
+        connection[:last_synchronized].should_not be_nil 
+        connection[:last_error].should be_nil
+      end
+    end    
+  end
+
   it 'does not restart the synchronization if synchronize is called twice' do 
     TrackerDispatcher.stub(:perform_async) do |user_id|
       # Do nothing
@@ -114,35 +134,6 @@ describe 'Connections API' do
     connection.last_accessed.should > Time.zone.now - 2.minutes
   end
 
-  it 'returns an error if the provider is not active' do 
-    token = get_conn(user1)
-    expect{token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")}.to raise_error(OAuth2::Error)
-    
-    # response.status.should == 202        
-    # api_status = JSON.parse(response.body, symbolize_names: true)
-    # api_status[:status][:message].should == "Provider fitbit connection is not active."
-  end
-
-  it 'returns an error if the synchronization cannot complete' do 
-    Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
-      "errors" =>
-        [{  "errorType"=>"oauth",
-            "fieldName"=>"oauth_access_token",
-             "message"=> "Invalid signature or token" }]
-      })
-
-    fitbit
-    token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
-    response.status.should == 202        
-    api_status = JSON.parse(response.body, symbolize_names: true)
-    # Start polling for progress
-    response = token.get(api_status[:status][:link])
-    api_status = JSON.parse(response.body, symbolize_names: true)
-    response.status.should == 200
-    api_status[:status][:state].should == 'authentication_error'
-    api_status[:status][:message].should == 'Error authenticating.'
-  end
 
   it 'keeps pending if the synchronization is taking time' do 
     TrackerDispatcher.stub(:perform_async) do |user_id|
@@ -160,6 +151,54 @@ describe 'Connections API' do
     api_status[:status][:state].should == 'pending'
     api_status[:status][:message].should == 'Synchronization is in progress.'
     api_status[:status][:link].should == "http://example.org#{@endpoint}/users/-/connections/fitbit/progress.json"
-
   end
+
+  describe 'Error and Edge cases' do 
+    it 'returns an error if the provider is not active' do 
+      token = get_conn(user1)
+      # expect{token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")}.to raise_error(OAuth2::Error)
+      response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
+      response.status.should == 406        
+      api_status = JSON.parse(response.body, symbolize_names: true)
+      api_status[:status][:code].should == 2001
+    end
+
+    it 'returns an error if the synchronization cannot complete' do 
+      Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+        "errors" =>
+          [{  "errorType"=>"oauth",
+              "fieldName"=>"oauth_access_token",
+               "message"=> "Invalid signature or token" }]
+        })
+
+      fitbit
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
+      response.status.should == 202        
+      api_status = JSON.parse(response.body, symbolize_names: true)
+      # Start polling for progress
+      response = token.get(api_status[:status][:link])
+      api_status = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 407
+      api_status[:status][:code].should == 2002
+    end
+
+    it 'returns an error if the tracker cannot synchronize' do 
+      Fitgem::Client.any_instance.stub(:activities_on_date) do |date|
+        raise IOError
+      end
+
+      fitbit
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
+      response.status.should == 202        
+      api_status = JSON.parse(response.body, symbolize_names: true)
+      # Start polling for progress
+      response = token.get(api_status[:status][:link])
+      api_status = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 502
+      api_status[:status][:code].should == 2003
+    end
+  end
+
 end

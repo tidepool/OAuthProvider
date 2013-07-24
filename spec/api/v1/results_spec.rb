@@ -63,10 +63,9 @@ describe 'Results API' do
   it 'gets the error state if results are not calculated' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/games/#{game_no_results.id}/progress.json")
-    response.status.should == 200
+    response.status.should == 500
     message = JSON.parse(response.body, :symbolize_names => true)
-    message[:status][:state].should == 'error'
-    message[:status][:link].should == "http://example.org#{@endpoint}/users/-/games/#{game_no_results.id}/results"
+    message[:status][:code].should == 3001
   end
 
   it 'shows the results when they are calculated' do

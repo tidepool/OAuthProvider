@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722005105) do
+ActiveRecord::Schema.define(version: 20130724040358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20130722005105) do
     t.hstore   "last_synchronized"
     t.hstore   "profile"
     t.string   "sync_status"
+    t.text     "last_error"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 20130722005105) do
     t.string   "status"
     t.string   "calling_ip"
     t.text     "event_log"
+    t.text     "last_error"
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree

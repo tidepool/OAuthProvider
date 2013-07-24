@@ -1,6 +1,6 @@
 class Api::V1::ResultsController < Api::V1::ApiController
   doorkeeper_for :all
-  respond_to :json
+  rescue_from Api::V1::ResultCalculationError, with: :result_calculation_error
 
   def index 
     # results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
@@ -28,6 +28,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
     else 
       # Called for a user
       user = target_user
+      api_status = {}
       if params[:type]
         results = Result.where('user_id = ? and type = ?', user.id, params[:type]).order('time_played')
       else
@@ -64,7 +65,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
   def progress
     game = Game.find(params[:game_id])
 
-    api_status = response_for_status(game.status)
+    api_status = response_for_status(game)
     respond_to do |format|
       format.json { 
         render({
@@ -80,7 +81,8 @@ class Api::V1::ResultsController < Api::V1::ApiController
 
   protected
 
-  def response_for_status(status)
+  def response_for_status(game)
+    status = game.status
     api_status = nil
     case status.to_sym
     when :calculating_results
@@ -98,20 +100,12 @@ class Api::V1::ResultsController < Api::V1::ApiController
           message: 'Results are ready.'
         })        
     when :incomplete_results
-      api_status = Hashie::Mash.new(
-        {
-          state: :error,
-          link: api_v1_user_game_results_url,
-          message: 'Error calculating results. Please try again later.'
-        })        
+      message = game.last_error
+      logger.error("Api caught error: #{message}")
+      raise Api::V1::ResultCalculationError, message 
     else
       logger.error("Game #{params[:game_id]} does not exist or unknown status.")
-      api_status = Hashie::Mash.new(
-        {
-          state: :precondition_failed,
-          link: '',
-          message: 'Not allowed to call progress.'
-        })
+      raise Api::V1::PreconditionFailedError, "Game #{params[:game_id]} does not exist or unknown status."
     end
     api_status
   end  
@@ -122,5 +116,16 @@ class Api::V1::ResultsController < Api::V1::ApiController
     elsif params[:game_id]
       @game ||= Game.find(params[:game_id]) 
     end
+  end
+
+  private
+
+  def result_calculation_error(exception)
+    api_status = Hashie::Mash.new({
+      code: 3001,
+      message: exception.message
+    })
+    http_status = :internal_server_error   
+    respond_with_error(api_status, http_status)     
   end
 end

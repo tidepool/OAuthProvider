@@ -98,7 +98,10 @@ describe 'Game API' do
 
   it 'doesnot allow non-admins to create games for other users' do
     token = get_conn(user1)
-    lambda { token.post("#{@endpoint}/users/#{user2.id}/games.json") }.should raise_error(Api::V1::UnauthorizedError)
+    response = token.post("#{@endpoint}/users/#{user2.id}/games.json") 
+    response.status.should == 401
+    result = JSON.parse(response.body, symbolize_names: true)
+    result[:status][:code].should == 1000                       
   end
 
   it 'allows admins create a game for other users' do

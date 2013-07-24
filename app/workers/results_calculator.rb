@@ -36,15 +36,18 @@ class ResultsCalculator
           end        
         else
           game.status = :incomplete_results
+          game.last_error = "Game #{game_id} cannot store events in the event_log."
         end        
       else
         game.status = :incomplete_results
+        game.last_error = "Game #{game_id} does not have any events in Redis."
       end
 
       if game.status == :incomplete_results
         retries += 1
         logger.warn("Game #{game_id} is being retried, retry #{retries}")
       else
+        game.last_error = ""
         break
       end
     end
@@ -56,7 +59,7 @@ class ResultsCalculator
     end
 
     unless game.save
-      logger.error("Game #{game_id} cannot be saved after all results are calculated.")
+      logger.error("Game #{game_id} cannot be saved post result calculation attempt.")
     end
   end
 
@@ -89,13 +92,14 @@ class ResultsCalculator
       analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
     rescue Exception => e
       logger.error("Game #{game.id} cannot analyze calculation. #{e.message}")
+      game.last_error = e.message
     end
     analysis_results
   end
 
   def persist_results(game, analysis_results)
     status = :results_ready
-    if game.definition.calculates
+    if game.definition && game.definition.calculates
       game.definition.calculates.each do |calculation|
         klass_name = "Persist#{calculation.to_s.camelize}"
         begin
@@ -104,8 +108,13 @@ class ResultsCalculator
         rescue Exception => e
           logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
           status = :incomplete_results
+          game.last_error = e.message
         end
-      end  
+      end 
+    else
+      logger.error("Game #{game.id} definition is not defined or missing calculates info.")
+      status = :incomplete_results 
+      game.last_error = "Game #{game.id} definition is not defined or missing calculates info."
     end
     status  
   end
@@ -114,8 +123,12 @@ class ResultsCalculator
     # Get the user events for a given game
     user_events_json = $redis.lrange(key, 0, MAX_NUM_EVENTS)
     user_events = []
-    user_events_json.each do |user_event| 
-      user_events << JSON.parse(user_event)
+    if user_events_json
+      user_events_json.each do |user_event| 
+        user_events << JSON.parse(user_event)
+      end
+    else
+      logger.error("No events found in Redis for key #{key}.")
     end
     user_events
   end

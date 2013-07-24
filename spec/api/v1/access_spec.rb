@@ -15,6 +15,8 @@ describe 'Basic access to APIs' do
   end
 
   it 'denies token for wrong pass' do
-    lambda { get_conn(user1, 'foo')}.should raise_error(OAuth2::Error)
+    response = get_conn(user1, 'foo')
+    response.should_not be_nil
+    response.params["error"].should == "invalid_resource_owner"
   end
 end
