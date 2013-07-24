@@ -2,6 +2,7 @@ require 'redis'
 require 'json'
 require 'tidepool_analyze'
 Dir[File.expand_path('../persistence/*.rb', __FILE__)].each {|file| require file }
+require File.expand_path('../errors.rb', __FILE__)
 
 class ResultsCalculator
   include Sidekiq::Worker
