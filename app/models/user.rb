@@ -83,16 +83,7 @@ class User < ActiveRecord::Base
     # First check if the authentication already exists:
     authentication = Authentication.find_by_provider_and_uid(auth_hash.provider, auth_hash.uid)
     if authentication
-      if auth_hash.credentials
-        authentication.oauth_token = auth_hash.credentials.token
-        authentication.oauth_secret = auth_hash.credentials.secret
-        if auth_hash.credentials.expires_at
-          authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
-        end
-        authentication.save
-      else
-        logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
-      end
+      authentication.check_and_reset_credentials(auth_hash)
       user = authentication.user
       if user.guest
         # Ensure that user is not guest
@@ -139,27 +130,40 @@ class User < ActiveRecord::Base
   end
 
   def populate_from_auth_hash!(auth_hash)
+    return if auth_hash.nil?   
     provider = auth_hash.provider
+    return if provider.nil? || provider.empty
 
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
-    if auth_hash.credentials
-      authentication.oauth_token = auth_hash.credentials.token
-      authentication.oauth_secret = auth_hash.credentials.secret
-      if auth_hash.credentials.expires_at
-        authentication.oauth_expires_at = Time.at(auth_hash.credentials.expires_at)
-      end
-    else
-      logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
-    end
+    authentication.check_and_reset_credentials(auth_hash)
+
     method_name = "populate_from_#{provider.underscore}".to_sym
-    if self.method(method_name)
-      self.method(method_name).call(auth_hash, authentication)
-    end
+    self.method(method_name).call(auth_hash, authentication) if self.method(method_name)
+    
     authentication.save!
+
     # As suggested here: (to prevent the password validation failing)
     # http://stackoverflow.com/questions/11917340/how-can-i-sometimes-require-password-and-sometimes-not-with-has-secure-password
-    self.password = self.password_confirmation = "12345678"
-    self.password_digest = "external-authorized account"
+
+    # Case 1:
+    #   User has primary authentication as TidePool Registered with email and password
+    #   (guest is false)
+    #   Adding a new authentication
+    #   Should not reset the password
+    # Case 2:
+    #   User has primary authentication as Facebook. 
+    #   (guest is false)
+    #   Adding a new authentication
+    #   Resetting the password has no effect. Ideally not reset the password.
+    # Case 3:
+    #   User has no authentication, guest user.
+    #   (guest is true)
+    #   Authenticating first time (with Facebook)
+    #   We need to set a password so that the user.save! does not fail for validation
+    if self.guest == true 
+      self.password = self.password_confirmation = "12345678"
+      self.password_digest = "external-authorized account"
+    end
 
     # At this point user is no longer guest
     self.guest = false
