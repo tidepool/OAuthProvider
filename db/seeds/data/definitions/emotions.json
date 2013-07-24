@@ -10,7 +10,7 @@
       {
         "friendly_name" : "Circles 1",
         "instructions" : "",
-        "view_name" : "emotions_circles",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "anger",
@@ -41,7 +41,7 @@
       {
         "friendly_name" : "Circles 2",
         "instructions" : "",
-        "view_name" : "emotions_circles",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "fear",
@@ -72,7 +72,7 @@
       {
         "friendly_name" : "Circles 3",
         "instructions" : "",
-        "view_name" : "emotions_circles",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "disgust",
@@ -99,7 +99,7 @@
       {
         "friendly_name" : "Circles 4",
         "instructions" : "",
-        "view_name" : "emotions_circles",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "surprise",
