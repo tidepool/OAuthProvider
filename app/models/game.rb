@@ -46,6 +46,7 @@ class Game < ActiveRecord::Base
 
     create! do |game|
       game.definition = definition
+      game.name = definition.unique_name  # Denormolizing the unique_name of the definition
       game.stages = definition.stages_from_stage_definition
       game.user = target_user
       game.calling_ip = calling_ip
@@ -56,7 +57,7 @@ class Game < ActiveRecord::Base
   end
 
   def self.find_latest(target_user)
-    game = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).last
+    game = Game.where('user_id = ?', target_user.id).order(:date_taken).last
   end
 
   def results_calculated?

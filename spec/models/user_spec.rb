@@ -48,7 +48,7 @@ describe User do
       })
   end
 
-  it 'creates a user from auth_hash' do
+  it 'creates a user from auth_hash when no prior guest user existed.' do
     user = User.create_or_find(@facebook_hash)
 
     expect(user.email).to eq("user1@gmail.com")
@@ -111,6 +111,18 @@ describe User do
     user = User.create_or_find(@test_hash, guest.id)
     expect(user.id).to eq(user3.id)
     expect(user.guest).to eq(false)
+  end
+
+  it 'adds a new authentication to an existing user with external authentication' do 
+    pending
+  end
+
+  it 'adds a new authentication to an existing user with email/password authentication' do 
+    pending
+  end
+
+  it 'switches the authentication to a new user if the authentication existed and belonged to another user' do 
+    pending
   end
 
   it 'finds no user if the user_id does not exist' do

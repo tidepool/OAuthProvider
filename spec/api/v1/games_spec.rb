@@ -14,6 +14,9 @@ describe 'Game API' do
   let(:game) { create(:game, user: user1) }
   let(:game_list) { create_list(:game, 10, user: user2) }
   let(:game_to_be_deleted) { create(:game, user: user1) }
+  let(:game_with_results) { create(:game, user: user1) }
+  let(:emo_result) { create(:result, user: user1, game: game_with_results, type: 'EmoResult') }
+  let(:reaction_result) { create(:result, user: user1, game: game_with_results, type: 'ReactionTimeResult')}
 
   it 'creates a game when user_id is - for the caller' do
     token = get_conn(user1)
@@ -40,17 +43,16 @@ describe 'Game API' do
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
-    game_result[:definition][:unique_name].should == 'baseline'
+    game_result[:name].should == 'baseline'
   end
 
   it 'creates a game that has the default definition if def_id is omitted' do 
     token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
-      { body: { def_id: 'foobar' } })
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
-    game_result[:definition][:unique_name].should == 'baseline'
+    game_result[:name].should == 'baseline'
   end
 
   it 'creates a game that is the default definition if def_id cannot be found' do
@@ -60,7 +62,7 @@ describe 'Game API' do
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
-    game_result[:definition][:unique_name].should == 'baseline'
+    game_result[:name].should == 'baseline'
   end
 
   it 'creates a game with a definition that is same as the game in the same_as parameter' do
@@ -71,7 +73,7 @@ describe 'Game API' do
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
-    game_result[:definition][:unique_name].should == definition.unique_name
+    game_result[:name].should == definition.unique_name
   end
 
   it 'records the ip of the caller when the game is created' do
@@ -94,6 +96,17 @@ describe 'Game API' do
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
     game_result[:id].to_i.should == game.id
+  end
+
+  it 'shows an existing game with its results' do 
+    emo_result
+    reaction_result
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/#{user1.id}/games/#{game_with_results.id}.json")
+    response.status.should == 200
+    result = JSON.parse(response.body, symbolize_names: true)
+    game_result = result[:data]
+
   end
 
   it 'doesnot allow non-admins to create games for other users' do
