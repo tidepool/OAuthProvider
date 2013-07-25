@@ -6,6 +6,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
     # results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
     response_body = {}
     status = :ok
+
     if params[:game_id]
       # Called for a specific game
       game = Game.find(params[:game_id])
@@ -34,17 +35,38 @@ class Api::V1::ResultsController < Api::V1::ApiController
       else
         results = Result.where('user_id = ?', user.id).order('time_played')      
       end
-      response_body = results
+
+      if params[:daily]
+        daily_results = {}
+
+        results.each do | result |
+          day = result.time_played.strftime("%m/%d/%Y")
+          daily_results[day] ||= []
+          daily_results[day] << result
+        end
+        response_body = daily_results.values
+      else
+        response_body = results      
+      end
+    end
+
+    render_hash = {  
+      json: response_body, 
+      status: status, 
+      each_serializer: ResultSerializer,
+      meta: api_status 
+      }
+    if params[:daily]
+      render_hash = {  
+        json: response_body, 
+        status: status, 
+        meta: api_status 
+        }
     end
 
     respond_to do |format|
       format.json { 
-        render({  
-          json: response_body, 
-          status: status, 
-          each_serializer: ResultSerializer,
-          meta: api_status 
-          }.merge(api_defaults))
+        render(render_hash.merge(api_defaults))
       }
     end    
   end

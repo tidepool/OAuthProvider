@@ -10,7 +10,11 @@ module FitbitPopulate
     set_if_empty(:city, auth.info.city, authentication)
     set_if_empty(:state, auth.info.state, authentication)
     set_if_empty(:country, auth.info.state, authentication)
-    set_if_empty(:date_of_birth, auth.info.dob, authentication)
+    if self.date_of_birth.nil?
+      self.date_of_birth = auth.info.dob
+      authentication.date_of_birth = auth.info.dob      
+    end
+    # set_if_empty(:date_of_birth, auth.info.dob, authentication)
     set_if_empty(:timezone, auth.info.timezone, authentication)
     set_if_empty(:locale, auth.info.locale, authentication)
     set_if_empty(:image, auth.extra.raw_info.user.avatar, authentication)

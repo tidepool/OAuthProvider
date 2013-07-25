@@ -28,7 +28,7 @@
 class Authentication < ActiveRecord::Base
   belongs_to :user
   
-  def check_and_reset_credentials(auth_hash)
+  def check_and_reset_credentials!(auth_hash)
     if auth_hash && auth_hash.credentials
       self.oauth_token = auth_hash.credentials.token
       self.oauth_secret = auth_hash.credentials.secret
@@ -39,6 +39,7 @@ class Authentication < ActiveRecord::Base
       # if expires_at
       #   self.expires_at = expires_at
       # end
+      self.save!
     else
       logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
     end

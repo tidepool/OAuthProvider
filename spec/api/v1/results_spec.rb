@@ -19,6 +19,8 @@ describe 'Results API' do
   let(:emo_results) { create_list(:result, 5, game: game,  user: user1, type: 'EmoResult')}
   let(:result) { create(:result, game: game_with_results, user: user1) }
  
+  let(:daily_results) { create_list(:daily_results, 10, game: game, user: user1, type: 'ReactionTimeResult')}
+
   it 'starts the results calculation' do 
     ResultsCalculator.stub(:perform_async) do |game_id|
       fake_game = Game.find(game_id)
@@ -128,6 +130,15 @@ describe 'Results API' do
     response_result = output[:data]
     response_result[:game_id].should == game_with_results.id
     response_result[:user_id].should == user1.id
+  end
+
+  it 'shows the results in a daily group' do
+    daily_results
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/results.json?daily=true")
+    response.status.should == 200
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
   end
 
   describe 'Error and Edge Cases' do

@@ -10,6 +10,10 @@ FactoryGirl.define do
     factory :new_result do 
       sequence(:time_played) { |n| Time.zone.now - (n * 1000) }
     end    
+
+    factory :daily_results do 
+      sequence(:time_played) { |n| Time.zone.now - (n * 12.hours) }
+    end
   end
 
   factory :personality do 
