@@ -32,13 +32,13 @@ class Authentication < ActiveRecord::Base
     if auth_hash && auth_hash.credentials
       self.oauth_token = auth_hash.credentials.token
       self.oauth_secret = auth_hash.credentials.secret
-      expires_at = auth_hash.credentials.expires_at
+      # expires_at = auth_hash.credentials.expires_at
 
       # oauth_expires_at is deprecated.
       # converting to DateTime, a time from an external server, is not right! 
-      if expires_at
-        self.expires_at = expires_at
-      end
+      # if expires_at
+      #   self.expires_at = expires_at
+      # end
     else
       logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
     end

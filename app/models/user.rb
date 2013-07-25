@@ -130,16 +130,17 @@ class User < ActiveRecord::Base
   end
 
   def populate_from_auth_hash!(auth_hash)
-    return if auth_hash.nil?   
+    # return if auth_hash.nil?   
     provider = auth_hash.provider
-    return if provider.nil? || provider.empty?
-
+    # return if provider.nil? || provider.empty?
+    logger.info("Received the hash #{auth_hash}")
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
     authentication.check_and_reset_credentials(auth_hash)
 
     method_name = "populate_from_#{provider.underscore}".to_sym
-    self.method(method_name).call(auth_hash, authentication) if self.method(method_name)
-    
+    if self.method(method_name)
+      self.method(method_name).call(auth_hash, authentication) 
+    end
     authentication.save!
 
     # As suggested here: (to prevent the password validation failing)
