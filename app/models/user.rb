@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
   def populate_from_auth_hash!(auth_hash)
     return if auth_hash.nil?   
     provider = auth_hash.provider
-    return if provider.nil? || provider.empty
+    return if provider.nil? || provider.empty?
 
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
     authentication.check_and_reset_credentials(auth_hash)
