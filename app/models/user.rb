@@ -96,7 +96,8 @@ class User < ActiveRecord::Base
           user.save!
         end
       end
-      authentication.check_and_reset_credentials!(auth_hash)
+      authentication.check_and_reset_credentials(auth_hash)
+      authentication.save!
       user = authentication.user
       if user.guest
         logger.warn("AuthenticationSequence: Authentication user is guest, this is abnormal!")
@@ -167,9 +168,9 @@ class User < ActiveRecord::Base
     no_existing_authentications = self.authentications.empty? 
     logger.info("AuthenticationSequence: Received the hash, building a new Authentication.")
     authentication = self.authentications.build(:provider => provider, :uid => auth_hash.uid)
-    authentication.check_and_reset_credentials!(auth_hash)
-
+    authentication.check_and_reset_credentials(auth_hash)
     populate_from_provider(auth_hash, authentication)
+    authentication.save!
 
     # As suggested here: (to prevent the password validation failing)
     # http://stackoverflow.com/questions/11917340/how-can-i-sometimes-require-password-and-sometimes-not-with-has-secure-password
@@ -178,23 +179,27 @@ class User < ActiveRecord::Base
     #   User has primary authentication as TidePool Registered with email and password
     #   (guest is false)
     #   Adding a new authentication
+    #   password_digest is not empty
     #   Should not reset the password
     # Case 2:
     #   User has primary authentication as Facebook. 
     #   (guest is false)
     #   Adding a new authentication
+    #   password_digest = "external-authorized account"
     #   Resetting the password has no effect. Ideally not reset the password.
     # Case 3:
     #   User has no authentication, guest user.
     #   (guest is true)
     #   Authenticating first time (with Facebook)
-    #   We need to set a password so that the user.save! does not fail for validation
+    #   password_digest = "Tidepool-Guest-User"
+    #   Resetting the password has no effect. User had a Guest Password Digest, will now have an External one if we reset.
     # Case 4:
     #   User has no authentication, not a guest user.
     #   (guest is false)
     #   Authenticating first time (with Facebook)
+    #   password_digest = ""
     #   We need to set a password so that the user.save! does not fail for validation
-    if self.guest == true || no_existing_authentications
+    if self.password_digest.nil? || self.password_digest.empty?
       logger.info("AuthenticationSequence: Guest user is adding external authentication, rewriting the password_digest.")
       self.password = self.password_confirmation = "12345678"
       self.password_digest = "external-authorized account"
