@@ -1,5 +1,6 @@
 class Api::V1::FriendSurveysController < Api::V1::ApiController
   # doorkeeper_for :all
+  rescue_from Api::V1::FriendSurveyNotReadyError, with: :survey_not_ready
 
   def create
     game_id = params[:game_id]
@@ -42,6 +43,15 @@ class Api::V1::FriendSurveysController < Api::V1::ApiController
   end
 
   protected
+
+  def survey_not_ready(exception)
+    api_status = Hashie::Mash.new({
+      code: 4000,
+      message: exception.message
+    })
+    http_status = :not_found   
+    respond_with_error(api_status, http_status)     
+  end
 
   REVERSE_TOP = 8
   def calculate_from_surveys(surveys)

@@ -47,52 +47,81 @@ describe 'Friend Surveys API' do
     }
   end
 
-  it 'calculates the survey results' do 
-    result
-    token = get_conn()
-    survey_params1 = { 
-      high_extraversion: 1,
-      low_extraversion: 4, 
-      high_openness: 3, 
-      low_openness: 7,
-      high_neuroticism: 2,
-      low_neuroticism: 6,
-      high_conscientiousness: 4,
-      low_conscientiousness: 2,
-      high_agreeableness: 1,
-      low_agreeableness: 3
-    }
-    survey_params2 = { 
-      high_extraversion: 2,
-      low_extraversion: 5, 
-      high_openness: 1, 
-      low_openness: 5,
-      high_neuroticism: 3,
-      low_neuroticism: 6,
-      high_conscientiousness: 4,
-      low_conscientiousness: 1,
-      high_agreeableness: 7,
-      low_agreeableness: 3
-    }
-    survey_params3 = { 
-      high_extraversion: 2,
-      low_extraversion: 6, 
-      high_openness: 4, 
-      low_openness: 5,
-      high_neuroticism: 3,
-      low_neuroticism: 7,
-      high_conscientiousness: 6,
-      low_conscientiousness: 1,
-      high_agreeableness: 6,
-      low_agreeableness: 2
-    }
-    response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: survey_params1 } )
-    response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: survey_params2 } )
-    response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: survey_params3 } )
+  describe 'calculations' do 
+    before :all do 
+      @survey_params1 = { 
+        high_extraversion: 1,
+        low_extraversion: 4, 
+        high_openness: 3, 
+        low_openness: 7,
+        high_neuroticism: 2,
+        low_neuroticism: 6,
+        high_conscientiousness: 4,
+        low_conscientiousness: 2,
+        high_agreeableness: 1,
+        low_agreeableness: 3
+      }
+      @survey_params2 = { 
+        high_extraversion: 2,
+        low_extraversion: 5, 
+        high_openness: 1, 
+        low_openness: 5,
+        high_neuroticism: 3,
+        low_neuroticism: 6,
+        high_conscientiousness: 4,
+        low_conscientiousness: 1,
+        high_agreeableness: 7,
+        low_agreeableness: 3
+      }
+      @survey_params3 = { 
+        high_extraversion: 2,
+        low_extraversion: 6, 
+        high_openness: 4, 
+        low_openness: 5,
+        high_neuroticism: 3,
+        low_neuroticism: 7,
+        high_conscientiousness: 6,
+        low_conscientiousness: 1,
+        high_agreeableness: 6,
+        low_agreeableness: 2
+      }
+    end
 
-    response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
-    result = JSON.parse(response.body, symbolize_names: true)
-    result.should_not be_nil
+    it 'calculates the survey results' do 
+      result
+      token = get_conn()
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params1 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params2 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params3 } )
+
+      response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      result = JSON.parse(response.body, symbolize_names: true)
+      result.should_not be_nil
+    end
+
+    it 'returns an error if the survey is not ready' do 
+      result
+      token = get_conn()
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params1 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params2 } )
+
+      response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      response.status.should == 404
+      result = JSON.parse(response.body, symbolize_names: true)
+      result.should_not be_nil
+    end
+
+    it 'returns an error if the result is not calculated' do 
+      token = get_conn()
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params1 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params2 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params3 } )
+
+      response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      response.status.should == 404
+      result = JSON.parse(response.body, symbolize_names: true)
+      result.should_not be_nil
+    end
+
   end
-
 end
