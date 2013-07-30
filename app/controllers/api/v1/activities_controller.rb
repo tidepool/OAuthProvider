@@ -9,7 +9,7 @@ class Api::V1::ActivitiesController < Api::V1::ApiController
       activities = Activity.where('user_id = ?', target_user).order(:date_recorded)      
     end
     respond_to do |format|
-      format.json { render :json => activities }
+      format.json { render({ json: activities, meta: {} }.merge(api_defaults))  }
     end
   end
 

@@ -24,4 +24,21 @@ class PersonalityResult < Result
   store_accessor :score, :logo_url
   store_accessor :score, :profile_description_id  
 
+  def self.create_from_analysis(game, profile_description, version, existing_result = nil)
+    return nil unless game && game.user_id
+    return nil if profile_description.nil?
+
+    result = existing_result
+    result = game.results.build(:type => 'PersonalityResult') if result.nil?
+
+    result.name = profile_description.name
+    result.one_liner = profile_description.one_liner
+    result.logo_url = profile_description.logo_url
+    result.profile_description_id = profile_description.id # This is an HStore accessor so needs to use id
+
+    result.calculations = {}
+    result.analysis_version = version
+    result.record_times(game)
+    result.save ? result : nil
+  end
 end

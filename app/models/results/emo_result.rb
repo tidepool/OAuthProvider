@@ -35,6 +35,7 @@ class EmoResult < Result
   store_accessor :score, :display_emotion_description
 
   def self.create_from_analysis(game, analysis_results, existing_result = nil)
+    return nil unless game && game.user_id
     return nil unless analysis_results && analysis_results[:emo] && analysis_results[:emo][:score] && analysis_results[:emo][:final_results]
 
     # First gather and check all the results before creating it.

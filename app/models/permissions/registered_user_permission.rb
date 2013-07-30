@@ -37,6 +37,8 @@ module Permissions
         allow :connections, [:index, :synchronize, :progress]
 
         allow :activities, :index
+
+        allow :friend_surveys, [:create, :results]
       end
     end
   end

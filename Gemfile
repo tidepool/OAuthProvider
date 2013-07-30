@@ -51,6 +51,9 @@ group :development, :test, :teamcity do
   gem 'factory_girl_rails'
 end
 
+# Pagination
+gem 'kaminari'
+
 # Cron replacement
 gem 'clockwork'
 

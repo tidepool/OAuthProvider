@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722005105) do
+ActiveRecord::Schema.define(version: 20130729180143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20130722005105) do
     t.hstore   "last_synchronized"
     t.hstore   "profile"
     t.string   "sync_status"
+    t.text     "last_error"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -127,6 +128,16 @@ ActiveRecord::Schema.define(version: 20130722005105) do
   add_index "foods", ["provider"], name: "index_foods_on_provider", using: :btree
   add_index "foods", ["user_id"], name: "index_foods_on_user_id", using: :btree
 
+  create_table "friend_surveys", force: true do |t|
+    t.integer  "game_id"
+    t.text     "answers"
+    t.string   "calling_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friend_surveys", ["game_id"], name: "index_friend_surveys_on_game_id", using: :btree
+
   create_table "games", force: true do |t|
     t.datetime "date_taken"
     t.integer  "definition_id"
@@ -138,8 +149,11 @@ ActiveRecord::Schema.define(version: 20130722005105) do
     t.string   "status"
     t.string   "calling_ip"
     t.text     "event_log"
+    t.text     "last_error"
+    t.string   "name"
   end
 
+  add_index "games", ["name"], name: "index_games_on_name", using: :btree
   add_index "games", ["user_id"], name: "index_games_on_user_id", using: :btree
 
   create_table "images", force: true do |t|

@@ -2,24 +2,23 @@ class Api::V1::GamesController < Api::V1::ApiController
   doorkeeper_for :index, :show, :destroy, :update
 
   def index
-    games = Game.includes(:definition).where('user_id = ?', target_user.id).order(:date_taken).load
+    games = Game.where('user_id = ?', target_user.id).order(:date_taken).load
     respond_to do |format|
-      format.json { render :json => games, :each_serializer => GameSummarySerializer }
+      format.json { render({ json: games, each_serializer: GameSummarySerializer, meta: {} }.merge(api_defaults)) }
     end
   end
 
   def show 
     game = current_resource
-    
     respond_to do |format|
-      format.json { render :json => game }
+      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end
   end
 
   def latest 
     game = current_resource
     respond_to do |format|
-      format.json { render :json => game }
+      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -35,7 +34,7 @@ class Api::V1::GamesController < Api::V1::ApiController
     end
     game = Game.create_by_definition(definition, target_user, calling_ip)
     respond_to do |format|
-      format.json { render :json => game }
+      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -43,7 +42,7 @@ class Api::V1::GamesController < Api::V1::ApiController
     game = current_resource
     game.update_attributes(game_params)
     respond_to do |format|
-      format.json { render :json => game}
+      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -51,7 +50,7 @@ class Api::V1::GamesController < Api::V1::ApiController
     game = current_resource
     game.destroy
     respond_to do |format|
-      format.json { render :json => {} }
+      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -59,7 +58,7 @@ class Api::V1::GamesController < Api::V1::ApiController
 
   def current_resource
     if params[:id]
-      @current_resource ||= Game.includes(:definition).find(params[:id])
+      @current_resource ||= Game.find(params[:id])
     else
       resource_method = "find_#{params[:action]}".to_sym
       @current_resource ||= Game.send(resource_method, target_user) if Game.respond_to?(resource_method)  

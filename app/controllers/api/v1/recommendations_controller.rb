@@ -8,7 +8,7 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
     recommendation = Recommendation.where('big5_dimension = ?', personality.big5_dimension).limit(1).offset(rec_no).first
 
     respond_to do |format|
-      format.json { render :json => recommendation }
+      format.json { render({ json: recommendation, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -17,25 +17,23 @@ class Api::V1::RecommendationsController < Api::V1::ApiController
     career_reco = CareerRecommendation.where(profile_description_id: profile_description_id).first
 
     respond_to do |format|
-      format.json { render :json => career_reco }
+      format.json { render({ json: career_reco, meta: {} }.merge(api_defaults)) }
     end
   end
 
-  def emotion
-    emotion_result = Result.find(params[:emo_result_id])
-    emotion_reco = EmoRecommendation.new(emotion_result)
-    
+  # def emotion
+  #   emotion_result = Result.find(params[:emo_result_id])
+  #   emotion_reco = EmoRecommendation.new(emotion_result)
 
-    respond_to do |format|
-      format.json { render :json => emotion_reco.recommendation }
-    end
-  end
+  #   respond_to do |format| 
+  #     format.json { render({ json: emotion_reco.recommendation, meta: {} }.merge(api_defaults)) }
+  #   end
+  # end
 
   def actions
     builder = RecommendationBuilder.new(target_user)
-
     respond_to do |format|
-      format.json { render :json => builder.recommendations }
+      format.json { render({ json: builder.recommendations, meta: {} }.merge(api_defaults)) }
     end    
   end
 
