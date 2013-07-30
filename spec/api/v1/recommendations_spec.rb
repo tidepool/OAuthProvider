@@ -108,7 +108,8 @@ describe 'Recommendations API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/recommendations/latest.json")
     response.status.should == 200        
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result[:big5_dimension].should == "high_openness"
     reco_result[:sentence].should_not be_nil
     reco_result[:link_title].should_not be_nil
@@ -121,7 +122,8 @@ describe 'Recommendations API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/recommendations/career.json")
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result[:careers].length.should == 4
     reco_result[:careers][3].should == "Life coach"
     reco_result[:tools].length.should == 3
@@ -130,22 +132,24 @@ describe 'Recommendations API' do
     reco_result[:skills][1].should == "General psychology training"
   end
 
-  it 'gets an emotion description and recommendation for a given result' do
-    token = get_conn(user1)
-    result = create_emotion_result
+  # it 'gets an emotion description and recommendation for a given result' do
+  #   token = get_conn(user1)
+  #   result = create_emotion_result
 
-    response = token.get("#{@endpoint}/users/-/recommendations/emotion.json?emo_result_id=#{result.id}")
-    response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
-    reco_result[:emotion].should == 'awe'
-    reco_result[:friendly_name].should_not be_nil
-  end
+  #   response = token.get("#{@endpoint}/users/-/recommendations/emotion.json?emo_result_id=#{result.id}")
+  #   response.status.should == 200
+  #   output = JSON.parse(response.body, symbolize_names: true)
+  #   reco_result = output[:data]
+  #   reco_result[:emotion].should == 'awe'
+  #   reco_result[:friendly_name].should_not be_nil
+  # end
 
   it 'gets actions for only recommended items and not games' do 
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/recommendations/actions.json")
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result.length.should >= 3
   end
 

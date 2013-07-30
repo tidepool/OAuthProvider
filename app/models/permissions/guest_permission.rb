@@ -21,6 +21,7 @@ module Permissions
           user.id == caller.id 
         end
 
+        allow :friend_surveys, [:create, :results]
       end
     end
   end

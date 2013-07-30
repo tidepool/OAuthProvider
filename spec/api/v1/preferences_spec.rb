@@ -16,7 +16,8 @@ describe 'Preferences API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/preferences/training-preference/description.json")
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result.should_not be_nil
   end
 
@@ -25,7 +26,8 @@ describe 'Preferences API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/preferences.json?type=TrainingPreference")
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result.should_not be_nil
     reco_result[:user_id].should == user1.id
     reco_result[:data].should == {
@@ -54,9 +56,9 @@ describe 'Preferences API' do
 
     response = token.post("#{@endpoint}/users/-/preferences.json", {body: {preference: preference_params}})
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result.should_not be_nil
-
 
     preferences = user2.preferences
     preferences.should_not be_nil
@@ -85,8 +87,10 @@ describe 'Preferences API' do
     token = get_conn(user1)
     response = token.put("#{@endpoint}/users/-/preferences.json", {body: {preference: preference_params}})
     response.status.should == 200
-    reco_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    reco_result = output[:data]
     reco_result.should_not be_nil
+
     user = User.find(user1.id)
     preferences = user.preferences
     preferences.should_not be_nil
