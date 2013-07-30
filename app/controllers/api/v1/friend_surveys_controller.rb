@@ -56,18 +56,25 @@ class Api::V1::FriendSurveysController < Api::V1::ApiController
   REVERSE_TOP = 8
   def calculate_from_surveys(surveys)
     # calculate the Big5 from high and low
+
     big5_results = []
     number_of_participants = surveys.length
     surveys.each do |survey|
       big5_result = {}
-      big5_result[:extraversion] = (survey.answers["high_extraversion"].to_f + (REVERSE_TOP - survey.answers["low_extraversion"].to_f)) / 2.0 
-      big5_result[:conscientiousness] = (survey.answers["high_conscientiousness"].to_f + (REVERSE_TOP - survey.answers["low_conscientiousness"].to_f)) / 2.0    
-      big5_result[:neuroticism] = (survey.answers["high_neuroticism"].to_f + (REVERSE_TOP - survey.answers["low_neuroticism"].to_f)) / 2.0    
-      big5_result[:openness] = (survey.answers["high_openness"].to_f + (REVERSE_TOP - survey.answers["low_openness"].to_f)) / 2.0    
-      big5_result[:agreeableness] = (survey.answers["high_agreeableness"].to_f + (REVERSE_TOP - survey.answers["low_agreeableness"].to_f)) / 2.0       
-      big5_results << big5_result
+      if survey.answers.nil?
+        number_of_participants = number_of_participants - 1
+      else
+        big5_result[:extraversion] = (survey.answers["high_extraversion"].to_f + (REVERSE_TOP - survey.answers["low_extraversion"].to_f)) / 2.0 
+        big5_result[:conscientiousness] = (survey.answers["high_conscientiousness"].to_f + (REVERSE_TOP - survey.answers["low_conscientiousness"].to_f)) / 2.0    
+        big5_result[:neuroticism] = (survey.answers["high_neuroticism"].to_f + (REVERSE_TOP - survey.answers["low_neuroticism"].to_f)) / 2.0    
+        big5_result[:openness] = (survey.answers["high_openness"].to_f + (REVERSE_TOP - survey.answers["low_openness"].to_f)) / 2.0    
+        big5_result[:agreeableness] = (survey.answers["high_agreeableness"].to_f + (REVERSE_TOP - survey.answers["low_agreeableness"].to_f)) / 2.0       
+        big5_results << big5_result
+      end
     end
 
+    raise Api::V1::FriendSurveyNotReadyError, "Survey results are not in yet." if number_of_participants < 3
+    
     # calculate total
     total = {}
     big5_results.each do |big5_result|
