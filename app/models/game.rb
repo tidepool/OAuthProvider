@@ -13,6 +13,8 @@
 #  status          :string(255)
 #  calling_ip      :string(255)
 #  event_log       :text
+#  last_error      :text
+#  name            :string(255)
 #
 
 class Game < ActiveRecord::Base

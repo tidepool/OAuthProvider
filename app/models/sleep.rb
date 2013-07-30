@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: sleeps
+#
+#  id             :integer          not null, primary key
+#  user_id        :integer          not null
+#  date_recorded  :date             not null
+#  data           :hstore
+#  goals          :hstore
+#  sleep_activity :text
+#  provider       :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Sleep < ActiveRecord::Base
   belongs_to :user
   serialize :sleep_activity, JSON
