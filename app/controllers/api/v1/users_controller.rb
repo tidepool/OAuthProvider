@@ -17,7 +17,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render :json => user }
+      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -25,7 +25,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render :json => user.personality }
+      format.json { render({ json: user.personality, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -33,7 +33,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     # binding.pry_remote
     user = User.create_guest_or_registered!(user_attributes)
     respond_to do |format|
-      format.json { render :json => user }
+      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -57,7 +57,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     status = user.save!
     
     respond_to do |format|
-      format.json { render :json => user}
+      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -65,7 +65,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
     user.destroy
     respond_to do |format|
-      format.json { render :json => {}}
+      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end
   end 
 

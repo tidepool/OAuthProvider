@@ -1,16 +1,15 @@
 class PersistPersonality 
-  include CalculationUtils
-
   def persist(game, analysis_results)
-    return if !game && !game.user_id
-
+    # Below will raise exception if not found ActiveRecord::NotFound
     user = User.find(game.user_id)
-    return if !user
 
-    # scores = analysis_results[:scores]
-    # return if !scores
-    return unless analysis_results && analysis_results[:big5] && analysis_results[:big5][:score]
-    return unless analysis_results && analysis_results[:holland6] && analysis_results[:holland6][:score]
+    unless analysis_results && analysis_results[:big5] && analysis_results[:big5][:score]
+      raise Workers::PersistenceError, "Analysis does not contain Big5 scores."
+    end
+
+    unless analysis_results && analysis_results[:holland6] && analysis_results[:holland6][:score]
+      raise Workers::PersistenceError, "Analysis does not contain Holland6 scores."
+    end
 
     big5_score = analysis_results[:big5][:score]
     holland6_score = analysis_results[:holland6][:score]
@@ -18,11 +17,15 @@ class PersistPersonality
     big5_dimension = big5_score[:dimension] ? big5_score[:dimension] : nil 
     holland6_dimension = holland6_score[:dimension] ? holland6_score[:dimension] : nil
 
-    return if big5_dimension == nil || holland6_dimension == nil
+    if big5_dimension == nil || holland6_dimension == nil
+      raise Workers::PersistenceError, "Big5 or Holland6 dimension score cannot be found."
+    end
 
     profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
 
-    personality = user.personality 
+    raise Workers::PersistenceError, "Profile description cannot be found for #{big5_dimension} and #{holland6_dimension}." if profile_description.nil?
+
+    personality = user.personality # Override existing personality if it exists
     personality = user.create_personality if personality.nil?
     personality.profile_description = profile_description
     personality.game = game
@@ -35,21 +38,14 @@ class PersistPersonality
     personality.holland6_score = holland6_score[:dimension_values]
     personality.holland6_dimension = holland6_dimension
 
-    personality.save!
-    user.save!
+    personality.save!  # We would like this to raise exception if it fails
+    user.save!         # We would like this to raise exception if it fails
 
     # There is only one result instance if this type per game
-    result = Result.find_for_type(game, 'PersonalityResult')
-    result = game.results.build(:type => 'PersonalityResult') if result.nil?
+    existing_result = Result.find_for_type(game, 'PersonalityResult')
+    version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
+    result = PersonalityResult.create_from_analysis(game, profile_description, version, existing_result)
 
-    result.name = profile_description.name
-    result.one_liner = profile_description.one_liner
-    result.logo_url = profile_description.logo_url
-    result.profile_description_id = profile_description.id # This is an HStore accessor so needs to use id
-
-    result.calculations = {}
-    result.analysis_version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
-    record_times(game, result)
-    result.save!
+    raise Workers::PersistenceError, 'Personality result for game #{game.id} can not be persisted.' if result.nil?
   end
 end

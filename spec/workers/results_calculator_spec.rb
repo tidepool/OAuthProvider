@@ -172,5 +172,6 @@ describe ResultsCalculator do
       $redis.exists(key).should == true
       # $redis.exists(key).should == false
     end
+
   end
 end

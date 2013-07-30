@@ -1,16 +1,16 @@
 {
   "name" : "Emotions via Circles",
   "unique_name": "emotions",
-  "instructions" : "This game helps you identify the emotions you may be currently experiencing.",
-  "end_remarks" : "Congratulations. Please take a moment to register!",
+  "instructions" : "",
+  "end_remarks" : "",
   "score_names" : ["emo"],
   "calculates" : ["emo"],
   "stages":
     [
       {
         "friendly_name" : "Circles 1",
-        "instructions" : "",
-        "view_name" : "emotions_circles",
+        "instructions" : "Place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important.",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "anger",
@@ -40,8 +40,8 @@
       },
       {
         "friendly_name" : "Circles 2",
-        "instructions" : "",
-        "view_name" : "emotions_circles",
+        "instructions" : "Place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important.",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "fear",
@@ -71,8 +71,8 @@
       },
       {
         "friendly_name" : "Circles 3",
-        "instructions" : "",
-        "view_name" : "emotions_circles",
+        "instructions" : "Place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important.",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "disgust",
@@ -98,8 +98,8 @@
       },
       {
         "friendly_name" : "Circles 4",
-        "instructions" : "",
-        "view_name" : "emotions_circles",
+        "instructions" : "Place each trait so that it best represents how important the trait is to yourself. Closest to you are the most important.",
+        "view_name" : "EmotionsCircles",
         "circles" : [
             { 
               "trait1" : "surprise",

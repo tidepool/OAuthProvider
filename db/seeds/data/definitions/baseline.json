@@ -1,7 +1,7 @@
 {
     "name" : "Baseline game",
     "unique_name": "baseline",
-    "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
+    "instructions" : "",
     "end_remarks" : "Congratulations. Please take a moment to register!",
     "score_names" : ["big5", "holland6"],
     "calculates" : ["big5", "holland6", "personality"],
@@ -17,9 +17,9 @@
             },
             {
                 "friendly_name" : "Circles 1",
-                "instructions" : ["Here are a number of psychological traits that may or may not describe you. Simply collapse or expand each circle to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each of the five circles in position to the new circle representing your self.<br/>Place each trait anywhere on the screen so that it best represents how important that trait is to your self.",
-                    "When you are ready hit button below to exit this stage."
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
                 ],
                 "view_name" : "CirclesTest",
                 "game_type" : "big5",
@@ -58,9 +58,9 @@
             },
             {
                 "friendly_name" : "Circles 2",
-                "instructions" : ["Here are a number of psychological traits that may or may not describe you. Simply collapse or expand each circle to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each of the five circles in position to the new circle representing your self.<br/>Place each trait anywhere on the screen so that it best represents how important that trait is to your self.",
-                    "When you are ready hit button below to exit this stage."
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
                 ],
                 "view_name" : "CirclesTest",
                 "game_type" : "big5",
@@ -92,9 +92,9 @@
             },
             {
                 "friendly_name" : "Circles 3",
-                "instructions" : ["Here are a number of psychological traits that may or may not describe you. Simply collapse or expand each circle to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each of the five circles in position to the new circle representing your self.<br/>Place each trait anywhere on the screen so that it best represents how important that trait is to your self.",
-                    "When you are ready hit button below to exit this stage."
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
                 ],
                 "view_name" : "CirclesTest",
                 "game_type" : "holland6",

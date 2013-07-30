@@ -126,5 +126,12 @@ describe PersistReactionTime do
       "slowest_time" => "610"
     }    
   end
+
+  it 'creates an error if the result can not be persisted' do 
+    persist_rt = PersistReactionTime.new
+    expect{persist_rt.persist(game_to_updated, nil)}.to raise_error(Workers::PersistenceError)
+
+  end
+
 end
 
