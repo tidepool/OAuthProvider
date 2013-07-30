@@ -73,7 +73,7 @@ class Api::V1::FriendSurveysController < Api::V1::ApiController
       end
     end
 
-    raise Api::V1::FriendSurveyNotReadyError, "Survey results are not in yet." if number_of_participants < 3
+    raise Api::V1::FriendSurveyNotReadyError, "Survey results missing data." if number_of_participants < 3
     
     # calculate total
     total = {}

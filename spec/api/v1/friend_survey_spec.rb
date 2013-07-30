@@ -95,6 +95,29 @@ describe 'Friend Surveys API' do
       response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params3 } )
 
       response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      response.status.should == 200
+      result = JSON.parse(response.body, symbolize_names: true)
+      result.should_not be_nil
+      result[:others_results].should == {
+                 :extraversion => 2.3333333333333335,
+            :conscientiousness => 5.666666666666667,
+                  :neuroticism => 2.1666666666666665,
+                     :openness => 2.5,
+                :agreeableness => 5.0
+      }
+    end
+
+    it 'calculates survey results for a guest user' do 
+      result
+      token = get_conn(guest)
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", 
+        {body: { friend_survey: @survey_params1 } })
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", 
+        {body: { friend_survey: @survey_params2 } })
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", 
+        {body: { friend_survey: @survey_params3 } })
+      response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      response.status.should == 200
       result = JSON.parse(response.body, symbolize_names: true)
       result.should_not be_nil
     end
@@ -123,5 +146,17 @@ describe 'Friend Surveys API' do
       result.should_not be_nil
     end
 
+    it 'needs one more calculation if the survey params are not provided' do 
+      result
+      token = get_conn()
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params1 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: @survey_params2 } )
+      response = token.post("#{@endpoint}/games/#{game.id}/friend_survey.json", { friend_survey: {} } )
+
+      response = token.get("#{@endpoint}/games/#{game.id}/friend_survey.json" )
+      response.status.should == 404
+      result = JSON.parse(response.body, symbolize_names: true)
+      result.should_not be_nil           
+    end
   end
 end
