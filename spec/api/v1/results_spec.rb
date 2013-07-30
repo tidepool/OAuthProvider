@@ -19,6 +19,8 @@ describe 'Results API' do
   let(:emo_results) { create_list(:result, 5, game: game,  user: user1, type: 'EmoResult')}
   let(:result) { create(:result, game: game_with_results, user: user1) }
  
+  let(:daily_results) { create_list(:daily_results, 10, game: game, user: user1, type: 'ReactionTimeResult')}
+
   it 'starts the results calculation' do 
     ResultsCalculator.stub(:perform_async) do |game_id|
       fake_game = Game.find(game_id)
@@ -34,6 +36,7 @@ describe 'Results API' do
     message = JSON.parse(response.body, :symbolize_names => true)
     message[:status][:state].should == 'pending'
     message[:status][:link].should == "http://example.org#{@endpoint}/users/-/games/#{game.id}/progress"
+    message[:data].should be_empty
   end
 
   it 'keeps checking progress' do
@@ -62,10 +65,9 @@ describe 'Results API' do
   it 'gets the error state if results are not calculated' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/games/#{game_no_results.id}/progress.json")
-    response.status.should == 200
+    response.status.should == 500
     message = JSON.parse(response.body, :symbolize_names => true)
-    message[:status][:state].should == 'error'
-    message[:status][:link].should == "http://example.org#{@endpoint}/users/-/games/#{game_no_results.id}/results"
+    message[:status][:code].should == 3001
   end
 
   it 'shows the results when they are calculated' do
@@ -83,7 +85,8 @@ describe 'Results API' do
     response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
     response.status.should == 200
 
-    results = JSON.parse(response.body, :symbolize_names => true)
+    output = JSON.parse(response.body, :symbolize_names => true)
+    results = output[:data]
     results.length.should == 2
     results[0][:type].should_not be_nil
     results[1][:type].should_not be_nil
@@ -100,7 +103,8 @@ describe 'Results API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/results.json?type=ReactionTimeResult")
     response.status.should == 200
-    user_results = JSON.parse(response.body, :symbolize_names => true)
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
     user_results.length.should == 10
   end
 
@@ -112,7 +116,8 @@ describe 'Results API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/results.json")
     response.status.should == 200
-    user_results = JSON.parse(response.body, :symbolize_names => true)
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
     user_results.length.should == 15
   end
 
@@ -121,9 +126,19 @@ describe 'Results API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/results/#{result.id}.json")
     response.status.should == 200
-    response_result = JSON.parse(response.body, :symbolize_names => true)
+    output = JSON.parse(response.body, :symbolize_names => true)
+    response_result = output[:data]
     response_result[:game_id].should == game_with_results.id
     response_result[:user_id].should == user1.id
+  end
+
+  it 'shows the results in a daily group' do
+    daily_results
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/results.json?daily=true")
+    response.status.should == 200
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
   end
 
   describe 'Error and Edge Cases' do

@@ -17,7 +17,8 @@ describe 'Activities API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/activities.json")
     response.status.should == 200        
-    activities = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    activities = result[:data]
     activities.should_not be_nil
     activities.length.should == 5
   end
@@ -31,7 +32,8 @@ describe 'Activities API' do
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/activities.json?provider=fitbit")
     response.status.should == 200        
-    activities = JSON.parse(response.body, symbolize_names: true)
+    result = JSON.parse(response.body, symbolize_names: true)
+    activities = result[:data]
     activities.should_not be_nil
     activities.length.should == 5
   end

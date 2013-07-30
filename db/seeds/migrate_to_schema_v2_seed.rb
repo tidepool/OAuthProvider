@@ -1,5 +1,9 @@
 class MigrateToSchemaV2Seed
   def create_seed
+    puts 'MigrateToSchemaV2: '
+    puts 'Served its purpose, should not be running anymore, returning immediately.'
+    return 
+
     # Results deprecated columns:
     # event_log, aggregate_results, intermediate_results
     # Results new columns:

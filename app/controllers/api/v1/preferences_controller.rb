@@ -4,7 +4,7 @@ class Api::V1::PreferencesController < Api::V1::ApiController
   def show
     preference = Preference.where('user_id = ? and type = ?', target_user.id, params[:type]).first
     respond_to do |format|
-      format.json { render :json => preference, :serializer => PreferenceSerializer }
+      format.json { render({ json: preference, serializer: PreferenceSerializer, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -19,7 +19,7 @@ class Api::V1::PreferencesController < Api::V1::ApiController
     end
 
     respond_to do |format|
-      format.json { render :json => preference, :serializer => PreferenceSerializer }
+      format.json { render({ json: preference, serializer: PreferenceSerializer, meta: {} }.merge(api_defaults)) }
     end    
   end
 
@@ -31,7 +31,7 @@ class Api::V1::PreferencesController < Api::V1::ApiController
     preference.update(pref_data) if preference
 
     respond_to do |format|
-      format.json { render :json => preference, :serializer => PreferenceSerializer }
+      format.json { render({ json: preference, serializer: PreferenceSerializer, meta: {} }.merge(api_defaults)) }
     end    
   end
 
@@ -40,7 +40,7 @@ class Api::V1::PreferencesController < Api::V1::ApiController
     pref_class = pref_type.constantize
 
     respond_to do |format|
-      format.json { render :json => pref_class.description }
+      format.json { render({ json: pref_class.description, meta: {} }.merge(api_defaults)) }
     end              
   end
 

@@ -14,7 +14,7 @@ module AppConnections
         f.adapter :rack, Rails.application
       end      
     else
-      client = OAuth2::Client.new(@app.uid, @app.secret) do |b|
+      client = OAuth2::Client.new(@app.uid, @app.secret, raise_errors: false) do |b|
         b.request :url_encoded
         b.adapter :rack, Rails.application
       end   

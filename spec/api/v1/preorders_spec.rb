@@ -15,7 +15,8 @@ describe 'Preorders API' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/-/preorders.json")
     response.status.should == 200        
-    preorder_result = JSON.parse(response.body, symbolize_names: true)
+    output = JSON.parse(response.body, symbolize_names: true)
+    preorder_result = output[:data]
     preorder_result[:user_id].should == user1.id
 
     preorder = Preorder.find(preorder_result[:id])

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :result do 
-    intermediate_results "{\"message\":\"Hello World\"}" 
-    aggregate_results "{\"message\":\"Hello Aggregates\"}" 
+    # intermediate_results "{\"message\":\"Hello World\"}" 
+    # aggregate_results "{\"message\":\"Hello Aggregates\"}" 
 
     factory :old_result do 
       sequence(:time_played) { |n| Time.zone.now - 5.hours - (n * 1000) }
@@ -10,6 +10,23 @@ FactoryGirl.define do
     factory :new_result do 
       sequence(:time_played) { |n| Time.zone.now - (n * 1000) }
     end    
+
+    factory :daily_results do 
+      sequence(:time_played) { |n| Time.zone.now - (n * 12.hours) }
+    end
+
+    factory :big5_result do 
+      type 'Big5Result'
+      calculations do 
+        scores = IO.read(File.expand_path('../fixtures/scores.json', __FILE__))
+        scores_json = JSON.parse scores, :symbolize_names => true
+        {
+          dimension_values: scores_json[:big5][:score],
+          final_results: {}
+        }
+      end
+
+    end
   end
 
   factory :personality do 
