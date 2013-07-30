@@ -14,6 +14,19 @@ FactoryGirl.define do
     factory :daily_results do 
       sequence(:time_played) { |n| Time.zone.now - (n * 12.hours) }
     end
+
+    factory :big5_result do 
+      type 'Big5Result'
+      calculations do 
+        scores = IO.read(File.expand_path('../fixtures/scores.json', __FILE__))
+        scores_json = JSON.parse scores, :symbolize_names => true
+        {
+          dimension_values: scores_json[:big5][:score],
+          final_results: {}
+        }
+      end
+
+    end
   end
 
   factory :personality do 

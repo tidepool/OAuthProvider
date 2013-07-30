@@ -58,6 +58,9 @@ OAuthProvider::Application.routes.draw do
 
       get 'preferences/:type/description', to: 'preferences#description'
 
+      get 'games/:game_id/friend_survey', to: 'friend_surveys#results'
+
+      post 'games/:game_id/friend_survey', to: 'friend_surveys#create'
     end
   end
   

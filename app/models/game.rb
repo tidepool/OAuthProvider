@@ -27,6 +27,7 @@ class Game < ActiveRecord::Base
   belongs_to :user
   belongs_to :definition
   has_many :results
+  has_many :friend_surveys
 
   # after_update do |game|
   #   unless game.game_completed?
