@@ -64,26 +64,31 @@ module TidepoolAnalyze
       recipe.each do |step|
         results = nil
 
-        if step[:formula_sheet].nil? || step[:formula_key].nil? 
-          formula_desc = nil
+        if step[:score_generator]
+          # This allows me to override the score generator name
+          score_name = step[:score_generator]
         else
-          formula_desc = {
-            formula_sheet: step[:formula_sheet],
-            formula_key: step[:formula_key]
-          }
-        end
+          if step[:formula_sheet].nil? || step[:formula_key].nil? 
+            formula_desc = nil
+          else
+            formula_desc = {
+              formula_sheet: step[:formula_sheet],
+              formula_key: step[:formula_key]
+            }
+          end
 
-        formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
+          formula = TidepoolAnalyze::Utils::load_formula(formula_desc)
 
-        if step[:analyzer] && !step[:analyzer].empty?
-          input_data = mini_game_events[step[:user_event_source]]
-          # Analyzers will be called for each stage of the game with subset
-          # of the user_events for that stage only
-          results = run_analyzer(step[:analyzer], formula, input_data)
-        end
+          if step[:analyzer] && !step[:analyzer].empty?
+            input_data = mini_game_events[step[:user_event_source]]
+            # Analyzers will be called for each stage of the game with subset
+            # of the user_events for that stage only
+            results = run_analyzer(step[:analyzer], formula, input_data)
+          end
 
-        if step[:formulator] && !step[:formulator].empty? && results && !results.empty?
-          final_results << run_formulator(step[:formulator], formula, results)
+          if step[:formulator] && !step[:formulator].empty? && results && !results.empty?
+            final_results << run_formulator(step[:formulator], formula, results)
+          end
         end
       end
 

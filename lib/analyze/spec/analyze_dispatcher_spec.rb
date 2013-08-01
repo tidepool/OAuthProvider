@@ -248,16 +248,21 @@ module TidepoolAnalyze
     end
 
     it 'executes a big5_with_images recipe' do 
-      #TODO: Changethe recipe format!!
-      pending
-      # analysis = execute_recipe('big5_with_images')
+      analysis = execute_recipe('big5_with_images')
 
-      # analysis[:final_results].should_not be_nil
-      # analysis[:score].should_not be_nil
+      analysis[:final_results].should_not be_nil
+      analysis[:score].should_not be_nil
     end
 
     it 'executes a holland6 recipe' do
       analysis = execute_recipe('holland6')
+
+      analysis[:final_results].should_not be_nil
+      analysis[:score].should_not be_nil
+    end
+
+    it 'executes a holland6_new recipe with the Interest Picker' do 
+      analysis = execute_recipe('holland6_new')
 
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil

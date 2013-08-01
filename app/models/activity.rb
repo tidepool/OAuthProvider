@@ -2,23 +2,17 @@
 #
 # Table name: activities
 #
-#  id                  :integer          not null, primary key
-#  user_id             :integer          not null
-#  type_id             :integer
-#  name                :string(255)
-#  steps               :integer
-#  distance            :float
-#  floors              :integer
-#  calories            :integer
-#  very_active_minutes :integer
-#  data                :hstore
-#  extra_data          :text
-#  is_summary          :boolean
-#  has_start_time      :boolean
-#  start_time          :datetime
-#  duration            :integer
-#  created_at          :datetime
-#  updated_at          :datetime
+#  id              :integer          not null, primary key
+#  user_id         :integer          not null
+#  date_recorded   :date             not null
+#  type_id         :integer
+#  name            :string(255)
+#  data            :hstore
+#  goals           :hstore
+#  daily_breakdown :text
+#  provider        :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 class Activity < ActiveRecord::Base

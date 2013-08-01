@@ -1,0 +1,19 @@
+[
+  {
+    "score_generator": "holland6"
+  },
+  {
+    "user_event_source": "circles_test",
+    "analyzer": "CirclesTestAnalyzer", 
+    "formulator": "CirclesFormulator",  
+    "formula_sheet": "holland6_circles.csv",
+    "formula_key": "name_pair"
+  },
+  {
+    "user_event_source": "interest_picker",
+    "analyzer": "NullAnalyzer", 
+    "formulator": "NullFormulator",  
+    "formula_sheet": "holland6_circles.csv",
+    "formula_key": "name_pair"    
+  }
+]
