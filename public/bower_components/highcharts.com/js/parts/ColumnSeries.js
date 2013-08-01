@@ -40,7 +40,6 @@ defaultPlotOptions.column = merge(defaultSeriesOptions, {
 var ColumnSeries = extendClass(Series, {
 	type: 'column',
 	tooltipOutsidePlot: true,
-	requireSorting: false,
 	pointAttrToOptions: { // mapping between SVG attributes and the corresponding options
 		stroke: 'borderColor',
 		'stroke-width': 'borderWidth',
@@ -76,7 +75,6 @@ var ColumnSeries = extendClass(Series, {
 	getColumnMetrics: function () {
 
 		var series = this,
-			chart = series.chart,
 			options = series.options,
 			xAxis = this.xAxis,
 			reversedXAxis = xAxis.reversed,
@@ -91,7 +89,7 @@ var ColumnSeries = extendClass(Series, {
 		if (options.grouping === false) {
 			columnCount = 1;
 		} else {
-			each(chart.series, function (otherSeries) {
+			each(series.yAxis.series, function (otherSeries) { // use Y axes separately, #642
 				var otherOptions = otherSeries.options;
 				if (otherSeries.type === series.type && otherSeries.visible &&
 						series.options.group === otherOptions.group) { // used in Stock charts navigator series
@@ -142,7 +140,6 @@ var ColumnSeries = extendClass(Series, {
 		var series = this,
 			chart = series.chart,
 			options = series.options,
-			stacking = options.stacking,
 			borderWidth = options.borderWidth,
 			yAxis = series.yAxis,
 			threshold = options.threshold,
@@ -150,8 +147,8 @@ var ColumnSeries = extendClass(Series, {
 			minPointLength = pick(options.minPointLength, 5),
 			metrics = series.getColumnMetrics(),
 			pointWidth = metrics.width,
-			barW = mathCeil(mathMax(pointWidth, 1 + 2 * borderWidth)), // rounded and postprocessed for border width
-			pointXOffset = metrics.offset;
+			barW = series.barW = mathCeil(mathMax(pointWidth, 1 + 2 * borderWidth)), // rounded and postprocessed for border width
+			pointXOffset = series.pointXOffset = metrics.offset;
 
 		Series.prototype.translate.apply(series);
 
@@ -162,22 +159,16 @@ var ColumnSeries = extendClass(Series, {
 				barX = point.plotX + pointXOffset,
 				barY = mathCeil(mathMin(plotY, yBottom)),
 				barH = mathCeil(mathMax(plotY, yBottom) - barY),
-				stack = yAxis.stacks[(point.y < 0 ? '-' : '') + series.stackKey],
 				shapeArgs;
-
-			// Record the offset'ed position and width of the bar to be able to align the stacking total correctly
-			if (stacking && series.visible && stack && stack[point.x]) {
-				stack[point.x].setOffset(pointXOffset, barW);
-			}
 
 			// handle options.minPointLength
 			if (mathAbs(barH) < minPointLength) {
 				if (minPointLength) {
 					barH = minPointLength;
 					barY =
-						mathAbs(barY - translatedThreshold) > minPointLength ? // stacked
+						mathRound(mathAbs(barY - translatedThreshold) > minPointLength ? // stacked
 							yBottom - minPointLength : // keep position
-							translatedThreshold - (yAxis.translate(point.y, 0, 1, 0, 1) <= translatedThreshold ? minPointLength : 0); // use exact yAxis.translation (#1485)
+							translatedThreshold - (yAxis.translate(point.y, 0, 1, 0, 1) <= translatedThreshold ? minPointLength : 0)); // use exact yAxis.translation (#1485)
 				}
 			}
 
@@ -253,20 +244,22 @@ var ColumnSeries = extendClass(Series, {
 	 */
 	drawTracker: function () {
 		var series = this,
-			pointer = series.chart.pointer,
+			chart = series.chart,
+			pointer = chart.pointer,
 			cursor = series.options.cursor,
 			css = cursor && { cursor: cursor },
 			onMouseOver = function (e) {
 				var target = e.target,
 					point;
 
-				series.onMouseOver();
-
+				if (chart.hoverSeries !== series) {
+					series.onMouseOver();
+				}
 				while (target && !point) {
 					point = target.point;
 					target = target.parentNode;
 				}
-				if (point !== UNDEFINED) { // undefined on graph in scatterchart
+				if (point !== UNDEFINED && point !== chart.hoverPoint) { // undefined on graph in scatterchart
 					point.onMouseOver(e);
 				}
 			};
