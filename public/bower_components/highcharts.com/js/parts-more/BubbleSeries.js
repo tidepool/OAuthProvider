@@ -24,6 +24,7 @@ defaultPlotOptions.bubble = merge(defaultPlotOptions.scatter, {
 	tooltip: {
 		pointFormat: '({point.x}, {point.y}), Size: {point.z}'
 	},
+	turboThreshold: 0, // docs: exclude from bubbles
 	zThreshold: 0
 });
 
@@ -181,7 +182,8 @@ seriesTypes.bubble = extendClass(seriesTypes.scatter, {
 			radius
 		).attr({
 			zIndex: 3
-		}).add(item.legendGroup);		
+		}).add(item.legendGroup);
+		item.legendSymbol.isMarker = true;	
 		
 	},
 	
