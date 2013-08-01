@@ -53,7 +53,7 @@ class ResultsCalculator
       end
     end
 
-    if game.status == :results_ready && game.event_log && !game.event_log.empty?
+    if game.status == :results_ready && game.event_log && !game.event_log.empty?      
       $redis.del(key)
     else
       logger.error("Game #{game_id} events left in the Redis queue, needs to be cleaned up.")

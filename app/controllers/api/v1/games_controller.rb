@@ -26,13 +26,18 @@ class Api::V1::GamesController < Api::V1::ApiController
     calling_ip = request.remote_ip
     if params[:def_id]
       definition = Definition.where(unique_name: params[:def_id]).first      
-      definition = Definition.default if definition.nil?
+      raise ActiveRecord::RecordNotFound, "Game definition not found." if definition.nil?
     elsif params[:same_as]
       definition = Definition.same_as_game(params[:same_as])
     else
-      definition = Definition.default
+      raise ArgumentError, "Game definition or same_as game not provided." 
     end
-    game = Game.create_by_definition(definition, target_user, calling_ip)
+    social_game = nil
+    if params[:social_game_id]
+      social_game = SocialGame.find(params[:social_game_id])
+    end
+
+    game = Game.create_by_definition(definition, target_user, calling_ip, social_game)
     respond_to do |format|
       format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
     end

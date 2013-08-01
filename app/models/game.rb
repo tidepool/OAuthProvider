@@ -20,12 +20,14 @@
 class Game < ActiveRecord::Base
   serialize :stages, JSON
   serialize :event_log, JSON
+  serialize :user_assets, JSON
 
   # Game status: :not_started, :calculating_results, :results_ready, :incomplete_results
   # status, is only used in calculating the results for a game.
   # It cannot be set publicly from the API, that may cause race conditions.
   # Use the helper methods: in_progress?, completed? for figuring out game status during gameplay.
-                  
+
+  belongs_to :social_game                  
   belongs_to :user
   belongs_to :definition
   has_many :results
@@ -43,7 +45,7 @@ class Game < ActiveRecord::Base
   #   end
   # end
 
-  def self.create_by_definition(definition, target_user, calling_ip = nil)
+  def self.create_by_definition(definition, target_user, calling_ip = nil, social_game = nil)
     raise ArgumentError.new('No definition specified') if definition.nil?
     raise ArgumentError.new('Requires a target user') if target_user.nil?   
 
@@ -53,6 +55,7 @@ class Game < ActiveRecord::Base
       game.stages = definition.stages_from_stage_definition
       game.user = target_user
       game.calling_ip = calling_ip
+      game.social_game = social_game
       game.date_taken = Time.zone.now # Always use Time.zone not Time
       game.stage_completed = -1
       game.status = :not_started

@@ -34,15 +34,15 @@ OAuthProvider::Application.routes.draw do
         post 'preorders', to: 'preorders#create'
 
         get 'results', to: 'results#index'
-        # get 'results/latest', to: 'results#latest'
         get 'results/:id', to: 'results#show'
 
         resources :games do
-          # get 'result' => 'results#show'
           get 'results', to: 'results#index'
-          # post 'result' => 'results#create'
           get 'progress', to: 'results#progress'
-          # get 'latest' => 'results#show'
+        end
+
+        resources :multiplayer_games do 
+            
         end
 
         resource :preferences
@@ -59,7 +59,6 @@ OAuthProvider::Application.routes.draw do
       get 'preferences/:type/description', to: 'preferences#description'
 
       get 'games/:game_id/friend_survey', to: 'friend_surveys#results'
-
       post 'games/:game_id/friend_survey', to: 'friend_surveys#create'
     end
   end
