@@ -1,0 +1,58 @@
+{
+    "name" : "Interest Picker",
+    "unique_name": "interest_picker",
+    "instructions" : "",
+    "end_remarks" : "Congratulations. Please take a moment to register!",
+    "score_names" : ["holland6_new"],
+    "calculates" : ["holland6"],
+    "result_view": "Profile",
+    "stages" :
+        [
+            {
+                "friendly_name" : "Circles Interest",
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+                ],
+                "view_name" : "CirclesTest",
+                "game_type" : "holland6",
+                "circles" : [{
+                        "trait1" : "Mechanical",
+                        "trait2" : "Hands-on",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Creative",
+                        "trait2" : "Intuitive",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Teacher",
+                        "trait2" : "Helpful",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Persuasive",
+                        "trait2" : "Enthusiastic",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Inquisitive",
+                        "trait2" : "Analytical",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Detail-Oriented",
+                        "trait2" : "Thorough",
+                        "size" : "2"
+                    }]
+            },
+            {
+                "friendly_name" : "Interest Picker",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "InterestPicker",
+                "game_type" : "holland6"
+            }
+        ]
+}
+
