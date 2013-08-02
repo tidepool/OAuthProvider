@@ -4,7 +4,7 @@
     "instructions" : "",
     "end_remarks" : "Congratulations. Please take a moment to register!",
     "score_names" : ["holland6_new"],
-    "calculates" : ["holland6"],
+    "calculates" : [],
     "result_view": "Profile",
     "stages" :
         [

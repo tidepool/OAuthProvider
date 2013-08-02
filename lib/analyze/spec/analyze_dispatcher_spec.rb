@@ -318,6 +318,15 @@ module TidepoolAnalyze
       analysis[:holland6][:score].should_not be_nil
     end  
 
+    it 'calculates the holland6_new score' do
+      score_names = ['holland6_new']
+
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, score_names)
+      analysis.length.should == 1
+      analysis[:holland6_new].should_not be_nil
+    end
+
     it 'calculates the reaction_time score' do
       score_names = ['reaction_time']
 

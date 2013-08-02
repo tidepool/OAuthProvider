@@ -100,18 +100,22 @@ class ResultsCalculator
 
   def persist_results(game, analysis_results)
     status = :results_ready
-    if game.definition && game.definition.calculates
-      game.definition.calculates.each do |calculation|
-        klass_name = "Persist#{calculation.to_s.camelize}"
-        begin
-          persist_calculation = klass_name.constantize.new()
-          persist_calculation.persist(game, analysis_results)
-        rescue Exception => e
-          logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
-          status = :incomplete_results
-          game.last_error = e.message
-        end
-      end 
+    if game.definition 
+      if game.definition.calculates
+        game.definition.calculates.each do |calculation|
+          klass_name = "Persist#{calculation.to_s.camelize}"
+          begin
+            persist_calculation = klass_name.constantize.new()
+            persist_calculation.persist(game, analysis_results)
+          rescue Exception => e
+            logger.error("Game #{game.id} cannot persist #{klass_name} calculation. #{e.message}")
+            status = :incomplete_results
+            game.last_error = e.message
+          end
+        end 
+      else
+        logger.warn("No calculates specified for game #{game.id}.")
+      end
     else
       logger.error("Game #{game.id} definition is not defined or missing calculates info.")
       status = :incomplete_results 
