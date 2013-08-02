@@ -24,6 +24,7 @@ module TidepoolAnalyze
       score_names_whitelist = { 
         big5: 'big5',
         holland6: 'holland6',
+        holland6_new: 'holland6_new',
         emo: 'emo',
         reaction_time: 'reaction_time',
         capacity: 'capacity',
