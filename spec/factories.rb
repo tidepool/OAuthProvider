@@ -64,11 +64,11 @@ FactoryGirl.define do
 
   factory :definition do
     factory :profile_game do 
-      calculates "['profile']"
+      persist_as_results "['profile']"
     end
 
     factory :other_game do 
-      calculates "['other']"
+      persist_as_results "['other']"
     end
   end
 

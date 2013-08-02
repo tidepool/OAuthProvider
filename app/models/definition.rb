@@ -20,8 +20,8 @@ Dir[File.expand_path('../generators/*.rb', __FILE__)].each {|file| require file 
 
 class Definition < ActiveRecord::Base
   serialize :stages, JSON
-  serialize :score_names, JSON
-  serialize :calculates, JSON
+  serialize :recipe_names, JSON
+  serialize :persist_as_results, JSON
   
   def self.default
     definition = self.where(unique_name: 'baseline').first 

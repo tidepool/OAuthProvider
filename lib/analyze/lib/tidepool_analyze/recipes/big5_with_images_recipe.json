@@ -1,6 +1,6 @@
 [
   {
-    "score_generator": "big5"
+    "score_name": "big5"
   },
   {
     "user_event_source": "circles_test",

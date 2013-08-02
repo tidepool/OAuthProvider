@@ -2,16 +2,14 @@
     "name" : "Snoozer",
     "unique_name": "snoozer",
     "instructions" : "",
-    "end_remarks" : "Thanks",
-    "score_names" : ["reaction_time"],
-    "calculates" : ["reaction_time"],
-    "result_view": "Scores",
+    "recipe_names" : ["reaction_time"],
+    "persist_as_results" : ["reaction_time"],
     "stages" :
         [
             {
                 "friendly_name" : "Snoozer",
                 "instructions" : "Click the circle on the screen as soon as it turns red.",
-                "view_name": "snoozer",
+                "view_name": "Snoozer",
                 "level_definition_name": "Snoozer",
                 "game_type" : "cognition",
                 "interval_floor": 1100,

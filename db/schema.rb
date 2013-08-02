@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729180143) do
+ActiveRecord::Schema.define(version: 20130802033324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,13 +81,10 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.string   "name"
     t.text     "stages"
     t.text     "instructions"
-    t.text     "end_remarks"
-    t.string   "icon"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.text     "score_names"
-    t.text     "calculates"
-    t.string   "result_view"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.text     "recipe_names"
+    t.text     "persist_as_results"
     t.string   "unique_name"
   end
 
@@ -163,6 +160,8 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "images", ["name"], name: "index_images_on_name", using: :btree
 
   create_table "measurements", force: true do |t|
     t.integer  "user_id",       null: false
