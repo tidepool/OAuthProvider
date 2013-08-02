@@ -1,7 +1,7 @@
 
 define([], function() {
   return require.config({
-    packages: ['core', 'game/levels/_base', 'game/levels/reaction_time_disc', 'game/levels/rank_images', 'game/levels/circle_size', 'game/levels/circle_proximity', 'game/levels/alex_trebek', 'game/levels/emotions_circles', 'game/levels/snoozer', 'dashboard/widgets/base', 'dashboard/widgets/lister', 'ui_widgets/formation'],
+    packages: ['core', 'game/levels/_base', 'game/levels/reaction_time_disc', 'game/levels/rank_images', 'game/levels/circle_size', 'game/levels/circle_proximity', 'game/levels/alex_trebek', 'game/levels/emotions_circles', 'game/levels/snoozer', 'game/levels/interest_picker', 'dashboard/widgets/base', 'dashboard/widgets/lister', 'ui_widgets/formation'],
     paths: {
       jquery: '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min',
       bootstrap: '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min',
