@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802033324) do
+ActiveRecord::Schema.define(version: 20130802180020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 20130802033324) do
     t.hstore   "profile"
     t.string   "sync_status"
     t.text     "last_error"
+    t.datetime "oauth_refresh_at"
+    t.boolean  "expires"
+    t.text     "permissions"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree

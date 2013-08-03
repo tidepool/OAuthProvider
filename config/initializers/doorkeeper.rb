@@ -26,26 +26,59 @@ Doorkeeper.configure do
     end
   end
 
+  # Facebook or (other) based external authenticated signup
+  # {
+  #   "user_id" : "Tidepool user id if exists",
+  #   "client_id" : "App Client ID",
+  #   "client_secret" : "App Client Secret",  
+  #   "grant_type" : "password",               # Use the string "password" literally here
+  #   "response_type" : "password",            # Use the string "password" literally here
+  #   "auth_hash": 
+  #     {
+  #       "provider": "facebook",
+  #       "uid": "facebook user id",           # Maps to com.facebook.sdk:TokenInformationUserFBIDKey
+  #       "info": {
+  #         "email": "email",
+  #         "name": "name",
+  #         "image": "image_url"
+  #       },
+  #       "credentials": {
+  #         "token": "facebook token",                      # Maps to com.facebook.sdk:TokenInformationTokenKey
+  #         "secret": "for Oauth 1.0 providers only",
+  #         "refresh_at": "2013-07-31T15:17:35.520-0700",   # Maps to com.facebook.sdk:TokenInformationRefreshDateKey
+  #         "permissions": ["basic_info","publish_actions"],# Maps to com.facebook.sdk:TokenInformationPermissionsKey
+  #         "expires_at": "2013-09-28T19:44:46.520-0700",   # Maps to com.facebook.sdk:TokenInformationExpirationDateKey
+  #         "expires": true
+  #       }
+  #     }
+  # }
+  # Below is what Facebook mappings look like: (https://github.com/colene/FacebookConnect/blob/master/src/ios/facebook/FBSessionTokenCachingStrategy.m)
+  # { 
+  #   "com.facebook.sdk:TokenInformationExpirationDateKey": "2013-09-28T19:44:46.520-0700",
+  #   "com.facebook.sdk:TokenInformationUserFBIDKey": "",
+  #   "com.facebook.sdk:TokenInformationTokenKey" : "CAAGrx0SD4AQBAPwlnVJGklqAxgQ99MQEKnLyoVuWvJH2Se5Ue8DE0L0ZBl74p8mFRc4KV43ZCXLnbocjH0YehdldzzklRAkI5SgVS17PNQZBdYkh6LXLlnDyDhxoXWZAMU3rDhgmZAQuA2wR5mdFuZCoXKF3UD9YjE3U5JXSwqvHX2Vqq4MyB1uCA4Sok28UgZD",
+  #   "com.facebook.sdk:TokenInformationRefreshDateKey" : "2013-07-31T15:17:35.520-0700", 
+  #   "com.facebook.sdk:TokenInformationLoginTypeLoginKey" : 3,
+  #   "com.facebook.sdk:TokenInformationPermissionsKey": ["basic_info","publish_actions"]
+  # }
+
+
   # Below gets called in from our client when:
   # response_type: password
   resource_owner_from_credentials do |routes|
-    #binding.remote_pry
-    username = params[:email] || params[:username]
-    password = params[:password]
+    # binding.remote_pry
+    if params[:auth_hash]
+      user_id = params[:user_id]
+      auth_hash = Hashie::Mash.new(params[:auth_hash])
 
-    # puts "Resource_owner from credentials called #{routes}"
-    user = User.where('email = ?', username).first
-    return_user = user && (user.guest || user.authenticate(password)) ? user : nil 
+      user = User.create_or_find(auth_hash, user_id)
+    else
+      username = params[:email] || params[:username]
+      password = params[:password]
 
-    # if username == "guest"
-    #   user = User.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
-    #   user.guest = true
-    #   user.save!(:validate => false)   
-    #   user   
-    # else
-    #   user = User.find_by_email(username)
-    #   user if user && user.authenticate(password)
-    # end
+      user = User.where('email = ?', username).first
+      return_user = user && (user.guest || user.authenticate(password)) ? user : nil 
+    end
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.

@@ -32,14 +32,20 @@
 #  last_error        :text
 #
 
+require 'utils'
+
 class Authentication < ActiveRecord::Base
+  serialize :permissions, JSON
   belongs_to :user
   
   def check_and_reset_credentials(auth_hash)
     if auth_hash && auth_hash.credentials
       self.oauth_token = auth_hash.credentials.token
       self.oauth_secret = auth_hash.credentials.secret
-      # oauth_expires_at is deprecated.
+      self.oauth_expires_at = Tidepool::TimeHelper::time_from_unknown_format(auth_hash.credentials.expires_at)
+      self.oauth_refresh_at = Tidepool::TimeHelper::time_from_unknown_format(auth_hash.credentials.refresh_at)
+      self.expires = auth_hash.credentials.expires
+      self.permissions = auth_hash.credentials.permissions
     else
       logger.warn("Auth hash does not have credentials info. Provider = #{auth_hash.provider}")
     end
