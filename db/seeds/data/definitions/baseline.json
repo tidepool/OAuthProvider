@@ -2,10 +2,8 @@
     "name" : "Baseline game",
     "unique_name": "baseline",
     "instructions" : "",
-    "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["big5", "holland6"],
-    "calculates" : ["big5", "holland6", "personality"],
-    "result_view": "Profile",
+    "recipe_names" : ["big5", "holland6"],
+    "persist_as_results" : ["big5", "holland6", "personality"],
     "stages" :
         [
             {

@@ -1,5 +1,8 @@
 [
   {
+    "score_name": "capacity"
+  },
+  {
     "user_event_source": "survey",
     "analyzer": "SurveyAnalyzer",
     "formulator": "DemandFormulator",

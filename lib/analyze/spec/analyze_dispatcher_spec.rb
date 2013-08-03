@@ -33,7 +33,7 @@ module TidepoolAnalyze
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
       recipe = analyze_dispatcher.read_recipe recipe_name
-      analysis = analyze_dispatcher.execute_recipe(recipe, recipe_name, mini_game_events)
+      analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
     end
 
     before(:all) do
@@ -64,12 +64,12 @@ module TidepoolAnalyze
     it 'reads the recipes for given score_name' do
       analyze_dispatcher = AnalyzeDispatcher.new
       recipe = analyze_dispatcher.read_recipe 'big5'
-      recipe.length.should == 2
-      recipe[0][:user_event_source].should == 'circles_test'
-      recipe[0][:analyzer].should == 'CirclesTestAnalyzer'
-      recipe[0][:formulator].should == 'CirclesFormulator'
-      recipe[0][:formula_sheet].should == 'big5_circles.csv'
-      recipe[0][:formula_key].should == 'name_pair'
+      recipe.length.should == 3
+      recipe[1][:user_event_source].should == 'circles_test'
+      recipe[1][:analyzer].should == 'CirclesTestAnalyzer'
+      recipe[1][:formulator].should == 'CirclesFormulator'
+      recipe[1][:formula_sheet].should == 'big5_circles.csv'
+      recipe[1][:formula_key].should == 'name_pair'
     end
 
     it 'runs the analyzer for big5 circles_test' do
@@ -294,7 +294,7 @@ module TidepoolAnalyze
       events = load_event_fixtures('snoozer.json')
       mini_game_events = analyze_dispatcher.events_by_mini_game(events)
       recipe = analyze_dispatcher.read_recipe 'reaction_time'
-      analysis = analyze_dispatcher.execute_recipe(recipe, 'reaction_time', mini_game_events)
+      analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
       analysis.should_not be_nil
       analysis[:score].should == {:fastest_time=>300, :slowest_time=>500, :average_time=>400, :version=>"2.0" }
     end
@@ -307,10 +307,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the big5 and holland6 scores' do
-      score_names = ['big5', 'holland6']
+      recipe_names = ['big5', 'holland6']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)
       analysis.length.should == 2
       analysis[:big5].should_not be_nil
       analysis[:holland6].should_not be_nil
@@ -319,19 +319,19 @@ module TidepoolAnalyze
     end  
 
     it 'calculates the holland6_new score' do
-      score_names = ['holland6_new']
+      recipe_names = ['holland6_new']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)
       analysis.length.should == 1
-      analysis[:holland6_new].should_not be_nil
+      analysis[:holland6].should_not be_nil
     end
 
     it 'calculates the reaction_time score' do
-      score_names = ['reaction_time']
+      recipe_names = ['reaction_time']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)      
       analysis.length.should == 1
       analysis[:reaction_time].should_not be_nil
       analysis[:reaction_time][:score].should_not be_nil
@@ -347,10 +347,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the survey score' do 
-      score_names = ['survey']
+      recipe_names = ['survey']
       analyze_dispatcher = AnalyzeDispatcher.new
 
-      analysis = analyze_dispatcher.analyze(@events, score_names)   
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)   
       analysis.length.should == 1
       analysis[:survey][:score].should == {
         :demand => {:answer=>5, :zscore=>0.6709893546422306, :tscore=>51.1827730651085},
@@ -361,10 +361,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the emotion score' do 
-      score_names = ['emo']
+      recipe_names = ['emo']
       events = load_event_fixtures('emotions.json')
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(events, score_names)      
+      analysis = analyze_dispatcher.analyze(events, recipe_names)      
       analysis.should_not be_nil
       analysis[:emo][:score].should == {
         :factors=> {
@@ -410,10 +410,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the capacity score' do
-      score_names = ['capacity']
+      recipe_names = ['capacity']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)      
       analysis.length.should == 1
       analysis[:capacity].should_not be_nil
       analysis[:capacity][:score].should_not be_nil

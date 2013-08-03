@@ -10,8 +10,8 @@ OAuthProvider::Application.routes.draw do
   get '/auth/failure', to: 'authentications#failure'
   
   get '/auth/new', to: 'authentications#add_new'  
-  # resources :sessions
-  # resources :users
+
+  get '/auth/create_from_mobile', to: 'authentications#create_from_mobile'
 
   mount Sidekiq::Web, at: '/sidekiq'
 

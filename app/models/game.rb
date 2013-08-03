@@ -75,9 +75,9 @@ class Game < ActiveRecord::Base
     self.stages && self.stages.length > 0 && self.stage_completed == self.stages.length - 1  
   end
 
-  def calculates_personality?
-    self.definition.calculates.index("profile") != nil
-  end
+  # def calculates_personality?
+  #   self.definition.persist_as_results.index("profile") != nil
+  # end
 
   # def self.find_latest_with_profile(target_user)
   #   definitions = Definition.where("calculates like '%profile%'").all

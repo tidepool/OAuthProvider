@@ -15,6 +15,7 @@ describe 'Users API' do
   let(:personality) { create(:personality) }
   let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
+  let(:authentication) { create(:authentication, user: user2) }
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -22,6 +23,18 @@ describe 'Users API' do
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
     user_info[:email].should == user1.email
+  end
+
+  it 'shows the users authentication info' do 
+    authentication
+    token = get_conn(user2)
+    response = token.get("#{@endpoint}/users/-.json")
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
+    user_info[:authentications].length.should == 1
+    user_info[:authentications][0][:provider].should == 'facebook'
+    user_info[:authentications][0][:oauth_token].should == '123456'
+    user_info[:authentications][0][:oauth_secret].should == '232323'
   end
 
   it 'creates a user' do 

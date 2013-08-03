@@ -49,7 +49,9 @@ FactoryGirl.define do
   factory :authentication do
     provider 'facebook'
     sequence(:uid) {|n| "1234#{n}" }
-
+    oauth_token "123456"
+    oauth_secret "232323"
+    
     factory :fitbit do 
       provider 'fitbit'
       last_synchronized do 
@@ -64,11 +66,11 @@ FactoryGirl.define do
 
   factory :definition do
     factory :profile_game do 
-      calculates "['profile']"
+      persist_as_results "['profile']"
     end
 
     factory :other_game do 
-      calculates "['other']"
+      persist_as_results "['other']"
     end
   end
 

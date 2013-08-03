@@ -99,11 +99,14 @@ class User < ActiveRecord::Base
       authentication.check_and_reset_credentials(auth_hash)
       authentication.save!
       user = authentication.user
-      if user.guest
+      if user && user.guest
         logger.warn("AuthenticationSequence: Authentication user is guest, this is abnormal!")
         # Ensure that user is not guest
         user.guest = false
         user.save!
+      elsif user.nil?
+        logger.warn("AuthenticationSequence: Authentication does not have a user. Will delete the authentication, this is abnormal!")
+        authentication.destroy!
       end
     else
       if user_id

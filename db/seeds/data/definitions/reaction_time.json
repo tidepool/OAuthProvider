@@ -2,10 +2,8 @@
     "name" : "Reaction Time",
     "unique_name": "reaction_time",
     "instructions" : "",
-    "end_remarks" : "",
-    "score_names" : ["reaction_time", "survey"],
-    "calculates" : ["reaction_time", "survey"],
-    "result_view": "Scores",
+    "recipe_names" : ["reaction_time", "survey"],
+    "persist_as_results" : ["reaction_time", "survey"],
     "stages" : [
         {
           "friendly_name": "Getting to Know You",
