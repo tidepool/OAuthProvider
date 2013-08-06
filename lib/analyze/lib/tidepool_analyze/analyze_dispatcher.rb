@@ -45,6 +45,9 @@ module TidepoolAnalyze
     end
 
     def events_by_mini_game(user_events)
+      if user_events.is_a?(Hash)
+        user_events = user_events.values
+      end
       mini_game_events = {}
       user_events.each do |user_event|
         mini_game = user_event['event_type']

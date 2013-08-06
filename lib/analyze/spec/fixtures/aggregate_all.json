@@ -2,9 +2,8 @@
   {
     "event_type": "reaction_time",
     "stage": 0,
-    "sequence_type": "simple",
     "events": [
-      {"time":1360194757876,"event":"level_started","data":["yellow:843","green:759","green:1367","green:986","green:741","red:506","yellow:910","green:951","red:1420","yellow:1383","yellow:638","yellow:1449","green:1090","yellow:1214","yellow:724","green:1375","red:575"]},
+      {"time":1360194757876,"event":"level_started","sequence_type": "simple","data":["yellow:843","green:759","green:1367","green:986","green:741","red:506","yellow:910","green:951","red:1420","yellow:1383","yellow:638","yellow:1449","green:1090","yellow:1214","yellow:724","green:1375","red:575"]},
       {"time":1360194758722,"event":"shown","color":"yellow","index":0,"time_interval":843},
       {"time":1360194759485,"event":"shown","color":"green","index":1,"time_interval":759},
       {"time":1360194760257,"event":"incorrect","color":"green","index":1},
@@ -39,9 +38,8 @@
   {
     "event_type": "reaction_time",
     "stage": 1,
-    "sequence_type": "complex",
     "events": [
-      {"time":1360194785277,"event":"level_started","data":["red:1160","red:1092","yellow:653","green:1239","yellow:1312","green:1101","red:587","yellow:1065","red:1090"]},
+      {"time":1360194785277,"event":"level_started","sequence_type": "complex","data":["red:1160","red:1092","yellow:653","green:1239","yellow:1312","green:1101","red:587","yellow:1065","red:1090"]},
       {"time":1360194786440,"event":"shown","color":"red","index":0,"time_interval":1160},
       {"time":1360194787535,"event":"shown","color":"red","index":1,"time_interval":1092},
       {"time":1360194787610,"event":"incorrect","color":"red","index":1},

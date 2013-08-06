@@ -1,20 +1,6 @@
 require 'spec_helper'
-require 'redis'
-require Rails.root + 'app/models/events/user_event.rb'
 
 describe ResultsCalculator do
-  def record_events_in_redis(game, events)
-    UserEvent.cleanup(game.id)
-
-    # Store the events in the Redis
-    events.each do |event|
-      user_event = UserEvent.new(event)
-
-      # The user events are loaded from a saved file, so update the game id with what we created
-      user_event.game_id = game.id
-      user_event.record
-    end
-  end
 
   describe 'Personality game calculation' do
     let(:guest) { create(:guest) }
@@ -23,9 +9,9 @@ describe ResultsCalculator do
       definition = Definition.where(unique_name: 'baseline').first
       @game  = Game.create_by_definition(definition, guest)
 
-      events_json = IO.read(File.expand_path('../../fixtures/test_event_log.json', __FILE__))
+      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
       events = JSON.parse(events_json)
-      record_events_in_redis(@game, events)
+      @game.update_event_log(events)
     end
 
     after(:each) do
@@ -41,7 +27,7 @@ describe ResultsCalculator do
       updated_game.status.should == :results_ready.to_s
       updated_game.results.length.should == 3
 
-      # Below result depends on the exact dataset we fed from test_event_log.json
+      # Below result depends on the exact dataset we fed from aggregate_all.json
       guest.personality.should_not be_nil    
       guest.personality.profile_description.name.should_not be_nil
       guest.personality.big5_dimension.should_not be_nil
@@ -51,23 +37,13 @@ describe ResultsCalculator do
       guest.personality.holland6_score.should_not be_nil
       guest.personality.big5_score.should_not be_nil
 
-      # guest.personality.profile_description.name.should == 'The Charger'
-      # guest.personality.big5_dimension.should == 'low_conscientiousness'
-      # guest.personality.profile_description.name.should == 'The Shelter'
-      # guest.personality.big5_dimension.should == 'high_neuroticism'
-      # guest.personality.holland6_dimension.should == 'social'
-      # guest.personality.big5_low.should == 'conscientiousness'
-      # guest.personality.big5_high.should == 'neuroticism'
+      guest.personality.profile_description.name.should == 'The Connector'
+      guest.personality.big5_dimension.should == 'low_conscientiousness'
+      guest.personality.holland6_dimension.should == 'social'
+      guest.personality.big5_low.should == 'conscientiousness'
+      guest.personality.big5_high.should == 'extraversion'
     end
 
-    it 'cleans up Redis' do
-      key = "game:#{@game.id}"
-      $redis.exists(key).should == true
-      resultsCalc = ResultsCalculator.new 
-      resultsCalc.perform(@game.id)
-
-      $redis.exists(key).should == false
-    end
   end
 
   describe 'Reaction-Time game calculation' do
@@ -77,13 +53,9 @@ describe ResultsCalculator do
       definition = Definition.where(unique_name: 'reaction_time').first
       @game  = Game.create_by_definition(definition, user)
 
-      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/test_event_log.json'))
+      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
       events = JSON.parse(events_json)
-      record_events_in_redis(@game, events)
-    end
-
-    after(:each) do
-      UserEvent.cleanup(@game.id)
+      @game.update_event_log(events)
     end
 
     it 'calculates the reaction-time and survey results' do
@@ -108,70 +80,41 @@ describe ResultsCalculator do
       definition = Definition.where(unique_name: 'baseline').first
       @game  = Game.create_by_definition(definition, user)
 
-      events_json = IO.read(File.expand_path('../../fixtures/test_event_log.json', __FILE__))
+      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
       @events = JSON.parse(events_json)
     end
 
-    after(:each) do
-      UserEvent.cleanup(@game.id)
-    end
-
-    # This is really not used by anyone, so took it off the feature list for now.
-
-    # it 'uses the events in the game.result.event_log if redis queue is empty' do
-    #   # This is a scenario we may use to rerun some existing tests
-    #   # This scenario should not happen normally in production
-    #   @game.event_log = @events
-    #   @game.save
-
-    #   resultsCalc = ResultsCalculator.new 
-    #   @game.status.should == :not_started
-    #   resultsCalc.perform(@game.id)
-    #   updated_game = Game.find(@game.id)
-    #   updated_game.status.should == :results_ready.to_s
-    #   user.personality.should_not be_nil    
-    #   # user.personality.profile_description.name.should == 'The Charger'
-    #   # user.personality.profile_description.name.should == 'The Shelter'      
-    # end
-
-    it 'changes the game status to :incomplete_results if there are no user_events anywhere' do
+    it 'does nothing if there are no user_events anywhere' do
       resultsCalc = ResultsCalculator.new 
       @game.status.should == :not_started
       resultsCalc.perform(@game.id)
       updated_game = Game.find(@game.id)
-      updated_game.status.should == :incomplete_results.to_s
+      updated_game.status.should == @game.status.to_s
     end
 
-    it 'leaves the user events in redis if game.save for the event_log fails' do
-      Game.any_instance.stub(:save).and_return(false)
-      key = "game:#{@game.id}"
-      record_events_in_redis(@game, @events)
-      $redis.exists(key).should == true
+    it 'changes the game status to :incomplete_results if one of the Persist calculators fail' do
+      TidepoolAnalyze::AnalyzeDispatcher.any_instance.stub(:analyze) do | events, recipe_names|
+        raise Exception.new
+      end
+
+      @game.update_event_log(@events)
       resultsCalc = ResultsCalculator.new 
-      resultsCalc.perform(@game.id)
-      $redis.exists(key).should == true
+      @game.status.should == :not_started
+      resultsCalc.perform(@game.id) 
+      updated_game = Game.find(@game.id)
+      updated_game.status.should == :incomplete_results.to_s
     end
 
     it 'changes the game status to :incomplete_results if one of the Persist calculators fail' do
       PersistPersonality.any_instance.stub(:persist) do |game, analysis_results|
         raise Exception.new
       end
-      key = "game:#{@game.id}"
-      record_events_in_redis(@game, @events)
-      $redis.exists(key).should == true
+      @game.update_event_log(@events)
       resultsCalc = ResultsCalculator.new 
       @game.status.should == :not_started
       resultsCalc.perform(@game.id) 
       updated_game = Game.find(@game.id)
       updated_game.status.should == :incomplete_results.to_s
-      updated_game.event_log.should_not be_nil
-
-      # We changed the behavior so that we keep the 
-      # events in the Redis, this way the client can keep asking the results in
-      # case the results are :incomplete_results
-      $redis.exists(key).should == true
-      # $redis.exists(key).should == false
     end
-
   end
 end

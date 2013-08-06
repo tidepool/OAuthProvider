@@ -64,14 +64,36 @@ class Game < ActiveRecord::Base
     game = Game.where('user_id = ?', target_user.id).order(:date_taken).last
   end
 
+  def all_events_received?
+    all_exist = true
+    num_stages = self.stages ? self.stages.length : 0
+    raise ActiveRecord::RecordInvalid, "Game has no stages, #{num_stages}" if num_stages <= 0
+
+    if self.event_log.nil? || self.event_log.empty?
+      all_exist = false
+    else
+      (0...num_stages).each do | stage_no |
+        if !self.event_log.has_key?(stage_no.to_s)
+          all_exist = false
+          break
+        end
+      end
+    end
+    all_exist
+  end
+
   def update_event_log(new_event_log)
-    validate(new_event_log)
-    game_events = self.event_log
+    raise ArgumentError, "Event log is empty." if new_event_log.nil? || new_event_log.empty?
 
-    stage = new_event_log['stage'].to_s
-
-    game_events[stage] = new_event_log
-    self.event_log = game_events
+    current_log = self.event_log
+    current_log = {} if current_log.nil?
+    if new_event_log.is_a?(Array)
+      new_event_log.each { | event_log_entry | add_event_log_entry(event_log_entry, current_log) }
+    else
+      add_event_log_entry(new_event_log, current_log)
+    end
+    
+    self.event_log = current_log
     self.save!
   end
 
@@ -87,12 +109,26 @@ class Game < ActiveRecord::Base
     self.stages && self.stages.length > 0 && self.stage_completed == self.stages.length - 1  
   end
 
-  def validate(new_event_log)
-    level_type = new_event_log['module']
+  protected
+
+  def add_event_log_entry(event_log_entry, current_log)
+    if event_log_entry['stage'] && ( !event_log_entry.has_key?('event_type') || !event_log_entry.has_key?('events'))
+      # Trying to delete an entry
+      stage_to_delete = event_log_entry['stage'].to_s
+      current_log.delete(stage_to_delete)
+    else
+      validate(event_log_entry)
+      stage = event_log_entry['stage'].to_s
+      current_log[stage] = event_log_entry
+    end
+  end
+
+  def validate(event_log_entry)
+    level_type = event_log_entry['event_type']
     raise Api::V1::UserEventValidatorError, 'Module info missing.' if level_type.nil?
 
     klass_name = "#{level_type.camelize}Validator"
-    validator = klass_name.constantize.new(new_event_log)
+    validator = klass_name.constantize.new(event_log_entry)
     validator.validate
   end
 
