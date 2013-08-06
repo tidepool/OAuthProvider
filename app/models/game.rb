@@ -55,12 +55,24 @@ class Game < ActiveRecord::Base
       game.calling_ip = calling_ip
       game.date_taken = Time.zone.now # Always use Time.zone not Time
       game.stage_completed = -1
+      game.event_log = {}
       game.status = :not_started
     end    
   end
 
   def self.find_latest(target_user)
     game = Game.where('user_id = ?', target_user.id).order(:date_taken).last
+  end
+
+  def update_event_log(new_event_log)
+    validate(new_event_log)
+    game_events = self.event_log
+
+    stage = new_event_log['stage'].to_s
+
+    game_events[stage] = new_event_log
+    self.event_log = game_events
+    self.save!
   end
 
   def results_calculated?
@@ -73,6 +85,15 @@ class Game < ActiveRecord::Base
 
   def completed?
     self.stages && self.stages.length > 0 && self.stage_completed == self.stages.length - 1  
+  end
+
+  def validate(new_event_log)
+    level_type = new_event_log['module']
+    raise Api::V1::UserEventValidatorError, 'Module info missing.' if level_type.nil?
+
+    klass_name = "#{level_type.camelize}Validator"
+    validator = klass_name.constantize.new(new_event_log)
+    validator.validate
   end
 
   # def calculates_personality?

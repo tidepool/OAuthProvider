@@ -4,8 +4,8 @@ module TidepoolAnalyze
   module Analyzer
     describe SnoozerAnalyzer do
       before(:all) do
-        events_json = IO.read(File.expand_path('../../fixtures/snoozer.json', __FILE__))
-        @user_events = JSON.parse(events_json)
+        events_json = IO.read(File.expand_path('../../fixtures/aggregate_snoozer.json', __FILE__))
+        @user_events = JSON.parse(events_json)[0]['events']
       end
 
       it 'analyzes the snoozer events' do 

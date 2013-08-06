@@ -37,7 +37,7 @@ module TidepoolAnalyze
     end
 
     before(:all) do
-      events_json = IO.read(File.expand_path('../fixtures/test_event_log.json', __FILE__))
+      events_json = IO.read(File.expand_path('../fixtures/aggregate_all.json', __FILE__))
       @events = JSON.parse(events_json)
     end
     
@@ -48,14 +48,13 @@ module TidepoolAnalyze
       mini_game_events['reaction_time'].should_not be_nil
       mini_game_events['reaction_time'].length.should == 2
       mini_game_events['reaction_time'].each do |stage, stage_events|
-        stage_events.length.should == 29 if stage == 0
-        stage_events.length.should == 16 if stage == 1
-        stage_events[0]['module'].should == 'reaction_time'
+        stage_events.length.should == 30 if stage == 0
+        stage_events.length.should == 17 if stage == 1
       end
       mini_game_events['image_rank'].should_not be_nil
       mini_game_events['image_rank'].length.should == 1
       mini_game_events['circles_test'].should_not be_nil
-      mini_game_events['circles_test'].length.should == 5
+      mini_game_events['circles_test'].length.should == 3
       mini_game_events['survey'].should_not be_nil
       mini_game_events['survey'].length.should == 1
 
@@ -291,7 +290,7 @@ module TidepoolAnalyze
 
     it 'executes a reaction_time recipe with snoozer events' do 
       analyze_dispatcher = AnalyzeDispatcher.new
-      events = load_event_fixtures('snoozer.json')
+      events = load_event_fixtures('aggregate_snoozer.json')
       mini_game_events = analyze_dispatcher.events_by_mini_game(events)
       recipe = analyze_dispatcher.read_recipe 'reaction_time'
       analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
@@ -362,7 +361,7 @@ module TidepoolAnalyze
 
     it 'calculates the emotion score' do 
       recipe_names = ['emo']
-      events = load_event_fixtures('emotions.json')
+      events = load_event_fixtures('aggregate_emotions_circles.json')
       analyze_dispatcher = AnalyzeDispatcher.new
       analysis = analyze_dispatcher.analyze(events, recipe_names)      
       analysis.should_not be_nil

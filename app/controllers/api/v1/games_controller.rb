@@ -46,6 +46,19 @@ class Api::V1::GamesController < Api::V1::ApiController
     end
   end
 
+  def update_event_log
+    game = current_resource
+    game.update_event_log(params(:event_log))
+    api_status = Hashie::Mash(
+    {
+      state: :event_log_updated,
+      message: "Updated the event log for game #{game.id}"
+    })
+    respond_to do |format|
+      format.json { render({ json: {}, meta: api_status }.merge(api_defaults)) }
+    end
+  end
+
   def destroy
     game = current_resource
     game.destroy

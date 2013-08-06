@@ -26,15 +26,13 @@ module TidepoolAnalyze
       #   ...
       # ]
       def calculate_result
-        is_valid = process_events(@events)
-        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
+        process_events(@events)
 
         results = @questions.map do |question| 
-          raise TidepoolAnalyze::UserEventValidatorError, "question not provided properly: #{question}" if question["question_id"].nil? || question["answer"].nil? || question["question_topic"].nil?
           {
             question_id: question["question_id"],
             answer: question["answer"],
-            question_topic: question["question_topic"]
+            question_topic: question["topic"]
           }
         end
         results
@@ -42,22 +40,16 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
-        is_valid = true
         events.each do |entry|
-          unless user_event_valid?(entry)
-            is_valid = false
-            break
-          end
-
-          case entry['event_desc']
-          when 'test_started'
-            @start_time = entry['record_time']
-          when 'test_completed'
-            @end_time = entry['record_time']
-            @questions = entry['questions']
+          case entry['event']
+          when 'level_started'
+            @start_time = entry['time']
+          when 'level_completed'
+            @end_time = entry['time']
+          when 'level_summary'
+            @questions = entry['data']
           end
         end
-        is_valid
       end
     end
   end
