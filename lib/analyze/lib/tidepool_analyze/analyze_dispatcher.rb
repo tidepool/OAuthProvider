@@ -20,8 +20,8 @@ module TidepoolAnalyze
     #   },
     #   ...
     # }
-    def analyze(user_events, score_names)
-      score_names_whitelist = { 
+    def analyze(user_events, recipe_names)
+      recipe_names_whitelist = { 
         big5: 'big5',
         holland6: 'holland6',
         holland6_new: 'holland6_new',
@@ -33,11 +33,12 @@ module TidepoolAnalyze
       mini_game_events = events_by_mini_game(user_events)
 
       analysis = {}
-      score_names.each do |score_name|
+      recipe_names.each do |recipe_name|
         # Load the recipe for the score
-        if score_names_whitelist[score_name.to_sym]
-          recipe = read_recipe score_name
-          analysis[score_name.to_sym] = execute_recipe recipe, score_name, mini_game_events
+        if recipe_names_whitelist[recipe_name.to_sym]
+          recipe = read_recipe recipe_name
+          result = execute_recipe recipe, mini_game_events
+          analysis[result[:score_name].to_sym] = result
         end
       end
       analysis
@@ -55,19 +56,19 @@ module TidepoolAnalyze
       mini_game_events
     end
 
-    def read_recipe(score_name)
-      recipe_json = IO.read(File.expand_path("../recipes/#{score_name}_recipe.json", __FILE__))
+    def read_recipe(recipe_name)
+      recipe_json = IO.read(File.expand_path("../recipes/#{recipe_name}_recipe.json", __FILE__))
       recipe = JSON.parse(recipe_json, symbolize_names: true)
     end
 
-    def execute_recipe(recipe, score_name, mini_game_events)
+    def execute_recipe(recipe, mini_game_events)
       final_results = [] 
+      score_name = ""
       recipe.each do |step|
         results = nil
-
-        if step[:score_generator]
+        if step[:score_name]
           # This allows me to override the score generator name
-          score_name = step[:score_generator]
+          score_name = step[:score_name]
         else
           if step[:formula_sheet].nil? || step[:formula_key].nil? 
             formula_desc = nil
@@ -93,11 +94,12 @@ module TidepoolAnalyze
         end
       end
 
-      if final_results.length > 0
+      if final_results.length > 0 && !score_name.empty?
         score = run_score_generator(score_name, final_results)
       end
 
       {
+        score_name: score_name,
         final_results: final_results,
         score: score
       }

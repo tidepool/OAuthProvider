@@ -90,7 +90,7 @@ class ResultsCalculator
     analysis_results = nil
     begin
       analyze_dispatcher = TidepoolAnalyze::AnalyzeDispatcher.new
-      analysis_results = analyze_dispatcher.analyze(user_events, game.definition.score_names)
+      analysis_results = analyze_dispatcher.analyze(user_events, game.definition.recipe_names)
     rescue Exception => e
       logger.error("Game #{game.id} cannot analyze calculation. #{e.message}")
       game.last_error = e.message
@@ -101,9 +101,9 @@ class ResultsCalculator
   def persist_results(game, analysis_results)
     status = :results_ready
     if game.definition 
-      if game.definition.calculates
-        game.definition.calculates.each do |calculation|
-          klass_name = "Persist#{calculation.to_s.camelize}"
+      if game.definition.persist_as_results
+        game.definition.persist_as_results.each do |result_name|
+          klass_name = "Persist#{result_name.to_s.camelize}"
           begin
             persist_calculation = klass_name.constantize.new()
             persist_calculation.persist(game, analysis_results)
@@ -114,12 +114,12 @@ class ResultsCalculator
           end
         end 
       else
-        logger.warn("No calculates specified for game #{game.id}.")
+        logger.warn("No persist_as_results specified for game #{game.id}.")
       end
     else
-      logger.error("Game #{game.id} definition is not defined or missing calculates info.")
+      logger.error("Game #{game.id} definition is not defined or missing persist_as_results info.")
       status = :incomplete_results 
-      game.last_error = "Game #{game.id} definition is not defined or missing calculates info."
+      game.last_error = "Game #{game.id} definition is not defined or missing persist_as_results info."
     end
     status  
   end

@@ -2,9 +2,8 @@
     "name" : "Baseline game",
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
     "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["big5", "holland6", "reaction_time"],
-    "calculates" : ["scores", "profile"],
-    "result_view": "Profile",
+    "recipe_names" : ["big5", "holland6", "reaction_time"],
+    "persist_as_results" : ["scores", "profile"],
     "stages" :
         [
             {

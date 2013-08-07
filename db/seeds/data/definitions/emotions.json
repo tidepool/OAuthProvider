@@ -2,9 +2,8 @@
   "name" : "Emotions via Circles",
   "unique_name": "emotions",
   "instructions" : "",
-  "end_remarks" : "",
-  "score_names" : ["emo"],
-  "calculates" : ["emo"],
+  "recipe_names" : ["emo"],
+  "persist_as_results" : ["emo"],
   "stages":
     [
       {

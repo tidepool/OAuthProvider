@@ -2,10 +2,8 @@
     "name" : "Interest Picker",
     "unique_name": "interest_picker",
     "instructions" : "",
-    "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["holland6_new"],
-    "calculates" : [],
-    "result_view": "Profile",
+    "recipe_names" : ["holland6_new"],
+    "persist_as_results" : [],
     "stages" :
         [
             {

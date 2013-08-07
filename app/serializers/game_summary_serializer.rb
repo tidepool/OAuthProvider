@@ -1,13 +1,5 @@
 class GameSummarySerializer < ActiveModel::Serializer
-  attributes :id, :name, :date_taken, :icon, :title, :completion, :num_of_stages, :user_id
-
-  def title
-    object.definition.name
-  end
-
-  def icon
-    object.definition.icon
-  end
+  attributes :id, :name, :date_taken, :completion, :num_of_stages, :user_id
 
   def num_of_stages
     (object.definition.stages) ? object.definition.stages.length : 0

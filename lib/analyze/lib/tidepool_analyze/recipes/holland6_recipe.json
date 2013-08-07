@@ -1,5 +1,8 @@
 [
   {
+    "score_name": "holland6"
+  },
+  {
     "user_event_source": "circles_test",
     "analyzer": "CirclesTestAnalyzer", 
     "formulator": "CirclesFormulator",  
