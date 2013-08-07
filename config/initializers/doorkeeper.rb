@@ -77,7 +77,17 @@ Doorkeeper.configure do
       password = params[:password]
 
       user = User.where('email = ?', username).first
-      return_user = user && (user.guest || user.authenticate(password)) ? user : nil 
+      if user.nil?
+        attributes = {
+          email: username,
+          password: password,
+          password_confirmation: params[:password_confirmation],
+          guest: params[:guest]
+        }
+        return_user = User.create_guest_or_registered(attributes)
+      else
+        return_user = user && (user.guest || user.authenticate(password)) ? user : nil         
+      end
     end
   end
 
