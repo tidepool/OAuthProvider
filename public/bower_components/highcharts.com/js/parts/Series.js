@@ -987,7 +987,7 @@ Series.prototype = {
 			yData = [],
 			zData = [],
 			dataLength = data ? data.length : [],
-			turboThreshold = pick(options.turboThreshold, 1000), // docs: 0 to disable
+			turboThreshold = pick(options.turboThreshold, 1000),
 			pt,
 			pointArrayMap = series.pointArrayMap,
 			valueCount = pointArrayMap && pointArrayMap.length,
@@ -1337,11 +1337,13 @@ Series.prototype = {
 			}
 
 			// Initialize StackItem for this x
-			if (oldStacks[key] && oldStacks[key][x]) {
-				stacks[key][x] = oldStacks[key][x];
-				stacks[key][x].total = null;
-			} else if (!stacks[key][x]) {
-				stacks[key][x] = new StackItem(yAxis, yAxis.options.stackLabels, isNegative, x, stackOption, stacking);
+			if (!stacks[key][x]) {
+				if (oldStacks[key] && oldStacks[key][x]) {
+					stacks[key][x] = oldStacks[key][x];
+					stacks[key][x].total = null;
+				} else {
+					stacks[key][x] = new StackItem(yAxis, yAxis.options.stackLabels, isNegative, x, stackOption, stacking);
+				}
 			}
 
 			// If the StackItem doesn't exist, create it first
@@ -1453,7 +1455,7 @@ Series.prototype = {
 			dataLength = points.length,
 			hasModifyValue = !!series.modifyValue,
 			i,
-			pointPlacement = options.pointPlacement, // docs: accept numbers
+			pointPlacement = options.pointPlacement,
 			dynamicallyPlaced = pointPlacement === 'between' || isNumber(pointPlacement),
 			threshold = options.threshold;
 

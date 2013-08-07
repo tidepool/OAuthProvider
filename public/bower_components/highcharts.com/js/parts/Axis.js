@@ -1535,7 +1535,8 @@ Axis.prototype = {
 			n,
 			i,
 			autoStaggerLines = 1,
-			maxStaggerLines = pick(labelOptions.maxStaggerLines, 5), // docs
+			maxStaggerLines = pick(labelOptions.maxStaggerLines, 5),
+			sortedPositions,
 			lastRight,
 			overlap,
 			pos,
@@ -1579,12 +1580,13 @@ Axis.prototype = {
 
 			// Handle automatic stagger lines
 			if (axis.horiz && !axis.staggerLines && maxStaggerLines && !labelOptions.rotation) {
+				sortedPositions = axis.reversed ? [].concat(tickPositions).reverse() : tickPositions;
 				while (autoStaggerLines < maxStaggerLines) {
 					lastRight = [];
 					overlap = false;
 					
-					for (i = 0; i < tickPositions.length; i++) {
-						pos = tickPositions[i];
+					for (i = 0; i < sortedPositions.length; i++) {
+						pos = sortedPositions[i];
 						bBox = ticks[pos].label && ticks[pos].label.bBox;
 						w = bBox ? bBox.width : 0;
 						lineNo = i % autoStaggerLines;
@@ -2043,11 +2045,8 @@ Axis.prototype = {
 			return;
 		}
 
-		var series = this.series,
-				last = series.length - 1;
-
-		each(series, function (serie, i) {
-			serie.setStackedPoints(i === last);
+		each(this.series, function (series) {
+			series.setStackedPoints();
 		});
 	},
 
@@ -2066,7 +2065,9 @@ Axis.prototype = {
 	destroy: function (keepEvents) {
 		var axis = this,
 			stacks = axis.stacks,
-			stackKey;
+			stackKey,
+			plotLinesAndBands = axis.plotLinesAndBands,
+			i;
 
 		// Remove the events
 		if (!keepEvents) {
@@ -2081,9 +2082,13 @@ Axis.prototype = {
 		}
 
 		// Destroy collections
-		each([axis.ticks, axis.minorTicks, axis.alternateBands, axis.plotLinesAndBands], function (coll) {
+		each([axis.ticks, axis.minorTicks, axis.alternateBands], function (coll) {
 			destroyObjectProperties(coll);
 		});
+		i = plotLinesAndBands.length;
+		while (i--) { // #1975
+			plotLinesAndBands[i].destroy();
+		}
 
 		// Destroy local variables
 		each(['stackTotalGroup', 'axisLine', 'axisGroup', 'gridGroup', 'labelGroup', 'axisTitle'], function (prop) {
