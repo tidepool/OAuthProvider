@@ -32,6 +32,7 @@
         require(['require_config'], function () {
             require(['core'], function (core) {
                 window._app = core.start();
+                core.analytics.trackPerformance( (new Date()).getTime() );
             });
         })
     </script>
