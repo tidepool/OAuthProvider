@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class ReactionTimeAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :start_time, :end_time, :test_type, :click_targets, :color_sequence 
       attr_accessor :time_threshold
 

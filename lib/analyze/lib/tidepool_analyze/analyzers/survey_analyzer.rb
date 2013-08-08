@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class SurveyAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :start_time, :end_time
 
       def initialize(events, formula)

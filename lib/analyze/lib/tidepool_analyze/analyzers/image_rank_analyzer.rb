@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class ImageRankAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
       # Output Data Format:

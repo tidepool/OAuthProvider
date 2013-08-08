@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class SnoozerAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       def initialize(events, formula)
         @events = events
         @average_time = 0
@@ -22,7 +20,6 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
-        is_valid = true
         events.each do |entry|
           case entry['event']
           when 'level_summary'

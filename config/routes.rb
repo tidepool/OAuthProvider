@@ -11,8 +11,6 @@ OAuthProvider::Application.routes.draw do
   
   get '/auth/new', to: 'authentications#add_new'  
 
-  get '/auth/create_from_mobile', to: 'authentications#create_from_mobile'
-
   mount Sidekiq::Web, at: '/sidekiq'
 
   root :to => 'home#index'
@@ -56,12 +54,11 @@ OAuthProvider::Application.routes.draw do
         get 'activities', to: 'activities#index'
       end
             
-      post '/user_events' => 'user_events#create'
+      # post '/user_events' => 'user_events#create'
 
       get 'preferences/:type/description', to: 'preferences#description'
 
       get 'games/:game_id/friend_survey', to: 'friend_surveys#results'
-
       post 'games/:game_id/friend_survey', to: 'friend_surveys#create'
     end
   end

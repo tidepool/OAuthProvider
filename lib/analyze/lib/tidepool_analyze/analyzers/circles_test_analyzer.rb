@@ -1,8 +1,6 @@
 module TidepoolAnalyze 
   module Analyzer
     class CirclesTestAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :start_time, :end_time, :circles, :radii, :start_coords, :self_circle
 
       # Output Format:
@@ -52,8 +50,6 @@ module TidepoolAnalyze
         self_circle_radius = @self_circle['size'] / 2.0
         self_circle_origin_x = @self_circle['left'] + self_circle_radius
         self_circle_origin_y = @self_circle['top'] + self_circle_radius
-
-        raise TidepoolAnalyze::UserEventValidatorError, "self circle radius can not be zero" if self_circle_radius.nil? || self_circle_radius == 0
 
         @results = []
         @circles.each do |circle|
