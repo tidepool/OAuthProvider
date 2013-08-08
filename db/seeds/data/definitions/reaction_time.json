@@ -11,7 +11,7 @@
           "data": [
             {
               "question_id": "demand1-7",
-              "question_topic": "demand",
+              "topic": "demand",
               "question_type": "icon_slider",
               "icon": "gfx-clock",
               "steps": 7,
@@ -24,7 +24,7 @@
             },
             {
               "question_id": "stress1-7",
-              "question_topic": "stress",
+              "topic": "stress",
               "question_type": "icon_slider",
               "icon": "gfx-stress",
               "steps": 7,
@@ -37,7 +37,7 @@
             }, 
             {
               "question_id": "productivity1-7",
-              "question_topic": "productivity",
+              "topic": "productivity",
               "question_type": "icon_slider",
               "icon": "gfx-productive",
               "steps": 7,
