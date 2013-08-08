@@ -43,6 +43,8 @@ OAuthProvider::Application.routes.draw do
           # post 'result' => 'results#create'
           get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
+
+          put 'event_log', to: 'games#update_event_log'
         end
 
         resource :preferences

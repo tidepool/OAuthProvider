@@ -1,0 +1,103 @@
+[
+  {
+    "event_type": "emotions_circles",
+    "stage": 1,
+    "events": [
+      {"time":1360195124413, "event":"level_started"},
+      {"time":1360194958241, "event":"level_completed" },
+      {"time":1360195167148, "event":"level_summary",
+        "data":[
+          {"trait1":"amused","size":4,"top":140,"left":499,"width":156},
+          {"trait1":"awe","size":0,"top":284,"left":699,"width":108},
+          {"trait1":"anger","size":4,"top":131,"left":801,"width":156},
+          {"trait1":"boredom","size":2,"top":400,"left":790,"width":132}
+        ],
+        "self_coord":{"top":138,"left":634,"size":386}
+      }
+    ]
+  },
+  {
+    "event_type": "emotions_circles",
+    "stage": 2,
+    "events": [
+      {"time":1360195124413,"event":"level_started"},
+      {"time":1360194958241,"event":"level_completed"},
+      {"time":1360195167148,"event":"level_summary",
+        "data":[
+          {"trait1":"confused","size":4,"top":140,"left":499,"width":156},
+          {"trait1":"contentment","size":0,"top":284,"left":699,"width":108},
+          {"trait1":"coyness","size":4,"top":131,"left":801,"width":156},
+          {"trait1":"desire_food","size":2,"top":400,"left":790,"width":132}
+        ],
+        "self_coord":{"top":138,"left":634,"size":386}
+      }
+    ]
+  },
+  {
+    "event_type": "emotions_circles",
+    "stage": 3,
+    "events": [
+      {"time":1360195124413,"event":"level_started"},
+      {"time":1360194958241, "event":"level_completed"},
+      {"time":1360195167148,"event":"level_summary",
+        "data":[
+          {"trait1":"desire_sex","size":4,"top":140,"left":499,"width":156},
+          {"trait1":"disgust","size":0,"top":284,"left":699,"width":108},
+          {"trait1":"embarrassment","size":4,"top":131,"left":801,"width":156},
+          {"trait1":"fear","size":2,"top":400,"left":790,"width":132}
+        ],
+        "self_coord":{"top":138,"left":634,"size":386}
+      }
+    ]
+  },
+  {
+    "event_type": "emotions_circles",
+    "stage": 4,
+    "events": [
+      {"time":1360195124413,"event":"level_started"},
+      {"time":1360194958241, "event":"level_completed" },
+      {"time":1360195167148,"event":"level_summary",
+        "data":[
+          {"trait1":"happiness","size":4,"top":140,"left":499,"width":156},
+          {"trait1":"interest","size":0,"top":284,"left":699,"width":108},
+          {"trait1":"pain","size":4,"top":131,"left":801,"width":156},
+          {"trait1":"pride","size":2,"top":400,"left":790,"width":132},
+          {"trait1":"relief","size":2,"top":430,"left":750,"width":132}
+        ],
+        "self_coord":{"top":138,"left":634,"size":386}
+      }
+    ]
+  },
+  {
+    "event_type": "emotions_circles",
+    "stage": 5,
+    "events": [
+      {"time":1360195124413,"event":"level_started"},
+      {"time":1360194958241, "event":"level_completed" },
+      {"time":1360195167148,"event":"level_summary",
+        "data":[
+          {"trait1":"sadness","size":4,"top":140,"left":499,"width":156},
+          {"trait1":"shame","size":0,"top":284,"left":699,"width":108},
+          {"trait1":"surprise","size":4,"top":131,"left":801,"width":156},
+          {"trait1":"sympathy","size":2,"top":400,"left":790,"width":132},
+          {"trait1":"triumph","size":2,"top":430,"left":750,"width":132}
+        ],
+        "self_coord":{"top":138,"left":634,"size":386}
+      }
+    ]
+  },
+  {
+    "event_type": "survey",
+    "stage": 6,
+    "events": [
+      { "time":1360195167248, "event":"level_started" },
+      { "time":1360194958241, "event":"level_completed" },
+      { "time":1360195167548, "event":"level_summary",
+        "data":[
+          { "question_id": "emotion22", "topic": "emotion", "answer": "sadness" }
+        ]
+      }
+    ]
+  }
+]
+

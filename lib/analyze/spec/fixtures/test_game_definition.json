@@ -1,0 +1,195 @@
+{
+  "name" : "Test game",
+  "unique_name": "test_game",
+  "instructions" : "",
+  "recipe_names" : ["big5", "holland6"],
+  "persist_as_results" : ["big5", "holland6", "personality"],
+  "stages" :
+    [
+      {
+        "friendly_name" : "Reaction Time 1",
+        "instructions" : "Click the circle on the screen as soon as it turns red.",
+        "view_name": "ReactionTime",
+        "game_type" : "cognition",
+        "colors": ["red", "yellow", "green"],
+        "sequence_type": "simple",
+        "correct_sequence": "red",
+        "number_of_reds": "4",
+        "interval_floor": "500",
+        "interval_ceil": "1500",
+        "limit_to": "15"
+      },
+      {
+        "friendly_name" : "Reaction Time 2",
+        "instructions" : "Click the red circle only when it appears AFTER a yellow circle.",
+        "view_name": "ReactionTime",
+        "game_type" : "cognition",
+        "colors": ["red", "yellow", "green"],
+        "sequence_type": "complex",
+        "correct_sequence": ["red", "yellow"],
+        "number_of_reds": "4",
+        "interval_floor": "500",
+        "interval_ceil": "1500",
+        "limit_to": "15"
+      },
+      {
+        "friendly_name" : "Image Ranking 1",
+        "instructions" : "Pick your favorite picture and rank them in order.",
+        "view_name" : "ImageRank",
+        "game_type" : "big5",
+        "image_sequence" : ["F1a", "F1b", "F1c", "F1d", "F1e"]
+      },
+      {
+        "friendly_name" : "Circles 1",
+        "instructions" : [
+          "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+          "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+        ],
+        "view_name" : "CirclesTest",
+        "game_type" : "big5",
+        "circles" : [{
+          "trait1" : "Self-Disciplined",
+          "trait2" : "Persistent",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Anxious",
+          "trait2" : "Dramatic",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Curious",
+          "trait2" : "Cultured",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Sociable",
+          "trait2" : "Adventurous",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Cooperative",
+          "trait2" : "Friendly",
+          "size" : "2"
+        }]
+      },
+      {
+        "friendly_name" : "Circles 2",
+        "instructions" : [
+          "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+          "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+        ],
+        "view_name" : "CirclesTest",
+        "game_type" : "big5",
+        "circles" : [{
+          "trait1" : "Independent",
+          "trait2" : "Aloof",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Self-Reflective",
+          "trait2" : "Reserved",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Disorganized",
+          "trait2" : "Unconventional",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Calm",
+          "trait2" : "Consistent",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Adamant",
+          "trait2" : "Focused",
+          "size" : "2"
+        }]
+      },
+      {
+        "friendly_name" : "Circles 3",
+        "instructions" : [
+          "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+          "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+        ],
+        "view_name" : "CirclesTest",
+        "game_type" : "holland6",
+        "circles" : [{
+          "trait1" : "Mechanical",
+          "trait2" : "Hands-on",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Creative",
+          "trait2" : "Intuitive",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Teacher",
+          "trait2" : "Helpful",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Persuasive",
+          "trait2" : "Enthusiastic",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Inquisitive",
+          "trait2" : "Analytical",
+          "size" : "2"
+        },
+        {
+          "trait1" : "Detail-Oriented",
+          "trait2" : "Thorough",
+          "size" : "2"
+        }]
+      },
+      {
+        "friendly_name": "Getting to Know You",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "demand1-7",
+            "question_topic": "demand",
+            "question_type": "icon_slider",
+            "icon": "gfx-clock",
+            "steps": 7,
+            "question": "Have your skills, knowledge, or network been in demand over the past hour?",
+            "labels": [
+              { "position": 0, "label": "Not at all" },
+              { "position": "50%", "label": "Somewhat" },
+              { "position": "100%", "label": "Very much" }
+            ]
+          },
+          {
+            "question_id": "stress1-7",
+            "question_topic": "stress",
+            "question_type": "icon_slider",
+            "icon": "gfx-stress",
+            "steps": 7,
+            "question": "How stressed have you been over the past hour?",
+            "labels": [
+              { "position": 0, "label": "Not at all" },
+              { "position": "50%", "label": "Somewhat" },
+              { "position": "100%", "label": "Very much" }
+            ]
+          }, 
+          {
+            "question_id": "productivity1-7",
+            "question_topic": "productivity",
+            "question_type": "icon_slider",
+            "icon": "gfx-productive",
+            "steps": 7,
+            "question": "How productive have you been over the past hour?",
+            "labels": [
+              { "position": 0, "label": "Not at all" },
+              { "position": "50%", "label": "Somewhat" },
+              { "position": "100%", "label": "Very much" }
+            ]
+          }
+        ]
+      }    
+    ]
+}
