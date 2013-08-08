@@ -1,4 +1,4 @@
-class EmotionsCirclesTestValidator < BaseValidator
+class EmotionsCirclesValidator < BaseValidator
   def validate_level_summary(event)
     required_keys = ['data', 'self_coord']
     validate_keys(event, required_keys)
