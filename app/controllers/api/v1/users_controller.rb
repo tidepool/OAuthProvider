@@ -31,7 +31,10 @@ class Api::V1::UsersController < Api::V1::ApiController
 
   def create
     # binding.pry_remote
-    user = User.create_guest_or_registered!(user_attributes)
+    # user = User.create_guest_or_registered!(user_attributes)
+    registration_service = RegistrationService.new
+    user = registration_service.register_guest_or_full!(user_attributes)
+
     respond_to do |format|
       format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end

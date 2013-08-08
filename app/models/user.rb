@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     begin
       User.create_guest_or_registered!(attributes)
     rescue Exception => e
-      # TODO: needs logging...
+      logger.error("Creating a user with username and password raised an error: #{e.message}")
       nil
     end
   end
@@ -72,7 +72,6 @@ class User < ActiveRecord::Base
     begin
       User.create_or_find!(auth_hash, user_id)
     rescue Exception => e
-      # TODO: needs logging...
       logger.error("Creating a user with #{auth_hash} raised an error: #{e.message}")
       nil
     end

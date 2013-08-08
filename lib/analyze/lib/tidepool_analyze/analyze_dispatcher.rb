@@ -45,13 +45,16 @@ module TidepoolAnalyze
     end
 
     def events_by_mini_game(user_events)
+      if user_events.is_a?(Hash)
+        user_events = user_events.values
+      end
       mini_game_events = {}
       user_events.each do |user_event|
-        mini_game = user_event['module']
+        mini_game = user_event['event_type']
         stage = user_event['stage']
         mini_game_events[mini_game] = {} unless mini_game_events.has_key?(mini_game)
         mini_game_events[mini_game][stage] = [] unless mini_game_events[mini_game].has_key?(stage)
-        mini_game_events[mini_game][stage] << user_event
+        mini_game_events[mini_game][stage].concat(user_event['events'])
       end
       mini_game_events
     end

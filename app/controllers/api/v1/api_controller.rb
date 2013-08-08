@@ -6,7 +6,8 @@ class Api::V1::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Api::V1::UnauthorizedError, with: :unauthorized_access
   rescue_from Api::V1::PreconditionFailedError, with: :precondition_failed
-  
+  rescue_from ArgumentError, with: :record_invalid
+
   protected
 
   def caller

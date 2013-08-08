@@ -1,0 +1,80 @@
+[
+  { 
+    "event_type" : "circles_test",
+    "stage" : 3,
+    "events" : [
+      {"time":1360194820934, "event":"level_started" },
+      {"time":1360194823936, "event":"resized", "index":"1", "new_size":1 },
+      {"time":1360194825276, "event":"resized", "index":"0", "new_size":2 },
+      {"time":1360194827133, "event":"resized", "index":"2", "new_size":0 },
+      {"time":1360194830361, "event":"resized", "index":"3", "new_size":4 },
+      {"time":1360194831713, "event":"resized", "index":"4", "new_size":2 },
+      {"time":1360194835894, "event":"sublevel_initialize", "data":[{"trait1":"Self-Disciplined","trait2":"Persistent","size":2,"changed":true,"moved":false,"top":130,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Anxious","trait2":"Dramatic","size":1,"changed":true,"moved":false,"top":136,"left":322,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Curious","trait2":"Cultured","size":0,"changed":true,"moved":false,"top":277,"left":213,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Sociable","trait2":"Adventurous","size":4,"changed":true,"moved":false,"top":388,"left":74,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Cooperative","trait2":"Friendly","size":2,"changed":true,"moved":false,"top":400,"left":316,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}]},
+      {"time":1360194838399, "event":"start_move", "index":"1","item":{"trait1":"Anxious","trait2":"Dramatic","size":1,"changed":true,"moved":false,"top":136,"left":322,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360194839132, "event":"end_move","index":"1","item":{"trait1":"Anxious","trait2":"Dramatic","size":1,"changed":true,"moved":true,"top":161,"left":656,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360194840564, "event":"start_move","index":"2","item":{"trait1":"Curious","trait2":"Cultured","size":0,"changed":true,"moved":false,"top":277,"left":213,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360194843140, "event":"end_move","index":"2","item":{"trait1":"Curious","trait2":"Cultured","size":0,"changed":true,"moved":true,"top":275,"left":789,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360194848411, "event":"start_move","index":"4","item":{"trait1":"Cooperative","trait2":"Friendly","size":2,"changed":true,"moved":false,"top":400,"left":316,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194849868, "event":"end_move","index":"4","item":{"trait1":"Cooperative","trait2":"Friendly","size":2,"changed":true,"moved":true,"top":126,"left":887,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194852026, "event":"start_move","index":"3","item":{"trait1":"Sociable","trait2":"Adventurous","size":4,"changed":true,"moved":false,"top":388,"left":74,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194854206, "event":"end_move","index":"3","item":{"trait1":"Sociable","trait2":"Adventurous","size":4,"changed":true,"moved":true,"top":351,"left":538,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194855944, "event":"start_move","index":"0","item":{"trait1":"Self-Disciplined","trait2":"Persistent","size":2,"changed":true,"moved":false,"top":130,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194857575, "event":"end_move","index":"0","item":{"trait1":"Self-Disciplined","trait2":"Persistent","size":2,"changed":true,"moved":true,"top":149,"left":375,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194958241, "event":"level_completed" },
+      {"time":1360194958245, "event":"level_summary","data":[{"trait1":"Self-Disciplined","trait2":"Persistent","size":2,"changed":true,"moved":true,"top":209,"left":335,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Anxious","trait2":"Dramatic","size":0,"changed":true,"moved":true,"top":283,"left":884,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Curious","trait2":"Cultured","size":1,"changed":true,"moved":true,"top":165,"left":627,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Sociable","trait2":"Adventurous","size":4,"changed":true,"moved":true,"top":68,"left":923,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Cooperative","trait2":"Friendly","size":3,"changed":true,"moved":true,"top":376,"left":733,"width":144,"height":144,"textMarginTop":39,"sliderMarginLeft":44}],"self_coord":{"top":138,"left":693,"size":386}}
+    ]
+  },
+  {
+    "event_type" : "circles_test",
+    "stage" : 4,
+    "events" : [
+      {"time":1360194960310,"event":"level_started"},
+      {"time":1360194962360,"event":"resized","index":"1","new_size":2},
+      {"time":1360194963630,"event":"resized","index":"0","new_size":4},
+      {"time":1360194965141,"event":"resized","index":"2","new_size":4},
+      {"time":1360194966684,"event":"resized","index":"3","new_size":2},
+      {"time":1360194969046,"event":"resized","index":"4","new_size":0},
+      {"time":1360194970782,"event":"sublevel_initialize","data":[{"trait1":"Independent","trait2":"Aloof","size":4,"changed":true,"moved":false,"top":118,"left":74,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Self-Reflective","trait2":"Reserved","size":2,"changed":true,"moved":false,"top":130,"left":316,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Disorganized","trait2":"Unconventional","size":4,"changed":true,"moved":false,"top":253,"left":189,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Calm","trait2":"Consistent","size":2,"changed":true,"moved":false,"top":400,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Adamant","trait2":"Focused","size":0,"changed":true,"moved":false,"top":412,"left":328,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}]},
+      {"time":1360194972702,"event":"start_move","index":"1","circle":{"trait1":"Self-Reflective","trait2":"Reserved","size":2,"changed":true,"moved":false,"top":130,"left":316,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194973520,"event":"end_move","index":"1","circle":{"trait1":"Self-Reflective","trait2":"Reserved","size":2,"changed":true,"moved":true,"top":68,"left":734,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194976865,"event":"start_move","index":"2","circle":{"trait1":"Disorganized","trait2":"Unconventional","size":4,"changed":true,"moved":false,"top":253,"left":189,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194977797,"event":"end_move","index":"2","circle":{"trait1":"Disorganized","trait2":"Unconventional","size":4,"changed":true,"moved":true,"top":245,"left":801,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194979346,"event":"start_move","index":"4","circle":{"trait1":"Adamant","trait2":"Focused","size":0,"changed":true,"moved":false,"top":412,"left":328,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360194980503,"event":"end_move","index":"4","circle":{"trait1":"Adamant","trait2":"Focused","size":0,"changed":true,"moved":true,"top":424,"left":854,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360194981896,"event":"start_move","index":"3","circle":{"trait1":"Calm","trait2":"Consistent","size":2,"changed":true,"moved":false,"top":400,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194984586,"event":"end_move","index":"3","circle":{"trait1":"Calm","trait2":"Consistent","size":2,"changed":true,"moved":true,"top":248,"left":569,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360194987526,"event":"start_move","index":"0","circle":{"trait1":"Independent","trait2":"Aloof","size":4,"changed":true,"moved":false,"top":118,"left":74,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194988170,"event":"end_move","index":"0","circle":{"trait1":"Independent","trait2":"Aloof","size":4,"changed":true,"moved":true,"top":114,"left":389,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50}},
+      {"time":1360194993576,"event":"level_completed" },
+      {"time":1360194993577,"event":"level_summary","data":[{"trait1":"Independent","trait2":"Aloof","size":4,"changed":true,"moved":true,"top":114,"left":389,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Self-Reflective","trait2":"Reserved","size":2,"changed":true,"moved":true,"top":68,"left":734,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Disorganized","trait2":"Unconventional","size":4,"changed":true,"moved":true,"top":245,"left":801,"width":156,"height":156,"textMarginTop":45,"sliderMarginLeft":50},{"trait1":"Calm","trait2":"Consistent","size":2,"changed":true,"moved":true,"top":248,"left":569,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Adamant","trait2":"Focused","size":0,"changed":true,"moved":true,"top":424,"left":854,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}],"self_coord":{"top":138,"left":634,"size":386}}
+    ]
+  },
+  {
+    "event_type" : "circles_test",
+    "stage" : 5,
+    "events" : [
+      {"time":1360195000513,"event":"level_started"},
+      {"time":1360195002380,"event":"resized","index":"5","new_size":2},
+      {"time":1360195003807,"event":"resized","index":"1","new_size":0},
+      {"time":1360195006193,"event":"resized","index":"2","new_size":2},
+      {"time":1360195007308,"event":"resized","index":"0","new_size":1},
+      {"time":1360195009615,"event":"resized","index":"3","new_size":2},
+      {"time":1360195012110,"event":"resized","index":"4","new_size":1},
+      {"time":1360195014891,"event":"sublevel_initialize","data":[{"trait1":"Mechanical","trait2":"Hands-on","size":1,"changed":true,"moved":false,"top":136,"left":92,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Creative","trait2":"Intuitive","size":0,"changed":true,"moved":false,"top":142,"left":328,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Teacher","trait2":"Helpful","size":2,"changed":true,"moved":false,"top":265,"left":201,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Persuasive","trait2":"Enthusiastic","size":2,"changed":true,"moved":false,"top":400,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Inquisitive","trait2":"Analytical","size":1,"changed":true,"moved":false,"top":406,"left":322,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Detail-Oriented","trait2":"Thorough","size":2,"changed":true,"moved":false,"top":265,"left":438,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}]},
+      {"time":1360195016162,"event":"start_move","index":"5","circle":{"trait1":"Detail-Oriented","trait2":"Thorough","size":2,"changed":true,"moved":false,"top":265,"left":438,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195016748,"event":"end_move","index":"5","circle":{"trait1":"Detail-Oriented","trait2":"Thorough","size":2,"changed":true,"moved":true,"top":78,"left":686,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195017945,"event":"start_move","index":"2","circle":{"trait1":"Teacher","trait2":"Helpful","size":2,"changed":true,"moved":false,"top":265,"left":201,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195019157,"event":"end_move","index":"2","circle":{"trait1":"Teacher","trait2":"Helpful","size":2,"changed":true,"moved":true,"top":245,"left":739,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195020629,"event":"start_move","index":"1","circle":{"trait1":"Creative","trait2":"Intuitive","size":0,"changed":true,"moved":false,"top":142,"left":328,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360195021190,"event":"end_move","index":"1","circle":{"trait1":"Creative","trait2":"Intuitive","size":0,"changed":true,"moved":true,"top":218,"left":582,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26}},
+      {"time":1360195022193,"event":"start_move","index":"4","circle":{"trait1":"Inquisitive","trait2":"Analytical","size":1,"changed":true,"moved":false,"top":406,"left":322,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360195022813,"event":"end_move","index":"4","circle":{"trait1":"Inquisitive","trait2":"Analytical","size":1,"changed":true,"moved":true,"top":404,"left":660,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360195028357,"event":"start_move","index":"3","circle":{"trait1":"Persuasive","trait2":"Enthusiastic","size":2,"changed":true,"moved":false,"top":400,"left":86,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195029288,"event":"end_move","index":"3","circle":{"trait1":"Persuasive","trait2":"Enthusiastic","size":2,"changed":true,"moved":true,"top":326,"left":463,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}},
+      {"time":1360195030725,"event":"start_move","index":"0","circle":{"trait1":"Mechanical","trait2":"Hands-on","size":1,"changed":true,"moved":false,"top":136,"left":92,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360195032621,"event":"end_move","index":"0","circle":{"trait1":"Mechanical","trait2":"Hands-on","size":1,"changed":true,"moved":true,"top":148,"left":353,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32}},
+      {"time":1360194993576,"event":"level_completed" },
+      {"time":1360195060912,"event":"level_summary","data":[{"trait1":"Mechanical","trait2":"Hands-on","size":1,"changed":true,"moved":true,"top":148,"left":353,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Creative","trait2":"Intuitive","size":0,"changed":true,"moved":true,"top":218,"left":582,"width":108,"height":108,"textMarginTop":21,"sliderMarginLeft":26},{"trait1":"Teacher","trait2":"Helpful","size":2,"changed":true,"moved":true,"top":245,"left":739,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Persuasive","trait2":"Enthusiastic","size":2,"changed":true,"moved":true,"top":326,"left":463,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38},{"trait1":"Inquisitive","trait2":"Analytical","size":1,"changed":true,"moved":true,"top":404,"left":660,"width":120,"height":120,"textMarginTop":27,"sliderMarginLeft":32},{"trait1":"Detail-Oriented","trait2":"Thorough","size":2,"changed":true,"moved":true,"top":78,"left":686,"width":132,"height":132,"textMarginTop":33,"sliderMarginLeft":38}],"self_coord":{"top":138,"left":634,"size":386}}    
+    ]    
+  }
+]

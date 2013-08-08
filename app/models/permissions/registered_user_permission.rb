@@ -5,7 +5,7 @@ module Permissions
       if caller == target_user
 
         allow :games, :create
-        allow :games, [:show, :update, :destroy] do |game|
+        allow :games, [:show, :update, :destroy, :update_event_log] do |game|
           game.user_id == caller.id
         end    
         allow :games, [:latest] do |game|
