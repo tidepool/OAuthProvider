@@ -67,11 +67,14 @@ Doorkeeper.configure do
   # response_type: password
   resource_owner_from_credentials do |routes|
     # binding.remote_pry
+    registration_service = RegistrationService.new
+
     if params[:auth_hash]
       user_id = params[:user_id]
       auth_hash = Hashie::Mash.new(params[:auth_hash])
 
-      user = User.create_or_find(auth_hash, user_id)
+      # user = User.create_or_find(auth_hash, user_id)
+      user = registration_service.register_or_find_from_external(auth_hash, user_id)
     else
       username = params[:email] || params[:username]
       password = params[:password]
@@ -84,7 +87,8 @@ Doorkeeper.configure do
           password_confirmation: params[:password_confirmation],
           guest: params[:guest]
         }
-        return_user = User.create_guest_or_registered(attributes)
+        # return_user = User.create_guest_or_registered(attributes)
+        return_user = registration_service.register_guest_or_full(attributes)
       else
         return_user = user && (user.guest || user.authenticate(password)) ? user : nil         
       end
