@@ -29,8 +29,12 @@ group :assets do
 
 end
 
+# Caching
+gem 'dalli'
+
 group :production do
   gem 'newrelic_rpm'
+  gem 'memcachier'
 end
 
 group :teamcity do

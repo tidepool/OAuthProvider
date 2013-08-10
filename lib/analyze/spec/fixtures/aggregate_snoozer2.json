@@ -1,0 +1,62 @@
+[
+  {
+    "event_type": "snoozer",
+    "stage": 0,
+    "events": [
+      {"time":1360194757876,"event":"level_started", "level_type":"simple", "description":"no_color, single" },
+      {"time":1360194758722,"event":"shown","item_id":"1_1"},
+      {"time":1360194758722,"event":"correct","item_id":"1_1"},
+      {"time":1360194758722,"event":"shown","item_id":"3_1"},
+      {"time":1360194758722,"event":"incorrect","item_id":"3_1"},
+      {"time":1360194758722,"event":"shown","item_id":"6_1"},
+      {"time":1360194758722,"event":"shown","item_id":"1_2"},
+      {"time":1360194775750,"event":"level_completed"},
+      {"time":1360194958245,"event":"level_summary"}
+    ]
+  },
+  {
+    "event_type": "snoozer",
+    "stage": 1,
+    "events": [
+      {"time":1360194757876,"event":"level_started", "level_type":"simple", "description":"no_color, multiple" },
+      {"time":1360194758722,"event":"shown","item_id":"1_1"},
+      {"time":1360194758722,"event":"correct","item_id":"1_1"},
+      {"time":1360194758722,"event":"shown","item_id":"3_1"},
+      {"time":1360194758722,"event":"incorrect","item_id":"3_1"},
+      {"time":1360194758722,"event":"shown","item_id":"6_1"},
+      {"time":1360194758722,"event":"shown","item_id":"1_2"},
+      {"time":1360194775750,"event":"level_completed"},
+      {"time":1360194958245,"event":"level_summary"}
+    ]
+  },
+  {
+    "event_type": "snoozer",
+    "stage": 2,
+    "events": [
+      {"time":1360194757876,"event":"level_started", "level_type":"simple", "description":"single_color" },
+      {"time":1360194758722,"event":"shown","item_id":"1_1"},
+      {"time":1360194758722,"event":"correct","item_id":"1_1"},
+      {"time":1360194758722,"event":"shown","item_id":"3_1"},
+      {"time":1360194758722,"event":"incorrect","item_id":"3_1"},
+      {"time":1360194758722,"event":"shown","item_id":"6_1"},
+      {"time":1360194758722,"event":"shown","item_id":"1_2"},
+      {"time":1360194775750,"event":"level_completed"},
+      {"time":1360194958245,"event":"level_summary"}
+    ]
+  },
+  {
+    "event_type": "snoozer",
+    "stage": 3,
+    "events": [
+      {"time":1360194757876,"event":"level_started", "level_type":"complex", "description":"color_change" },
+      {"time":1360194758722,"event":"shown","item_id":"1_1"},
+      {"time":1360194758722,"event":"correct","item_id":"1_1"},
+      {"time":1360194758722,"event":"shown","item_id":"3_1"},
+      {"time":1360194758722,"event":"incorrect","item_id":"3_1"},
+      {"time":1360194758722,"event":"shown","item_id":"6_1"},
+      {"time":1360194758722,"event":"shown","item_id":"1_2"},
+      {"time":1360194775750,"event":"level_completed"},
+      {"time":1360194958245,"event":"level_summary"}
+    ]
+  }
+]

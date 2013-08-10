@@ -1,5 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApiController
   doorkeeper_for :index, :show, :update, :destroy
+  serialization_scope nil
 
   # TODO: This is stupid!
   # https://github.com/rails/rails/issues/10630
@@ -17,7 +18,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: user, meta: {} }.merge(api_defaults), scope: current_resource, scope_name: :current_user) }
     end
   end
 
@@ -25,7 +26,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render({ json: user.personality, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: user.personality, meta: {} }.merge(api_defaults), scope: current_resource, scope_name: :current_user) }
     end
   end
 
@@ -83,22 +84,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     else
       nil
     end
-
-    # if params[:id] == '-' 
-    #   @user ||= caller
-    # elsif params[:id]
-    #   @user ||= User.find(params[:id])
-    # elsif params[:user_id]
-    #   user_id = params[:user_id]
-    #   if user_id && user_id == '-'
-    #     @user ||= caller
-    #   elsif user_id 
-    #     @user ||= User.find(params[:user_id])
-    #   end
-    # else
-    #   @user = nil
-    # end
-    # @user
   end
 
   def user_attributes

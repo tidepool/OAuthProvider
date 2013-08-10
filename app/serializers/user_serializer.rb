@@ -1,4 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
+  cached 
+
   attributes :id, :email, :guest, :name, :display_name,
             :date_of_birth, :gender, :image, 
             :timezone, :locale, 
@@ -8,4 +10,8 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :authentications
   has_one :personality
+
+  def cache_key
+    [object, current_user]
+  end
 end

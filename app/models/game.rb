@@ -50,7 +50,9 @@ class Game < ActiveRecord::Base
     create! do |game|
       game.definition = definition
       game.name = definition.unique_name  # Denormolizing the unique_name of the definition
-      game.stages = definition.stages_from_stage_definition
+      game.stages = Rails.cache.fetch(definition.unique_name, expires_in: 10 minutes) do 
+        definition.stages_from_stage_definition
+      end
       game.user = target_user
       game.calling_ip = calling_ip
       game.date_taken = Time.zone.now # Always use Time.zone not Time
