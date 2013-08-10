@@ -11,7 +11,7 @@ class ImageRankGenerator
 
     image_sequence = []
     image_id_sequence = @stage_template["image_sequence"]
-    images = Rails.cache.fetch(image_id_sequence, expires_in: 1 day) do 
+    images = Rails.cache.fetch(image_id_sequence, expires_in: 1.day) do 
       Image.where(name: image_id_sequence).to_a
     end
     images.each do |image|

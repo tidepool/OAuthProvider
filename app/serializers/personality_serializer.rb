@@ -5,6 +5,6 @@ class PersonalitySerializer < ActiveModel::Serializer
   has_one :profile_description
 
   def cache_key 
-    [object, current_user]
+    [object, current_resource]
   end
 end

@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::V1::ApiController
   doorkeeper_for :index, :show, :update, :destroy
-  serialization_scope nil
+  serialization_scope :current_resource
 
   # TODO: This is stupid!
   # https://github.com/rails/rails/issues/10630
@@ -18,7 +18,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render({ json: user, meta: {} }.merge(api_defaults), scope: current_resource, scope_name: :current_user) }
+      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -26,7 +26,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = current_resource
 
     respond_to do |format|
-      format.json { render({ json: user.personality, meta: {} }.merge(api_defaults), scope: current_resource, scope_name: :current_user) }
+      format.json { render({ json: user.personality, meta: {} }.merge(api_defaults)) }
     end
   end
 
