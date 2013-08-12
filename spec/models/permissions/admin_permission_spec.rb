@@ -69,5 +69,9 @@ module Permissions
       expect(subject.allow?(:activities, :index)).to be_true
     end
 
+    it 'admin permissions for sleeps' do
+      expect(subject.allow?(:sleeps, :index)).to be_true
+    end
+
   end
 end
