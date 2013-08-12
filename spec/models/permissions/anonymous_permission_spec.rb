@@ -58,5 +58,9 @@ module Permissions
       expect(subject.allow?(:activities, :index)).to be_false
     end
 
+    it 'anonymous permissions for sleeps' do
+      expect(subject.allow?(:sleeps, :index)).to be_false
+    end
+
   end
 end

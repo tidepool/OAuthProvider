@@ -38,6 +38,8 @@ module Permissions
 
         allow :activities, :index
 
+        allow :sleeps, :index
+
         allow :friend_surveys, [:create, :results]
       end
     end

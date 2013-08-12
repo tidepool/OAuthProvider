@@ -66,8 +66,12 @@ module Permissions
         expect(subject.allow?(:connections, :progress)).to be_true
       end
 
-      it 'anonymous permissions for activities' do
+      it 'registered permissions for activities' do
         expect(subject.allow?(:activities, :index)).to be_true
+      end
+
+      it 'registered permissions for sleeps' do
+        expect(subject.allow?(:sleeps, :index)).to be_true
       end
 
     end
