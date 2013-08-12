@@ -15,6 +15,7 @@ define([], function() {
       toastr: "bower_components/toastr",
       chart: "bower_components/Chart.js/Chart.min",
       markdown: 'bower_components/markdown/lib/markdown',
+      fastclick: 'bower_components/fastclick/lib/fastclick',
       nested_view: "scripts/vendor/nested_view",
       results: "scripts/views/results",
       controllers: "scripts/controllers",
