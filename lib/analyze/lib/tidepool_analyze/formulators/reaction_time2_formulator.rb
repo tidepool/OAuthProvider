@@ -74,7 +74,8 @@ module TidepoolAnalyze
           average_time_simple: average_time_simple,
           average_time_complex: average_time_complex,
           fastest_time: fastest_time,
-          slowest_time: slowest_time
+          slowest_time: slowest_time,
+          stage_data: @reaction_times
         }
       end   
     end

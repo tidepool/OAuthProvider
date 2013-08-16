@@ -11,7 +11,8 @@ module TidepoolAnalyze
             :average_time_simple=>340,
             :average_time_complex=>718,
             :fastest_time=>400,
-            :slowest_time=>905
+            :slowest_time=>905,
+            :stage_data=>[]
           }
         ] 
       end
@@ -27,6 +28,7 @@ module TidepoolAnalyze
           :average_time_complex=>718,
           :fastest_time=>400,
           :slowest_time=>905,
+          :stage_data=>[],
           :version => "2.0"
         }
       end

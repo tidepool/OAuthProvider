@@ -1,5 +1,5 @@
 class SpeedArchetypeResultSerializer < ActiveModel::Serializer
-  attributes :id, :game_id, :user_id, :type, :speed_archetype, :big5_dimension,
+  attributes :id, :game_id, :user_id, :type, :calculations, :speed_archetype, :big5_dimension, 
       :fastest_time, :slowest_time, :average_time, :average_time_simple, :average_time_complex, 
       :description, :bullet_description,  :display_id, :time_played, :time_calculated
 

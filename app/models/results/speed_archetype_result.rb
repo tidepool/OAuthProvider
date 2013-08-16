@@ -28,7 +28,7 @@ class SpeedArchetypeResult < Result
     result.reaction_time_description_id = reaction_time_description.id # This is an HStore accessor so needs to use id
 
     result.calculations = {
-      "final_results" => analysis_results[:reaction_time2][:final_results]
+      "stage_data" => score[:stage_data]
     }
     result.analysis_version = version
     result.record_times(game)
