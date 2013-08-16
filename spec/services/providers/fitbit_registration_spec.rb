@@ -67,6 +67,6 @@ describe FitbitRegistration do
 
     user1.date_of_birth.should == Date.new(1969, 8, 20)
     user1.image.should == "http://cache.fitbit.com/38AC23FC-7AC2-BA16-A1BD-39885AB91048_profile_100_square.jpg"
-    user1.gender.should == "MALE"
+    user1.gender.should == "male"
   end
 end

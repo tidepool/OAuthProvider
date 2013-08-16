@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "reaction_time2"
+  },
+  {
+    "user_event_source": "snoozer",
+    "analyzer": "SnoozerAnalyzer", 
+    "formulator": "ReactionTime2Formulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
+  }
+]

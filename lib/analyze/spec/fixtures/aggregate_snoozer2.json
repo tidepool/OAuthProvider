@@ -1,0 +1,34 @@
+[
+  {
+    "event_type": "snoozer",
+    "stage":0,
+    "events": [
+      { "time":1360194757876, "event":"level_started", "sequence_type":"simple"},
+      { "time":1360194763094, "event":"shown", "type":"target", "color":"yellow", "item_id":"1_1" },
+      { "time":1360194763626, "event":"correct", "color":"yellow", "item_id":"1_1" },
+      { "time":1360194764006, "event":"shown", "type":"decoy", "color":"yellow", "item_id":"2_1" },
+      { "time":1360194764637, "event":"incorrect", "color":"yellow", "item_id": "2_1"},
+      { "time":1360194768406, "event":"shown", "type":"target", "color":"yellow", "item_id":"4_1"},
+      { "time":1360194774844, "event":"shown", "type":"target", "color":"red", "item_id": "2_2" },
+      { "time":1360194775749, "event":"correct","color":"red", "item_id": "2_2" },
+      { "time":1360194775750, "event":"level_completed"},    
+      { "time":1360194958245, "event": "level_summary"}
+    ]
+  },
+  {
+    "event_type": "snoozer",
+    "stage":1,
+    "events": [
+      { "time":1360194757876, "event":"level_started", "sequence_type":"complex"},
+      { "time":1360194763094, "event":"shown", "type":"target", "color":"yellow", "item_id":"1_1" },
+      { "time":1360194763626, "event":"correct", "color":"yellow", "item_id":"1_1" },
+      { "time":1360194764006, "event":"shown", "type":"decoy", "color":"yellow", "item_id":"2_1" },
+      { "time":1360194764637, "event":"incorrect", "color":"yellow", "item_id": "2_1"},
+      { "time":1360194768406, "event":"shown", "type":"target", "color":"yellow", "item_id":"4_1"},
+      { "time":1360194774844, "event":"shown", "type":"target", "color":"red", "item_id": "2_2" },
+      { "time":1360194775749, "event":"correct","color":"red", "item_id": "2_2" },
+      { "time":1360194775750, "event":"level_completed"},    
+      { "time":1360194958245, "event":"level_summary"}
+    ]
+  }
+]

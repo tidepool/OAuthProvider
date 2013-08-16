@@ -27,6 +27,7 @@ module TidepoolAnalyze
         holland6_new: 'holland6_new',
         emo: 'emo',
         reaction_time: 'reaction_time',
+        reaction_time2: 'reaction_time2',
         capacity: 'capacity',
         survey: 'survey'
       }

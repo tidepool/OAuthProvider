@@ -1,0 +1,35 @@
+require 'spec_helper'
+
+module TidepoolAnalyze
+  module ScoreGenerator
+
+    describe ReactionTime2Score do
+      before(:all) do
+        @input_data = [
+          {
+            :average_time=>529,
+            :average_time_simple=>340,
+            :average_time_complex=>718,
+            :fastest_time=>400,
+            :slowest_time=>905
+          }
+        ] 
+      end
+
+      it 'should calculate the reaction_time score correctly' do
+        reaction_time_score = ReactionTime2Score.new
+        result = reaction_time_score.calculate_score(@input_data)
+
+        result.should == {
+          :speed_archetype=>"dog",
+          :average_time=>529,
+          :average_time_simple=>340,
+          :average_time_complex=>718,
+          :fastest_time=>400,
+          :slowest_time=>905,
+          :version => "2.0"
+        }
+      end
+    end
+  end
+end

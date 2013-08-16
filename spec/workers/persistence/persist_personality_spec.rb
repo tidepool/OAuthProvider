@@ -93,9 +93,9 @@ describe PersistPersonality do
     result = updated_game.results[0]
     result.type.should == 'PersonalityResult'
     result.score.should == {
-      "name" => "The Swiss Army Knife",
-      "one_liner" => "**The Swiss Army Knife** welcomes new and complex problems and invents offers concrete solutions through immediate action.", 
-      "logo_url" => "The-Swiss-Army-Knife.png",
+      # "name" => "The Swiss Army Knife",
+      # "one_liner" => "**The Swiss Army Knife** welcomes new and complex problems and invents offers concrete solutions through immediate action.", 
+      # "logo_url" => "The-Swiss-Army-Knife.png",
       "profile_description_id" => "13"
     }
     result.analysis_version.should == '2.0'
