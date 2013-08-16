@@ -303,6 +303,26 @@ module TidepoolAnalyze
         :average_time_complex => 718,
         :fastest_time => 532,
         :slowest_time => 905,
+        :stage_data => [
+          { :test_type=>"simple", 
+            :test_duration=>17874, 
+            :average_time=>718, 
+            :slowest_time=>905, 
+            :fastest_time=>532, 
+            :total=>4, 
+            :total_correct=>2, 
+            :total_incorrect=>1, 
+            :total_missed=>1}, 
+          { :test_type=>"complex", 
+            :test_duration=>17874, 
+            :average_time=>718, 
+            :slowest_time=>905, 
+            :fastest_time=>532, 
+            :total=>4, 
+            :total_correct=>2, 
+            :total_incorrect=>1, 
+            :total_missed=>1}
+            ],
         :version => "2.0"
       }
     end

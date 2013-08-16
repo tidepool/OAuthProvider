@@ -30,7 +30,8 @@ module TidepoolAnalyze
                 average_time_simple: data[:average_time_simple],
                 average_time_complex: data[:average_time_complex],
                 fastest_time: data[:fastest_time],
-                slowest_time: data[:slowest_time]                
+                slowest_time: data[:slowest_time],
+                stage_data: data[:stage_data]                
               }
             end
           end

@@ -39,6 +39,30 @@ FactoryGirl.define do
           "reaction_time_description_id" => "24"
         }
       end
+      calculations do 
+        {
+          "stage_data" => [
+            { :test_type=>"simple",
+              :test_duration=>17874,
+              :average_time=>718,
+              :slowest_time=>905,
+              :fastest_time=>532,
+              :total=>4,
+              :total_correct=>2,
+              :total_incorrect=>1,
+              :total_missed=>1},
+            { :test_type=>"complex",
+              :test_duration=>17874,
+              :average_time=>718,
+              :slowest_time=>905,
+              :fastest_time=>532,
+              :total=>4,
+              :total_correct=>2,
+              :total_incorrect=>1,
+              :total_missed=>1}
+            ]
+        }
+      end
     end
 
     factory :personality_result do 
