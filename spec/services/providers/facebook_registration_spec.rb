@@ -12,8 +12,10 @@ describe FacebookRegistration do
                   "name" => "John Doe",
             "first_name" => "John",
              "last_name" => "Doe",
+                   "dob" => "1911-10-15",
                  "image" => "http://graph.facebook.com/1222/picture?type=square",
                   "urls" => { "Facebook" => "http://www.facebook.com/kkaratal" },
+              "location" => "San Francisco, California",
               "verified" => true
                      },
     "credentials" => {
@@ -55,5 +57,8 @@ describe FacebookRegistration do
     user1.image.should == "http://graph.facebook.com/1222/picture?type=square"
     user1.gender.should == "male"
     user1.timezone.should == -7
+    user1.date_of_birth.should == Date.new(1911, 10,15)
+    user1.city.should == "San Francisco"
+    user1.state.should == "California"
   end
 end

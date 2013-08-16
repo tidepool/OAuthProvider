@@ -70,7 +70,6 @@ describe ResultsCalculator do
       updated_game.results[0].type.should == "SurveyResult"
       updated_game.results[1].type.should == "ReactionTimeResult"
     end
-
   end
 
   describe 'Error and Edge Cases: ' do

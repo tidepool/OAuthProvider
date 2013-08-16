@@ -290,12 +290,21 @@ module TidepoolAnalyze
 
     it 'executes a reaction_time recipe with snoozer events' do 
       analyze_dispatcher = AnalyzeDispatcher.new
-      events = load_event_fixtures('aggregate_snoozer.json')
+      events = load_event_fixtures('aggregate_snoozer2.json')
       mini_game_events = analyze_dispatcher.events_by_mini_game(events)
-      recipe = analyze_dispatcher.read_recipe 'reaction_time'
+      recipe = analyze_dispatcher.read_recipe 'reaction_time2'
+
       analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
       analysis.should_not be_nil
-      analysis[:score].should == {:fastest_time=>300, :slowest_time=>500, :average_time=>400, :version=>"2.0" }
+      analysis[:score].should == {
+        :speed_archetype => "dolphin",
+        :average_time => 718,
+        :average_time_simple => 718,
+        :average_time_complex => 718,
+        :fastest_time => 532,
+        :slowest_time => 905,
+        :version => "2.0"
+      }
     end
 
 

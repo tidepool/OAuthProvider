@@ -4,18 +4,46 @@ module TidepoolAnalyze
   module Analyzer
     describe SnoozerAnalyzer do
       before(:all) do
-        events_json = IO.read(File.expand_path('../../fixtures/aggregate_snoozer.json', __FILE__))
-        @user_events = JSON.parse(events_json)[0]['events']
+        events_json = IO.read(File.expand_path('../../fixtures/aggregate_snoozer2.json', __FILE__))
+        @user_events = JSON.parse(events_json)
       end
 
-      it 'analyzes the snoozer events' do 
-        snoozer_analyzer = SnoozerAnalyzer.new(@user_events, nil)
+      it 'analyzes the snoozer events for simple' do 
+        simple_events = @user_events[0]['events']
+        snoozer_analyzer = SnoozerAnalyzer.new(simple_events, nil)
         result = snoozer_analyzer.calculate_result
-
         result.should_not be_nil
-        result[:average_time_to_click].should == 400
-        result[:max_time_to_click_above_threshold].should == 500
-        result[:min_time_to_click_above_threshold].should == 300
+
+        result.should == {
+          :test_type => "simple",
+          :test_duration => 17874,
+          :average_time => 718,
+          :slowest_time => 905,
+          :fastest_time => 532,
+          :total => 4,
+          :total_correct => 2,
+          :total_incorrect => 1,
+          :total_missed => 1
+        }
+      end
+
+      it 'analyzes the snoozer events for complex' do 
+        complex_events = @user_events[1]['events']
+        snoozer_analyzer = SnoozerAnalyzer.new(complex_events, nil)
+        result = snoozer_analyzer.calculate_result
+        result.should_not be_nil
+        
+        result.should == {
+          :test_type => "complex",
+          :test_duration => 17874,
+          :average_time => 718,
+          :slowest_time => 905,
+          :fastest_time => 532,
+          :total => 4,
+          :total_correct => 2,
+          :total_incorrect => 1,
+          :total_missed => 1
+        }
       end
     end
   end

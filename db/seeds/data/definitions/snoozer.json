@@ -2,20 +2,191 @@
     "name" : "Snoozer",
     "unique_name": "snoozer",
     "instructions" : "",
-    "recipe_names" : ["reaction_time"],
-    "persist_as_results" : ["reaction_time"],
+    "recipe_names" : ["reaction_time2"],
+    "persist_as_results" : ["speed_archetype"],
     "stages" :
         [
             {
                 "friendly_name" : "Snoozer",
-                "instructions" : "Click the circle on the screen as soon as it turns red.",
+                "instructions" : "Tap the clocks as soon they start ringing.",
                 "view_name": "Snoozer",
                 "level_definition_name": "Snoozer",
-                "game_type" : "cognition",
-                "interval_floor": 1100,
-                "interval_ceil": 1600,
+                "game_type" : "simple",
+                "sequence" : [[{
+                        "delay":200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":5950,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":3200,
+                        "colors":["green"]
+                    }
+                    ],[
+                    ],[
+                    ],[{
+                        "delay":2400,
+                        "colors":["green"]
+                    }
+                    ]
+                    ],
+                "correct_color": "green",
+                "correct_color_sequence": ["green"],
+                "limit_to": 10,
+                "target_count": 5
+            },
+            {
+                "friendly_name" : "Snoozer",
+                "instructions" : "Tap the clock as soon as it starts ringing. Multiple clocks can ring at the same time.",
+                "view_name": "Snoozer",
+                "level_definition_name": "Snoozer",
+                "game_type" : "simple",
+                "sequence" : [[{
+                        "delay":200,
+                        "colors":["green"]
+                    },{
+                        "delay":8200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":5700,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":3200,
+                        "colors":["green"]
+                    },{
+                        "delay":6200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":4100,
+                        "colors":["green"]
+                    },{
+                        "delay":6700,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":7960,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":3400,
+                        "colors":["green"]
+                    }
+                    ]
+                    ],
+                "correct_color": "green",
+                "correct_color_sequence": ["green"],
+                "limit_to": 10,
+                "target_count": 5
+            },
+            {
+                "friendly_name" : "Snoozer",
+                "instructions" : "Tap only the **green** clocks as soon as they start ringing. Avoid the **orange** decoys.",
+                "view_name": "Snoozer",
+                "level_definition_name": "Snoozer",
+                "game_type" : "simple",
+                "sequence" : [[{
+                        "delay":200,
+                        "colors":["orange"]
+                    },{
+                        "delay":6200,
+                        "colors":["orange"]
+                    }
+                    ],[{
+                        "delay":1200,
+                        "colors":["green"]
+                    },{
+                        "delay":4200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":200,
+                        "colors":["orange"]
+                    },{
+                        "delay":6200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":6200,
+                        "colors":["green"]
+                    },{
+                        "delay":9200,
+                        "colors":["orange"]
+                    }
+                    ],[{
+                        "delay":1200,
+                        "colors":["orange"]
+                    },{
+                        "delay":7200,
+                        "colors":["green"]
+                    }
+                    ],[{
+                        "delay":200,
+                        "colors":["orange"]
+                    }
+                    ]
+                    ],
+                "correct_color": "green",
+                "correct_color_sequence": ["green"],
+                "limit_to": 10,
+                "target_count": 5
+            },
+                        {
+                "friendly_name" : "Snoozer",
+                "instructions" : "Tap only ringing clocks that change from **yellow** to **green**. Avoid the **orange** clocks.",
+                "view_name": "Snoozer",
+                "level_definition_name": "Snoozer",
+                "game_type" : "complex",
+                "sequence" : [[{
+                        "delay":200,
+                        "colors":["orange"]
+                    },{
+                        "delay":6200,
+                        "colors":["yellow","green"]
+                    }
+                    ],[{
+                        "delay":1200,
+                        "colors":["orange"]
+                    },{
+                        "delay":4200,
+                        "colors":["orange","yellow"]
+                    }
+                    ],[{
+                        "delay":200,
+                        "colors":["yellow","green"]
+                    },{
+                        "delay":6200,
+                        "colors":["green","orange"]
+                    }
+                    ],[{
+                        "delay":6200,
+                        "colors":["yellow"]
+                    },{
+                        "delay":9200,
+                        "colors":["orange"]
+                    }
+                    ],[{
+                        "delay":1200,
+                        "colors":["yellow"]
+                    },{
+                        "delay":7200,
+                        "colors":["green","orange"]
+                    }
+                    ],[{
+                        "delay":200,
+                        "colors":["orange"]
+                    }
+                    ]
+                    ],
+                "correct_color": "green",
+                "correct_color_sequence": ["yellow","green"],
                 "limit_to": 10,
                 "target_count": 5
             }
+
         ]
 }

@@ -40,7 +40,16 @@ Doorkeeper.configure do
   #       "info": {
   #         "email": "email",
   #         "name": "name",
-  #         "image": "image_url"
+  #         "image": "image_url",
+  #         "location" : "location",
+  #         "gender" : "male",
+  #         "dob" : "1911-11-23"
+  #       },
+  #       "extra": {
+  #         "raw_info": {
+  #           "gender" : "male",
+  #           "dob" : "1911-11-23"
+  #         }
   #       },
   #       "credentials": {
   #         "token": "facebook token",                      # Maps to com.facebook.sdk:TokenInformationTokenKey

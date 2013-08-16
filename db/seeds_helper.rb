@@ -106,4 +106,18 @@ module SeedsHelper
       'factor5' => 'factor5'      
     }
   end
+
+  def speed_archetype_whitelist
+    whitelist = {
+      'falcon' => 'falcon',
+      'cheetah' => 'cheetah',
+      'antelope' => 'antelope',
+      'cat' => 'cat',
+      'wolf' => 'wolf',
+      'dog' => 'dog',
+      'crow' => 'crow',
+      'gorilla' => 'gorilla',
+      'dolphin' => 'dolphin'
+    }
+  end
 end

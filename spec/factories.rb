@@ -25,8 +25,30 @@ FactoryGirl.define do
           final_results: {}
         }
       end
-
     end
+
+    factory :speed_archetype_result do 
+      type 'SpeedArchetypeResult'
+      score do 
+        {
+          "average_time"=>"529",
+          "average_time_simple"=>"340",
+          "average_time_complex"=>"718",
+          "fastest_time"=>"400",
+          "slowest_time"=>"905",
+          "reaction_time_description_id" => "24"
+        }
+      end
+    end
+
+    factory :personality_result do 
+      type 'PersonalityResult'
+      score do 
+        {
+          "profile_description_id" => "2"
+        }
+      end
+    end    
   end
 
   factory :personality do 
