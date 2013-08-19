@@ -2,8 +2,8 @@
     "name" : "Snoozer",
     "unique_name": "snoozer",
     "instructions" : "",
-    "recipe_names" : ["reaction_time2"],
-    "persist_as_results" : ["speed_archetype"],
+    "recipe_names" : ["reaction_time2", "survey2"],
+    "persist_as_results" : ["speed_archetype", "survey"],
     "stages" :
         [
             {
@@ -135,7 +135,7 @@
                 "limit_to": 10,
                 "target_count": 5
             },
-                        {
+            {
                 "friendly_name" : "Snoozer",
                 "instructions" : "Tap only ringing clocks that change from **yellow** to **green**. Avoid the **orange** clocks.",
                 "view_name": "Snoozer",
@@ -186,7 +186,37 @@
                 "correct_color_sequence": ["yellow","green"],
                 "limit_to": 10,
                 "target_count": 5
-            }
-
+            },
+            {
+              "friendly_name": "Getting to Know You",
+              "view_name": "Survey",
+              "data": [
+                {
+                  "question_id": "activity1-7",
+                  "topic": "activity",
+                  "question_type": "icon_slider",
+                  "icon": "gfx-clock",
+                  "steps": 7,
+                  "question": "How much activity did you have today?",
+                  "labels": [
+                      { "position": 0, "label": "Not at all" },
+                      { "position": "50%", "label": "Somewhat" },
+                      { "position": "100%", "label": "Very much" }
+                  ]
+                },
+                {
+                  "question_id": "sleep1-7",
+                  "topic": "sleep",
+                  "question_type": "icon_slider",
+                  "icon": "gfx-stress",
+                  "steps": 7,
+                  "question": "How well did you sleep last night?",
+                  "labels": [
+                    { "position": 0, "label": "Not well" },
+                    { "position": "50%", "label": "Somewhat" },
+                    { "position": "100%", "label": "Very much" }
+                  ]
+                }]
+            } 
         ]
 }

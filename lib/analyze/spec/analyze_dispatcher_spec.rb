@@ -437,6 +437,22 @@ module TidepoolAnalyze
       }
     end
 
+    it 'calculates the survey2 score' do
+      recipe_names = ['survey2']
+
+      events = load_event_fixtures('aggregate_snoozer2.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+      analysis.length.should == 1
+      analysis.should == {
+        :survey=>
+          { :score_name=>"survey",
+            :final_results=>[{:activity=>5, :sleep=>3}],
+            :score=>{:activity=>5, :sleep=>3, :version=>"2.0"}
+          }
+        }
+    end
+
     it 'calculates the capacity score' do
       recipe_names = ['capacity']
 

@@ -32,7 +32,11 @@ class SurveyResult < Result
     survey_results = {}
     survey_score.each do | topic, value |
       if topic.to_sym != :version
-        survey_results[topic] = value[:answer]
+        if value.class == Hash && value[:answer]
+          survey_results[topic] = value[:answer]
+        else
+          survey_results[topic] = value
+        end
       end
     end
     result.score = survey_results

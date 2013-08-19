@@ -29,6 +29,7 @@ module TidepoolAnalyze
         reaction_time: 'reaction_time',
         reaction_time2: 'reaction_time2',
         capacity: 'capacity',
+        survey2: 'survey2',
         survey: 'survey'
       }
       mini_game_events = events_by_mini_game(user_events)
