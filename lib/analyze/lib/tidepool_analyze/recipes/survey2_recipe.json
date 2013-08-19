@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "survey"
+  },
+  {
+    "user_event_source": "survey",
+    "analyzer": "SurveyAnalyzer",
+    "formulator": "SurveyFormulator",
+    "formula_sheet": "reaction_time_demand.csv",
+    "formula_key": "calculation"
+  }
+]
