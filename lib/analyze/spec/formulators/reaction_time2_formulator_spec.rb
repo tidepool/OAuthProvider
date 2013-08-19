@@ -27,7 +27,7 @@ module TidepoolAnalyze
             :total_correct => 2,
             :total_incorrect => 1,
             :total_missed => 1
-          }                
+          }
         ]
         formula_desc = {
           formula_sheet: 'reaction_time_demand.csv',

@@ -19,12 +19,13 @@ module TidepoolAnalyze
         output = {}
         input_data.each do | data |
           if data[:average_time] 
+            # Snoozer game results
             simple_time_key = simple_time_mapping(data[:average_time_simple])
             complex_time_key = complex_time_mapping(data[:average_time_complex])
 
             if simple_time_key && complex_time_key
               lookup = "#{simple_time_key}-#{complex_time_key}"
-              output = {
+              output = output.merge({
                 speed_archetype: mapping[lookup],
                 average_time: data[:average_time],
                 average_time_simple: data[:average_time_simple],
@@ -32,8 +33,12 @@ module TidepoolAnalyze
                 fastest_time: data[:fastest_time],
                 slowest_time: data[:slowest_time],
                 stage_data: data[:stage_data]                
-              }
+              })
             end
+          else
+            # Survey results
+            output[:activity_level] = data[:activity] if data[:activity]
+            output[:sleep_level] = data[:sleep] if data[:sleep]  
           end
         end
         output.merge({ version: '2.0' })

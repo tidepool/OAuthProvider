@@ -30,5 +30,20 @@
       { "time":1360194775750, "event":"level_completed"},    
       { "time":1360194958245, "event":"level_summary"}
     ]
+  },
+  {
+    "event_type": "survey",
+    "stage": 2,
+    "events": [
+      {"time":1360195167248, "event":"level_started" },
+      {"time":1360195167848, "event":"changed", "question_id": "activity1-7", "topic": "activity", "answer": 5},
+      {"time":1360195167248, "event":"level_completed" },
+      {"time":1360195167548, "event":"level_summary",
+        "data":[
+          {"question_id": "activity1-7", "topic": "activity", "answer": 5}, 
+          {"question_id": "sleep1-7", "topic": "sleep", "answer": 3}
+        ]
+      }
+    ]
   }
 ]

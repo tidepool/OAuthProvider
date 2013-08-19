@@ -5,11 +5,15 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
     # called :redirectable, so we need to check to make sure this is checked?
     
     auth = authorization.authorize
-    user_id = auth.token.resource_owner_id
-    user = User.where(id: user_id).first
-    if user 
-      user_output = UserSerializer.new(user).as_json
-      output = auth.body.merge(user_output)
+    if auth.respond_to?('token')
+      user_id = auth.token.resource_owner_id
+      user = User.where(id: user_id).first
+      if user 
+        user_output = UserSerializer.new(user).as_json
+        output = auth.body.merge(user_output)
+      else
+        output = auth.body
+      end
     else
       output = auth.body
     end

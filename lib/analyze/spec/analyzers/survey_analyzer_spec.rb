@@ -25,15 +25,6 @@ module TidepoolAnalyze
         question[:question_topic].should == 'demand'
         question[:answer].should == 5
       end
-
-      # describe 'Edge and Error Cases' do 
-      #   it 'raises an exception if the event is malformed' do
-      #     events_json = IO.read(File.expand_path('../../fixtures/survey_malformed.json', __FILE__))
-      #     user_events = JSON.parse(events_json)
-      #     survey_analyzer = SurveyAnalyzer.new(user_events, nil)
-      #     expect { survey_analyzer.calculate_result }.to raise_error(TidepoolAnalyze::UserEventValidatorError)
-      #   end
-      # end
     end
   end
 end

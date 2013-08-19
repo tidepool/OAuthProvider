@@ -7,7 +7,8 @@ class Api::V1::UsersController < Api::V1::ApiController
   wrap_parameters User, include: [:guest,
       :email, :password, :password_confirmation, :name, :display_name, 
       :description, :city, :state, :country, :timezone, 
-      :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by]
+      :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by, 
+      :ios_device_token, :android_device_token, :is_dob_by_age]
 
   def index
     # TODO: Consider queries like friends, latest_users etc.
@@ -106,14 +107,16 @@ class Api::V1::UsersController < Api::V1::ApiController
       params.require(:user).permit!
     elsif params[:action] == 'create'
       params.require(:user).permit(:guest,
-      :email, :password, :password_confirmation, :name, :display_name, 
-      :description, :city, :state, :country, :timezone, 
-      :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by)        
+        :email, :password, :password_confirmation, :name, :display_name, 
+        :description, :city, :state, :country, :timezone, 
+        :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by, 
+        :ios_device_token, :android_device_token, :is_dob_by_age)        
     else
       params.require(:user).permit(:guest,
         :email, :password, :password_confirmation, :name, :display_name, 
         :description, :city, :state, :country, :timezone, 
-        :locale, :image, :gender, :date_of_birth, :education, :handedness)
+        :locale, :image, :gender, :date_of_birth, :education, :handedness, :referred_by, 
+        :ios_device_token, :android_device_token, :is_dob_by_age)
     end
   end
 end
