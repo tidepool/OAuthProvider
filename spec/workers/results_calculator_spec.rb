@@ -36,11 +36,10 @@ describe ResultsCalculator do
       guest.personality.big5_high.should_not be_nil
       guest.personality.holland6_score.should_not be_nil
       guest.personality.big5_score.should_not be_nil
-
-      guest.personality.profile_description.name.should == 'The Connector'
-      guest.personality.big5_dimension.should == 'low_conscientiousness'
+      guest.personality.profile_description.name.should == 'The Sparkler'
+      guest.personality.big5_dimension.should == 'high_extraversion'
       guest.personality.holland6_dimension.should == 'social'
-      guest.personality.big5_low.should == 'conscientiousness'
+      guest.personality.big5_low.should == 'openness'
       guest.personality.big5_high.should == 'extraversion'
     end
 

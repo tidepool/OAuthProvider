@@ -39,4 +39,6 @@ OAuthProvider::Application.configure do
   #   * production - set it to true
   config.eager_load = false
 
+  # http://coffeepowered.net/2013/08/02/ruby-prof-for-rails/
+  config.middleware.insert 0, "Rack::RequestProfiler", :printer => ::RubyProf::CallTreePrinter
 end
