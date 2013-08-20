@@ -17,7 +17,13 @@ module TidepoolAnalyze
           if result && result.has_key?(:realistic)
             count += 1
             result.each do |dimension, value|
-              holland6_scores[dimension] += value[:average] if holland6_scores[dimension]
+              if holland6_scores[dimension]
+                if value.class == Hash && value[:average]
+                  holland6_scores[dimension] += value[:average]
+                else
+                  holland6_scores[dimension] += value
+                end
+              end
             end
           end
         end

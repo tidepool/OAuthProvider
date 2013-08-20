@@ -9,10 +9,18 @@
     {"time":1360195167248, "event":"level_completed" },
     {"time":1360195167548, "event":"level_summary",
       "symbol_list":[
-        { "value": "enterprising1", "dimension": "enterprising" } 
+        { "value": "enterprising1", "dimension": "enterprising" },
+        { "value": "enterprising1", "dimension": "realistic" },
+        { "value": "enterprising1", "dimension": "enterprising" }         
       ],
       "word_list": [
-        { "value": "mechanical", "dimension": "realistic" }
+        { "value": "mechanical", "dimension": "realistic" },
+        { "value": "mechanical", "dimension": "social" },
+        { "value": "mechanical", "dimension": "realistic" },
+        { "value": "mechanical", "dimension": "realistic" },
+        { "value": "mechanical", "dimension": "social" },        
+        { "value": "mechanical", "dimension": "investigative" },        
+        { "value": "mechanical", "dimension": "conventional" }                
       ]
     }
   ]
