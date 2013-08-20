@@ -40,6 +40,7 @@ describe PersistSpeedArchetype do
     updated_game.results.should_not be_nil
     updated_game.results.length.should == 1
     result = updated_game.results[0]
+    result.user_id.should == user.id
     result.type.should == 'SpeedArchetypeResult'
     result.score.should == {
       # "speed_archetype"=>"dog",

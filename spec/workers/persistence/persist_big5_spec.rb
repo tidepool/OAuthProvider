@@ -53,6 +53,7 @@ describe PersistBig5 do
     updated_game.results.length.should == 1
     result = updated_game.results[0]
     result.type.should == 'Big5Result'
+    result.user_id.should == user.id
     result.score.should == {
        "adjust_by" => "1",
        "dimension" => "high_openness",

@@ -98,6 +98,7 @@ describe PersistPersonality do
       # "logo_url" => "The-Swiss-Army-Knife.png",
       "profile_description_id" => "13"
     }
+    result.user_id.should == user.id
     result.analysis_version.should == '2.0'
   end
 

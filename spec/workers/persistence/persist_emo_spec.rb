@@ -97,6 +97,7 @@ describe PersistBig5 do
     updated_game.results.length.should == 1
     result = updated_game.results[0]
     result.should_not be_nil
+    result.user_id.should == user.id
     result.factor1.should == "41.66610693205314"
     result.factor2.should == "44.92791625293482"
     result.factor3.should == "45.71085593272107"

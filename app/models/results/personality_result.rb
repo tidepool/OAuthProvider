@@ -35,6 +35,7 @@ class PersonalityResult < Result
     result = existing_result
     result = game.results.build(:type => 'PersonalityResult') if result.nil?
 
+    result.user_id = game.user_id
     # result.name = profile_description.name
     # result.one_liner = profile_description.one_liner
     # result.logo_url = profile_description.logo_url
