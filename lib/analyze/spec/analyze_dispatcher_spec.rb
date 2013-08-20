@@ -232,16 +232,16 @@ module TidepoolAnalyze
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
       analysis[:score].should == {
-        :dimension => "low_conscientiousness",
+        :dimension => "high_extraversion",
         :dimension_values => {
-            :openness => 13.545517101280748,
-            :agreeableness => 18.956322022270864,
-            :conscientiousness => 10.0,
-            :extraversion => 22.453501732805346,
-            :neuroticism => 21.267963651267777 },
-        :low_dimension => :conscientiousness,
+            :openness => 9.999999999999998,
+            :agreeableness => 12.614011786845673,
+            :conscientiousness => 10.475974254355606,
+            :extraversion => 21.154235454105393,
+            :neuroticism => 16.639460681817177 },
+        :low_dimension => :openness,
         :high_dimension => :extraversion,
-        :adjust_by => 1.7080919421487604,
+        :adjust_by => 1.629257384610685,
         :version => "2.0"
       }
     end

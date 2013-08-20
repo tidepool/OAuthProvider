@@ -2,10 +2,17 @@
     "name" : "Baseline game",
     "unique_name": "baseline",
     "instructions" : "",
-    "recipe_names" : ["big5_circles", "holland6"],
+    "recipe_names" : ["big5", "holland6"],
     "persist_as_results" : ["big5", "holland6", "personality"],
     "stages" :
         [
+            {
+                "friendly_name" : "Image Ranking 1",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F2a", "F2b", "F2c", "F2d", "F2e"]
+            },
             {
                 "friendly_name" : "Circles 1",
                 "instructions" : [
@@ -15,30 +22,37 @@
                 "view_name" : "CirclesTest",
                 "game_type" : "big5",
                 "circles" : [{
-                    "trait1" : "Self-Disciplined",
-                    "trait2" : "Persistent",
-                    "size" : "2"
-                },
-                {
-                    "trait1" : "Anxious",
-                    "trait2" : "Dramatic",
-                    "size" : "2"
-                },
-                {
-                    "trait1" : "Curious",
-                    "trait2" : "Cultured",
-                    "size" : "2"
-                },
-                {
-                    "trait1" : "Sociable",
-                    "trait2" : "Adventurous",
-                    "size" : "2"
-                },
-                {
-                    "trait1" : "Cooperative",
-                    "trait2" : "Friendly",
-                    "size" : "2"
-                }]
+                        "trait1" : "Self-Disciplined",
+                        "trait2" : "Persistent",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Anxious",
+                        "trait2" : "Dramatic",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Curious",
+                        "trait2" : "Cultured",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Sociable",
+                        "trait2" : "Adventurous",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Cooperative",
+                        "trait2" : "Friendly",
+                        "size" : "2"
+                    }]
+            },
+            {
+                "friendly_name" : "Image Ranking 2",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F4a", "F4b", "F4c", "F4d", "F4e"]
             },
             {
                 "friendly_name" : "Circles 2",
@@ -49,7 +63,7 @@
                 "view_name" : "CirclesTest",
                 "game_type" : "big5",
                 "circles" : [{
-                        "trait1" : "Judgmental",
+                        "trait1" : "Independent",
                         "trait2" : "Aloof",
                         "size" : "2"
                     },
@@ -69,8 +83,8 @@
                         "size" : "2"
                     },
                     {
-                        "trait1" : "Traditional",
-                        "trait2" : "Straightforward",
+                        "trait1" : "Adamant",
+                        "trait2" : "Focused",
                         "size" : "2"
                     }]
             },
@@ -112,6 +126,21 @@
                         "trait2" : "Thorough",
                         "size" : "2"
                     }]
+            },
+            {
+                "friendly_name" : "Image Ranking 3",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F7a", "F7b", "F7c", "F7d", "F7e"]
+            },
+            {
+                "friendly_name" : "Image Ranking 4",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F8a", "F8b", "F8c", "F8d", "F8e"]
             }
         ]
 }
+
