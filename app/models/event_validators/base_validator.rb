@@ -42,7 +42,7 @@ class BaseValidator
       if @expected_events[event_name] == false
         @expected_events[event_name] = true
       else
-        raise Api::V1::UserEventValidatorError, "Duplicate #{expected_event} specified."
+        raise Api::V1::UserEventValidatorError, "Duplicate #{event_name} specified."
       end
     end
   end
