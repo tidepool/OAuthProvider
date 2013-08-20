@@ -148,6 +148,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       code: 3001,
       message: exception.message
     })
+    logger.error("ResultCalculationError: #{exception.message}")
     http_status = :internal_server_error   
     respond_with_error(api_status, http_status)     
   end

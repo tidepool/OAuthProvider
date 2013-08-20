@@ -91,6 +91,7 @@ class Api::V1::GamesController < Api::V1::ApiController
       code: 5000,
       message: exception.message
     })
+    logger.error("UserEventValidatorError: #{exception.message}")
     http_status = :conflict   
     respond_with_error(api_status, http_status)     
   end

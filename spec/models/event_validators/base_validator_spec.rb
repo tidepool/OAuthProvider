@@ -33,4 +33,10 @@ describe BaseValidator do
     expect { validator.validate }.to raise_error(Api::V1::UserEventValidatorError)     
   end
 
+  it 'raises an error if the same expected event is sent twice' do 
+    @events['events'] << {"time" => 1360194958245, "event" => "level_summary"}
+
+    validator = BaseValidator.new(@events)
+    expect { validator.validate }.to raise_error(Api::V1::UserEventValidatorError)  
+  end
 end

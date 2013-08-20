@@ -49,6 +49,7 @@ class Api::V1::FriendSurveysController < Api::V1::ApiController
       code: 4000,
       message: exception.message
     })
+    logger.error("FriendSurveyNotReadyError: #{exception.message}")
     http_status = :not_found   
     respond_with_error(api_status, http_status)     
   end
