@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Definition do
 
   it 'creates a definition for the baseline game' do 
-    definition = Definition.default
+    definition = Definition.where(unique_name: 'baseline_old').first 
     stages = definition.stages_from_stage_definition
     stages.should_not be_nil
     stages.length.should == 7

@@ -1,6 +1,6 @@
 {
     "name" : "Baseline game",
-    "unique_name": "baseline",
+    "unique_name": "baseline_old",
     "instructions" : "",
     "recipe_names" : ["big5", "holland6"],
     "persist_as_results" : ["big5", "holland6", "personality"],
