@@ -44,7 +44,7 @@ module TidepoolAnalyze
     it 'sorts user_events into mini_game_events' do
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
-      mini_game_events.length.should == 4
+      mini_game_events.length.should == 5
       mini_game_events['reaction_time'].should_not be_nil
       mini_game_events['reaction_time'].length.should == 2
       mini_game_events['reaction_time'].each do |stage, stage_events|
@@ -57,7 +57,8 @@ module TidepoolAnalyze
       mini_game_events['circles_test'].length.should == 3
       mini_game_events['survey'].should_not be_nil
       mini_game_events['survey'].length.should == 1
-
+      mini_game_events['interest_picker'].should_not be_nil
+      mini_game_events['interest_picker'].length.should == 1
     end
 
     it 'reads the recipes for given score_name' do
@@ -262,7 +263,6 @@ module TidepoolAnalyze
 
     it 'executes a holland6_new recipe with the Interest Picker' do 
       analysis = execute_recipe('holland6_new')
-
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
     end
@@ -353,6 +353,28 @@ module TidepoolAnalyze
       analysis = analyze_dispatcher.analyze(@events, recipe_names)
       analysis.length.should == 1
       analysis[:holland6].should_not be_nil
+      analysis.should == {
+        :holland6=>
+          {:score_name=>"holland6",
+           :final_results=>
+            [{:realistic=>4,
+              :artistic=>0,
+              :social=>2,
+              :enterprising=>2,
+              :investigative=>1,
+              :conventional=>1}],
+           :score=>
+            {:dimension=>"realistic",
+             :dimension_values=>
+              {:realistic=>50,
+               :artistic=>10,
+               :social=>30,
+               :enterprising=>30,
+               :investigative=>20,
+               :conventional=>20},
+             :adjust_by=>1,
+             :version=>"2.0"}}
+      }
     end
 
     it 'calculates the reaction_time score' do

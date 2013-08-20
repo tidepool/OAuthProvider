@@ -197,7 +197,7 @@ describe 'Game API' do
 
       updated_game = Game.find(game.id)
       updated_game.event_log.should_not be_empty
-      updated_game.event_log.length.should == 7
+      updated_game.event_log.length.should == all_events.length
     end
 
     it 'receives an error if the event does not validate' do 
