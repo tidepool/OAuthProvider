@@ -23,6 +23,7 @@ module TidepoolAnalyze
     def analyze(user_events, recipe_names)
       recipe_names_whitelist = { 
         big5: 'big5',
+        big5_circles: 'big5_circles',
         holland6: 'holland6',
         holland6_new: 'holland6_new',
         emo: 'emo',

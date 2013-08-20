@@ -6,7 +6,6 @@ class ResultsCalculator
   include Sidekiq::Worker
    
   def perform(game_id)
-    key = "game:#{game_id}"
     game = Game.where('id = ?', game_id).first
     return if game.nil?
 

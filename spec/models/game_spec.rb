@@ -23,7 +23,7 @@ describe Game do
       game.definition.should == definition
       game.name.should == definition.unique_name
       game.stages.should_not be_nil
-      game.stages.length.should == 7
+      game.stages.length.should == 3
       game.user_id.should == guest.id
       game.event_log.should == {}
       game.status.should == :not_started
