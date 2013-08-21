@@ -10,8 +10,6 @@ OAuthProvider::Application.routes.draw do
   get '/auth/failure', to: 'authentications#failure'
   
   get '/auth/new', to: 'authentications#add_new'  
-  # resources :sessions
-  # resources :users
 
   mount Sidekiq::Web, at: '/sidekiq'
 
@@ -43,6 +41,8 @@ OAuthProvider::Application.routes.draw do
           # post 'result' => 'results#create'
           get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
+
+          put 'event_log', to: 'games#update_event_log'
         end
 
         resource :preferences
@@ -52,14 +52,14 @@ OAuthProvider::Application.routes.draw do
         get 'connections/:provider/progress', to: 'connections#progress'
 
         get 'activities', to: 'activities#index'
+        get 'sleeps', to: 'sleeps#index'
       end
             
-      post '/user_events' => 'user_events#create'
+      # post '/user_events' => 'user_events#create'
 
       get 'preferences/:type/description', to: 'preferences#description'
 
       get 'games/:game_id/friend_survey', to: 'friend_surveys#results'
-
       post 'games/:game_id/friend_survey', to: 'friend_surveys#create'
     end
   end

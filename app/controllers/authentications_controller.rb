@@ -6,7 +6,9 @@ class AuthenticationsController < ApplicationController
     redirect_after_external = session[:redirect_after_external]
     is_connection_request = session[:connection_request]
 
-    user = User.create_or_find(auth_hash, user_id)
+    # user = User.create_or_find(auth_hash, user_id)
+    registration_service = RegistrationService.new
+    user = registration_service.register_or_find_from_external(auth_hash, user_id)
     if user.nil?
       user_id = -1
     else

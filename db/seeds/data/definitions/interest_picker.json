@@ -1,0 +1,149 @@
+{
+    "name" : "Interest Picker",
+    "unique_name": "interest_picker",
+    "instructions" : "",
+    "recipe_names" : ["holland6_new"],
+    "persist_as_results" : [],
+    "stages" :
+        [
+            {
+                "friendly_name" : "Interest Picker",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "InterestPicker",
+                "game_type" : "holland6",
+                "data": [
+                    {
+                        "type": "symbol",
+                        "value": "gfx-hol6-social1",
+                        "desc": "A symbol depicting a man peeling a potato"
+                    }, {
+                        "value": "gfx-hol6-social2"
+                    }, {
+                        "value": "gfx-hol6-social3"
+                    }, {
+                        "value": "gfx-hol6-social4"
+                    }, {
+                        "value": "gfx-hol6-enterprising1"
+                    }, {
+                        "value": "gfx-hol6-enterprising2"
+                    }, {
+                        "value": "gfx-hol6-enterprising3"
+                    }, {
+                        "value": "gfx-hol6-enterprising4"
+                    }, {
+                        "value": "gfx-hol6-enterprising5"
+                    }, {
+                        "value": "gfx-hol6-conventional1"
+                    }, {
+                        "value": "gfx-hol6-conventional2"
+                    }, {
+                        "value": "gfx-hol6-conventional3"
+                    }, {
+                        "value": "gfx-hol6-conventional4"
+                    }, {
+                        "value": "gfx-hol6-realistic1"
+                    }, {
+                        "value": "gfx-hol6-realistic2"
+                    }, {
+                        "value": "gfx-hol6-realistic3"
+                    }, {
+                        "value": "gfx-hol6-realistic4"
+                    }, {
+                        "value": "gfx-hol6-realistic5"
+                    }, {
+                        "value": "gfx-hol6-artistic1"
+                    }, {
+                        "value": "gfx-hol6-artistic2"
+                    }, {
+                        "value": "gfx-hol6-artistic3"
+                    }, {
+                        "value": "gfx-hol6-artistic4"
+                    }, {
+                        "value": "gfx-hol6-investigative1"
+                    }, {
+                        "value": "gfx-hol6-investigative2"
+                    }, {
+                        "value": "gfx-hol6-investigative3"
+                    }, {
+                        "value": "gfx-hol6-investigative4"
+                    }, {
+                        "type": "word",
+                        "value": "Hands-on"
+                    }, {
+                        "type": "word",
+                        "value": "Mechanical"
+                    }, {
+                        "type": "word",
+                        "value": "Creative"
+                    }, {
+                        "type": "word",
+                        "value": "Intuitive"
+                    }, {
+                        "type": "word",
+                        "value": "Helpful"
+                    }, {
+                        "type": "word",
+                        "value": "Caring"
+                    }, {
+                        "type": "word",
+                        "value": "Persuasive"
+                    }, {
+                        "type": "word",
+                        "value": "Passionate"
+                    }, {
+                        "type": "word",
+                        "value": "Inquisitive"
+                    }, {
+                        "type": "word",
+                        "value": "Analytical"
+                    }, {
+                        "type": "word",
+                        "value": "Detail-Oriented"
+                    }, {
+                        "type": "word",
+                        "value": "Thorough"
+                    }
+                ]
+            },
+            {
+                "friendly_name" : "Circles Interest",
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+                ],
+                "view_name" : "CirclesTest",
+                "game_type" : "holland6",
+                "circles" : [{
+                        "trait1" : "Mechanical",
+                        "trait2" : "Hands-on",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Creative",
+                        "trait2" : "Intuitive",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Teacher",
+                        "trait2" : "Helpful",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Persuasive",
+                        "trait2" : "Enthusiastic",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Inquisitive",
+                        "trait2" : "Analytical",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Detail-Oriented",
+                        "trait2" : "Thorough",
+                        "size" : "2"
+                    }]
+            }
+        ]
+}
+

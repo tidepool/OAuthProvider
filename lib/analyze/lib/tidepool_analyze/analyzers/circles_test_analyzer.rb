@@ -1,8 +1,6 @@
 module TidepoolAnalyze 
   module Analyzer
     class CirclesTestAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :start_time, :end_time, :circles, :radii, :start_coords, :self_circle
 
       # Output Format:
@@ -47,29 +45,14 @@ module TidepoolAnalyze
       end
 
       def calculate_result
-        is_valid = process_events(@events)
-        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
-        raise TidepoolAnalyze::UserEventValidatorError, "circles are not provided" if @circles.nil?
-
-
-        raise TidepoolAnalyze::UserEventValidatorError, "self_coord top not provided" if @self_circle['top'].nil?
-        raise TidepoolAnalyze::UserEventValidatorError, "self_coord left not provided" if @self_circle['left'].nil?
-        raise TidepoolAnalyze::UserEventValidatorError, "self_coord size not provided" if @self_circle['size'].nil?
+        process_events(@events)
         
         self_circle_radius = @self_circle['size'] / 2.0
         self_circle_origin_x = @self_circle['left'] + self_circle_radius
         self_circle_origin_y = @self_circle['top'] + self_circle_radius
 
-        raise TidepoolAnalyze::UserEventValidatorError, "self circle radius can not be zero" if self_circle_radius.nil? || self_circle_radius == 0
-
         @results = []
         @circles.each do |circle|
-          raise TidepoolAnalyze::UserEventValidatorError, "trait1 not provided" if circle['trait1'].nil?
-          raise TidepoolAnalyze::UserEventValidatorError, "size not provided" if circle['size'].nil?
-          raise TidepoolAnalyze::UserEventValidatorError, "width not provided" if circle['width'].nil?
-          raise TidepoolAnalyze::UserEventValidatorError, "left not provided" if circle['left'].nil?
-          raise TidepoolAnalyze::UserEventValidatorError, "top not provided" if circle['top'].nil?
-
           if circle['trait2'].nil? || circle['trait2'].empty?
             name_pair = circle['trait1']
           else
@@ -160,23 +143,16 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
-        is_valid = true
         events.each do |entry|
-          unless user_event_valid?(entry)
-            is_valid = false
-            break
-          end
-
-          case entry['event_desc']
-          when 'test_started'
-            @start_time = entry['record_time']
-          when 'test_completed'
-            @end_time = entry['record_time']
-            @circles = entry['circles']
+          case entry['event']
+          when 'level_started'
+            @start_time = entry['time']
+          when 'level_summary'
+            @end_time = entry['time']
+            @circles = entry['data']
             @self_circle = entry['self_coord']
           end
         end
-        is_valid
       end
     end
   end

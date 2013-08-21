@@ -55,6 +55,7 @@ describe PersistHolland6 do
     updated_game.results.length.should == 1
     result = updated_game.results[0]
     result.type.should == 'Holland6Result'
+    result.user_id.should == user.id
     result.score.should == {
        "adjust_by" => "1",
        "dimension" => "realistic",

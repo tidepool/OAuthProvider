@@ -1,5 +1,8 @@
 [
   {
+    "score_name": "emo"
+  },
+  {
     "user_event_source": "emotions_circles",
     "analyzer": "CirclesTestAnalyzer", 
     "formulator": "EmoFormulator",  

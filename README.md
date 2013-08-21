@@ -7,16 +7,16 @@ Pre-requisites:
         brew install rbenv
         brew install ruby-build
   
-  DO NOT Forget to add this to your .zshrc or .profile (depending on your shell)
+    DO NOT Forget to add this to your .zshrc or .profile (depending on your shell)
   
         if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
   
-  Then install and switch to the LATEST_RUBY version (currently at 2.0.0-p0)
+    Then install and switch to the LATEST_RUBY version (currently at 2.0.0-p0)
 
         rbenv install LATEST_RUBY
         rbenv global LATEST_RUBY
 
-  (Make sure you are on latest Ruby before continuing)
+    (Make sure you are on latest Ruby before continuing)
 
 * Install globally:
 
@@ -31,7 +31,7 @@ Pre-requisites:
 
         brew install redis
 
-  and run it: (default options)
+    and run it: (default options)
 
         redis-server
 
@@ -69,7 +69,7 @@ Installation:
         curl get.pow.cx | sh
         echo 7004 > ~/.pow/api-server
 
-Start the server now:
+    Start the server now:
 
         RACK_ENV=development foreman start
 

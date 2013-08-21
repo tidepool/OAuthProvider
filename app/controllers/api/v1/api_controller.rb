@@ -6,7 +6,8 @@ class Api::V1::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Api::V1::UnauthorizedError, with: :unauthorized_access
   rescue_from Api::V1::PreconditionFailedError, with: :precondition_failed
-  
+  rescue_from ArgumentError, with: :record_invalid
+
   protected
 
   def caller
@@ -62,6 +63,7 @@ class Api::V1::ApiController < ApplicationController
       code: 1001,
       message: exception.message
     })
+    logger.error("ActiveRecord::RecordNotFound: #{exception.message}")
     http_status = :not_found   
     respond_with_error(api_status, http_status)     
   end
@@ -71,6 +73,7 @@ class Api::V1::ApiController < ApplicationController
       code: 1002,
       message: exception.message
     })
+    logger.error("ActiveRecord::RecordInvalid: #{exception.message}")
     http_status = :unprocessable_entity   
     respond_with_error(api_status, http_status)     
   end
@@ -80,6 +83,7 @@ class Api::V1::ApiController < ApplicationController
       code: 1003,
       message: exception.message
     })
+    logger.error("PreconditionFailedError: #{exception.message}")
     http_status = :precondition_failed   
     respond_with_error(api_status, http_status)     
   end
@@ -89,6 +93,7 @@ class Api::V1::ApiController < ApplicationController
       code: 1000,
       message: exception.message
     })
+    logger.error("UnauthorizedError: #{exception.message}")
     http_status = :unauthorized   
     respond_with_error(api_status, http_status)     
   end

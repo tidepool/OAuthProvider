@@ -1,5 +1,8 @@
 [
   {
+    "score_name": "big5"
+  },
+  {
     "user_event_source": "circles_test",
     "analyzer": "CirclesTestAnalyzer", 
     "formulator": "CirclesFormulator",  

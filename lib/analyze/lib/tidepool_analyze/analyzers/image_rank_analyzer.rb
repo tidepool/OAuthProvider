@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class ImageRankAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
       # Output Data Format:
@@ -21,9 +19,7 @@ module TidepoolAnalyze
       # This is the correct behaviour:
       # The lowest ranked image (4) will get a rank_multiplier 1
       def calculate_result
-        is_valid = process_events(@events)
-        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
-        raise TidepoolAnalyze::UserEventValidatorError, "final_rank not supplied: #{@final_rank}" if @final_rank.nil? or @final_rank.length != 5
+        process_events(@events)
 
         elements = {}
         i = 0
@@ -45,23 +41,16 @@ module TidepoolAnalyze
       private
 
       def process_events(events)
-        is_valid = true
         events.each do |entry|
-          unless user_event_valid?(entry)
-            is_valid = false
-            break
-          end
-
-          case entry['event_desc']
-          when 'test_started'
-            @start_time = entry['record_time']
-            @images = entry['image_sequence']
-          when 'test_completed'
-            @end_time = entry['record_time']
+          case entry['event']
+          when 'level_started'
+            @start_time = entry['time']
+            @images = entry['data']
+          when 'level_summary'
+            @end_time = entry['time']
             @final_rank = entry['final_rank']
           end
         end
-        is_valid
       end
     end
   end

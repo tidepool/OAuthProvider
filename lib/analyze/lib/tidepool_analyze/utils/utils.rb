@@ -18,8 +18,12 @@ module TidepoolAnalyze
       # Merges array of arrays into one array with contents of the inside arrays
       single_array = []
       input_data.each do | result |
-        result.each do | raw_result |
-          single_array << raw_result
+        if result.class == Array
+          result.each do | raw_result |
+            single_array << raw_result
+          end
+        else
+          single_array << result
         end
       end
       single_array

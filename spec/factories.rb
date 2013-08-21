@@ -25,8 +25,54 @@ FactoryGirl.define do
           final_results: {}
         }
       end
-
     end
+
+    factory :speed_archetype_result do 
+      type 'SpeedArchetypeResult'
+      score do 
+        {
+          "average_time"=>"529",
+          "average_time_simple"=>"340",
+          "average_time_complex"=>"718",
+          "fastest_time"=>"400",
+          "slowest_time"=>"905",
+          "reaction_time_description_id" => "24"
+        }
+      end
+      calculations do 
+        {
+          "stage_data" => [
+            { :test_type=>"simple",
+              :test_duration=>17874,
+              :average_time=>718,
+              :slowest_time=>905,
+              :fastest_time=>532,
+              :total=>4,
+              :total_correct=>2,
+              :total_incorrect=>1,
+              :total_missed=>1},
+            { :test_type=>"complex",
+              :test_duration=>17874,
+              :average_time=>718,
+              :slowest_time=>905,
+              :fastest_time=>532,
+              :total=>4,
+              :total_correct=>2,
+              :total_incorrect=>1,
+              :total_missed=>1}
+            ]
+        }
+      end
+    end
+
+    factory :personality_result do 
+      type 'PersonalityResult'
+      score do 
+        {
+          "profile_description_id" => "2"
+        }
+      end
+    end    
   end
 
   factory :personality do 
@@ -49,7 +95,9 @@ FactoryGirl.define do
   factory :authentication do
     provider 'facebook'
     sequence(:uid) {|n| "1234#{n}" }
-
+    oauth_token "123456"
+    oauth_secret "232323"
+    
     factory :fitbit do 
       provider 'fitbit'
       last_synchronized do 
@@ -64,17 +112,17 @@ FactoryGirl.define do
 
   factory :definition do
     factory :profile_game do 
-      calculates "['profile']"
+      persist_as_results "['profile']"
     end
 
     factory :other_game do 
-      calculates "['other']"
+      persist_as_results "['other']"
     end
   end
 
   factory :game do
     definition_id 1
-    stages [{}, {}]
+    stages [{}, {}, {}, {}, {}, {}, {}]
     stage_completed -1
     status 'not_started'
     sequence(:date_taken) { |n| Time.zone.now - (n*1000) }

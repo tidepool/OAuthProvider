@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "big5"
+  },
+  {
+    "user_event_source": "circles_test",
+    "analyzer": "CirclesTestAnalyzer", 
+    "formulator": "CirclesFormulator",  
+    "formula_sheet": "big5_circles.csv",
+    "formula_key": "name_pair"
+  }
+]

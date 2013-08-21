@@ -167,6 +167,23 @@ class FitbitTracker
       sleep.total_minutes_asleep = summary["totalMinutesAsleep"]
       sleep.total_minutes_in_bed =  summary["totalTimeInBed"]
     end
+    sleep_details = sleep_hash["sleep"]
+    if sleep_details
+      if sleep_details.class == Array
+        sleep_details.each do |details|
+          # Only record the main sleep for now
+          if details["isMainSleep"] && details["isMainSleep"] == true
+            sleep.efficiency = details["efficiency"]
+            sleep.minutes_to_fall_asleep = details["minutesToFallAsleep"]
+            sleep.start_time = details["startTime"]
+            sleep.number_of_times_awake = details["awakeningsCount"]
+            sleep.minutes_awake = details["minutesAwake"]
+            sleep.minutes_after_wake_up = details["minutesAfterWakeup"]
+          end
+        end
+      end 
+    end
+
     sleep
   end
 

@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "holland6"
+  },
+  {
+    "user_event_source": "interest_picker",
+    "analyzer": "PickerAnalyzer", 
+    "formulator": "InterestFormulator",  
+    "formula_sheet": "holland6_circles.csv",
+    "formula_key": "name_pair"    
+  }
+]

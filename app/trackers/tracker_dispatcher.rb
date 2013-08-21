@@ -6,8 +6,6 @@ require File.expand_path('../errors.rb', __FILE__)
 class TrackerDispatcher
   include Sidekiq::Worker
    
-  RETRY_COUNT = 3
-
   def perform(user_id)
     logger.info("TrackerDispatcher called with #{user_id}")
     user = User.where(id: user_id).first

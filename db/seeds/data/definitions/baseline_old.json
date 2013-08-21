@@ -1,0 +1,146 @@
+{
+    "name" : "Baseline game",
+    "unique_name": "baseline_old",
+    "instructions" : "",
+    "recipe_names" : ["big5", "holland6"],
+    "persist_as_results" : ["big5", "holland6", "personality"],
+    "stages" :
+        [
+            {
+                "friendly_name" : "Image Ranking 1",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F2a", "F2b", "F2c", "F2d", "F2e"]
+            },
+            {
+                "friendly_name" : "Circles 1",
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+                ],
+                "view_name" : "CirclesTest",
+                "game_type" : "big5",
+                "circles" : [{
+                        "trait1" : "Self-Disciplined",
+                        "trait2" : "Persistent",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Anxious",
+                        "trait2" : "Dramatic",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Curious",
+                        "trait2" : "Cultured",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Sociable",
+                        "trait2" : "Adventurous",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Cooperative",
+                        "trait2" : "Friendly",
+                        "size" : "2"
+                    }]
+            },
+            {
+                "friendly_name" : "Image Ranking 2",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F4a", "F4b", "F4c", "F4d", "F4e"]
+            },
+            {
+                "friendly_name" : "Circles 2",
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+                ],
+                "view_name" : "CirclesTest",
+                "game_type" : "big5",
+                "circles" : [{
+                        "trait1" : "Independent",
+                        "trait2" : "Aloof",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Self-Reflective",
+                        "trait2" : "Reserved",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Disorganized",
+                        "trait2" : "Unconventional",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Calm",
+                        "trait2" : "Consistent",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Adamant",
+                        "trait2" : "Focused",
+                        "size" : "2"
+                    }]
+            },
+            {
+                "friendly_name" : "Circles 3",
+                "instructions" : [
+                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+                ],
+                "view_name" : "CirclesTest",
+                "game_type" : "holland6",
+                "circles" : [{
+                        "trait1" : "Mechanical",
+                        "trait2" : "Hands-on",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Creative",
+                        "trait2" : "Intuitive",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Teacher",
+                        "trait2" : "Helpful",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Persuasive",
+                        "trait2" : "Enthusiastic",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Inquisitive",
+                        "trait2" : "Analytical",
+                        "size" : "2"
+                    },
+                    {
+                        "trait1" : "Detail-Oriented",
+                        "trait2" : "Thorough",
+                        "size" : "2"
+                    }]
+            },
+            {
+                "friendly_name" : "Image Ranking 3",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F7a", "F7b", "F7c", "F7d", "F7e"]
+            },
+            {
+                "friendly_name" : "Image Ranking 4",
+                "instructions" : "Pick your favorite picture and rank them in order.",
+                "view_name" : "ImageRank",
+                "game_type" : "big5",
+                "image_sequence" : ["F8a", "F8b", "F8c", "F8d", "F8e"]
+            }
+        ]
+}
+

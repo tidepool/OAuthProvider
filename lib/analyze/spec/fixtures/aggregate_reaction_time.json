@@ -1,0 +1,61 @@
+[
+  {
+    "event_type": "reaction_time",
+    "stage": 0,
+    "events": [
+      {"time":1360194757876,"event":"level_started", "sequence_type":"simple", "data":["yellow:843","green:759","green:1367","green:986","green:741","red:506","yellow:910","green:951","red:1420","yellow:1383","yellow:638","yellow:1449","green:1090","yellow:1214","yellow:724","green:1375","red:575"]},
+      {"time":1360194758722,"event":"shown","color":"yellow","index":0,"time_interval":843},
+      {"time":1360194759485,"event":"shown","color":"green","index":1,"time_interval":759},
+      {"time":1360194760257,"event":"incorrect","color":"green","index":1},
+      {"time":1360194760855,"event":"shown","color":"green","index":2,"time_interval":1367},
+      {"time":1360194761777,"event":"incorrect","color":"green","index":2},
+      {"time":1360194761842,"event":"shown","color":"green","index":3,"time_interval":986},
+      {"time":1360194762586,"event":"shown","color":"green","index":4,"time_interval":741},
+      {"time":1360194763094,"event":"shown","color":"red","index":5,"time_interval":506},
+      {"time":1360194763626,"event":"correct","color":"red","index":5},
+      {"time":1360194764006,"event":"shown","color":"yellow","index":6,"time_interval":910},
+      {"time":1360194764637,"event":"incorrect","color":"yellow","index":6},
+      {"time":1360194764959,"event":"shown","color":"green","index":7,"time_interval":951},
+      {"time":1360194766381,"event":"shown","color":"red","index":8,"time_interval":1420},
+      {"time":1360194766524,"event":"correct","color":"red","index":8},
+      {"time":1360194767068,"event":"correct","color":"red","index":8},
+      {"time":1360194767766,"event":"shown","color":"yellow","index":9,"time_interval":1383},
+      {"time":1360194768306,"event":"incorrect","color":"yellow","index":9},
+      {"time":1360194768406,"event":"shown","color":"yellow","index":10,"time_interval":638},
+      {"time":1360194769857,"event":"shown","color":"yellow","index":11,"time_interval":1449},
+      {"time":1360194770922,"event":"incorrect","color":"yellow","index":11},
+      {"time":1360194770948,"event":"shown","color":"green","index":12,"time_interval":1090},
+      {"time":1360194771722,"event":"incorrect","color":"green","index":12},
+      {"time":1360194772165,"event":"shown","color":"yellow","index":13,"time_interval":1214},
+      {"time":1360194772891,"event":"shown","color":"yellow","index":14,"time_interval":724},
+      {"time":1360194774267,"event":"shown","color":"green","index":15,"time_interval":1375},
+      {"time":1360194774844,"event":"shown","color":"red","index":16,"time_interval":575},
+      {"time":1360194775749,"event":"correct","color":"red","index":16},
+      {"time":1360194775750,"event":"level_completed","index":16},
+      {"time":1360194958245,"event":"level_summary"}
+    ]
+  },
+  {
+    "event_type": "reaction_time",
+    "stage": 1,
+    "events": [
+      {"time":1360194785277,"event":"level_started","sequence_type":"complex","data":["red:1160","red:1092","yellow:653","green:1239","yellow:1312","green:1101","red:587","yellow:1065","red:1090"]},
+      {"time":1360194786440,"event":"shown","color":"red","index":0,"time_interval":1160},
+      {"time":1360194787535,"event":"shown","color":"red","index":1,"time_interval":1092},
+      {"time":1360194787610,"event":"incorrect","color":"red","index":1},
+      {"time":1360194788190,"event":"shown","color":"yellow","index":2,"time_interval":653},
+      {"time":1360194789255,"event":"incorrect","color":"yellow","index":2},
+      {"time":1360194789430,"event":"shown","color":"green","index":3,"time_interval":1239},
+      {"time":1360194790745,"event":"shown","color":"yellow","index":4,"time_interval":1312},
+      {"time":1360194791849,"event":"shown","color":"green","index":5,"time_interval":1101},
+      {"time":1360194791874,"event":"incorrect","color":"green","index":5},
+      {"time":1360194792439,"event":"shown","color":"red","index":6,"time_interval":587},
+      {"time":1360194793275,"event":"incorrect","color":"red","index":6},
+      {"time":1360194793506,"event":"shown","color":"yellow","index":7,"time_interval":1065},
+      {"time":1360194794600,"event":"shown","color":"red","index":8,"time_interval":1090},
+      {"time":1360194795202,"event":"correct","color":"red","index":8},
+      {"time":1360194795203,"event":"level_completed","index":8},
+      {"time":1360194795205,"event":"level_summary"}
+    ]
+  }
+]

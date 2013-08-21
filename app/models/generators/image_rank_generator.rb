@@ -11,19 +11,17 @@ class ImageRankGenerator
 
     image_sequence = []
     image_id_sequence = @stage_template["image_sequence"]
-    image_id_sequence.each do |image_id|
-      image = Image.where(name: image_id).first
-      if !image.nil?
-        image_url = ""
-        if (Rails.env.production?)
-          # TODO: S3 based location for the images
-          image_url = "/images/devtest_images/#{image_id}.jpg"
-        else
-          image_url = "/images/devtest_images/#{image_id}.jpg"
-        end        
-        image_sequence << { image_id: image_id, elements: image.elements, url: image_url}
-      end
+    images = Image.where(name: image_id_sequence).to_a
+    images.each do |image|
+      if (Rails.env.production?)
+        # TODO: S3 based location for the images
+        image_url = "/images/devtest_images/#{image.name}.jpg"
+      else
+        image_url = "/images/devtest_images/#{image.name}.jpg"
+      end        
+      image_sequence << { image_id: image.name, elements: image.elements, url: image_url}      
     end
+
     result["image_sequence"] = image_sequence
     result
   end
