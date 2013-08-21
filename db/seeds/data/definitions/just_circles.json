@@ -2,10 +2,8 @@
     "name" : "Just Circles",
     "unique_name": "just_circles",
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
-    "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["big5", "holland6"],
-    "calculates" : ["big5", "personality"],
-    "result_view": "Profile",
+    "recipe_names" : ["big5", "holland6"],
+    "persist_as_results" : ["big5", "personality"],
     "stages":
         [
             {

@@ -20,7 +20,8 @@ describe 'Game API' do
 
   it 'creates a game when user_id is - for the caller' do
     token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/-/games.json")
+    response = token.post("#{@endpoint}/users/-/games.json",
+      { body: { def_id: 'baseline' } })
     response.status.should == 200        
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
@@ -29,7 +30,8 @@ describe 'Game API' do
 
   it 'creates a game which has the user_id in the URI' do
     token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
+    response = token.post("#{@endpoint}/users/#{user1.id}/games.json",
+      { body: { def_id: 'baseline' } })
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
@@ -40,25 +42,6 @@ describe 'Game API' do
     token = get_conn(user1)
     response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
       { body: { def_id: 'baseline' } })
-    response.status.should == 200
-    result = JSON.parse(response.body, symbolize_names: true)
-    game_result = result[:data]
-    game_result[:name].should == 'baseline'
-  end
-
-  it 'creates a game that has the default definition if def_id is omitted' do 
-    token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
-    response.status.should == 200
-    result = JSON.parse(response.body, symbolize_names: true)
-    game_result = result[:data]
-    game_result[:name].should == 'baseline'
-  end
-
-  it 'creates a game that is the default definition if def_id cannot be found' do
-    token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
-      { body: { def_id: 'foobar' } })
     response.status.should == 200
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
@@ -119,7 +102,8 @@ describe 'Game API' do
 
   it 'allows admins create a game for other users' do
     token = get_conn(admin)
-    response = token.post("#{@endpoint}/users/#{user2.id}/games.json")
+    response = token.post("#{@endpoint}/users/#{user2.id}/games.json",
+      { body: { def_id: 'baseline' } })
     result = JSON.parse(response.body, symbolize_names: true)
     game_result = result[:data]
     game_result[:user_id].to_i.should == user2.id
@@ -161,6 +145,76 @@ describe 'Game API' do
     updated_game[:stage_completed].should == 1
   end
 
+  describe 'Updating the event_log' do
+    before :each do
+      @event = {
+        "event_type" => "image_rank",
+        "stage" => 2,
+        "events" =>  [
+          {"time" => 1360194798295,"event" => "level_started","data" => [{"url" => "assets/devtest_images/F1a.jpg","elements" => "color,human,male,man_made,movement,nature,pair,reflection,texture,whole","image_id" => "F1a","rank" => -1},{"url" => "assets/devtest_images/F1b.jpg","elements" => "color,male,man_made,pair,reflection","image_id" => "F1b","rank" => -1},{"url" => "assets/devtest_images/F1c.jpg","elements" => "color,human,human_eyes,male,man_made,movement,negative_space,pair,reflection,texture","image_id" => "F1c","rank" => -1},{"url" => "assets/devtest_images/F1d.jpg","elements" => "color,happy,human,human_eyes,nature,shading,texture,vista,whole","image_id" => "F1d","rank" => -1},{"url" => "assets/devtest_images/F1e.jpg","elements" => "color,human,male,man_made,movement,pair,reflection,shading,whole","image_id" => "F1e","rank" => -1}]},
+          {"time" => 1360194799677,"index" => 0, "event" => "start_move"},
+          {"time" => 1360194800133,"index" => 0, "rank" => "0","event" => "end_move"},
+          {"time" => 1360194801706,"index" => 2, "event" => "start_move"},
+          {"time" => 1360194802233,"index" => 2, "rank" => "2","event" => "end_move"},
+          {"time" => 1360194803821,"index" => 4, "event" => "start_move"},
+          {"time" => 1360194804382,"index" => 4, "rank" => "1","event" => "end_move"},
+          {"time" => 1360194805788,"index" => 1, "event" => "start_move"},
+          {"time" => 1360194811482,"index" => 1, "rank" => "4","event" => "end_move"},
+          {"time" => 1360194813884,"index" => 3, "event" => "start_move"},
+          {"time" => 1360194815866,"index" => 3, "rank" => "3","event" => "end_move"},
+          {"time" => 1360194815867,"event" => "level_completed"},
+          {"time" => 1360194815868,"event" => "level_summary", "final_rank" => [0,4,2,3,1]}
+        ]
+      }
+    end
+
+    it 'updates the event log of a game with a single stage' do
+      token = get_conn(user1)
+      game.user_id.should == user1.id
+      response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}/event_log.json",
+        { body: { event_log: @event } })
+      result = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 200
+      result[:status][:state].should == 'event_log_updated'
+
+      updated_game = Game.find(game.id)
+      updated_game.event_log.should_not be_empty
+      updated_game.event_log["2"]["event_type"].should == "image_rank"
+    end
+
+    it 'updates the event log of a game with an array of stages' do
+      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
+      all_events = JSON.parse(events_json)
+
+      token = get_conn(user1)
+      game.user_id.should == user1.id
+      response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}/event_log.json",
+        { body: { event_log: all_events } })
+
+      result = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 200
+      result[:status][:state].should == 'event_log_updated'
+
+      updated_game = Game.find(game.id)
+      updated_game.event_log.should_not be_empty
+      updated_game.event_log.length.should == all_events.length
+    end
+
+    it 'receives an error if the event does not validate' do 
+      @event["events"].delete_at(0)
+
+      token = get_conn(user1)
+      game.user_id.should == user1.id
+      response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}/event_log.json",
+        { body: { event_log: @event } })
+      result = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 409
+      result[:status][:code].should == 5000
+      updated_game = Game.find(game.id)
+      updated_game.event_log.should be_nil
+    end
+  end
+
   describe 'Error and Edge Cases' do
     it 'does not let API to update status directly' do 
       token = get_conn(user1)
@@ -171,5 +225,25 @@ describe 'Game API' do
       updated_game = result[:data]
       updated_game[:status].should == 'not_started'
     end
+
+    it 'returns an error if def_id is omitted during creation' do 
+      token = get_conn(user1)
+      response = token.post("#{@endpoint}/users/#{user1.id}/games.json")
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      game_result = result[:status]
+      game_result[:code].should == 1002
+    end
+
+    it 'returns an error def_id cannot be found during creation' do
+      token = get_conn(user1)
+      response = token.post("#{@endpoint}/users/#{user1.id}/games.json", 
+        { body: { def_id: 'foobar' } })
+      response.status.should == 404
+      result = JSON.parse(response.body, symbolize_names: true)
+      game_result = result[:status]
+      game_result[:code].should == 1001
+    end
+
   end
 end

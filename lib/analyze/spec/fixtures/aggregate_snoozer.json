@@ -1,0 +1,9 @@
+[
+  {
+    "event_type": "snoozer",
+    "stage":0,
+    "events": [
+      { "time": 1360195167248, "event": "level_summary", "fastest_time": 300, "slowest_time": 500, "average_time": 400}
+    ]
+  }
+]

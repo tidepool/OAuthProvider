@@ -41,6 +41,7 @@ group :teamcity do
 end
 
 group :development, :test, :teamcity do
+  gem 'request_profiler', :git => "git://github.com/justinweiss/request_profiler.git"
   gem 'annotate', ">=2.5.0"
   gem 'rspec-rails'
   gem 'oauth2'

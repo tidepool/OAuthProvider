@@ -16,6 +16,8 @@ module Permissions
         expect(subject.allow?(:games, :destroy, others_game)).to be_false
         expect(subject.allow?(:games, :update, game)).to be_true
         expect(subject.allow?(:games, :update, others_game)).to be_false
+        expect(subject.allow?(:games, :update_event_log, game)).to be_true
+        expect(subject.allow?(:games, :update_event_log, others_game)).to be_false
         expect(subject.allow?(:games, :show, game)).to be_true
         expect(subject.allow?(:games, :show, others_game)).to be_false
         expect(subject.allow?(:games, :index)).to be_true
@@ -64,8 +66,12 @@ module Permissions
         expect(subject.allow?(:connections, :progress)).to be_true
       end
 
-      it 'anonymous permissions for activities' do
+      it 'registered permissions for activities' do
         expect(subject.allow?(:activities, :index)).to be_true
+      end
+
+      it 'registered permissions for sleeps' do
+        expect(subject.allow?(:sleeps, :index)).to be_true
       end
 
     end

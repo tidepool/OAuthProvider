@@ -6,6 +6,9 @@ describe 'Results API' do
   before :all do
     find_or_create_app
     @endpoint = '/api/v1'
+
+    events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
+    @all_events = JSON.parse(events_json)
   end
 
   let(:user1) { create(:user) }
@@ -29,6 +32,7 @@ describe 'Results API' do
       fake_game.results.create(type: 'Big5Result', score: {'bar' => 'foo'})
       fake_game.results.create(type: 'Holland6Result', score: {'bar' => 'foo'})      
     end
+    game.update_event_log(@all_events)
 
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
@@ -39,7 +43,17 @@ describe 'Results API' do
     message[:data].should be_empty
   end
 
+  it 'declines calculating the results if all events are not received yet' do 
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
+    response.status.should == 412
+    message = JSON.parse(response.body, :symbolize_names => true)
+    message[:status][:code].should == 1003
+  end
+
   it 'keeps checking progress' do
+    game.update_event_log(@all_events)
+
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
     message = JSON.parse(response.body, :symbolize_names => true)
@@ -78,6 +92,7 @@ describe 'Results API' do
       fake_game.results.create(type: 'Big5Result', score: {'bar' => 'foo'}, user_id: fake_game.user.id)
       fake_game.results.create(type: 'Holland6Result', score: {'bar' => 'foo'}, user_id: fake_game.user.id)      
     end
+    game.update_event_log(@all_events)
 
     token = get_conn(user1)
     response = token.get("#{@endpoint}/users/-/games/#{game.id}/results.json")
@@ -139,6 +154,45 @@ describe 'Results API' do
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
+  end
+
+  describe 'PersonalityResult' do
+    let(:personality_result) { create(:personality_result, game: game, user: user1) }
+
+    it 'shows the results for PersonalityResult as it has some special runtime joins' do 
+      personality_result
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/results.json?type=PersonalityResult")
+      response.status.should == 200
+      output = JSON.parse(response.body, :symbolize_names => true)
+      user_results = output[:data]
+      user_results[0].should_not be_nil
+      user_results[0][:type].should == 'PersonalityResult'
+      user_results[0][:name].should == 'The Brainstorm'
+      user_results[0][:one_liner].should_not be_nil
+    end
+  end
+
+  describe 'SpeedArchetypeResult' do
+    let(:speed_archetype_result) { create(:speed_archetype_result, game: game, user: user1) } 
+
+    it 'shows the results for the SpeedArchetypeResult as it has some special runtime joins' do
+      speed_archetype_result
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/results.json?type=SpeedArchetypeResult")
+      response.status.should == 200
+      output = JSON.parse(response.body, :symbolize_names => true)
+      user_results = output[:data]
+      user_results[0].should_not be_nil
+      user_results[0][:type].should == 'SpeedArchetypeResult'
+      user_results[0][:speed_archetype].should == 'dog'
+      user_results[0][:big5_dimension].should == 'high_openness'
+      user_results[0][:description].should_not be_nil
+      user_results[0][:bullet_description].class.should == Array
+      user_results[0][:display_id].should == 'high_openness_dog'
+      user_results[0][:average_time_simple].should == '340'
+      user_results[0][:average_time_complex].should == '718'
+    end
   end
 
   describe 'Error and Edge Cases' do

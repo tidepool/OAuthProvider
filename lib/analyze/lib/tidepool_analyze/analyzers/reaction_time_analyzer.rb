@@ -1,8 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
     class ReactionTimeAnalyzer
-      include TidepoolAnalyze::Utils::EventValidator
-
       attr_reader :start_time, :end_time, :test_type, :click_targets, :color_sequence 
       attr_accessor :time_threshold
 
@@ -33,8 +31,7 @@ module TidepoolAnalyze
       # Time is coming from the browsers as EpochTime in number of miliseconds since Jan 1, 1970.
       # Ruby (and Unix) Epoch time is measured in seconds since Jan 1, 1970.
       def calculate_result
-        is_valid = process_events(@events)
-        raise TidepoolAnalyze::UserEventValidatorError, "user_event invalid: #{invalid_event}, with missing key #{missing_key}" unless is_valid
+        process_events(@events)
 
         total_clicks = 0
         correct_clicks = 0
@@ -71,62 +68,55 @@ module TidepoolAnalyze
 
       private
       def process_events(events)
-        is_valid = true
         events.each do |entry|
-          unless user_event_valid?(entry)
-            is_valid = false
-            break
-          end
-
-          case entry['event_desc']
-          when 'test_started'
+          case entry['event']
+          when 'level_started'
             @test_type = entry['sequence_type']
-            @start_time = entry['record_time']
-            if entry['color_sequence'] 
-              @color_sequence = entry['color_sequence'].map do |item|
+            @start_time = entry['time']
+            if entry['data'] 
+              @color_sequence = entry['data'].map do |item|
                 color, time_interval = item.split(':')
                 {color: color, time_interval: time_interval}
               end 
             end
-          when 'test_completed'
-            @end_time = entry['record_time']
-          when 'circle_shown'
-            color = entry['circle_color']
+          when 'level_completed'
+            @end_time = entry['time']
+          when 'shown'
+            color = entry['color']
 
             # We are using a Hash instead of an Array
             # We will look for each sequence in the event processing later on
-            sequence_no = entry['sequence_no']
+            sequence_no = entry['index']
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
-                :shown_at => entry['record_time'],
+                :shown_at => entry['time'],
                 :clicked => false,
                 :clicked_at => 0, 
                 :expected => true 
                 })
             end
-          when 'correct_circle_clicked'
-            color = entry['circle_color']
-            sequence_no = entry['sequence_no']
+          when 'correct'
+            color = entry['color']
+            sequence_no = entry['index']
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
                   :clicked => true,
-                  :clicked_at => entry['record_time'],
+                  :clicked_at => entry['time'],
                   :expected => true
                 })
             end
-          when 'wrong_circle_clicked'
-            color = entry['circle_color']
-            sequence_no = entry['sequence_no']
+          when 'incorrect'
+            color = entry['color']
+            sequence_no = entry['index']
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
                 :clicked => true,
-                :clicked_at => entry['record_time'],
+                :clicked_at => entry['time'],
                 :expected => false              
                 })
             end
           end
         end
-        is_valid
       end
 
       def create_click_target_entry(color, sequence_no, values)

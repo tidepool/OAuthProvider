@@ -4,7 +4,7 @@ module Permissions
       super()
       if caller == target_user      
         allow :games, :create
-        allow :games, [:update, :show] do |game|
+        allow :games, [:update, :show, :update_event_log] do |game|
           game.user_id == caller.id 
         end
         allow :games, [:latest, :latest_with_profile] do |game|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729180143) do
+ActiveRecord::Schema.define(version: 20130819192212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.hstore   "profile"
     t.string   "sync_status"
     t.text     "last_error"
+    t.datetime "oauth_refresh_at"
+    t.boolean  "expires"
+    t.text     "permissions"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -81,13 +84,10 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.string   "name"
     t.text     "stages"
     t.text     "instructions"
-    t.text     "end_remarks"
-    t.string   "icon"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.text     "score_names"
-    t.text     "calculates"
-    t.string   "result_view"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.text     "recipe_names"
+    t.text     "persist_as_results"
     t.string   "unique_name"
   end
 
@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "images", ["name"], name: "index_images_on_name", using: :btree
 
   create_table "measurements", force: true do |t|
     t.integer  "user_id",       null: false
@@ -263,6 +265,19 @@ ActiveRecord::Schema.define(version: 20130729180143) do
   add_index "profile_descriptions", ["big5_dimension"], name: "index_profile_descriptions_on_big5_dimension", using: :btree
   add_index "profile_descriptions", ["holland6_dimension"], name: "index_profile_descriptions_on_holland6_dimension", using: :btree
 
+  create_table "reaction_time_descriptions", force: true do |t|
+    t.string   "big5_dimension",     null: false
+    t.string   "speed_archetype",    null: false
+    t.text     "description"
+    t.text     "bullet_description"
+    t.string   "display_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reaction_time_descriptions", ["big5_dimension"], name: "index_reaction_time_descriptions_on_big5_dimension", using: :btree
+  add_index "reaction_time_descriptions", ["speed_archetype"], name: "index_reaction_time_descriptions_on_speed_archetype", using: :btree
+
   create_table "recommendations", force: true do |t|
     t.string   "big5_dimension", null: false
     t.string   "link_type"
@@ -315,12 +330,12 @@ ActiveRecord::Schema.define(version: 20130729180143) do
   add_index "sleeps", ["user_id"], name: "index_sleeps_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",           default: "",    null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "password_digest", default: "",    null: false
-    t.boolean  "admin",           default: false, null: false
-    t.boolean  "guest",           default: false, null: false
+    t.string   "email",                default: "",    null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "password_digest",      default: "",    null: false
+    t.boolean  "admin",                default: false, null: false
+    t.boolean  "guest",                default: false, null: false
     t.string   "name"
     t.string   "display_name"
     t.string   "description"
@@ -337,6 +352,9 @@ ActiveRecord::Schema.define(version: 20130729180143) do
     t.string   "education"
     t.string   "referred_by"
     t.hstore   "stats"
+    t.string   "ios_device_token"
+    t.string   "android_device_token"
+    t.boolean  "is_dob_by_age",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

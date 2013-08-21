@@ -15,6 +15,7 @@ describe 'Users API' do
   let(:personality) { create(:personality) }
   let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
+  let(:authentication) { create(:authentication, user: user2) }
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -22,6 +23,18 @@ describe 'Users API' do
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
     user_info[:email].should == user1.email
+  end
+
+  it 'shows the users authentication info' do 
+    authentication
+    token = get_conn(user2)
+    response = token.get("#{@endpoint}/users/-.json")
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
+    user_info[:authentications].length.should == 1
+    user_info[:authentications][0][:provider].should == 'facebook'
+    user_info[:authentications][0][:oauth_token].should == '123456'
+    user_info[:authentications][0][:oauth_secret].should == '232323'
   end
 
   it 'creates a user' do 
@@ -64,7 +77,10 @@ describe 'Users API' do
       date_of_birth: Date.new(1970, 3, 25), 
       education: 'High School',
       handedness: 'left', 
-      referred_by: 'Hesston'
+      referred_by: 'Hesston', 
+      ios_device_token: "1232321313",
+      android_device_token: "44443224",
+      is_dob_by_age: true
     }
     response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
     result = JSON.parse(response.body, symbolize_names: true)
@@ -82,7 +98,10 @@ describe 'Users API' do
     user_info[:gender].should == user_params[:gender]
     user_info[:education].should == user_params[:education]
     user_info[:handedness].should == user_params[:handedness]
-    user_info[:referred_by].should_not == user_params[:referred_by] # Change is only allowed for creation time
+    user_info[:referred_by].should == user_params[:referred_by]
+    user_info[:ios_device_token].should == user_params[:ios_device_token] 
+    user_info[:android_device_token].should == user_params[:android_device_token] 
+    user_info[:is_dob_by_age].should == user_params[:is_dob_by_age]  
   end
 
   it 'updates a users information also in the database' do
@@ -245,15 +264,15 @@ describe 'Users API' do
       user_info[:guest].should == false
     end
     
-    it 'doesnot allow to change the referred_by attribute' do 
-      token = get_conn(user1)
-      user_params = { referred_by: 'Hesston' }
-      response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
-      result = JSON.parse(response.body, symbolize_names: true)
-      user_info = result[:data]
-      user = User.find(user_info[:id])
-      user.referred_by.should_not == 'Hesston'
-    end
+    # it 'doesnot allow to change the referred_by attribute' do 
+    #   token = get_conn(user1)
+    #   user_params = { referred_by: 'Hesston' }
+    #   response = token.put("#{@endpoint}/users/#{user1.id}.json", {body: {user: user_params}})
+    #   result = JSON.parse(response.body, symbolize_names: true)
+    #   user_info = result[:data]
+    #   user = User.find(user_info[:id])
+    #   user.referred_by.should_not == 'Hesston'
+    # end
 
   end
 end

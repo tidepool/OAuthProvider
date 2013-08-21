@@ -1,0 +1,16 @@
+{
+  "event_type": "survey",
+  "stage": 6,
+  "events": [
+    {"time":1360195167248, "event":"level_started" },
+    {"time":1360195167848, "event":"changed", "question_id": "demand_1234", "topic": "demand", "answer": 5},
+    {"time":1360195167248, "event":"level_completed" },
+    {"time":1360195167548, "event":"level_summary",
+      "data":[
+        {"question_id": "demand_1234", "topic": "demand", "answer": 5}, 
+        {"question_id": "productivity_1234", "topic": "productivity", "answer": 3},
+        {"question_id": "stress_1111", "topic": "stress", "answer": 2}
+      ]
+    }
+  ]
+}

@@ -33,43 +33,43 @@ module TidepoolAnalyze
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
       recipe = analyze_dispatcher.read_recipe recipe_name
-      analysis = analyze_dispatcher.execute_recipe(recipe, recipe_name, mini_game_events)
+      analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
     end
 
     before(:all) do
-      events_json = IO.read(File.expand_path('../fixtures/test_event_log.json', __FILE__))
+      events_json = IO.read(File.expand_path('../fixtures/aggregate_all.json', __FILE__))
       @events = JSON.parse(events_json)
     end
     
     it 'sorts user_events into mini_game_events' do
       analyze_dispatcher = AnalyzeDispatcher.new
       mini_game_events = analyze_dispatcher.events_by_mini_game(@events)
-      mini_game_events.length.should == 4
+      mini_game_events.length.should == 5
       mini_game_events['reaction_time'].should_not be_nil
       mini_game_events['reaction_time'].length.should == 2
       mini_game_events['reaction_time'].each do |stage, stage_events|
-        stage_events.length.should == 29 if stage == 0
-        stage_events.length.should == 16 if stage == 1
-        stage_events[0]['module'].should == 'reaction_time'
+        stage_events.length.should == 30 if stage == 0
+        stage_events.length.should == 17 if stage == 1
       end
       mini_game_events['image_rank'].should_not be_nil
       mini_game_events['image_rank'].length.should == 1
       mini_game_events['circles_test'].should_not be_nil
-      mini_game_events['circles_test'].length.should == 5
+      mini_game_events['circles_test'].length.should == 3
       mini_game_events['survey'].should_not be_nil
       mini_game_events['survey'].length.should == 1
-
+      mini_game_events['interest_picker'].should_not be_nil
+      mini_game_events['interest_picker'].length.should == 1
     end
 
     it 'reads the recipes for given score_name' do
       analyze_dispatcher = AnalyzeDispatcher.new
       recipe = analyze_dispatcher.read_recipe 'big5'
-      recipe.length.should == 2
-      recipe[0][:user_event_source].should == 'circles_test'
-      recipe[0][:analyzer].should == 'CirclesTestAnalyzer'
-      recipe[0][:formulator].should == 'CirclesFormulator'
-      recipe[0][:formula_sheet].should == 'big5_circles.csv'
-      recipe[0][:formula_key].should == 'name_pair'
+      recipe.length.should == 3
+      recipe[1][:user_event_source].should == 'circles_test'
+      recipe[1][:analyzer].should == 'CirclesTestAnalyzer'
+      recipe[1][:formulator].should == 'CirclesFormulator'
+      recipe[1][:formula_sheet].should == 'big5_circles.csv'
+      recipe[1][:formula_key].should == 'name_pair'
     end
 
     it 'runs the analyzer for big5 circles_test' do
@@ -233,32 +233,36 @@ module TidepoolAnalyze
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
       analysis[:score].should == {
-        :dimension => "low_conscientiousness",
+        :dimension => "high_extraversion",
         :dimension_values => {
-            :openness => 13.545517101280748,
-            :agreeableness => 18.956322022270864,
-            :conscientiousness => 10.0,
-            :extraversion => 22.453501732805346,
-            :neuroticism => 21.267963651267777 },
-        :low_dimension => :conscientiousness,
+            :openness => 9.999999999999998,
+            :agreeableness => 12.614011786845673,
+            :conscientiousness => 10.475974254355606,
+            :extraversion => 21.154235454105393,
+            :neuroticism => 16.639460681817177 },
+        :low_dimension => :openness,
         :high_dimension => :extraversion,
-        :adjust_by => 1.7080919421487604,
+        :adjust_by => 1.629257384610685,
         :version => "2.0"
       }
     end
 
     it 'executes a big5_with_images recipe' do 
-      #TODO: Changethe recipe format!!
-      pending
-      # analysis = execute_recipe('big5_with_images')
+      analysis = execute_recipe('big5_with_images')
 
-      # analysis[:final_results].should_not be_nil
-      # analysis[:score].should_not be_nil
+      analysis[:final_results].should_not be_nil
+      analysis[:score].should_not be_nil
     end
 
     it 'executes a holland6 recipe' do
       analysis = execute_recipe('holland6')
 
+      analysis[:final_results].should_not be_nil
+      analysis[:score].should_not be_nil
+    end
+
+    it 'executes a holland6_new recipe with the Interest Picker' do 
+      analysis = execute_recipe('holland6_new')
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
     end
@@ -286,12 +290,41 @@ module TidepoolAnalyze
 
     it 'executes a reaction_time recipe with snoozer events' do 
       analyze_dispatcher = AnalyzeDispatcher.new
-      events = load_event_fixtures('snoozer.json')
+      events = load_event_fixtures('aggregate_snoozer2.json')
       mini_game_events = analyze_dispatcher.events_by_mini_game(events)
-      recipe = analyze_dispatcher.read_recipe 'reaction_time'
-      analysis = analyze_dispatcher.execute_recipe(recipe, 'reaction_time', mini_game_events)
+      recipe = analyze_dispatcher.read_recipe 'reaction_time2'
+
+      analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
       analysis.should_not be_nil
-      analysis[:score].should == {:fastest_time=>300, :slowest_time=>500, :average_time=>400, :version=>"2.0" }
+      analysis[:score].should == {
+        :speed_archetype => "dolphin",
+        :average_time => 718,
+        :average_time_simple => 718,
+        :average_time_complex => 718,
+        :fastest_time => 532,
+        :slowest_time => 905,
+        :stage_data => [
+          { :test_type=>"simple", 
+            :test_duration=>17874, 
+            :average_time=>718, 
+            :slowest_time=>905, 
+            :fastest_time=>532, 
+            :total=>4, 
+            :total_correct=>2, 
+            :total_incorrect=>1, 
+            :total_missed=>1}, 
+          { :test_type=>"complex", 
+            :test_duration=>17874, 
+            :average_time=>718, 
+            :slowest_time=>905, 
+            :fastest_time=>532, 
+            :total=>4, 
+            :total_correct=>2, 
+            :total_incorrect=>1, 
+            :total_missed=>1}
+            ],
+        :version => "2.0"
+      }
     end
 
 
@@ -302,10 +335,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the big5 and holland6 scores' do
-      score_names = ['big5', 'holland6']
+      recipe_names = ['big5', 'holland6']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)
       analysis.length.should == 2
       analysis[:big5].should_not be_nil
       analysis[:holland6].should_not be_nil
@@ -313,11 +346,42 @@ module TidepoolAnalyze
       analysis[:holland6][:score].should_not be_nil
     end  
 
-    it 'calculates the reaction_time score' do
-      score_names = ['reaction_time']
+    it 'calculates the holland6_new score' do
+      recipe_names = ['holland6_new']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)
+      analysis.length.should == 1
+      analysis[:holland6].should_not be_nil
+      analysis.should == {
+        :holland6=>
+          {:score_name=>"holland6",
+           :final_results=>
+            [{:realistic=>4,
+              :artistic=>0,
+              :social=>2,
+              :enterprising=>2,
+              :investigative=>1,
+              :conventional=>1}],
+           :score=>
+            {:dimension=>"realistic",
+             :dimension_values=>
+              {:realistic=>50,
+               :artistic=>10,
+               :social=>30,
+               :enterprising=>30,
+               :investigative=>20,
+               :conventional=>20},
+             :adjust_by=>1,
+             :version=>"2.0"}}
+      }
+    end
+
+    it 'calculates the reaction_time score' do
+      recipe_names = ['reaction_time']
+
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)      
       analysis.length.should == 1
       analysis[:reaction_time].should_not be_nil
       analysis[:reaction_time][:score].should_not be_nil
@@ -333,10 +397,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the survey score' do 
-      score_names = ['survey']
+      recipe_names = ['survey']
       analyze_dispatcher = AnalyzeDispatcher.new
 
-      analysis = analyze_dispatcher.analyze(@events, score_names)   
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)   
       analysis.length.should == 1
       analysis[:survey][:score].should == {
         :demand => {:answer=>5, :zscore=>0.6709893546422306, :tscore=>51.1827730651085},
@@ -347,10 +411,10 @@ module TidepoolAnalyze
     end
 
     it 'calculates the emotion score' do 
-      score_names = ['emo']
-      events = load_event_fixtures('emotions.json')
+      recipe_names = ['emo']
+      events = load_event_fixtures('aggregate_emotions_circles.json')
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(events, score_names)      
+      analysis = analyze_dispatcher.analyze(events, recipe_names)      
       analysis.should_not be_nil
       analysis[:emo][:score].should == {
         :factors=> {
@@ -395,11 +459,27 @@ module TidepoolAnalyze
       }
     end
 
+    it 'calculates the survey2 score' do
+      recipe_names = ['survey2']
+
+      events = load_event_fixtures('aggregate_snoozer2.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+      analysis.length.should == 1
+      analysis.should == {
+        :survey=>
+          { :score_name=>"survey",
+            :final_results=>[{:activity=>5, :sleep=>3}],
+            :score=>{:activity=>5, :sleep=>3, :version=>"2.0"}
+          }
+        }
+    end
+
     it 'calculates the capacity score' do
-      score_names = ['capacity']
+      recipe_names = ['capacity']
 
       analyze_dispatcher = AnalyzeDispatcher.new
-      analysis = analyze_dispatcher.analyze(@events, score_names)      
+      analysis = analyze_dispatcher.analyze(@events, recipe_names)      
       analysis.length.should == 1
       analysis[:capacity].should_not be_nil
       analysis[:capacity][:score].should_not be_nil

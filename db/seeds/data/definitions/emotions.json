@@ -2,9 +2,8 @@
   "name" : "Emotions via Circles",
   "unique_name": "emotions",
   "instructions" : "",
-  "end_remarks" : "",
-  "score_names" : ["emo"],
-  "calculates" : ["emo"],
+  "recipe_names" : ["emo"],
+  "persist_as_results" : ["emo"],
   "stages":
     [
       {
@@ -129,7 +128,7 @@
         "data": [
           {
             "question_id": "emotion22",
-            "question_topic": "emotion",
+            "topic": "emotion",
             "question_type": "select_by_icon",
             "question": "How do you feel right now?",
             "options": [

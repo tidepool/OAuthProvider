@@ -6,7 +6,6 @@ class Api::V1::ResultsController < Api::V1::ApiController
     # results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
     response_body = {}
     status = :ok
-
     if params[:game_id]
       # Called for a specific game
       game = Game.find(params[:game_id])
@@ -15,6 +14,8 @@ class Api::V1::ResultsController < Api::V1::ApiController
         response_body = results
         api_status = {}
       elsif game && game.status.to_sym != :calculating_results
+        raise Api::V1::PreconditionFailedError, "All events for the game has not been received!" unless game.all_events_received?
+        
         game.status = :calculating_results
         game.save
         ResultsCalculator.perform_async(game.id)
@@ -53,7 +54,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
     render_hash = {  
       json: response_body, 
       status: status, 
-      each_serializer: ResultSerializer,
+      # each_serializer: ResultSerializer,
       meta: api_status 
       }
     if params[:daily]
@@ -147,6 +148,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
       code: 3001,
       message: exception.message
     })
+    logger.error("ResultCalculationError: #{exception.message}")
     http_status = :internal_server_error   
     respond_with_error(api_status, http_status)     
   end

@@ -2,10 +2,8 @@
     "name" : "Quick Images",
     "unique_name": "quick_images",
     "instructions" : "This test assesses your personality based on the Big 5 personality types. Please take a moment to take this test.",
-    "end_remarks" : "Congratulations. Please take a moment to register!",
-    "score_names" : ["big5"],
-    "calculates" : ["big5"],
-    "result_view": "Scores",
+    "recipe_names" : ["big5"],
+    "persist_as_results" : ["big5"],
     "stages" :
         [
             {

@@ -139,6 +139,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       code: 2001,
       message: exception.message
     })
+    logger.error("ExternalConnectionError: #{exception.message}")
     http_status = :not_acceptable   
     respond_with_error(api_status, http_status)     
   end
@@ -148,6 +149,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       code: 2002,
       message: exception.message
     })
+    logger.error("ExternalAuthenticationError: #{exception.message}")
     http_status = :proxy_authentication_required   
     respond_with_error(api_status, http_status)     
   end
@@ -157,6 +159,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       code: 2003,
       message: exception.message
     })
+    logger.error("SyncError: #{exception.message}")
     http_status = :bad_gateway   
     respond_with_error(api_status, http_status)     
   end
