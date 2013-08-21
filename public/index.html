@@ -10,6 +10,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+    <!-- Mobile Icons -->
+    <link rel="apple-touch-icon" href="apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="TidePool">
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <!--<script src="bower_components/modernizr/modernizr.js"></script>-->
     <!-- endbuild -->
@@ -32,6 +39,7 @@
         require(['require_config'], function () {
             require(['core'], function (core) {
                 window._app = core.start();
+                core.analytics.trackPerformance( (new Date()).getTime() );
             });
         })
     </script>
