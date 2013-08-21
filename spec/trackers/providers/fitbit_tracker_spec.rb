@@ -118,4 +118,49 @@ describe FitbitTracker do
       new_activity.calories_goal.should == 2184
     end
   end
+
+  describe 'Sleep storage' do 
+    before(:each) do 
+      Fitgem::Client.any_instance.stub(:sleep_on_date).and_return({
+        "sleep"=>
+           [{"awakeningsCount"=>14,
+             "duration"=>25800000,
+             "efficiency"=>90,
+             "isMainSleep"=>true,
+             "logId"=>51345943,
+             "minuteData"=>
+              [{"dateTime"=>"23:54:00", "value"=>"3"},
+               {"dateTime"=>"23:55:00", "value"=>"3"},
+               {"dateTime"=>"07:02:00", "value"=>"2"},
+               {"dateTime"=>"07:03:00", "value"=>"2"}],
+             "minutesAfterWakeup"=>6,
+             "minutesAsleep"=>375,
+             "minutesAwake"=>41,
+             "minutesToFallAsleep"=>8,
+             "startTime"=>"2013-08-14T23:54:00.000",
+             "timeInBed"=>430}],
+          "summary"=>
+           {"totalMinutesAsleep"=>375, "totalSleepRecords"=>1, "totalTimeInBed"=>430}
+        })
+    end
+
+    it 'persists the sleep info to database when the todays sleep does not exist' do 
+      client = Fitgem::Client.new({
+        consumer_key: ENV['FITBIT_KEY'],
+        consumer_secret: ENV['FITBIT_SECRET']})
+
+      tracker = FitbitTracker.new(user, connection, client)
+      new_sleep = tracker.persist_sleeps(Date.current)
+      new_sleep.should_not be_nil
+      new_sleep.total_minutes_in_bed.should == 430
+      new_sleep.total_minutes_asleep.should == 375
+      new_sleep.efficiency.should == 90
+      new_sleep.minutes_to_fall_asleep.should == 8
+      new_sleep.start_time.should == "2013-08-14T23:54:00.000"
+      new_sleep.number_of_times_awake.should == 14
+      new_sleep.minutes_awake.should == 41
+      new_sleep.minutes_after_wake_up.should == 6
+
+    end
+  end
 end
