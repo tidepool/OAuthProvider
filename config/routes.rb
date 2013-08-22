@@ -1,6 +1,12 @@
 require 'sidekiq/web'
+require 'admin_constraint'
 
 OAuthProvider::Application.routes.draw do
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  
+  resources :sessions
+
   use_doorkeeper do
     controllers :authorizations => 'authorizations'
   end
@@ -11,8 +17,9 @@ OAuthProvider::Application.routes.draw do
   
   get '/auth/new', to: 'authentications#add_new'  
 
-  mount Sidekiq::Web, at: '/sidekiq'
-
+  # mount Sidekiq::Web, at: '/sidekiq'
+  mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new
+  
   root :to => 'home#index'
 
   resources :connections

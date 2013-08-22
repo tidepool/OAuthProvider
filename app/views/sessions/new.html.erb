@@ -1,0 +1,18 @@
+<% if current_admin %>
+  Logged in as <%= current_admin.email %>.
+  <%= link_to "Log Out", logout_path %>
+<% else %>
+  <h1>Log In</h1>
+
+  <%= form_tag sessions_path do %>
+    <div class="field">
+            <%= label_tag :email %><br />
+            <%= text_field_tag :email, params[:email] %>
+    </div>
+    <div class="field">
+            <%= label_tag :password %><br />
+            <%= password_field_tag :password %>
+    </div>
+    <div class="actions"><%= submit_tag "Log In" %>
+  <% end %>
+<% end %>
