@@ -14,7 +14,7 @@ class Api::V1::ResultsController < Api::V1::ApiController
         response_body = results
         api_status = {}
       elsif game && game.status.to_sym != :calculating_results
-        raise Api::V1::PreconditionFailedError, "All events for the game has not been received!" unless game.all_events_received?
+        raise Api::V1::PreconditionFailedError, "All events for the game have not been received!" unless game.all_events_received?
         
         game.status = :calculating_results
         game.save
