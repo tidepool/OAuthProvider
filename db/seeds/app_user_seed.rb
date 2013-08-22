@@ -2,6 +2,17 @@ class AppUserSeed
   include SeedsHelper
 
   def create_seed
+    # Create the admin account for us
+    admin = Admin.where('email = ?', 'admin@tidepool.co').first
+    if admin.nil?
+      admin = Admin.create! :email => 'admin@tidepool.co',
+                            :password => ENV['ADMIN_PASS'],
+                            :password_confirmation => ENV['ADMIN_PASS']
+    
+      admin.save!
+    end
+
+
     # Create the test application and user
     if Rails.env.development? || Rails.env.test?
       user = User.where('email = ?', 'user@example.com').first
