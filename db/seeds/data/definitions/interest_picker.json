@@ -5,145 +5,234 @@
     "recipe_names" : ["holland6_new"],
     "persist_as_results" : [],
     "stages" :
-        [
+      [
+        {
+          "friendly_name" : "Interest Picker",
+          "instructions" : "Pick your favorite symbols and words.",
+          "view_name" : "InterestPicker",
+          "game_type" : "holland6",
+          "data": [
             {
-                "friendly_name" : "Interest Picker",
-                "instructions" : "Pick your favorite picture and rank them in order.",
-                "view_name" : "InterestPicker",
-                "game_type" : "holland6",
-                "data": [
-                    {
-                        "type": "symbol",
-                        "value": "gfx-hol6-social1",
-                        "desc": "A symbol depicting a man peeling a potato"
-                    }, {
-                        "value": "gfx-hol6-social2"
-                    }, {
-                        "value": "gfx-hol6-social3"
-                    }, {
-                        "value": "gfx-hol6-social4"
-                    }, {
-                        "value": "gfx-hol6-enterprising1"
-                    }, {
-                        "value": "gfx-hol6-enterprising2"
-                    }, {
-                        "value": "gfx-hol6-enterprising3"
-                    }, {
-                        "value": "gfx-hol6-enterprising4"
-                    }, {
-                        "value": "gfx-hol6-enterprising5"
-                    }, {
-                        "value": "gfx-hol6-conventional1"
-                    }, {
-                        "value": "gfx-hol6-conventional2"
-                    }, {
-                        "value": "gfx-hol6-conventional3"
-                    }, {
-                        "value": "gfx-hol6-conventional4"
-                    }, {
-                        "value": "gfx-hol6-realistic1"
-                    }, {
-                        "value": "gfx-hol6-realistic2"
-                    }, {
-                        "value": "gfx-hol6-realistic3"
-                    }, {
-                        "value": "gfx-hol6-realistic4"
-                    }, {
-                        "value": "gfx-hol6-realistic5"
-                    }, {
-                        "value": "gfx-hol6-artistic1"
-                    }, {
-                        "value": "gfx-hol6-artistic2"
-                    }, {
-                        "value": "gfx-hol6-artistic3"
-                    }, {
-                        "value": "gfx-hol6-artistic4"
-                    }, {
-                        "value": "gfx-hol6-investigative1"
-                    }, {
-                        "value": "gfx-hol6-investigative2"
-                    }, {
-                        "value": "gfx-hol6-investigative3"
-                    }, {
-                        "value": "gfx-hol6-investigative4"
-                    }, {
-                        "type": "word",
-                        "value": "Hands-on"
-                    }, {
-                        "type": "word",
-                        "value": "Mechanical"
-                    }, {
-                        "type": "word",
-                        "value": "Creative"
-                    }, {
-                        "type": "word",
-                        "value": "Intuitive"
-                    }, {
-                        "type": "word",
-                        "value": "Helpful"
-                    }, {
-                        "type": "word",
-                        "value": "Caring"
-                    }, {
-                        "type": "word",
-                        "value": "Persuasive"
-                    }, {
-                        "type": "word",
-                        "value": "Passionate"
-                    }, {
-                        "type": "word",
-                        "value": "Inquisitive"
-                    }, {
-                        "type": "word",
-                        "value": "Analytical"
-                    }, {
-                        "type": "word",
-                        "value": "Detail-Oriented"
-                    }, {
-                        "type": "word",
-                        "value": "Thorough"
-                    }
-                ]
+              "type": "word",
+              "value": "Hands-on",
+              "dimension": "realistic"
             },
             {
-                "friendly_name" : "Circles Interest",
-                "instructions" : [
-                    "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
-                    "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
-                ],
-                "view_name" : "CirclesTest",
-                "game_type" : "holland6",
-                "circles" : [{
-                        "trait1" : "Mechanical",
-                        "trait2" : "Hands-on",
-                        "size" : "2"
-                    },
-                    {
-                        "trait1" : "Creative",
-                        "trait2" : "Intuitive",
-                        "size" : "2"
-                    },
-                    {
-                        "trait1" : "Teacher",
-                        "trait2" : "Helpful",
-                        "size" : "2"
-                    },
-                    {
-                        "trait1" : "Persuasive",
-                        "trait2" : "Enthusiastic",
-                        "size" : "2"
-                    },
-                    {
-                        "trait1" : "Inquisitive",
-                        "trait2" : "Analytical",
-                        "size" : "2"
-                    },
-                    {
-                        "trait1" : "Detail-Oriented",
-                        "trait2" : "Thorough",
-                        "size" : "2"
-                    }]
+              "type": "word",
+              "value": "Creative",
+              "dimension": "artistic"
+            },
+            {
+              "type": "word",
+              "value": "Helpful",
+              "dimension": "social"
+            },
+            {
+              "type": "word",
+              "value": "Persuasive",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "word",
+              "value": "Inquisitive",
+              "dimension": "investigative"
+            },
+            {
+              "type": "word",
+              "value": "Detail-Oriented",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-social1",
+              "dimension": "social"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-enterprising2",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-conventional5",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-realistic2",
+              "dimension": "realistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-artistic4",
+              "dimension": "artistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-investigative5",
+              "dimension": "investigative"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-social2",
+              "dimension": "social"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-enterprising6",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-conventional6",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-realistic6",
+              "dimension": "realistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-artistic5",
+              "dimension": "artistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-investigative6",
+              "dimension": "investigative"
+            },
+            {
+              "type": "word",
+              "value": "Mechanical",
+              "dimension": "realistic"
+            },
+            {
+              "type": "word",
+              "value": "Intuitive",
+              "dimension": "artistic"
+            },
+            {
+              "type": "word",
+              "value": "Caring",
+              "dimension": "social"
+            },
+            {
+              "type": "word",
+              "value": "Passionate",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "word",
+              "value": "Analytical",
+              "dimension": "investigative"
+            },
+            {
+              "type": "word",
+              "value": "Thorough",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-social3",
+              "dimension": "social"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-enterprising7",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-conventional7",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-realistic7",
+              "dimension": "realistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-artistic6",
+              "dimension": "artistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-investigative7",
+              "dimension": "investigative"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-social5",
+              "dimension": "social"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-investigative4",
+              "dimension": "investigative"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-conventional8",
+              "dimension": "conventional"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-enterprising3",
+              "dimension": "enterprising"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-artistic7",
+              "dimension": "artistic"
+            },
+            {
+              "type": "symbol",
+              "value": "gfx-hol6-investigative8",
+              "dimension": "investigative"
             }
-        ]
+          ]
+        },
+        {
+          "friendly_name" : "Circles Interest",
+          "instructions" : [
+              "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
+              "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
+          ],
+          "view_name" : "CirclesTest",
+          "game_type" : "holland6",
+          "circles" : [{
+                  "trait1" : "Mechanical",
+                  "trait2" : "Hands-on",
+                  "size" : "2"
+              },
+              {
+                  "trait1" : "Creative",
+                  "trait2" : "Intuitive",
+                  "size" : "2"
+              },
+              {
+                  "trait1" : "Teacher",
+                  "trait2" : "Helpful",
+                  "size" : "2"
+              },
+              {
+                  "trait1" : "Persuasive",
+                  "trait2" : "Enthusiastic",
+                  "size" : "2"
+              },
+              {
+                  "trait1" : "Inquisitive",
+                  "trait2" : "Analytical",
+                  "size" : "2"
+              },
+              {
+                  "trait1" : "Detail-Oriented",
+                  "trait2" : "Thorough",
+                  "size" : "2"
+              }]
+        }
+      ]
 }
 

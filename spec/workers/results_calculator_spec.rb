@@ -36,9 +36,9 @@ describe ResultsCalculator do
       guest.personality.big5_high.should_not be_nil
       guest.personality.holland6_score.should_not be_nil
       guest.personality.big5_score.should_not be_nil
-      guest.personality.profile_description.name.should == 'The Sparkler'
+      guest.personality.profile_description.name.should == 'The Chief Executive'
       guest.personality.big5_dimension.should == 'high_extraversion'
-      guest.personality.holland6_dimension.should == 'social'
+      guest.personality.holland6_dimension.should == 'realistic'
       guest.personality.big5_low.should == 'openness'
       guest.personality.big5_high.should == 'extraversion'
     end
