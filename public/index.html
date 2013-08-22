@@ -17,6 +17,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="TidePool">
 
+    <script type="text/javascript">window.pageLoadStart = (new Date()).getTime()</script>
+
     <!-- build:js scripts/vendor/modernizr.js -->
     <!--<script src="bower_components/modernizr/modernizr.js"></script>-->
     <!-- endbuild -->
@@ -39,7 +41,9 @@
         require(['require_config'], function () {
             require(['core'], function (core) {
                 window._app = core.start();
-                core.analytics.trackPerformance( (new Date()).getTime() );
+                if (typeof (_base = core.analytics).trackPerformance === "function") {
+                    _base.trackPerformance((new Date()).getTime());
+                }
             });
         })
     </script>
