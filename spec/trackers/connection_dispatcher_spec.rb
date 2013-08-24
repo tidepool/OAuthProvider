@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ConnectionDispatcher do
   let(:user) { create(:user) }
   let(:connection_list) { create_list(:fitbit, 10, user:user)}
-  let(:recently_sync_list) { create_list(:fitbit, 10, last_accessed: Time.now - 10.minutes, user:user) }
+  let(:recently_sync_list) { create_list(:fitbit, 10, last_accessed: Time.zone.now - 10.minutes, user:user) }
 
   before :each do 
     Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
