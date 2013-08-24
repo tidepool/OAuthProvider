@@ -6,23 +6,14 @@ class Api::V1::ResultsController < Api::V1::ApiController
     # results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
     api_status = {}
     http_status = :ok
-    results_service = ResultsService.new
 
-    if params[:game_id]
-      # Called for a specific game
-      game = Game.find(params[:game_id])
-      results, status = results_service.find_results_for_game(game)
-      if status == :started_calculation
-        api_status = Hashie::Mash.new({
-          state: :pending, 
-          link: api_v1_user_game_progress_url,
-          message: 'Starting to calculate results.'
-          })
-        http_status = :accepted
-      end        
-    else 
-      results = results_service.find_results_for_user(target_user, params[:type], params[:daily])
-    end
+    # TODO : We need to fix this, this is UGLY!!!
+    progress_url = api_v1_user_game_progress_url if params[:game_id]
+    
+    results_service = ResultsService.new(params, target_user, {
+          progress: progress_url,
+          results: api_v1_user_results_url } )
+    results, api_status, http_status = results_service.find_results
 
     respond_to do |format|
       format.json { 

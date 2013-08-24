@@ -1,35 +1,77 @@
 class ResultsService
+  def initialize(params, user, urls)
+    @limit = params[:limit].to_i
+    @offset = params[:offset].to_i
+    if @limit && @offset && @limit != 0
+      @paginate = true
+    end
+    @is_daily = params[:daily]
+    @result_type = params[:type]
+    @game_id = params[:game_id]
+    @user = user
+    @urls = urls
+  end
+
   def logger 
     ::Rails.logger
   end
 
+  def find_results
+    http_status = :ok
+    if @game_id
+      game = Game.find(@game_id)
+      results, api_status = find_results_for_game(game)
+      if api_status[:state] == :pending
+        http_status = :accepted
+      end
+    else
+      results, api_status = find_results_for_user
+    end
+
+    return results, api_status, http_status
+  end
+
   def find_results_for_game(game)
     results = []
-
+    api_status = {}
     case game.status.to_sym 
     when :results_ready
       results = Result.where(game_id: game.id)
-      status = :ready  
     when :calculating_results
       results = []
-      status = :in_progress
     else
       results = []
       calculate_results(game)
-      status = :started_calculation
+      api_status = Hashie::Mash.new({
+        state: :pending, 
+        link: @urls[:progress],
+        message: 'Starting to calculate results.'
+        })
     end
-    return results, status
+    return results, api_status
   end
 
-  def find_results_for_user(user, result_type=nil, is_daily=false)
-    if result_type
-      results = Result.where('user_id = ? and type = ?', user.id, result_type).order('time_played')
-    else
-      results = Result.where('user_id = ?', user.id).order('time_played')      
-    end
+  def find_results_for_user
+    results = Result.where(user_id: @user.id)
+    results = results.where(type: @result_type) if @result_type
+    results = results.order('time_played')
+    results = results.limit(@limit) if @paginate
+    results = results.offset(@offset) if @paginate
 
+    api_status = {}
+    if @paginate
+      next_offset = @offset + @limit 
+      prev_offset = @offset - @limit 
+      prev_offset = 0 if prev_offset < 0
+      api_status = Hashie::Mash.new({
+        'offset' => @offset,
+        'limit' => @limit,
+        'next' => "#{@urls[:results]}?offset=#{next_offset}&limit=#{@limit}",
+        'prev' => "#{@urls[:results]}?offset=#{prev_offset}&limit=#{@limit}"
+      })
+    end
     response = results
-    if is_daily
+    if @is_daily
       daily_results = {}
 
       results.each do | result |
@@ -39,7 +81,7 @@ class ResultsService
       end
       response = daily_results.values
     end
-    response
+    return response, api_status
   end
 
   def calculate_results(game)
