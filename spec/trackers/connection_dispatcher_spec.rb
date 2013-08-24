@@ -63,7 +63,7 @@ describe ConnectionDispatcher do
 
     connections = Authentication.where(provider:'fitbit').limit(10)
     connections.each do |conn|
-      conn.last_accessed.should == last_accessed
+      conn.last_accessed.to_s.should == last_accessed.to_s
       conn.sync_status.should == 'not_synchronized'
     end
   end
@@ -80,7 +80,7 @@ describe ConnectionDispatcher do
 
     connections = Authentication.where(provider:'fitbit').limit(10)
     connections.each do |conn|
-      conn.last_accessed.should_not == last_accessed
+      conn.last_accessed.to_s.should_not == last_accessed.to_s
       conn.sync_status.should == 'synchronized'
     end
   end
