@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20130821193203) do
     t.string   "gender"
     t.date     "date_of_birth"
     t.date     "member_since"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "oauth_secret"
     t.boolean  "is_activated"
     t.datetime "last_accessed"
@@ -303,8 +303,8 @@ ActiveRecord::Schema.define(version: 20130821193203) do
     t.integer  "game_id",              null: false
     t.text     "event_log"
     t.text     "intermediate_results"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "aggregate_results"
     t.hstore   "score"
     t.text     "calculations"
@@ -366,15 +366,5 @@ ActiveRecord::Schema.define(version: 20130821193203) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["referred_by"], name: "index_users_on_referred_by", using: :btree
-
-  create_table "vs_database_diagrams", id: false, force: true do |t|
-    t.string   "name",     limit: 80
-    t.text     "diadata"
-    t.string   "comment",  limit: 1022
-    t.text     "preview"
-    t.string   "lockinfo", limit: 80
-    t.datetime "locktime"
-    t.string   "version",  limit: 80
-  end
 
 end

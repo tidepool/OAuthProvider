@@ -1,0 +1,1119 @@
+{
+    "name" : "Survey",
+    "unique_name": "survey",
+    "instructions" : "",
+    "recipe_names" : ["survey"],
+    "persist_as_results" : ["survey"],
+    "stages" : [
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I would be interested in:  Building kitchen cabinets ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a new medicine ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Write books or plays ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach an individual an exercise routine ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Buy and sell stocks and bonds ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a spreadsheet using computer software ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Lay brick or tile ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Study ways to reduce water pollution ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Play a musical instrument ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Help people with personal or emotional problems ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a retail store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Proofread records or forms ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I would be interested in:  Repairing household appliances ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Conduct chemical experiments ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Compose or arrange music ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Give career guidance to people ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Operate a beauty salon or barber shop ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Load computer software into a large computer network ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Raise fish in a fish hatchery ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Study the movement of planets ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Draw pictures ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Perform rehabilitation therapy ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a department within a large company ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Operate a calculator ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I would be interested in:  Assembling electronic parts ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Examine blood samples using a microscope ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Create special effects for movies ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Do volunteer work at a non-profit organization ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Start your own business ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Keep shipping and receiving records ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Drive a truck to deliver packages to offices and homes ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Investigate the cause of a fire ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Paint sets for plays ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach children how to play sports ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Negotiate business contracts ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Calculate the wages of employees ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I would be interested in:  Testing the quality of parts before shipment ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a way to better predict the weather ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Write scripts for movies or television shows ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach sign language to people with hearing disabilities ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Represent a client in a lawsuit ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Inventory supplies using a hand-held computer ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Repair and install locks ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Work in a biology lab ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Perform jazz or tap dance ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Help conduct a group therapy session ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Market a new line of clothing ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Record rent payments ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I would be interested in:  Seting up and operateing machines to make products ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Invent a replacement for sugar ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Sing in a band ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Take care of children at a day-care center ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Sell merchandise at a department store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Keep inventory records ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Put out forest fires ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Do laboratory tests to identify diseases ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Edit movies ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach a high-school class ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a clothing store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Stamp, sort, and distribute mail for an organization",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "tipi_extraverted",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Extraverted, enthusiastic ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_extraverted",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Critical, quarrelsome ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_dependable",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Dependable, self-disciplined ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_anxious",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Anxious, easily upset ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_open",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Open to new experiences, complex ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_reserved",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Reserved, quiet ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_sympathetic",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Sympathetic, warm ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_disorganized",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Disorganized, careless ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_calm",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Calm, emotionally stable ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          },
+          {
+            "question_id": "tipi_conventional",
+            "topic": "tipi",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Conventional, uncreative ",
+            "labels": [
+              { "position": 0, "label": "Disagree strongly" },
+              { "position": "16.67%", "label": "Disagree moderately" },
+              { "position": "33.34%", "label": "Disagree a little" },
+              { "position": "50%", "label": "Neither agree nor disagree" },
+              { "position": "66.67%", "label": "Agree a little" },
+              { "position": "83.34%", "label": "Agree moderately" },
+              { "position": "100%", "label": "Agree strongly" }
+            ]
+          }
+        ]
+      }
+    ]
+}
+
+
+
+

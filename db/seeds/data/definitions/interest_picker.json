@@ -1,238 +1,1128 @@
 {
-    "name" : "Interest Picker",
-    "unique_name": "interest_picker",
-    "instructions" : "",
-    "recipe_names" : ["holland6_new"],
-    "persist_as_results" : [],
-    "stages" :
-      [
-        {
-          "friendly_name" : "Interest Picker",
-          "instructions" : "Pick your favorite symbols and words.",
-          "view_name" : "InterestPicker",
-          "game_type" : "holland6",
-          "data": [
-            {
-              "type": "word",
-              "value": "Hands-on",
-              "dimension": "realistic"
-            },
-            {
-              "type": "word",
-              "value": "Creative",
-              "dimension": "artistic"
-            },
-            {
-              "type": "word",
-              "value": "Helpful",
-              "dimension": "social"
-            },
-            {
-              "type": "word",
-              "value": "Persuasive",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "word",
-              "value": "Inquisitive",
-              "dimension": "investigative"
-            },
-            {
-              "type": "word",
-              "value": "Detail-Oriented",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-social1",
-              "dimension": "social"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-enterprising2",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-conventional5",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-realistic2",
-              "dimension": "realistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-artistic4",
-              "dimension": "artistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-investigative5",
-              "dimension": "investigative"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-social2",
-              "dimension": "social"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-enterprising6",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-conventional6",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-realistic6",
-              "dimension": "realistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-artistic5",
-              "dimension": "artistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-investigative6",
-              "dimension": "investigative"
-            },
-            {
-              "type": "word",
-              "value": "Mechanical",
-              "dimension": "realistic"
-            },
-            {
-              "type": "word",
-              "value": "Intuitive",
-              "dimension": "artistic"
-            },
-            {
-              "type": "word",
-              "value": "Caring",
-              "dimension": "social"
-            },
-            {
-              "type": "word",
-              "value": "Passionate",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "word",
-              "value": "Analytical",
-              "dimension": "investigative"
-            },
-            {
-              "type": "word",
-              "value": "Thorough",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-social3",
-              "dimension": "social"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-enterprising7",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-conventional7",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-realistic7",
-              "dimension": "realistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-artistic6",
-              "dimension": "artistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-investigative7",
-              "dimension": "investigative"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-social5",
-              "dimension": "social"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-investigative4",
-              "dimension": "investigative"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-conventional8",
-              "dimension": "conventional"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-enterprising3",
-              "dimension": "enterprising"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-artistic7",
-              "dimension": "artistic"
-            },
-            {
-              "type": "symbol",
-              "value": "gfx-hol6-investigative8",
-              "dimension": "investigative"
-            }
-          ]
-        },
-        {
-          "friendly_name" : "Circles Interest",
-          "instructions" : [
-              "Collapse or expand circles to indicate how well the trait describes you. You must change the size of all circles",
-              "Now place each trait so that it best represents how important the trait is to yourself. Those closest to you are the most important."
-          ],
-          "view_name" : "CirclesTest",
-          "game_type" : "holland6",
-          "circles" : [{
-                  "trait1" : "Mechanical",
-                  "trait2" : "Hands-on",
-                  "size" : "2"
-              },
-              {
-                  "trait1" : "Creative",
-                  "trait2" : "Intuitive",
-                  "size" : "2"
-              },
-              {
-                  "trait1" : "Teacher",
-                  "trait2" : "Helpful",
-                  "size" : "2"
-              },
-              {
-                  "trait1" : "Persuasive",
-                  "trait2" : "Enthusiastic",
-                  "size" : "2"
-              },
-              {
-                  "trait1" : "Inquisitive",
-                  "trait2" : "Analytical",
-                  "size" : "2"
-              },
-              {
-                  "trait1" : "Detail-Oriented",
-                  "trait2" : "Thorough",
-                  "size" : "2"
-              }]
-        }
-      ]
+  "name" : "Interest Picker",
+  "unique_name": "interest_picker",
+  "instructions" : "Pick the symbols and words that best represent to your interests",
+  "recipe_names" : ["holland6_new"],
+  "persist_as_results" : [],
+  "stages" :
+    [
+      {
+        "friendly_name" : "Interest Picker",
+        "instructions" : "Pick your favorite symbols and words.",
+        "view_name" : "InterestPicker",
+        "game_type" : "holland6",
+        "data": [
+          {
+            "type": "word",
+            "value": "Hands-on",
+            "dimension": "realistic"
+          },
+          {
+            "type": "word",
+            "value": "Creative",
+            "dimension": "artistic"
+          },
+          {
+            "type": "word",
+            "value": "Helpful",
+            "dimension": "social"
+          },
+          {
+            "type": "word",
+            "value": "Persuasive",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "word",
+            "value": "Inquisitive",
+            "dimension": "investigative"
+          },
+          {
+            "type": "word",
+            "value": "Detail-Oriented",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-social2",
+            "dimension": "social"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising2",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-conventional5",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-realistic2",
+            "dimension": "realistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-artistic4",
+            "dimension": "artistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-investigative6",
+            "dimension": "investigative"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-social3",
+            "dimension": "social"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising6",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-conventional6",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-realistic6",
+            "dimension": "realistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-artistic5",
+            "dimension": "artistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-investigative9",
+            "dimension": "investigative"
+          },
+          {
+            "type": "word",
+            "value": "Mechanical",
+            "dimension": "realistic"
+          },
+          {
+            "type": "word",
+            "value": "Intuitive",
+            "dimension": "artistic"
+          },
+          {
+            "type": "word",
+            "value": "Caring",
+            "dimension": "social"
+          },
+          {
+            "type": "word",
+            "value": "Passionate",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "word",
+            "value": "Analytical",
+            "dimension": "investigative"
+          },
+          {
+            "type": "word",
+            "value": "Thorough",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-social5",
+            "dimension": "social"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising8",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-conventional7",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-realistic8",
+            "dimension": "realistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-artistic7",
+            "dimension": "artistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-investigative10",
+            "dimension": "investigative"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-social6",
+            "dimension": "social"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising9",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-conventional9",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-realistic9",
+            "dimension": "realistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-artistic8",
+            "dimension": "artistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-investigative5",
+            "dimension": "investigative"
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Build kitchen cabinets ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a new medicine ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Write books or plays ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach an individual an exercise routine ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Buy and sell stocks and bonds ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional1",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a spreadsheet using computer software ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Lay brick or tile ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Study ways to reduce water pollution ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Play a musical instrument ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Help people with personal or emotional problems ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a retail store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional2",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Proofread records or forms ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Repair household appliances ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Conduct chemical experiments ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Compose or arrange music ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Give career guidance to people ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Operate a beauty salon or barber shop ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional3",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Load computer software into a large computer network ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Raise fish in a fish hatchery ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Study the movement of planets ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Draw pictures ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Perform rehabilitation therapy ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a department within a large company ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional4",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Operate a calculator ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Assemble electronic parts ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Examine blood samples using a microscope ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Create special effects for movies ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Do volunteer work at a non-profit organization ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Start your own business ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional5",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Keep shipping and receiving records ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Drive a truck to deliver packages to offices and homes ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Investigate the cause of a fire ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Paint sets for plays ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach children how to play sports ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Negotiate business contracts ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional6",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Calculate the wages of employees ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Test the quality of parts before shipment ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Develop a way to better predict the weather ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Write scripts for movies or television shows ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach sign language to people with hearing disabilities ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Represent a client in a lawsuit ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional7",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Inventory supplies using a hand-held computer ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Repair and install locks ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Work in a biology lab ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Perform jazz or tap dance ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Help conduct a group therapy session ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Market a new line of clothing ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional8",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Record rent payments ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "holl6_Realistic9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Set up and operate machines to make products ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Invent a replacement for sugar ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Sing in a band ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Take care of children at a day-care center ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Sell merchandise at a department store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional9",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Keep inventory records ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Realistic10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Put out forest fires ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Investigative10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Do laboratory tests to identify diseases ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Artistic10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Edit movies ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Social10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Teach a high-school class ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Enterprising10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Manage a clothing store ",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          },
+          {
+            "question_id": "holl6_Conventional10",
+            "topic": "holl6",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "Stamp, sort, and distribute mail for an organization",
+            "labels": [
+              { "position": 0, "label": "strongly dislike" },
+              { "position": "25%", "label": "dislike" },
+              { "position": "50%", "label": "unsure" },
+              { "position": "75%", "label": "like" },
+              { "position": "100%", "label": "strongly like" }
+            ]
+          }
+        ]
+      }
+    ]
 }
-
