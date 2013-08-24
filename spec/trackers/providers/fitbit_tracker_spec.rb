@@ -8,7 +8,8 @@ describe FitbitTracker do
   end
 
   it 'correctly calculates days to retrieve info' do 
-    tracker = FitbitTracker.new(user, connection, nil)
+    user
+    tracker = FitbitTracker.new(connection, nil)
     days = tracker.days_to_retrieve(:activities)
     days.should == 3
     days = tracker.days_to_retrieve(:sleeps)
@@ -20,7 +21,8 @@ describe FitbitTracker do
   end
 
   it 'calls the APIs for the correct number of days back' do
-    tracker = FitbitTracker.new(user, connection, nil)
+    user
+    tracker = FitbitTracker.new(connection, nil)
     sync_list = [:activities]
     Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
       "summary" => {
@@ -78,7 +80,8 @@ describe FitbitTracker do
         consumer_key: ENV['FITBIT_KEY'],
         consumer_secret: ENV['FITBIT_SECRET']})
 
-      tracker = FitbitTracker.new(user, connection, client)
+      user
+      tracker = FitbitTracker.new(connection, client)
       new_activity = tracker.persist_activities(Date.current)
 
       new_activity.should_not be_nil
@@ -99,7 +102,8 @@ describe FitbitTracker do
         consumer_secret: ENV['FITBIT_SECRET']})
 
       activity
-      tracker = FitbitTracker.new(user, connection, client)
+      user
+      tracker = FitbitTracker.new(connection, client)
       new_activity = tracker.persist_activities(Date.current)
       new_activity.should_not be_nil
 
@@ -149,7 +153,8 @@ describe FitbitTracker do
         consumer_key: ENV['FITBIT_KEY'],
         consumer_secret: ENV['FITBIT_SECRET']})
 
-      tracker = FitbitTracker.new(user, connection, client)
+      user
+      tracker = FitbitTracker.new(connection, client)
       new_sleep = tracker.persist_sleeps(Date.current)
       new_sleep.should_not be_nil
       new_sleep.total_minutes_in_bed.should == 430

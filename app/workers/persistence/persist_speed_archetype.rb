@@ -1,10 +1,11 @@
 class PersistSpeedArchetype 
   def persist(game, analysis_results)
-    # Below will raise exception if not found ActiveRecord::NotFound
-    user = User.find(game.user_id)
     unless analysis_results && analysis_results[:reaction_time2] && analysis_results[:reaction_time2][:score]
       raise Workers::PersistenceError, "Analysis does not contain ReactionTime2 scores."
     end
+
+    # Below will raise exception if not found ActiveRecord::NotFound
+    user = User.find(game.user_id)
 
     reaction_time2_score = analysis_results[:reaction_time2][:score]
 

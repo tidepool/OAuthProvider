@@ -100,6 +100,7 @@ FactoryGirl.define do
     
     factory :fitbit do 
       provider 'fitbit'
+      last_accessed Time.zone.now
       last_synchronized do 
         { 
           'activities' => (Time.zone.now - 2.days).to_s, 

@@ -154,6 +154,23 @@ describe 'Results API' do
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
+    output[:data].length.should == 6
+    output[:data].flatten.length.should == 10
+  end
+
+  it 'shows the results in pages' do 
+    daily_results
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/results.json?limit=4&offset=2")
+    response.status.should == 200
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
+    user_results.length.should == 4
+    status = output[:status]
+    status[:offset].should == 2
+    status[:limit].should == 4
+    status[:next].should == "http://example.org/api/v1/users/-/results?offset=6&limit=4"
+    status[:prev].should == "http://example.org/api/v1/users/-/results?offset=0&limit=4"
   end
 
   describe 'PersonalityResult' do
