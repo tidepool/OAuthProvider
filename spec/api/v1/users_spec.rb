@@ -191,6 +191,21 @@ describe 'Users API' do
     user_info[:holland6_score].should == personality.holland6_score.symbolize_keys
   end
 
+  it 'allows the user to reset their password given their email' do 
+    user1
+    MailSender.stub(:perform_async) do |mailer_klass_name, mailer_method, options|
+      options[:user_id].should == user1.id
+      options[:temp_password].should_not be_nil
+    end
+    token = get_conn()
+    user_params = { email: user1.email }
+    response = token.post("#{@endpoint}/users/-/reset_password.json", {user: user_params})
+
+    result = JSON.parse(response.body, symbolize_names: true)
+    response.status.should == 200
+    result[:status][:message].should == "Password is reset, and email sent with temporary password."
+  end
+
   describe 'Error and Edge Cases' do
     it 'doesnot show other users information' do 
       token = get_conn(user1)

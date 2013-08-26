@@ -29,6 +29,7 @@ OAuthProvider::Application.routes.draw do
       # get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
         get 'personality', to: 'users#personality'
+        post 'reset_password', to: 'users#reset_password'
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
