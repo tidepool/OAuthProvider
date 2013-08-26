@@ -5,6 +5,20 @@ class RegistrationService
     ::Rails.logger
   end
 
+  def reset_password(email)
+    user = User.where(email: email).first
+    raise ActiveRecord::RecordNotFound, "User with email does not exist" if user.nil?
+
+    char_opts =  [('1'..'9'),('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten
+    password = (0...12).map{ char_opts[rand(char_opts.length)] }.join
+
+    user.password = password
+    user.password_confirmation = password
+    user.save!
+
+    MailSender.perform_async(:UserMailer, :password_reset_email, { user_id: user.id, temp_password: password } )
+  end
+
   def register_guest_or_full(attributes)
     begin
       register_guest_or_full!(attributes)

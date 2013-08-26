@@ -51,6 +51,29 @@ class AppUserSeed
       end
       app.save!
 
+      ios_app = Doorkeeper::Application.where('name = ?', 'tidepool_ios').first_or_create do |ios_app|
+        ios_app.name = 'tidepool_ios'
+        ios_app.redirect_uri = 'http://assessments-front.dev/redirect.html'
+      end
+
+      user_int = User.where(email: 'user_int@example.com').first
+      if user_int.nil?
+        user_int = User.create! :email => 'user_int@example.com', 
+                            :password => 'tidepool', 
+                            :password_confirmation => 'tidepool' 
+        user_int.admin = false
+        user_int.save
+      end
+      token = Doorkeeper::AccessToken.where(resource_owner_id: user_int.id).first
+
+      if token.nil?
+        expires_in = 2.years
+        token = Doorkeeper::AccessToken.create! :application_id => ios_app.id,
+                                                  :use_refresh_token => true,
+                                                  :resource_owner_id => user_int.id,
+                                                  :expires_in => expires_in
+      end
+
       puts 'Users :'
       puts "email: #{user.email}"
       puts "email: #{user2.email}"
@@ -60,6 +83,11 @@ class AppUserSeed
       puts "redirect_uri: #{app.redirect_uri}"
       puts "uid: #{app.uid}"
       puts "secret: #{app.secret}"
+
+      puts "iOS APP---------"
+      puts "secret: #{ios_app.secret}"
+      puts "uid: #{ios_app.uid}"
+      puts "token: #{token.token}"
     end
   end
 end
