@@ -1110,6 +1110,786 @@
             ]
           }
         ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "big5_extraversion1",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am the life of the party.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness1",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I feel little concern for others.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness1",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am always prepared.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability1",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I get stressed out easily.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness1",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have a rich vocabulary.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_extraversion2",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I don't talk a lot.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness2",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am interested in people.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness2",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I leave my belongings around.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability2",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am relaxed most of the time.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness2",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have difficulty understanding abstract ideas.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "big5_extraversion3",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I feel comfortable around people.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness3",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I insult people.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness3",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I pay attention to details.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability3",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I worry about things.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness3",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have a vivid imagination.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_extraversion4",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I keep in the background.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness4",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I sympathize with others' feelings.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness4",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I make a mess of things.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability4",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I seldom feel blue.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness4",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am not interested in abstract ideas.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "big5_extraversion5",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I start conversations.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness5",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am not interested in other people's problems.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness5",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I get chores done right away.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability5",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am easily disturbed.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness5",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have excellent ideas.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_extraversion6",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have little to say.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness6",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have a soft heart.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness6",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I often forget to put things back in their proper place.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability6",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I get upset easily.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness6",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I do not have a good imagination.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "big5_extraversion7",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I talk to a lot of different people at parties.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness7",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am not really interested in others.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness7",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I like order.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability7",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I change my mood a lot.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness7",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am quick to understand things.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_extraversion8",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I don't like to draw attention to myself.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness8",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I take time out for others.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness8",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I shirk my duties.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability8",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I have frequent mood swings.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness8",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I use difficult words.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "data": [
+          {
+            "question_id": "big5_extraversion9",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I don't mind being the center of attention.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness9",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I feel others' emotions.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness9",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I follow a schedule.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability9",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I get irritated easily.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness9",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I spend time reflecting on things.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_extraversion10",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am quiet around strangers.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_agreeableness10",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I make people feel at ease.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_conscientiousness10",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am exacting in my work.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_emotional_stability10",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I often feel blue.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          },
+          {
+            "question_id": "big5_openness10",
+            "topic": "big5",
+            "question_type": "icon_slider",
+            "icon": "icon-asterisk",
+            "steps": 5,
+            "question": "I am full of ideas.",
+            "labels": [
+              { "position": 0, "label": "disagree" },
+              { "position": "25%", "label": "slightly disagree" },
+              { "position": "50%", "label": "neutral" },
+              { "position": "75%", "label": "slightly agree" },
+              { "position": "100%", "label": "agree" }
+            ]
+          }
+        ]
       }
     ]
 }
