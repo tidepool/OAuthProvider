@@ -13,7 +13,9 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
   end
 
   def description
-    @reaction_time.description if @reaction_time
+    desc = ""
+    desc = @reaction_time.description if @reaction_time && @reaction_time.description
+    desc
   end
 
   def display_id
