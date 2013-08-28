@@ -27,12 +27,13 @@ class SpeedAggregateResult < AggregateResult
     return nil unless game && game.user_id
     return nil unless analysis_results && analysis_results[:reaction_time2] && analysis_results[:reaction_time2][:score]
 
-    user = User.where(id: game.user_id).first
-    return nil if user.nil?
+    # user = User.where(id: game.user_id).first
+    # return nil if user.nil?
 
     result = existing_result
     if result.nil?
-      result = user.aggregate_results.build(:type => 'SpeedAggregateResult') 
+      result = AggregateResult.create(type: 'SpeedAggregateResult', user_id: game.user_id)
+      # result = user.aggregate_results.build(:type => 'SpeedAggregateResult') 
       result.initialize_scores
     end
 

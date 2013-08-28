@@ -8,9 +8,7 @@ module TidepoolAnalyze
         input_data.each do | data |
           if data[:average_time] 
             speed_score = data[:score]
-            if speed_score
-              speed_score = (speed_score / 10).to_i
-            end
+            
             # Snoozer game results
             output = output.merge({
               average_time: data[:average_time],
@@ -29,7 +27,6 @@ module TidepoolAnalyze
         end
         output.merge({ version: '2.0' })
       end
-
     end
   end
 end

@@ -31,7 +31,7 @@ describe PersistSpeedArchetype do
     }
   end
 
-  it 'persists the speed_archetype results' do 
+  it 'persists the speed_archetype results when no results available' do 
     user
     persist_rt = PersistSpeedArchetype.new
     persist_rt.persist(game, @analysis_results)
