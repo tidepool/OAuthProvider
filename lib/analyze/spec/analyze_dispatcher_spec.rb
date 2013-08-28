@@ -296,37 +296,35 @@ module TidepoolAnalyze
 
       analysis = analyze_dispatcher.execute_recipe(recipe, mini_game_events)
       analysis.should_not be_nil
-      analysis[:score].should == {
-        :speed_archetype => "dolphin",
-        :average_time => 718,
-        :average_time_simple => 718,
-        :average_time_complex => 718,
-        :fastest_time => 532,
-        :slowest_time => 905,
-        :stage_data => [
-          { :test_type=>"simple", 
-            :test_duration=>17874, 
-            :average_time=>718, 
-            :slowest_time=>905, 
-            :fastest_time=>532, 
-            :total=>4, 
-            :total_correct=>2, 
-            :total_incorrect=>1, 
-            :total_missed=>1}, 
-          { :test_type=>"complex", 
-            :test_duration=>17874, 
-            :average_time=>718, 
-            :slowest_time=>905, 
-            :fastest_time=>532, 
-            :total=>4, 
-            :total_correct=>2, 
-            :total_incorrect=>1, 
-            :total_missed=>1}
-            ],
-        :version => "2.0"
-      }
+      analysis[:score].should == {:average_time=>718,
+        :average_time_simple=>718,
+        :average_time_complex=>718,
+        :fastest_time=>532,
+        :slowest_time=>905,
+        :speed_score=>0,
+        :stage_data=>
+          [{:test_type=>"simple",
+            :test_duration=>17954,
+            :average_time=>718,
+            :slowest_time=>905,
+            :fastest_time=>532,
+            :score=>0,
+            :total=>5,
+            :total_correct=>2,
+            :total_incorrect=>2,
+            :total_missed=>1},
+           {:test_type=>"complex",
+            :test_duration=>17874,
+            :average_time=>718,
+            :slowest_time=>905,
+            :fastest_time=>532,
+            :score=>0,
+            :total=>4,
+            :total_correct=>2,
+            :total_incorrect=>1,
+            :total_missed=>1}],
+        :version=>"2.0"}
     end
-
 
     it 'executes a capacity recipe' do
       analysis = execute_recipe('capacity')

@@ -11,6 +11,7 @@ Doorkeeper.configure do
     user_id = params[:user_id]
     guest_id = params[:guest_id]
     provider = params[:provider]
+    # redirect_uri = params[:redirect_uri]
 
     if user_id && user_id != -1
       user = User.find(user_id)
@@ -19,6 +20,7 @@ Doorkeeper.configure do
         session[:user_id] = guest_id if guest_id
         # The & at the end is necessary as we will tack parameters
         session[:redirect_after_external] = "#{request.fullpath}&"
+        # session[:redirect_after_external] = "#{redirect_uri}&"
         redirect_to("/auth/#{provider}")
         # Once the authentication is complete (success of fail), 
         # we will be redirected back here with a user_id in the params
