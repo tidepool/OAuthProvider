@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   has_many :authentications
   has_many :preorders
   has_many :results
+  has_many :aggregate_results
   has_many :preferences
   has_many :activities
 

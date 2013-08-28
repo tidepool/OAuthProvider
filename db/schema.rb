@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823004720) do
+ActiveRecord::Schema.define(version: 20130827211725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20130823004720) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "aggregate_results", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "type"
+    t.integer  "high_score"
+    t.text     "scores"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "aggregate_results", ["high_score"], name: "index_aggregate_results_on_high_score", using: :btree
+  add_index "aggregate_results", ["user_id"], name: "index_aggregate_results_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -273,19 +285,6 @@ ActiveRecord::Schema.define(version: 20130823004720) do
   add_index "profile_descriptions", ["big5_dimension"], name: "index_profile_descriptions_on_big5_dimension", using: :btree
   add_index "profile_descriptions", ["holland6_dimension"], name: "index_profile_descriptions_on_holland6_dimension", using: :btree
 
-  create_table "reaction_time_descriptions", force: true do |t|
-    t.string   "big5_dimension",     null: false
-    t.string   "speed_archetype",    null: false
-    t.text     "description"
-    t.text     "bullet_description"
-    t.string   "display_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reaction_time_descriptions", ["big5_dimension"], name: "index_reaction_time_descriptions_on_big5_dimension", using: :btree
-  add_index "reaction_time_descriptions", ["speed_archetype"], name: "index_reaction_time_descriptions_on_speed_archetype", using: :btree
-
   create_table "recommendations", force: true do |t|
     t.string   "big5_dimension", null: false
     t.string   "link_type"
@@ -336,6 +335,16 @@ ActiveRecord::Schema.define(version: 20130823004720) do
   add_index "sleeps", ["date_recorded"], name: "index_sleeps_on_date_recorded", using: :btree
   add_index "sleeps", ["provider"], name: "index_sleeps_on_provider", using: :btree
   add_index "sleeps", ["user_id"], name: "index_sleeps_on_user_id", using: :btree
+
+  create_table "speed_archetype_descriptions", force: true do |t|
+    t.string   "speed_archetype", null: false
+    t.text     "description"
+    t.string   "display_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "speed_archetype_descriptions", ["speed_archetype"], name: "index_speed_archetype_descriptions_on_speed_archetype", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                default: "",    null: false

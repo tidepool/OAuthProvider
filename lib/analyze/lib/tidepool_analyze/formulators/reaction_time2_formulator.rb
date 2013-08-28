@@ -49,14 +49,17 @@ module TidepoolAnalyze
         slowest_time = 0
         fastest_time = 100000
         count_all = 0
+        score = 0
 
         @reaction_times.each do |entry|
           case entry[:test_type]
           when 'simple'
             total_average_simple += entry[:average_time]
+            score += entry[:score]
             count_simple += 1
           when 'complex'
             total_average_complex += entry[:average_time]
+            score += entry[:score]
             count_complex += 1
           end
 
@@ -75,6 +78,7 @@ module TidepoolAnalyze
           average_time_complex: average_time_complex,
           fastest_time: fastest_time,
           slowest_time: slowest_time,
+          score: score,
           stage_data: @reaction_times
         }
       end   

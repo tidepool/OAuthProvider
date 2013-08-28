@@ -202,11 +202,9 @@ describe 'Results API' do
       user_results = output[:data]
       user_results[0].should_not be_nil
       user_results[0][:type].should == 'SpeedArchetypeResult'
-      user_results[0][:speed_archetype].should == 'dog'
-      user_results[0][:big5_dimension].should == 'high_openness'
+      user_results[0][:speed_archetype].should == 'cheetah'
       user_results[0][:description].should_not be_nil
-      user_results[0][:bullet_description].class.should == Array
-      user_results[0][:display_id].should == 'high_openness_dog'
+      user_results[0][:display_id].should == 'cheetah'
       user_results[0][:average_time_simple].should == '340'
       user_results[0][:average_time_complex].should == '718'
     end

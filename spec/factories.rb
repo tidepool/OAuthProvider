@@ -31,12 +31,13 @@ FactoryGirl.define do
       type 'SpeedArchetypeResult'
       score do 
         {
+          "speed_score" => "800",
           "average_time"=>"529",
           "average_time_simple"=>"340",
           "average_time_complex"=>"718",
           "fastest_time"=>"400",
           "slowest_time"=>"905",
-          "reaction_time_description_id" => "24"
+          "description_id" => "2"
         }
       end
       calculations do 
