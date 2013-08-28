@@ -12,7 +12,7 @@
           {
             "question_id": "holl6_Realistic1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Building kitchen cabinets ",
@@ -27,7 +27,7 @@
           {
             "question_id": "holl6_Investigative1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Develop a new medicine ",
@@ -42,7 +42,7 @@
           {
             "question_id": "holl6_Artistic1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Write books or plays ",
@@ -57,7 +57,7 @@
           {
             "question_id": "holl6_Social1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Teach an individual an exercise routine ",
@@ -72,7 +72,7 @@
           {
             "question_id": "holl6_Enterprising1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Buy and sell stocks and bonds ",
@@ -87,7 +87,7 @@
           {
             "question_id": "holl6_Conventional1",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Develop a spreadsheet using computer software ",
@@ -102,7 +102,7 @@
           {
             "question_id": "holl6_Realistic2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Lay brick or tile ",
@@ -117,7 +117,7 @@
           {
             "question_id": "holl6_Investigative2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Study ways to reduce water pollution ",
@@ -132,7 +132,7 @@
           {
             "question_id": "holl6_Artistic2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Play a musical instrument ",
@@ -147,7 +147,7 @@
           {
             "question_id": "holl6_Social2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Help people with personal or emotional problems ",
@@ -162,7 +162,7 @@
           {
             "question_id": "holl6_Enterprising2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Manage a retail store ",
@@ -177,7 +177,7 @@
           {
             "question_id": "holl6_Conventional2",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Proofread records or forms ",
