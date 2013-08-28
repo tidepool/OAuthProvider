@@ -5,7 +5,7 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
 
   def initialize(object, options={})
     super 
-    find_reaction_time_description
+    find_speed_archetype_description
   end
 
   def speed_archetype
@@ -20,13 +20,15 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
     @reaction_time.display_id if @reaction_time
   end
 
-  def find_reaction_time_description
-    if @reaction_time.nil?
-      desc_id = object.description_id
-      desc = nil
-      desc = SpeedArchetypeDescription.where(id: desc_id).first if desc_id
-      desc = SpeedArchetypeDescription.where(id: 10).first if desc.nil? # This is only to account for older results, since we changed the descriptions since
-      @reaction_time = desc
+  def find_speed_archetype_description
+    desc_id = object.description_id
+    if desc_id
+      desc_id = desc_id.to_i 
+      if desc_id > 12
+        # This is only to account for older results, since we changed the descriptions since
+        desc_id = 10
+      end
+      @reaction_time ||= SpeedArchetypeDescription.find(desc_id)
     end
   end
 end
