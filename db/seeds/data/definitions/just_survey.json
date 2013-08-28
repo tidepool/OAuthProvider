@@ -8,6 +8,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "option_choices": "strongly dislike, dislike, unsure, like, strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic1",
@@ -21,7 +22,7 @@
               {"icon": "icon-asterisk", "value": "2"},
               {"icon": "icon-asterisk", "value": "3"},
               {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -31,12 +32,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Develop a new medicine ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -46,12 +47,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Write books or plays ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -61,12 +62,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Teach an individual an exercise routine ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -76,12 +77,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Buy and sell stocks and bonds ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -91,12 +92,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Develop a spreadsheet using computer software ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -106,12 +107,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Lay brick or tile ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -121,12 +122,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Study ways to reduce water pollution ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -136,12 +137,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Play a musical instrument ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -151,12 +152,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Help people with personal or emotional problems ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -166,12 +167,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Manage a retail store ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
@@ -181,12 +182,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Proofread records or forms ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -198,181 +199,181 @@
           {
             "question_id": "holl6_Realistic3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Repairing household appliances ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Conduct chemical experiments ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Compose or arrange music ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Give career guidance to people ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Operate a beauty salon or barber shop ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional3",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Load computer software into a large computer network ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Realistic4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Raise fish in a fish hatchery ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Study the movement of planets ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Draw pictures ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Perform rehabilitation therapy ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Manage a department within a large company ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional4",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Operate a calculator ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -384,181 +385,181 @@
           {
             "question_id": "holl6_Realistic5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Assembling electronic parts ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Examine blood samples using a microscope ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Create special effects for movies ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Do volunteer work at a non-profit organization ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Start your own business ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional5",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Keep shipping and receiving records ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Realistic6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Drive a truck to deliver packages to offices and homes ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Investigate the cause of a fire ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Paint sets for plays ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Teach children how to play sports ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Negotiate business contracts ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional6",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Calculate the wages of employees ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -570,181 +571,181 @@
           {
             "question_id": "holl6_Realistic7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Testing the quality of parts before shipment ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Develop a way to better predict the weather ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Write scripts for movies or television shows ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Teach sign language to people with hearing disabilities ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Represent a client in a lawsuit ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional7",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Inventory supplies using a hand-held computer ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Realistic8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Repair and install locks ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Work in a biology lab ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Perform jazz or tap dance ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Help conduct a group therapy session ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Market a new line of clothing ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional8",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Record rent payments ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -756,181 +757,181 @@
           {
             "question_id": "holl6_Realistic9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Seting up and operateing machines to make products ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Invent a replacement for sugar ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Sing in a band ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Take care of children at a day-care center ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Sell merchandise at a department store ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional9",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Keep inventory records ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Realistic10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Put out forest fires ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Investigative10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Do laboratory tests to identify diseases ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Artistic10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Edit movies ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Social10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Teach a high-school class ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Enterprising10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Manage a clothing store ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "holl6_Conventional10",
             "topic": "holl6",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "Stamp, sort, and distribute mail for an organization",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -938,331 +939,156 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
-        "data": [
-          {
-            "question_id": "tipi_extraverted",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Extraverted, enthusiastic ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_critical",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Critical, quarrelsome ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_dependable",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Dependable, self-disciplined ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_anxious",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Anxious, easily upset ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_open",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Open to new experiences, complex ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_reserved",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Reserved, quiet ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_sympathetic",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Sympathetic, warm ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_disorganized",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Disorganized, careless ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_calm",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Calm, emotionally stable ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          },
-          {
-            "question_id": "tipi_conventional",
-            "topic": "tipi",
-            "question_type": "icon_slider",
-            "icon": "icon-asterisk",
-            "steps": 7,
-            "question": "I see myself as:  Conventional, uncreative ",
-            "labels": [
-              { "position": 0, "label": "Disagree strongly" },
-              { "position": "16.67%", "label": "Disagree moderately" },
-              { "position": "33.34%", "label": "Disagree a little" },
-              { "position": "50%", "label": "Neither agree nor disagree" },
-              { "position": "66.67%", "label": "Agree a little" },
-              { "position": "83.34%", "label": "Agree moderately" },
-              { "position": "100%", "label": "Agree strongly" }
-            ]
-          }
-        ]
-      },
-      {
-        "friendly_name": "Score the following questions as related to yourself",
-        "view_name": "Survey",
+        "option_choices": "disagree, slightly disagree, neutral, slightly agree, agree",
         "data": [
           {
             "question_id": "big5_extraversion1",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am the life of the party.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness1",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I feel little concern for others.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness1",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am always prepared.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability1",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I get stressed out easily.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness1",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have a rich vocabulary.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_extraversion2",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I don't talk a lot.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness2",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am interested in people.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness2",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I leave my belongings around.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability2",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am relaxed most of the time.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness2",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have difficulty understanding abstract ideas.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -1274,151 +1100,151 @@
           {
             "question_id": "big5_extraversion3",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I feel comfortable around people.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness3",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I insult people.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness3",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I pay attention to details.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability3",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I worry about things.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness3",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have a vivid imagination.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_extraversion4",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I keep in the background.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness4",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I sympathize with others' feelings.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness4",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I make a mess of things.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability4",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I seldom feel blue.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness4",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am not interested in abstract ideas.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -1430,151 +1256,151 @@
           {
             "question_id": "big5_extraversion5",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I start conversations.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness5",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am not interested in other people's problems.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness5",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I get chores done right away.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability5",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am easily disturbed.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness5",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have excellent ideas.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_extraversion6",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have little to say.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness6",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have a soft heart.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness6",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I often forget to put things back in their proper place.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability6",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I get upset easily.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness6",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I do not have a good imagination.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -1586,151 +1412,151 @@
           {
             "question_id": "big5_extraversion7",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I talk to a lot of different people at parties.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness7",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am not really interested in others.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness7",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I like order.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability7",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I change my mood a lot.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness7",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am quick to understand things.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_extraversion8",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I don't like to draw attention to myself.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness8",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I take time out for others.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness8",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I shirk my duties.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability8",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I have frequent mood swings.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness8",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I use difficult words.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           }
         ]
@@ -1742,151 +1568,328 @@
           {
             "question_id": "big5_extraversion9",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I don't mind being the center of attention.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness9",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I feel others' emotions.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness9",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I follow a schedule.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability9",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I get irritated easily.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness9",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I spend time reflecting on things.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_extraversion10",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am quiet around strangers.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_agreeableness10",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I make people feel at ease.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_conscientiousness10",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am exacting in my work.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_emotional_stability10",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I often feel blue.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
             ]
           },
           {
             "question_id": "big5_openness10",
             "topic": "big5",
-            "question_type": "icon_slider",
+            "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I am full of ideas.",
-            "labels": [
-              { "position": 0, "label": "disagree" },
-              { "position": "25%", "label": "slightly disagree" },
-              { "position": "50%", "label": "neutral" },
-              { "position": "75%", "label": "slightly agree" },
-              { "position": "100%", "label": "agree" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"}
+            ]
+          }
+        ]
+      },
+      {
+        "friendly_name": "Score the following questions as related to yourself",
+        "view_name": "Survey",
+        "option_choices": "Disagree strongly, Disagree moderately, Disagree a little, Neither agree nor disagree, Agree a little, Agree moderately, Agree strongly",
+        "data": [
+          {
+            "question_id": "tipi_extraverted",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Extraverted, enthusiastic ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_critical",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Critical, quarrelsome ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_dependable",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Dependable, self-disciplined ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_anxious",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Anxious, easily upset ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_open",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Open to new experiences, complex ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_reserved",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Reserved, quiet ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_sympathetic",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Sympathetic, warm ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_disorganized",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Disorganized, careless ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_calm",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Calm, emotionally stable ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
+            ]
+          },
+          {
+            "question_id": "tipi_conventional",
+            "topic": "tipi",
+            "question_type": "select_by_icon",
+            "icon": "icon-asterisk",
+            "steps": 7,
+            "question": "I see myself as:  Conventional, uncreative ",
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
+              {"icon": "icon-asterisk", "value": "6"},
+              {"icon": "icon-asterisk", "value": "7"}
             ]
           }
         ]
