@@ -16,12 +16,12 @@
             "icon": "icon-asterisk",
             "steps": 5,
             "question": "I would be interested in:  Building kitchen cabinets ",
-            "labels": [
-              { "position": 0, "label": "strongly dislike" },
-              { "position": "25%", "label": "dislike" },
-              { "position": "50%", "label": "unsure" },
-              { "position": "75%", "label": "like" },
-              { "position": "100%", "label": "strongly like" }
+            "options": [
+              {"icon": "icon-asterisk", "value": "1"},
+              {"icon": "icon-asterisk", "value": "2"},
+              {"icon": "icon-asterisk", "value": "3"},
+              {"icon": "icon-asterisk", "value": "4"},
+              {"icon": "icon-asterisk", "value": "5"},
             ]
           },
           {
