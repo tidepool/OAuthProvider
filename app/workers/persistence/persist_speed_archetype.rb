@@ -62,7 +62,7 @@ class PersistSpeedArchetype
   end
 
   def time_mapping(average_time, mean, sd)
-    zscore = zscore(average_time, simple, sd)
+    zscore = zscore(average_time, mean, sd)
 
     output = "medium"
     if zscore < -1

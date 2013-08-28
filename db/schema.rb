@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130827211725) do
+ActiveRecord::Schema.define(version: 20130828164647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,15 +42,14 @@ ActiveRecord::Schema.define(version: 20130827211725) do
   end
 
   create_table "aggregate_results", force: true do |t|
-    t.integer  "user_id",    null: false
+    t.integer  "user_id",     null: false
     t.string   "type"
-    t.integer  "high_score"
     t.text     "scores"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.hstore   "high_scores"
   end
 
-  add_index "aggregate_results", ["high_score"], name: "index_aggregate_results_on_high_score", using: :btree
   add_index "aggregate_results", ["user_id"], name: "index_aggregate_results_on_user_id", using: :btree
 
   create_table "authentications", force: true do |t|

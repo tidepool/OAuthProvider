@@ -154,7 +154,6 @@ describe 'Results API' do
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
-    output[:data].length.should == 6
     output[:data].flatten.length.should == 10
   end
 
