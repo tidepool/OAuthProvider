@@ -1,6 +1,6 @@
 {
   "name" : "Snoozer",
-  "unique_name": "snoozer",
+  "unique_name": "snoozers",
   "instructions" : "",
   "recipe_names" : ["reaction_time2", "survey2"],
   "persist_as_results" : ["speed_archetype", "survey"],
