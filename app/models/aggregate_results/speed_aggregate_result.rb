@@ -1,5 +1,24 @@
 class SpeedAggregateResult < AggregateResult
+  store_accessor :high_scores, :all_time_best
+  store_accessor :high_scores, :daily_best
+  store_accessor :high_scores, :current_day
 
+  def all_time_best=(value)
+    super(value.to_i)
+  end
+
+  def all_time_best
+    super.to_i
+  end
+
+  def daily_best=(value)
+    super(value.to_i)
+  end
+
+  def daily_best
+    super.to_i
+  end
+    
   def active_model_serializer
     SpeedAggregateResultSerializer
   end
@@ -25,6 +44,7 @@ class SpeedAggregateResult < AggregateResult
     circadian = result.scores["circadian"]
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
+    result.high_scores = result.update_high_scores(score)
     result.scores = {
       "simple" => new_simple,
       "complex" => new_complex,
@@ -60,6 +80,41 @@ class SpeedAggregateResult < AggregateResult
       },
       "circadian" => circadian
     }
+    self.high_scores = {
+      "all_time_best" => 0,
+      "daily_best" => 0,
+      "current_day" => Time.zone.now.to_s
+    }
+  end
+
+  def update_high_scores(score)
+    all_time_best = update_all_time_best(score)
+    today = Time.zone.now    
+    daily_best = update_daily_best(score, today)
+    
+    {
+      all_time_best: all_time_best,
+      daily_best: daily_best,
+      current_day: today.to_s
+    }
+  end
+
+  def update_all_time_best(score)
+    best_score = self.all_time_best
+    best_score = score[:speed_score] if score[:speed_score] > best_score
+    best_score
+  end
+
+  def update_daily_best(score, day)
+    stored_year_day = Time.zone.parse(self.high_scores[:current_day]).yday
+    year_day = day.yday
+
+    best_score = score[:speed_score]
+    if stored_year_day == year_day
+      best_score = self.daily_best
+      best_score = score[:speed_score] if score[:speed_score] > best_score
+    end
+    best_score
   end
 
   def update_circadian(score, hour)
@@ -99,7 +154,6 @@ class SpeedAggregateResult < AggregateResult
   #  S = S + (x-m)*(x-prev_mean);
   # std = sqrt(S/n)
   # http://dsp.stackexchange.com/questions/811/determining-the-mean-and-standard-deviation-in-real-time
-
   def update_mean_and_sd(score_type, new_score)
     prev_mean = self.scores[score_type]["mean"]
     total_results = self.scores[score_type]["total_results"] + 1
@@ -107,13 +161,6 @@ class SpeedAggregateResult < AggregateResult
     mean = prev_mean + (new_score - prev_mean) / total_results
     sums = self.scores[score_type]["sums"] + (new_score - mean) * (new_score - prev_mean)
     sd = Math.sqrt(sums/total_results)
-
-    # sum_1 = self.scores[:sum_1] + new_score
-    # sum_2 = self.scores[:sum_2] + new_score ** 2
-    # total_results = self.scores[:total_results] + 1
-
-    # mean = sum_1 / total_results
-    # sd = Math.sqrt(total_results * sum_2 - sum_1 ** 2) / total_results
 
     {
       "sums" => sums, 
