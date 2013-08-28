@@ -48,6 +48,7 @@ module TidepoolAnalyze
         end
 
         average_time = total_time / correct if correct > 0
+        score = score / 10
         score = 0 if score < 0
         {
           test_type: @test_type,
