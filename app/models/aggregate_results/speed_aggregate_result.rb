@@ -27,14 +27,14 @@ class SpeedAggregateResult < AggregateResult
     return nil unless game && game.user_id
     return nil unless analysis_results && analysis_results[:reaction_time2] && analysis_results[:reaction_time2][:score]
 
-    # user = User.where(id: game.user_id).first
-    # return nil if user.nil?
-
     result = existing_result
     if result.nil?
       result = AggregateResult.create(type: 'SpeedAggregateResult', user_id: game.user_id)
-      # result = user.aggregate_results.build(:type => 'SpeedAggregateResult') 
       result.initialize_scores
+      result.initialize_high_scores
+    end
+    if result.high_scores.nil?
+      result.initialize_high_scores
     end
 
     score = analysis_results[:reaction_time2][:score]
@@ -81,6 +81,9 @@ class SpeedAggregateResult < AggregateResult
       },
       "circadian" => circadian
     }
+  end
+
+  def initialize_high_scores 
     self.high_scores = {
       "all_time_best" => 0,
       "daily_best" => 0,
@@ -102,7 +105,7 @@ class SpeedAggregateResult < AggregateResult
 
   def update_all_time_best(score)
     best_score = self.all_time_best
-    best_score = score[:speed_score] if score[:speed_score] > best_score
+    best_score = score[:speed_score] if best_score.nil? || score[:speed_score] > best_score
     best_score
   end
 
@@ -113,7 +116,7 @@ class SpeedAggregateResult < AggregateResult
     best_score = score[:speed_score]
     if stored_year_day == year_day
       best_score = self.daily_best
-      best_score = score[:speed_score] if score[:speed_score] > best_score
+      best_score = score[:speed_score] if best_score.nil? || score[:speed_score] > best_score
     end
     best_score
   end
