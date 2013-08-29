@@ -1,33 +1,25 @@
-require 'redis'
-require 'json'
 Dir[File.expand_path('../providers/*.rb', __FILE__)].each {|file| require file }
 require File.expand_path('../errors.rb', __FILE__)
 
 class TrackerDispatcher
   include Sidekiq::Worker
    
-  def perform(user_id)
-    logger.info("TrackerDispatcher called with #{user_id}")
-    user = User.where(id: user_id).first
-    return if user.nil? || user.authentications.nil?
+  def perform(connection_id)
+    logger.info("TrackerDispatcher called with #{connection_id}")
+    connection = Authentication.where(id: connection_id).first
+    return if connection.nil? 
 
-    supported_providers = {
-      fitbit: true,
-      facebook: false,
-      twitter: false
-    }
-    user.authentications.each do | connection |
-      provider = connection.provider
-      logger.info("Synchronizing #{provider} for #{user.id}")      
-      synchronize_provider(provider, user, connection) if supported_providers[provider.to_sym]
-    end
+    synchronize_connection(connection) 
   end
 
-  def synchronize_provider(provider, user, connection)
+  def synchronize_connection(connection)
+    provider = connection.provider
+    logger.info("Synchronizing #{provider} for #{connection.user_id}")
+
     klass_name = "#{provider.to_s.camelize}Tracker"
-    tracker = klass_name.constantize.new(user, connection)
+    tracker = klass_name.constantize.new(connection)
     tracker.synchronize
-    logger.info("Synchronization successful for #{provider} for #{user.id}")
+    logger.info("Synchronization successful for #{provider} for #{connection.user_id}")
     connection.sync_status = :synchronized
     connection.last_accessed = Time.zone.now
     connection.save!

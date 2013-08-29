@@ -24,7 +24,7 @@ module Permissions
           end
         end
 
-        allow :users, [:show, :create, :update, :destroy, :personality] do |user|
+        allow :users, [:show, :create, :update, :destroy, :personality, :reset_password] do |user|
           user.id == caller.id 
         end
 

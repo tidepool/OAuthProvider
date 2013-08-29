@@ -46,7 +46,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       connection.sync_status = 'synchronizing'
       connection.save
 
-      TrackerDispatcher.perform_async(target_user.id)    
+      TrackerDispatcher.perform_async(connection.id)    
 
       api_status = Hashie::Mash.new({
         state: :pending, 

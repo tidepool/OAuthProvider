@@ -1,6 +1,6 @@
 class FitbitTracker
-  def initialize(user, connection, client = nil)
-    @user = user
+  def initialize(connection, client = nil)
+    @user_id = connection.user_id if connection
     @connection = connection
     @client = client
   end
@@ -24,7 +24,7 @@ class FitbitTracker
 
           if sync_item
             sync_item.provider = 'fitbit'
-            sync_item.user = @user
+            sync_item.user_id = @user_id
             sync_item.date_recorded = date
             sync_item.save!
           end
@@ -75,7 +75,7 @@ class FitbitTracker
         if error["errorType"] == "oauth"
           raise Trackers::AuthenticationError, error["message"]
         else
-          logger.error(error["message"])
+          raise Trackers::ConnectionError, error["message"]
         end
       end
     end
@@ -116,7 +116,7 @@ class FitbitTracker
     activity_hash = @client.activities_on_date(date.to_s)
     check_for_errors(activity_hash)
 
-    activity = Activity.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
+    activity = Activity.where('date_recorded = ? and user_id = ? and provider = ?', date, @user_id, 'fitbit').first_or_initialize
 
     summary = activity_hash["summary"]
     if summary
@@ -160,7 +160,7 @@ class FitbitTracker
     sleep_hash = @client.sleep_on_date date.to_s
     check_for_errors(sleep_hash)
 
-    sleep = Sleep.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
+    sleep = Sleep.where('date_recorded = ? and user_id = ? and provider = ?', date, @user_id, 'fitbit').first_or_initialize
 
     summary = sleep_hash["summary"]
     if summary 
@@ -203,7 +203,7 @@ class FitbitTracker
     food_hash = @client.foods_on_date date.to_s
     check_for_errors(food_hash)
 
-    food = Food.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
+    food = Food.where('date_recorded = ? and user_id = ? and provider = ?', date, @user_id, 'fitbit').first_or_initialize
 
     summary = food_hash["summary"]
     if summary 
@@ -238,7 +238,7 @@ class FitbitTracker
     measurement_hash = @client.body_measurements_on_date date.to_s
     check_for_errors(measurement_hash)
 
-    measurement = Measurement.where('date_recorded = ? and user_id = ? and provider = ?', date, @user.id, 'fitbit').first_or_initialize
+    measurement = Measurement.where('date_recorded = ? and user_id = ? and provider = ?', date, @user_id, 'fitbit').first_or_initialize
 
     body = measurement_hash["body"]
     if body 

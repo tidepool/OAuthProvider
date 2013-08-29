@@ -4,70 +4,20 @@ class Api::V1::ResultsController < Api::V1::ApiController
 
   def index 
     # results = Result.joins(:game).where('games.user_id' => target_user.id).order('games.date_taken')
-    response_body = {}
-    status = :ok
-    if params[:game_id]
-      # Called for a specific game
-      game = Game.find(params[:game_id])
-      if game && game.results_calculated?
-        results = Result.where(game_id: game.id)
-        response_body = results
-        api_status = {}
-      elsif game && game.status.to_sym != :calculating_results
-        raise Api::V1::PreconditionFailedError, "All events for the game have not been received!" unless game.all_events_received?
-        
-        game.status = :calculating_results
-        game.save
-        ResultsCalculator.perform_async(game.id)
-        api_status = Hashie::Mash.new({
-          state: :pending, 
-          link: api_v1_user_game_progress_url,
-          message: 'Starting to calculate results.'
-          })
-        response_body = []
-        status = :accepted
-      end
-    else 
-      # Called for a user
-      user = target_user
-      api_status = {}
-      if params[:type]
-        results = Result.where('user_id = ? and type = ?', user.id, params[:type]).order('time_played')
-      else
-        results = Result.where('user_id = ?', user.id).order('time_played')      
-      end
+    api_status = {}
+    http_status = :ok
 
-      if params[:daily]
-        daily_results = {}
-
-        results.each do | result |
-          day = result.time_played.strftime("%m/%d/%Y")
-          daily_results[day] ||= []
-          daily_results[day] << result
-        end
-        response_body = daily_results.values
-      else
-        response_body = results      
-      end
-    end
-
-    render_hash = {  
-      json: response_body, 
-      status: status, 
-      # each_serializer: ResultSerializer,
-      meta: api_status 
-      }
-    if params[:daily]
-      render_hash = {  
-        json: response_body, 
-        status: status, 
-        meta: api_status 
-        }
-    end
+    # TODO : We need to fix this, this is UGLY!!!
+    progress_url = api_v1_user_game_progress_url if params[:game_id]
+    
+    results_service = ResultsService.new(params, target_user, {
+          progress: progress_url,
+          results: api_v1_user_results_url } )
+    results, api_status, http_status = results_service.find_results
 
     respond_to do |format|
       format.json { 
-        render(render_hash.merge(api_defaults))
+        render( { json: results, status: http_status, meta: api_status }.merge(api_defaults) )
       }
     end    
   end
