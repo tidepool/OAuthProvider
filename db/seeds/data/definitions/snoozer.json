@@ -16,7 +16,7 @@
         "correct_color_sequence": ["green"],
         "incorrect_color_sequences": [],
         "fraction_incorrect": 0,
-        "time_to_show": 2000,
+        "time_to_show": 1000,
         "minimum_time_gap_fraction": 1,
         "maximum_time_gap_fraction": 1.5,
         "number_correct_to_show": 5
@@ -31,7 +31,7 @@
         "correct_color_sequence": ["green"],
         "incorrect_color_sequencess": [],
         "fraction_incorrect": 0,
-        "time_to_show": 2000,
+        "time_to_show": 1000,
         "minimum_time_gap_fraction": 0.5,
         "maximum_time_gap_fraction": 1.5,
         "number_correct_to_show": 7
@@ -48,7 +48,7 @@
             ["orange"]
         ],
         "fraction_incorrect": 0.5,
-        "time_to_show": 2000,
+        "time_to_show": 1000,
         "minimum_time_gap_fraction": 0.4,
         "maximum_time_gap_fraction": 1.5,
         "number_correct_to_show": 5
@@ -85,7 +85,7 @@
             ]
         ],
         "fraction_incorrect": 0.5,
-        "time_to_show": 2000,
+        "time_to_show": 1000,
         "minimum_time_gap_fraction": 1,
         "maximum_time_gap_fraction": 1.5,
         "number_correct_to_show": 5
