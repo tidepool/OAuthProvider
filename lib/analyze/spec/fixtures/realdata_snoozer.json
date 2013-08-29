@@ -1,0 +1,499 @@
+[
+  {
+    "event_type": "snoozer",
+    "events": [
+      {
+        "event": "level_started",
+        "sequence_type": "simple",
+        "time": 1377721192054
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_0",
+        "time": 1377721194093,
+        "type": "target"
+      },
+      {
+        "event": "incorrect",
+        "item_id": "0_1",
+        "time": 1377721195093
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_0",
+        "time": 1377721196221,
+        "type": "target"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_1",
+        "time": 1377721199530,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "6_1",
+        "time": 1377721199946
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "3_0",
+        "time": 1377721202009,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "3_0",
+        "time": 1377721202579
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "2_0",
+        "time": 1377721204219,
+        "type": "target"
+      },
+      {
+        "event": "level_completed",
+        "time": 1377721204221
+      },
+      {
+        "event": "level_summary",
+        "time": 1377721204221
+      }
+    ],
+    "stage": 0
+  },
+  {
+    "event_type": "snoozer",
+    "events": [
+      {
+        "event": "level_started",
+        "sequence_type": "simple",
+        "time": 1377721213122
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "3_0",
+        "time": 1377721215537,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "3_0",
+        "time": 1377721216096
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_0",
+        "time": 1377721216986,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "1_0",
+        "time": 1377721217496
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_0",
+        "time": 1377721219467,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "6_0",
+        "time": 1377721219962
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "5_0",
+        "time": 1377721221121,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "5_0",
+        "time": 1377721221529
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "2_0",
+        "time": 1377721224579,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "2_0",
+        "time": 1377721225179
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_1",
+        "time": 1377721225764,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "6_1",
+        "time": 1377721226295
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_1",
+        "time": 1377721228414,
+        "type": "target"
+      },
+      {
+        "event": "level_completed",
+        "time": 1377721228416
+      },
+      {
+        "event": "level_summary",
+        "time": 1377721228416
+      }
+    ],
+    "stage": 1
+  },
+  {
+    "event_type": "snoozer",
+    "events": [
+      {
+        "event": "level_started",
+        "sequence_type": "simple",
+        "time": 1377721229374
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_0",
+        "time": 1377721232312,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "6_0",
+        "time": 1377721232846
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "2_0",
+        "time": 1377721233485,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "5_0",
+        "time": 1377721235341,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "2_1",
+        "time": 1377721238178,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "1_0",
+        "time": 1377721239349,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "5_1",
+        "time": 1377721242512,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "3_0",
+        "time": 1377721244882,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "3_0",
+        "time": 1377721245662
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "5_2",
+        "time": 1377721247543,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "5_2",
+        "time": 1377721248312
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "6_1",
+        "time": 1377721251542,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "5_3",
+        "time": 1377721252350,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "3_1",
+        "time": 1377721253909,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "5_4",
+        "time": 1377721256025,
+        "type": "decoy"
+      },
+      {
+        "event": "incorrect",
+        "item_id": "5_4",
+        "time": 1377721256998
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "2_2",
+        "time": 1377721259004,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "3_2",
+        "time": 1377721260974,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "3_2",
+        "time": 1377721261562
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "6_2",
+        "time": 1377721263558,
+        "type": "decoy"
+      },
+      {
+        "color": "orange",
+        "event": "shown",
+        "item_id": "2_3",
+        "time": 1377721264391,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_1",
+        "time": 1377721267163,
+        "type": "target"
+      },
+      {
+        "event": "level_completed",
+        "time": 1377721267165
+      },
+      {
+        "event": "level_summary",
+        "time": 1377721267165
+      }
+    ],
+    "stage": 2
+  },
+  {
+    "event_type": "snoozer",
+    "events": [
+      {
+        "event": "level_started",
+        "sequence_type": "complex",
+        "time": 1377721269521
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "6_0",
+        "time": 1377721273263,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "6_1",
+        "time": 1377721274264,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "6_1",
+        "time": 1377721274662
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "2_0",
+        "time": 1377721275874,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "2_1",
+        "time": 1377721276874,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "2_1",
+        "time": 1377721277313
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "1_0",
+        "time": 1377721278567,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_1",
+        "time": 1377721279568,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "1_1",
+        "time": 1377721279929
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "4_0",
+        "time": 1377721282327,
+        "type": "decoy"
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "4_1",
+        "time": 1377721283328,
+        "type": "decoy"
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "5_0",
+        "time": 1377721286246,
+        "type": "decoy"
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "5_1",
+        "time": 1377721287247,
+        "type": "target"
+      },
+      {
+        "event": "correct",
+        "item_id": "5_1",
+        "time": 1377721287712
+      },
+      {
+        "color": "yellow",
+        "event": "shown",
+        "item_id": "1_2",
+        "time": 1377721288764,
+        "type": "decoy"
+      },
+      {
+        "event": "level_completed",
+        "time": 1377721288766
+      },
+      {
+        "event": "level_summary",
+        "time": 1377721288766
+      },
+      {
+        "color": "green",
+        "event": "shown",
+        "item_id": "1_3",
+        "time": 1377721289764,
+        "type": "target"
+      }
+    ],
+    "stage": 3
+  },
+  {
+    "event_type": "survey",
+    "events": [
+      {
+        "event": "level_started",
+        "time": 1377721288780
+      },
+      {
+        "answer": 4,
+        "event": "changed",
+        "question_id": "sleep1-7",
+        "time": 1377721290395,
+        "topic": "sleep"
+      },
+      {
+        "answer": 4,
+        "event": "changed",
+        "question_id": "activity1-7",
+        "time": 1377721291428,
+        "topic": "activity"
+      },
+      {
+        "event": "level_completed",
+        "time": 1377721292028
+      },
+      {
+        "data": [
+          {
+            "answer": 4,
+            "question_id": "activity1-7",
+            "topic": "activity"
+          },
+          {
+            "answer": 4,
+            "question_id": "sleep1-7",
+            "topic": "sleep"
+          }
+        ],
+        "event": "level_summary",
+        "time": 1377721292028
+      }
+    ],
+    "stage": 4
+  }
+]
