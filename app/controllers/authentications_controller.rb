@@ -5,8 +5,8 @@ class AuthenticationsController < ApplicationController
     user_id = session[:user_id]
     redirect_after_external = session[:redirect_after_external]
     is_connection_request = session[:connection_request]
-
     # user = User.create_or_find(auth_hash, user_id)
+    # binding.remote_pry
     registration_service = RegistrationService.new
     user = registration_service.register_or_find_from_external(auth_hash, user_id)
     if user.nil?
@@ -30,6 +30,12 @@ class AuthenticationsController < ApplicationController
     redirect_url = "#{session[:redirect_after_external]}user_id=-1" 
     clean_up_session
     redirect_to redirect_url
+  end
+
+  def client_redirect
+    client_uri = session[:client_uri]
+    binding.remote_pry
+    redirect_to "#{client_uri}#{params[:access_token]}"
   end
 
   def add_new
