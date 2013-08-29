@@ -154,6 +154,22 @@ describe 'Results API' do
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
+    output[:data].flatten.length.should == 10
+  end
+
+  it 'shows the results in pages' do 
+    daily_results
+    token = get_conn(user1)
+    response = token.get("#{@endpoint}/users/-/results.json?limit=4&offset=2")
+    response.status.should == 200
+    output = JSON.parse(response.body, :symbolize_names => true)
+    user_results = output[:data]
+    user_results.length.should == 4
+    status = output[:status]
+    status[:offset].should == 2
+    status[:limit].should == 4
+    status[:next].should == "http://example.org/api/v1/users/-/results?offset=6&limit=4"
+    status[:prev].should == "http://example.org/api/v1/users/-/results?offset=0&limit=4"
   end
 
   describe 'PersonalityResult' do
@@ -185,11 +201,9 @@ describe 'Results API' do
       user_results = output[:data]
       user_results[0].should_not be_nil
       user_results[0][:type].should == 'SpeedArchetypeResult'
-      user_results[0][:speed_archetype].should == 'dog'
-      user_results[0][:big5_dimension].should == 'high_openness'
+      user_results[0][:speed_archetype].should == 'cheetah'
       user_results[0][:description].should_not be_nil
-      user_results[0][:bullet_description].class.should == Array
-      user_results[0][:display_id].should == 'high_openness_dog'
+      user_results[0][:display_id].should == 'cheetah'
       user_results[0][:average_time_simple].should == '340'
       user_results[0][:average_time_complex].should == '718'
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821193203) do
+ActiveRecord::Schema.define(version: 20130828164647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 20130821193203) do
     t.datetime "updated_at"
   end
 
+  create_table "aggregate_results", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.string   "type"
+    t.text     "scores"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.hstore   "high_scores"
+  end
+
+  add_index "aggregate_results", ["user_id"], name: "index_aggregate_results_on_user_id", using: :btree
+
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -60,14 +71,14 @@ ActiveRecord::Schema.define(version: 20130821193203) do
     t.string   "gender"
     t.date     "date_of_birth"
     t.date     "member_since"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "oauth_secret"
     t.boolean  "is_activated"
     t.datetime "last_accessed"
     t.hstore   "last_synchronized"
     t.hstore   "profile"
-    t.string   "sync_status"
+    t.string   "sync_status",       default: "not_synchronized"
     t.text     "last_error"
     t.datetime "oauth_refresh_at"
     t.boolean  "expires"
@@ -75,6 +86,7 @@ ActiveRecord::Schema.define(version: 20130821193203) do
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
+  add_index "authentications", ["sync_status"], name: "index_authentications_on_sync_status", using: :btree
   add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
@@ -272,19 +284,6 @@ ActiveRecord::Schema.define(version: 20130821193203) do
   add_index "profile_descriptions", ["big5_dimension"], name: "index_profile_descriptions_on_big5_dimension", using: :btree
   add_index "profile_descriptions", ["holland6_dimension"], name: "index_profile_descriptions_on_holland6_dimension", using: :btree
 
-  create_table "reaction_time_descriptions", force: true do |t|
-    t.string   "big5_dimension",     null: false
-    t.string   "speed_archetype",    null: false
-    t.text     "description"
-    t.text     "bullet_description"
-    t.string   "display_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reaction_time_descriptions", ["big5_dimension"], name: "index_reaction_time_descriptions_on_big5_dimension", using: :btree
-  add_index "reaction_time_descriptions", ["speed_archetype"], name: "index_reaction_time_descriptions_on_speed_archetype", using: :btree
-
   create_table "recommendations", force: true do |t|
     t.string   "big5_dimension", null: false
     t.string   "link_type"
@@ -335,6 +334,16 @@ ActiveRecord::Schema.define(version: 20130821193203) do
   add_index "sleeps", ["date_recorded"], name: "index_sleeps_on_date_recorded", using: :btree
   add_index "sleeps", ["provider"], name: "index_sleeps_on_provider", using: :btree
   add_index "sleeps", ["user_id"], name: "index_sleeps_on_user_id", using: :btree
+
+  create_table "speed_archetype_descriptions", force: true do |t|
+    t.string   "speed_archetype", null: false
+    t.text     "description"
+    t.string   "display_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "speed_archetype_descriptions", ["speed_archetype"], name: "index_speed_archetype_descriptions_on_speed_archetype", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                default: "",    null: false

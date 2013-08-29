@@ -22,6 +22,18 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
+  def reset_password
+    registration_service = RegistrationService.new
+    registration_service.reset_password(params[:user][:email])
+
+    status = Hashie::Mash.new({
+        message: "Password is reset, and email sent with temporary password."
+      })
+    respond_to do |format|
+      format.json { render({ json: nil, meta: status, serializer: UserSerializer }.merge(api_defaults)) }
+    end
+  end
+
   def personality
     user = current_resource
 

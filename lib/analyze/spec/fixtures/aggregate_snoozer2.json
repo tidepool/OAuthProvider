@@ -11,7 +11,8 @@
       { "time":1360194768406, "event":"shown", "type":"target", "color":"yellow", "item_id":"4_1"},
       { "time":1360194774844, "event":"shown", "type":"target", "color":"red", "item_id": "2_2" },
       { "time":1360194775749, "event":"correct","color":"red", "item_id": "2_2" },
-      { "time":1360194775750, "event":"level_completed"},    
+      { "time":1360194775780, "event":"incorrect","color":"red", "item_id": "0_2" },      
+      { "time":1360194775830, "event":"level_completed"},    
       { "time":1360194958245, "event": "level_summary"}
     ]
   },

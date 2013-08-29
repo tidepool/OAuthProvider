@@ -117,7 +117,10 @@ module SeedsHelper
       'dog' => 'dog',
       'crow' => 'crow',
       'gorilla' => 'gorilla',
-      'dolphin' => 'dolphin'
+      'dolphin' => 'dolphin',
+      'progress1' => 'progress1',
+      'progress2' => 'progress2',
+      'progress3' => 'progress3'      
     }
   end
 end

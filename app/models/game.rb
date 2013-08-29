@@ -31,18 +31,6 @@ class Game < ActiveRecord::Base
   has_many :results
   has_many :friend_surveys
 
-  # after_update do |game|
-  #   unless game.game_completed?
-  #     # We should not allow any more status changes based on stage_completed after the game is completed
-  #     # That can potentially create race conditions.
-  #     if game.stages && game.stages.length > 0
-  #       game.status = :in_progress if game.stage_completed == 0
-  #       game.status = :completed if (game.stage_completed == game.stages.length - 1)
-  #       game.save
-  #     end
-  #   end
-  # end
-
   def self.create_by_definition(definition, target_user, calling_ip = nil)
     raise ArgumentError.new('No definition specified') if definition.nil?
     raise ArgumentError.new('Requires a target user') if target_user.nil?   
@@ -84,7 +72,6 @@ class Game < ActiveRecord::Base
 
   def update_event_log(new_event_log)
     raise ArgumentError, "Event log is empty." if new_event_log.nil? || new_event_log.empty?
-
     current_log = self.event_log
     current_log = {} if current_log.nil?
     if new_event_log.is_a?(Array)

@@ -9,4 +9,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :authentications
   has_one :personality
+  has_many :aggregate_results
 end
