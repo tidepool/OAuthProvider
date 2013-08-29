@@ -1,4 +1,28 @@
 class AuthorizationsController < Doorkeeper::AuthorizationsController
+  def new
+    # Overriding the default implementation:
+
+    if pre_auth.authorizable?
+      if Doorkeeper::AccessToken.matching_token_for(pre_auth.client, current_resource_owner.id, pre_auth.scopes) || skip_authorization?
+        auth = authorization.authorize
+
+        # The redirect URL that is passed here is created with # instead of ? for 
+        # separating query params. 
+        # The below will redirect to AuthenticationsController.client_redirect 
+        # Below HACK allows client redirect to access the parameters which contains the
+        # access_token created by Doorkeeper.
+        # TODO: Why does Doorkeeper generate a redirect uri with '#', instead of '?' ?
+        uri = auth.redirect_uri.sub!('#', '?')
+        redirect_to uri
+      else
+        render :new
+      end
+    else
+      render :error
+    end
+  end
+
+
   def create
     # Overriding the default implementation:
     # In the default implementation the Token does not have a method

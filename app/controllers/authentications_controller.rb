@@ -34,7 +34,6 @@ class AuthenticationsController < ApplicationController
 
   def client_redirect
     client_uri = session[:client_uri]
-    binding.remote_pry
     redirect_to "#{client_uri}#{params[:access_token]}"
   end
 
