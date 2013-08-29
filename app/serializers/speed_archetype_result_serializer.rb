@@ -8,8 +8,16 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
     find_speed_archetype_description
   end
 
+  def speed_score
+    output = 0
+    output = object.speed_score if object.speed_score
+    output
+  end
+
   def speed_archetype
-    @reaction_time.speed_archetype if @reaction_time
+    output = "Progress1"
+    output = @reaction_time.speed_archetype if @reaction_time && @reaction_time.speed_archetype
+    output
   end
 
   def description
@@ -19,7 +27,9 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
   end
 
   def display_id
-    @reaction_time.display_id if @reaction_time
+    output = ""
+    output = @reaction_time.display_id if @reaction_time && @reaction_time.display_id
+    output
   end
 
   def find_speed_archetype_description
