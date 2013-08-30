@@ -8,7 +8,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
-        "option_choices": "strongly dislike, dislike, unsure, like, strongly like",
+        "instructions": "Rate the following based on your interests.\n1: strongly dislike, 2: dislike, 3: unsure, 4: like, 5: strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic1",
@@ -16,13 +16,13 @@
             "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
-            "question": "I would be interested in:  Building kitchen cabinets ",
+            "question": "Build kitchen cabinets ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -33,11 +33,11 @@
             "steps": 5,
             "question": "Develop a new medicine ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -48,11 +48,11 @@
             "steps": 5,
             "question": "Write books or plays ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -63,11 +63,11 @@
             "steps": 5,
             "question": "Teach an individual an exercise routine ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -78,11 +78,11 @@
             "steps": 5,
             "question": "Buy and sell stocks and bonds ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -93,11 +93,11 @@
             "steps": 5,
             "question": "Develop a spreadsheet using computer software ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -108,11 +108,11 @@
             "steps": 5,
             "question": "Lay brick or tile ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -123,11 +123,11 @@
             "steps": 5,
             "question": "Study ways to reduce water pollution ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -138,11 +138,11 @@
             "steps": 5,
             "question": "Play a musical instrument ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -153,11 +153,11 @@
             "steps": 5,
             "question": "Help people with personal or emotional problems ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -168,11 +168,11 @@
             "steps": 5,
             "question": "Manage a retail store ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -183,11 +183,11 @@
             "steps": 5,
             "question": "Proofread records or forms ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -195,6 +195,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Rate the following based on your interests.\n1: strongly dislike, 2: dislike, 3: unsure, 4: like, 5: strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic3",
@@ -202,13 +203,13 @@
             "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
-            "question": "I would be interested in:  Repairing household appliances ",
+            "question": "Repair household appliances ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -219,11 +220,11 @@
             "steps": 5,
             "question": "Conduct chemical experiments ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -234,11 +235,11 @@
             "steps": 5,
             "question": "Compose or arrange music ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -249,11 +250,11 @@
             "steps": 5,
             "question": "Give career guidance to people ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -264,11 +265,11 @@
             "steps": 5,
             "question": "Operate a beauty salon or barber shop ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -279,11 +280,11 @@
             "steps": 5,
             "question": "Load computer software into a large computer network ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -294,11 +295,11 @@
             "steps": 5,
             "question": "Raise fish in a fish hatchery ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -309,11 +310,11 @@
             "steps": 5,
             "question": "Study the movement of planets ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -324,11 +325,11 @@
             "steps": 5,
             "question": "Draw pictures ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -339,11 +340,11 @@
             "steps": 5,
             "question": "Perform rehabilitation therapy ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -354,11 +355,11 @@
             "steps": 5,
             "question": "Manage a department within a large company ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -369,11 +370,11 @@
             "steps": 5,
             "question": "Operate a calculator ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -381,6 +382,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Rate the following based on your interests.\n1: strongly dislike, 2: dislike, 3: unsure, 4: like, 5: strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic5",
@@ -388,13 +390,13 @@
             "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
-            "question": "I would be interested in:  Assembling electronic parts ",
+            "question": "Assemble electronic parts ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -405,11 +407,11 @@
             "steps": 5,
             "question": "Examine blood samples using a microscope ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -420,11 +422,11 @@
             "steps": 5,
             "question": "Create special effects for movies ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -435,11 +437,11 @@
             "steps": 5,
             "question": "Do volunteer work at a non-profit organization ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -450,11 +452,11 @@
             "steps": 5,
             "question": "Start your own business ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -465,11 +467,11 @@
             "steps": 5,
             "question": "Keep shipping and receiving records ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -480,11 +482,11 @@
             "steps": 5,
             "question": "Drive a truck to deliver packages to offices and homes ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -495,11 +497,11 @@
             "steps": 5,
             "question": "Investigate the cause of a fire ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -510,11 +512,11 @@
             "steps": 5,
             "question": "Paint sets for plays ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -525,11 +527,11 @@
             "steps": 5,
             "question": "Teach children how to play sports ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -540,11 +542,11 @@
             "steps": 5,
             "question": "Negotiate business contracts ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -555,11 +557,11 @@
             "steps": 5,
             "question": "Calculate the wages of employees ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -567,6 +569,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Rate the following based on your interests.\n1: strongly dislike, 2: dislike, 3: unsure, 4: like, 5: strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic7",
@@ -574,13 +577,13 @@
             "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
-            "question": "I would be interested in:  Testing the quality of parts before shipment ",
+            "question": "Test the quality of parts before shipment ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -591,11 +594,11 @@
             "steps": 5,
             "question": "Develop a way to better predict the weather ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -606,11 +609,11 @@
             "steps": 5,
             "question": "Write scripts for movies or television shows ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -621,11 +624,11 @@
             "steps": 5,
             "question": "Teach sign language to people with hearing disabilities ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -636,11 +639,11 @@
             "steps": 5,
             "question": "Represent a client in a lawsuit ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -651,11 +654,11 @@
             "steps": 5,
             "question": "Inventory supplies using a hand-held computer ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -666,11 +669,11 @@
             "steps": 5,
             "question": "Repair and install locks ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -681,11 +684,11 @@
             "steps": 5,
             "question": "Work in a biology lab ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -696,11 +699,11 @@
             "steps": 5,
             "question": "Perform jazz or tap dance ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -711,11 +714,11 @@
             "steps": 5,
             "question": "Help conduct a group therapy session ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -726,11 +729,11 @@
             "steps": 5,
             "question": "Market a new line of clothing ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -741,11 +744,11 @@
             "steps": 5,
             "question": "Record rent payments ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -753,6 +756,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Rate the following based on your interests.\n1: strongly dislike, 2: dislike, 3: unsure, 4: like, 5: strongly like",
         "data": [
           {
             "question_id": "holl6_Realistic9",
@@ -760,13 +764,13 @@
             "question_type": "select_by_icon",
             "icon": "icon-asterisk",
             "steps": 5,
-            "question": "I would be interested in:  Seting up and operateing machines to make products ",
+            "question": "Set up and operateing machines to make products ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -777,11 +781,11 @@
             "steps": 5,
             "question": "Invent a replacement for sugar ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -792,11 +796,11 @@
             "steps": 5,
             "question": "Sing in a band ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -807,11 +811,11 @@
             "steps": 5,
             "question": "Take care of children at a day-care center ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -822,11 +826,11 @@
             "steps": 5,
             "question": "Sell merchandise at a department store ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -837,11 +841,11 @@
             "steps": 5,
             "question": "Keep inventory records ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -852,11 +856,11 @@
             "steps": 5,
             "question": "Put out forest fires ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -867,11 +871,11 @@
             "steps": 5,
             "question": "Do laboratory tests to identify diseases ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -882,11 +886,11 @@
             "steps": 5,
             "question": "Edit movies ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -897,11 +901,11 @@
             "steps": 5,
             "question": "Teach a high-school class ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -912,11 +916,11 @@
             "steps": 5,
             "question": "Manage a clothing store ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -927,11 +931,11 @@
             "steps": 5,
             "question": "Stamp, sort, and distribute mail for an organization",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -939,7 +943,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
-        "option_choices": "disagree, slightly disagree, neutral, slightly agree, agree",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: disagree, 2: slightly disagree, 3: neutral, 4: slightly agree, 5: agree",
         "data": [
           {
             "question_id": "big5_extraversion1",
@@ -949,11 +953,11 @@
             "steps": 5,
             "question": "I am the life of the party.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -964,11 +968,11 @@
             "steps": 5,
             "question": "I feel little concern for others.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -979,11 +983,11 @@
             "steps": 5,
             "question": "I am always prepared.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -994,11 +998,11 @@
             "steps": 5,
             "question": "I get stressed out easily.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1009,11 +1013,11 @@
             "steps": 5,
             "question": "I have a rich vocabulary.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1024,11 +1028,11 @@
             "steps": 5,
             "question": "I don't talk a lot.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1039,11 +1043,11 @@
             "steps": 5,
             "question": "I am interested in people.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1054,11 +1058,11 @@
             "steps": 5,
             "question": "I leave my belongings around.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1069,11 +1073,11 @@
             "steps": 5,
             "question": "I am relaxed most of the time.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1084,11 +1088,11 @@
             "steps": 5,
             "question": "I have difficulty understanding abstract ideas.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -1096,6 +1100,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: disagree, 2: slightly disagree, 3: neutral, 4: slightly agree, 5: agree",
         "data": [
           {
             "question_id": "big5_extraversion3",
@@ -1105,11 +1110,11 @@
             "steps": 5,
             "question": "I feel comfortable around people.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1120,11 +1125,11 @@
             "steps": 5,
             "question": "I insult people.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1135,11 +1140,11 @@
             "steps": 5,
             "question": "I pay attention to details.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1150,11 +1155,11 @@
             "steps": 5,
             "question": "I worry about things.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1165,11 +1170,11 @@
             "steps": 5,
             "question": "I have a vivid imagination.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1180,11 +1185,11 @@
             "steps": 5,
             "question": "I keep in the background.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1195,11 +1200,11 @@
             "steps": 5,
             "question": "I sympathize with others' feelings.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1210,11 +1215,11 @@
             "steps": 5,
             "question": "I make a mess of things.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1225,11 +1230,11 @@
             "steps": 5,
             "question": "I seldom feel blue.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1240,11 +1245,11 @@
             "steps": 5,
             "question": "I am not interested in abstract ideas.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -1252,6 +1257,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: disagree, 2: slightly disagree, 3: neutral, 4: slightly agree, 5: agree",
         "data": [
           {
             "question_id": "big5_extraversion5",
@@ -1261,11 +1267,11 @@
             "steps": 5,
             "question": "I start conversations.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1276,11 +1282,11 @@
             "steps": 5,
             "question": "I am not interested in other people's problems.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1291,11 +1297,11 @@
             "steps": 5,
             "question": "I get chores done right away.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1306,11 +1312,11 @@
             "steps": 5,
             "question": "I am easily disturbed.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1321,11 +1327,11 @@
             "steps": 5,
             "question": "I have excellent ideas.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1336,11 +1342,11 @@
             "steps": 5,
             "question": "I have little to say.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1351,11 +1357,11 @@
             "steps": 5,
             "question": "I have a soft heart.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1366,11 +1372,11 @@
             "steps": 5,
             "question": "I often forget to put things back in their proper place.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1381,11 +1387,11 @@
             "steps": 5,
             "question": "I get upset easily.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1396,11 +1402,11 @@
             "steps": 5,
             "question": "I do not have a good imagination.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -1408,6 +1414,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: disagree, 2: slightly disagree, 3: neutral, 4: slightly agree, 5: agree",
         "data": [
           {
             "question_id": "big5_extraversion7",
@@ -1417,11 +1424,11 @@
             "steps": 5,
             "question": "I talk to a lot of different people at parties.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1432,11 +1439,11 @@
             "steps": 5,
             "question": "I am not really interested in others.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1447,11 +1454,11 @@
             "steps": 5,
             "question": "I like order.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1462,11 +1469,11 @@
             "steps": 5,
             "question": "I change my mood a lot.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1477,11 +1484,11 @@
             "steps": 5,
             "question": "I am quick to understand things.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1492,11 +1499,11 @@
             "steps": 5,
             "question": "I don't like to draw attention to myself.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1507,11 +1514,11 @@
             "steps": 5,
             "question": "I take time out for others.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1522,11 +1529,11 @@
             "steps": 5,
             "question": "I shirk my duties.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1537,11 +1544,11 @@
             "steps": 5,
             "question": "I have frequent mood swings.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1552,11 +1559,11 @@
             "steps": 5,
             "question": "I use difficult words.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -1564,6 +1571,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: disagree, 2: slightly disagree, 3: neutral, 4: slightly agree, 5: agree",
         "data": [
           {
             "question_id": "big5_extraversion9",
@@ -1573,11 +1581,11 @@
             "steps": 5,
             "question": "I don't mind being the center of attention.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1588,11 +1596,11 @@
             "steps": 5,
             "question": "I feel others' emotions.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1603,11 +1611,11 @@
             "steps": 5,
             "question": "I follow a schedule.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1618,11 +1626,11 @@
             "steps": 5,
             "question": "I get irritated easily.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1633,11 +1641,11 @@
             "steps": 5,
             "question": "I spend time reflecting on things.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1648,11 +1656,11 @@
             "steps": 5,
             "question": "I am quiet around strangers.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1663,11 +1671,11 @@
             "steps": 5,
             "question": "I make people feel at ease.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1678,11 +1686,11 @@
             "steps": 5,
             "question": "I am exacting in my work.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1693,11 +1701,11 @@
             "steps": 5,
             "question": "I often feel blue.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1708,11 +1716,11 @@
             "steps": 5,
             "question": "I am full of ideas.",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
@@ -1720,7 +1728,7 @@
       {
         "friendly_name": "Score the following questions as related to yourself",
         "view_name": "Survey",
-        "option_choices": "Disagree strongly, Disagree moderately, Disagree a little, Neither agree nor disagree, Agree a little, Agree moderately, Agree strongly",
+        "instructions": "Indicate the extent to which each statement applies to you.\n1: Disagree strongly, 2: Disagree a little, 3: Neither agree nor disagree, 4: Agree a little, 5: Agree strongly",
         "data": [
           {
             "question_id": "tipi_extraverted",
@@ -1730,13 +1738,11 @@
             "steps": 7,
             "question": "I see myself as:  Extraverted, enthusiastic ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1747,13 +1753,11 @@
             "steps": 7,
             "question": "I see myself as:  Critical, quarrelsome ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1764,13 +1768,11 @@
             "steps": 7,
             "question": "I see myself as:  Dependable, self-disciplined ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1781,13 +1783,11 @@
             "steps": 7,
             "question": "I see myself as:  Anxious, easily upset ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1798,13 +1798,11 @@
             "steps": 7,
             "question": "I see myself as:  Open to new experiences, complex ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1815,13 +1813,11 @@
             "steps": 7,
             "question": "I see myself as:  Reserved, quiet ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1832,13 +1828,11 @@
             "steps": 7,
             "question": "I see myself as:  Sympathetic, warm ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1849,13 +1843,11 @@
             "steps": 7,
             "question": "I see myself as:  Disorganized, careless ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1866,13 +1858,11 @@
             "steps": 7,
             "question": "I see myself as:  Calm, emotionally stable ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           },
           {
@@ -1883,13 +1873,11 @@
             "steps": 7,
             "question": "I see myself as:  Conventional, uncreative ",
             "options": [
-              {"icon": "icon-asterisk", "value": "1"},
-              {"icon": "icon-asterisk", "value": "2"},
-              {"icon": "icon-asterisk", "value": "3"},
-              {"icon": "icon-asterisk", "value": "4"},
-              {"icon": "icon-asterisk", "value": "5"},
-              {"icon": "icon-asterisk", "value": "6"},
-              {"icon": "icon-asterisk", "value": "7"}
+              {"icon": "num1", "value": "1"},
+              {"icon": "num2", "value": "2"},
+              {"icon": "num2", "value": "3"},
+              {"icon": "num4", "value": "4"},
+              {"icon": "num5", "value": "5"}
             ]
           }
         ]
