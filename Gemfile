@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.0.0"
 
 gem 'rails', '4.0.0'
 
@@ -76,7 +76,8 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'foreman'
 
-gem 'thin'
+gem 'unicorn'
+# gem 'thin'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
