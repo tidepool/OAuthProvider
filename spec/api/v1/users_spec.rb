@@ -120,7 +120,25 @@ describe 'Users API' do
     updated_user.name.should == user_params[:name]
   end
 
+  it 'updates a users information also in the database, when the user_id is -' do
+    token = get_conn(user1)
+    user_params = { name: 'John Doe', city: 'Istanbul'}
+    response = token.put("#{@endpoint}/users/-.json", {body: {user: user_params}})
+    result = JSON.parse(response.body, symbolize_names: true)
+    user_info = result[:data]
+    updated_user = User.find(user_info[:id])
+    updated_user.city.should == user_params[:city]
+    updated_user.name.should == user_params[:name]
+  end
+
   it 'deletes a user' do
+    token = get_conn(user1)
+    user_id = user1.id
+    response = token.delete("#{@endpoint}/users/#{user_id}.json")
+    lambda { User.find(user_id) }.should raise_error(ActiveRecord::RecordNotFound)
+  end
+
+  it 'deletes a user when the user_id is -' do
     token = get_conn(user1)
     user_id = user1.id
     response = token.delete("#{@endpoint}/users/-.json")

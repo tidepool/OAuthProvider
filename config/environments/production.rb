@@ -72,4 +72,5 @@ OAuthProvider::Application.configure do
   #   * production - set it to true
   config.eager_load = true
 
+  config.cache_store = :dalli_store
 end

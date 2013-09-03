@@ -21,7 +21,10 @@ class PersistPersonality
       raise Workers::PersistenceError, "Big5 or Holland6 dimension score cannot be found."
     end
 
-    profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
+    profile_description = Rails.cache.fetch("ProfileDescription_#{big5_dimension}_#{holland6_dimension}", expires_in: 1.hours) do
+      # ProfileDescription.find(desc_id) 
+      ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
+    end   
 
     raise Workers::PersistenceError, "Profile description cannot be found for #{big5_dimension} and #{holland6_dimension}." if profile_description.nil?
 

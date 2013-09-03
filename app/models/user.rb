@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
   has_many :aggregate_results
   has_many :preferences
   has_many :activities
+  has_one :access_token,  foreign_key: "resource_owner_id", class_name: "Doorkeeper::AccessToken"
 
   # def self.create_guest_or_registered(attributes)
   #   begin
