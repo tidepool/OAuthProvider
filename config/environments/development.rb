@@ -43,4 +43,6 @@ OAuthProvider::Application.configure do
 
   # http://coffeepowered.net/2013/08/02/ruby-prof-for-rails/
   config.middleware.insert 0, "Rack::RequestProfiler", :printer => ::RubyProf::CallTreePrinter
+
+  config.cache_store = :dalli_store
 end

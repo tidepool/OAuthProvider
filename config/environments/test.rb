@@ -35,4 +35,5 @@ OAuthProvider::Application.configure do
   #   * production - set it to true
   config.eager_load = false
 
+  config.cache_store = :null_store
 end

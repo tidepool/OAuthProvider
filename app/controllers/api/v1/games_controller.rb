@@ -28,7 +28,9 @@ class Api::V1::GamesController < Api::V1::ApiController
   def create
     calling_ip = request.remote_ip
     if params[:def_id]
-      definition = Definition.where(unique_name: params[:def_id]).first      
+      definition = Rails.cache.fetch("Definition_#{params[:def_id]}", expires_in: 10.minutes) do
+        Definition.where(unique_name: params[:def_id]).first    
+      end  
       raise ActiveRecord::RecordNotFound, "Game definition not found." if definition.nil?
     elsif params[:same_as]
       definition = Definition.same_as_game(params[:same_as])
