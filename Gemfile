@@ -61,6 +61,7 @@ group :development, :test, :teamcity do
   # https://github.com/bkeepers/dotenv/commit/5084756968badfc1fd783242db093fb9996d6537
   gem 'dotenv-rails', :github => 'bkeepers/dotenv'
   gem 'factory_girl_rails'
+  gem 'blitz'
 end
 
 # Pagination
