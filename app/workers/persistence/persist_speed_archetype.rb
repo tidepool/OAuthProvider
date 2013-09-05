@@ -12,6 +12,8 @@ class PersistSpeedArchetype
 
     # There is only one result instance if this type per game
     existing_result = Result.find_for_type(game, 'SpeedArchetypeResult')
+    return if existing_result
+
     version = reaction_time2_score[:version] # We pick one of big5 vs. holland6 for the version here
     result = SpeedArchetypeResult.create_from_analysis(game, analysis_results, desc, version, existing_result)
 
@@ -65,9 +67,9 @@ class PersistSpeedArchetype
     zscore = zscore(average_time, mean, sd)
 
     output = "medium"
-    if zscore < -1
+    if zscore < -0.4
       output = "fast"
-    elsif zscore > 1
+    elsif zscore > 0.4
       output = "slow"
     end
     output

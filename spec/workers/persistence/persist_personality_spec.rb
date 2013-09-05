@@ -3,6 +3,8 @@ require 'spec_helper'
 describe PersistPersonality do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }
+  let(:game2) { create(:game, user: user) }
+  let(:personality_result) { create(:personality_result, game: game2)}
 
 
   before(:all) do 
@@ -100,6 +102,9 @@ describe PersistPersonality do
     }
     result.user_id.should == user.id
     result.analysis_version.should == '2.0'
+
+    user = User.find(game.user_id)
+    user.personality.game_id.should == updated_game.id
   end
 
   it 'persists the time_played and time_calculated' do
@@ -112,4 +117,15 @@ describe PersistPersonality do
     result.time_played.should == updated_game.date_taken
     result.time_calculated.should > result.time_played
   end
+
+  it 'returns fast if the the game already has the personality persisted' do 
+    game2
+    personality_result
+    persist_rt = PersistPersonality.new
+    persist_rt.persist(game2, @analysis_results)
+    updated_game = Game.find(game2.id)
+    updated_game.results.length.should == 1
+    updated_game.results[0].id.should == personality_result.id
+  end
+
 end
