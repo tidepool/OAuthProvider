@@ -2,6 +2,7 @@ require File.expand_path('../errors.rb', __FILE__)
 
 class ConnectionDispatcher
   include Sidekiq::Worker
+  sidekiq_options :retry => 1, :backtrace => 5
    
   def perform(options={})
     time_ago = options[:time_ago] || 8.hours

@@ -9,5 +9,7 @@ handler do |job|
   puts "Running #{job}"
   ConnectionDispatcher.perform_async
 end
- 
-every(5.minutes, 'update_trackers')
+
+update_interval = Integer(ENV["TRACKER_UPDATE_MINUTES"] || 10)
+Rails.logger.info("Starting Clock with #{update_interval} minutes")
+every(update_interval.minutes, 'update_trackers')
