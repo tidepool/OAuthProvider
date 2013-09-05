@@ -39,7 +39,7 @@ class Api::V1::GamesController < Api::V1::ApiController
     end
     game = Game.create_by_definition(definition, target_user, calling_ip)
     respond_to do |format|
-      format.json { render({ json: game, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: game, meta: {}, serializer: GameNewSerializer }.merge(api_defaults)) }
     end
   end
 
@@ -60,7 +60,7 @@ class Api::V1::GamesController < Api::V1::ApiController
 
     # DONOT forget the serializer: GameSerializer, otherwise the meta: does not get serialized!
     respond_to do |format|
-      format.json { render({ json: nil, meta: api_status, serializer: GameSerializer }.merge(api_defaults)) }
+      format.json { render({ json: nil, meta: api_status, serializer: GameNewSerializer }.merge(api_defaults)) }
     end
   end
 
