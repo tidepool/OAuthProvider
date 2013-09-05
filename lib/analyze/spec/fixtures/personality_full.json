@@ -1,0 +1,1030 @@
+[
+  {
+    "event_type": "circles_test",
+    "events": [
+      {
+        "event": "level_started",
+        "time": 1378247527045
+      },
+      {
+        "event": "sublevel_initialize",
+        "time": 1378247527061
+      },
+      {
+        "event": "resized",
+        "index": 1,
+        "new_size": 3,
+        "time": 1378247528123
+      },
+      {
+        "event": "resized",
+        "index": 2,
+        "new_size": 4,
+        "time": 1378247528637
+      },
+      {
+        "event": "resized",
+        "index": 3,
+        "new_size": 4,
+        "time": 1378247529583
+      },
+      {
+        "event": "resized",
+        "index": 0,
+        "new_size": 1,
+        "time": 1378247530583
+      },
+      {
+        "event": "resized",
+        "index": 4,
+        "new_size": 0,
+        "time": 1378247531912
+      },
+      {
+        "data": [
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 1,
+            "top": 0,
+            "trait1": "Self-Disciplined",
+            "trait2": "Persistent",
+            "width": 52.5
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 3,
+            "top": 0,
+            "trait1": "Anxious",
+            "trait2": "Dramatic",
+            "width": 97.5
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 4,
+            "top": 0,
+            "trait1": "Curious",
+            "trait2": "Cultured",
+            "width": 120
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 4,
+            "top": 0,
+            "trait1": "Sociable",
+            "trait2": "Adventurous",
+            "width": 120
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 0,
+            "top": 0,
+            "trait1": "Cooperative",
+            "trait2": "Friendly",
+            "width": 30
+          }
+        ],
+        "event": "sublevel_initialize",
+        "time": 1378247532961
+      },
+      {
+        "event": "start_move",
+        "index": 1,
+        "item": {
+          "left": 0,
+          "pos": {
+            "x": 0,
+            "y": 0
+          },
+          "selfOverlapPx": null,
+          "selfOverlapRatio": null,
+          "selfProximityPx": null,
+          "size": 3,
+          "top": 0,
+          "trait1": "Anxious",
+          "trait2": "Dramatic",
+          "width": 97.5
+        },
+        "time": 1378247534096
+      },
+      {
+        "event": "end_move",
+        "index": 1,
+        "item": {
+          "left": 824,
+          "pos": {
+            "x": 873,
+            "y": 257
+          },
+          "selfOverlapPx": null,
+          "selfOverlapRatio": 0,
+          "selfProximityPx": 251,
+          "size": 3,
+          "top": 208,
+          "trait1": "Anxious",
+          "trait2": "Dramatic",
+          "width": 97.5
+        },
+        "time": 1378247534273
+      },
+      {
+        "data": [
+          {
+            "left": 746,
+            "pos": {
+              "x": 772.5,
+              "y": 97.5
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 1,
+            "top": 71,
+            "trait1": "Self-Disciplined",
+            "trait2": "Persistent",
+            "width": 52.5
+          },
+          {
+            "left": 824,
+            "pos": {
+              "x": 873,
+              "y": 257
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 251,
+            "size": 3,
+            "top": 208,
+            "trait1": "Anxious",
+            "trait2": "Dramatic",
+            "width": 97.5
+          },
+          {
+            "left": 566,
+            "pos": {
+              "x": 626,
+              "y": 550
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 4,
+            "top": 490,
+            "trait1": "Curious",
+            "trait2": "Cultured",
+            "width": 120
+          },
+          {
+            "left": 328,
+            "pos": {
+              "x": 388,
+              "y": 377
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 4,
+            "top": 317,
+            "trait1": "Sociable",
+            "trait2": "Adventurous",
+            "width": 120
+          },
+          {
+            "left": 464,
+            "pos": {
+              "x": 479,
+              "y": 98
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 0,
+            "top": 83,
+            "trait1": "Cooperative",
+            "trait2": "Friendly",
+            "width": 30
+          }
+        ],
+        "event": "level_summary",
+        "self_coord": {
+          "left": 525.5,
+          "size": 200,
+          "top": 200
+        },
+        "time": 1378247538427
+      },
+      {
+        "event": "level_completed",
+        "time": 1378247538427
+      }
+    ],
+    "is_phone_width": false,
+    "is_touch": false,
+    "stage": 0,
+    "timezone_offset": 420
+  },
+  {
+    "event_type": "interest_picker",
+    "events": [
+      {
+        "event": "level_started",
+        "time": 1378247538434
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247544014,
+        "time": 1378247544015,
+        "type": "symbol",
+        "value": "gfx-hol6-social2"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247545645,
+        "time": 1378247545646,
+        "type": "symbol",
+        "value": "gfx-hol6-social3"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247547356,
+        "time": 1378247547357,
+        "type": "word",
+        "value": "Analytical"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548233,
+        "time": 1378247548234,
+        "type": "symbol",
+        "value": "gfx-hol6-conventional5"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548234,
+        "time": 1378247548234,
+        "type": "symbol",
+        "value": "gfx-hol6-enterprising7"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548235,
+        "time": 1378247548235,
+        "type": "symbol",
+        "value": "gfx-hol6-investigative5"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548236,
+        "time": 1378247548236,
+        "type": "symbol",
+        "value": "gfx-hol6-social2"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548236,
+        "time": 1378247548237,
+        "type": "symbol",
+        "value": "gfx-hol6-artistic6"
+      },
+      {
+        "event": "ready_to_proceed",
+        "time": 1378247548240
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548240,
+        "time": 1378247548240,
+        "type": "symbol",
+        "value": "gfx-hol6-social3"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548241,
+        "time": 1378247548241,
+        "type": "word",
+        "value": "Analytical"
+      },
+      {
+        "dimension": "realistic",
+        "event": "selected",
+        "record_time": 1378247548242,
+        "time": 1378247548242,
+        "type": "word",
+        "value": "Hands-on"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548243,
+        "time": 1378247548243,
+        "type": "symbol",
+        "value": "gfx-hol6-social5"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548243,
+        "time": 1378247548244,
+        "type": "symbol",
+        "value": "gfx-hol6-conventional8"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548245,
+        "time": 1378247548245,
+        "type": "word",
+        "value": "Persuasive"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548249,
+        "time": 1378247548250,
+        "type": "symbol",
+        "value": "gfx-hol6-social1"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548251,
+        "time": 1378247548251,
+        "type": "symbol",
+        "value": "gfx-hol6-conventional7"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548252,
+        "time": 1378247548253,
+        "type": "word",
+        "value": "Helpful"
+      },
+      {
+        "dimension": "realistic",
+        "event": "selected",
+        "record_time": 1378247548253,
+        "time": 1378247548254,
+        "type": "symbol",
+        "value": "gfx-hol6-realistic2"
+      },
+      {
+        "dimension": "social",
+        "event": "selected",
+        "record_time": 1378247548254,
+        "time": 1378247548255,
+        "type": "word",
+        "value": "Caring"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548256,
+        "time": 1378247548257,
+        "type": "symbol",
+        "value": "gfx-hol6-investigative7"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548257,
+        "time": 1378247548258,
+        "type": "word",
+        "value": "Intuitive"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548259,
+        "time": 1378247548260,
+        "type": "symbol",
+        "value": "gfx-hol6-artistic5"
+      },
+      {
+        "dimension": "realistic",
+        "event": "selected",
+        "record_time": 1378247548260,
+        "time": 1378247548261,
+        "type": "word",
+        "value": "Mechanical"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548262,
+        "time": 1378247548262,
+        "type": "symbol",
+        "value": "gfx-hol6-enterprising2"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548263,
+        "time": 1378247548263,
+        "type": "word",
+        "value": "Passionate"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548264,
+        "time": 1378247548264,
+        "type": "word",
+        "value": "Thorough"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548265,
+        "time": 1378247548266,
+        "type": "word",
+        "value": "Creative"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548266,
+        "time": 1378247548267,
+        "type": "symbol",
+        "value": "gfx-hol6-artistic4"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548268,
+        "time": 1378247548268,
+        "type": "symbol",
+        "value": "gfx-hol6-enterprising6"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548269,
+        "time": 1378247548270,
+        "type": "word",
+        "value": "Inquisitive"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548270,
+        "time": 1378247548271,
+        "type": "symbol",
+        "value": "gfx-hol6-investigative8"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548271,
+        "time": 1378247548272,
+        "type": "word",
+        "value": "Detail-Oriented"
+      },
+      {
+        "dimension": "realistic",
+        "event": "selected",
+        "record_time": 1378247548272,
+        "time": 1378247548274,
+        "type": "symbol",
+        "value": "gfx-hol6-realistic7"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548274,
+        "time": 1378247548276,
+        "type": "symbol",
+        "value": "gfx-hol6-investigative4"
+      },
+      {
+        "dimension": "enterprising",
+        "event": "selected",
+        "record_time": 1378247548276,
+        "time": 1378247548277,
+        "type": "symbol",
+        "value": "gfx-hol6-enterprising3"
+      },
+      {
+        "dimension": "conventional",
+        "event": "selected",
+        "record_time": 1378247548278,
+        "time": 1378247548279,
+        "type": "symbol",
+        "value": "gfx-hol6-conventional6"
+      },
+      {
+        "dimension": "investigative",
+        "event": "selected",
+        "record_time": 1378247548280,
+        "time": 1378247548281,
+        "type": "symbol",
+        "value": "gfx-hol6-investigative6"
+      },
+      {
+        "dimension": "realistic",
+        "event": "selected",
+        "record_time": 1378247548281,
+        "time": 1378247548283,
+        "type": "symbol",
+        "value": "gfx-hol6-realistic6"
+      },
+      {
+        "dimension": "artistic",
+        "event": "selected",
+        "record_time": 1378247548284,
+        "time": 1378247548285,
+        "type": "symbol",
+        "value": "gfx-hol6-artistic7"
+      },
+      {
+        "cheater_pick": true,
+        "event": "level_summary",
+        "symbol_list": [
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548233,
+            "type": "symbol",
+            "value": "gfx-hol6-conventional5"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548234,
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising7"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548235,
+            "type": "symbol",
+            "value": "gfx-hol6-investigative5"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548236,
+            "type": "symbol",
+            "value": "gfx-hol6-social2"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548236,
+            "type": "symbol",
+            "value": "gfx-hol6-artistic6"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548240,
+            "type": "symbol",
+            "value": "gfx-hol6-social3"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548243,
+            "type": "symbol",
+            "value": "gfx-hol6-social5"
+          },
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548243,
+            "type": "symbol",
+            "value": "gfx-hol6-conventional8"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548249,
+            "type": "symbol",
+            "value": "gfx-hol6-social1"
+          },
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548251,
+            "type": "symbol",
+            "value": "gfx-hol6-conventional7"
+          },
+          {
+            "dimension": "realistic",
+            "record_time": 1378247548253,
+            "type": "symbol",
+            "value": "gfx-hol6-realistic2"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548256,
+            "type": "symbol",
+            "value": "gfx-hol6-investigative7"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548259,
+            "type": "symbol",
+            "value": "gfx-hol6-artistic5"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548262,
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising2"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548266,
+            "type": "symbol",
+            "value": "gfx-hol6-artistic4"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548268,
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising6"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548270,
+            "type": "symbol",
+            "value": "gfx-hol6-investigative8"
+          },
+          {
+            "dimension": "realistic",
+            "record_time": 1378247548272,
+            "type": "symbol",
+            "value": "gfx-hol6-realistic7"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548274,
+            "type": "symbol",
+            "value": "gfx-hol6-investigative4"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548276,
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising3"
+          },
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548278,
+            "type": "symbol",
+            "value": "gfx-hol6-conventional6"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548280,
+            "type": "symbol",
+            "value": "gfx-hol6-investigative6"
+          },
+          {
+            "dimension": "realistic",
+            "record_time": 1378247548281,
+            "type": "symbol",
+            "value": "gfx-hol6-realistic6"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548284,
+            "type": "symbol",
+            "value": "gfx-hol6-artistic7"
+          }
+        ],
+        "time": 1378247550247,
+        "word_list": [
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548241,
+            "type": "word",
+            "value": "Analytical"
+          },
+          {
+            "dimension": "realistic",
+            "record_time": 1378247548242,
+            "type": "word",
+            "value": "Hands-on"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548245,
+            "type": "word",
+            "value": "Persuasive"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548252,
+            "type": "word",
+            "value": "Helpful"
+          },
+          {
+            "dimension": "social",
+            "record_time": 1378247548254,
+            "type": "word",
+            "value": "Caring"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548257,
+            "type": "word",
+            "value": "Intuitive"
+          },
+          {
+            "dimension": "realistic",
+            "record_time": 1378247548260,
+            "type": "word",
+            "value": "Mechanical"
+          },
+          {
+            "dimension": "enterprising",
+            "record_time": 1378247548263,
+            "type": "word",
+            "value": "Passionate"
+          },
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548264,
+            "type": "word",
+            "value": "Thorough"
+          },
+          {
+            "dimension": "artistic",
+            "record_time": 1378247548265,
+            "type": "word",
+            "value": "Creative"
+          },
+          {
+            "dimension": "investigative",
+            "record_time": 1378247548269,
+            "type": "word",
+            "value": "Inquisitive"
+          },
+          {
+            "dimension": "conventional",
+            "record_time": 1378247548271,
+            "type": "word",
+            "value": "Detail-Oriented"
+          }
+        ]
+      },
+      {
+        "event": "level_completed",
+        "time": 1378247550247
+      }
+    ],
+    "is_phone_width": false,
+    "is_touch": false,
+    "stage": 1,
+    "timezone_offset": 420
+  },
+  {
+    "event_type": "circles_test",
+    "events": [
+      {
+        "event": "level_started",
+        "time": 1378247550254
+      },
+      {
+        "event": "sublevel_initialize",
+        "time": 1378247550268
+      },
+      {
+        "event": "resized",
+        "index": 1,
+        "new_size": 3,
+        "time": 1378247554400
+      },
+      {
+        "event": "resized",
+        "index": 0,
+        "new_size": 1,
+        "time": 1378247555266
+      },
+      {
+        "event": "resized",
+        "index": 3,
+        "new_size": 3,
+        "time": 1378247556267
+      },
+      {
+        "event": "resized",
+        "index": 3,
+        "new_size": 4,
+        "time": 1378247556493
+      },
+      {
+        "data": [
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 1,
+            "top": 0,
+            "trait1": "Judgmental",
+            "trait2": "Aloof",
+            "width": 52.5
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 3,
+            "top": 0,
+            "trait1": "Self-Reflective",
+            "trait2": "Reserved",
+            "width": 97.5
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 2,
+            "top": 0,
+            "trait1": "Disorganized",
+            "trait2": "Unconventional",
+            "width": 75
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 4,
+            "top": 0,
+            "trait1": "Calm",
+            "trait2": "Consistent",
+            "width": 120
+          },
+          {
+            "left": 0,
+            "pos": {
+              "x": 0,
+              "y": 0
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": null,
+            "selfProximityPx": null,
+            "size": 2,
+            "top": 0,
+            "trait1": "Traditional",
+            "trait2": "Straightforward",
+            "width": 75
+          }
+        ],
+        "event": "sublevel_initialize",
+        "time": 1378247557807
+      },
+      {
+        "data": [
+          {
+            "left": 746,
+            "pos": {
+              "x": 772.5,
+              "y": 97.5
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 1,
+            "top": 71,
+            "trait1": "Judgmental",
+            "trait2": "Aloof",
+            "width": 52.5
+          },
+          {
+            "left": 814,
+            "pos": {
+              "x": 863,
+              "y": 377
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 3,
+            "top": 328,
+            "trait1": "Self-Reflective",
+            "trait2": "Reserved",
+            "width": 97.5
+          },
+          {
+            "left": 588,
+            "pos": {
+              "x": 625.5,
+              "y": 550.5
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 251,
+            "size": 2,
+            "top": 513,
+            "trait1": "Disorganized",
+            "trait2": "Unconventional",
+            "width": 75
+          },
+          {
+            "left": 328,
+            "pos": {
+              "x": 388,
+              "y": 377
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 4,
+            "top": 317,
+            "trait1": "Calm",
+            "trait2": "Consistent",
+            "width": 120
+          },
+          {
+            "left": 441,
+            "pos": {
+              "x": 478.5,
+              "y": 97.5
+            },
+            "selfOverlapPx": null,
+            "selfOverlapRatio": 0,
+            "selfProximityPx": 250,
+            "size": 2,
+            "top": 60,
+            "trait1": "Traditional",
+            "trait2": "Straightforward",
+            "width": 75
+          }
+        ],
+        "event": "level_summary",
+        "self_coord": {
+          "left": 525.5,
+          "size": 200,
+          "top": 200
+        },
+        "time": 1378247560421
+      },
+      {
+        "event": "level_completed",
+        "time": 1378247560421
+      }
+    ],
+    "is_phone_width": false,
+    "is_touch": false,
+    "stage": 2,
+    "timezone_offset": 420
+  }
+]

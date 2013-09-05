@@ -33,7 +33,8 @@ class AuthorizationsController < Doorkeeper::AuthorizationsController
       user_id = auth.token.resource_owner_id
       user = User.where(id: user_id).first
       if user 
-        user_output = UserSerializer.new(user).as_json
+        # user_output = UserSerializer.new(user).as_json
+        user_output = UserNewSerializer.new(user).as_json
         output = auth.body.merge(user_output)
       else
         output = auth.body
