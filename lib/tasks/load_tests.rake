@@ -43,6 +43,7 @@ namespace :loadtests do
     test = {
       "steps" => [
         {
+          "timeout" => 2000,
           "request" => "POST",
           "headers" => ["Content-Type: application/json",
             "Authorization: Bearer cbe52a989f38125da0c2df5bc3c13c7bc0dbbe381c3e940c4bcae3997eb638c9"
@@ -62,8 +63,8 @@ namespace :loadtests do
           {
             "iterations" => 1,
             "start" => 10,
-            "end" => 50,
-            "duration" => 30
+            "end" => 250,
+            "duration" => 60
           }
         ]
       }
@@ -145,11 +146,11 @@ namespace :loadtests do
       test["steps"][0]["variables"] = {
         "gameid" => {
           "type" => "list",
-          "entries" => (3332..3383).to_a
+          "entries" => (3437..3637).to_a | (3642..3693).to_a
         }
       }
       binding.pry
-      run_rush(test, 10, 50, 60)
+      run_rush(test, 10, 250, 60)
     end
   end
 

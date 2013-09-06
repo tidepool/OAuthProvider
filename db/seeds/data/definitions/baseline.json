@@ -78,7 +78,7 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-social1",
+            "value": "gfx-hol6-social2",
             "dimension": "social"
           },
           {
@@ -103,12 +103,12 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-investigative5",
+            "value": "gfx-hol6-investigative6",
             "dimension": "investigative"
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-social2",
+            "value": "gfx-hol6-social3",
             "dimension": "social"
           },
           {
@@ -133,7 +133,7 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-investigative6",
+            "value": "gfx-hol6-investigative9",
             "dimension": "investigative"
           },
           {
@@ -168,12 +168,12 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-social3",
+            "value": "gfx-hol6-social5",
             "dimension": "social"
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-enterprising7",
+            "value": "gfx-hol6-enterprising4",
             "dimension": "enterprising"
           },
           {
@@ -183,38 +183,8 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-realistic7",
+            "value": "gfx-hol6-realistic8",
             "dimension": "realistic"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-artistic6",
-            "dimension": "artistic"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-investigative7",
-            "dimension": "investigative"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-social5",
-            "dimension": "social"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-investigative4",
-            "dimension": "investigative"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-conventional8",
-            "dimension": "conventional"
-          },
-          {
-            "type": "symbol",
-            "value": "gfx-hol6-enterprising3",
-            "dimension": "enterprising"
           },
           {
             "type": "symbol",
@@ -223,11 +193,41 @@
           },
           {
             "type": "symbol",
-            "value": "gfx-hol6-investigative8",
+            "value": "gfx-hol6-investigative10",
+            "dimension": "investigative"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-social6",
+            "dimension": "social"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-enterprising10",
+            "dimension": "enterprising"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-conventional9",
+            "dimension": "conventional"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-realistic9",
+            "dimension": "realistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-artistic8",
+            "dimension": "artistic"
+          },
+          {
+            "type": "symbol",
+            "value": "gfx-hol6-investigative5",
             "dimension": "investigative"
           }
         ]
-      },      
+      },
       {
         "friendly_name" : "Circles 2",
         "instructions" : [

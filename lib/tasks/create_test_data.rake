@@ -15,7 +15,7 @@ namespace :loadtests do
     events_json = IO.read(File.expand_path("../../analyze/spec/fixtures/#{filename}", __FILE__))
     events = JSON.parse(events_json)
 
-    (0..40).each do |i|
+    (0..50).each do |i|
       response = token.post("/api/v1/users/-/games.json",
         { body: { def_id: 'snoozer' } })
       result = JSON.parse(response.body, symbolize_names: true)
