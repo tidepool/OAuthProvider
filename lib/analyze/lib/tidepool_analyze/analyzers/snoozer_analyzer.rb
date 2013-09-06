@@ -1,6 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
-    class SnoozerAnalyzer < BaseAnalyzer
+    class SnoozerAnalyzer 
       def initialize(events, formula)
         @events = events
         @test_type = 'simple'
@@ -123,6 +123,12 @@ module TidepoolAnalyze
           end
         end
       end
+
+      def get_time(entry)
+        time = 0
+        time = entry['time'].to_i if entry['time']  
+      end
+
     end
   end
 end
