@@ -1,6 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
-    class PickerAnalyzer 
+    class PickerAnalyzer < BaseAnalyzer
       def initialize(events, formula)
         @events = events
         @symbols = []
@@ -38,9 +38,9 @@ module TidepoolAnalyze
         events.each do |entry|
           case entry['event']
           when 'level_started'
-            @start_time = entry['time']
+            @start_time = get_time(entry)
           when 'level_completed'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
           when 'level_summary'
             @symbols = entry['symbol_list']
             @words = entry['word_list']
