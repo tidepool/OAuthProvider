@@ -3,7 +3,8 @@ require 'spec_helper'
 describe PersistBig5 do
   let(:user) { create(:user) }
   let(:game) { create(:game, user: user) }
-
+  let(:game2) { create(:game, user: user) }
+  let(:big5_result) { create(:big5_result, game: game2)}
 
   before(:all) do 
     @analysis_results = {
@@ -74,4 +75,13 @@ describe PersistBig5 do
     result.time_calculated.should > result.time_played
   end
 
+  it 'returns fast if the the game already has the big5_result persisted' do 
+    game2
+    big5_result
+    persist_rt = PersistBig5.new
+    persist_rt.persist(game2, @analysis_results)
+    updated_game = Game.find(game2.id)
+    updated_game.results.length.should == 1
+    updated_game.results[0].id.should == big5_result.id
+  end
 end

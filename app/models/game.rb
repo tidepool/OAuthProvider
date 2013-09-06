@@ -72,6 +72,7 @@ class Game < ActiveRecord::Base
 
   def update_event_log(new_event_log)
     raise ArgumentError, "Event log is empty." if new_event_log.nil? || new_event_log.empty?
+
     current_log = self.event_log
     current_log = {} if current_log.nil?
     if new_event_log.is_a?(Array)
@@ -79,7 +80,6 @@ class Game < ActiveRecord::Base
     else
       add_event_log_entry(new_event_log, current_log)
     end
-    
     self.event_log = current_log
     self.save!
   end

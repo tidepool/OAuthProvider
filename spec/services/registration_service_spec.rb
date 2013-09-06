@@ -8,7 +8,7 @@ describe RegistrationService do
   let(:auth2) { create(:authentication, user: user2) }
   let(:auth3) { create(:authentication, { user: user3, uid: "5555", provider: "facebook"}) }
 
-  before :all do
+  before :each do
     @facebook_hash = Hashie::Mash.new(
     {
      "provider" => "facebook",
@@ -256,8 +256,31 @@ describe RegistrationService do
     }
     # expect{ User.create_guest_or_registered!(params)}.to raise_error(ActiveRecord::RecordInvalid)
     expect{ @registration_service.register_guest_or_full!(params)}.to raise_error(ActiveRecord::RecordInvalid)
-
   end  
 
+
+  it 'user has an existing Facebook authentication and trying to create a new custom auth with a Facebook account which has same email' do 
+    auth3
+    email = auth3.user.email
+
+    params = {
+      email: email,
+      password: 'uniquepass',
+      password_confirmation: 'uniquepass'
+    }
+    expect { @registration_service.register_guest_or_full!(params)}.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'user has an existing custom authentication and trying to login with their Facebook but the email on Facebook account is the same as custom auth' do
+    @facebook_hash.info.email = user1.email 
+    expect { @registration_service.register_or_find_from_external!(@facebook_hash)}.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'if the user_id is an empty string passed into register_or_find_from_external than a new user will be created' do
+    user = @registration_service.register_or_find_from_external!(@facebook_hash, "")
+    user.should_not be_nil
+    user.email.should == @facebook_hash.info.email
+    user.name.should == @facebook_hash.info.name
+  end
 
 end

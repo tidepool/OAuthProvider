@@ -454,6 +454,7 @@
   },
   {
     "event_type": "survey",
+    "stage": 4,
     "events": [
       {
         "event": "level_started",
@@ -478,6 +479,8 @@
         "time": 1377721292028
       },
       {
+        "event": "level_summary",
+        "time": 1377721292028,
         "data": [
           {
             "answer": 4,
@@ -489,11 +492,8 @@
             "question_id": "sleep1-7",
             "topic": "sleep"
           }
-        ],
-        "event": "level_summary",
-        "time": 1377721292028
+        ]
       }
-    ],
-    "stage": 4
+    ]
   }
 ]

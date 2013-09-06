@@ -80,7 +80,7 @@ class RegistrationService
         authentication.destroy!
       end
     else
-      if user_id
+      if user_id && !(user_id.class == String && user_id.empty?)
         logger.info("AuthenticationSequence: No authentication found, but a user_id is passed, will try finding the user.")      
         # We are trying to add the new authentication by provider to the user (The user can be a guest)
         # Note that user_id being nil means we are not even trying to find the user.

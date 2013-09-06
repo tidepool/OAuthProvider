@@ -3,6 +3,7 @@ require File.expand_path('../errors.rb', __FILE__)
 
 class TrackerDispatcher
   include Sidekiq::Worker
+  sidekiq_options :retry => false, :backtrace => 5
    
   def perform(connection_id)
     logger.info("TrackerDispatcher called with #{connection_id}")

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.0.0"
 
 gem 'rails', '4.0.0'
 
@@ -19,6 +19,8 @@ gem 'rack-cors', :require => 'rack/cors'
 
 gem 'tidepool_analyze', :path => './lib/analyze'
 
+gem 'dalli'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -31,6 +33,7 @@ end
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'memcachier'
 end
 
 group :teamcity do
@@ -45,11 +48,20 @@ group :development, :test, :teamcity do
   gem 'annotate', ">=2.5.0"
   gem 'rspec-rails'
   gem 'oauth2'
-  gem 'jazz_hands'
+  # gem 'jazz_hands'
+  gem 'pry'
+  gem 'awesome_print'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-git'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
   # gem 'dotenv-rails'
   # https://github.com/bkeepers/dotenv/commit/5084756968badfc1fd783242db093fb9996d6537
   gem 'dotenv-rails', :github => 'bkeepers/dotenv'
   gem 'factory_girl_rails'
+  gem 'blitz'
 end
 
 # Pagination
@@ -76,7 +88,8 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'foreman'
 
-gem 'thin'
+gem 'unicorn'
+# gem 'thin'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'

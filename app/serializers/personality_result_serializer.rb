@@ -20,6 +20,10 @@ class PersonalityResultSerializer < ActiveModel::Serializer
 
   def find_profile_description
     desc_id = object.profile_description_id
-    @desc ||= ProfileDescription.find(desc_id) if desc_id
+    if desc_id
+      @desc ||= Rails.cache.fetch("ProfileDescription_#{desc_id}", expires_in: 1.hours) do
+        ProfileDescription.find(desc_id) 
+      end   
+    end
   end
 end

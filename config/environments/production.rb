@@ -1,5 +1,7 @@
 OAuthProvider::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'INFO')
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -31,7 +33,7 @@ OAuthProvider::Application.configure do
   config.force_ssl = true
 
   # See everything in the log (default is :info)
-  config.log_level = :debug
+  # config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -52,7 +54,7 @@ OAuthProvider::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
-  # config.threadsafe!
+  config.threadsafe!
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
@@ -70,4 +72,5 @@ OAuthProvider::Application.configure do
   #   * production - set it to true
   config.eager_load = true
 
+  config.cache_store = :dalli_store
 end

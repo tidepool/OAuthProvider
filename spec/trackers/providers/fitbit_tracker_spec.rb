@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe FitbitTracker do
   let(:user) { create(:user) }
+  let(:user1) { create(:user) }
   let(:connection) { create(:fitbit, user: user)}
-
+  let(:fitbit_earlier) { create(:fitbit_earlier, user: user1)}
   before(:all) do 
   end
 
@@ -13,7 +14,7 @@ describe FitbitTracker do
     days = tracker.days_to_retrieve(:activities)
     days.should == 3
     days = tracker.days_to_retrieve(:sleeps)
-    days.should == 1
+    days.should == 1  # Always sync the current day
     days = tracker.days_to_retrieve(:foods)
     days.should == 6
     days = tracker.days_to_retrieve(:measurements)
@@ -35,6 +36,33 @@ describe FitbitTracker do
     activities = Activity.where('user_id = ? and provider = ?', user.id, 'fitbit').order(:date_recorded)
     activities.length.should == 3
     activities[2].date_recorded.should == Date.current
+  end
+
+  it 'sets the last synchronized date correctly if ' do 
+    user1
+    tracker = FitbitTracker.new(fitbit_earlier, nil)
+    sync_list = [:activities, :sleeps]
+    Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+      "summary" => {
+        "steps"=>9663,
+        "veryActiveMinutes"=>30
+        }
+      })
+    Fitgem::Client.any_instance.stub(:sleep_on_date) do |date|
+      day = Time.parse(date).yday
+      today = Time.zone.now.yday
+      if day == today - 1
+        raise Exception.new
+      end
+      { "summary" => {"totalMinutesAsleep"=>375, "totalSleepRecords"=>1, "totalTimeInBed"=>430} }
+    end
+    activity_days = tracker.days_to_retrieve(:activities)
+    sleep_days = tracker.days_to_retrieve(:sleeps)
+
+    expect{ tracker.synchronize(sync_list)}.to raise_error(Exception)
+    connection = Authentication.where(user_id: user1.id, provider: 'fitbit').first
+    connection.last_synchronized.should_not be_nil   
+    Time.parse(connection.last_synchronized['sleeps']).yday.should == Time.zone.now.yday - 2
   end
 
   describe 'Activity storage' do

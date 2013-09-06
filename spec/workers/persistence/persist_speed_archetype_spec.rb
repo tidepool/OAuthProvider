@@ -5,6 +5,8 @@ describe PersistSpeedArchetype do
   let(:game) { create(:game, user: user) }
   let(:personality) { create(:personality, user: user) }
   let(:aggregate_result) { create(:aggregate_result, user: user) }
+  let(:game2) { create(:game, user: user) }
+  let(:speed_archetype_result) { create(:speed_archetype_result, game: game2)}
 
   before(:each) do 
     @analysis_results = {
@@ -106,5 +108,14 @@ describe PersistSpeedArchetype do
     
   end
 
+  it 'returns fast if the the game already has the personality persisted' do 
+    game2
+    speed_archetype_result
+    persist_rt = PersistSpeedArchetype.new
+    persist_rt.persist(game2, @analysis_results)
+    updated_game = Game.find(game2.id)
+    updated_game.results.length.should == 1
+    updated_game.results[0].id.should == speed_archetype_result.id
+  end
 
 end

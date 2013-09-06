@@ -7,14 +7,11 @@ class FitbitTracker
 
   def synchronize(sync_list = nil)
     return if @connection.nil? || @connection.provider != 'fitbit'
-
-    last_synchronized = @connection.last_synchronized
-    last_synchronized = {} if last_synchronized.nil?
+    sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
+    last_sync_dates = {}
 
     @client = Fitgem::Client.new(client_config) if @client.nil?
     if @client
-      sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
-
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
         number_of_days.times do | day |
@@ -27,13 +24,18 @@ class FitbitTracker
             sync_item.user_id = @user_id
             sync_item.date_recorded = date
             sync_item.save!
+
+            last_sync_dates[item.to_s] = date.to_s
           end
         end 
-        last_synchronized[item.to_s] = Time.zone.now
       end
-      @connection.last_synchronized = last_synchronized
-      @connection.save!
     end
+  ensure
+    last_synchronized = @connection.last_synchronized
+    last_synchronized = {} if last_synchronized.nil?
+    new_dates = last_synchronized.merge(last_sync_dates)
+    @connection.last_synchronized = new_dates
+    @connection.save!
   end
 
   # {:consumer_key=>"4c4660694a7844d081bfaf93ef0d2330",

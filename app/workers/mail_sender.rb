@@ -1,5 +1,6 @@
 class MailSender
   include Sidekiq::Worker
+  sidekiq_options :retry => 5, :backtrace => 5
 
   def perform(mailer_klass_name, mailer_method, options)
     return if mailer_klass_name.nil? || mailer_klass_name.empty?

@@ -1,6 +1,8 @@
+require File.expand_path('../base_analyzer.rb', __FILE__)
+
 module TidepoolAnalyze
   module Analyzer
-    class ImageRankAnalyzer
+    class ImageRankAnalyzer < BaseAnalyzer
       attr_reader :images, :start_time, :end_time, :final_rank, :stage
 
       # Output Data Format:
@@ -44,10 +46,10 @@ module TidepoolAnalyze
         events.each do |entry|
           case entry['event']
           when 'level_started'
-            @start_time = entry['time']
+            @start_time = get_time(entry)
             @images = entry['data']
           when 'level_summary'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
             @final_rank = entry['final_rank']
           end
         end

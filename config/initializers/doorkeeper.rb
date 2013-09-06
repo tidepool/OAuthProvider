@@ -1,29 +1,53 @@
-require 'pry-remote' if Rails.env.test? || Rails.env.development?
-
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use.
   # Currently supported options are :active_record, :mongoid2, :mongoid3, :mongo_mapper
   orm :active_record
 
   # This block will be called to check whether the resource owner is authenticated or not.
+  # This is called from the AuthorizationsController.new, which we monkey patched in this project.
+  # params[:redirect_uri] => used by Doorkeeper, needs to be passed. It is the same as what 
+  #                          is stored in the oauth_applications table for the application in 
+  #                          redirect_uri column. Doorkeeper checks to see if they are same.
+  # params[:user_id] => client does not pass this. This is passed the second time this block is called.
+  #                     The caller is AuthenticationsController.create (redirect to this with a user_id)
+  # params[:guest_id] => client passes this if they are trying to convert a guest user to a registered one.
+  # params[:provider] => client passes this to indicate which external provider should be used for authentication.
+  #                      such as Facebook...
+  # params[:client_uri] => client passes this to indicate which client uri to redirect back to. Keep in mind that
+  #                        in our architecture the client can be (actually is now) served from a different web
+  #                        server as static files. (S3) So the uri should point to that server and we will 
+  #                        pass in the final access_token (Doorkeeper generated) to that URI. This happens in the
+  #                        AuthenticationsController.client_redirect
   resource_owner_authenticator do
-    # puts "Resource_owner authenticator called #{request.params}"
     user_id = params[:user_id]
     guest_id = params[:guest_id]
     provider = params[:provider]
-    # redirect_uri = params[:redirect_uri]
+    client_uri = params[:client_uri]
 
     if user_id && user_id != -1
       user = User.find(user_id)
     else
       if provider
-        session[:user_id] = guest_id if guest_id
+        # Below check for guest_id.empty? is important to make sure that we don't have an empty string
+        # guest_id parameter passed by an incorrrectly written client.
+        session[:user_id] = guest_id if guest_id && !(guest_id.class == String && guest_id.empty?)
+
+        # redirect_after_external is used by AuthenticationsController to call back into
+        # AuthorizationsController.new which then subsequently executes this block. 
+        # The external authentication happens all on the backend API server, which is this codebase.
         # The & at the end is necessary as we will tack parameters
         session[:redirect_after_external] = "#{request.fullpath}&"
-        # session[:redirect_after_external] = "#{redirect_uri}&"
+
+        # client_uri is going to be needed at the very end to pass the access_token to the client,
+        # which happens in AuthenticationsController.client_redirect
+        session[:client_uri] = client_uri
+
+        # Below will redirect to the OmniAuth's implementations of authentication with external.
         redirect_to("/auth/#{provider}")
+
         # Once the authentication is complete (success of fail), 
         # we will be redirected back here with a user_id in the params
+        # If failed the user_id will be => -1
       end
     end
   end
@@ -76,6 +100,7 @@ Doorkeeper.configure do
 
   # Below gets called in from our client when:
   # response_type: password
+  # This is called from the monkey patched AuthorizationsController.create
   resource_owner_from_credentials do |routes|
     # binding.remote_pry
     registration_service = RegistrationService.new
@@ -84,7 +109,6 @@ Doorkeeper.configure do
       user_id = params[:user_id]
       auth_hash = Hashie::Mash.new(params[:auth_hash])
 
-      # user = User.create_or_find(auth_hash, user_id)
       user = registration_service.register_or_find_from_external(auth_hash, user_id)
     else
       username = params[:email] || params[:username]
@@ -103,7 +127,6 @@ Doorkeeper.configure do
           password_confirmation: params[:password_confirmation],
           guest: guest
         }
-        # return_user = User.create_guest_or_registered(attributes)
         return_user = registration_service.register_guest_or_full(attributes)
       else
         return_user = user && (user.guest || user.authenticate(password)) ? user : nil         
@@ -124,7 +147,7 @@ Doorkeeper.configure do
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
-  access_token_expires_in 1.month
+  access_token_expires_in 1.year
 
   # Issue access tokens with refresh token (disabled by default)
   use_refresh_token
