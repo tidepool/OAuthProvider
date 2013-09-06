@@ -1,6 +1,8 @@
+require File.expand_path('../base_analyzer.rb', __FILE__)
+
 module TidepoolAnalyze
   module Analyzer
-    class SnoozerAnalyzer 
+    class SnoozerAnalyzer < BaseAnalyzer
       def initialize(events, formula)
         @events = events
         @test_type = 'simple'
@@ -123,12 +125,6 @@ module TidepoolAnalyze
           end
         end
       end
-
-      def get_time(entry)
-        time = 0
-        time = entry['time'].to_i if entry['time']  
-      end
-
     end
   end
 end
