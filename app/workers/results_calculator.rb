@@ -4,6 +4,7 @@ require File.expand_path('../worker_errors.rb', __FILE__)
 
 class ResultsCalculator
   include Sidekiq::Worker
+  sidekiq_options :retry => 7, :backtrace => 5
    
   def perform(game_id)
     game = Game.where('id = ?', game_id).first

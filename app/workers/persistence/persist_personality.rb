@@ -1,7 +1,5 @@
 class PersistPersonality 
   def persist(game, analysis_results)
-    # Below will raise exception if not found ActiveRecord::NotFound
-    user = User.find(game.user_id)
 
     unless analysis_results && analysis_results[:big5] && analysis_results[:big5][:score]
       raise Workers::PersistenceError, "Analysis does not contain Big5 scores."
@@ -21,9 +19,15 @@ class PersistPersonality
       raise Workers::PersistenceError, "Big5 or Holland6 dimension score cannot be found."
     end
 
-    profile_description = ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
+    profile_description = Rails.cache.fetch("ProfileDescription_#{big5_dimension}_#{holland6_dimension}", expires_in: 1.hours) do
+      # ProfileDescription.find(desc_id) 
+      ProfileDescription.where('big5_dimension = ? AND holland6_dimension = ?', big5_dimension, holland6_dimension).first
+    end   
 
     raise Workers::PersistenceError, "Profile description cannot be found for #{big5_dimension} and #{holland6_dimension}." if profile_description.nil?
+
+    # Below will raise exception if not found ActiveRecord::NotFound
+    user = User.find(game.user_id)
 
     personality = user.personality # Override existing personality if it exists
     personality = user.create_personality if personality.nil?
@@ -43,6 +47,8 @@ class PersistPersonality
 
     # There is only one result instance if this type per game
     existing_result = Result.find_for_type(game, 'PersonalityResult')
+    return if existing_result
+
     version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
     result = PersonalityResult.create_from_analysis(game, profile_description, version, existing_result)
 

@@ -1,0 +1,7 @@
+{"stage"=>4,  
+"events"=>
+  [
+    {"event"=>"level_started", "time"=>1378420127524}, 
+    {"event"=>"level_completed", "time"=>1378420128352}, 
+    {"data"=>[{"question_id"=>"activity1-7", "topic"=>"activity", "answer"=>6}, {"question_id"=>"sleep1-7", "topic"=>"sleep", "answer"=>6}], "event"=>"level_summary", "time"=>1378420128352}
+  ], "event_type"=>"survey"}

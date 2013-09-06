@@ -11,8 +11,12 @@ class Api::V1::ApiController < ApplicationController
   protected
 
   def caller
-    if doorkeeper_token
-      @caller ||= User.find(doorkeeper_token.resource_owner_id)
+    token = Doorkeeper::OAuth::Token.from_bearer_authorization(request)
+    if token
+      @caller ||= Rails.cache.fetch("caller_#{token}", expires_in: 1.minutes) do
+        # User.find(doorkeeper_token.resource_owner_id)
+        User.joins(:access_token).where("oauth_access_tokens.token" => token).readonly(false).first
+      end       
     else
       @caller = nil
     end

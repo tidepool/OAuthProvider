@@ -16,6 +16,7 @@ OAuthProvider::Application.routes.draw do
   get '/auth/failure', to: 'authentications#failure'
   
   get '/auth/new', to: 'authentications#add_new'  
+  get '/auth/client_redirect', to: 'authentications#client_redirect'
 
   # mount Sidekiq::Web, at: '/sidekiq'
   mount Sidekiq::Web => '/sidekiq', :constraints => AdminConstraint.new

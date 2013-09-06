@@ -1,3 +1,3 @@
-web: bundle exec rails server thin -p $PORT -e $RACK_ENV
-worker: bundle exec sidekiq
+web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+worker: bundle exec sidekiq -C ./config/sidekiq.yml
 clock: bundle exec clockwork clock.rb

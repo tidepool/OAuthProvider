@@ -232,19 +232,19 @@ module TidepoolAnalyze
 
       analysis[:final_results].should_not be_nil
       analysis[:score].should_not be_nil
-      analysis[:score].should == {
-        :dimension => "high_extraversion",
-        :dimension_values => {
-            :openness => 9.999999999999998,
-            :agreeableness => 12.614011786845673,
-            :conscientiousness => 10.475974254355606,
-            :extraversion => 21.154235454105393,
-            :neuroticism => 16.639460681817177 },
-        :low_dimension => :openness,
-        :high_dimension => :extraversion,
-        :adjust_by => 1.629257384610685,
-        :version => "2.0"
+      analysis[:score].should == {:dimension=>"low_openness",
+        :dimension_values=>
+        {:openness=>10.0,
+         :agreeableness=>18.630592721061745,
+         :conscientiousness=>16.2184235050143,
+         :extraversion=>26.17987209013,
+         :neuroticism=>19.808349329584292},
+        :low_dimension=>:openness,
+        :high_dimension=>:extraversion,
+        :adjust_by=>2.10347127698387,
+        :version=>"2.0"
       }
+
     end
 
     it 'executes a big5_with_images recipe' do 

@@ -15,7 +15,10 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def show
-    user = current_resource
+    # user = current_resource
+    user = user_eager_load
+    # user_id = params[:id].nil? || params[:id] == '-' ? caller.id : params[:id]
+    # user = User.eager_load(:personality, :authentications, :aggregate_results).where(id: user_id)
 
     respond_to do |format|
       format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
@@ -35,6 +38,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def personality
+    # TODO: DEPRECATE THIS, USER ALREADY RETURNS PERSONALITY
     user = current_resource
 
     respond_to do |format|
@@ -49,18 +53,13 @@ class Api::V1::UsersController < Api::V1::ApiController
     user = registration_service.register_guest_or_full!(user_attributes)
 
     respond_to do |format|
-      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: user, meta: {}, serializer: UserNewSerializer }.merge(api_defaults)) }
     end
   end
 
   def update
-    user = current_resource
-    # This is an extra authorizations so that registered users can not convert 
-    # themselves to guest users.
-    # if user.guest == false && params[:user][:guest]
-    #   params[:user][:guest] = false
-    #   # raise Api::V1::UnauthorizedError.new('Not Authorized')
-    # end
+    # user = current_resource
+    user = user_eager_load
 
     # TODO: We should be using the ! version here, but
     # looks like it fails even no password is supposed to be set.
@@ -86,6 +85,11 @@ class Api::V1::UsersController < Api::V1::ApiController
   end 
 
   private 
+
+  def user_eager_load
+    user_id = params[:id].nil? || params[:id] == '-' ? caller.id : params[:id]
+    user = User.eager_load(:personality, :authentications, :aggregate_results).where(id: user_id).first
+  end
 
   def current_resource
     # binding.pry

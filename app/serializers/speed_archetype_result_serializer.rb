@@ -40,7 +40,9 @@ class SpeedArchetypeResultSerializer < ActiveModel::Serializer
         # This is only to account for older results, since we changed the descriptions since
         desc_id = 10
       end
-      @reaction_time ||= SpeedArchetypeDescription.find(desc_id)
+      @reaction_time ||= Rails.cache.fetch("SpeedArchetypeDescription_#{desc_id}", expires_in: 1.hours) do
+        SpeedArchetypeDescription.find(desc_id)
+      end
     end
   end
 end

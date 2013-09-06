@@ -1,6 +1,8 @@
+require File.expand_path('../base_analyzer.rb', __FILE__)
+
 module TidepoolAnalyze
   module Analyzer
-    class SurveyAnalyzer
+    class SurveyAnalyzer < BaseAnalyzer
       attr_reader :start_time, :end_time
 
       def initialize(events, formula)
@@ -41,9 +43,9 @@ module TidepoolAnalyze
         events.each do |entry|
           case entry['event']
           when 'level_started'
-            @start_time = entry['time']
+            @start_time = get_time(entry)
           when 'level_completed'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
           when 'level_summary'
             @questions = entry['data']
           end
