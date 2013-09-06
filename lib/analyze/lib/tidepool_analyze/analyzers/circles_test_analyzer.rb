@@ -1,6 +1,6 @@
 module TidepoolAnalyze 
   module Analyzer
-    class CirclesTestAnalyzer
+    class CirclesTestAnalyzer < BaseAnalyzer
       attr_reader :start_time, :end_time, :circles, :radii, :start_coords, :self_circle
 
       # Output Format:
@@ -146,9 +146,9 @@ module TidepoolAnalyze
         events.each do |entry|
           case entry['event']
           when 'level_started'
-            @start_time = entry['time']
+            @start_time = get_time(entry)
           when 'level_summary'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
             @circles = entry['data']
             @self_circle = entry['self_coord']
           end

@@ -182,6 +182,24 @@ describe 'Game API' do
       updated_game.event_log["2"]["event_type"].should == "image_rank"
     end
 
+    it 'updates the event log for a real recorded snoozer events' do 
+      events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/realdata_snoozer.json'))
+      all_events = JSON.parse(events_json)
+
+      token = get_conn(user1)
+      game.user_id.should == user1.id
+      response = token.put("#{@endpoint}/users/#{user1.id}/games/#{game.id}/event_log.json",
+        { body: { event_log: all_events } })
+      result = JSON.parse(response.body, symbolize_names: true)
+      response.status.should == 200
+      result[:status][:state].should == 'event_log_updated'
+
+      updated_game = Game.find(game.id)
+      updated_game.event_log.should_not be_empty
+      updated_game.event_log["0"]["event_type"].should == "snoozer"
+
+    end
+
     it 'updates the event log of a game with an array of stages' do
       events_json = IO.read(Rails.root.join('lib/analyze/spec/fixtures/aggregate_all.json'))
       all_events = JSON.parse(events_json)

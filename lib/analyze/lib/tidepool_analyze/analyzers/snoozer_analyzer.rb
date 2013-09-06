@@ -1,6 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
-    class SnoozerAnalyzer
+    class SnoozerAnalyzer < BaseAnalyzer
       def initialize(events, formula)
         @events = events
         @test_type = 'simple'
@@ -84,16 +84,16 @@ module TidepoolAnalyze
           case entry['event']
           when 'level_started'
             @test_type = entry['sequence_type']
-            @start_time = entry['time']
+            @start_time = get_time(entry)
           when 'level_completed'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
           when 'shown'
             # We are using a Hash instead of an Array
             # We will look for each sequence in the event processing later on
             item_id = entry['item_id']
             if item_id
               @items_shown[item_id] = {
-                :shown_at => entry['time'],
+                :shown_at => get_time(entry),
                 :selection => :none,
                 :type => entry['type'] 
               }
@@ -102,21 +102,21 @@ module TidepoolAnalyze
             item_id = entry['item_id']
             if item_id && @items_shown[item_id]
               @items_shown[item_id][:selection] = :correct
-              @items_shown[item_id][:selected_at] = entry['time']
+              @items_shown[item_id][:selected_at] = get_time(entry)
             end
           when 'incorrect'
             item_id = entry['item_id']
             if item_id
               if @items_shown[item_id]
                 @items_shown[item_id][:selection] = :incorrect
-                @items_shown[item_id][:selected_at] = entry['time']
+                @items_shown[item_id][:selected_at] = get_time(entry)
               else  
                 # This is for tapping on items that are not ringing, 
                 # but simply shown at the beginning of the game.
                 @items_shown[item_id] = {
                   :shown_at => @start_time,
                   :selection => :incorrect,
-                  :selected_at => entry['time']
+                  :selected_at => get_time(entry)
                 }
               end
             end

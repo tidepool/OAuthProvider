@@ -1,6 +1,6 @@
 module TidepoolAnalyze
   module Analyzer
-    class ReactionTimeAnalyzer
+    class ReactionTimeAnalyzer < BaseAnalyzer
       attr_reader :start_time, :end_time, :test_type, :click_targets, :color_sequence 
       attr_accessor :time_threshold
 
@@ -72,7 +72,7 @@ module TidepoolAnalyze
           case entry['event']
           when 'level_started'
             @test_type = entry['sequence_type']
-            @start_time = entry['time']
+            @start_time = get_time(entry)
             if entry['data'] 
               @color_sequence = entry['data'].map do |item|
                 color, time_interval = item.split(':')
@@ -80,7 +80,7 @@ module TidepoolAnalyze
               end 
             end
           when 'level_completed'
-            @end_time = entry['time']
+            @end_time = get_time(entry)
           when 'shown'
             color = entry['color']
 
@@ -89,7 +89,7 @@ module TidepoolAnalyze
             sequence_no = entry['index']
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
-                :shown_at => entry['time'],
+                :shown_at => get_time(entry),
                 :clicked => false,
                 :clicked_at => 0, 
                 :expected => true 
@@ -101,7 +101,7 @@ module TidepoolAnalyze
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
                   :clicked => true,
-                  :clicked_at => entry['time'],
+                  :clicked_at => get_time(entry),
                   :expected => true
                 })
             end
@@ -111,7 +111,7 @@ module TidepoolAnalyze
             if color && sequence_no
               create_click_target_entry(color, sequence_no, {
                 :clicked => true,
-                :clicked_at => entry['time'],
+                :clicked_at => get_time(entry),
                 :expected => false              
                 })
             end

@@ -122,10 +122,56 @@ namespace :loadtests do
     pp :duration => result.duration
     content = JSON.parse result.steps[0].response.content
     pp :response => content
+  end
 
+  task :trigger_results, [:test_type] => :environment do |t, args|
+    test_type = args[:test_type]
+    test = {
+      "steps" => [
+        {
+          "request" => "GET",
+          "headers" => ["Content-Type: application/json",
+            "Authorization: Bearer cbe52a989f38125da0c2df5bc3c13c7bc0dbbe381c3e940c4bcae3997eb638c9"
+            ],
+          "content" => {
+            "data" => []
+            },
+          "url" => "https://tide-dev.herokuapp.com/api/v1/users/-/games/\#{gameid}/results.json"
+        }
+      ],
+      "region" => "california"      
+    }
+    if test_type == "rush"
+      test["steps"][0]["variables"] = {
+        "gameid" => {
+          "type" => "list",
+          "entries" => (3332..3383).to_a
+        }
+      }
+      binding.pry
+      run_rush(test, 10, 50, 60)
+    end
   end
 
   def load_event_fixtures(filename) 
     events_json = IO.read(File.expand_path("../../analyze/spec/fixtures/#{filename}", __FILE__))
+  end
+
+  def run_rush(test, start_users, end_users, duration)
+    test["pattern"] = {
+      "iterations" => 1,
+      "intervals" => [
+        {
+          "iterations" => 1,
+          "start" => start_users,
+          "end" => end_users,
+          "duration" => duration
+        }
+      ]
+    }
+    rush = Blitz::Curl::Rush.new(test)
+    rush.execute do |partial|
+      pp [ partial.region, partial.timeline.last.hits ]
+    end
   end
 end
