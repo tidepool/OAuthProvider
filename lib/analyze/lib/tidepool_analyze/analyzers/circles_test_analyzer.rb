@@ -1,3 +1,5 @@
+require File.expand_path('../base_analyzer.rb', __FILE__)
+
 module TidepoolAnalyze 
   module Analyzer
     class CirclesTestAnalyzer < BaseAnalyzer
