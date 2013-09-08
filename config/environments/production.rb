@@ -72,5 +72,5 @@ OAuthProvider::Application.configure do
   #   * production - set it to true
   config.eager_load = true
 
-  config.cache_store = :dalli_store
+  config.cache_store = ENV['USE_MEM_CACHE'] && ENV['USE_MEM_CACHE'] == 'true' ? :dalli_store : :null_store
 end
