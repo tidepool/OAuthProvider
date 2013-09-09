@@ -29,6 +29,7 @@ class RegistrationService
   end  
 
   def register_guest_or_full!(attributes)
+    attributes[:password_confirmation] = "" if attributes[:password_confirmation].nil? # If nil password confirm validation does not work.
     user = User.new(attributes)
     if user.guest
       user.email = "guest_#{Time.now.to_i}#{rand(99)}@example.com"
