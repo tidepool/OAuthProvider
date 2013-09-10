@@ -20,6 +20,7 @@ describe 'Authentications API' do
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
   let(:authentication) { create(:authentication, user: user2) }
+  let(:personality) { create(:personality, user: user2) }
 
   it 'creates a new user and returns info' do 
     token = get_conn()
@@ -100,6 +101,7 @@ describe 'Authentications API' do
   end
 
   it 'logs in an existing user with external authentication' do
+    personality
     authentication
     user2
     auth_hash = {
@@ -113,6 +115,8 @@ describe 'Authentications API' do
     user_info = result
     user_info[:access_token].should_not be_nil
     user_info[:user][:email].should == user2.email
+    user_info[:user][:personality].should_not be_nil
+    user_info[:user][:personality][:big5_dimension].should == "high_openness"
   end
 
   it 'creates a guest user if the email/password is not provided' do 
