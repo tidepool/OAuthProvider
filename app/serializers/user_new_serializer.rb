@@ -10,4 +10,5 @@ class UserNewSerializer < ActiveModel::Serializer
             :education, :referred_by, :handedness,
             :ios_device_token, :android_device_token, :is_dob_by_age
 
+  has_one :personality
 end
