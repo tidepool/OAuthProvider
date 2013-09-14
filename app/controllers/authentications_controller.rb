@@ -16,7 +16,7 @@ class AuthenticationsController < ApplicationController
     end
     clean_up_session
     if is_connection_request
-      redirect_url = redirect_after_external
+      redirect_url = "/success"
     else
       redirect_url = "#{redirect_after_external}user_id=#{user_id}&provider=#{auth_hash.provider}" 
     end
@@ -26,8 +26,12 @@ class AuthenticationsController < ApplicationController
 
   def failure
     # Omniauth failure
-
-    redirect_url = "#{session[:redirect_after_external]}user_id=-1" 
+    is_connection_request = session[:connection_request]
+    if is_connection_request
+      redirect_url = "/failure"
+    else
+      redirect_url = "#{session[:redirect_after_external]}user_id=-1" 
+    end
     clean_up_session
     redirect_to redirect_url
   end
@@ -39,7 +43,7 @@ class AuthenticationsController < ApplicationController
 
   def add_new
     # We are creating this authentication using the browser redirect method  
-    session[:redirect_after_external] = params[:redirect_uri]
+    # session[:redirect_after_external] = params[:redirect_uri]
     session[:user_id] = params[:user_id]
     session[:connection_request] = true
     authentication_uri = "/auth/#{params[:provider]}"
