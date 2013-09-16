@@ -1,10 +1,6 @@
 class ResultsService
   def initialize(params, user, urls)
-    @limit = params[:limit].to_i
-    @offset = params[:offset].to_i
-    if @limit && @offset && @limit != 0
-      @paginate = true
-    end
+    @params = params
     @is_daily = params[:daily]
     @result_type = params[:type]
     @game_id = params[:game_id]
@@ -55,22 +51,8 @@ class ResultsService
     results = Result.where(user_id: @user.id)
     results = results.where(type: @result_type) if @result_type
     results = results.order('time_played')
-    results = results.limit(@limit) if @paginate
-    results = results.offset(@offset) if @paginate
 
-    api_status = {}
-    if @paginate
-      next_offset = @offset + @limit 
-      prev_offset = @offset - @limit 
-      prev_offset = 0 if prev_offset < 0
-      api_status = Hashie::Mash.new({
-        'offset' => @offset,
-        'limit' => @limit,
-        'next' => "#{@urls[:results]}?offset=#{next_offset}&limit=#{@limit}",
-        'prev' => "#{@urls[:results]}?offset=#{prev_offset}&limit=#{@limit}"
-      })
-    end
-    response = results
+    response, api_status = Result.paginate(results, @params)
     if @is_daily
       daily_results = {}
 
