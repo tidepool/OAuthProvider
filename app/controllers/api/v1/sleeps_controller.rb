@@ -2,14 +2,14 @@ class Api::V1::SleepsController < Api::V1::ApiController
   doorkeeper_for :all
 
   def index
-    provider = params[:provider]
-    if provider
-      sleeps = Sleep.where('user_id = ? and provider = ?', target_user, provider).order(:date_recorded)
-    else
-      sleeps = Sleep.where('user_id = ?', target_user).order(:date_recorded)      
-    end
+    query = Sleep.where(user_id: target_user)
+    query = query.where(provider: params[:provider]) if params[:provider]
+    query = query.order(:date_recorded)
+
+    sleeps, api_status = Sleep.paginate(query, params)
+
     respond_to do |format|
-      format.json { render({ json: sleeps, meta: {} }.merge(api_defaults))  }
+      format.json { render({ json: sleeps, meta: api_status }.merge(api_defaults))  }
     end
   end
 
