@@ -14,6 +14,8 @@
 #
 
 class Sleep < ActiveRecord::Base
+  include Paginate
+  
   belongs_to :user
   serialize :sleep_activity, JSON
   store_accessor :data, :total_minutes_asleep, :total_minutes_in_bed, :efficiency, :minutes_to_fall_asleep,

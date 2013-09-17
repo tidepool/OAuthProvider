@@ -16,6 +16,8 @@
 #
 
 class Activity < ActiveRecord::Base
+  include Paginate
+  
   belongs_to :user
   serialize :daily_breakdown, JSON
 

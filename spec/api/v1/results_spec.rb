@@ -168,8 +168,8 @@ describe 'Results API' do
     status = output[:status]
     status[:offset].should == 2
     status[:limit].should == 4
-    status[:next].should == "http://example.org/api/v1/users/-/results?offset=6&limit=4"
-    status[:prev].should == "http://example.org/api/v1/users/-/results?offset=0&limit=4"
+    status[:next].should == "?offset=6&limit=4"
+    status[:prev].should == "?offset=0&limit=4"
   end
 
   describe 'PersonalityResult' do

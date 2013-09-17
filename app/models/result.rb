@@ -19,6 +19,8 @@
 #
 
 class Result < ActiveRecord::Base
+  include Paginate
+  
   # serialize :event_log, JSON
   serialize :intermediate_results, JSON  # deprecated DONOT use
   serialize :aggregate_results, JSON # deprecated DONOT use
