@@ -150,6 +150,8 @@ class FitbitTracker
       activity.daily_breakdown = daily_breakdown
     end
 
+    ActivityAggregateResult.create_from_latest(activity, @user_id, date)
+    
     activity
   end
 
@@ -186,6 +188,8 @@ class FitbitTracker
       end 
     end
 
+    SleepAggregateResult.create_from_latest(sleep, @user_id, date)
+    
     sleep
   end
 
