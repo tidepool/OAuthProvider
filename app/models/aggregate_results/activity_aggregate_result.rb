@@ -8,11 +8,11 @@ class ActivityAggregateResult < AggregateResult
 
     week_day = date && date.class == Date ? date.wday : 0
     weekly[week_day] = {
-      'most_steps' => activity.steps > weekly[week_day]['most_steps'] ? activity.steps : weekly[week_day]['most_steps'],
-      'least_steps' => activity.steps < weekly[week_day]['least_steps'] ? activity.steps : weekly[week_day]['least_steps'],
-      'total_steps' => activity.steps + weekly[week_day]['total_steps'],
-      'average_steps' => (activity.steps + weekly[week_day]['total_steps']) / (weekly[week_day]['data_points'] + 1),
-      'data_points' => weekly[week_day]['data_points'] + 1
+      'most_steps' => activity.steps.to_i > weekly[week_day]['most_steps'].to_i ? activity.steps.to_i : weekly[week_day]['most_steps'].to_i,
+      'least_steps' => activity.steps.to_i < weekly[week_day]['least_steps'].to_i ? activity.steps.to_i : weekly[week_day]['least_steps'].to_i,
+      'total_steps' => activity.steps.to_i + weekly[week_day]['total_steps'].to_i,
+      'average_steps' => (activity.steps.to_i + weekly[week_day]['total_steps'].to_i) / (weekly[week_day]['data_points'].to_i + 1),
+      'data_points' => weekly[week_day]['data_points'].to_i + 1
     }
 
     result.scores = {
