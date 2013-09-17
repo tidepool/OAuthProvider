@@ -48,7 +48,9 @@ class SpeedAggregateResult < AggregateResult
 
     day = Time.zone.now.wday
     weekly = result.scores["weekly"]
-    weekly = result.initialize_weekly if weekly.nil?
+    if weekly.nil? || weekly.empty?
+      weekly = result.initialize_weekly_for_existing_user(game.user_id) 
+    end
 
     weekly[day] = result.update_weekly(weekly[day], score)
 
@@ -119,6 +121,20 @@ class SpeedAggregateResult < AggregateResult
     weekly
   end
 
+  def initialize_weekly_for_existing_user(user_id)
+    weekly = initialize_weekly
+    previous_results = Result.where(user_id: user_id, type: 'SpeedArchetypeResult').to_a
+    previous_results.each do | result |
+      day = result.time_played.wday
+      score = {
+        speed_score: result.speed_score,
+        fastest_time: result.fastest_time,
+        slowest_time: result.slowest_time
+      }
+      weekly[day] = update_weekly(weekly[day], score)
+    end
+    weekly
+  end
 
   def update_high_scores(score)
     all_time_best = update_all_time_best(score)
@@ -152,13 +168,13 @@ class SpeedAggregateResult < AggregateResult
 
   def update_weekly(weekly, score)   
     speed_score = weekly["speed_score"]
-    speed_score = score[:speed_score] if score[:speed_score] > weekly["speed_score"] 
+    speed_score = score[:speed_score].to_i if score[:speed_score].to_i > weekly["speed_score"].to_i 
 
     fastest_time = weekly["fastest_time"]
-    fastest_time = score[:fastest_time] if score[:fastest_time] < weekly["fastest_time"]
+    fastest_time = score[:fastest_time].to_i if score[:fastest_time].to_i < weekly["fastest_time"].to_i 
 
     slowest_time = weekly["slowest_time"]
-    slowest_time = score[:slowest_time] if score[:slowest_time] > weekly["slowest_time"]
+    slowest_time = score[:slowest_time].to_i if score[:slowest_time].to_i > weekly["slowest_time"].to_i 
 
     data_points = weekly["data_points"]
     data_points += 1 

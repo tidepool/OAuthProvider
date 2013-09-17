@@ -7,6 +7,7 @@ describe PersistSpeedArchetype do
   let(:aggregate_result) { create(:aggregate_result, user: user) }
   let(:game2) { create(:game, user: user) }
   let(:speed_archetype_result) { create(:speed_archetype_result, game: game2)}
+  let(:prior_speed_archetypes) { create_list(:prior_speed_archetypes, 10, game: game2, user:user)}
 
   before(:each) do 
     @analysis_results = {
@@ -101,7 +102,7 @@ describe PersistSpeedArchetype do
     }    
   end
 
-  it 'persists the speed_archetype aggregate result with the correct weekly results' do
+  it 'persists the speed_aggregate_result with the correct weekly results' do
     user
     circadian = aggregate_result.scores["circadian"]
     weekly = []
@@ -139,7 +140,7 @@ describe PersistSpeedArchetype do
           "weekly" => weekly }
     aggregate_result.save
         
-    persist_rt = PersistSpeedArchetype.new    
+    persist_rt = PersistSpeedArchetype.new  
     persist_rt.persist(game, @analysis_results)
 
     result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
@@ -150,6 +151,24 @@ describe PersistSpeedArchetype do
       "slowest_time" => 905,
       "data_points" => 2
     }        
+  end
+
+  it 'persists the speed_aggregate_result for users who already have played snoozer games' do 
+    # This is for the TidePool launch users.
+    # They will have:
+    # * multiple SpeedArchetypeResults
+    # * one SpeedAggregateResult but no weekly in it.
+
+    user
+    prior_speed_archetypes
+    aggregate_result
+
+    persist_rt = PersistSpeedArchetype.new    
+    persist_rt.persist(game2, @analysis_results)
+
+    result = AggregateResult.find_for_type(game2.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'].should_not be_nil
   end
 
   it 'persists updates the high_scores' do 
