@@ -10,8 +10,8 @@ describe SleepAggregateResult do
     result.scores['weekly'][Date.current.wday].should == {
                "most_minutes" => 365,
               "least_minutes" => 365,
-              "total_minutes" => 365,
-            "average_minutes" => 365,
+              "total" => 365,
+            "average" => 365,
                 "data_points" => 1
         }
 
@@ -19,8 +19,8 @@ describe SleepAggregateResult do
     result.scores['weekly'][Date.current.wday].should == {
                "most_minutes" => 365,
               "least_minutes" => 365,
-              "total_minutes" => 365,
-            "average_minutes" => 365,
+              "total" => 365,
+            "average" => 365,
                 "data_points" => 1
         }
   end

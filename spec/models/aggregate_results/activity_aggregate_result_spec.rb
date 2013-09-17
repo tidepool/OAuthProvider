@@ -12,8 +12,8 @@ describe ActivityAggregateResult do
     result.scores['weekly'][Date.current.wday].should == {
                    "most_steps" => 2000,
                   "least_steps" => 2000,
-                  "total_steps" => 2000,
-                "average_steps" => 2000,
+                  "total" => 2000,
+                "average" => 2000,
                   "data_points" => 1
               }
   end
@@ -25,8 +25,8 @@ describe ActivityAggregateResult do
     result.scores['weekly'][Date.current.wday].should == {
                "most_steps" => 8000,
               "least_steps" => 2000,
-              "total_steps" => 10000,
-            "average_steps" => 5000,
+              "total" => 10000,
+            "average" => 5000,
               "data_points" => 2
         }    
 
@@ -34,8 +34,8 @@ describe ActivityAggregateResult do
     result.scores['weekly'][Date.current.wday].should == {
                "most_steps" => 8000,
               "least_steps" => 2000,
-              "total_steps" => 10000,
-            "average_steps" => 5000,
+              "total" => 10000,
+            "average" => 5000,
               "data_points" => 2
         }    
   end
