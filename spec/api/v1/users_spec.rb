@@ -285,6 +285,15 @@ describe 'Users API' do
       result[:status][:code].should == 1002                       
     end
 
+    it 'doesnot create a user with password less than 8 characters' do
+      token = get_conn()
+      user_params = { email: 'test_user@example.com', password: '1234567', password_confirmation: '1234567' }
+      response = token.post("#{@endpoint}/users.json", { user: user_params } )
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1002                       
+    end
+
     it 'doesnot delete another user than the caller' do
       token = get_conn(user1)
       user_id = user1.id
