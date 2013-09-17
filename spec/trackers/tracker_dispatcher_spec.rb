@@ -39,5 +39,15 @@ describe TrackerDispatcher do
     updated_connection = Authentication.find(connection.id)
 
     updated_connection.sync_status.should == "synchronized"
+
+    result = ActivityAggregateResult.where(user_id: user.id).first
+    result.should_not be_nil
+    result.scores['weekly'][Date.current.wday].should == {
+                         "most_steps" => 9663,
+                        "least_steps" => 9663,
+                        "total_steps" => 9663,
+                      "average_steps" => 9663,
+                        "data_points" => 1
+    }
   end
 end

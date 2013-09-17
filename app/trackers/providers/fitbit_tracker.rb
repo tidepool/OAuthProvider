@@ -5,6 +5,10 @@ class FitbitTracker
     @client = client
   end
 
+  def logger
+    Rails.logger
+  end
+
   def synchronize(sync_list = nil)
     return if @connection.nil? || @connection.provider != 'fitbit'
     sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
@@ -24,7 +28,7 @@ class FitbitTracker
             sync_item.user_id = @user_id
             sync_item.date_recorded = date
             sync_item.save!
-
+            logger.info("#{item} synchronized successfully for #{@user_id}.")
             last_sync_dates[item.to_s] = date.to_s
           end
         end 
