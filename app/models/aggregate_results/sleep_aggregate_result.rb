@@ -10,8 +10,8 @@ class SleepAggregateResult < AggregateResult
     weekly[week_day] = {
       'most_minutes' => sleep.total_minutes_asleep.to_i > weekly[week_day]['most_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['most_minutes'].to_i,
       'least_minutes' => sleep.total_minutes_asleep.to_i < weekly[week_day]['least_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['least_minutes'].to_i,
-      'total_minutes' => sleep.total_minutes_asleep.to_i + weekly[week_day]['total_minutes'].to_i,
-      'average_minutes' => (sleep.total_minutes_asleep.to_i + weekly[week_day]['total_minutes']).to_i / (weekly[week_day]['data_points'].to_i + 1),
+      'total' => sleep.total_minutes_asleep.to_i + weekly[week_day]['total'].to_i,
+      'average' => (sleep.total_minutes_asleep.to_i + weekly[week_day]['total']).to_i / (weekly[week_day]['data_points'].to_i + 1),
       'data_points' => weekly[week_day]['data_points'].to_i + 1
     }
 
@@ -27,8 +27,8 @@ class SleepAggregateResult < AggregateResult
       weekly << {
         'most_minutes' => 0,
         'least_minutes' => 1000000,
-        'total_minutes' => 0,
-        'average_minutes' => 0,
+        'total' => 0,
+        'average' => 0,
         'data_points' => 0
       }
     end

@@ -128,8 +128,8 @@ describe FitbitTracker do
       result.scores['weekly'][Date.current.wday].should == {
                            "most_steps" => 9663,
                           "least_steps" => 9663,
-                          "total_steps" => 9663,
-                        "average_steps" => 9663,
+                          "total" => 9663,
+                        "average" => 9663,
                           "data_points" => 1
       }
     end

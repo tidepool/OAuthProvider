@@ -90,6 +90,66 @@ describe PersistSpeedArchetype do
     "average_time_complex" => "718",
           "description_id" => "3"
     }
+
+    result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'][Time.zone.now.wday].should == {
+      "speed_score" => 800,
+      "fastest_time" => 400,
+      "slowest_time" => 905,
+       "data_points" => 1
+    }    
+  end
+
+  it 'persists the speed_archetype aggregate result with the correct weekly results' do
+    user
+    circadian = aggregate_result.scores["circadian"]
+    weekly = []
+    (0..6).each do |i|
+      if i == Time.zone.now.wday 
+        weekly << {
+         'speed_score' => 1200,
+         'fastest_time' => 300,
+         'slowest_time' => 800,
+         'data_points' => 1         
+        }
+      else
+        weekly << {
+          'speed_score' => 0,
+          'fastest_time' => 1000000,
+          'slowest_time' => 0,
+          'data_points' => 0
+        }
+      end
+    end
+    aggregate_result.scores = {
+          "simple" => {
+                     "sums" => 3230.0,
+            "total_results" => 4,
+                     "mean" => 450.0,
+                       "sd" => 2.0
+          },
+          "complex" => {
+                     "sums" => 3000.0,
+            "total_results" => 4,
+                     "mean" => 530.0,
+                       "sd" => 1.3
+          },
+          "circadian" => circadian,
+          "weekly" => weekly }
+    aggregate_result.save
+        
+    persist_rt = PersistSpeedArchetype.new    
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'][Time.zone.now.wday].should == {
+      "speed_score" => 1200,
+      "fastest_time" => 300,
+      "slowest_time" => 905,
+      "data_points" => 2
+    }        
   end
 
   it 'persists updates the high_scores' do 
@@ -104,8 +164,7 @@ describe PersistSpeedArchetype do
     result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
     result.high_scores.should_not be_nil
     result.all_time_best.should == 2400
-    result.daily_best.should == 1800
-    
+    result.daily_best.should == 1800    
   end
 
   it 'returns fast if the the game already has the personality persisted' do 

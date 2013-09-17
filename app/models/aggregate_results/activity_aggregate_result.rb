@@ -10,8 +10,8 @@ class ActivityAggregateResult < AggregateResult
     weekly[week_day] = {
       'most_steps' => activity.steps.to_i > weekly[week_day]['most_steps'].to_i ? activity.steps.to_i : weekly[week_day]['most_steps'].to_i,
       'least_steps' => activity.steps.to_i < weekly[week_day]['least_steps'].to_i ? activity.steps.to_i : weekly[week_day]['least_steps'].to_i,
-      'total_steps' => activity.steps.to_i + weekly[week_day]['total_steps'].to_i,
-      'average_steps' => (activity.steps.to_i + weekly[week_day]['total_steps'].to_i) / (weekly[week_day]['data_points'].to_i + 1),
+      'total' => activity.steps.to_i + weekly[week_day]['total'].to_i,
+      'average' => (activity.steps.to_i + weekly[week_day]['total'].to_i) / (weekly[week_day]['data_points'].to_i + 1),
       'data_points' => weekly[week_day]['data_points'].to_i + 1
     }
 
@@ -27,8 +27,8 @@ class ActivityAggregateResult < AggregateResult
       weekly << {
         'most_steps' => 0,
         'least_steps' => 1000000,
-        'total_steps' => 0,
-        'average_steps' => 0,
+        'total' => 0,
+        'average' => 0,
         'data_points' => 0
       }
     end

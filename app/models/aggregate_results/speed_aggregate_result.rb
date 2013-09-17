@@ -33,6 +33,7 @@ class SpeedAggregateResult < AggregateResult
       result.initialize_scores
       result.initialize_high_scores
     end
+
     if result.high_scores.nil?
       result.initialize_high_scores
     end
@@ -45,27 +46,25 @@ class SpeedAggregateResult < AggregateResult
     circadian = result.scores["circadian"]
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
+    day = Time.zone.now.wday
+    weekly = result.scores["weekly"]
+    weekly = result.initialize_weekly if weekly.nil?
+
+    weekly[day] = result.update_weekly(weekly[day], score)
+
     result.high_scores = result.update_high_scores(score)
     result.scores = {
       "simple" => new_simple,
       "complex" => new_complex,
-      "circadian" => circadian
+      "circadian" => circadian,
+      "weekly" => weekly
     }
     result.save ? result : nil
   end
 
   def initialize_scores
-    circadian = {}
-    (0...24).each do |hour|
-      circadian[hour.to_s] = {
-        "speed_score" => 0,
-        "fastest_time" => 100000,
-        "slowest_time" => 0,
-        "average_time_simple" => 100000,
-        "average_time_complex" => 100000,
-        "times_played" => 0        
-      }
-    end
+    circadian = initialize_circadian
+    weekly = initialize_weekly
     self.scores = {
       "simple" => {
         "sums" => 0.0,
@@ -79,7 +78,8 @@ class SpeedAggregateResult < AggregateResult
         "mean" => 0.0,
         "sd" => 0.0
       },
-      "circadian" => circadian
+      "circadian" => circadian,
+      "weekly" => weekly
     }
   end
 
@@ -90,6 +90,35 @@ class SpeedAggregateResult < AggregateResult
       "current_day" => Time.zone.now.to_s
     }
   end
+
+  def initialize_circadian
+    circadian = {}
+    (0...24).each do |hour|
+      circadian[hour.to_s] = {
+        "speed_score" => 0,
+        "fastest_time" => 100000,
+        "slowest_time" => 0,
+        "average_time_simple" => 100000,
+        "average_time_complex" => 100000,
+        "times_played" => 0        
+      }
+    end
+    circadian
+  end
+
+  def initialize_weekly
+    weekly = []
+    (0..6).each do |i|
+      weekly << {
+        'speed_score' => 0,
+        'fastest_time' => 1000000,
+        'slowest_time' => 0,
+        'data_points' => 0
+      }
+    end
+    weekly
+  end
+
 
   def update_high_scores(score)
     all_time_best = update_all_time_best(score)
@@ -119,6 +148,28 @@ class SpeedAggregateResult < AggregateResult
       best_score = score[:speed_score] if best_score.nil? || score[:speed_score] > best_score
     end
     best_score
+  end
+
+  def update_weekly(weekly, score)   
+    speed_score = weekly["speed_score"]
+    speed_score = score[:speed_score] if score[:speed_score] > weekly["speed_score"] 
+
+    fastest_time = weekly["fastest_time"]
+    fastest_time = score[:fastest_time] if score[:fastest_time] < weekly["fastest_time"]
+
+    slowest_time = weekly["slowest_time"]
+    slowest_time = score[:slowest_time] if score[:slowest_time] > weekly["slowest_time"]
+
+    data_points = weekly["data_points"]
+    data_points += 1 
+
+    {
+      "speed_score" => speed_score,
+      "fastest_time" => fastest_time,
+      "slowest_time" => slowest_time,
+      "data_points" => data_points
+    }
+
   end
 
   def update_circadian(score, hour)
