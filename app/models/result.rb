@@ -40,9 +40,10 @@ class Result < ActiveRecord::Base
     result = Result.where('game_id = ? and type = ?', game.id, result_type).first
   end  
 
-  def record_times(game)
+  def record_times(game, timezone_offset)
     self.time_played = game.date_taken
     self.time_calculated = Time.zone.now
+    self.timezone_offset = timezone_offset.to_i
   end
 
 end

@@ -129,11 +129,22 @@ describe 'Authentications API' do
     user_info[:user][:guest].should == true
   end
 
-  it 'fails to create a new user is password is not confirmed' do 
+  it 'fails to create a new user if password is not confirmed' do 
     token = get_conn()
     @payload["email"] = "test_user@test.co"
     @payload["password"] = "12345678"
     @payload["password_confirmation"] = "12345621"
+    response = token.post("#{@endpoint}", @payload)
+    result = JSON.parse(response.body, symbolize_names: true)
+    result[:error].should == "invalid_resource_owner"
+    result[:access_token].should be_nil
+  end
+
+  it 'fails to create a new user if password has less than 8 characters' do 
+    token = get_conn()
+    @payload["email"] = "test_user@test.co"
+    @payload["password"] = "1234567"
+    @payload["password_confirmation"] = "1234567"
     response = token.post("#{@endpoint}", @payload)
     result = JSON.parse(response.body, symbolize_names: true)
     result[:error].should == "invalid_resource_owner"

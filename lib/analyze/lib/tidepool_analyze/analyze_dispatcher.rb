@@ -21,6 +21,13 @@ module TidepoolAnalyze
     #   ...
     # }
     def analyze(user_events, recipe_names)
+      # http://www.w3schools.com/jsref/jsref_gettimezoneoffset.asp
+      # We expect the Javascript client to convert timezone_offset to seconds and multiply by -1
+
+      # The default here is set so that if it is not given by the client, we have a 
+      # obviously incorrect value 
+      @timezone_offset = 999999
+
       recipe_names_whitelist = { 
         big5: 'big5',
         big5_circles: 'big5_circles',
@@ -42,6 +49,7 @@ module TidepoolAnalyze
           recipe = read_recipe recipe_name
           result = execute_recipe recipe, mini_game_events
           analysis[result[:score_name].to_sym] = result
+          analysis[result[:score_name].to_sym][:timezone_offset] = @timezone_offset
         end
       end
       analysis
@@ -55,6 +63,10 @@ module TidepoolAnalyze
       user_events.each do |user_event|
         mini_game = user_event['event_type']
         stage = user_event['stage']
+
+        timezone_offset = user_event['timezone_offset']        
+        @timezone_offset = timezone_offset.nil? ? @timezone_offset : timezone_offset
+
         mini_game_events[mini_game] = {} unless mini_game_events.has_key?(mini_game)
         mini_game_events[mini_game][stage] = [] unless mini_game_events[mini_game].has_key?(stage)
         mini_game_events[mini_game][stage].concat(user_event['events'])

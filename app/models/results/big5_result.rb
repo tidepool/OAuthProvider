@@ -41,7 +41,7 @@ class Big5Result < Result
       final_results: analysis_results[:big5][:final_results]
     }
     result.analysis_version = score[:version]
-    result.record_times(game)
+    result.record_times(game, analysis_results[:big5][:timezone_offset])
     result.save ? result : nil
   end  
 end

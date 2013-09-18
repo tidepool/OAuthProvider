@@ -87,7 +87,7 @@ class EmoResult < Result
       final_results: analysis_results[:emo][:final_results]
     }
     result.analysis_version = score[:version]
-    result.record_times(game)
+    result.record_times(game, analysis_results[:emo][:timezone_offset])
     result.save ? result : nil
   end
 end

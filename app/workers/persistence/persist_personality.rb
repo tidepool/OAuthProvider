@@ -50,7 +50,7 @@ class PersistPersonality
     return if existing_result
 
     version = big5_score[:version] # We pick one of big5 vs. holland6 for the version here
-    result = PersonalityResult.create_from_analysis(game, profile_description, version, existing_result)
+    result = PersonalityResult.create_from_analysis(game, profile_description, analysis_results[:big5][:timezone_offset], version, existing_result)
 
     raise Workers::PersistenceError, 'Personality result for game #{game.id} can not be persisted.' if result.nil?
   end
