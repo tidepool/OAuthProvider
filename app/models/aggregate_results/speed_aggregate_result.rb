@@ -1,4 +1,6 @@
 class SpeedAggregateResult < AggregateResult
+  include TimeZoneCalculations
+
   store_accessor :high_scores, :all_time_best
   store_accessor :high_scores, :daily_best
   store_accessor :high_scores, :current_day
@@ -42,11 +44,12 @@ class SpeedAggregateResult < AggregateResult
     new_simple = result.update_mean_and_sd("simple", score[:average_time_simple])
     new_complex = result.update_mean_and_sd("complex", score[:average_time_complex])
 
-    hour = Time.zone.now.hour
+    timezone_offset = analysis_results[:reaction_time2][:timezone_offset].to_i
+    hour = result.time_from_offset(Time.zone.now, timezone_offset).hour
     circadian = result.scores["circadian"]
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
-    day = Time.zone.now.wday
+    day = result.time_from_offset(Time.zone.now, timezone_offset).wday
     weekly = result.scores["weekly"]
     if weekly.nil? || weekly.empty?
       weekly = result.initialize_weekly_for_existing_user(game.user_id) 
@@ -54,7 +57,7 @@ class SpeedAggregateResult < AggregateResult
 
     weekly[day] = result.update_weekly(weekly[day], score)
 
-    result.high_scores = result.update_high_scores(score)
+    result.high_scores = result.update_high_scores(score, timezone_offset)
     result.scores = {
       "simple" => new_simple,
       "complex" => new_complex,
@@ -136,10 +139,10 @@ class SpeedAggregateResult < AggregateResult
     weekly
   end
 
-  def update_high_scores(score)
+  def update_high_scores(score, timezone_offset)
     all_time_best = update_all_time_best(score)
-    today = Time.zone.now    
-    daily_best = update_daily_best(score, today)
+    today = time_from_offset(Time.zone.now, timezone_offset) 
+    daily_best = update_daily_best(score, today, timezone_offset)
     
     {
       all_time_best: all_time_best,
@@ -154,8 +157,9 @@ class SpeedAggregateResult < AggregateResult
     best_score
   end
 
-  def update_daily_best(score, day)
-    stored_year_day = Time.zone.parse(self.high_scores[:current_day]).yday
+  def update_daily_best(score, day, timezone_offset)
+    # stored_year_day = Time.zone.parse(self.high_scores[:current_day]).yday
+    stored_year_day = time_from_offset(Time.zone.parse(self.high_scores[:current_day]), timezone_offset).yday
     year_day = day.yday
 
     best_score = score[:speed_score]

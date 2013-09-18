@@ -354,6 +354,7 @@ module TidepoolAnalyze
       analysis.should == {
         :holland6=>
           {:score_name=>"holland6",
+           :timezone_offset=>999999,
            :final_results=>
             [{:realistic=>4,
               :artistic=>0,
@@ -384,6 +385,7 @@ module TidepoolAnalyze
       analysis[:reaction_time].should_not be_nil
       analysis[:reaction_time][:score].should_not be_nil
       analysis[:reaction_time][:final_results].should_not be_nil 
+      analysis[:reaction_time][:timezone_offset].should == 999999
       analysis[:reaction_time][:score][:version].should == '2.0'
       score = analysis[:reaction_time][:score]
       final_results = analysis[:reaction_time][:final_results]
@@ -467,6 +469,7 @@ module TidepoolAnalyze
       analysis.should == {
         :survey=>
           { :score_name=>"survey",
+            :timezone_offset=>7200,
             :final_results=>[{:activity=>5, :sleep=>3}],
             :score=>{:activity=>5, :sleep=>3, :version=>"2.0"}
           }

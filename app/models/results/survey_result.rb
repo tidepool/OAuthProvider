@@ -42,7 +42,7 @@ class SurveyResult < Result
     result.score = survey_results
     result.calculations = survey_score 
     result.analysis_version = survey_score[:version]
-    result.record_times(game)
+    result.record_times(game, analysis_results[:survey][:timezone_offset])
     result.save ? result : nil
   end
 end

@@ -12,6 +12,7 @@ describe PersistSpeedArchetype do
   before(:each) do 
     @analysis_results = {
       reaction_time2: {
+        timezone_offset: 8.hours,
         score: {
           :average_time=>529,
           :average_time_simple=>340,
@@ -54,6 +55,7 @@ describe PersistSpeedArchetype do
       "slowest_time"=>"905",
       "description_id" => "10"
     }
+    result.timezone_offset.should == 8.hours
     result.analysis_version.should == '2.0'
   end
 
@@ -94,7 +96,7 @@ describe PersistSpeedArchetype do
 
     result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
     result.should_not be_nil
-    result.scores['weekly'][Time.zone.now.wday].should == {
+    result.scores['weekly'][Time.zone.now.in_time_zone(8).wday].should == {
       "speed_score" => 800,
       "fastest_time" => 400,
       "slowest_time" => 905,
@@ -105,9 +107,10 @@ describe PersistSpeedArchetype do
   it 'persists the speed_aggregate_result with the correct weekly results' do
     user
     circadian = aggregate_result.scores["circadian"]
+    wday = Time.zone.now.in_time_zone(8).wday
     weekly = []
     (0..6).each do |i|
-      if i == Time.zone.now.wday 
+      if i == wday 
         weekly << {
          'speed_score' => 1200,
          'fastest_time' => 300,
@@ -145,7 +148,7 @@ describe PersistSpeedArchetype do
 
     result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
     result.should_not be_nil
-    result.scores['weekly'][Time.zone.now.wday].should == {
+    result.scores['weekly'][wday].should == {
       "speed_score" => 1200,
       "fastest_time" => 300,
       "slowest_time" => 905,
