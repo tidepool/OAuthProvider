@@ -19,7 +19,6 @@ class AggregateResult < ActiveRecord::Base
     last_value = self.scores['last_value'].to_i if self.scores
 
     if date == last_updated
-      new_value = last_value
       trend = 0
       trend = self.scores['trend'].to_f if self.scores
     else

@@ -81,5 +81,17 @@ describe ActivityAggregateResult do
       result2.scores['last_value'].should == activity2.steps
       result2.scores['last_updated'].should == today.to_s
     end
+
+    it 'does not update the trend if the activity is already updated for that day' do 
+      today = Date.current
+      result = ActivityAggregateResult.where(user_id: user.id).first
+      result.should be_nil
+      result1 = ActivityAggregateResult.create_from_latest(activity1, user.id, today - 1.days)
+      result2 = ActivityAggregateResult.create_from_latest(activity2, user.id, today)
+      result3 = ActivityAggregateResult.create_from_latest(activity1, user.id, today)
+      result3.scores['trend'].should == (activity2.steps.to_f - activity1.steps.to_f) / activity1.steps.to_f
+      result3.scores['last_value'].should == activity1.steps
+      result3.scores['last_updated'].should == today.to_s
+    end
   end
 end
