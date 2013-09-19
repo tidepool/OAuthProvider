@@ -1,6 +1,7 @@
 class FitbitRegistration < BaseRegistration
   def populate(auth_hash)
     return if auth_hash.nil? || auth_hash.info.nil?
+    # Rails.logger.info("Connected to Fitbit: #{auth_hash.info}\n #{auth_hash.extra.raw_info.user}")
     set_if_empty(:name, auth_hash.info.full_name)
     set_if_empty(:display_name, auth_hash.info.display_name)
 
@@ -14,6 +15,8 @@ class FitbitRegistration < BaseRegistration
 
     if auth_hash.extra && auth_hash.extra.raw_info && auth_hash.extra.raw_info.user
       set_if_empty(:image, auth_hash.extra.raw_info.user.avatar)
+      @authentication.timezone = auth_hash.extra.raw_info.user.timezone
+      @authentication.timezone_offset = auth_hash.extra.raw_info.user.offsetFromUTCMillis.to_i / 1000
     end
   end
 end

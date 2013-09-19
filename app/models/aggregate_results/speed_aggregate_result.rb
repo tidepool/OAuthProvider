@@ -36,33 +36,49 @@ class SpeedAggregateResult < AggregateResult
       result.initialize_high_scores
     end
 
-    if result.high_scores.nil?
-      result.initialize_high_scores
-    end
-
+    result.initialize_high_scores if result.high_scores.nil?
+ 
     score = analysis_results[:reaction_time2][:score]
     new_simple = result.update_mean_and_sd("simple", score[:average_time_simple])
     new_complex = result.update_mean_and_sd("complex", score[:average_time_complex])
 
     timezone_offset = analysis_results[:reaction_time2][:timezone_offset].to_i
+
+    # Update the circadian results
     hour = result.time_from_offset(Time.zone.now, timezone_offset).hour
     circadian = result.scores["circadian"]
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
+    # Update the weekly results
     day = result.time_from_offset(Time.zone.now, timezone_offset).wday
     weekly = result.scores["weekly"]
     if weekly.nil? || weekly.empty?
+      # This is for existing users prior to the introduction of this feature.
       weekly = result.initialize_weekly_for_existing_user(game.user_id) 
     end
-
     weekly[day] = result.update_weekly(weekly[day], score)
+
+    # Update the trend and last_speed_score
+    last_speed_score = result.scores["last_value"].to_i
+    if result.scores["last_value"].nil?
+      # This is for existing users prior to the introduction of this feature.
+      last_speed_score = result.find_last_speed_score(game.user_id)
+    end
+    new_speed_score = score[:speed_score].to_i
+    if last_speed_score == 0 
+      trend = 999.99
+    else
+      trend = (new_speed_score - last_speed_score).to_f / last_speed_score.to_f
+    end
 
     result.high_scores = result.update_high_scores(score, timezone_offset)
     result.scores = {
       "simple" => new_simple,
       "complex" => new_complex,
       "circadian" => circadian,
-      "weekly" => weekly
+      "weekly" => weekly,
+      "trend" => trend,
+      "last_value" => new_speed_score      
     }
     result.save ? result : nil
   end
@@ -84,7 +100,9 @@ class SpeedAggregateResult < AggregateResult
         "sd" => 0.0
       },
       "circadian" => circadian,
-      "weekly" => weekly
+      "weekly" => weekly,
+      "trend" => 0.0,
+      "last_speed_score" => 0
     }
   end
 
@@ -139,6 +157,15 @@ class SpeedAggregateResult < AggregateResult
     weekly
   end
 
+  def find_last_speed_score(user_id)
+    last_result = Result.where(user_id: user_id, type: 'SpeedArchetypeResult').order('time_played').last
+    speed_score = 0
+    if last_result
+      speed_score = last_result.speed_score.to_i
+    end
+    speed_score
+  end
+
   def update_high_scores(score, timezone_offset)
     all_time_best = update_all_time_best(score)
     today = time_from_offset(Time.zone.now, timezone_offset) 
@@ -158,7 +185,6 @@ class SpeedAggregateResult < AggregateResult
   end
 
   def update_daily_best(score, day, timezone_offset)
-    # stored_year_day = Time.zone.parse(self.high_scores[:current_day]).yday
     stored_year_day = time_from_offset(Time.zone.parse(self.high_scores[:current_day]), timezone_offset).yday
     year_day = day.yday
 
