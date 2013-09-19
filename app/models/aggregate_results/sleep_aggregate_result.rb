@@ -1,6 +1,5 @@
 class SleepAggregateResult < AggregateResult
   def self.create_from_latest(sleep, user_id, date)
-
     result = SleepAggregateResult.where(user_id: user_id).first_or_initialize
 
     weekly = result.scores['weekly'] if result.scores
@@ -15,8 +14,13 @@ class SleepAggregateResult < AggregateResult
       'data_points' => weekly[week_day]['data_points'].to_i + 1
     }
 
+    trend, new_sleep_minutes, last_updated = result.calculate_trend(date, sleep.total_minutes_asleep)
+
     result.scores = {
-      'weekly' => weekly
+      'weekly' => weekly, 
+      'trend' => trend,
+      'last_value' => new_sleep_minutes,
+      'last_updated' => last_updated.to_s
     }
     result.save ? result : nil
   end

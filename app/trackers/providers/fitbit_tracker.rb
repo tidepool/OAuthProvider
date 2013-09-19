@@ -1,4 +1,6 @@
 class FitbitTracker
+  include TimeZoneCalculations
+
   def initialize(connection, client = nil)
     @user_id = connection.user_id if connection
     @connection = connection
@@ -13,13 +15,15 @@ class FitbitTracker
     return if @connection.nil? || @connection.provider != 'fitbit'
     sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
     last_sync_dates = {}
+ 
+    today = Date.parse(time_from_offset(Time.zone.now, @connection.timezone_offset).to_s)
 
     @client = Fitgem::Client.new(client_config) if @client.nil?
     if @client
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
         number_of_days.times do | day |
-          date = Date.current - (number_of_days - day - 1).days        
+          date = today - (number_of_days - day - 1).days        
           method_name = "persist_#{item}".to_sym
           sync_item = self.method(method_name).call(date) if self.method(method_name)
 
@@ -64,7 +68,8 @@ class FitbitTracker
     last_synchronized = @connection.last_synchronized[type_of_data.to_s]
     if last_synchronized
       last_synchronized = Time.parse(last_synchronized)
-      number_of_days = ((Time.zone.now - last_synchronized) / 1.day).ceil
+      today = time_from_offset(Time.zone.now, @connection.timezone_offset)
+      number_of_days = ((today - last_synchronized) / 1.day).ceil
     end
     number_of_days
   end
