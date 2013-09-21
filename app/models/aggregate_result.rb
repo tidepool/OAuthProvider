@@ -18,6 +18,11 @@ class AggregateResult < ActiveRecord::Base
     last_value = 0
     last_value = self.scores['last_value'].to_i if self.scores
 
+    # The results (activities/sleeps) can come in multiple times during a day 
+    # For activities we need to take the last activity update for the day to find 
+    # the trend from the previous day.
+    # Or 
+
     if date == last_updated
       trend = 0
       trend = self.scores['trend'].to_f if self.scores

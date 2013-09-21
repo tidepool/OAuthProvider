@@ -5,9 +5,10 @@ describe SleepAggregateResult do
   let(:sleep) { create(:sleep, user: user)}
 
   it 'creates a sleep aggretage result from sleep data' do 
-    result = SleepAggregateResult.create_from_latest(sleep, user.id, Date.current)
+    today = Date.current
+    result = SleepAggregateResult.create_from_latest(sleep, user.id, today)
     result.should_not be_nil
-    result.scores['weekly'][Date.current.wday].should == {
+    result.scores['weekly'][today.wday].should == {
                "most_minutes" => 365,
               "least_minutes" => 365,
               "total" => 365,
@@ -16,13 +17,16 @@ describe SleepAggregateResult do
         }
 
     result = SleepAggregateResult.where(user_id: user.id).first
-    result.scores['weekly'][Date.current.wday].should == {
+    result.scores['weekly'][today.wday].should == {
                "most_minutes" => 365,
               "least_minutes" => 365,
               "total" => 365,
             "average" => 365,
                 "data_points" => 1
         }
+    result.scores['trend'].should == 999.99 # Our value to indicate no change
+    result.scores['last_value'].should == sleep.total_minutes_asleep
+    result.scores['last_updated'].should == today.to_s
   end
 
 end

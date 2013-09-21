@@ -100,6 +100,7 @@ describe PersistSpeedArchetype do
       "speed_score" => 800,
       "fastest_time" => 400,
       "slowest_time" => 905,
+      "average_speed_score" => 800,
        "data_points" => 1
     }    
   end
@@ -152,6 +153,7 @@ describe PersistSpeedArchetype do
       "speed_score" => 1200,
       "fastest_time" => 300,
       "slowest_time" => 905,
+      "average_speed_score" => 800,
       "data_points" => 2
     }        
   end
