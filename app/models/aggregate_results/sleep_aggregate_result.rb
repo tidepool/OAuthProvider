@@ -5,7 +5,8 @@ class SleepAggregateResult < AggregateResult
     weekly = result.scores['weekly'] if result.scores
     weekly = result.initialize_weekly if weekly.nil?
 
-    week_day = date && date.class == Date ? date.wday : 0
+    week_day = date ? date.wday : 0
+
     weekly[week_day] = {
       'most_minutes' => sleep.total_minutes_asleep.to_i > weekly[week_day]['most_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['most_minutes'].to_i,
       'least_minutes' => sleep.total_minutes_asleep.to_i < weekly[week_day]['least_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['least_minutes'].to_i,
@@ -14,13 +15,13 @@ class SleepAggregateResult < AggregateResult
       'data_points' => weekly[week_day]['data_points'].to_i + 1
     }
 
-    trend, new_sleep_minutes, last_updated = result.calculate_trend(date, sleep.total_minutes_asleep)
+    trend = result.calculate_trend(sleep.total_minutes_asleep.to_f, weekly[week_day]['average'])
 
     result.scores = {
       'weekly' => weekly, 
       'trend' => trend,
-      'last_value' => new_sleep_minutes,
-      'last_updated' => last_updated.to_s
+      'last_updated' => date.to_s,
+      'last_value' => sleep.total_minutes_asleep 
     }
     result.save ? result : nil
   end
