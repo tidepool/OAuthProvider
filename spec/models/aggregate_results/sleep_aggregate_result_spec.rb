@@ -24,7 +24,7 @@ describe SleepAggregateResult do
             "average" => 365,
                 "data_points" => 1
         }
-    result.scores['trend'].should == 999.99 # Our value to indicate no change
+    result.scores['trend'].should == 0.0 
     result.scores['last_value'].should == sleep.total_minutes_asleep
     result.scores['last_updated'].should == today.to_s
   end

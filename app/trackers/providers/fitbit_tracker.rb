@@ -71,7 +71,7 @@ class FitbitTracker
       today = time_from_offset(Time.zone.now, @connection.timezone_offset)
       number_of_days = ((today - last_synchronized) / 1.day).ceil
     end
-    number_of_days
+    number_of_days 
   end
 
   # "errors"=>

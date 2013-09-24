@@ -62,28 +62,16 @@ class SpeedAggregateResult < AggregateResult
       # This is for existing users prior to the introduction of this feature.
       weekly = result.initialize_weekly_for_existing_user(game.user_id) 
     end
-    weekly[day] = result.update_weekly(weekly[day], score, result.daily_average)
 
-    # Update the trend and last_speed_score
-    last_speed_score = result.scores["last_value"].to_i
-    if result.scores["last_value"].nil?
-      # This is for existing users prior to the introduction of this feature.
-      last_speed_score = result.find_last_speed_score(game.user_id)
-    end
-    new_speed_score = score[:speed_score].to_i
-    if last_speed_score == 0 
-      trend = 999.99
-    else
-      trend = (new_speed_score - last_speed_score).to_f / last_speed_score.to_f
-    end
+    trend = result.calculate_trend(score[:speed_score], weekly[day]['average_speed_score'])
+    weekly[day] = result.update_weekly(weekly[day], score, result.daily_average)
     
     result.scores = {
       "simple" => new_simple,
       "complex" => new_complex,
       "circadian" => circadian,
       "weekly" => weekly,
-      "trend" => trend,
-      "last_value" => new_speed_score      
+      "trend" => trend
     }
     result.save ? result : nil
   end
@@ -142,7 +130,7 @@ class SpeedAggregateResult < AggregateResult
     (0..6).each do |i|
       weekly << {
         'speed_score' => 0,
-        'average_speed_score' => 0,
+        'average_speed_score' => 0.0,
         'fastest_time' => 1000000,
         'slowest_time' => 0,
         'data_points' => 0
