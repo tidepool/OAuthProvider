@@ -49,7 +49,8 @@ describe SpeedAggregateResult do
 
   it 'updates the trend correctly' do 
     existing_result = SpeedAggregateResult.find(aggregate_result.id)
-    result = SpeedAggregateResult.create_from_analysis(game, @analysis_results, existing_result)
+    time = Time.zone.now
+    result = SpeedAggregateResult.create_from_analysis(game, @analysis_results, time, existing_result)
 
     new_score = @analysis_results[:reaction_time2][:score][:speed_score]
     average_score = @weekly[Time.zone.now.wday]['average_speed_score']
@@ -64,9 +65,25 @@ describe SpeedAggregateResult do
     existing_result.daily_average = 1000
     existing_result.save!
 
-    result = SpeedAggregateResult.create_from_analysis(game, @analysis_results, existing_result)
+    time = Time.zone.now
+    result = SpeedAggregateResult.create_from_analysis(game, @analysis_results, time, existing_result)
     result.daily_average.should == (3000 + @analysis_results[:reaction_time2][:score][:speed_score]) / 4
     result.daily_total.should ==  3000 + @analysis_results[:reaction_time2][:score][:speed_score]   
     result.daily_data_points.should == 4
+  end
+
+  it 'resets the daily average when the day passes' do 
+    existing_result = SpeedAggregateResult.find(aggregate_result.id)
+    existing_result.daily_total = 3000
+    existing_result.daily_data_points = 3
+    existing_result.daily_average = 1000
+    existing_result.save!
+
+    time = Time.zone.now + 1.day
+    result = SpeedAggregateResult.create_from_analysis(game, @analysis_results, time, existing_result)
+    result.daily_average.should == @analysis_results[:reaction_time2][:score][:speed_score]
+    result.daily_total.should ==  @analysis_results[:reaction_time2][:score][:speed_score]   
+    result.daily_data_points.should == 1
+    result.high_scores.should_not be_nil
   end
 end

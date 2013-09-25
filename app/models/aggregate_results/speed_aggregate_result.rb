@@ -28,41 +28,44 @@ class SpeedAggregateResult < AggregateResult
     SpeedAggregateResultSerializer
   end
 
-  def self.create_from_analysis(game, analysis_results, existing_result = nil)
+  def self.create_from_analysis(game, analysis_results, time, existing_result = nil)
     return nil unless game && game.user_id
     return nil unless analysis_results && analysis_results[:reaction_time2] && analysis_results[:reaction_time2][:score]
+
+    timezone_offset = analysis_results[:reaction_time2][:timezone_offset].to_i
 
     result = existing_result
     if result.nil?
       result = AggregateResult.create(type: 'SpeedAggregateResult', user_id: game.user_id)
       result.initialize_scores
-      result.initialize_high_scores
+      result.initialize_high_scores(result.time_from_offset(time, timezone_offset))
     end
 
-    result.initialize_high_scores if result.high_scores.nil?
+    result.initialize_high_scores(result.time_from_offset(time, timezone_offset)) if result.high_scores.nil?
  
     score = analysis_results[:reaction_time2][:score]
+ 
+    # Update the mean and sd
     new_simple = result.update_mean_and_sd("simple", score[:average_time_simple])
     new_complex = result.update_mean_and_sd("complex", score[:average_time_complex])
-
-    timezone_offset = analysis_results[:reaction_time2][:timezone_offset].to_i
-
+   
     # Update the circadian results
-    hour = result.time_from_offset(Time.zone.now, timezone_offset).hour
+    hour = result.time_from_offset(time, timezone_offset).hour
     circadian = result.scores["circadian"]
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
     # Update the high scores
-    result.high_scores = result.update_high_scores(score, timezone_offset)
+    result.high_scores = result.update_high_scores(score, time, timezone_offset)
 
-    # Update the weekly results
-    day = result.time_from_offset(Time.zone.now, timezone_offset).wday
+    # Get the weekly results
+    day = result.time_from_offset(time, timezone_offset).wday
     weekly = result.scores["weekly"]
     if weekly.nil? || weekly.empty?
       # This is for existing users prior to the introduction of this feature.
       weekly = result.initialize_weekly_for_existing_user(game.user_id) 
     end
 
+    # Update the trend and weekly
     trend = result.calculate_trend(score[:speed_score], weekly[day]['average_speed_score'])
     weekly[day] = result.update_weekly(weekly[day], score, result.daily_average)
     
@@ -99,14 +102,14 @@ class SpeedAggregateResult < AggregateResult
     }
   end
 
-  def initialize_high_scores 
+  def initialize_high_scores(time) 
     self.high_scores = {
       "all_time_best" => 0,
       "daily_best" => 0,
       "daily_average" => 0.0,
       "daily_data_points" => 0,
       "daily_total" => 0,
-      "current_day" => Time.zone.now.to_s
+      "current_day" => time.to_s
     }
   end
 
@@ -179,9 +182,9 @@ class SpeedAggregateResult < AggregateResult
     speed_score
   end
 
-  def update_high_scores(score, timezone_offset)
+  def update_high_scores(score, time, timezone_offset)
     all_time_best = update_all_time_best(score)
-    today = time_from_offset(Time.zone.now, timezone_offset) 
+    today = time_from_offset(time, timezone_offset) 
     daily_best = update_daily_best(score, today, timezone_offset)
     daily_average, daily_total, daily_data_points = update_daily_average(score, today, timezone_offset)
 
