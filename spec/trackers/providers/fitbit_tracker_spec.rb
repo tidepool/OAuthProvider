@@ -83,6 +83,53 @@ describe FitbitTracker do
     activities[2].date_recorded.yday.should == Time.zone.now.in_time_zone(8).yday
   end
 
+  describe 'Batch Updates' do 
+    let(:connection1) { create(:fitbit, user: user)}
+    let(:connection2) { create(:fitbit, user: user1)}
+
+    before :each do 
+      Fitgem::Client.any_instance.stub(:sleep_on_date).and_return({
+          "summary"=>
+           {"totalMinutesAsleep"=>375, "totalSleepRecords"=>1, "totalTimeInBed"=>430}
+        })
+      Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+          "summary" => 
+          { "steps"=>7500, "veryActiveMinutes"=>30 }
+        })
+      
+    end
+
+    it 'handles batch updates for multiple connections' do 
+      updates = [
+        {
+          "collectionType" => "sleep",
+          "date" => "2010-03-02",
+          "ownerId" => "228S74",
+          "ownerType" => "user",
+          "subscriptionId" => connection1.user_id.to_s
+        },
+        {
+          "collectionType" => "activities",
+          "date" => "2010-03-01",
+          "ownerId" => "184X36",
+          "ownerType" => "user",
+          "subscriptionId" => connection2.user_id.to_s
+        }
+      ]
+      provider = 'fitbit'
+      klass_name = "#{provider.to_s.camelize}Tracker"
+      klass_name.constantize.batch_update_connections(updates)
+      activity = Activity.where(user_id: user1.id, date_recorded: Date.parse(updates[1]["date"])).first
+      activity.should_not be_nil
+      activity.steps.should == 7500
+      activity.very_active_minutes.should == 30
+
+      sleep = Sleep.where(user_id: user.id, date_recorded: Date.parse(updates[0]["date"])).first
+      sleep.should_not be_nil
+      sleep.total_minutes_asleep.should == 375
+    end
+  end
+
   describe 'Activity storage' do
     let(:activity) { create(:activity, user: user) }
     before(:each) do 

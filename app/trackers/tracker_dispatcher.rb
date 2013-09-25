@@ -5,12 +5,17 @@ class TrackerDispatcher
   include Sidekiq::Worker
   sidekiq_options :retry => false, :backtrace => 5
    
-  def perform(connection_id)
+  def perform(connection_id, provider=nil, updates=nil)
     logger.info("TrackerDispatcher called with #{connection_id}")
-    connection = Authentication.where(id: connection_id).first
-    return if connection.nil? 
-
-    synchronize_connection(connection) 
+    if updates.nil?
+      connection = Authentication.where(id: connection_id).first
+      return if connection.nil? 
+      synchronize_connection(connection)
+    else
+      # batch updates based on notifications
+      return if provider.nil? || provider.empty? || updates.nil?
+      batch_synchronize(provider, updates)
+    end   
   end
 
   def synchronize_connection(connection)
@@ -36,5 +41,12 @@ class TrackerDispatcher
     connection.last_accessed = Time.zone.now
     connection.save
     logger.error("Provider #{provider} cannot synchronize - #{e.message}")
+  end
+
+  def batch_synchronize(provider, updates)
+    logger.info("Batch synchronizing #{provider}")
+
+    klass_name = "#{provider.to_s.camelize}Tracker"
+    klass_name.constantize.batch_update_connections(updates)
   end
 end
