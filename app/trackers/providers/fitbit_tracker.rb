@@ -1,10 +1,58 @@
 class FitbitTracker
   include TimeZoneCalculations
 
+  def self.batch_update_connections(updates)
+    return if updates.nil? || updates.class != Array
+    item_mapping = {
+      "activities" => "activities", 
+      "sleep" => "sleeps",
+      "foods" => "foods",
+      "body" => "measurements"
+    }
+    updates.each do |update|
+      item_type = item_mapping[update["collectionType"]]
+      if item_type.nil?
+        Rails.logger("ProviderError: Incorrect item_type provided - #{update['collectionType']}")
+        next
+      end
+
+      subscription_id = update["subscriptionId"]
+      connection = Authentication.where(user_id: subscription_id.to_i).first
+      if connection.nil?
+        Rails.logger("ProviderError: Cannot find subscriber with user_id #{subscription_id}")
+        next
+      end
+      last_sync_times = {}
+      begin 
+        tracker = FitbitTracker.new(connection)
+        date_str = update["date"]
+        time_synchronized = tracker.time_from_offset(Time.zone.parse(date_str), connection.timezone_offset)
+        sync_item = tracker.synchronize_each(time_synchronized, item_type)
+        last_sync_times[item_type.to_s] = time_synchronized.to_s if sync_item
+      rescue Trackers::AuthenticationError => e
+        connection.sync_status = :authentication_error
+        connection.last_error = e.message
+        Rails.logger.error("Provider Fitbit cannot authenticate - #{e.message}")
+      rescue Exception => e
+        connection.sync_status = :sync_error
+        connection.last_error = e.message
+        Rails.logger.error("Provider Fitbit cannot synchronize - #{e.message}")        
+      ensure
+        last_synchronized = connection.last_synchronized
+        last_synchronized = {} if last_synchronized.nil?
+        new_times = last_synchronized.merge(last_sync_times)
+        connection.last_synchronized = new_times
+        connection.last_accessed = Time.zone.now
+        connection.save!
+      end        
+    end
+  end
+
   def initialize(connection, client = nil)
     @user_id = connection.user_id if connection
     @connection = connection
     @client = client
+    @client = Fitgem::Client.new(client_config) if @client.nil?
   end
 
   def logger
@@ -18,25 +66,13 @@ class FitbitTracker
  
     today = time_from_offset(Time.zone.now, @connection.timezone_offset)
 
-    @client = Fitgem::Client.new(client_config) if @client.nil?
     if @client
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
         number_of_days.times do | day |
-          time_synchronized = today - (number_of_days - day - 1).days        
-          method_name = "persist_#{item}".to_sym
-
-          date_synchronized = Date.parse(time_synchronized.to_s) # This is important, otherwise ActiveRecord converts using timezone
-          sync_item = self.method(method_name).call(date_synchronized) if self.method(method_name)
-
-          if sync_item
-            sync_item.provider = 'fitbit'
-            sync_item.user_id = @user_id
-            sync_item.date_recorded = date_synchronized
-            sync_item.save!
-            logger.info("#{item} synchronized successfully for #{@user_id}.")
-            last_sync_times[item.to_s] = time_synchronized.to_s
-          end
+          time_synchronized = today - (number_of_days - day - 1).days    
+          sync_item = synchronize_each(time_synchronized, item) 
+          last_sync_times[item.to_s] = time_synchronized.to_s if sync_item
         end 
       end
     end
@@ -46,6 +82,23 @@ class FitbitTracker
     new_times = last_synchronized.merge(last_sync_times)
     @connection.last_synchronized = new_times
     @connection.save!
+  end
+
+  def synchronize_each(time_synchronized, item)
+    last_sync_times = {}
+    method_name = "persist_#{item}".to_sym
+
+    date_synchronized = Date.parse(time_synchronized.to_s) # This is important, otherwise ActiveRecord converts using timezone
+    sync_item = self.method(method_name).call(date_synchronized) if self.method(method_name)
+
+    if sync_item
+      sync_item.provider = 'fitbit'
+      sync_item.user_id = @user_id
+      sync_item.date_recorded = date_synchronized
+      sync_item.save!
+      logger.info("#{item} synchronized successfully for #{@user_id}.")
+    end
+    sync_item
   end
 
   # {:consumer_key=>"4c4660694a7844d081bfaf93ef0d2330",
