@@ -5,6 +5,7 @@ describe FitbitTracker do
   let(:user1) { create(:user) }
   let(:connection) { create(:fitbit, user: user)}
   let(:fitbit_earlier) { create(:fitbit_earlier, user: user1)}
+  let(:fitbit_from_hongkong) { create(:fitbit_from_hongkong, user: user1)}
   before(:all) do 
   end
 
@@ -38,7 +39,7 @@ describe FitbitTracker do
     activities[2].date_recorded.should == Date.current
   end
 
-  it 'sets the last synchronized date correctly if ' do 
+  it 'sets the last synchronized date correctly if tracker raises an exception' do 
     user1
     tracker = FitbitTracker.new(fitbit_earlier, nil)
     sync_list = [:activities, :sleeps]
@@ -63,6 +64,23 @@ describe FitbitTracker do
     connection = Authentication.where(user_id: user1.id, provider: 'fitbit').first
     connection.last_synchronized.should_not be_nil   
     Time.parse(connection.last_synchronized['sleeps']).yday.should == Time.zone.now.yday - 2
+  end
+
+  it 'handles connections from different timezones' do 
+    user1
+    sync_list = [:activities]
+    Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+     "summary" => {
+       "steps"=>7500,
+       "veryActiveMinutes"=>30
+       }
+     })
+    
+    tracker = FitbitTracker.new(fitbit_from_hongkong, nil)
+    tracker.synchronize(sync_list)
+    activities = Activity.where('user_id = ? and provider = ?', user1.id, 'fitbit').order(:date_recorded)
+    activities.length.should == 3
+    activities[2].date_recorded.yday.should == Time.zone.now.in_time_zone(8).yday
   end
 
   describe 'Activity storage' do

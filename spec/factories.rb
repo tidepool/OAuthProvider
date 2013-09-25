@@ -136,6 +136,18 @@ FactoryGirl.define do
         }
       end 
     end
+    factory :fitbit_from_hongkong do 
+      provider 'fitbit'
+      last_accessed Time.zone.now.in_time_zone(8)
+      last_synchronized do 
+        { 
+          'activities' => (Time.zone.now.in_time_zone(8) - 2.days).to_s, 
+          'sleeps' => (Time.zone.now.in_time_zone(8) - 2.days).to_s
+        }
+      end 
+      timezone_offset Time.zone.now.in_time_zone(8).utc_offset
+    end
+    
   end
 
   factory :definition do

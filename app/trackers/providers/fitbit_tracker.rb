@@ -16,7 +16,7 @@ class FitbitTracker
     sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
     last_sync_dates = {}
  
-    today = Date.parse(time_from_offset(Time.zone.now, @connection.timezone_offset).to_s)
+    today = time_from_offset(Time.zone.now, @connection.timezone_offset)
 
     @client = Fitgem::Client.new(client_config) if @client.nil?
     if @client
@@ -67,9 +67,12 @@ class FitbitTracker
 
     last_synchronized = @connection.last_synchronized[type_of_data.to_s]
     if last_synchronized
-      last_synchronized = Time.parse(last_synchronized)
+      last_synchronized = time_from_offset(Time.parse(last_synchronized), @connection.timezone_offset)
       today = time_from_offset(Time.zone.now, @connection.timezone_offset)
-      number_of_days = ((today - last_synchronized) / 1.day).ceil
+      # We add +1 here, because we always need to synchronize the current day as the data
+      # will be coming in. For days before the current day, the data will be frozen (i.e can take any
+      # more steps yesterday) so we will synchronize it one last time.to get the full data for that day.
+      number_of_days = today.yday - last_synchronized.yday + 1
     end
     number_of_days 
   end

@@ -22,7 +22,8 @@ class PersistSpeedArchetype
 
   def update_aggregate_result(game, analysis_results)
     existing_result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
-    aggregate_result = SpeedAggregateResult.create_from_analysis(game, analysis_results, existing_result)
+    time = Time.zone.now
+    aggregate_result = SpeedAggregateResult.create_from_analysis(game, analysis_results, time, existing_result)
     
     raise Workers::PersistenceError, "Cannot create the SpeedAggregateResult." if aggregate_result.nil?
 
