@@ -14,7 +14,7 @@ class FitbitTracker
   def synchronize(sync_list = nil)
     return if @connection.nil? || @connection.provider != 'fitbit'
     sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
-    last_sync_dates = {}
+    last_sync_times = {}
  
     today = time_from_offset(Time.zone.now, @connection.timezone_offset)
 
@@ -23,17 +23,19 @@ class FitbitTracker
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
         number_of_days.times do | day |
-          date = today - (number_of_days - day - 1).days        
+          time_synchronized = today - (number_of_days - day - 1).days        
           method_name = "persist_#{item}".to_sym
-          sync_item = self.method(method_name).call(date) if self.method(method_name)
+
+          date_synchronized = Date.parse(time_synchronized.to_s) # This is important, otherwise ActiveRecord converts using timezone
+          sync_item = self.method(method_name).call(date_synchronized) if self.method(method_name)
 
           if sync_item
             sync_item.provider = 'fitbit'
             sync_item.user_id = @user_id
-            sync_item.date_recorded = date
+            sync_item.date_recorded = date_synchronized
             sync_item.save!
             logger.info("#{item} synchronized successfully for #{@user_id}.")
-            last_sync_dates[item.to_s] = date.to_s
+            last_sync_times[item.to_s] = time_synchronized.to_s
           end
         end 
       end
@@ -41,8 +43,8 @@ class FitbitTracker
   ensure
     last_synchronized = @connection.last_synchronized
     last_synchronized = {} if last_synchronized.nil?
-    new_dates = last_synchronized.merge(last_sync_dates)
-    @connection.last_synchronized = new_dates
+    new_times = last_synchronized.merge(last_sync_times)
+    @connection.last_synchronized = new_times
     @connection.save!
   end
 

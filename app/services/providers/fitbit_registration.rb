@@ -19,4 +19,33 @@ class FitbitRegistration < BaseRegistration
       @authentication.timezone_offset = auth_hash.extra.raw_info.user.offsetFromUTCMillis.to_i / 1000
     end
   end
+
+  def create_subscription
+    client = Fitgem::Client.new(client_config)
+    if client.nil?
+      Rails.logger.error("ProviderError: Cannot create Fitgem to connect to fitbit.")
+      return
+    end
+    opts = {
+      type: :all,  # Subscribe to all notifications
+      subscriptionId: @user.id
+    }
+    code, response = client.create_subscription(opts)
+    if code == 409
+      Rails.logger.error("ProviderError: User #{@user.id} already subscribed.")
+      @authentication.subscription_info = 'failed'  
+      return    
+    end
+    @authentication.subscription_info = 'subscribed'
+  end
+
+  def client_config
+    {
+      consumer_key: ENV['FITBIT_KEY'],
+      consumer_secret: ENV['FITBIT_SECRET'],
+      token: @authentication.oauth_token,
+      secret: @authentication.oauth_secret,
+      user_id: @authentication.uid
+    }
+  end  
 end
