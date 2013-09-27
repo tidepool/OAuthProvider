@@ -1,6 +1,8 @@
 class MigrateToSchemaV3Seed
   def create_seed
     puts 'MigrateToSchemaV3: '
+    puts 'Served its purpose, should not be running anymore, returning immediately.'
+    return
     puts "Migrating all existing games to have a name, which maps to definition.unique_name"
     count = 0
     Game.all.each do |game|
