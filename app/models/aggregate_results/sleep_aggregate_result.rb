@@ -7,12 +7,17 @@ class SleepAggregateResult < AggregateResult
 
     week_day = date ? date.wday : 0
 
+    prior_most_minutes = weekly[week_day]['most_minutes'] ? weekly[week_day]['most_minutes'].to_i : 0
+    prior_least_minutes = weekly[week_day]['least_minutes'] ? weekly[week_day]['least_minutes'].to_i : 1000000
+    prior_total = weekly[week_day]['total'] ? weekly[week_day]['total'].to_i : 0
+    prior_data_points = weekly[week_day]['data_points'] ? weekly[week_day]['data_points'].to_i : 0
+
     weekly[week_day] = {
-      'most_minutes' => sleep.total_minutes_asleep.to_i > weekly[week_day]['most_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['most_minutes'].to_i,
-      'least_minutes' => sleep.total_minutes_asleep.to_i < weekly[week_day]['least_minutes'].to_i ? sleep.total_minutes_asleep.to_i : weekly[week_day]['least_minutes'].to_i,
-      'total' => sleep.total_minutes_asleep.to_i + weekly[week_day]['total'].to_i,
-      'average' => (sleep.total_minutes_asleep.to_i + weekly[week_day]['total']).to_i / (weekly[week_day]['data_points'].to_i + 1),
-      'data_points' => weekly[week_day]['data_points'].to_i + 1
+      'most_minutes' => sleep.total_minutes_asleep.to_i > prior_most_minutes ? sleep.total_minutes_asleep.to_i : prior_most_minutes,
+      'least_minutes' => sleep.total_minutes_asleep.to_i < prior_least_minutes ? sleep.total_minutes_asleep.to_i : prior_least_minutes,
+      'total' => sleep.total_minutes_asleep.to_i + prior_total,
+      'average' => (sleep.total_minutes_asleep.to_i + prior_total) / (prior_data_points + 1),
+      'data_points' => prior_data_points + 1
     }
 
     trend = result.calculate_trend(sleep.total_minutes_asleep.to_f, weekly[week_day]['average'])

@@ -4,7 +4,6 @@ class FitbitRegistration < BaseRegistration
     # Rails.logger.info("Connected to Fitbit: #{auth_hash.info}\n #{auth_hash.extra.raw_info.user}")
     set_if_empty(:name, auth_hash.info.full_name)
     set_if_empty(:display_name, auth_hash.info.display_name)
-
     set_gender(auth_hash.info.gender)
     set_if_empty(:city, auth_hash.info.city)
     set_if_empty(:state, auth_hash.info.state)
@@ -28,7 +27,7 @@ class FitbitRegistration < BaseRegistration
     end
     opts = {
       type: :all,  # Subscribe to all notifications
-      subscriptionId: @user.id
+      subscription_id: @user.id
     }
     code, response = client.create_subscription(opts)
     if code == 409
@@ -36,6 +35,7 @@ class FitbitRegistration < BaseRegistration
       @authentication.subscription_info = 'failed'  
       return    
     end
+    Rails.logger.info("Subscription created!")
     @authentication.subscription_info = 'subscribed'
   end
 

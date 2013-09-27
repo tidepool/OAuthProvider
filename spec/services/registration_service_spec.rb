@@ -168,7 +168,6 @@ describe RegistrationService do
   it 'adds a new authentication to an existing user with external authentication' do 
     auth3 # Has Facebook authentication
     user = @registration_service.register_or_find_from_external(@fitbit_hash, user3.id)
-
     expect(user.authentications.length).to eq(2)
     expect(user.authentications[0].provider).to eq('fitbit')
     expect(user.password_digest).to eq(user3.password_digest)

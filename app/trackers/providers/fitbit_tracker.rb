@@ -63,12 +63,13 @@ class FitbitTracker
     return if @connection.nil? || @connection.provider != 'fitbit'
     sync_list = [:activities, :sleeps, :foods, :measurements] if sync_list.nil?
     last_sync_times = {}
- 
+    logger.info("ProviderFitbit: start synchronize.")
     today = time_from_offset(Time.zone.now, @connection.timezone_offset)
-
+    logger.info("ProviderFitbit: start synchronize for #{today.to_s}.")
     if @client
       sync_list.each do | item |
         number_of_days = days_to_retrieve(item)
+        logger.info("ProviderFitbit: synchronizing #{item} for #{number_of_days} days.")
         number_of_days.times do | day |
           time_synchronized = today - (number_of_days - day - 1).days    
           sync_item = synchronize_each(time_synchronized, item) 
