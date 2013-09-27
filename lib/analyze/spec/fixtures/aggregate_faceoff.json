@@ -1,0 +1,12 @@
+{
+  "event_type": "faceoff",
+  "stage": 7,
+  "events": [
+    {"time":1360195167248, "event":"level_started"},
+    {"time":1360195167848, "event":"correct", "value": "fear", "type":"primary" , "instant_replay": 0},
+    {"time":1360195167848, "event":"incorrect", "value": "amusement", "instant_replay": 2 },    
+    {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 3 },
+    {"time":1360195167248, "event":"level_completed" },
+    {"time":1360195167548, "event":"level_summary" }
+  ]
+}
