@@ -11,7 +11,7 @@ describe Subscriber do
     Fitgem::Client.any_instance.stub(:create_subscription).and_return([200, {}])
 
     subscriber = Subscriber.new
-    subscriber.perform(fitbit.id)
+    subscriber.perform(user1.id, 'fitbit')
 
     conn = Authentication.find(fitbit.id)
     conn.subscription_info.should == 'subscribed'
@@ -25,7 +25,7 @@ describe Subscriber do
     end
 
     subscriber = Subscriber.new
-    subscriber.perform(fitbit.id)
+    subscriber.perform(user1.id, 'fitbit')
 
     conn = Authentication.find(fitbit.id)
     conn.subscription_info.should == 'failed'

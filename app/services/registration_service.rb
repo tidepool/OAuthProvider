@@ -171,7 +171,8 @@ class RegistrationService
       klass_name = "#{provider.camelize}Registration"
       populator = klass_name.constantize.new(user, authentication)
       populator.populate(auth_hash)
-      subscribe_to_service_notifications(authentication) if populator.respond_to?(:create_subscription)
+      authentication.save!  #TODO: This is an extra save, but we need this due to race condition below.
+      subscribe_to_service_notifications(user, provider) if populator.respond_to?(:create_subscription)
     rescue Exception => e
       logger.error("ProviderError: Could not populate from #{provider}. Error: #{e.message}")
       # TODO : May be we should not eat this exception?
@@ -182,7 +183,8 @@ class RegistrationService
     MailSender.perform_async(:UserMailer, :welcome_email, { user_id: user.id } )
   end
 
-  def subscribe_to_service_notifications(authentication)
-    Subscriber.perform_async(authentication.id)
+  def subscribe_to_service_notifications(user, provider)
+    logger.info("About to create subscription for #{user.id}")
+    Subscriber.perform_async(user.id, provider)
   end
 end
