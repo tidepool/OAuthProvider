@@ -27,5 +27,18 @@ FactoryGirl.define do
     factory :activities do 
       sequence(:date_recorded) { |n| Date.current - n.days }
     end
+
+    factory :activity_steps do 
+      sequence(:date_recorded) { |n| Date.current - n.days }
+      sequence(:data) do |n|
+        {
+          "very_active_minutes" => "30",
+          "floors" => "5",
+          "steps" => (5000 + n * 1000).to_s,
+          "distance" => "4.24",
+          "calories" => "1978"          
+        }
+      end
+    end
   end
 end

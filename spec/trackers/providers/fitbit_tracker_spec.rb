@@ -5,6 +5,7 @@ describe FitbitTracker do
   let(:user1) { create(:user) }
   let(:connection) { create(:fitbit, user: user)}
   let(:fitbit_earlier) { create(:fitbit_earlier, user: user1)}
+  let(:fitbit_from_hongkong) { create(:fitbit_from_hongkong, user: user1)}
   before(:all) do 
   end
 
@@ -38,7 +39,7 @@ describe FitbitTracker do
     activities[2].date_recorded.should == Date.current
   end
 
-  it 'sets the last synchronized date correctly if ' do 
+  it 'sets the last synchronized date correctly if tracker raises an exception' do 
     user1
     tracker = FitbitTracker.new(fitbit_earlier, nil)
     sync_list = [:activities, :sleeps]
@@ -63,6 +64,70 @@ describe FitbitTracker do
     connection = Authentication.where(user_id: user1.id, provider: 'fitbit').first
     connection.last_synchronized.should_not be_nil   
     Time.parse(connection.last_synchronized['sleeps']).yday.should == Time.zone.now.yday - 2
+  end
+
+  it 'handles connections from different timezones' do 
+    user1
+    sync_list = [:activities]
+    Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+     "summary" => {
+       "steps"=>7500,
+       "veryActiveMinutes"=>30
+       }
+     })
+    
+    tracker = FitbitTracker.new(fitbit_from_hongkong, nil)
+    tracker.synchronize(sync_list)
+    activities = Activity.where('user_id = ? and provider = ?', user1.id, 'fitbit').order(:date_recorded)
+    activities.length.should == 3
+    activities[2].date_recorded.yday.should == Time.zone.now.in_time_zone(8).yday
+  end
+
+  describe 'Batch Updates' do 
+    let(:connection1) { create(:fitbit, user: user)}
+    let(:connection2) { create(:fitbit, user: user1)}
+
+    before :each do 
+      Fitgem::Client.any_instance.stub(:sleep_on_date).and_return({
+          "summary"=>
+           {"totalMinutesAsleep"=>375, "totalSleepRecords"=>1, "totalTimeInBed"=>430}
+        })
+      Fitgem::Client.any_instance.stub(:activities_on_date).and_return({
+          "summary" => 
+          { "steps"=>7500, "veryActiveMinutes"=>30 }
+        })
+      
+    end
+
+    it 'handles batch updates for multiple connections' do 
+      updates = [
+        {
+          "collectionType" => "sleep",
+          "date" => "2010-03-02",
+          "ownerId" => "228S74",
+          "ownerType" => "user",
+          "subscriptionId" => connection1.user_id.to_s
+        },
+        {
+          "collectionType" => "activities",
+          "date" => "2010-03-01",
+          "ownerId" => "184X36",
+          "ownerType" => "user",
+          "subscriptionId" => connection2.user_id.to_s
+        }
+      ]
+      provider = 'fitbit'
+      klass_name = "#{provider.to_s.camelize}Tracker"
+      klass_name.constantize.batch_update_connections(updates)
+      activity = Activity.where(user_id: user1.id, date_recorded: Date.parse(updates[1]["date"])).first
+      activity.should_not be_nil
+      activity.steps.should == 7500
+      activity.very_active_minutes.should == 30
+
+      sleep = Sleep.where(user_id: user.id, date_recorded: Date.parse(updates[0]["date"])).first
+      sleep.should_not be_nil
+      sleep.total_minutes_asleep.should == 375
+    end
   end
 
   describe 'Activity storage' do
@@ -122,6 +187,15 @@ describe FitbitTracker do
       new_activity.steps_goal.should == 10000
       new_activity.distance_goal.should == 5.0
       new_activity.calories_goal.should == 2184
+
+      result = ActivityAggregateResult.where(user_id: user.id).first
+      result.should_not be_nil
+      result.scores['weekly'][Date.current.wday].should == {
+                           "most_steps" => 9663,
+                          "total" => 9663,
+                        "average" => 9663,
+                          "data_points" => 1
+      }
     end
 
     it 'persists activity to the database when the todays activity already exists' do 

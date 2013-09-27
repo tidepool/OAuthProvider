@@ -29,6 +29,7 @@ class RegistrationService
   end  
 
   def register_guest_or_full!(attributes)
+    attributes[:password_confirmation] = "" if attributes[:password_confirmation].nil? # If nil password confirm validation does not work.
     user = User.new(attributes)
     if user.guest
       user.email = "guest_#{Time.now.to_i}#{rand(99)}@example.com"
@@ -170,8 +171,10 @@ class RegistrationService
       klass_name = "#{provider.camelize}Registration"
       populator = klass_name.constantize.new(user, authentication)
       populator.populate(auth_hash)
+      authentication.save!  #TODO: This is an extra save, but we need this due to race condition below.
+      subscribe_to_service_notifications(user, provider) if populator.respond_to?(:create_subscription)
     rescue Exception => e
-      logger.error("Could not populate from #{provider}. Error: #{e.message}")
+      logger.error("ProviderError: Could not populate from #{provider}. Error: #{e.message}")
       # TODO : May be we should not eat this exception?
     end
   end
@@ -180,4 +183,8 @@ class RegistrationService
     MailSender.perform_async(:UserMailer, :welcome_email, { user_id: user.id } )
   end
 
+  def subscribe_to_service_notifications(user, provider)
+    logger.info("About to create subscription for #{user.id}")
+    Subscriber.perform_async(user.id, provider)
+  end
 end

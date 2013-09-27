@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130828164647) do
+ActiveRecord::Schema.define(version: 20130925171439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 20130828164647) do
     t.datetime "oauth_refresh_at"
     t.boolean  "expires"
     t.text     "permissions"
+    t.integer  "timezone_offset"
+    t.string   "subscription_info"
   end
 
   add_index "authentications", ["provider"], name: "index_authentications_on_provider", using: :btree
@@ -312,6 +314,7 @@ ActiveRecord::Schema.define(version: 20130828164647) do
     t.datetime "time_calculated"
     t.string   "analysis_version"
     t.string   "type"
+    t.integer  "timezone_offset"
   end
 
   add_index "results", ["game_id"], name: "index_results_on_game_id", using: :btree

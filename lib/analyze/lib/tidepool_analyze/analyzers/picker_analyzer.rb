@@ -45,7 +45,9 @@ module TidepoolAnalyze
             @end_time = get_time(entry)
           when 'level_summary'
             @symbols = entry['symbol_list']
+            @symbols = [] if @symbols.nil? 
             @words = entry['word_list']
+            @words = [] if @words.nil?
           end
         end
       end

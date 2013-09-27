@@ -114,7 +114,6 @@ describe RegistrationService do
   end
 
   it 'attaches the authentication to an existing user with user_id' do
-    # user = User.create_or_find(@facebook_hash, user1.id)
     user = @registration_service.register_or_find_from_external(@facebook_hash, user1.id)
 
     expect(user.email).to eq(user1.email)
@@ -126,7 +125,6 @@ describe RegistrationService do
   it 'attaches the new authentication to a guest and guest becomes registered' do
     expect(guest.guest).to eq(true)
     user = @registration_service.register_or_find_from_external(@facebook_hash, guest.id)
-    # user = User.create_or_find(@facebook_hash, guest.id)
 
     expect(user.email).to eq(@facebook_hash.info.email)
     expect(user.guest).to eq(false)
@@ -143,7 +141,6 @@ describe RegistrationService do
 
     expect(auth3.user).to eq(user3)
     expect(user3.authentications[0].uid).to eq("5555")
-    # user = User.create_or_find(@test_hash)
     user = @registration_service.register_or_find_from_external(@test_hash)
 
     expect(user.id).to eq(user3.id)
@@ -162,7 +159,6 @@ describe RegistrationService do
     expect(auth3.user).to eq(user3)
     expect(user3.authentications[0].uid).to eq("5555")
 
-    # user = User.create_or_find(@test_hash, guest.id)
     user = @registration_service.register_or_find_from_external(@test_hash, guest.id)
 
     expect(user.id).to eq(user3.id)
@@ -171,9 +167,7 @@ describe RegistrationService do
 
   it 'adds a new authentication to an existing user with external authentication' do 
     auth3 # Has Facebook authentication
-    # user = User.create_or_find(@fitbit_hash, user3.id)
     user = @registration_service.register_or_find_from_external(@fitbit_hash, user3.id)
-
     expect(user.authentications.length).to eq(2)
     expect(user.authentications[0].provider).to eq('fitbit')
     expect(user.password_digest).to eq(user3.password_digest)
@@ -181,7 +175,6 @@ describe RegistrationService do
   end
 
   it 'adds a new authentication to an existing user with email/password authentication' do 
-    # user = User.create_or_find(@fitbit_hash, user1.id)
     user = @registration_service.register_or_find_from_external(@fitbit_hash, user1.id)
 
     expect(user.authentications.length).to eq(1)
@@ -190,13 +183,11 @@ describe RegistrationService do
   end
 
   it 'adds a new authentication to a guest user' do 
-    # user = User.create_guest_or_registered({guest: true})
     user = @registration_service.register_guest_or_full({guest: true})
 
     expect(user.guest).to be_true
     expect(user.password_digest).to eq("Tidepool-Guest-User")
 
-    # updated_user = User.create_or_find(@facebook_hash, user.id)
     updated_user = @registration_service.register_or_find_from_external(@facebook_hash, user.id)
 
     expect(updated_user.password_digest).to eq("Tidepool-Guest-User")
@@ -211,7 +202,6 @@ describe RegistrationService do
                 "info" => { "email" => "test@example.com" }
           })      
     auth3 # Belongs to user3
-    # user = User.create_or_find(@test_hash, user1.id) 
     user = @registration_service.register_or_find_from_external(@test_hash, user1.id) # Try to assign to user1
 
     expect(user.authentications.length).to eq(1)
@@ -221,14 +211,12 @@ describe RegistrationService do
   end
 
   it 'finds no user if the user_id does not exist' do
-    # user = User.create_or_find(@facebook_hash, 12345)
     user = @registration_service.register_or_find_from_external(@facebook_hash, 12345)
 
     expect(user).to be_nil
   end
 
   it 'creates a guest user from attributes' do 
-    # user = User.create_guest_or_registered({guest: true})
     user = @registration_service.register_guest_or_full({guest: true})
 
     expect(user.guest).to be_true
@@ -241,11 +229,19 @@ describe RegistrationService do
       password: '12345678',
       password_confirmation: '12345678'
     }
-    # user = User.create_guest_or_registered(params)
     user = @registration_service.register_guest_or_full(params)
 
     expect(user.guest).to be_false
     expect(user.email).to eq('foo@foo.com')
+  end
+
+  it 'denies new user creation if password is less than 8 characters' do
+    params = {
+      email: 'foo@foo.com',
+      password: '1234567',
+      password_confirmation: '1234567'
+    }
+    expect{ @registration_service.register_guest_or_full!(params)}.to raise_error(ActiveRecord::RecordInvalid)
   end
 
   it 'denies new user creation if password confirmation is not correct' do 
@@ -254,7 +250,6 @@ describe RegistrationService do
       password: '12345678',
       password_confirmation: '12345378'
     }
-    # expect{ User.create_guest_or_registered!(params)}.to raise_error(ActiveRecord::RecordInvalid)
     expect{ @registration_service.register_guest_or_full!(params)}.to raise_error(ActiveRecord::RecordInvalid)
   end  
 

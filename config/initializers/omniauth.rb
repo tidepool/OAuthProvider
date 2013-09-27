@@ -3,5 +3,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
             :scope => 'email'
 
   provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
-  provider :fitbit, ENV['FITBIT_KEY'], ENV['FITBIT_SECRET']
+  provider :fitbit, ENV['FITBIT_KEY'], ENV['FITBIT_SECRET'], :setup => lambda{|env| env['omniauth.strategy'].options[:authorize_params] = { :display => 'touch'} }
 end
