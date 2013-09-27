@@ -58,7 +58,6 @@ describe FitbitRegistration do
   let(:user1) { create(:user) }
   let(:authentication) { create(:authentication, user: user1) }
 
-
   it 'populates fields from Fitbit' do 
     user1
     authentication
@@ -69,4 +68,27 @@ describe FitbitRegistration do
     user1.image.should == "http://cache.fitbit.com/38AC23FC-7AC2-BA16-A1BD-39885AB91048_profile_100_square.jpg"
     user1.gender.should == "male"
   end
+
+  it 'subscribes to fitbit for notifications' do 
+    user1
+    authentication
+    Fitgem::Client.any_instance.stub(:create_subscription).and_return([200, {}])
+
+    fitbit_reg = FitbitRegistration.new(user1, authentication)
+    fitbit_reg.create_subscription
+
+    authentication.subscription_info.should == 'subscribed'
+  end
+
+  it 'fails to subscribe to fitbit for notifications if fitbit returns 409' do 
+    user1
+    authentication
+    Fitgem::Client.any_instance.stub(:create_subscription).and_return([409, {}])
+
+    fitbit_reg = FitbitRegistration.new(user1, authentication)
+    fitbit_reg.create_subscription
+
+    authentication.subscription_info.should == 'failed'
+  end
+
 end

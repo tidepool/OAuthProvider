@@ -40,22 +40,7 @@ namespace :loadtests do
 
   task :create_game, [:test_type] => :environment do |t, args|
     test_type = args[:test_type]
-    test = {
-      "steps" => [
-        {
-          "timeout" => 2000,
-          "request" => "POST",
-          "headers" => ["Content-Type: application/json",
-            "Authorization: Bearer cbe52a989f38125da0c2df5bc3c13c7bc0dbbe381c3e940c4bcae3997eb638c9"
-            ],
-          "content" => {
-            "data" => ["{\"def_id\":\"snoozer\"}"]
-            },
-          "url" => "https://tide-dev.herokuapp.com/api/v1/users/-/games.json"
-        }
-      ],
-      "region" => "california"      
-    }
+    test = setup_test
     if test_type == "rush"
       test["pattern"] = {
         "iterations" => 1,
@@ -77,7 +62,7 @@ namespace :loadtests do
       sprint = Blitz::Curl::Sprint.new(test)
       result = sprint.execute
       pp :duration => result.duration
-
+      binding.pry
       content = JSON.parse result.steps[0].response.content
       pp :response => content
     end
@@ -127,26 +112,12 @@ namespace :loadtests do
 
   task :trigger_results, [:test_type] => :environment do |t, args|
     test_type = args[:test_type]
-    test = {
-      "steps" => [
-        {
-          "request" => "GET",
-          "headers" => ["Content-Type: application/json",
-            "Authorization: Bearer cbe52a989f38125da0c2df5bc3c13c7bc0dbbe381c3e940c4bcae3997eb638c9"
-            ],
-          "content" => {
-            "data" => []
-            },
-          "url" => "https://tide-dev.herokuapp.com/api/v1/users/-/games/\#{gameid}/results.json"
-        }
-      ],
-      "region" => "california"      
-    }
+    test = setup_test2
     if test_type == "rush"
       test["steps"][0]["variables"] = {
         "gameid" => {
           "type" => "list",
-          "entries" => (3437..3637).to_a | (3642..3693).to_a
+          "entries" => (3560..3810).to_a #| (3642..3693).to_a
         }
       }
       binding.pry

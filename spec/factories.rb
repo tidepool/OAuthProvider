@@ -66,6 +66,22 @@ FactoryGirl.define do
       end
     end
 
+    factory :prior_speed_archetypes do 
+      type 'SpeedArchetypeResult'
+      sequence(:time_played) { |n| Time.zone.now - (n * 12.hours) }
+      score do 
+        {
+          "speed_score" => "800",
+          "average_time"=>"529",
+          "average_time_simple"=>"340",
+          "average_time_complex"=>"718",
+          "fastest_time"=>"400",
+          "slowest_time"=>"905",
+          "description_id" => "2"
+        }
+      end
+    end
+
     factory :personality_result do 
       type 'PersonalityResult'
       score do 
@@ -120,6 +136,18 @@ FactoryGirl.define do
         }
       end 
     end
+    factory :fitbit_from_hongkong do 
+      provider 'fitbit'
+      last_accessed Time.zone.now.in_time_zone(8)
+      last_synchronized do 
+        { 
+          'activities' => (Time.zone.now.in_time_zone(8) - 2.days).to_s, 
+          'sleeps' => (Time.zone.now.in_time_zone(8) - 2.days).to_s
+        }
+      end 
+      timezone_offset Time.zone.now.in_time_zone(8).utc_offset
+    end
+    
   end
 
   factory :definition do

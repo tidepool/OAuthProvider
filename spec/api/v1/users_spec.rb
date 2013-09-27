@@ -17,6 +17,8 @@ describe 'Users API' do
   let(:game) { create(:game, user: guest) }
   let(:authentication) { create(:authentication, user: user2) }
   let(:aggregate_result) { create(:aggregate_result, user: user2) }
+  let(:sleep_aggregate_result) { create(:aggregate_result, type: 'SleepAggregateResult', user: user2) }
+  let(:activity_aggregate_result) { create(:aggregate_result, type: 'ActivityAggregateResult', user: user2) }
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -227,11 +229,15 @@ describe 'Users API' do
 
   it 'returns the aggregate_result for the user' do 
     aggregate_result
+    sleep_aggregate_result
+    activity_aggregate_result
     token = get_conn(user2)
     response = token.get("#{@endpoint}/users/-.json")
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
-    user_info[:aggregate_results].length.should == 1
+    user_info[:aggregate_results].length.should == 3
+    # Always ensure the first aggregate result is SpeedAggregateResult, because of a backwards compat
+    # bug in the iOS client.
     user_info[:aggregate_results][0][:type].should == 'SpeedAggregateResult'
   end
 
@@ -273,6 +279,15 @@ describe 'Users API' do
     it 'doesnot create a user with wrong password_confirmation' do
       token = get_conn()
       user_params = { email: 'test_user@example.com', password: '12345678', password_confirmation: '22225678' }
+      response = token.post("#{@endpoint}/users.json", { user: user_params } )
+      response.status.should == 422
+      result = JSON.parse(response.body, symbolize_names: true)
+      result[:status][:code].should == 1002                       
+    end
+
+    it 'doesnot create a user with password less than 8 characters' do
+      token = get_conn()
+      user_params = { email: 'test_user@example.com', password: '1234567', password_confirmation: '1234567' }
       response = token.post("#{@endpoint}/users.json", { user: user_params } )
       response.status.should == 422
       result = JSON.parse(response.body, symbolize_names: true)

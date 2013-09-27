@@ -16,7 +16,6 @@ class BaseRegistration
 
   def set_dob(dob)
     return if dob.nil?
-
     if @user.date_of_birth.nil?
       date_of_birth = Tidepool::TimeHelper.time_from_unknown_format(dob)
       @user.date_of_birth = date_of_birth

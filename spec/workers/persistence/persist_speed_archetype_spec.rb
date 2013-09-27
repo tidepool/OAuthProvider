@@ -7,10 +7,12 @@ describe PersistSpeedArchetype do
   let(:aggregate_result) { create(:aggregate_result, user: user) }
   let(:game2) { create(:game, user: user) }
   let(:speed_archetype_result) { create(:speed_archetype_result, game: game2)}
+  let(:prior_speed_archetypes) { create_list(:prior_speed_archetypes, 10, game: game2, user:user)}
 
   before(:each) do 
     @analysis_results = {
       reaction_time2: {
+        timezone_offset: 8.hours,
         score: {
           :average_time=>529,
           :average_time_simple=>340,
@@ -53,6 +55,7 @@ describe PersistSpeedArchetype do
       "slowest_time"=>"905",
       "description_id" => "10"
     }
+    result.timezone_offset.should == 8.hours
     result.analysis_version.should == '2.0'
   end
 
@@ -90,6 +93,87 @@ describe PersistSpeedArchetype do
     "average_time_complex" => "718",
           "description_id" => "3"
     }
+
+    result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'][Time.zone.now.in_time_zone(8).wday].should == {
+      "speed_score" => 800,
+      "fastest_time" => 400,
+      "slowest_time" => 905,
+      "average_speed_score" => 800,
+       "data_points" => 1
+    }    
+  end
+
+  it 'persists the speed_aggregate_result with the correct weekly results' do
+    user
+    circadian = aggregate_result.scores["circadian"]
+    wday = Time.zone.now.in_time_zone(8).wday
+    weekly = []
+    (0..6).each do |i|
+      if i == wday 
+        weekly << {
+         'speed_score' => 1200,
+         'fastest_time' => 300,
+         'slowest_time' => 800,
+         'data_points' => 1         
+        }
+      else
+        weekly << {
+          'speed_score' => 0,
+          'fastest_time' => 1000000,
+          'slowest_time' => 0,
+          'data_points' => 0
+        }
+      end
+    end
+    aggregate_result.scores = {
+          "simple" => {
+                     "sums" => 3230.0,
+            "total_results" => 4,
+                     "mean" => 450.0,
+                       "sd" => 2.0
+          },
+          "complex" => {
+                     "sums" => 3000.0,
+            "total_results" => 4,
+                     "mean" => 530.0,
+                       "sd" => 1.3
+          },
+          "circadian" => circadian,
+          "weekly" => weekly }
+    aggregate_result.save
+        
+    persist_rt = PersistSpeedArchetype.new  
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'][wday].should == {
+      "speed_score" => 1200,
+      "fastest_time" => 300,
+      "slowest_time" => 905,
+      "average_speed_score" => 800,
+      "data_points" => 2
+    }        
+  end
+
+  it 'persists the speed_aggregate_result for users who already have played snoozer games' do 
+    # This is for the TidePool launch users.
+    # They will have:
+    # * multiple SpeedArchetypeResults
+    # * one SpeedAggregateResult but no weekly in it.
+
+    user
+    prior_speed_archetypes
+    aggregate_result
+
+    persist_rt = PersistSpeedArchetype.new    
+    persist_rt.persist(game2, @analysis_results)
+
+    result = AggregateResult.find_for_type(game2.user_id, 'SpeedAggregateResult')
+    result.should_not be_nil
+    result.scores['weekly'].should_not be_nil
   end
 
   it 'persists updates the high_scores' do 
@@ -104,8 +188,7 @@ describe PersistSpeedArchetype do
     result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
     result.high_scores.should_not be_nil
     result.all_time_best.should == 2400
-    result.daily_best.should == 1800
-    
+    result.daily_best.should == 1800    
   end
 
   it 'returns fast if the the game already has the personality persisted' do 

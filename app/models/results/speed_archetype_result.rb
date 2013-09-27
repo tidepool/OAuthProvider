@@ -33,7 +33,7 @@ class SpeedArchetypeResult < Result
       "stage_data" => score[:stage_data]
     }
     result.analysis_version = version
-    result.record_times(game)
+    result.record_times(game, analysis_results[:reaction_time2][:timezone_offset])
     result.save ? result : nil
   end
 end

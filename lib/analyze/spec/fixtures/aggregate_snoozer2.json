@@ -2,6 +2,7 @@
   {
     "event_type": "snoozer",
     "stage":0,
+    "timezone_offset":7200,
     "events": [
       { "time":1360194757876, "event":"level_started", "sequence_type":"simple"},
       { "time":1360194763094, "event":"shown", "type":"target", "color":"yellow", "item_id":"1_1" },
@@ -12,13 +13,14 @@
       { "time":1360194774844, "event":"shown", "type":"target", "color":"red", "item_id": "2_2" },
       { "time":1360194775749, "event":"correct","color":"red", "item_id": "2_2" },
       { "time":1360194775780, "event":"incorrect","color":"red", "item_id": "0_2" },      
-      { "time":1360194775830, "event":"level_completed"},    
+      { "time":1360194775830, "event":"level_completed" },    
       { "time":1360194958245, "event": "level_summary"}
     ]
   },
   {
     "event_type": "snoozer",
     "stage":1,
+    "timezone_offset":7200,
     "events": [
       { "time":1360194757876, "event":"level_started", "sequence_type":"complex"},
       { "time":1360194763094, "event":"shown", "type":"target", "color":"yellow", "item_id":"1_1" },
@@ -28,13 +30,14 @@
       { "time":1360194768406, "event":"shown", "type":"target", "color":"yellow", "item_id":"4_1"},
       { "time":1360194774844, "event":"shown", "type":"target", "color":"red", "item_id": "2_2" },
       { "time":1360194775749, "event":"correct","color":"red", "item_id": "2_2" },
-      { "time":1360194775750, "event":"level_completed"},    
+      { "time":1360194775750, "event":"level_completed" },    
       { "time":1360194958245, "event":"level_summary"}
     ]
   },
   {
     "event_type": "survey",
     "stage": 2,
+    "timezone_offset":7200,
     "events": [
       {"time":1360195167248, "event":"level_started" },
       {"time":1360195167848, "event":"changed", "question_id": "activity1-7", "topic": "activity", "answer": 5},

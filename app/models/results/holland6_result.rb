@@ -39,7 +39,7 @@ class Holland6Result < Result
       final_results: analysis_results[:holland6][:final_results]
     }
     result.analysis_version = score[:version]
-    result.record_times(game)
+    result.record_times(game, analysis_results[:holland6][:timezone_offset])
     result.save ? result : nil
   end
 end

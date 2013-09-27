@@ -65,7 +65,7 @@ group :development, :test, :teamcity do
 end
 
 # Pagination
-gem 'kaminari'
+# gem 'kaminari'
 
 # Cron replacement
 gem 'clockwork'

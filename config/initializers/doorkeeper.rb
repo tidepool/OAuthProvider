@@ -102,7 +102,6 @@ Doorkeeper.configure do
   # response_type: password
   # This is called from the monkey patched AuthorizationsController.create
   resource_owner_from_credentials do |routes|
-    # binding.remote_pry
     registration_service = RegistrationService.new
 
     if params[:auth_hash]

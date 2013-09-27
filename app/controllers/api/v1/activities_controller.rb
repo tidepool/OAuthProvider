@@ -2,14 +2,14 @@ class Api::V1::ActivitiesController < Api::V1::ApiController
   doorkeeper_for :all
 
   def index
-    provider = params[:provider]
-    if provider
-      activities = Activity.where('user_id = ? and provider = ?', target_user, provider).order(:date_recorded)
-    else
-      activities = Activity.where('user_id = ?', target_user).order(:date_recorded)      
-    end
+    query = Activity.where(user_id: target_user)
+    query = query.where(provider: params[:provider]) if params[:provider]
+    query = query.order(:date_recorded)
+
+    activities, api_status = Activity.paginate(query, params)
+
     respond_to do |format|
-      format.json { render({ json: activities, meta: {} }.merge(api_defaults))  }
+      format.json { render({ json: activities, meta: api_status }.merge(api_defaults))  }
     end
   end
 

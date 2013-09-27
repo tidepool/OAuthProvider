@@ -28,7 +28,7 @@ class PersonalityResult < Result
     PersonalityResultSerializer
   end
 
-  def self.create_from_analysis(game, profile_description, version, existing_result = nil)
+  def self.create_from_analysis(game, profile_description, timezone_offset, version, existing_result = nil)
     return nil unless game && game.user_id
     return nil if profile_description.nil?
 
@@ -43,7 +43,7 @@ class PersonalityResult < Result
 
     result.calculations = {}
     result.analysis_version = version
-    result.record_times(game)
+    result.record_times(game, timezone_offset)
     result.save ? result : nil
   end
 end
