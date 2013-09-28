@@ -1,0 +1,32 @@
+[
+  {
+    "event_type": "faceoff",
+    "stage": 8,
+    "timezone_offset":7200,
+    "events": [
+      {"time":1360195167248, "event":"level_started", "primary_multiplier": 2, "secondary_multiplier": 1, "difficulty_multiplier": 1, "time_to_show": 99999 },
+      {"time":1360195167848, "event":"correct", "value": "fear", "type":"primary" , "instant_replay": 0},
+      {"time":1360195167848, "event":"incorrect", "value": "amusement", "instant_replay": 0 },    
+      {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 0 },
+      {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 1 },
+      {"time":1360195167248, "event":"level_completed" },
+      {"time":1360195167548, "event":"level_summary" }
+    ]
+  }, 
+  {
+    "event_type": "faceoff",
+    "stage": 9,
+    "timezone_offset":7200,
+    "events": [
+      {"time":1360195167248, "event":"level_started", "primary_multiplier": 3, "secondary_multiplier": 1, "difficulty_multiplier": 2, "time_to_show": 1000 },
+      {"time":1360195167848, "event":"correct", "value": "fear", "type":"primary" , "instant_replay": 0},
+      {"time":1360195167848, "event":"incorrect", "value": "amusement", "instant_replay": 2 },    
+      {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 3 },
+      {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 1 },
+      {"time":1360195167848, "event":"correct", "value": "anger", "type":"secondary", "instant_replay": 0 },
+      {"time":1360195167848, "event":"incorrect", "value": "amusement", "instant_replay": 0 },
+      {"time":1360195167248, "event":"level_completed" },
+      {"time":1360195167548, "event":"level_summary" }
+    ]
+  }
+]
