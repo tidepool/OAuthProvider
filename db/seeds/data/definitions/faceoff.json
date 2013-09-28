@@ -1,0 +1,68 @@
+{
+  "name" : "Face Off",
+  "unique_name": "faceoff",
+  "instructions" : "",
+  "recipe_names" : ["emo_face"],
+  "persist_as_results" : ["emo_intelligence"],
+  "stages" :
+    [
+      {
+        "friendly_name": "Face Off",
+        "instructions": "Find the emotion behind the face.",
+        "view_name": "FaceOff",
+        "image_url_base": "",
+        "time_to_show": 99999,
+        "primary_multiplier": 2,
+        "secondary_multiplier": 1,
+        "difficulty_multiplier": 1, 
+        "images": [
+          { 
+            "path": "fo-amusement.jpg",
+            "emotions" : ["amusement", "happiness", "joy", "fear"],
+            "primary" : "amusement",
+            "secondary" : "happiness"
+          },
+          {
+            "path": "fo-fear.jpg",
+            "emotions" : ["anger", "shame", "fear"],
+            "primary" : "fear"
+          },
+          {
+            "path": "fo-pride.jpg",
+            "emotions" : ["content", "pride", "happiness", "joy"],
+            "primary" : "pride",
+            "secondary" : "content"
+          }        
+        ]        
+      },
+      {
+        "friendly_name": "Face Off",
+        "instructions": "Find the emotion behind the face.",
+        "view_name": "FaceOff",
+        "image_url_base": "",
+        "time_to_show": 1000,
+        "primary_multiplier": 2,
+        "secondary_multiplier": 1,
+        "difficulty_multiplier": 2, 
+        "images": [
+          { 
+            "path": "fo-boredom.jpg",
+            "emotions" : ["content", "confused", "boredom", "fear"],
+            "primary" : "boredom"
+          },
+          {
+            "path": "fo-embarrassment.jpg",
+            "emotions" : ["embarrassment", "shame", "surprise", "anger"],
+            "primary" : "embarrassment",
+            "secondary" : "surprise"
+          },
+          {
+            "path": "fo-anger.jpg",
+            "emotions" : ["disgust", "fear", "pain", "anger"],
+            "primary" : "anger",
+            "secondary" : "disgust"
+          }        
+        ]        
+      }      
+    ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "emo_intelligence"
+  },
+  {
+    "user_event_source": "faceoff",
+    "analyzer": "FaceOffAnalyzer", 
+    "formulator": "EmoIntelligenceFormulator",  
+    "formula_sheet": "emo_circles.csv",
+    "formula_key": "name"
+  }
+]
