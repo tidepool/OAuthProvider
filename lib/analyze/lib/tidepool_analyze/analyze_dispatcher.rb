@@ -36,6 +36,7 @@ module TidepoolAnalyze
         emo: 'emo',
         reaction_time: 'reaction_time',
         reaction_time2: 'reaction_time2',
+        emo_face: 'emo_face',
         capacity: 'capacity',
         survey2: 'survey2',
         survey: 'survey'

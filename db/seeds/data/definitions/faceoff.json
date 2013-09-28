@@ -3,7 +3,7 @@
   "unique_name": "faceoff",
   "instructions" : "",
   "recipe_names" : ["emo_face"],
-  "persist_as_results" : ["emo_face"],
+  "persist_as_results" : ["emo_intelligence"],
   "stages" :
     [
       {
@@ -14,6 +14,7 @@
         "time_to_show": 99999,
         "primary_multiplier": 2,
         "secondary_multiplier": 1,
+        "difficulty_multiplier": 1, 
         "images": [
           { 
             "path": "fo-amusement.jpg",
@@ -42,6 +43,7 @@
         "time_to_show": 1000,
         "primary_multiplier": 2,
         "secondary_multiplier": 1,
+        "difficulty_multiplier": 2, 
         "images": [
           { 
             "path": "fo-boredom.jpg",
