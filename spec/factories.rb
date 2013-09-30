@@ -27,6 +27,16 @@ FactoryGirl.define do
       end
     end
 
+    factory :speed_archetype_rand_scores do 
+      type 'SpeedArchetypeResult'
+      sequence(:time_played) { |n| Time.zone.now - (n * 5.hours) }
+      sequence(:score) do |n| 
+        {
+          "speed_score" => "#{rand 1000}"
+        }
+      end
+    end
+
     factory :speed_archetype_result do 
       type 'SpeedArchetypeResult'
       score do 
