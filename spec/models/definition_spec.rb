@@ -4,7 +4,7 @@ describe Definition do
 
   it 'creates a definition for the baseline game' do 
     definition = Definition.where(unique_name: 'baseline_old').first 
-    stages = definition.stages_from_stage_definition
+    stages = definition.stages_from_stage_definition(nil)
     stages.should_not be_nil
     stages.length.should == 7
     stages[0]["image_sequence"].length.should == 5

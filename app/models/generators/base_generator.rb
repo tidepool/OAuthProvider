@@ -1,6 +1,5 @@
-class FaceOffGenerator < BaseGenerator
+class BaseGenerator
   def initialize(user)
-    
   end
 
   def generate(stage_no, stage_template)
