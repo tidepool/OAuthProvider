@@ -15,6 +15,7 @@
         "primary_multiplier": 2,
         "secondary_multiplier": 1,
         "difficulty_multiplier": 1, 
+        "number_of_images": 2,
         "images": [
           { 
             "path": "fo-amusement.jpg",
@@ -43,7 +44,8 @@
         "time_to_show": 1000,
         "primary_multiplier": 2,
         "secondary_multiplier": 1,
-        "difficulty_multiplier": 2, 
+        "difficulty_multiplier": 2,
+        "number_of_images": 2, 
         "images": [
           { 
             "path": "fo-boredom.jpg",
