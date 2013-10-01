@@ -503,8 +503,8 @@ module TidepoolAnalyze
         :emo_intelligence =>
           { 
             :score_name=>"emo_intelligence",
-            :final_results=>[{:eq_score=>3840, :corrects=>7, :incorrects=>3}],
-            :score=>{:eq_score=>3840, :corrects=>7, :incorrects=>3, :version=>"2.0"},
+            :final_results=>[{:eq_score=>3840, :corrects=>7, :incorrects=>3, :instant_replays=>7, :time_elapsed=>2100}],
+            :score=>{:eq_score=>3840, :corrects=>7, :incorrects=>3, :instant_replays=>7, :time_elapsed=>2100, :version=>"2.0"},
             :timezone_offset=>7200
           }
         }

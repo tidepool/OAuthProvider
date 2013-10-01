@@ -19,6 +19,7 @@ module TidepoolAnalyze
           secondary_multiplier: @secondary_multiplier,
           difficulty_multiplier: @difficulty_multiplier,
           time_to_show: @time_to_show,
+          time_elapsed: @end_time - @start_time,
           emotions: @emotions
         }
       end
