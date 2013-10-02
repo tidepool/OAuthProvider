@@ -7,6 +7,65 @@
   "stages" :
     [
       {
+        "friendly_name": "What's Your Mood?",
+        "view_name": "Survey",
+        "client_view_name": "EmotionsSurvey",
+        "data": [
+          {
+            "question_id": "emotion11",
+            "topic": "emotion",
+            "question_type": "select_by_icon",
+            "question": "How do you feel right now?",
+            "options": [
+                {
+                    "value": "angry",
+                    "label": "angry"
+                },
+                {
+                    "value": "sad",
+                    "label": "sad"
+                },
+                {
+                    "value": "disgusted",
+                    "label": "disgusted"
+                },
+                {
+                    "value": "afraid",
+                    "label": "afraid"
+                },
+                {
+                    "value": "ashamed",
+                    "label": "ashamed"
+                },
+                {
+                    "label": "surprised",
+                    "value": "surprised"
+                },
+                {
+                    "label": "embarrassed",
+                    "value": "embarrassed"
+                },
+                {
+                    "value": "bored",
+                    "label": "bored"
+                },
+                {
+                    "value": "amused",
+                    "label": "amused"
+                },
+                {
+                    "label": "proud",
+                    "value": "proud"
+                },
+                {
+                    "label": "happy",
+                    "value": "happy"
+                }
+            ]
+          }
+        ]
+      },      
+      {
         "friendly_name": "Face Off",
         "instructions": "Find the emotion behind the face.",
         "view_name": "FaceOff",

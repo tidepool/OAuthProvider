@@ -509,5 +509,24 @@ module TidepoolAnalyze
           }
         }
     end
+
+    it 'calculates the emo_intelligence with reported mood score' do 
+      recipe_names = ['emo_face']
+      events = load_event_fixtures('aggregate_faceoff_mood.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+
+      analysis.length.should == 1
+      analysis.should == {
+        :emo_intelligence =>
+          { 
+            :score_name=>"emo_intelligence",
+            :final_results=>[{:eq_score=>3840, :corrects=>7, :incorrects=>3, :instant_replays=>7, :time_elapsed=>2100}, {:emotion=>"sadness"}],
+            :score=>{:eq_score=>3840, :corrects=>7, :incorrects=>3, :reported_mood=>"sadness", :instant_replays=>7, :time_elapsed=>2100, :version=>"2.0"},
+            :timezone_offset=>7200
+          }
+        }
+    end
+
   end
 end
