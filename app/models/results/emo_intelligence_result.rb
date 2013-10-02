@@ -4,6 +4,7 @@ class EmoIntelligenceResult < Result
   store_accessor :score, :incorrects
   store_accessor :score, :instant_replays
   store_accessor :score, :time_elapsed
+  store_accessor :score, :reported_mood
 
   def active_model_serializer
     EmoIntelligenceResultSerializer
@@ -23,6 +24,7 @@ class EmoIntelligenceResult < Result
     result.incorrects = score[:incorrects]
     result.instant_replays = score[:instant_replays]
     result.time_elapsed = score[:time_elapsed]
+    result.reported_mood = score[:reported_mood]
 
     result.analysis_version = score[:version]
     result.record_times(game, analysis_results[:emo_intelligence][:timezone_offset])

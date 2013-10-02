@@ -6,6 +6,9 @@ module TidepoolAnalyze
         input_data.each do |result|
           if result.has_key?(:corrects) 
             output.merge!(result)
+          elsif result.has_key?(:emotion)
+            reported_mood = result[:emotion]
+            output.merge!({ reported_mood: reported_mood })
           end
         end
         output.merge!({ version: '2.0' })

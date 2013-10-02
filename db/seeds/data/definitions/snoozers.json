@@ -93,6 +93,7 @@
       {
         "friendly_name": "Getting to Know You",
         "view_name": "Survey",
+        "client_view_name": "Survey",
         "data": [
           {
             "question_id": "activity1-7",
