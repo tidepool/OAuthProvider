@@ -13,6 +13,7 @@ gem 'omniauth', :github => 'tidepool/omniauth' # We need a way to iterate over a
 gem 'omniauth-facebook'
 gem 'omniauth-fitbit'
 gem 'omniauth-twitter'
+gem 'omniauth-jawbone'
 
 # To support CORS
 gem 'rack-cors', :require => 'rack/cors'

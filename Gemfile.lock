@@ -159,6 +159,9 @@ GEM
     omniauth-fitbit (1.0.1)
       multi_xml
       omniauth-oauth (~> 1.0)
+    omniauth-jawbone (1.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -296,6 +299,7 @@ DEPENDENCIES
   omniauth!
   omniauth-facebook
   omniauth-fitbit
+  omniauth-jawbone
   omniauth-twitter
   pg
   pry
