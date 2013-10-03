@@ -44,19 +44,20 @@ module TidepoolAnalyze
           secondary_multiplier = stage[:secondary_multiplier]
           difficulty_multiplier = stage[:difficulty_multiplier]
           emotions = stage[:emotions]
+          stage_score = 0
 
           corrects += emotions[:correct].length
           incorrects += emotions[:incorrect].length
           emotions[:correct].each do |entry|
             multiplier = entry[:type] == 'primary' ? primary_multiplier : secondary_multiplier
-            score += CORRECT_SCORE * multiplier + INSTANT_REPLAY_SCORE * entry[:instant_replay]
+            stage_score += CORRECT_SCORE * multiplier + INSTANT_REPLAY_SCORE * entry[:instant_replay]
             instant_replays += entry[:instant_replay]
           end
           emotions[:incorrect].each do |entry|
-            score += INCORRECT_SCORE + INSTANT_REPLAY_SCORE * entry[:instant_replay]
+            stage_score += INCORRECT_SCORE + INSTANT_REPLAY_SCORE * entry[:instant_replay]
             instant_replays += entry[:instant_replay]
           end
-          score += (score * difficulty_multiplier)
+          score += (stage_score * difficulty_multiplier)
           time_elapsed += stage[:time_elapsed]
         end
         score = 0 if score < 0
