@@ -3,7 +3,7 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
   rescue_from Api::V1::ExternalConnectionError, with: :external_connection_error
   rescue_from Api::V1::ExternalAuthenticationError, with: :external_authentication_error
   rescue_from Api::V1::SyncError, with: :sync_error
-  
+
   def index
     strategy_list = OmniAuth.all_strategies 
 
@@ -90,6 +90,17 @@ class Api::V1::ConnectionsController < Api::V1::ApiController
       format.json { render({ json: nil, status: status, meta: api_status, serializer: ResultSerializer, location: api_status.link }.merge(api_defaults)) }
     end
 
+  end
+
+  def destroy
+    provider = params[:provider]
+    raise Api::V1::NotAcceptableError, "Facebook authentication cannot be deleted." if provider == 'facebook'
+
+    DestroyAuthentication.perform_async(target_user.id, provider)
+    api_status = Hashie::Mash.new({state: :accepted, message: 'Delete request is accepted and queued.'})
+    respond_to do |format|
+      format.json { render({ json: nil, status: :accepted, meta: api_status, serializer: ResultSerializer }.merge(api_defaults) ) }
+    end
   end
 
   protected

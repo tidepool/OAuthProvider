@@ -91,6 +91,37 @@ describe 'Connections API' do
     end    
   end
 
+  it 'deletes the user authentication' do 
+    DestroyAuthentication.stub(:perform_async) do |user_id, provider| 
+      # Do Nothing
+      Rails.logger.info("DestroyAuthentication: Called from test!")
+    end
+
+    fitbit
+    token = get_conn(user1)
+    response = token.delete("#{@endpoint}/users/-/connections/fitbit.json")
+    response.status.should == 202        
+    output = JSON.parse(response.body, symbolize_names: true)
+    meta = output[:status]
+    output[:status][:state].should == 'accepted'    
+  end
+
+  it 'does not delete the user authentication if it is facebook' do 
+    DestroyAuthentication.stub(:perform_async) do |user_id, provider| 
+      # Do Nothing
+      Rails.logger.info("DestroyAuthentication: Called from test!")
+    end
+
+    facebook
+    token = get_conn(user1)
+    response = token.delete("#{@endpoint}/users/-/connections/facebook.json")
+    response.status.should == 406        
+    output = JSON.parse(response.body, symbolize_names: true)
+    meta = output[:status]
+    output[:status][:code].should == 1004    
+    output[:status][:message].should == "Facebook authentication cannot be deleted."
+  end
+
   it 'does not restart the synchronization if synchronize is called twice' do 
     TrackerDispatcher.stub(:perform_async) do |user_id|
       # Do nothing

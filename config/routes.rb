@@ -59,6 +59,7 @@ OAuthProvider::Application.routes.draw do
         get 'connections', to: 'connections#index'
         get 'connections/:provider/synchronize', to: 'connections#synchronize'
         get 'connections/:provider/progress', to: 'connections#progress'
+        delete 'connections/:provider', to: 'connections#destroy'
 
         get 'activities', to: 'activities#index'
         get 'sleeps', to: 'sleeps#index'
