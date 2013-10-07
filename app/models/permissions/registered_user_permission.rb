@@ -34,7 +34,7 @@ module Permissions
 
         allow :preorders, :create
 
-        allow :connections, [:index, :synchronize, :progress]
+        allow :connections, [:index, :synchronize, :progress, :destroy]
 
         allow :activities, :index
 

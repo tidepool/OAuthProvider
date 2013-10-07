@@ -35,8 +35,29 @@ class FitbitRegistration < BaseRegistration
       @authentication.subscription_info = 'failed'  
       return    
     end
-    Rails.logger.info("Subscription created!")
+    Rails.logger.info("Subscription #{@user.id} created!")
     @authentication.subscription_info = 'subscribed'
+  end
+
+  def remove_subscription
+    client = Fitgem::Client.new(client_config)
+    if client.nil?
+      Rails.logger.error("ProviderError: Cannot create Fitgem to connect to fitbit.")
+      return
+    end
+
+    opts = {
+      type: :all,  # Unsubscribe from all notifications
+      subscription_id: @user.id
+    }
+    code, response = client.remove_subscription(opts)
+    if code == 404
+      Rails.logger.error("ProviderError: User #{@user.id} does not exist, already unsubscribed.")
+      return false
+    end    
+    Rails.logger.info("Subscription #{@user.id} removed!")
+    @authentication.subscription_info = 'unsubscribed'
+    true
   end
 
   def client_config
