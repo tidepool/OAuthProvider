@@ -19,6 +19,16 @@ class RegistrationService
     MailSender.perform_async(:UserMailer, :password_reset_email, { user_id: user.id, temp_password: password } )
   end
 
+  # def register_invited_user(email)
+  #   user = User.new
+  #   user.email = email
+  #   user.guest = true
+  #   user.password = user.password_confirmation = "12345678"
+  #   user.password_digest = "Tidepool-Invited-User"
+  #   user.save!
+  #   user
+  # end
+
   def register_guest_or_full(attributes)
     begin
       register_guest_or_full!(attributes)

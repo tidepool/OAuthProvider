@@ -40,6 +40,7 @@ module Permissions
       expect(subject.allow?(:users, :update, target_user)).to be_true
       expect(subject.allow?(:users, :destroy, target_user)).to be_true
       expect(subject.allow?(:users, :personality, target_user)).to be_true
+      expect(subject.allow?(:users, :invite_friends, target_user)).to be_true
     end
 
     it 'admin permissions for recommendations' do
