@@ -31,6 +31,7 @@ OAuthProvider::Application.routes.draw do
       resources :users do 
         get 'personality', to: 'users#personality'
         post 'reset_password', to: 'users#reset_password'
+        post 'invite_friends', to: 'users#invite_friends'
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
