@@ -13,11 +13,9 @@ class FaceOffGenerator < BaseGenerator
   def generate(stage_no, stage_template)
     stage = {}
     difficulty_map = {
-      "1" => 0,
-      "2" => 1, 
-      "2.2" => 2, 
-      "2.5" => 3,
-      "3" => 4
+      "1" => 1,
+      "2" => 2, 
+      "3" => 3
     }
     stage.merge!(stage_template)
     difficulty_multiplier = stage_template["difficulty_multiplier"].to_s
