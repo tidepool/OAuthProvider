@@ -76,6 +76,7 @@
         "secondary_multiplier": 1,
         "difficulty_multiplier": 1, 
         "number_of_images": 2,
+        "number_of_choices": 3,
         "images": [
           { 
             "path": "fo-amusement.jpg",
@@ -107,6 +108,7 @@
         "secondary_multiplier": 1,
         "difficulty_multiplier": 2,
         "number_of_images": 2, 
+        "number_of_choices": 4,
         "images": [
           { 
             "path": "fo-boredom.jpg",
