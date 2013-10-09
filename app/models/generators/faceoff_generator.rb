@@ -23,6 +23,7 @@ class FaceOffGenerator < BaseGenerator
     difficulty_multiplier = stage_template["difficulty_multiplier"].to_s
     difficulty = difficulty_map[difficulty_multiplier].to_i || 0
     number_of_images = stage_template["number_of_images"].to_i || 5
+    number_of_choices = stage_template["number_of_choices"].to_i || 4
     images = []
     (0...number_of_images).each do |i|
       range = 0...@image_list[difficulty].length
@@ -37,13 +38,26 @@ class FaceOffGenerator < BaseGenerator
         emotions << image[:secondary]
       end
       emotions << image[:primary]
-      alternate = image[:alternate].split(',') 
+      alternate = create_extra_choices(image, number_of_choices, emotions.length)
+      # alternate = image[:alternate].split(',') 
       emotions.concat(alternate) 
       image_entry["emotions"] = emotions.shuffle
       images << image_entry
     end
     stage["images"] = images
     stage
+  end
+
+  def create_extra_choices(image, number_of_choices, existing)
+    return [] if existing >= number_of_choices
+    choices = image[:alternate].split(',') 
+    number_of_choices_left = number_of_choices - existing 
+    choices_left = []
+    choices.each_with_index do | emotion, i |
+      break if i >= number_of_choices_left
+      choices_left << emotion 
+    end
+    choices_left
   end
 
   def pick_random(range, images)

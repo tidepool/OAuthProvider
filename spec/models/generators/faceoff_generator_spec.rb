@@ -31,4 +31,22 @@ describe FaceOffGenerator do
     stage.should_not be_nil
     stage["images"].length.should == stage["number_of_images"].to_i
   end
+
+  it 'caps the choices to the number_of_choices' do 
+    generator = FaceOffGenerator.new(nil)
+    image = { alternate: "anger,shame,happiness"}
+    choices = generator.create_extra_choices(image, 4, 2)
+    choices.length.should == 2
+    choices[0].should == 'anger'
+    choices[1].should == 'shame'
+
+    choices = generator.create_extra_choices(image, 3, 2)
+    choices.length.should == 1
+
+    choices = generator.create_extra_choices(image, 3, 3)
+    choices.length.should == 0
+
+    choices = generator.create_extra_choices(image, 5, 1)
+    choices.length.should == 3
+  end
 end
