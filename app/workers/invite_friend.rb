@@ -7,7 +7,10 @@ class InviteFriend
     if friend
       add_user_as_friend(user_id, friend)
     else
-      invite_user(user_id, friend_email) unless status == 'sent'      
+      unless status == 'sent'   
+        add_user_to_invited_user(user_id, friend_email)
+        invite_user(user_id, friend_email)    
+      end
     end
   end
 
@@ -23,5 +26,10 @@ class InviteFriend
   def add_user_as_friend(user_id, friend)
     friendship = Friendship.where(user_id: user_id, friend_id: friend.id).first_or_initialize   
     friendship.save! 
+  end
+
+  def add_user_to_invited_user(user_id, email)
+    invited_user = InvitedUser.where(inviter_id: user_id, invited_email: email).first_or_initialize
+    invited_user.save!
   end
 end
