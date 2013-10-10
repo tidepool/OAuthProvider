@@ -77,7 +77,7 @@
         "secondary_multiplier": 1,
         "difficulty_multiplier": 1, 
         "number_of_images": 3,
-        "number_of_choices": 3
+        "number_of_choices": 4
       },
       {
         "friendly_name": "Face Off",
