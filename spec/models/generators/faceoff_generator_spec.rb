@@ -11,7 +11,7 @@ describe FaceOffGenerator do
 
     images = generator.initialize_images
     images.should_not be_empty
-    images.length.should == 5
+    images.length.should == 3
   end
 
   it 'picks a random image from a set of images' do 
@@ -49,4 +49,76 @@ describe FaceOffGenerator do
     choices = generator.create_extra_choices(image, 5, 1)
     choices.length.should == 3
   end
+
+  it 'picks 3 random emotions from a list' do 
+    generator = FaceOffGenerator.new(nil)
+    emotions = "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved"
+    random_emotions = generator.pick_random_emotion(emotions)
+    random_emotions.length.should == 3    
+  end
+
+  it 'generates a primary_only stage' do 
+    stage = {
+        "friendly_name" => "Face Off",
+        "instructions" => "Find the emotion behind the face.",
+        "view_name" => "FaceOff",
+        "client_view_name" => "FaceOff",
+        "image_url_base" => "",
+        "stage_type" => "primary_only",
+        "time_to_show" => 1000,
+        "primary_multiplier" => 2,
+        "secondary_multiplier" => 1,
+        "difficulty_multiplier" => 1,
+        "number_of_images" => 3, 
+        "number_of_choices" => 4
+      }
+    generator = FaceOffGenerator.new(nil)
+    output = generator.generate(0, stage)
+
+    output.should_not be_nil
+
+  end
+
+  it 'generates a primary_secondary stage' do 
+    stage = {
+        "friendly_name" => "Face Off",
+        "instructions" => "Find the emotion behind the face.",
+        "view_name" => "FaceOff",
+        "client_view_name" => "FaceOff",
+        "image_url_base" => "",
+        "stage_type" => "primary_secondary",
+        "time_to_show" => 1000,
+        "primary_multiplier" => 2,
+        "secondary_multiplier" => 1,
+        "difficulty_multiplier" => 1,
+        "number_of_images" => 3, 
+        "number_of_choices" => 4
+      }
+    generator = FaceOffGenerator.new(nil)
+    output = generator.generate(0, stage)
+    output.should_not be_nil
+
+  end
+
+  it 'generates a primary_nuanced stage' do 
+    stage = {
+        "friendly_name" => "Face Off",
+        "instructions" => "Find the emotion behind the face.",
+        "view_name" => "FaceOff",
+        "client_view_name" => "FaceOff",
+        "image_url_base" => "",
+        "stage_type" => "primary_nuanced",
+        "time_to_show" => 1000,
+        "primary_multiplier" => 2,
+        "secondary_multiplier" => 1,
+        "difficulty_multiplier" => 1,
+        "number_of_images" => 3, 
+        "number_of_choices" => 4
+      }
+    generator = FaceOffGenerator.new(nil)
+    output = generator.generate(0, stage)
+    output.should_not be_nil
+
+  end
+
 end
