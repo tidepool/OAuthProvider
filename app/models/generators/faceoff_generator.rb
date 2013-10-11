@@ -3,11 +3,9 @@ require 'csv'
 class FaceOffGenerator < BaseGenerator
   attr_accessor :picked_images, :max_tries
 
-  MAX_TRIES = 3
   def initialize(user)
     @image_list = initialize_images
     @picked_images = {}
-    @max_tries = MAX_TRIES
     @nuanced_emotions = {
       "Happy" => "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved",
       "Sad" => "Agony,Suffering,Hurted,Anguish,Depressed,Despaired,Hopelessness,Gloomy,Sad,Unhappy,Grieving,Sorrow,Woed,Misery,Dismayed,Disappointed,Displeased,Guilty,Ashamed,Regretful,Remorseful,Alienated,Isolated,Neglected,Defeated,Dejected,Insecure,Embarrassed,Humiliated,Insulted,Pity,Sympathy",
@@ -17,21 +15,14 @@ class FaceOffGenerator < BaseGenerator
 
   def generate(stage_no, stage_template)
     stage = {}
-    # difficulty_map = {
-    #   "1" => 1,
-    #   "2" => 2, 
-    #   "3" => 3
-    # }
     stage.merge!(stage_template)
-    # difficulty_multiplier = stage_template["difficulty_multiplier"].to_s
-    # difficulty = difficulty_map[difficulty_multiplier].to_i || 0
     number_of_images = stage_template["number_of_images"].to_i || 5
     number_of_choices = stage_template["number_of_choices"].to_i || 4
     stage_type = stage_template["stage_type"] || 'primary_only'
     images = []
     (0...number_of_images).each do |i|
       range = 0...@image_list[stage_type.to_sym].length
-      image = pick_random(range, @image_list[stage_type.to_sym])
+      image = pick_random_from_array(@image_list[stage_type.to_sym], 1)
 
       emotions = []
       image_entry = {}
@@ -50,18 +41,13 @@ class FaceOffGenerator < BaseGenerator
         image_entry["primary_nuanced"] = image[:nuanced]
         nuanced_emotions = []
         nuanced_emotions << image[:nuanced]
-        alternate_nuanced = pick_random_emotion(@nuanced_emotions[image[:emo_group]])
+        emotions_list = @nuanced_emotions[image[:emo_group]].split(',')
+        alternate_nuanced = pick_random_from_array(emotions_list, 3)
         nuanced_emotions.concat(alternate_nuanced)
         image_entry["nuanced_emotions"] = nuanced_emotions.shuffle
       end
       alternate = create_extra_choices(image, number_of_choices, emotions.length)
            
-      # unless image[:secondary].nil?
-      #   image_entry["secondary"] = image[:secondary] 
-      #   emotions << image[:secondary]
-      # end
-      
-      # alternate = image[:alternate].split(',') 
       emotions.concat(alternate) 
       image_entry["emotions"] = emotions.shuffle
       images << image_entry
@@ -82,39 +68,14 @@ class FaceOffGenerator < BaseGenerator
     choices_left
   end
 
-  def pick_random(range, images)
-    selected_image = {}
-    (0...@max_tries).each do |i|
-      random_generator = Random.new
-      index = random_generator.rand(range)
-      name = images[index][:name]
-      if @picked_images[name].nil? || i == (@max_tries - 1)
-        @picked_images[name] = true
-        selected_image = images[index]
-        break
-      end
+  def pick_random_from_array(list, number_of_picks)
+    picked_list = []
+    (0...number_of_picks).each do |i|
+      index = Random.new.rand(list.length)
+      picked_list << list[index]
+      list = list - [list[index]]
     end
-    selected_image
-  end
-
-  def pick_random_emotion(emotions)
-    emotion_list = emotions.split(',')
-    range = emotion_list.length
-    picked_emotions = {}
-    listed_emotions = []
-    (0...3).each do |i|
-      (0...@max_tries).each do |i|
-        random_generator = Random.new
-        index = random_generator.rand(range)
-        emotion = emotion_list[index]
-        if @picked_images[emotion].nil? || i == (@max_tries - 1)
-          @picked_images[emotion] = true
-          listed_emotions << emotion
-          break
-        end
-      end
-    end
-    listed_emotions
+    number_of_picks > 1 ? picked_list : picked_list[0]
   end
 
   def initialize_images

@@ -18,12 +18,36 @@
             "question": "How do you feel right now?",
             "options": [
                 {
+                    "label": "happy",
+                    "value": "happy"
+                },
+                {
+                    "value": "bored",
+                    "label": "bored"
+                },
+                {
                     "value": "angry",
                     "label": "angry"
                 },
                 {
                     "value": "sad",
                     "label": "sad"
+                },
+                {
+                    "value": "amused",
+                    "label": "amused"
+                },
+                {
+                    "label": "surprised",
+                    "value": "surprised"
+                },
+                {
+                    "label": "proud",
+                    "value": "proud"
+                },
+                {
+                    "label": "embarrassed",
+                    "value": "embarrassed"
                 },
                 {
                     "value": "disgusted",
@@ -36,30 +60,6 @@
                 {
                     "value": "ashamed",
                     "label": "ashamed"
-                },
-                {
-                    "label": "surprised",
-                    "value": "surprised"
-                },
-                {
-                    "label": "embarrassed",
-                    "value": "embarrassed"
-                },
-                {
-                    "value": "bored",
-                    "label": "bored"
-                },
-                {
-                    "value": "amused",
-                    "label": "amused"
-                },
-                {
-                    "label": "proud",
-                    "value": "proud"
-                },
-                {
-                    "label": "happy",
-                    "value": "happy"
                 }
             ]
           }
