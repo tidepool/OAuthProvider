@@ -14,15 +14,15 @@ describe FaceOffGenerator do
     images.length.should == 3
   end
 
-  it 'picks a random image from a set of images' do 
+  it 'picks a random item or items from a list' do 
     generator = FaceOffGenerator.new(nil)
-    generator.picked_images = { "foo1" => true, "foo2" => true, "bar2" => true }
-    generator.max_tries = 100
+    images = generator.initialize_images
+    picked_item = generator.pick_random_from_array(images[:primary_only], 1)
+    picked_item[:name].should_not be_nil
 
-    images = [{name: "foo1"}, {name: "foo2"}, {name: "bar1"}, {name: "bar2"}]
-    image = generator.pick_random((0...images.length), images)
-    image.should_not be_nil
-    image[:name].should == "bar1"
+    emotions = "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved"
+    picked = generator.pick_random_from_array(emotions.split(","), 3)
+    picked.length.should == 3
   end
 
   it 'generates the correct stages' do 
@@ -50,13 +50,6 @@ describe FaceOffGenerator do
     choices.length.should == 3
   end
 
-  it 'picks 3 random emotions from a list' do 
-    generator = FaceOffGenerator.new(nil)
-    emotions = "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved"
-    random_emotions = generator.pick_random_emotion(emotions)
-    random_emotions.length.should == 3    
-  end
-
   it 'generates a primary_only stage' do 
     stage = {
         "friendly_name" => "Face Off",
@@ -74,9 +67,12 @@ describe FaceOffGenerator do
       }
     generator = FaceOffGenerator.new(nil)
     output = generator.generate(0, stage)
-
     output.should_not be_nil
-
+    output["images"].length.should == 3
+    output["images"][0]["secondary"].should be_nil
+    output["images"][0]["primary"].should_not be_nil
+    output["images"][0]["emotions"].length.should == 4
+    output["images"][0]["path"].should_not be_nil    
   end
 
   it 'generates a primary_secondary stage' do 
@@ -97,7 +93,11 @@ describe FaceOffGenerator do
     generator = FaceOffGenerator.new(nil)
     output = generator.generate(0, stage)
     output.should_not be_nil
-
+    output["images"].length.should == 3
+    output["images"][0]["secondary"].should_not be_nil
+    output["images"][0]["primary"].should_not be_nil
+    output["images"][0]["emotions"].length.should == 4
+    output["images"][0]["path"].should_not be_nil    
   end
 
   it 'generates a primary_nuanced stage' do 
@@ -118,7 +118,13 @@ describe FaceOffGenerator do
     generator = FaceOffGenerator.new(nil)
     output = generator.generate(0, stage)
     output.should_not be_nil
-
+    output["images"].length.should == 3
+    output["images"][0]["secondary"].should be_nil
+    output["images"][0]["primary"].should_not be_nil
+    output["images"][0]["primary_nuanced"].should_not be_nil
+    output["images"][0]["nuanced_emotions"].length.should == 4
+    output["images"][0]["emotions"].length.should == 4
+    output["images"][0]["path"].should_not be_nil    
   end
 
 end
