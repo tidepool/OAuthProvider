@@ -42,6 +42,25 @@ class EmoAggregateResult < AggregateResult
     # Update the high scores
     result.high_scores = result.update_high_scores(score[:eq_score].to_i, time, timezone_offset)
 
+    reported_mood = score[:reported_mood]
+    existing_scores = result.scores || {}
+
+    existing_scores[reported_mood] = result.update_emo_breakdown_results(reported_mood, existing_scores, score[:emo_groups])
+    result.scores = existing_scores
+
     result.save ? result : nil
+  end
+
+  def update_emo_breakdown_results(reported_mood, existing_breakdown, new_breakdown)
+    return new_breakdown if existing_breakdown.nil?    
+
+    existing_breakdown = existing_breakdown[reported_mood]
+    return new_breakdown if existing_breakdown.nil?  
+
+    new_breakdown.each do | emo_group, value | 
+      value[:corrects] += existing_breakdown[emo_group.to_s]["corrects"]
+      value[:incorrects] += existing_breakdown[emo_group.to_s]["incorrects"]      
+    end
+    new_breakdown
   end
 end

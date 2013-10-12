@@ -307,8 +307,32 @@ FactoryGirl.define do
         "daily_best" => 1600,
         "current_day" => Time.zone.now.to_s
       }
+    end 
+    
+    factory :emo_aggregate_result do 
+      type 'EmoAggregateResult'
+      scores do 
+        {
+          sad: 
+            {
+              happy: { corrects: 6, incorrects: 2 },
+              sad: { corrects: 4, incorrects: 1 },
+              angry: { corrects: 1, incorrects: 0 }, 
+              disgust: { corrects: 1, incorrects: 2 }, 
+              fear: { corrects: 3, incorrects: 1 },
+              surprise: {corrects: 0, incorrects: 3 }              
+            }
+        }
+      end
+      high_scores do 
+        {
+          "all_time_best" => 4000,
+          "daily_best" => 1600,
+          "current_day" => Time.zone.now.to_s, 
+          "daily_data_points" => 1
+        }        
+      end
     end
 
-    
   end
 end

@@ -5,11 +5,13 @@ class FaceOffGenerator < BaseGenerator
 
   def initialize(user)
     @image_list = initialize_images
-    @picked_images = {}
     @nuanced_emotions = {
-      "Happy" => "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved",
-      "Sad" => "Agony,Suffering,Hurted,Anguish,Depressed,Despaired,Hopelessness,Gloomy,Sad,Unhappy,Grieving,Sorrow,Woed,Misery,Dismayed,Disappointed,Displeased,Guilty,Ashamed,Regretful,Remorseful,Alienated,Isolated,Neglected,Defeated,Dejected,Insecure,Embarrassed,Humiliated,Insulted,Pity,Sympathy",
-      "Angry" => "Irritated,Aggravated,Agitated,Annoyed,Grouchy,Grumpy,Frustrated,Angry,Rage,Outraged,Furious,Hostile,Ferocious,Bitter,Hate,Dislike,Resentment,Envious,Jealous,Tormented"
+      "happy" => "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved",
+      "sad" => "Agony,Suffering,Hurted,Anguish,Depressed,Despaired,Hopelessness,Gloomy,Sad,Unhappy,Grieving,Sorrow,Woed,Misery,Dismayed,Disappointed,Displeased,Guilty,Ashamed,Regretful,Remorseful,Alienated,Isolated,Neglected,Defeated,Dejected,Insecure,Embarrassed,Humiliated,Insulted,Pity,Sympathy",
+      "angry" => "Irritated,Aggravated,Agitated,Annoyed,Grouchy,Grumpy,Frustrated,Angry,Rage,Outraged,Furious,Hostile,Ferocious,Bitter,Hate,Dislike,Resentment,Envious,Jealous,Tormented",
+      "fear" => "",
+      "disgust" => "",
+      "surprise" => ""
     }
   end
 
@@ -28,6 +30,7 @@ class FaceOffGenerator < BaseGenerator
       image_entry = {}
       image_entry["path"] = image[:name]
       image_entry["primary"] = image[:primary]
+      image_entry["emo_group"] = image[:emo_group]
       
       emotions << image[:primary]
 
@@ -47,7 +50,6 @@ class FaceOffGenerator < BaseGenerator
         image_entry["nuanced_emotions"] = nuanced_emotions.shuffle
       end
       alternate = create_extra_choices(image, number_of_choices, emotions.length)
-           
       emotions.concat(alternate) 
       image_entry["emotions"] = emotions.shuffle
       images << image_entry
@@ -89,9 +91,10 @@ class FaceOffGenerator < BaseGenerator
     CSV.foreach(emo_image_path, :encoding => 'windows-1251:utf-8') do |row|
       desc_attr = {}
       row.each_with_index do |value, i|
-        desc_attr[attributes[i]] = value.delete(' ') unless value.nil?
+        attribute = attributes[i]
+        desc_attr[attribute] = value.delete(' ') unless value.nil?
+        desc_attr[attribute] = desc_attr[attribute].downcase if attribute == :emo_group
       end
-      # difficulty = desc_attr[:difficulty].to_i || 0
       bucket = :primary_only
       if desc_attr[:secondary] && !desc_attr[:secondary].empty?
         bucket = :primary_secondary

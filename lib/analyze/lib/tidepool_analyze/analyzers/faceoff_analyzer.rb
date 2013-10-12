@@ -37,14 +37,20 @@ module TidepoolAnalyze
           when 'level_completed'
             @end_time = get_time(entry)
           when 'correct'
+            emo_group = nil
+            emo_group = entry['emo_group'].downcase if entry['emo_group']
             @emotions[:correct] << {
               emotion: entry['value'],
+              emo_group: emo_group,
               instant_replay: entry['instant_replay'] || 0,
               type: entry['type'] || "primary"
             }
           when 'incorrect'
+            emo_group = nil
+            emo_group = entry['emo_group'].downcase if entry['emo_group']
             @emotions[:incorrect] << {
               emotion: entry['value'],
+              emo_group: emo_group,
               instant_replay: entry['instant_replay'] || 0
             }
           end
