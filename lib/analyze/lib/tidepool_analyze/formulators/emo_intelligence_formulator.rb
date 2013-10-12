@@ -16,11 +16,13 @@ module TidepoolAnalyze
       #     emotions: {
       #       correct: [
       #         emotion: entry['value'],
+      #         emo_group: entry['emo_group'],
       #         instant_replay: entry['instant_replay'],
       #         type: entry['type']
       #       ], 
       #       incorrect: [
       #         emotion: entry['value'],
+      #         emo_group: entry['emo_group'],
       #         instant_replay: entry['instant_replay']
       #       ]
       #     }
@@ -39,6 +41,15 @@ module TidepoolAnalyze
         incorrects = 0
         instant_replays = 0
         time_elapsed = 0
+        emo_groups = {
+          happy: { corrects: 0, incorrects: 0 },
+          sad: { corrects: 0, incorrects: 0 },
+          angry: { corrects: 0, incorrects: 0 }, 
+          disgust: { corrects: 0, incorrects: 0 }, 
+          fear: { corrects: 0, incorrects: 0 },
+          surprise: {corrects: 0, incorrects: 0 }
+        }
+
         @emo_results.each do | stage |
           primary_multiplier = stage[:primary_multiplier]
           secondary_multiplier = stage[:secondary_multiplier]
@@ -49,11 +60,15 @@ module TidepoolAnalyze
           corrects += emotions[:correct].length
           incorrects += emotions[:incorrect].length
           emotions[:correct].each do |entry|
+            emo_group = entry[:emo_group] ? entry[:emo_group].to_sym : nil
+            emo_groups[emo_group][:corrects] += 1 if emo_groups[emo_group]
             multiplier = entry[:type] == 'primary' ? primary_multiplier : secondary_multiplier
             stage_score += CORRECT_SCORE * multiplier + INSTANT_REPLAY_SCORE * entry[:instant_replay]
             instant_replays += entry[:instant_replay]
           end
           emotions[:incorrect].each do |entry|
+            emo_group = entry[:emo_group] ? entry[:emo_group].to_sym : nil
+            emo_groups[emo_group][:incorrects] += 1 if emo_groups[emo_group]
             stage_score += INCORRECT_SCORE + INSTANT_REPLAY_SCORE * entry[:instant_replay]
             instant_replays += entry[:instant_replay]
           end
@@ -62,6 +77,7 @@ module TidepoolAnalyze
         end
         score = 0 if score < 0
         {
+          emo_groups: emo_groups,
           eq_score: score,
           corrects: corrects,
           incorrects: incorrects, 

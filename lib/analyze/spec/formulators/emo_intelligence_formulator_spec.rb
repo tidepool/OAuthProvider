@@ -16,11 +16,13 @@ module TidepoolAnalyze
               :correct => [
                 {
                            :emotion => "content",
+                           :emo_group => "happy",
                     :instant_replay => 0,
                               :type => "secondary"
                 },
                 {
                            :emotion => "fear",
+                           :emo_group => "fear",
                     :instant_replay => 0,
                               :type => "primary"
                 }
@@ -38,6 +40,7 @@ module TidepoolAnalyze
               :correct => [
                 {
                            :emotion => "embarrassment",
+                           :emo_group => "sad",
                     :instant_replay => 0,
                               :type => "primary"
                 }
@@ -45,6 +48,7 @@ module TidepoolAnalyze
             :incorrect => [
                 {
                            :emotion => "pain",
+                           :emo_group => "fear",
                     :instant_replay => 0
                 }
               ]
@@ -58,12 +62,19 @@ module TidepoolAnalyze
         result = emo_formulator.calculate_result
         result.should_not be_nil
         result.should == {
-          :eq_score=>660,
-          :corrects=>3,
-          :incorrects=>1,
-          :instant_replays=>0,
-          :time_elapsed=>14565
-        }
+          :emo_groups=>
+            {:happy=>{:corrects=>1, :incorrects=>0},
+             :sad=>{:corrects=>1, :incorrects=>0},
+             :angry=>{:corrects=>0, :incorrects=>0},
+             :disgust=>{:corrects=>0, :incorrects=>0},
+             :fear=>{:corrects=>1, :incorrects=>1},
+             :surprise=>{:corrects=>0, :incorrects=>0}},
+           :eq_score=>660,
+           :corrects=>3,
+           :incorrects=>1,
+           :instant_replays=>0,
+           :time_elapsed=>14565
+         }
       end
     end
   end
