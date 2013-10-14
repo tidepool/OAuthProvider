@@ -26,6 +26,10 @@ class EmoIntelligenceResult < Result
     result.time_elapsed = score[:time_elapsed]
     result.reported_mood = score[:reported_mood]
 
+    result.calculations = {
+      emo_groups: score[:emo_groups]
+    }
+
     result.analysis_version = score[:version]
     result.record_times(game, analysis_results[:emo_intelligence][:timezone_offset])
     result.save ? result : nil
