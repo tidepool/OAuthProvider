@@ -18,4 +18,8 @@ class PersistEmoIntelligence
 
     aggregate_result
   end
+
+  def calculate_emo_archetype()
+
+  end
 end
