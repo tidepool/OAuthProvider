@@ -19,6 +19,7 @@ describe 'Users API' do
   let(:aggregate_result) { create(:aggregate_result, user: user2) }
   let(:sleep_aggregate_result) { create(:aggregate_result, type: 'SleepAggregateResult', user: user2) }
   let(:activity_aggregate_result) { create(:aggregate_result, type: 'ActivityAggregateResult', user: user2) }
+  let(:emo_aggregate_result) { create(:emo_aggregate_result, user: user2) }
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -231,14 +232,24 @@ describe 'Users API' do
     aggregate_result
     sleep_aggregate_result
     activity_aggregate_result
+    emo_aggregate_result
     token = get_conn(user2)
     response = token.get("#{@endpoint}/users/-.json")
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
-    user_info[:aggregate_results].length.should == 3
+    user_info[:aggregate_results].length.should == 4
     # Always ensure the first aggregate result is SpeedAggregateResult, because of a backwards compat
     # bug in the iOS client.
     user_info[:aggregate_results][0][:type].should == 'SpeedAggregateResult'
+    user_info[:aggregate_results].each do |result|
+      if result[:type] == "EmoAggregateResult"
+        result[:badge].should_not be_nil
+        result[:badge][:character].should == "trump"
+      elsif result[:type] == "SpeedAggregateResult" 
+        result[:badge].should_not be_nil
+        result[:badge][:character].should == "gorilla"
+      end
+    end
   end
 
   it 'invites the users friends' do 
