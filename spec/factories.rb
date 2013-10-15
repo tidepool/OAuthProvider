@@ -37,6 +37,33 @@ FactoryGirl.define do
       end
     end
 
+    factory :emo_intelligence_result do 
+      type 'EmoIntelligenceResult'
+      score do 
+        {
+               "corrects" => "6",
+               "eq_score" => "3840",
+             "incorrects" => "4",
+           "time_elapsed" => "2100",
+           "reported_mood"=>"sad",
+        "instant_replays" => "7"
+        }
+      end
+      calculations do 
+        {
+          "emo_groups" => {
+             :happy=>{:corrects=>1, :incorrects=>0},
+             :sad=>{:corrects=>1, :incorrects=>0},
+             :angry=>{:corrects=>0, :incorrects=>0},
+             :disgust=>{:corrects=>0, :incorrects=>0},
+             :fear=>{:corrects=>1, :incorrects=>1},
+             :surprise=>{:corrects=>0, :incorrects=>0}
+          }
+        }
+      end
+
+    end
+
     factory :speed_archetype_result do 
       type 'SpeedArchetypeResult'
       score do 

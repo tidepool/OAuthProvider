@@ -209,6 +209,24 @@ describe 'Results API' do
     end
   end
 
+  describe 'EmoIntelligenceResult' do 
+    let(:emo_intelligence_result) { create(:emo_intelligence_result, game: game, user: user1) } 
+
+    it 'shows the results for the EmoIntelligenceResult' do 
+      emo_intelligence_result
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/results.json?type=EmoIntelligenceResult")
+      response.status.should == 200
+      output = JSON.parse(response.body, :symbolize_names => true)
+      user_results = output[:data]
+      user_results[0].should_not be_nil
+      user_results[0][:type].should == 'EmoIntelligenceResult'
+      user_results[0][:reported_mood].should == 'sad'
+      user_results[0][:badge][:character].should == 'einstein'
+      user_results[0][:eq_score].should == "3840"
+    end
+  end
+
   describe 'Error and Edge Cases' do
     
   end
