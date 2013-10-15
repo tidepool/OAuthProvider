@@ -305,7 +305,8 @@ FactoryGirl.define do
       {
         "all_time_best" => 2400,
         "daily_best" => 1600,
-        "current_day" => Time.zone.now.to_s
+        "current_day" => Time.zone.now.to_s,
+        "last_value" => 8
       }
     end 
     
@@ -329,7 +330,8 @@ FactoryGirl.define do
           "all_time_best" => 4000,
           "daily_best" => 1600,
           "current_day" => Time.zone.now.to_s, 
-          "daily_data_points" => 1
+          "daily_data_points" => 1,
+          "last_value" => 1800
         }        
       end
     end

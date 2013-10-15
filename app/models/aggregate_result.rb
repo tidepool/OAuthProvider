@@ -18,6 +18,7 @@ class AggregateResult < ActiveRecord::Base
       "daily_average" => 0.0,
       "daily_data_points" => 0,
       "daily_total" => 0,
+      "last_score" => 0,
       "current_day" => time.to_s
     }
   end
@@ -34,6 +35,7 @@ class AggregateResult < ActiveRecord::Base
       daily_average: daily_average,
       daily_data_points: daily_data_points,
       daily_total: daily_total,
+      last_score: score,
       current_day: today.to_s
     }
   end

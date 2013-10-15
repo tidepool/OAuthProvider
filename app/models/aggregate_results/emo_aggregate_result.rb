@@ -7,6 +7,7 @@ class EmoAggregateResult < AggregateResult
   store_accessor :high_scores, :daily_total
   store_accessor :high_scores, :daily_data_points
   store_accessor :high_scores, :current_day
+  store_accessor :high_scores, :last_value
 
   def all_time_best=(value)
     super(value.to_i)
@@ -21,6 +22,14 @@ class EmoAggregateResult < AggregateResult
   end
 
   def daily_best
+    super.to_i
+  end
+
+  def last_value=(value)
+    super(value.to_i)
+  end
+
+  def last_value
     super.to_i
   end
 
@@ -48,6 +57,7 @@ class EmoAggregateResult < AggregateResult
     existing_scores[reported_mood] = result.update_emo_breakdown_results(reported_mood, existing_scores, score[:emo_groups])
     result.scores = existing_scores
 
+    result.last_value = score[:eq_score]
     result.save ? result : nil
   end
 

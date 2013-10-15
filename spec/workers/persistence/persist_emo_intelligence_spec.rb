@@ -107,6 +107,7 @@ describe PersistEmoIntelligence do
     result.high_scores["daily_best"].should == "3840"
     result.high_scores["all_time_best"].should == "4000"
     result.high_scores["daily_average"].should == "1920"
+    result.high_scores["last_value"].should == "3840"
 
     result.scores.should == {
       "sad" => 

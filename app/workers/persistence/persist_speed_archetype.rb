@@ -10,7 +10,7 @@ class PersistSpeedArchetype
     aggregate_result = update_aggregate_result(game, analysis_results)
     desc = calculate_speed_archetype(aggregate_result, reaction_time2_score)
 
-    aggregate_result.last_description_id = desc.id
+    aggregate_result.last_value = desc.id
     aggregate_result.save!
 
     # There is only one result instance if this type per game

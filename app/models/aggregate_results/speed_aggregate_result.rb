@@ -7,7 +7,8 @@ class SpeedAggregateResult < AggregateResult
   store_accessor :high_scores, :daily_total
   store_accessor :high_scores, :daily_data_points
   store_accessor :high_scores, :current_day
-  store_accessor :high_scores, :last_description_id
+  store_accessor :high_scores, :last_value
+  store_accessor :high_scores, :last_score
 
   def all_time_best=(value)
     super(value.to_i)
@@ -22,6 +23,14 @@ class SpeedAggregateResult < AggregateResult
   end
 
   def daily_best
+    super.to_i
+  end
+
+  def last_score=(value)
+    super(value.to_i)
+  end
+
+  def last_score
     super.to_i
   end
     
