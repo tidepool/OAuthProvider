@@ -8,7 +8,6 @@ describe FaceOffGenerator do
 
   it 'initializes an in-memory representation of emo images' do
     generator = FaceOffGenerator.new(nil)
-
     images = generator.initialize_images
     images.should_not be_empty
     images.length.should == 3
@@ -27,7 +26,7 @@ describe FaceOffGenerator do
 
   it 'generates the correct stages' do 
     generator = FaceOffGenerator.new(nil)
-    stage = generator.generate(0, @definition["stages"][0])
+    stage = generator.generate(0, @definition["stages"][1])
     stage.should_not be_nil
     stage["images"].length.should == stage["number_of_images"].to_i
   end

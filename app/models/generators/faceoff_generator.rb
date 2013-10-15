@@ -22,10 +22,12 @@ class FaceOffGenerator < BaseGenerator
     number_of_choices = stage_template["number_of_choices"].to_i || 4
     stage_type = stage_template["stage_type"] || 'primary_only'
     images = []
-    (0...number_of_images).each do |i|
+    picked_images = pick_random_from_array(@image_list[stage_type.to_sym], number_of_images)
+    return stage if picked_images.nil?
+    
+    picked_images.each do |image|
       range = 0...@image_list[stage_type.to_sym].length
-      image = pick_random_from_array(@image_list[stage_type.to_sym], 1)
-
+      # image = pick_random_from_array(@image_list[stage_type.to_sym], 1)
       emotions = []
       image_entry = {}
       image_entry["path"] = image[:name]
