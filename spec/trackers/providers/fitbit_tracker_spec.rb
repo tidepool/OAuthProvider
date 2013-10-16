@@ -102,18 +102,18 @@ describe FitbitTracker do
     it 'handles batch updates for multiple connections' do 
       updates = [
         {
-          "collectionType" => "sleep",
-          "date" => "2010-03-02",
-          "ownerId" => "228S74",
-          "ownerType" => "user",
-          "subscriptionId" => connection1.user_id.to_s
+          :collectionType => "sleep",
+          :date => "2010-03-02",
+          :ownerId => "228S74",
+          :ownerType => "user",
+          :subscriptionId => connection1.user_id.to_s
         },
         {
-          "collectionType" => "activities",
-          "date" => "2010-03-01",
-          "ownerId" => "184X36",
-          "ownerType" => "user",
-          "subscriptionId" => connection2.user_id.to_s
+          :collectionType => "activities",
+          :date => "2010-03-01",
+          :ownerId => "184X36",
+          :ownerType => "user",
+          :subscriptionId => connection2.user_id.to_s
         }
       ]
       provider = 'fitbit'

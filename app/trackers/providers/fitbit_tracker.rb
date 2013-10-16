@@ -11,13 +11,13 @@ class FitbitTracker
       "body" => "measurements"
     }
     updates.each do |update|
-      item_type = item_mapping[update["collectionType"]]
+      item_type = item_mapping[update[:collectionType]]
       if item_type.nil?
-        Rails.logger.error("ProviderError: Incorrect item_type provided - #{update['collectionType']}")
+        Rails.logger.error("ProviderError: Incorrect item_type provided - #{update[:collectionType]}")
         next
       end
 
-      subscription_id = update["subscriptionId"]
+      subscription_id = update[:subscriptionId]
       connection = Authentication.where(user_id: subscription_id.to_i).first
       if connection.nil?
         Rails.logger.error("ProviderError: Cannot find subscriber with user_id #{subscription_id}")
@@ -26,7 +26,7 @@ class FitbitTracker
       last_sync_times = {}
       begin 
         tracker = FitbitTracker.new(connection)
-        date_str = update["date"]
+        date_str = update[:date]
         time_synchronized = tracker.time_from_offset(Time.zone.parse(date_str), connection.timezone_offset)
         sync_item = tracker.synchronize_each(time_synchronized, item_type)
         last_sync_times[item_type.to_s] = time_synchronized.to_s if sync_item
