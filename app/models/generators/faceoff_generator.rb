@@ -47,6 +47,7 @@ class FaceOffGenerator < BaseGenerator
         nuanced_emotions = []
         nuanced_emotions << image[:nuanced]
         emotions_list = @nuanced_emotions[image[:emo_group]].split(',')
+        emotions_list = emotions_list - nuanced_emotions
         alternate_nuanced = pick_random_from_array(emotions_list, 3)
         nuanced_emotions.concat(alternate_nuanced)
         image_entry["nuanced_emotions"] = nuanced_emotions.shuffle
@@ -64,6 +65,17 @@ class FaceOffGenerator < BaseGenerator
     return [] if existing >= number_of_choices
     choices = image[:alternate].split(',') 
     number_of_choices_left = number_of_choices - existing 
+    if choices.length < number_of_choices_left 
+      if image[:secondary]
+        choices << image[:secondary]
+      elsif image[:nuanced]
+        choices << image[:nuanced]
+      end
+
+      if existing > 1 || choices.length < number_of_choices
+        Rails.logger.error("GeneratorError: Not enough choices provided for image #{image[:name]}")
+      end
+    end
     choices_left = []
     choices.each_with_index do | emotion, i |
       break if i >= number_of_choices_left

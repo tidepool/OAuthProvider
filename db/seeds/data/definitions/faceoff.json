@@ -40,6 +40,10 @@
                 {
                     "value": "disgusted",
                     "label": "disgusted"
+                },
+                {
+                    "value": "neutral",
+                    "label": "neutral"
                 }
             ]
           }

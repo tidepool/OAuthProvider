@@ -4,37 +4,37 @@ module EmoBadgeSerialize
       { 
         character: "sheldon",
         title: "Know It All.. Not",
-        description: "If you ever thought intellectual ability was all you needed to succeed, you are for a \"Big Bang\". Emotional intelligence is the ability to be aware of your own emotions, cope with change, understand the needs of others and maintain positive relationships with people."
+        description: "If you ever thought intellectual ability was all you needed to succeed, you are up for a \"Big Bang\". It seems you can resonate well with this modern day hero; emotions simply escape you. Understanding emotions is just not a strength at the moment. You can improve your effectiveness by engaging in emotional training and focusing on the strong aspects of your personality."
       },
       {
         character: "trump",
-        title: "",
-        description: ""
+        title: "Big Boss",
+        description: "The character represented here uses their Low EI for success. The stereotype of the hard-driving salesperson/entrepreneur not only fails to process emotions they practice the art of causing emotional turmoil to their own advantage. Low EI does not mean a lack of success. We encourage you to chose less self-centered means of finding satisfaction and train more for understanding other's emotions."
       },
       {
         character: "steve",
-        title: "",
-        description: ""        
+        title: "Innovator",
+        description: "Some of the most successful people of our generation were by all appearances very attuned to EI. Well, truth be known it is possible to have some failures in emotional regulation, and still be successful beyond all but the wildest dreams. Your EI is such that with insight, training and openness to areas of strength from your personality there is no limit to your effectiveness."        
       },
       {
         character: "einstein",
         title: "Genius",
-        description: "You are good at combining your intelligence with understanding people around you. This unique combination will help you excel at work and in your relationships."
+        description: "Perhaps no one demonstrates the malleability of EI more than this man who can easily be argued to have accomplished more with his life than all but a few people ever did. While he certainly wasn’t without rough edges in his ability to understand emotions, he was able to find the emotional support he needed to do the work that has changed our world forever. Given your own variability in EI we suspect you can resonate and even benefit by considering how far you can go by finding and nurturing the support you need."
       },
       {
         character: "abe",
         title: "Honest Abe",
-        description: "Your ability to regulate your own emotions is key for your extraordinary levels of humility. Humility does not come easy to any leader, and you might achieve more due to your unique levels of EQ."
+        description: "You clearly have a high level of ability to understand and manage your emotions. EI is not the only important fact you need to consider as you move toward a life of personal satisfaction and effectiveness. Consider this icon who despite an unbelievable level of EI struggled with his own internal weaknesses and remember to not only consider the emotions of others but also what you need to nurture you own spirit."
       },
       {
         character: "walt",
         title: "Imagineer",
-        description: "A person with such high emotional intelligence can be very pragmatic because of your skills to understand people around you. You can use this to steer groups for forming new ideas and inspiring to achieve dreams."
+        description: "Few people have been able to understand the emotional dreams of people as did the man who brought these dreams onto the silver screen.  A person with such high emotional intelligence can be very pragmatic because of your skills to understand people around you. You can use this to steer groups for forming new ideas and inspiring to achieve dreams."
       },
       {
         character: "oprah",
         title: "Talk Shaw Diva",
-        description: "You are powerful in the sense that lot of people look to you in times of need. Not only will you guide people with your intelligent advice but you can also express empathy very well. Your strength in emotional intelligence makes you a authentic leader in your field."
+        description: "Many people of great effectiveness like this icon, you are powerful in the sense that lot of people look to you in times of need. Not only will you guide people with your intelligent advice but you can also express empathy very well. Your strength in emotional intelligence makes you a authentic leader in your field."
       }
     ]
 
