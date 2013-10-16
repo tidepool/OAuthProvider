@@ -126,4 +126,20 @@ describe FaceOffGenerator do
     output["images"][0]["path"].should_not be_nil    
   end
 
+  it 'adds the secondary emotion in if the number of choices are not enough' do
+    image = {
+      name: "foo.jpg",
+      emo_group: "Angry",
+      primary: "Disgusted",
+      secondary: nil,
+      nuanced: "Nervous",
+      alternate: "Surprised,Relieved"
+    }    
+    generator = FaceOffGenerator.new(nil)
+    output = generator.create_extra_choices(image, 4, 1)
+    output.should_not be_nil
+    final = ["Surprised","Relieved", "Nervous"] - output
+    final.length.should == 0
+  end
+
 end
