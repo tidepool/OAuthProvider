@@ -22,44 +22,24 @@
                     "value": "happy"
                 },
                 {
-                    "value": "bored",
-                    "label": "bored"
+                    "value": "sad",
+                    "label": "sad"
                 },
                 {
                     "value": "angry",
                     "label": "angry"
                 },
                 {
-                    "value": "sad",
-                    "label": "sad"
-                },
-                {
-                    "value": "amused",
-                    "label": "amused"
-                },
-                {
                     "label": "surprised",
                     "value": "surprised"
-                },
-                {
-                    "label": "proud",
-                    "value": "proud"
-                },
-                {
-                    "label": "embarrassed",
-                    "value": "embarrassed"
-                },
-                {
-                    "value": "disgusted",
-                    "label": "disgusted"
                 },
                 {
                     "value": "afraid",
                     "label": "afraid"
                 },
                 {
-                    "value": "ashamed",
-                    "label": "ashamed"
+                    "value": "disgusted",
+                    "label": "disgusted"
                 }
             ]
           }
