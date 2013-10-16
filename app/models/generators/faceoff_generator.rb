@@ -9,9 +9,9 @@ class FaceOffGenerator < BaseGenerator
       "happy" => "Adoring,Affectionate,Love,Fonds,Caring,Amused,Blissful,Cheerful,Gleeful,Jovial,Delighted,Enjoyment,Ecstatic,Satisfied,Elated,Euphoric,Enthusiastic,Excited,Thrilled,Exhillirated,Contented,Pleased,Proud,Triumph,Eager,Hopeful,Optimistic,Enthralled,Relieved",
       "sad" => "Agony,Suffering,Hurted,Anguish,Depressed,Despaired,Hopelessness,Gloomy,Sad,Unhappy,Grieving,Sorrow,Woed,Misery,Dismayed,Disappointed,Displeased,Guilty,Ashamed,Regretful,Remorseful,Alienated,Isolated,Neglected,Defeated,Dejected,Insecure,Embarrassed,Humiliated,Insulted,Pity,Sympathy",
       "angry" => "Irritated,Aggravated,Agitated,Annoyed,Grouchy,Grumpy,Frustrated,Angry,Rage,Outraged,Furious,Hostile,Ferocious,Bitter,Hate,Dislike,Resentment,Envious,Jealous,Tormented",
-      "fear" => "",
-      "disgust" => "",
-      "surprise" => ""
+      "afraid" => "",
+      "disgusted" => "",
+      "surprised" => ""
     }
   end
 
