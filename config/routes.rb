@@ -69,6 +69,7 @@ OAuthProvider::Application.routes.draw do
       # post '/user_events' => 'user_events#create'
 
       post 'fitbit', to: 'fitbit_notifications#notify'
+      put 'fitbit', to: 'fitbit_notifications#notify'
 
       get 'preferences/:type/description', to: 'preferences#description'
 

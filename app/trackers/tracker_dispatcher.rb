@@ -14,6 +14,7 @@ class TrackerDispatcher
     else
       # batch updates based on notifications
       return if provider.nil? || provider.empty? || updates.nil?
+      updates = JSON.parse(updates, symbolize_names: true) if updates.class == String
       batch_synchronize(provider, updates)
     end   
   end
