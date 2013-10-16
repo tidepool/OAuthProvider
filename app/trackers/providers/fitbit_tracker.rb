@@ -3,6 +3,7 @@ class FitbitTracker
 
   def self.batch_update_connections(updates)
     return if updates.nil? || updates.class != Array
+    Rails.logger.info(updates.to_s)
     item_mapping = {
       "activities" => "activities", 
       "sleep" => "sleeps",
@@ -12,14 +13,14 @@ class FitbitTracker
     updates.each do |update|
       item_type = item_mapping[update["collectionType"]]
       if item_type.nil?
-        Rails.logger("ProviderError: Incorrect item_type provided - #{update['collectionType']}")
+        Rails.logger.error("ProviderError: Incorrect item_type provided - #{update['collectionType']}")
         next
       end
 
       subscription_id = update["subscriptionId"]
       connection = Authentication.where(user_id: subscription_id.to_i).first
       if connection.nil?
-        Rails.logger("ProviderError: Cannot find subscriber with user_id #{subscription_id}")
+        Rails.logger.error("ProviderError: Cannot find subscriber with user_id #{subscription_id}")
         next
       end
       last_sync_times = {}
