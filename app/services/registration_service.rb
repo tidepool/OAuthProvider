@@ -192,7 +192,8 @@ class RegistrationService
   def send_welcome_email(user)
     return if user.nil?
     MailSender.perform_async(:UserMailer, :welcome_email, { user_id: user.id } )
-    NotifyInviter.perform_async(user.id, user.email)
+    # We will re-enable this once the friend invites is fully implemented.
+    # NotifyInviter.perform_async(user.id, user.email)
   end
 
   def subscribe_to_service_notifications(user, provider)
