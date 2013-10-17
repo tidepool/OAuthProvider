@@ -18,7 +18,7 @@ class FitbitTracker
       end
 
       subscription_id = update[:subscriptionId]
-      connection = Authentication.where(user_id: subscription_id.to_i).first
+      connection = Authentication.where(user_id: subscription_id.to_i, provider:'fitbit').first
       if connection.nil?
         Rails.logger.error("ProviderError: Cannot find subscriber with user_id #{subscription_id}")
         next
