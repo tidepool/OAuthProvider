@@ -492,5 +492,87 @@ module TidepoolAnalyze
 
       score[:demand].should_not be_nil
     end
+
+    it 'calculates the emo_intelligence score' do 
+      recipe_names = ['emo_face']
+      events = load_event_fixtures('aggregate_faceoff.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+      analysis.length.should == 1
+      analysis.should == {
+        :emo_intelligence =>
+          { 
+            :score_name=>"emo_intelligence",
+            :final_results=>[ {
+              :emo_groups=>
+                 {:happy=>{:corrects=>0, :incorrects=>3},
+                  :sad=>{:corrects=>0, :incorrects=>0},
+                  :angry=>{:corrects=>5, :incorrects=>0},
+                  :disgust=>{:corrects=>0, :incorrects=>0},
+                  :fear=>{:corrects=>2, :incorrects=>0},
+                  :surprise=>{:corrects=>0, :incorrects=>0}},
+              :eq_score=>1435, 
+              :corrects=>7, 
+              :incorrects=>3, 
+              :instant_replays=>7, 
+              :time_elapsed=>2100} ],
+            :score=>{
+              :emo_groups=>
+                    {:happy=>{:corrects=>0, :incorrects=>3},
+                     :sad=>{:corrects=>0, :incorrects=>0},
+                     :angry=>{:corrects=>5, :incorrects=>0},
+                     :disgust=>{:corrects=>0, :incorrects=>0},
+                     :fear=>{:corrects=>2, :incorrects=>0},
+                     :surprise=>{:corrects=>0, :incorrects=>0}},
+              :eq_score=>1435, 
+              :corrects=>7, 
+              :incorrects=>3, 
+              :instant_replays=>7, 
+              :time_elapsed=>2100, 
+              :version=>"2.0"},
+            :timezone_offset=>7200
+          }
+        }
+    end
+
+    it 'calculates the emo_intelligence with reported mood score' do 
+      recipe_names = ['emo_face']
+      events = load_event_fixtures('aggregate_faceoff_mood.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+      analysis.length.should == 1
+      analysis.should == {:emo_intelligence=>
+          {:score_name=>"emo_intelligence",
+           :final_results=>
+            [{:emo_groups=>
+               {:happy=>{:corrects=>0, :incorrects=>3},
+                :sad=>{:corrects=>0, :incorrects=>0},
+                :angry=>{:corrects=>5, :incorrects=>0},
+                :disgust=>{:corrects=>0, :incorrects=>0},
+                :fear=>{:corrects=>2, :incorrects=>0},
+                :surprise=>{:corrects=>0, :incorrects=>0}},
+              :eq_score=>1435,
+              :corrects=>7,
+              :incorrects=>3,
+              :instant_replays=>7,
+              :time_elapsed=>2100},
+             {:emotion=>"sadness"}],
+           :score=>
+            {:emo_groups=>
+              {:happy=>{:corrects=>0, :incorrects=>3},
+               :sad=>{:corrects=>0, :incorrects=>0},
+               :angry=>{:corrects=>5, :incorrects=>0},
+               :disgust=>{:corrects=>0, :incorrects=>0},
+               :fear=>{:corrects=>2, :incorrects=>0},
+               :surprise=>{:corrects=>0, :incorrects=>0}},
+             :eq_score=>1435,
+             :corrects=>7,
+             :incorrects=>3,
+             :instant_replays=>7,
+             :time_elapsed=>2100,
+             :reported_mood=>"sadness",
+             :version=>"2.0"},
+           :timezone_offset=>7200}}
+    end
   end
 end

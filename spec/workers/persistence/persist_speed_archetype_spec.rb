@@ -189,6 +189,8 @@ describe PersistSpeedArchetype do
     result.high_scores.should_not be_nil
     result.all_time_best.should == 2400
     result.daily_best.should == 1800    
+    result.last_value.should == "11"
+    result.last_score.should == 1800
   end
 
   it 'returns fast if the the game already has the personality persisted' do 

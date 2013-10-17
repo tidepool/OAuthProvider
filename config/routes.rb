@@ -31,6 +31,7 @@ OAuthProvider::Application.routes.draw do
       resources :users do 
         get 'personality', to: 'users#personality'
         post 'reset_password', to: 'users#reset_password'
+        post 'invite_friends', to: 'users#invite_friends'
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
@@ -59,6 +60,7 @@ OAuthProvider::Application.routes.draw do
         get 'connections', to: 'connections#index'
         get 'connections/:provider/synchronize', to: 'connections#synchronize'
         get 'connections/:provider/progress', to: 'connections#progress'
+        delete 'connections/:provider', to: 'connections#destroy'
 
         get 'activities', to: 'activities#index'
         get 'sleeps', to: 'sleeps#index'
@@ -67,6 +69,7 @@ OAuthProvider::Application.routes.draw do
       # post '/user_events' => 'user_events#create'
 
       post 'fitbit', to: 'fitbit_notifications#notify'
+      put 'fitbit', to: 'fitbit_notifications#notify'
 
       get 'preferences/:type/description', to: 'preferences#description'
 

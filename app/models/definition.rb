@@ -32,13 +32,21 @@ class Definition < ActiveRecord::Base
     game.definition
   end
 
-  def stages_from_stage_definition
+  def stages_from_stage_definition(user)
     result = []
-    self.stages.each do |stage|
-      generator_name = stage['view_name']
-      klass_name = "#{generator_name.camelize}Generator"
-      generator = klass_name.constantize.new(stage)
-      result << generator.generate
+    generators = {}
+    stage_no = 0
+    self.stages.each do |stage_template|
+      generator_name = stage_template['view_name']
+      if generators[generator_name].nil?        
+        klass_name = "#{generator_name.camelize}Generator"
+        generator = klass_name.constantize.new(user)
+        generators[generator_name] = generator
+      else
+        generator = generators[generator_name]
+      end
+      result << generator.generate(stage_no, stage_template)
+      stage_no += 1
     end  
     result
   end

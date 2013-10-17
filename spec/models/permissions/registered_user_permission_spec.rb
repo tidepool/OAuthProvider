@@ -40,6 +40,7 @@ module Permissions
         expect(subject.allow?(:users, :update, target_user)).to be_true
         expect(subject.allow?(:users, :destroy, target_user)).to be_true
         expect(subject.allow?(:users, :personality, target_user)).to be_true
+        expect(subject.allow?(:users, :invite_friends, target_user)).to be_true
       end
 
       it 'registered user permissions for recommendations' do
@@ -64,6 +65,7 @@ module Permissions
         expect(subject.allow?(:connections, :index)).to be_true
         expect(subject.allow?(:connections, :synchronize)).to be_true
         expect(subject.allow?(:connections, :progress)).to be_true
+        expect(subject.allow?(:connections, :destroy)).to be_true
       end
 
       it 'registered permissions for activities' do

@@ -24,7 +24,7 @@ module Permissions
           end
         end
 
-        allow :users, [:show, :create, :update, :destroy, :personality, :reset_password] do |user|
+        allow :users, [:show, :create, :update, :destroy, :personality, :reset_password, :invite_friends] do |user|
           user.id == caller.id 
         end
 
@@ -34,7 +34,7 @@ module Permissions
 
         allow :preorders, :create
 
-        allow :connections, [:index, :synchronize, :progress]
+        allow :connections, [:index, :synchronize, :progress, :destroy]
 
         allow :activities, :index
 
