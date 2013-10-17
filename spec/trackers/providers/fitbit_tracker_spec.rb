@@ -119,12 +119,12 @@ describe FitbitTracker do
       provider = 'fitbit'
       klass_name = "#{provider.to_s.camelize}Tracker"
       klass_name.constantize.batch_update_connections(updates)
-      activity = Activity.where(user_id: user1.id, date_recorded: Date.parse(updates[1]["date"])).first
+      activity = Activity.where(user_id: user1.id, date_recorded: Date.parse(updates[1][:date])).first
       activity.should_not be_nil
       activity.steps.should == 7500
       activity.very_active_minutes.should == 30
 
-      sleep = Sleep.where(user_id: user.id, date_recorded: Date.parse(updates[0]["date"])).first
+      sleep = Sleep.where(user_id: user.id, date_recorded: Date.parse(updates[0][:date])).first
       sleep.should_not be_nil
       sleep.total_minutes_asleep.should == 375
     end
