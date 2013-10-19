@@ -99,8 +99,8 @@ class RegistrationService
         mail_needs_to_be_sent = false
         mail_needs_to_be_sent = true if user.guest      
         if user
-          populate_from_auth_hash!(auth_hash, user)
-          send_welcome_email(user) if mail_needs_to_be_sent
+          authentication = populate_from_auth_hash!(auth_hash, user)
+          send_welcome_email(user, authentication) if mail_needs_to_be_sent
         else
           logger.error("AuthenticationSequence: Invalid or non-existing user_id #{user_id} was passed, user not found!")
         end
@@ -109,8 +109,8 @@ class RegistrationService
         logger.info("AuthenticationSequence: No authentication found, and no user_id is passed, will create a brand new user.")      
         user = User.new
         if user
-          populate_from_auth_hash!(auth_hash, user) 
-          send_welcome_email(user)
+          authentication = populate_from_auth_hash!(auth_hash, user) 
+          send_welcome_email(user, authentication)
         else
           logger.error("AuthenticationSequence: Very unexpected, just trying to create a user in memory and failed!")
         end
@@ -122,12 +122,12 @@ class RegistrationService
   def populate_from_auth_hash!(auth_hash, user)
     if auth_hash.nil?  
       logger.error("AuthenticationSequence: Auth_hash is not provided, returning without adding the authentication.")
-      return
+      return nil
     end 
     provider = auth_hash.provider 
     if provider.nil? || provider.empty?
       logger.error("AuthenticationSequence: Auth_hash does not include provider info, returning.")
-      return
+      return nil
     end 
 
     no_existing_authentications = user.authentications.empty? 
@@ -173,6 +173,7 @@ class RegistrationService
     # At this point user is no longer guest
     user.guest = false
     user.save!
+    authentication
   end
 
   def populate_from_provider(auth_hash, user, authentication)
@@ -189,11 +190,15 @@ class RegistrationService
     end
   end
 
-  def send_welcome_email(user)
+  def send_welcome_email(user, authentication = nil)
     return if user.nil?
     MailSender.perform_async(:UserMailer, :welcome_email, { user_id: user.id } )
-    # We will re-enable this once the friend invites is fully implemented.
-    # NotifyInviter.perform_async(user.id, user.email)
+
+    # Add the user's email and authentication id to redis
+    $redis.sadd("users:emails", user.email)
+    unless authentication.nil?
+      $redis.sadd("users:facebook_ids", authentication.uid) if authentication.provider == 'facebook'
+    end
   end
 
   def subscribe_to_service_notifications(user, provider)
