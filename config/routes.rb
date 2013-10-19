@@ -66,8 +66,6 @@ OAuthProvider::Application.routes.draw do
         get 'sleeps', to: 'sleeps#index'
       end
             
-      # post '/user_events' => 'user_events#create'
-
       post 'fitbit', to: 'fitbit_notifications#notify'
       put 'fitbit', to: 'fitbit_notifications#notify'
 
