@@ -101,6 +101,7 @@ GEM
       mime-types (>= 1.15)
       rest-client (>= 1.5.1)
     dalli (2.6.4)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
@@ -136,6 +137,8 @@ GEM
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.0)
+    leaderboard (3.3.0)
+      redis
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -283,6 +286,7 @@ DEPENDENCIES
   blitz
   clockwork
   dalli
+  database_cleaner
   debugger-ruby_core_source (~> 1.2.3)
   doorkeeper!
   dotenv-rails!
@@ -290,6 +294,7 @@ DEPENDENCIES
   fitgem
   foreman
   jquery-rails
+  leaderboard
   memcachier
   newrelic_rpm
   oauth2
