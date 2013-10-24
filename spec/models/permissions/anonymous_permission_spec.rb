@@ -64,5 +64,13 @@ module Permissions
       expect(subject.allow?(:sleeps, :index)).to be_false
     end
 
+    it 'anonymous permissions for friends' do 
+      expect(subject.allow?(:friends, :index)).to be_false
+      expect(subject.allow?(:friends, :find)).to be_false
+      expect(subject.allow?(:friends, :accept)).to be_false
+      expect(subject.allow?(:friends, :progress)).to be_false
+    end
+
+
   end
 end

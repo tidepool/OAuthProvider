@@ -28,6 +28,8 @@
 #
 
 class User < ActiveRecord::Base
+  include Paginate
+  
   has_secure_password validations: false
   
   validates_uniqueness_of :email

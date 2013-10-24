@@ -151,7 +151,13 @@ FactoryGirl.define do
     sequence(:uid) {|n| "1234#{n}" }
     oauth_token "123456"
     oauth_secret "232323"
-    
+    sequence(:image) { |n| "http://example.com/john_image#{n}.jpg" }
+    sequence(:name) { |n| "John#{n} Doe" }
+
+    factory :friend_authentications do 
+      association :user, factory: :user
+    end
+
     factory :fitbit do 
       provider 'fitbit'
       last_accessed Time.zone.now
@@ -215,6 +221,8 @@ FactoryGirl.define do
     password_confirmation "12345678"
     guest false
     admin false
+    sequence(:image) { |n| "http://example.com/image#{n}.jpg" }
+    sequence(:name) { |n| "Mary#{n} Doe" }
 
     factory :admin do
       admin true

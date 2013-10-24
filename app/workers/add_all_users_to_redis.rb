@@ -14,7 +14,7 @@ class AddAllUsersToRedis
 
     key = "users:facebook_ids"
     unless $redis.exists(key)
-      Authentication.select(:id, :uid).find_in_batches(batch_size: 1000) do |authentications|
+      Authentication.select(:id, :uid, :provider).find_in_batches(batch_size: 1000) do |authentications|
         user_ids = authentications.map do |authentication| 
           authentication.uid if authentication.provider == 'facebook'
         end

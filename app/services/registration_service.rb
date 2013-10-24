@@ -192,14 +192,22 @@ class RegistrationService
 
   def send_welcome_email(user, authentication = nil)
     return if user.nil?
+    
     MailSender.perform_async(:UserMailer, :welcome_email, { user_id: user.id } )
 
-    # Add the user's email and authentication id to redis
+    add_user_to_redis(user, authentication)
+
+    authentication_uid = authentication.uid if authentication
+    AcceptFriendInvitation.perform_async(user.email, user.id, authentication_uid)
+  end
+
+  def add_user_to_redis(user, authentication)
     $redis.sadd("users:emails", user.email)
     unless authentication.nil?
       $redis.sadd("users:facebook_ids", authentication.uid) if authentication.provider == 'facebook'
     end
   end
+
 
   def subscribe_to_service_notifications(user, provider)
     logger.info("About to create subscription for #{user.id}")

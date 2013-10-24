@@ -252,24 +252,24 @@ describe 'Users API' do
     end
   end
 
-  it 'invites the users friends' do 
-    user1
-    InviteFriends.stub(:perform_async) do | user_id, friend_list |
-      user_id.should == user1.id
-      friend_list.should == ['foo@kk.com', 'bar@kk.com']
-    end
+  # it 'invites the users friends' do 
+  #   user1
+  #   InviteFriends.stub(:perform_async) do | user_id, friend_list |
+  #     user_id.should == user1.id
+  #     friend_list.should == ['foo@kk.com', 'bar@kk.com']
+  #   end
 
-    params = {
-      friend_list: ['foo@kk.com', 'bar@kk.com']
-    }
-    token = get_conn(user1)
-    response = token.post("#{@endpoint}/users/-/invite_friends.json", {body: params})
-    response.status.should == 202
+  #   params = {
+  #     friend_list: ['foo@kk.com', 'bar@kk.com']
+  #   }
+  #   token = get_conn(user1)
+  #   response = token.post("#{@endpoint}/users/-/invite_friends.json", {body: params})
+  #   response.status.should == 202
 
-    result = JSON.parse(response.body, symbolize_names: true)
-    meta = result[:status]
-    meta[:state].should == 'accepted'
-  end
+  #   result = JSON.parse(response.body, symbolize_names: true)
+  #   meta = result[:status]
+  #   meta[:state].should == 'accepted'
+  # end
 
   describe 'Error and Edge Cases' do
     it 'doesnot show other users information' do 
