@@ -31,7 +31,6 @@ OAuthProvider::Application.routes.draw do
       resources :users do 
         get 'personality', to: 'users#personality'
         post 'reset_password', to: 'users#reset_password'
-        post 'invite_friends', to: 'users#invite_friends'
        
         get 'recommendations/latest', to: 'recommendations#latest'
         get 'recommendations/career', to: 'recommendations#career'
@@ -64,6 +63,12 @@ OAuthProvider::Application.routes.draw do
 
         get 'activities', to: 'activities#index'
         get 'sleeps', to: 'sleeps#index'
+
+        get 'friends', to: 'friends#index'
+        get 'friends/find', to: 'friends#find'
+        post 'friends/accept', to: 'friends#accept'
+        get 'friends/pending', to: 'friends#pending'
+        post 'friends/invite', to: 'friends#invite'
       end
             
       post 'fitbit', to: 'fitbit_notifications#notify'

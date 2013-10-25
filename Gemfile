@@ -82,6 +82,7 @@ gem 'jquery-rails'
 # Database
 gem 'pg'
 gem 'redis'
+gem 'activerecord-import', '~> 0.4'
 
 # Leaderboard Support
 gem 'leaderboard'

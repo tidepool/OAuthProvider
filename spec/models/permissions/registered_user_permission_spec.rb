@@ -68,14 +68,21 @@ module Permissions
         expect(subject.allow?(:connections, :destroy)).to be_true
       end
 
-      it 'registered permissions for activities' do
+      it 'registered user permissions for activities' do
         expect(subject.allow?(:activities, :index)).to be_true
       end
 
-      it 'registered permissions for sleeps' do
+      it 'registered user permissions for sleeps' do
         expect(subject.allow?(:sleeps, :index)).to be_true
       end
 
+      it 'registered user permissions for friends' do 
+        expect(subject.allow?(:friends, :index)).to be_true
+        expect(subject.allow?(:friends, :find)).to be_true
+        expect(subject.allow?(:friends, :accept)).to be_true
+        expect(subject.allow?(:friends, :pending)).to be_true
+        expect(subject.allow?(:friends, :invite)).to be_true
+      end
     end
 
     # describe 'caller and target_user are NOT the same user' do

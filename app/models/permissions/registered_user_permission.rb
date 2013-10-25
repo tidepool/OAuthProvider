@@ -41,6 +41,8 @@ module Permissions
         allow :sleeps, :index
 
         allow :friend_surveys, [:create, :results]
+
+        allow :friends, [:index, :accept, :find, :pending, :invite]
       end
     end
   end
