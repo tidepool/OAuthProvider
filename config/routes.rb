@@ -66,8 +66,9 @@ OAuthProvider::Application.routes.draw do
 
         get 'friends', to: 'friends#index'
         get 'friends/find', to: 'friends#find'
-        get 'friends/progress', to: 'friends#progress'
         post 'friends/accept', to: 'friends#accept'
+        get 'friends/pending', to: 'friends#pending'
+        post 'friends/invite', to: 'friends#invite'
       end
             
       post 'fitbit', to: 'fitbit_notifications#notify'

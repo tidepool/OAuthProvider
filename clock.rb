@@ -17,4 +17,3 @@ tracker_update_interval = Integer(ENV["TRACKER_UPDATE_MINUTES"] || 10)
 # Rails.logger.info("Starting Clock with #{tracker_update_interval} minutes")
 
 every(tracker_update_interval.minutes, 'ConnectionDispatcher')
-every(1.day, 'AddAllUsersToRedis', :at => '01:30')

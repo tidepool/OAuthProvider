@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :friendship do
-    association :friend, factory: :user   
+    association :friend, factory: :friend_user   
   end
 end

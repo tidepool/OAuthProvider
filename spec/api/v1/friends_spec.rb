@@ -8,41 +8,13 @@ describe 'Friends API' do
     @endpoint = '/api/v1'
   end
 
-  let(:user1) { create(:user) }
+  let(:user1) { create(:friend_user) }
   let(:authentication) { create(:authentication, user: user1) }
 
-  describe 'Getting a list of friends' do 
-    let(:friend_list) { create_list(:user, 7)}
+  describe 'Friendlist' do 
+    let(:friend_list) { create_list(:friend_user, 7)}
     let(:friend_auth_list) { create_list(:friend_authentications, 8)}
     let(:friendships) { create_list(:friendship, 10, user: user1)}
-
-    before :each do 
-      pending_friend_emails = (0..6).map {|i| friend_list[i].email }
-      key = "pending_emails:#{user1.email}"
-      $redis.sadd(key, pending_friend_emails)
-      pending_friend_uids = (0..7).map {|i| friend_auth_list[i].uid }
-      key = "pending_facebook_ids:#{authentication.uid}"
-      $redis.sadd(key, pending_friend_uids)
-    end
-
-    it 'a list of pending friends with paging' do
-      authentication 
-      token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends.json?pending=true&limit=20&offset=5")
-      result = JSON.parse(response.body, symbolize_names: true)
-      user_info = result[:data]
-
-      user_info.length.should == (7 + 8 - 5)
-      user_info[0][:name].scan(/Mary/).should == ["Mary"]
-      user_info[0][:image].scan(/image/).should == ["image"]
-      user_info[0][:email].should_not be_nil
-      user_info[0][:id].should_not be_nil
-      user_info[9][:uid].should_not be_nil
-      user_info[9][:image].should_not be_nil
-      status = result[:status]      
-      status[:offset].should == 5
-      status[:limit].should == 20
-    end
 
     it 'a list of existing friends' do 
       friendships
@@ -59,94 +31,125 @@ describe 'Friends API' do
     end
   end
 
-  describe 'Finding a list of friends' do 
-    let(:friend_list) { create_list(:user, 7)}
-    let(:friend_auth_list) { create_list(:authentication, 8)}
+  describe 'Pending and accepting' do 
+    let(:friend_list) { create_list(:friend_user, 7)}
 
     before :each do
-      FindFriends.stub(:perform_async) do |user_id, friend_list|
-        FindFriends.new.perform(user_id, friend_list)
-      end
-      friend_list
-      friend_auth_list
-      AddAllUsersToRedis.new.perform
+      key_name = "pending_friend_reqs:#{user1.id}"
+      pending_friends = friend_list[0..3].map { |friend| friend.id }
+      $redis.sadd(key_name, pending_friends)
     end
 
-    it 'finds the already existing members from a list of emails and adds the user_id as a pending friend' do 
-      params = { friend_list: {} } 
-      params[:friend_list][:emails] = friend_list.map { | item | item.email }
-
+    it 'gets a list of all pending friends' do 
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", {body: params})
+      response = token.get("#{@endpoint}/users/-/friends/pending.json")
       result = JSON.parse(response.body, symbolize_names: true)
-      friend_list.each do |friend|
-        key_name = "pending_emails:#{friend.email}"
-        member = $redis.smembers(key_name)      
-        member[0].to_i.should == user1.id
-      end
+      user_info = result[:data]
+      user_info.length.should == 4
+      pending = $redis.smembers "pending_friend_reqs:#{user1.id}"
     end
 
-    it 'does not add the user as a pending friend if they are already friends' do 
-      params = { friend_list: {} } 
-      params[:friend_list][:emails] = friend_list.map { | item | item.email }
-
-      # Add the first friend in the friend_list as an already existing friend for user1
-      look_up_key = "friend_list_emails:#{user1.id}"
-      $redis.sadd(look_up_key, friend_list[0].email)      
+    it 'accepts the list of pending friends as friends' do 
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params })
-      response.status.should == 202    
-      key_name = "pending_emails:#{friend_list[0].email}"
-      member = $redis.smembers(key_name) 
-      member.should be_empty
-      key_name = "pending_emails:#{friend_list[1].email}"
-      member = $redis.smembers(key_name) 
-      member[0].to_i.should == user1.id
+      response = token.get("#{@endpoint}/users/-/friends/pending.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      pending_friends = result[:data]
+      params = {friend_list: pending_friends}
+      response = token.post("#{@endpoint}/users/-/friends/accept.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      pending = $redis.smembers "pending_friend_reqs:#{user1.id}"  
+      pending.length.should == 0
+      user1.friends.length.should == 4
     end
   end
 
-  describe 'Accepting a set of friends' do 
-    let(:friend_list) { create_list(:user, 10)}
-    let(:friend_auth_list) { create_list(:authentication, 10)}
+  describe 'Finding and inviting' do 
+    let(:friend_list) { create_list(:friend_user, 10)}
+    let(:friend_auth_list) { create_list(:friend_authentications, 10)}
+    let(:friendships) { create_list(:friendship, 10, user: user1)}
 
-    before :each do
-      AcceptFriends.stub(:perform_async) do |user_id, user_email, friend_list|
-        AcceptFriends.new.perform(user_id, user_email, friend_list)
-      end
+    it 'finds a list of friends from emails' do 
+      friend_list
+      find_list = friend_list[0..3].map { |friend| friend.email } 
+      find_list << "foo@foo.com"  # A non-existing friend
+ 
+      params = {friend_list: { emails: find_list} }
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
+      found_friends.length.should == 4
+      found_list = found_friends.find_all { |friend| friend[:email] == "foo@foo.com" }
+      found_list.should be_empty
+
+      found_list = found_friends.find_all { |friend| friend[:email] == friend_list[0].email }
+      found_list.should_not be_empty
+    end
+
+    it 'finds a list of friends, except your already existing friends' do 
+      friend_list
+      friendships
+      friend_email = user1.friends[0].email
+      find_list = friend_list[0..3].map { |friend| friend.email } 
+      find_list << friend_email # Your existing friend
+      params = {friend_list: { emails: find_list} }
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
+      found_friends.length.should == 4
+      found_list = found_friends.find_all { |friend| friend[:email] == friend_email }
+      found_list.should be_empty
+    end
+
+    it 'finds a list of friends from facebook ids' do 
+      friend_auth_list
+      find_list = friend_auth_list[0..3].map { |friend| friend.uid } 
+      params = {friend_list: { facebook_ids: find_list} }
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
+      found_friends.length.should == 4
+      found_list = found_friends.find_all { |friend| friend[:uid] == friend_auth_list[0].uid }
+      found_list.should_not be_empty
+    end
+
+    it 'finds a list of friends some from emails, some facebook_ids' do
       friend_list
       friend_auth_list
-      AddAllUsersToRedis.new.perform
-    
-      pending_friend_ids = (0..5).map {|i| friend_list[i].id }
-      key = "pending_emails:#{user1.email}"
-      $redis.sadd(key, pending_friend_ids)
-      pending_friend_ids = (0..5).map {|i| friend_auth_list[i].user_id }
-      key = "pending_facebook_ids:#{authentication.uid}"
-      $redis.sadd(key, pending_friend_ids)
-    end
+      email_list = friend_list[0..5].map { |friend| friend.email } 
+      uid_list = friend_auth_list[0..3].map { |friend| friend.uid }
 
-    it 'accepts the friends with emails' do 
-      # Get the first 3 friends from the friend_list and and accept them
-      to_be_accepted = (0..2).map do |i| 
-        { 
-          id: friend_list[i].id,
-          email: friend_list[i].email
-        }
-      end
-
-      params = { friend_list: to_be_accepted }
+      params = {friend_list: { facebook_ids: uid_list, emails: email_list } }
       token = get_conn(user1)
-      response = token.post("#{@endpoint}/users/-/friends/accept.json", { body: params })
-      response.status.should == 202
-      friends_in_redis = $redis.smembers("friend_list_emails:#{user1.id}")
-      friends_in_redis.length.should == 3
-      pending_emails = $redis.smembers("pending_emails:#{user1.email}")
-      pending_emails.length.should == 6 - 3
-      user1.friends.length.should == 3
-      user1.friends[0].friends.length.should == 1
-      user1.friends[0].friends[0].email.should == user1.email
+      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
+      found_friends.length.should == 10
+      found_list = found_friends.find_all { |friend| friend[:uid] == friend_auth_list[0].uid }
+      found_list.should_not be_empty
+
+      found_list = found_friends.find_all { |friend| friend[:email] == friend_list[0].email }
+      found_list.should_not be_empty
     end
 
+    it 'invites found friends' do 
+      friend_list
+      find_list = friend_list[0..3].map { |friend| friend.email } 
+      params = {friend_list: { emails: find_list} }
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
 
+      params = {friend_list: found_friends}
+      response = token.post("#{@endpoint}/users/-/friends/invite.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      invite_list = $redis.smembers "pending_friend_reqs:#{friend_list[0].id}"
+      invite_list.should_not be_empty
+      invite_list[0].to_i.should == user1.id
+    end
   end
 end
