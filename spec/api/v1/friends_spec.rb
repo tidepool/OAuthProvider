@@ -25,9 +25,12 @@ describe 'Friends API' do
       user_info.length.should == 5
       user_info[0][:name].scan(/Mary/).should == ["Mary"]
       user_info[0][:image].scan(/image/).should == ["image"]
-      status = result[:status]      
+      status = result[:status]   
       status[:offset].should == 0
       status[:limit].should == 5
+      status[:next_offset].should == 5
+      status[:next_limit].should == 5
+      status[:total].should == 10
     end
   end
 
@@ -42,11 +45,18 @@ describe 'Friends API' do
 
     it 'gets a list of all pending friends' do 
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/pending.json")
+      response = token.get("#{@endpoint}/users/-/friends/pending.json?offset=1&limit=2")
       result = JSON.parse(response.body, symbolize_names: true)
       user_info = result[:data]
-      user_info.length.should == 4
+      user_info.length.should == 2
       pending = $redis.smembers "pending_friend_reqs:#{user1.id}"
+
+      status = result[:status] 
+      status[:offset].should == 1
+      status[:limit].should == 2
+      status[:next_offset].should == 3
+      status[:next_limit].should == 1
+      status[:total].should == 4
     end
 
     it 'accepts the list of pending friends as friends' do 

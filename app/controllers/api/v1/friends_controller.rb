@@ -23,10 +23,7 @@ class Api::V1::FriendsController < Api::V1::ApiController
     user = current_resource
     raise Api::V1::NotAcceptableError, "User not specified." if user.nil?
     friends_service = FriendsService.new
-    friends = friends_service.find_pending_friends(user.id, params)
-    api_status = Hashie::Mash.new({
-      'offset' => offset,
-      'limit' => limit})
+    api_status, friends = friends_service.find_pending_friends(user.id, params)
     response = {
       data: friends,
       status: api_status
@@ -64,9 +61,7 @@ class Api::V1::FriendsController < Api::V1::ApiController
     friends_service = FriendsService.new
     new_found_friends = friends_service.find_new_friends(user.id, friend_list)
 
-    api_status = Hashie::Mash.new({
-      'offset' => offset,
-      'limit' => new_found_friends.length})
+    api_status = Hashie::Mash.new( {'total' => new_found_friends.length} )
     response = {
       data: new_found_friends,
       status: api_status

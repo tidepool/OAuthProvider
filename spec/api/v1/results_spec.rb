@@ -160,16 +160,17 @@ describe 'Results API' do
   it 'shows the results in pages' do 
     daily_results
     token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/-/results.json?limit=4&offset=2")
+    response = token.get("#{@endpoint}/users/-/results.json?limit=5&offset=2")
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
-    user_results.length.should == 4
+    user_results.length.should == 5
     status = output[:status]
     status[:offset].should == 2
-    status[:limit].should == 4
-    status[:next].should == "?offset=6&limit=4"
-    status[:prev].should == "?offset=0&limit=4"
+    status[:limit].should == 5
+    status[:next_offset].should == 7
+    status[:next_limit].should == 3
+    status[:total].should == 10
   end
 
   describe 'PersonalityResult' do

@@ -3,24 +3,40 @@ module Paginate
 
   module ClassMethods
     def paginate(query, params)
-      limit = params[:limit].to_i
-      offset = params[:offset].to_i
-      return query, {} unless limit && offset && limit != 0
+      return query, {} unless params[:limit] && params[:offset]
+      total = query.count
 
-      paginated_query = query.limit(limit) 
-      paginated_query = paginated_query.offset(offset)
+      defaults = {
+        limit: 20,
+        offset: 0,
+        total: total
+      }
+
+      api_status = generate_status(params, defaults)
+      paginated_query = query.limit(api_status.limit) 
+      paginated_query = paginated_query.offset(api_status.offset)
+      return paginated_query, api_status
+    end
+
+    def generate_status(params, defaults)
+      limit = (params[:limit] || defaults[:limit]).to_i
+      offset = (params[:offset] || defaults[:offset]).to_i
+      total = defaults[:total].to_i
 
       next_offset = offset + limit 
-      prev_offset = offset - limit 
-      prev_offset = 0 if prev_offset < 0
+      if next_offset < total
+        next_limit =  (total - next_offset) < limit ? total - next_offset : limit             
+      else
+        next_offset = 0
+        next_limit = limit   
+      end
       api_status = Hashie::Mash.new({
         'offset' => offset,
         'limit' => limit,
-        'next' => "?offset=#{next_offset}&limit=#{limit}",
-        'prev' => "?offset=#{prev_offset}&limit=#{limit}"
+        'next_offset' => next_offset,
+        'next_limit' => next_limit,
+        'total' => total
       })
-
-      return paginated_query, api_status
-    end
+    end    
   end
 end

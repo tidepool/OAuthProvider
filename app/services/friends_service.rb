@@ -1,4 +1,6 @@
 class FriendsService
+  include Paginate
+
   def find_new_friends(user_id, find_list)
     return if find_list.nil? || find_list.empty? || user_id.nil? 
     found_friends = []
@@ -60,13 +62,22 @@ class FriendsService
   def find_pending_friends(user_id, params)
     key_name = "pending_friend_reqs:#{user_id}"
     pending = $redis.smembers(key_name)
-    limit = (params[:limit] || 20).to_i 
-    offset = (params[:offset] || 0).to_i
+    total = pending.length
+    defaults = {
+      limit: 20, 
+      offset: 0, 
+      total: total
+    }
 
-    from = offset < pending.length ? offset : 0 
-    to = offset + limit < pending.length ? offset + limit : pending.length - 1
-    friend_window = pending[from..to]
-    User.select(:id, :name, :email, :image).where(id: friend_window).to_a
+    api_status = FriendsService.generate_status(params, defaults)
+    limit = api_status.limit
+    offset = api_status.offset
+
+    from = offset < total ? offset : 0 
+    to = offset + limit < total ? offset + limit : total
+    friend_window = pending[from...to]
+
+    return api_status, User.select(:id, :name, :email, :image).where(id: friend_window).to_a
   end
 
   def accept_friends(user_id, pending_list)
