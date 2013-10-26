@@ -139,8 +139,6 @@ GEM
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.0)
-    leaderboard (3.3.0)
-      redis
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -297,7 +295,6 @@ DEPENDENCIES
   fitgem
   foreman
   jquery-rails
-  leaderboard
   memcachier
   newrelic_rpm
   oauth2

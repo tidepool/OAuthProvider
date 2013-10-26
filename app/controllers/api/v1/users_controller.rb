@@ -79,18 +79,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end 
 
-  def invite_friends
-    friend_list = params[:friend_list]
-    user = current_resource
-    raise Api::V1::NotAcceptableError, "User not specified." if user.nil?
-
-    InviteFriends.perform_async(user.id, friend_list) 
-    api_status = Hashie::Mash.new({state: :accepted, message: 'Friend list invite accepted, emails being sent.'})
-    respond_to do |format|
-      format.json { render({ json: nil, status: :accepted, meta: api_status, serializer: UserSerializer }.merge(api_defaults) ) }
-    end
-  end
-
   private 
   def user_eager_load
     user_id = params[:id].nil? || params[:id] == '-' ? caller.id : params[:id]

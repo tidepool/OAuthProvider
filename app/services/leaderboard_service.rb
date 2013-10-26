@@ -1,4 +1,4 @@
-class LeaderBoardService
+class LeaderboardService
   def initialize(game)
 
   end
@@ -12,12 +12,10 @@ class LeaderBoardService
   end
 
   def global_leaderboard()
-
+    
   end
 
   def friends_leaderboard
 
   end
-
-
 end

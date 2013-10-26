@@ -84,9 +84,6 @@ gem 'pg'
 gem 'redis'
 gem 'activerecord-import', '~> 0.4'
 
-# Leaderboard Support
-gem 'leaderboard'
-
 # Below are required for sidekiq and its web admin UI
 gem 'sidekiq'
 gem 'sinatra', require: false
