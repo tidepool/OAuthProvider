@@ -37,6 +37,34 @@ describe LeaderboardService do
       entry[0][1].should == 1000.0
       entry[0][0].should == user1.id.to_s
     end
+
+    it 'updates the global leaderboard only if the score is higher' do 
+      lb_service = LeaderboardService.new('fizzbuzz', user1.id)
+      lb_service.update_global_leaderboard(1000.0)
+
+      # Update with smaller score
+      lb_service = LeaderboardService.new('fizzbuzz', user1.id)
+      lb_service.update_global_leaderboard(900.0)
+
+      entry = Leaderboard.where(game_name: 'fizzbuzz', user_id: user1.id).first
+      entry.score.should == 1000.0
+      entry = $redis.zscore "global_lb:fizzbuzz", user1.id.to_s
+      entry.should == 1000.0
+    end
+
+    it 'updates an individuals score with a higher score' do 
+      lb_service = LeaderboardService.new('fizzbuzz', user1.id)
+      lb_service.update_global_leaderboard(1000.0)
+
+      # Update with higher score
+      lb_service = LeaderboardService.new('fizzbuzz', user1.id)
+      lb_service.update_global_leaderboard(1200.0)
+
+      entry = Leaderboard.where(game_name: 'fizzbuzz', user_id: user1.id).first
+      entry.score.should == 1200.0
+      entry = $redis.zscore "global_lb:fizzbuzz", user1.id.to_s
+      entry.should == 1200.0      
+    end
   end
 
   describe "Friends Leaderboard" do 
@@ -103,6 +131,23 @@ describe LeaderboardService do
       found = results.find_all { |result| user1.id.to_s == result[:id].to_s }
       found[0][:score].should == 1000.0
     end 
+
+    it 'reads from the friend leaderboard consecutively, caching enabled' do 
+      lb_service = LeaderboardService.new('fizzbuzz', user1.id, 10.minutes)
+      lb_service.update_global_leaderboard(900.0)
+
+      api_status, results = lb_service.friends_leaderboard
+      results.length.should == 5
+      found = results.find_all { |result| user1.id.to_s == result[:id].to_s }
+      found[0][:score].should == 900.0
+
+      # A new high score
+      lb_service.update_global_leaderboard(1000.0)
+      api_status, results = lb_service.friends_leaderboard
+      results.length.should == 5
+      found = results.find_all { |result| user1.id.to_s == result[:id].to_s }
+      found[0][:score].should == 900.0 # The new high score is not seen
+    end
   end
 
 end
