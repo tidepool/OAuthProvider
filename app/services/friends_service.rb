@@ -89,7 +89,20 @@ class FriendsService
     end
     Friendship.import(friendships)
 
+    add_friends_to_redis(user_id, pending_list)
     remove_from_pending_lists(user_id, pending_list)
+  end
+
+  def add_friends_to_redis(user_id, pending_list)
+    friend_list = []
+    $redis.pipelined do 
+      pending_list.each do |friend| 
+        friend_id = friend[:id] || friend["id"]
+        friend_list << friend_id
+        $redis.sadd "friends:#{friend_id}", user_id
+      end
+    end
+    $redis.sadd "friends:#{user_id}", friend_list
   end
 
   def remove_from_pending_lists(user_id, friend_list)
