@@ -44,10 +44,11 @@ class AggregateResult < ActiveRecord::Base
     best_score = self.all_time_best
     if best_score.nil? || score > best_score
       best_score = score 
-      if game
-        lb_service = LeaderboardService.new(game.name, self.user_id)
-        lb_service.update_global_leaderboard(score)
-      end
+    end
+    
+    if game
+      lb_service = LeaderboardService.new(game.name, self.user_id)
+      lb_service.update_global_leaderboard(best_score)
     end
     best_score
   end

@@ -153,4 +153,66 @@ describe PersistEmoIntelligence do
         }
     }
   end
+
+  it 'updates the leaderboard entries when a high score is reached' do 
+    user
+    emo_aggregate_result
+    @analysis_results[:emo_intelligence][:score][:eq_score] = 5000
+    persist_rt = PersistEmoIntelligence.new
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'EmoAggregateResult')
+    result.should_not be_nil
+    result.all_time_best.should == 5000
+
+    lb_entry = Leaderboard.where(game_name: 'faceoff', user_id: user.id).first     
+    lb_entry.score.should == 5000.0
+
+    global_lb_entry = $redis.zscore "global_lb:faceoff", user.id.to_s
+    global_lb_entry.should == 5000.0
+  end
+
+  it 'still updates the leaderboard when the game is played for the first time' do
+    user
+
+    result = AggregateResult.find_for_type(game.user_id, 'EmoAggregateResult')
+    result.should be_nil
+
+    @analysis_results[:emo_intelligence][:score][:eq_score] = 5000
+    persist_rt = PersistEmoIntelligence.new
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'EmoAggregateResult')
+    result.should_not be_nil
+    result.all_time_best.should == 5000
+
+    lb_entry = Leaderboard.where(game_name: 'faceoff', user_id: user.id).first     
+    lb_entry.score.should == 5000.0
+
+    global_lb_entry = $redis.zscore "global_lb:faceoff", user.id.to_s
+    global_lb_entry.should == 5000.0  
+  end
+
+  it 'does not update the leaderboard if there is no high score' do 
+    user
+    emo_aggregate_result
+
+    result = AggregateResult.find_for_type(game.user_id, 'EmoAggregateResult')
+    result.should_not be_nil
+    all_time_best = result.all_time_best
+
+    @analysis_results[:emo_intelligence][:score][:eq_score] = 100
+    persist_rt = PersistEmoIntelligence.new
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'EmoAggregateResult')
+    result.should_not be_nil
+    result.all_time_best.should == all_time_best
+
+    lb_entry = Leaderboard.where(game_name: 'faceoff', user_id: user.id).first     
+    lb_entry.score.should == all_time_best.to_f
+
+    global_lb_entry = $redis.zscore "global_lb:faceoff", user.id.to_s
+    global_lb_entry.should == all_time_best.to_f
+  end
 end

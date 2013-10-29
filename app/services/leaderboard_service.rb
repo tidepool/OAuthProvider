@@ -14,10 +14,17 @@ class LeaderboardService
   end
 
   def update_global_leaderboard(score)
-    $redis.zadd global_lb_key, score.to_f, @user_id
+    score = score.to_f
 
+    # Update Redis
+    old_score = $redis.zscore global_lb_key, @user_id.to_s
+    old_score = old_score.to_f
+    $redis.zadd global_lb_key, score, @user_id if score > old_score
+
+    # Update Postgres
     lb_entry = Leaderboard.where(game_name: @game_name, user_id: @user_id).first_or_initialize
-    lb_entry.score = score.to_f
+    old_score = lb_entry.score.to_f
+    lb_entry.score = score if score > old_score 
     lb_entry.save!
   end
 
@@ -85,7 +92,12 @@ class LeaderboardService
   end
 
   def initialize_friend_leaderboard
-    friends = $redis.smembers friend_list_key
+    # This is a 1-time expensive operation, if user has many friends. (1000s)
+    # Assumption: 
+    # The chances of user accumulating that many friends without leaderboard ever being called 
+    # is very small.
+
+    friends = $redis.smembers friend_list_key 
     friends = friends.map { |friend_id| [0.0, friend_id.to_s]}
     friends << [0.0, @user_id.to_s] # Don't forget yourself!
     result = $redis.zadd friend_lb_key, friends
