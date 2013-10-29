@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe PersistSpeedArchetype do
   let(:user) { create(:user) }
-  let(:game) { create(:game, user: user) }
+  let(:game) { create(:game, user: user, name: 'snoozer') }
   let(:personality) { create(:personality, user: user) }
   let(:aggregate_result) { create(:aggregate_result, user: user) }
-  let(:game2) { create(:game, user: user) }
+  let(:game2) { create(:game, user: user, name: 'snoozer') }
   let(:speed_archetype_result) { create(:speed_archetype_result, game: game2)}
   let(:prior_speed_archetypes) { create_list(:prior_speed_archetypes, 10, game: game2, user:user)}
 

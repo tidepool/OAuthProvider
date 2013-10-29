@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PersistEmoIntelligence do
   let(:user) { create(:user) }
-  let(:game) { create(:game, user: user) }
+  let(:game) { create(:game, user: user, name: 'faceoff') }
   let(:emo_aggregate_result) { create(:emo_aggregate_result, user: user)}
 
   before :each do

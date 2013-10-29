@@ -83,6 +83,11 @@ module Permissions
         expect(subject.allow?(:friends, :pending)).to be_true
         expect(subject.allow?(:friends, :invite)).to be_true
       end
+
+      it 'registered user permissions for leaderboards' do 
+        expect(subject.allow?(:leaderboards, :global)).to be_true
+        expect(subject.allow?(:leaderboards, :friends)).to be_true
+      end
     end
 
     # describe 'caller and target_user are NOT the same user' do

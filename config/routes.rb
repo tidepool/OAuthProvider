@@ -50,7 +50,6 @@ OAuthProvider::Application.routes.draw do
           # post 'result' => 'results#create'
           get 'progress', to: 'results#progress'
           # get 'latest' => 'results#show'
-
           put 'event_log', to: 'games#update_event_log'
         end
 
@@ -69,6 +68,8 @@ OAuthProvider::Application.routes.draw do
         post 'friends/accept', to: 'friends#accept'
         get 'friends/pending', to: 'friends#pending'
         post 'friends/invite', to: 'friends#invite'
+
+        get 'games/:game_name/leaderboard', to: 'leaderboards#friends'
       end
             
       post 'fitbit', to: 'fitbit_notifications#notify'
@@ -76,6 +77,7 @@ OAuthProvider::Application.routes.draw do
 
       get 'preferences/:type/description', to: 'preferences#description'
 
+      get 'games/:game_name/leaderboard', to: 'leaderboards#global'
       get 'games/:game_id/friend_survey', to: 'friend_surveys#results'
       post 'games/:game_id/friend_survey', to: 'friend_surveys#create'
     end

@@ -49,7 +49,7 @@ class EmoAggregateResult < AggregateResult
  
     score = analysis_results[:emo_intelligence][:score]
     # Update the high scores
-    result.high_scores = result.update_high_scores(score[:eq_score].to_i, time, timezone_offset)
+    result.high_scores = result.update_high_scores(score[:eq_score].to_i, time, timezone_offset, game)
 
     reported_mood = score[:reported_mood]
     existing_scores = result.scores || {}

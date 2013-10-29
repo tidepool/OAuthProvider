@@ -23,8 +23,8 @@ class AggregateResult < ActiveRecord::Base
     }
   end
   
-  def update_high_scores(score, time, timezone_offset)
-    all_time_best = update_all_time_best(score)
+  def update_high_scores(score, time, timezone_offset, game)
+    all_time_best = update_all_time_best(score, game)
     today = time_from_offset(time, timezone_offset) 
     daily_best = update_daily_best(score, today, timezone_offset)
     daily_average, daily_total, daily_data_points = update_daily_average(score, today, timezone_offset)
@@ -40,9 +40,15 @@ class AggregateResult < ActiveRecord::Base
     }
   end
 
-  def update_all_time_best(score)
+  def update_all_time_best(score, game)
     best_score = self.all_time_best
-    best_score = score if best_score.nil? || score > best_score
+    if best_score.nil? || score > best_score
+      best_score = score 
+      if game
+        lb_service = LeaderboardService.new(game.name, self.user_id)
+        lb_service.update_global_leaderboard(score)
+      end
+    end
     best_score
   end
 

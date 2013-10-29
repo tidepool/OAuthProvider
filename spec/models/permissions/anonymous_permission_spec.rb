@@ -72,6 +72,11 @@ module Permissions
       expect(subject.allow?(:friends, :invite)).to be_false
     end
 
+    it 'anonymous permissions for leaderboards' do 
+      expect(subject.allow?(:leaderboards, :global)).to be_false
+      expect(subject.allow?(:leaderboards, :friends)).to be_false
+    end
+
 
   end
 end

@@ -19,20 +19,76 @@ Every user has a friend leaderboard per game. This is stored as a sorted set in 
 
 where game_name is the unique name of the game and the user_id is the unique id of the user from Postgres. The leaderboard contains a sorted set of { friend_user_id, score } tuples.
 
-* When a user scores a high_score, we will add the user's high_score to all their friends' leaderboards. This is a O(NlogN) operation.
+For the first time a user's friend_lb is asked: -> Total: 2*O(M*log(M)) + O(2*M) + O(M)
 
-* The user's newly added friends will not have the latest highscore of the user, until the user plays a new game and scores a new high_score. 
+  * Retrieve the list of all of users friend user_id's. -> O(M) where M is the number of friends.
+  * Create a sorted set of all user's friends with 0 scores. -> O(M*log(M)) where M is the number of friends.
+  * Intersect that sorted set with the global_lb for that game and store it in friend_lb. For intersection, we will use the MAX as the aggregate function. ->  O(M*K)+O(M*log(M)) where M is the number of friends, K is 2.
+  * Record the date/time of request for caching purposes. -> O(1)
 
-    * When a user plays the game for the first time, then we do the rather expensive operation of: 
-    1. Create a sorted set of all user's friends with 0 scores.
-    2. Intersect that sorted set with the global_lb for that game. 
+Next time the user's friend_lb is asked:
 
-For the first time a user's friend_lb is asked:
-
+  * Check the date/time of request. If it is less than 1 minute, we serve the existing friend_lb. O(1)
+  * If not, then we do the intersection of friend_lb & global_lb again. ->  O(M*K)+O(M*log(M)) where M is the number of friends, K is 2.
 
 Other requirements:
+
 * Whenever a new friend is added, the friend's user_id is stored in a set in Redis with the following key:
 
     "friends:#{user_id}"
 
 ## API
+
+* As a user, find the global leaderboard for a given game
+
+Call the below API by paging. The default limit and offset are 10 and 0.
+
+    GET /api/v1/games/#{game_name}/leaderboard?offset=0&limit=10
+
+will return in descending order (top score first)
+
+    {
+      data: [
+        {
+          "id": "74",
+          "name": "Mary12 Doe",
+          "email": "spec_user66@example.com",
+          "image": "http://example.com/image12.jpg" 
+          "score": "1212"
+        }, {}
+      ]
+      status: {
+        "offset": 1,
+        "limit": 2,
+        "next_offset": 3,
+        "next_limit": 1,
+        "total": 4
+      }  
+    }
+
+* As a user, find the leaderboard for a given game for the friends of the calling user.
+
+Call the below API by paging. The default limit and offset are 10 and 0.
+
+    GET /api/v1/users/-/games/#{game_name}/leaderboard?offset=0&limit=10
+
+will return in descending order (top score first)
+
+    {
+      data: [
+        {
+          "id": "74",
+          "name": "Mary12 Doe",
+          "email": "spec_user66@example.com",
+          "image": "http://example.com/image12.jpg" 
+          "score": "1212"
+        }, {}
+      ]
+      status: {
+        "offset": 1,
+        "limit": 2,
+        "next_offset": 3,
+        "next_limit": 1,
+        "total": 4
+      }  
+    }
