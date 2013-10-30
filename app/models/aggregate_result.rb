@@ -82,4 +82,66 @@ class AggregateResult < ActiveRecord::Base
 
     return daily_average, daily_total, daily_data_points
   end
+
+  def initialize_scores
+    circadian = initialize_circadian
+    weekly = initialize_weekly
+    self.scores = {
+      "circadian" => circadian,
+      "weekly" => weekly,
+      "trend" => 0.0
+    }
+  end
+
+  def initialize_circadian
+    circadian = {}
+    (0...24).each do |hour|
+      circadian[hour.to_s] = {
+        "score" => 0,
+        "times_played" => 0        
+      }
+    end
+    circadian
+  end
+
+  def initialize_weekly
+    weekly = []
+    (0..6).each do |i|
+      weekly << {
+        'score' => 0,
+        'average_score' => 0.0,
+        'data_points' => 0
+      }
+    end
+    weekly
+  end 
+
+  def update_weekly(weekly, score, average_score)   
+    weekly_score = weekly["score"]
+    weekly_score = score.to_i if score.to_i > weekly["score"].to_i 
+
+    data_points = weekly["data_points"]
+    data_points += 1 
+
+    {
+      "score" => weekly_score,
+      "average_score" => average_score,
+      "data_points" => data_points
+    }
+  end
+
+  def update_circadian(score, hour)
+    circadian = self.scores["circadian"][hour.to_s]
+
+    circadian_score = circadian["score"]
+    circadian_score = score.to_i if score.to_i > circadian["score"].to_i 
+      
+    times_played = circadian["times_played"]
+    times_played += 1 
+
+    {
+      "score" => circadian_score,
+      "times_played" => times_played
+    }
+  end
 end

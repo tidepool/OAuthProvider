@@ -1,0 +1,22 @@
+[
+  {
+    "event_type": "echo",
+    "stage": 8,
+    "timezone_offset":7200,
+    "events": [
+      {"time":1360195167248, "event":"level_started", "stage_type": "forward", "score_multiplier": 1 },
+      {"time":1360195167848, "event":"level_completed" },
+      {"time":1360195167848, "event":"level_summary", "highest": 5 }
+    ]
+  }, 
+  {
+    "event_type": "echo",
+    "stage": 9,
+    "timezone_offset":7200,
+    "events": [
+      {"time":1360195168000, "event":"level_started", "stage_type": "reverse", "score_multiplier": 2 },
+      {"time":1360195169500, "event":"level_completed" },
+      {"time":1360195169500, "event":"level_summary", "highest": 8 }
+    ]
+  }
+]

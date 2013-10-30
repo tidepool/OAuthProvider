@@ -61,7 +61,29 @@ FactoryGirl.define do
           }
         }
       end
+    end
 
+    factory :attention_result do 
+      type 'AttentionResult'
+      score do 
+        {
+          "attention_score" => "2100"
+        }
+      end
+      calculations do 
+        {
+          "stage_scores" => [
+            {
+              "highest" => 5,
+              "score" => 500
+            },
+            {
+              "highest" => 8,
+              "score" => 1600
+            }
+          ]
+        }
+      end
     end
 
     factory :speed_archetype_result do 

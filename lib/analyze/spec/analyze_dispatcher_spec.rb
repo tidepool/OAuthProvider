@@ -574,5 +574,23 @@ module TidepoolAnalyze
              :version=>"2.0"},
            :timezone_offset=>7200}}
     end
+    it 'calculates the attention score' do 
+      recipe_names = ['attention_echo']
+      events = load_event_fixtures('aggregate_echo.json')
+      analyze_dispatcher = AnalyzeDispatcher.new
+      analysis = analyze_dispatcher.analyze(events, recipe_names) 
+      analysis.length.should == 1
+      analysis.should == {:attention=>
+          {:score_name=>"attention",
+           :final_results=>
+            [{:attention_score=>2100,
+              :stage_scores=>
+               [{:highest=>5, :score=>500}, {:highest=>8, :score=>1600}]}],
+           :score=>
+            {:attention_score=>2100,
+             :stage_scores=>[{:highest=>5, :score=>500}, {:highest=>8, :score=>1600}],
+             :version=>"2.0"},
+           :timezone_offset=>7200}}
+    end
   end
 end
