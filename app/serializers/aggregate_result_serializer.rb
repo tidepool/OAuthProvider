@@ -6,7 +6,7 @@ class AggregateResultSerializer < ActiveModel::Serializer
 
   def badge
     badge = {}
-    if object.type == "EmoAggregateResult" 
+    if object.type == "EmoAggregateResult" || object.type == "AttentionAggregateResult"
       badge = badge_for_score(object.last_value)
     elsif object.type == "SpeedAggregateResult"
       badge = badge_for_desc_id(object.last_value)

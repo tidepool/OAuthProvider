@@ -1,0 +1,24 @@
+{
+  "name" : "Echo",
+  "unique_name": "echo",
+  "instructions" : "",
+  "recipe_names" : ["attention_echo"],
+  "persist_as_results" : ["attention"],
+  "stages" :
+    [
+      {
+        "friendly_name": "Echo",
+        "instructions": "",
+        "view_name": "Echo",
+        "client_view_name": "Echo",
+        "stage_type": "forward"
+      },
+      {
+        "friendly_name": "Echo",
+        "instructions": "",
+        "view_name": "Echo",
+        "client_view_name": "Echo",
+        "stage_type": "reverse"
+      }
+    ]
+}

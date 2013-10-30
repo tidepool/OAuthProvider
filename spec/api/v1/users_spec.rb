@@ -20,6 +20,7 @@ describe 'Users API' do
   let(:sleep_aggregate_result) { create(:aggregate_result, type: 'SleepAggregateResult', user: user2) }
   let(:activity_aggregate_result) { create(:aggregate_result, type: 'ActivityAggregateResult', user: user2) }
   let(:emo_aggregate_result) { create(:emo_aggregate_result, user: user2) }
+  let(:attention_aggregate_result) { create(:attention_aggregate_result, user: user2)}
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -233,11 +234,13 @@ describe 'Users API' do
     sleep_aggregate_result
     activity_aggregate_result
     emo_aggregate_result
+    attention_aggregate_result
+
     token = get_conn(user2)
     response = token.get("#{@endpoint}/users/-.json")
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
-    user_info[:aggregate_results].length.should == 4
+    user_info[:aggregate_results].length.should == 5
     # Always ensure the first aggregate result is SpeedAggregateResult, because of a backwards compat
     # bug in the iOS client.
     user_info[:aggregate_results][0][:type].should == 'SpeedAggregateResult'
@@ -248,6 +251,11 @@ describe 'Users API' do
       elsif result[:type] == "SpeedAggregateResult" 
         result[:badge].should_not be_nil
         result[:badge][:character].should == "gorilla"
+      elsif result[:type] == "AttentionAggregateResult" 
+        result[:badge].should_not be_nil
+        result[:scores][:circadian].should_not be_nil 
+        result[:scores][:weekly].should_not be_nil  
+        result[:high_scores].should_not be_nil      
       end
     end
   end

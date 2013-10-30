@@ -228,7 +228,32 @@ describe 'Results API' do
     end
   end
 
-  describe 'Error and Edge Cases' do
-    
+  describe 'AttentionResult' do
+    let(:attention_result) { create(:attention_result, game: game, user: user1) }
+
+    it 'shows the results for the EmoIntelligenceResult' do 
+      attention_result
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/results.json?type=AttentionResult")
+      response.status.should == 200
+      output = JSON.parse(response.body, :symbolize_names => true)
+      user_results = output[:data]
+      user_results[0].should_not be_nil
+      user_results[0][:type].should == 'AttentionResult'
+      user_results[0][:badge][:character].should == 'steve'
+      user_results[0][:attention_score].should == "2100"
+      user_results[0][:calculations].should == {
+            :stage_scores => [
+                {
+                  :highest => 5,
+                  :score => 500
+                },
+                {
+                  :highest => 8,
+                  :score => 1600
+                }
+            ]
+        }
+    end    
   end
 end

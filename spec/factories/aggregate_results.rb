@@ -336,5 +336,40 @@ FactoryGirl.define do
       end
     end
 
+    factory :attention_aggregate_result do 
+      type 'AttentionAggregateResult'
+      scores do 
+        rand_gen = Random.new
+        weekly = (0..6).map do |i|
+          {
+            'score' => rand_gen.rand(100..4000),
+            'average_score' => rand_gen.rand(500.0..3000.0),
+            'data_points' => rand_gen.rand(1..10)
+          }
+        end
+        circadian = {}
+        (0...24).each do |hour|
+          circadian[hour.to_s] = {
+            "score" => rand_gen.rand(100..4000),
+            "times_played" => rand_gen.rand(1..10)        
+          }
+        end
+        {
+          "circadian" => circadian,
+          "weekly" => weekly,
+          "trend" =>  0.5
+        }
+      end
+      high_scores do 
+        {
+          "all_time_best" => 2500,
+          "daily_best" => 1600,
+          "current_day" => Time.zone.now.to_s, 
+          "daily_data_points" => 1,
+          "last_value" => 1800
+        }        
+      end
+    end
+
   end
 end

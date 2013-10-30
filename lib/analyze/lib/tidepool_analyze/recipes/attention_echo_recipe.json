@@ -1,0 +1,12 @@
+[
+  {
+    "score_name": "attention"
+  },
+  {
+    "user_event_source": "echo",
+    "analyzer": "EchoAnalyzer", 
+    "formulator": "AttentionFormulator",  
+    "formula_sheet": "emo_circles.csv",
+    "formula_key": "name"
+  }
+]
