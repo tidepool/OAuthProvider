@@ -84,9 +84,8 @@ describe 'Friends API' do
       find_list = friend_list[0..3].map { |friend| friend.email } 
       find_list << "foo@foo.com"  # A non-existing friend
  
-      params = {friend_list: { emails: find_list} }
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      response = token.get("#{@endpoint}/users/-/friends/find.json", :params => {'email' => find_list })
       result = JSON.parse(response.body, symbolize_names: true)
       found_friends = result[:data]
       found_friends.length.should == 4
@@ -103,9 +102,8 @@ describe 'Friends API' do
       friend_email = user1.friends[0].email
       find_list = friend_list[0..3].map { |friend| friend.email } 
       find_list << friend_email # Your existing friend
-      params = {friend_list: { emails: find_list} }
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      response = token.get("#{@endpoint}/users/-/friends/find.json", :params => {'email' => find_list })
       result = JSON.parse(response.body, symbolize_names: true)
       found_friends = result[:data]
       found_friends.length.should == 4
@@ -118,7 +116,7 @@ describe 'Friends API' do
       find_list = friend_auth_list[0..3].map { |friend| friend.uid } 
       params = {friend_list: { facebook_ids: find_list} }
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      response = token.get("#{@endpoint}/users/-/friends/find.json", :params => {'fbid' => find_list })
       result = JSON.parse(response.body, symbolize_names: true)
       found_friends = result[:data]
       found_friends.length.should == 4
@@ -132,9 +130,8 @@ describe 'Friends API' do
       email_list = friend_list[0..5].map { |friend| friend.email } 
       uid_list = friend_auth_list[0..3].map { |friend| friend.uid }
 
-      params = {friend_list: { facebook_ids: uid_list, emails: email_list } }
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      response = token.get("#{@endpoint}/users/-/friends/find.json",:params => {'email' => email_list, 'fbid' => uid_list})
       result = JSON.parse(response.body, symbolize_names: true)
       found_friends = result[:data]
       found_friends.length.should == 10
@@ -148,9 +145,8 @@ describe 'Friends API' do
     it 'invites found friends' do 
       friend_list
       find_list = friend_list[0..3].map { |friend| friend.email } 
-      params = {friend_list: { emails: find_list} }
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/friends/find.json", { body: params})
+      response = token.get("#{@endpoint}/users/-/friends/find.json", :params => {'email' => find_list })
       result = JSON.parse(response.body, symbolize_names: true)
       found_friends = result[:data]
 

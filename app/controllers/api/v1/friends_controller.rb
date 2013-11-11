@@ -53,10 +53,17 @@ class Api::V1::FriendsController < Api::V1::ApiController
     offset = (params[:offset] || 0).to_i
     raise Api::V1::NotAcceptableError, "Limit cannot be larger than 20." if limit > 20
 
-    friend_list = params[:friend_list]
-
     user = current_resource
     raise Api::V1::NotAcceptableError, "User not specified." if user.nil?
+
+    # friend_list = params[:friend_list]
+    email_list = params[:email]
+    fb_list = params[:fbid]
+
+    friend_list = {
+      emails: email_list,
+      facebook_ids: fb_list
+    }
 
     friends_service = FriendsService.new
     new_found_friends = friends_service.find_new_friends(user.id, friend_list)
