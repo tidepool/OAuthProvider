@@ -4,16 +4,13 @@
 
 Upload the list of emails and/or Facebook IDs you want to search for: (You would need to page this on your end so that you are not uploading more than 20 at a time.)
 
-    GET /api/v1/users/-/friends/find 
+    GET /api/v1/users/-/friends/find? 
 
-in the body of HTTP request:
+in the query params:
 
-    {
-      friend_list: {
-        emails: [ "foo@foo.com", "bar@bar.com" ]
-        facebook_ids: [ "12212", "222212" ]
-      }
-    }
+    ?email[]=foo@foo.com&email[]=bar@bar.com&
+    fbid[]=12312313&fbid[]=654646454
+
 
 returns: 
 
