@@ -12,7 +12,7 @@
         "view_name": "Echo",
         "client_view_name": "Echo",
         "stage_type": "forward", 
-        "score_multiplier" : 1
+        "score_multiplier" : 1.0
       },
       {
         "friendly_name": "Echo",

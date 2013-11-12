@@ -9,7 +9,6 @@ module TidepoolAnalyze
 
       def calculate_result
         process_events(@events)
-
         {
           score_multiplier: @score_multiplier,
           stage_type: @stage_type,
@@ -23,7 +22,7 @@ module TidepoolAnalyze
           case entry['event']
           when 'level_started'
             @start_time = get_time(entry)
-            @score_multiplier = entry['score_multiplier'] ? entry['score_multiplier'].to_i : 1
+            @score_multiplier = entry['score_multiplier'] ? entry['score_multiplier'].to_f : 1.0
             @stage_type = entry['stage_type'] || "forward"
           when 'level_completed'
             @end_time = get_time(entry)
