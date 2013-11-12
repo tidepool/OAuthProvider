@@ -11,14 +11,16 @@
         "instructions": "",
         "view_name": "Echo",
         "client_view_name": "Echo",
-        "stage_type": "forward"
+        "stage_type": "forward", 
+        "score_multiplier" : 1
       },
       {
         "friendly_name": "Echo",
         "instructions": "",
         "view_name": "Echo",
         "client_view_name": "Echo",
-        "stage_type": "reverse"
+        "stage_type": "reverse",
+        "score_multiplier" : 1.5
       }
     ]
 }
