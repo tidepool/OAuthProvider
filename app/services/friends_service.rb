@@ -35,12 +35,11 @@ class FriendsService
     filtered_list = []
     member_ids = member_list.map { |member| member[:id] || member["id"] }
     existing_friends = Friendship.where(user_id: user_id, friend_id: member_ids).to_a
-    return member_list if existing_friends.empty?
     member_list.each do |member|
       member_id = member[:id] || member["id"]
       existing_friend = nil
       existing_friend = existing_friends.find_all { |friend| friend.friend_id.to_i == member_id.to_i }
-      filtered_list << member if existing_friend.empty? 
+      filtered_list << member if existing_friend.empty? && (member_id.to_i != user_id.to_i)
     end
     filtered_list
   end
