@@ -111,6 +111,23 @@ describe 'Friends API' do
       found_list.should be_empty
     end
 
+    it 'finds a list of friends, except yourself, if your email is included accidentally' do
+      friend_list
+      find_list = friend_list[0..3].map { |friend| friend.email } 
+      find_list << user1.email
+
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/find.json", :params => {'email' => find_list })
+      result = JSON.parse(response.body, symbolize_names: true)
+      found_friends = result[:data]
+      found_friends.length.should == 4
+      found_list = found_friends.find_all { |friend| friend[:email] == user1.email }
+      found_list.should be_empty
+
+      found_list = found_friends.find_all { |friend| friend[:email] == friend_list[0].email }
+      found_list.should_not be_empty
+    end
+
     it 'finds a list of friends from facebook ids' do 
       friend_auth_list
       find_list = friend_auth_list[0..3].map { |friend| friend.uid } 
