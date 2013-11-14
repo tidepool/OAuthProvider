@@ -175,4 +175,5 @@ describe 'Friends API' do
       invite_list[0].to_i.should == user1.id
     end
   end
+
 end

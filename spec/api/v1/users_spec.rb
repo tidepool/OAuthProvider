@@ -261,13 +261,13 @@ describe 'Users API' do
   end
 
   describe 'Error and Edge Cases' do
-    it 'doesnot show other users information' do 
-      token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/#{guest.id}.json") 
-      response.status.should == 401
-      result = JSON.parse(response.body, symbolize_names: true)
-      result[:status][:code].should == 1000
-    end
+    # it 'doesnot show other users information' do 
+    #   token = get_conn(user1)
+    #   response = token.get("#{@endpoint}/users/#{guest.id}.json") 
+    #   response.status.should == 401
+    #   result = JSON.parse(response.body, symbolize_names: true)
+    #   result[:status][:code].should == 1000
+    # end
 
     it 'doesnot give anonymous access to user info' do 
       token = get_conn()

@@ -33,5 +33,4 @@ class Api::V1::LeaderboardsController < Api::V1::ApiController
   def current_resource
     target_user
   end
-
 end

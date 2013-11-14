@@ -16,6 +16,89 @@ class FriendsService
     found_friends
   end
 
+  def invite_friends(user_id, invite_list)
+    # ASSUMPTION: 
+    # It is expensive to do the rechecks we did in find_new_friends, so we will assume that
+    # this list is a list of friends that are already existing TidePool members and they are not user's friends
+
+    invited_user_ids = []
+    $redis.pipelined do 
+      invite_list.each do | invited_user |
+        invited_user_id = invited_user[:id] || invited_user["id"]
+        invited_user_ids << invited_user_id
+        # key_name = "pending_friend_reqs:#{invited_user_id}"
+        $redis.sadd pending_friend_reqs_key(invited_user_id), user_id 
+      end
+      $redis.sadd invited_friends_key(user_id), invited_user_ids
+    end
+  end
+
+  def find_pending_friends(user_id, params)
+    # key_name = "pending_friend_reqs:#{user_id}"
+    pending = $redis.smembers pending_friend_reqs_key(user_id)
+    total = pending.length
+    defaults = {
+      limit: 20, 
+      offset: 0, 
+      total: total
+    }
+
+    api_status = FriendsService.generate_status(params, defaults)
+    limit = api_status.limit
+    offset = api_status.offset
+
+    from = offset < total ? offset : 0 
+    to = offset + limit < total ? offset + limit : total
+    friend_window = pending[from...to]
+
+    return api_status, User.select(:id, :name, :email, :image).where(id: friend_window).to_a
+  end
+
+  def accept_friends(user_id, pending_list)
+    friendships = []
+    pending_ids_list = []
+    pending_list.each do |friend|
+      friend_id = friend[:id] || friend["id"]
+      pending_ids_list << friend_id
+      friendships << Friendship.new(user_id: user_id, friend_id: friend_id)
+      friendships << Friendship.new(user_id: friend_id, friend_id: user_id)      
+    end
+    Friendship.import(friendships)
+
+    $redis.pipelined do 
+      add_friends_to_redis(user_id, pending_ids_list)
+      remove_from_pending_list(user_id, pending_ids_list)
+      remove_from_invited_user_lists(user_id, pending_ids_list)
+    end
+  end
+
+  def reject_friends(user_id, pending_list)
+
+  end
+
+  def friend_status(caller, target_user)
+    status = :not_friend
+
+    $redis.pipelined do 
+      @is_friend = $redis.sismember friends_key(caller.id), target_user.id
+      @is_pending = $redis.sismember invited_friends_key(caller.id), target_user.id
+      @is_invited_by = $redis.sismember pending_friend_reqs_key(caller.id), target_user.id
+    end
+    if @is_friend.value == true
+      status = :friend
+    elsif @is_pending.value == true
+      status = :pending
+    elsif @is_invited_by.value == true
+      status = :invited_by
+    end
+    status
+  end
+
+  def unfriend_friends(user_id, friend_list)
+
+  end
+
+  private
   def find_by_email(user_id, email_list)    
     return [] if email_list.nil? || (email_list && email_list.empty?)
 
@@ -44,68 +127,40 @@ class FriendsService
     filtered_list
   end
 
-  def invite_friends(user_id, invite_list)
-    # ASSUMPTION: 
-    # It is expensive to do the rechecks we did in find_new_friends, so we will assume that
-    # this list is a list of friends that are already existing TidePool members and they are not user's friends
-
-    $redis.pipelined do 
-      invite_list.each do | invited_user |
-        invited_user_id = invited_user[:id] || invited_user["id"]
-        key_name = "pending_friend_reqs:#{invited_user_id}"
-        $redis.sadd(key_name, user_id)
-      end
-    end
-  end
-
-  def find_pending_friends(user_id, params)
-    key_name = "pending_friend_reqs:#{user_id}"
-    pending = $redis.smembers(key_name)
-    total = pending.length
-    defaults = {
-      limit: 20, 
-      offset: 0, 
-      total: total
-    }
-
-    api_status = FriendsService.generate_status(params, defaults)
-    limit = api_status.limit
-    offset = api_status.offset
-
-    from = offset < total ? offset : 0 
-    to = offset + limit < total ? offset + limit : total
-    friend_window = pending[from...to]
-
-    return api_status, User.select(:id, :name, :email, :image).where(id: friend_window).to_a
-  end
-
-  def accept_friends(user_id, pending_list)
-    friendships = []
-    pending_list.each do |friend|
-      friend_id = friend[:id] || friend["id"]
-      friendships << Friendship.new(user_id: user_id, friend_id: friend_id)
-      friendships << Friendship.new(user_id: friend_id, friend_id: user_id)      
-    end
-    Friendship.import(friendships)
-
-    add_friends_to_redis(user_id, pending_list)
-    remove_from_pending_lists(user_id, pending_list)
-  end
-
+  # pending_list is an array of ids
   def add_friends_to_redis(user_id, pending_list)
-    friend_list = []
-    $redis.pipelined do 
-      pending_list.each do |friend| 
-        friend_id = friend[:id] || friend["id"]
-        friend_list << friend_id
-        $redis.sadd "friends:#{friend_id}", user_id
-      end
+    pending_list.each do |friend_id| 
+      $redis.sadd friends_key(friend_id), user_id
     end
-    $redis.sadd "friends:#{user_id}", friend_list
+    $redis.sadd friends_key(user_id), pending_list
   end
 
-  def remove_from_pending_lists(user_id, friend_list)
-    friend_ids = friend_list.map { |friend| friend[:id] || friend["id"] }
-    $redis.srem "pending_friend_reqs:#{user_id}", friend_ids
+  # friend_list is an array of ids
+  def remove_from_pending_list(user_id, friend_list)
+    # friend_ids = friend_list.map { |friend| friend[:id] || friend["id"] }
+    # $redis.srem "pending_friend_reqs:#{user_id}", friend_ids
+    $redis.srem pending_friend_reqs_key(user_id), friend_list
+  end
+
+  # friend_list is an array of ids
+  def remove_from_invited_user_lists(user_id, friend_list)
+    friend_list.each do |friend_id|
+      $redis.srem invited_friends_key(friend_id), user_id
+    end
+  end
+
+  # List of friends for the user.
+  def friends_key(user_id)
+    "friends:#{user_id}"
+  end
+
+  # List of pending friend requests from other users for the user_id
+  def pending_friend_reqs_key(user_id)
+    "pending_friend_reqs:#{user_id}"
+  end
+
+  # List of friends user_id has invited but not accepted yet.
+  def invited_friends_key(user_id)
+    "invited_friends:#{user_id}"
   end
 end

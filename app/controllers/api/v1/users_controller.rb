@@ -15,10 +15,21 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def show
-    user = user_eager_load
+    if caller == current_resource
+      # The caller is asking about themselves.
+      user = user_eager_load
+      serializer = UserSerializer
+    else
+      # The caller is asking about another user
+      friend_service = FriendsService.new
+      friend_status = friend_service.friend_status(caller, current_resource)
+      serializer = friend_status == :friend ? FriendSerializer : PublicProfileSerializer
+      user = current_resource
+      user.set_friend_status(friend_status)
+    end
 
     respond_to do |format|
-      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: user, serializer: serializer, meta: {} }.merge(api_defaults)) }
     end
   end
 
