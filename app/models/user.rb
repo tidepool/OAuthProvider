@@ -68,4 +68,12 @@ class User < ActiveRecord::Base
     self.guest = false # The user is no longer a guest
     super
   end
+
+  def set_friend_status(friend_status)
+    @friend_status = friend_status
+  end
+
+  def get_friend_status
+    @friend_status
+  end
 end
