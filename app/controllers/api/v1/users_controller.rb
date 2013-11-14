@@ -25,7 +25,7 @@ class Api::V1::UsersController < Api::V1::ApiController
       friend_status = friend_service.friend_status(caller, current_resource)
       serializer = friend_status == :friend ? FriendSerializer : PublicProfileSerializer
       user = current_resource
-      user.set_friend_status(friend_status)
+      user.friend_status = friend_status
     end
 
     respond_to do |format|

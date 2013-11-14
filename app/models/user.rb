@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  attr_accessor :friend_status
   
   def needs_password?
     guest == false #&& (password.present? || password_confirmation.present?)
@@ -69,11 +71,11 @@ class User < ActiveRecord::Base
     super
   end
 
-  def set_friend_status(friend_status)
-    @friend_status = friend_status
-  end
+  # def set_friend_status(friend_status)
+  #   @friend_status = friend_status
+  # end
 
-  def get_friend_status
-    @friend_status
-  end
+  # def get_friend_status
+  #   @friend_status
+  # end
 end

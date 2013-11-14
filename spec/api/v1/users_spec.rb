@@ -9,10 +9,11 @@ describe 'Users API' do
   end
 
   let(:user1) { create(:user) }
-  let(:user2) { create(:user) }
   let(:guest) { create(:guest) }
   let(:admin) { create(:admin) }
   let(:personality) { create(:personality) }
+  let(:personality2) { create(:personality)}
+  let(:user2) { create(:user, personality: personality2) }
   let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
   let(:authentication) { create(:authentication, user: user2) }
@@ -257,6 +258,77 @@ describe 'Users API' do
         result[:scores][:weekly].should_not be_nil  
         result[:high_scores].should_not be_nil      
       end
+    end
+  end
+
+  describe 'Friend and Public Profiles' do 
+    before :each do 
+      aggregate_result
+      sleep_aggregate_result
+      activity_aggregate_result
+      emo_aggregate_result
+      attention_aggregate_result
+    end
+
+    it 'returns the public profile of a user who is not a friend' do 
+      personality
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:friend_status].should == "not_friend"
+      user_info[:personality][:profile_description][:id].should == personality.profile_description.id
+      user_info[:personality][:profile_description][:name].should == personality.profile_description.name
+      user_info[:aggregate_results].should be_nil
+    end
+
+    it 'returns the friend profile of a user who is a friend' do 
+      personality
+      personality2
+      make_friends(user3, user2)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should == user2.email
+      user_info[:friend_status].should == "friend"
+      user_info[:personality][:id].should == personality2.id
+      user_info[:personality][:big5_score].should == personality.big5_score.symbolize_keys
+      user_info[:personality][:holland6_score].should == personality.holland6_score.symbolize_keys
+      user_info[:personality][:profile_description][:id].should == personality.profile_description.id
+      user_info[:personality][:profile_description][:name].should == personality.profile_description.name
+    
+      user_info[:aggregate_results].length.should == 5
+    end
+
+    it 'returns pending for friend_status if the caller invited the user' do 
+      personality
+      invite_friends(user3, user2)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should be_nil
+      user_info[:friend_status].should == "pending"
+      user_info[:personality][:id].should be_nil
+      user_info[:aggregate_results].should be_nil
+    end
+
+    it 'returns invited by for friend_status if the caller is invited by the user' do 
+      personality
+      invite_friends(user2, user3)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should be_nil
+      user_info[:friend_status].should == "invited_by"
+      user_info[:personality][:id].should be_nil
+      user_info[:aggregate_results].should be_nil
     end
   end
 
