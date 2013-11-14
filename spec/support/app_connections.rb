@@ -21,4 +21,15 @@ module AppConnections
       client.password.get_token(user.email, password)
     end
   end
+
+  def make_friends(user1, user2) 
+    friends_service = FriendsService.new
+    friends_service.invite_friends(user1.id, [{id: user2.id}])
+    friends_service.accept_friends(user2.id, [{id: user1.id}])
+  end
+
+  def invite_friends(user1, user2)
+    friends_service = FriendsService.new
+    friends_service.invite_friends(user1.id, [{id: user2.id}])
+  end
 end

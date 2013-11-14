@@ -152,6 +152,7 @@ FactoryGirl.define do
   end
 
   factory :personality do 
+    profile_description_id 2
     big5_dimension "high_openness"
     big5_high "openness"
     big5_low "neuroticism"

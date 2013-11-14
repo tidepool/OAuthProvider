@@ -1,5 +1,5 @@
 class PublicProfileSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image, :personality
+  attributes :id, :name, :image, :personality, :friend_status
 
   def name
     if object.name.nil? || object.name.empty?
@@ -17,7 +17,7 @@ class PublicProfileSerializer < ActiveModel::Serializer
       }
     else
       desc = nil
-      desc_id = object.profile_description_id   
+      desc_id = personality.profile_description_id   
       if desc_id 
         desc ||= Rails.cache.fetch("ProfileDescription_#{desc_id}", expires_in: 1.hours) do
           ProfileDescription.find(desc_id) 
