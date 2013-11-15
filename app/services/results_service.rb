@@ -50,7 +50,7 @@ class ResultsService
   def find_results_for_user
     results = Result.where(user_id: @user.id)
     results = results.where(type: @result_type) if @result_type
-    results = results.order('time_played')
+    results = results.order('time_played').reverse_order
 
     response, api_status = Result.paginate(results, @params)
     if @is_daily
