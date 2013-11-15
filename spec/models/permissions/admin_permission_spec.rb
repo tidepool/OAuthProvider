@@ -81,6 +81,9 @@ module Permissions
       expect(subject.allow?(:friends, :accept)).to be_true
       expect(subject.allow?(:friends, :pending)).to be_true
       expect(subject.allow?(:friends, :invite)).to be_true
+      expect(subject.allow?(:friends, :reject)).to be_true
+      expect(subject.allow?(:friends, :unfriend)).to be_true
+
     end
 
     it 'admin permissions for leaderboards' do 

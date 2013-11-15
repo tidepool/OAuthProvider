@@ -44,7 +44,7 @@ module Permissions
 
         allow :friend_surveys, [:create, :results]
 
-        allow :friends, [:index, :accept, :find, :pending, :invite]
+        allow :friends, [:index, :accept, :find, :pending, :invite, :reject, :unfriend]
 
         allow :leaderboards, [:global, :friends]
       end

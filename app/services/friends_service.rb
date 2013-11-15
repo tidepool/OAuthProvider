@@ -22,7 +22,7 @@ class FriendsService
     # this list is a list of friends that are already existing TidePool members and they are not user's friends
 
     invited_user_ids = []
-    $redis.pipelined do 
+    $redis.multi do 
       invite_list.each do | invited_user |
         invited_user_id = invited_user[:id] || invited_user["id"]
         invited_user_ids << invited_user_id
@@ -65,15 +65,20 @@ class FriendsService
     end
     Friendship.import(friendships)
 
-    $redis.pipelined do 
+    $redis.multi do 
       add_friends_to_redis(user_id, pending_ids_list)
       remove_from_pending_list(user_id, pending_ids_list)
       remove_from_invited_user_lists(user_id, pending_ids_list)
     end
   end
 
-  def reject_friends(user_id, pending_list)
+  def reject_invitations(user_id, pending_list)
+    pending_ids_list = pending_list.map { |friend| friend[:id] || friend["id"] }    
 
+    $redis.multi do 
+      remove_from_pending_list(user_id, pending_ids_list)
+      remove_from_invited_user_lists(user_id, pending_ids_list)
+    end
   end
 
   def friend_status(caller, target_user)
@@ -95,7 +100,16 @@ class FriendsService
   end
 
   def unfriend_friends(user_id, friend_list)
+    friend_id_list = friend_list.map { |friend| friend[:id] || friend["id"] }
+    Friendship.transaction do 
+      Friendship.where(user_id: user_id, friend_id: friend_id_list).delete_all
+      Friendship.where(user_id: friend_id_list, friend_id: user_id).delete_all
+    end
 
+    $redis.multi do
+      remove_friends(user_id, friend_id_list)
+      remove_from_friend_lists(user_id, friend_id_list)
+    end
   end
 
   private
@@ -146,6 +160,18 @@ class FriendsService
   def remove_from_invited_user_lists(user_id, friend_list)
     friend_list.each do |friend_id|
       $redis.srem invited_friends_key(friend_id), user_id
+    end
+  end
+
+  # friend_list is an array of ids
+  def remove_friends(user_id, friend_list)
+    $redis.srem friends_key(user_id), friend_list
+  end
+
+  # friend_list is an array of ids
+  def remove_from_friend_lists(user_id, friend_list)
+    friend_list.each do |friend_id|
+      $redis.srem friends_key(friend_id), user_id
     end
   end
 
