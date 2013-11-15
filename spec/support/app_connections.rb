@@ -32,4 +32,5 @@ module AppConnections
     friends_service = FriendsService.new
     friends_service.invite_friends(user1.id, [{id: user2.id}])
   end
+
 end

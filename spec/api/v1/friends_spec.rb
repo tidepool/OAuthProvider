@@ -3,6 +3,15 @@ require 'spec_helper'
 describe 'Friends API' do 
   include AppConnections
 
+  def create_friends
+    invite_list = friend_list.map { |friend| { id: friend.id} }
+    friend_service = FriendsService.new
+    friend_service.invite_friends(user1.id, invite_list)
+    invite_list.each do |friend|
+      friend_service.accept_friends(friend[:id], [{ id: user1.id }] )
+    end
+  end
+
   before :all do
     find_or_create_app
     @endpoint = '/api/v1'
@@ -11,13 +20,17 @@ describe 'Friends API' do
   let(:user1) { create(:friend_user) }
   let(:authentication) { create(:authentication, user: user1) }
 
-  describe 'Friendlist' do 
+  describe 'Friendlist and unfriending' do 
     let(:friend_list) { create_list(:friend_user, 7)}
     let(:friend_auth_list) { create_list(:friend_authentications, 8)}
-    let(:friendships) { create_list(:friendship, 10, user: user1)}
+    # let(:friendships) { create_list(:friendship, 10, user: user1)}
+
+    before :each do 
+      create_friends
+    end
 
     it 'a list of existing friends' do 
-      friendships
+      # friendships
       token = get_conn(user1)
       response = token.get("#{@endpoint}/users/-/friends.json?limit=5&offset=0")
       result = JSON.parse(response.body, symbolize_names: true)
@@ -29,12 +42,66 @@ describe 'Friends API' do
       status[:offset].should == 0
       status[:limit].should == 5
       status[:next_offset].should == 5
-      status[:next_limit].should == 5
-      status[:total].should == 10
+      status[:next_limit].should == 2
+      status[:total].should == 7
+    end
+
+    it 'unfriends a list of friends' do 
+      # friendships
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends.json?limit=5&offset=0")
+      result = JSON.parse(response.body, symbolize_names: true)
+      existing_friends = result[:data]
+
+      # My friends in Postgres
+      user1.friends.length.should == 7
+
+      # Friends friends in Postgres
+      user1.friends.each do |friend| 
+        friend.friends.length.should == 1
+      end
+
+      # My friends in Redis
+      redis_data = $redis.smembers "friends:#{user1.id}"
+      redis_data.length.should == 7 
+
+      # Friends friends in Redis
+      existing_friends.each  do | existing_friend |
+        redis_data = $redis.smembers "friends:#{existing_friend[:id]}" 
+        redis_data.length.should == 1        
+      end
+
+      params = {friend_list: existing_friends}
+      response = token.post("#{@endpoint}/users/-/friends/unfriend.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      new_user = User.find(user1.id)
+
+      # My friends in Postgres
+      new_user.friends.length.should == 2
+
+      # Friends friends in Postgres
+      existing_friends.each do |existing_friend| 
+        old_friend = User.find(existing_friend[:id])
+        old_friend.friends.length.should == 0
+      end
+
+      # My friends in Redis
+      redis_data = $redis.smembers "friends:#{user1.id}"
+      redis_data.length.should == 2
+
+      # Friends friends in Redis
+      existing_friends.each  do | existing_friend |
+        redis_data = $redis.smembers "friends:#{existing_friend[:id]}" 
+        redis_data.length.should == 0        
+      end
+
+      status = result[:status]
+      status[:message].should == 'Friend list unfriended.'
     end
   end
 
-  describe 'Pending and accepting' do 
+  describe 'Pending and accepting or rejecting' do 
     let(:friend_list) { create_list(:friend_user, 7)}
 
     before :each do
@@ -71,6 +138,32 @@ describe 'Friends API' do
       pending = $redis.smembers "pending_friend_reqs:#{user1.id}"  
       pending.length.should == 0
       user1.friends.length.should == 4
+
+      status = result[:status]
+      status[:message].should == 'Friend list accepted.'
+
+    end
+
+    it 'rejects friend invitations' do 
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/friends/pending.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      pending = $redis.smembers "pending_friend_reqs:#{user1.id}"  
+      pending.length.should_not == 0
+
+      pending_friends = result[:data]
+      params = {friend_list: pending_friends}
+      response = token.post("#{@endpoint}/users/-/friends/reject.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      pending = $redis.smembers "pending_friend_reqs:#{user1.id}"  
+      pending.length.should == 0
+      user1.friends.length.should == 0
+
+      status = result[:status]
+      status[:message].should == 'Friend list rejected.'
+
     end
   end
 
@@ -173,6 +266,10 @@ describe 'Friends API' do
       invite_list = $redis.smembers "pending_friend_reqs:#{friend_list[0].id}"
       invite_list.should_not be_empty
       invite_list[0].to_i.should == user1.id
+
+      status = result[:status]
+      status[:message].should == 'Friend list invited, once they accept they will be your friends.'
+
     end
   end
 

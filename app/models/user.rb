@@ -71,11 +71,4 @@ class User < ActiveRecord::Base
     super
   end
 
-  # def set_friend_status(friend_status)
-  #   @friend_status = friend_status
-  # end
-
-  # def get_friend_status
-  #   @friend_status
-  # end
 end

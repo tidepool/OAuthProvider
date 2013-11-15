@@ -68,6 +68,8 @@ OAuthProvider::Application.routes.draw do
         post 'friends/accept', to: 'friends#accept'
         get 'friends/pending', to: 'friends#pending'
         post 'friends/invite', to: 'friends#invite'
+        post 'friends/reject', to: 'friends#reject'
+        post 'friends/unfriend', to: 'friends#unfriend'
 
         get 'games/:game_name/leaderboard', to: 'leaderboards#friends'
       end
