@@ -27,7 +27,7 @@ module TidepoolAnalyze
           total_score += score
         end
         {
-          attention_score: total_score,
+          attention_score: total_score.to_i,
           stage_scores: stage_scores
         }
       end
