@@ -119,7 +119,17 @@ describe 'Friends API' do
 
       status = result[:status]
       status[:message].should == 'Friend list accepted.'
+    end
 
+    it 'does not accept the pending friends input if they are not actually on pending friends lists' do 
+      # Make up a list of friends who are not pending and some pending
+      pending_friends = friend_list[0..6].map { |friend| {id: friend.id } }
+      params = {friend_list: pending_friends}
+      token = get_conn(user1)
+      response = token.post("#{@endpoint}/users/-/friends/accept.json", { body: params})
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      user1.friends.length.should == 4
     end
 
     it 'rejects friend invitations' do 
