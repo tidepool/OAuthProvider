@@ -62,20 +62,12 @@ class FriendsService
       friendships << Friendship.new(user_id: friend_id, friend_id: user_id)      
     end
     Friendship.import(friendships)
-
-    $redis.multi do 
-      remove_from_pending_list(user_id, pending_ids_list)
-      remove_from_invited_user_lists(user_id, pending_ids_list)
-    end
+    remove_from_temp_lists(user_id, pending_ids_list)
   end
 
   def reject_invitations(user_id, pending_list)
     pending_ids_list = pending_list.map { |friend| friend[:id] || friend["id"] }    
-
-    $redis.multi do 
-      remove_from_pending_list(user_id, pending_ids_list)
-      remove_from_invited_user_lists(user_id, pending_ids_list)
-    end
+    remove_from_temp_lists(user_id, pending_ids_list)
   end
 
   def friend_status(caller, target_user)
@@ -131,6 +123,14 @@ class FriendsService
       filtered_list << member if existing_friend.empty? && (member_id.to_i != user_id.to_i)
     end
     filtered_list
+  end
+
+  # friend_list is an array of ids
+  def remove_from_temp_lists(user_id, friend_list)
+    $redis.multi do 
+      remove_from_pending_list(user_id, friend_list)
+      remove_from_invited_user_lists(user_id, friend_list)
+    end
   end
 
   # friend_list is an array of ids
