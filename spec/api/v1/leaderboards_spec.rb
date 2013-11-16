@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Leaderboards API' do 
   include AppConnections
+  include FriendHelpers
 
   before :all do
     find_or_create_app
@@ -52,8 +53,9 @@ describe 'Leaderboards API' do
       end
       $redis.zadd "global_lb:fizzbuzz", sample_scores
 
-      friend_list = user_list[0..6].map { |user| user.id }
-      $redis.sadd "friends:#{user1.id}", friend_list
+      create_friends(user1, user_list[0..6])
+      # friend_list = user_list[0..6].map { |user| user.id }
+      # $redis.sadd "friends:#{user1.id}", friend_list
     end
 
     it 'retrieves the friend leaderboard' do 

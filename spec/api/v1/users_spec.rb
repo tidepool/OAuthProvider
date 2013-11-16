@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Users API' do 
   include AppConnections
+  include FriendHelpers
 
   before :all do
     find_or_create_app
