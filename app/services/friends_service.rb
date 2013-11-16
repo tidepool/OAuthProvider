@@ -53,6 +53,9 @@ class FriendsService
   end
 
   def accept_friends(user_id, pending_list)
+    pending_list = check_if_in_pending_list(user_id, pending_list)
+    return if pending_list.empty?
+
     friendships = []
     pending_ids_list = []
     pending_list.each do |friend|
@@ -78,11 +81,14 @@ class FriendsService
       @is_pending = $redis.sismember invited_friends_key(caller.id), target_user.id
       @is_invited_by = $redis.sismember pending_friend_reqs_key(caller.id), target_user.id
     end
+
+    is_pending = future_value(@is_pending)
+    is_invited_by = future_value(@is_invited_by)
     if fship
       status = :friend
-    elsif @is_pending.value == true
+    elsif is_pending
       status = :pending
-    elsif @is_invited_by.value == true
+    elsif is_invited_by
       status = :invited_by
     end
     status
@@ -123,6 +129,29 @@ class FriendsService
       filtered_list << member if existing_friend.empty? && (member_id.to_i != user_id.to_i)
     end
     filtered_list
+  end
+
+  def check_if_in_pending_list(user_id, pending_list)
+    @is_member = []
+    $redis.pipelined do 
+      pending_list.each do |friend| 
+        friend_id = friend[:id] || friend["id"]
+        @is_member << $redis.sismember(pending_friend_reqs_key(user_id), friend_id) 
+      end
+    end
+    new_list = []
+    pending_list.each_with_index do |friend, i| 
+      is_member = future_value(@is_member[i])
+      new_list << friend if is_member
+    end
+    new_list
+  end
+
+  def future_value(input)
+    while input.value.is_a?(Redis::FutureNotReady)
+      sleep(1.0 / 100.0)
+    end
+    input.value
   end
 
   # friend_list is an array of ids
