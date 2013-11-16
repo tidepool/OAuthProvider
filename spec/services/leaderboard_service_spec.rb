@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe LeaderboardService do
+  include FriendHelpers
+
   let(:user1) { create(:user) }
 
   describe "Global Leaderboard" do 
@@ -76,8 +78,7 @@ describe LeaderboardService do
       end
       $redis.zadd "global_lb:fizzbuzz", sample_scores
 
-      friend_list = user_list[0..3].map { |user| user.id }
-      $redis.sadd "friends:#{user1.id}", friend_list
+      create_friends(user1, user_list[0..3])
     end
 
     it 'reads from the friend leaderboard for the first time' do 

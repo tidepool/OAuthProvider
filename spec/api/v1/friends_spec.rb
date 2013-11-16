@@ -2,15 +2,16 @@ require 'spec_helper'
 
 describe 'Friends API' do 
   include AppConnections
+  include FriendHelpers
 
-  def create_friends
-    invite_list = friend_list.map { |friend| { id: friend.id} }
-    friend_service = FriendsService.new
-    friend_service.invite_friends(user1.id, invite_list)
-    invite_list.each do |friend|
-      friend_service.accept_friends(friend[:id], [{ id: user1.id }] )
-    end
-  end
+  # def create_friends
+  #   invite_list = friend_list.map { |friend| { id: friend.id} }
+  #   friend_service = FriendsService.new
+  #   friend_service.invite_friends(user1.id, invite_list)
+  #   invite_list.each do |friend|
+  #     friend_service.accept_friends(friend[:id], [{ id: user1.id }] )
+  #   end
+  # end
 
   before :all do
     find_or_create_app
@@ -23,14 +24,12 @@ describe 'Friends API' do
   describe 'Friendlist and unfriending' do 
     let(:friend_list) { create_list(:friend_user, 7)}
     let(:friend_auth_list) { create_list(:friend_authentications, 8)}
-    # let(:friendships) { create_list(:friendship, 10, user: user1)}
 
     before :each do 
-      create_friends
+      create_friends(user1, friend_list)
     end
 
     it 'a list of existing friends' do 
-      # friendships
       token = get_conn(user1)
       response = token.get("#{@endpoint}/users/-/friends.json?limit=5&offset=0")
       result = JSON.parse(response.body, symbolize_names: true)
@@ -47,7 +46,6 @@ describe 'Friends API' do
     end
 
     it 'unfriends a list of friends' do 
-      # friendships
       token = get_conn(user1)
       response = token.get("#{@endpoint}/users/-/friends.json?limit=5&offset=0")
       result = JSON.parse(response.body, symbolize_names: true)
@@ -59,16 +57,6 @@ describe 'Friends API' do
       # Friends friends in Postgres
       user1.friends.each do |friend| 
         friend.friends.length.should == 1
-      end
-
-      # My friends in Redis
-      redis_data = $redis.smembers "friends:#{user1.id}"
-      redis_data.length.should == 7 
-
-      # Friends friends in Redis
-      existing_friends.each  do | existing_friend |
-        redis_data = $redis.smembers "friends:#{existing_friend[:id]}" 
-        redis_data.length.should == 1        
       end
 
       params = {friend_list: existing_friends}
@@ -84,16 +72,6 @@ describe 'Friends API' do
       existing_friends.each do |existing_friend| 
         old_friend = User.find(existing_friend[:id])
         old_friend.friends.length.should == 0
-      end
-
-      # My friends in Redis
-      redis_data = $redis.smembers "friends:#{user1.id}"
-      redis_data.length.should == 2
-
-      # Friends friends in Redis
-      existing_friends.each  do | existing_friend |
-        redis_data = $redis.smembers "friends:#{existing_friend[:id]}" 
-        redis_data.length.should == 0        
       end
 
       status = result[:status]
@@ -169,8 +147,8 @@ describe 'Friends API' do
 
   describe 'Finding and inviting' do 
     let(:friend_list) { create_list(:friend_user, 10)}
+    let(:cur_friend_list) { create_list(:friend_user, 5)}
     let(:friend_auth_list) { create_list(:friend_authentications, 10)}
-    let(:friendships) { create_list(:friendship, 10, user: user1)}
 
     it 'finds a list of friends from emails' do 
       friend_list
@@ -191,7 +169,7 @@ describe 'Friends API' do
 
     it 'finds a list of friends, except your already existing friends' do 
       friend_list
-      friendships
+      create_friends(user1, cur_friend_list)
       friend_email = user1.friends[0].email
       find_list = friend_list[0..3].map { |friend| friend.email } 
       find_list << friend_email # Your existing friend

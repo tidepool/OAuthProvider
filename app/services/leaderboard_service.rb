@@ -97,8 +97,8 @@ class LeaderboardService
     # The chances of user accumulating that many friends without leaderboard ever being called 
     # is very small.
 
-    friends = $redis.smembers friend_list_key 
-    friends = friends.map { |friend_id| [0.0, friend_id.to_s]}
+    friends = Friendship.where(user_id: @user_id).select(:friend_id).to_a
+    friends = friends.map { |friendship| [0.0, friendship.friend_id.to_s]}
     friends << [0.0, @user_id.to_s] # Don't forget yourself!
     result = $redis.zadd friend_lb_key, friends
     if result != friends.length 
@@ -112,10 +112,6 @@ class LeaderboardService
 
   def friend_lb_temp_key
     "friend_lb:#{@game_name}:temp_#{@user_id}"
-  end
-
-  def friend_list_key 
-    "friends:#{@user_id}"
   end
 
   def global_lb_key
