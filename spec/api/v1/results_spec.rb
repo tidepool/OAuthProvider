@@ -240,7 +240,7 @@ describe 'Results API' do
       user_results = output[:data]
       user_results[0].should_not be_nil
       user_results[0][:type].should == 'AttentionResult'
-      user_results[0][:badge][:character].should == 'steve'
+      user_results[0][:badge][:character].should == 'marshwarbler'
       user_results[0][:attention_score].should == "2100"
       user_results[0][:calculations].should == {
             :stage_scores => [
