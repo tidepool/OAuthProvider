@@ -6,6 +6,6 @@ class AttentionResultSerializer < ActiveModel::Serializer
             :calculations, :badge
 
   def badge
-    badge_for_score(object.attention_score)
+    attention_badge_for_score(object.attention_score)
   end        
 end
