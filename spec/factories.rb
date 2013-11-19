@@ -250,6 +250,10 @@ FactoryGirl.define do
       sequence(:name) { |n| "Mary#{n} Doe" }
     end
 
+    factory :friend_user_no_name do 
+      sequence(:image) { |n| "http://example.com/image#{n}.jpg" }
+    end
+
     factory :admin do
       admin true
     end
