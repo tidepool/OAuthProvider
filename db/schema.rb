@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131009181823) do
+ActiveRecord::Schema.define(version: 20131025215510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,14 +160,13 @@ ActiveRecord::Schema.define(version: 20131009181823) do
   add_index "friend_surveys", ["game_id"], name: "index_friend_surveys_on_game_id", using: :btree
 
   create_table "friendships", force: true do |t|
-    t.integer  "user_id",                        null: false
-    t.integer  "friend_id",                      null: false
-    t.string   "status",     default: "invited", null: false
+    t.integer  "user_id",    null: false
+    t.integer  "friend_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "friendships", ["status"], name: "index_friendships_on_status", using: :btree
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
   add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "games", force: true do |t|
@@ -198,24 +197,13 @@ ActiveRecord::Schema.define(version: 20131009181823) do
 
   add_index "images", ["name"], name: "index_images_on_name", using: :btree
 
-  create_table "invitations", force: true do |t|
-    t.integer  "user_id",           null: false
-    t.text     "email_invite_list"
+  create_table "leaderboards", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "game_name",  null: false
+    t.float    "score"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
-
-  create_table "invited_users", force: true do |t|
-    t.integer  "inviter_id",    null: false
-    t.string   "invited_email", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invited_users", ["invited_email"], name: "index_invited_users_on_invited_email", using: :btree
-  add_index "invited_users", ["inviter_id"], name: "index_invited_users_on_inviter_id", using: :btree
 
   create_table "measurements", force: true do |t|
     t.integer  "user_id",       null: false

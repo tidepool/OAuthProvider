@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe PersistSpeedArchetype do
   let(:user) { create(:user) }
-  let(:game) { create(:game, user: user) }
+  let(:game) { create(:game, user: user, name: 'snoozer') }
   let(:personality) { create(:personality, user: user) }
   let(:aggregate_result) { create(:aggregate_result, user: user) }
-  let(:game2) { create(:game, user: user) }
+  let(:game2) { create(:game, user: user, name: 'snoozer') }
   let(:speed_archetype_result) { create(:speed_archetype_result, game: game2)}
   let(:prior_speed_archetypes) { create_list(:prior_speed_archetypes, 10, game: game2, user:user)}
 
@@ -176,7 +176,7 @@ describe PersistSpeedArchetype do
     result.scores['weekly'].should_not be_nil
   end
 
-  it 'persists updates the high_scores' do 
+  it 'updates the high_scores' do 
     user
     game
     aggregate_result
@@ -191,6 +191,26 @@ describe PersistSpeedArchetype do
     result.daily_best.should == 1800    
     result.last_value.should == "11"
     result.last_score.should == 1800
+  end
+
+  it 'updates the leaderboards when a highscore is reached' do 
+    user
+    game
+    aggregate_result
+    @analysis_results[:reaction_time2][:score][:speed_score] = 5000 
+
+    persist_rt = PersistSpeedArchetype.new    
+    persist_rt.persist(game, @analysis_results)
+
+    result = AggregateResult.find_for_type(game.user_id, 'SpeedAggregateResult')
+    result.high_scores.should_not be_nil
+    result.all_time_best.should == 5000
+
+    lb_entry = Leaderboard.where(game_name: 'snoozer', user_id: user.id).first     
+    lb_entry.score.should == 5000.0
+
+    global_lb_entry = $redis.zscore "global_lb:snoozer", user.id.to_s
+    global_lb_entry.should == 5000.0
   end
 
   it 'returns fast if the the game already has the personality persisted' do 

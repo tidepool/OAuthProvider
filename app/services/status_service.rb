@@ -1,13 +1,13 @@
 class StatusService
-  def check_status
-
+  def self.check(key)
+    $redis.get(key)
   end
 
-  def update_status
-
+  def self.update(key, status)
+    $redis.set(key, status)
   end
 
-  def delete_status
-
+  def self.delete(key)
+    $redis.del(key)
   end
 end

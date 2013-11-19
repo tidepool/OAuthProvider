@@ -28,6 +28,8 @@
 #
 
 class User < ActiveRecord::Base
+  include Paginate
+  
   has_secure_password validations: false
   
   validates_uniqueness_of :email
@@ -49,6 +51,8 @@ class User < ActiveRecord::Base
   
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  attr_accessor :friend_status
   
   def needs_password?
     guest == false #&& (password.present? || password_confirmation.present?)
@@ -66,4 +70,5 @@ class User < ActiveRecord::Base
     self.guest = false # The user is no longer a guest
     super
   end
+
 end

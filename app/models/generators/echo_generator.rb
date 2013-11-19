@@ -1,0 +1,2 @@
+class EchoGenerator < BaseGenerator
+end

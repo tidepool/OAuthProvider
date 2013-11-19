@@ -65,7 +65,7 @@ class SpeedAggregateResult < AggregateResult
     circadian[hour.to_s] = result.update_circadian(score, hour)
 
     # Update the high scores
-    result.high_scores = result.update_high_scores(score[:speed_score].to_i, time, timezone_offset)
+    result.high_scores = result.update_high_scores(score[:speed_score].to_i, time, timezone_offset, game)
 
     # Get the weekly results
     day = result.time_from_offset(time, timezone_offset).wday

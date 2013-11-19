@@ -72,6 +72,14 @@ class Api::V1::GamesController < Api::V1::ApiController
     end
   end
 
+  def global_leaderboard
+
+  end
+
+  def friends_leaderboard
+
+  end
+
   private
 
   def current_resource

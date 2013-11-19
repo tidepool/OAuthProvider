@@ -160,16 +160,17 @@ describe 'Results API' do
   it 'shows the results in pages' do 
     daily_results
     token = get_conn(user1)
-    response = token.get("#{@endpoint}/users/-/results.json?limit=4&offset=2")
+    response = token.get("#{@endpoint}/users/-/results.json?limit=5&offset=2")
     response.status.should == 200
     output = JSON.parse(response.body, :symbolize_names => true)
     user_results = output[:data]
-    user_results.length.should == 4
+    user_results.length.should == 5
     status = output[:status]
     status[:offset].should == 2
-    status[:limit].should == 4
-    status[:next].should == "?offset=6&limit=4"
-    status[:prev].should == "?offset=0&limit=4"
+    status[:limit].should == 5
+    status[:next_offset].should == 7
+    status[:next_limit].should == 3
+    status[:total].should == 10
   end
 
   describe 'PersonalityResult' do
@@ -227,7 +228,32 @@ describe 'Results API' do
     end
   end
 
-  describe 'Error and Edge Cases' do
-    
+  describe 'AttentionResult' do
+    let(:attention_result) { create(:attention_result, game: game, user: user1) }
+
+    it 'shows the results for the EmoIntelligenceResult' do 
+      attention_result
+      token = get_conn(user1)
+      response = token.get("#{@endpoint}/users/-/results.json?type=AttentionResult")
+      response.status.should == 200
+      output = JSON.parse(response.body, :symbolize_names => true)
+      user_results = output[:data]
+      user_results[0].should_not be_nil
+      user_results[0][:type].should == 'AttentionResult'
+      user_results[0][:badge][:character].should == 'marshwarbler'
+      user_results[0][:attention_score].should == "2100"
+      user_results[0][:calculations].should == {
+            :stage_scores => [
+                {
+                  :highest => 5,
+                  :score => 500
+                },
+                {
+                  :highest => 8,
+                  :score => 1600
+                }
+            ]
+        }
+    end    
   end
 end

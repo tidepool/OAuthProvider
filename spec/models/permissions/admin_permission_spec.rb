@@ -75,5 +75,21 @@ module Permissions
       expect(subject.allow?(:sleeps, :index)).to be_true
     end
 
+    it 'admin permissions for friends' do 
+      expect(subject.allow?(:friends, :index)).to be_true
+      expect(subject.allow?(:friends, :find)).to be_true
+      expect(subject.allow?(:friends, :accept)).to be_true
+      expect(subject.allow?(:friends, :pending)).to be_true
+      expect(subject.allow?(:friends, :invite)).to be_true
+      expect(subject.allow?(:friends, :reject)).to be_true
+      expect(subject.allow?(:friends, :unfriend)).to be_true
+
+    end
+
+    it 'admin permissions for leaderboards' do 
+      expect(subject.allow?(:leaderboards, :global)).to be_true
+      expect(subject.allow?(:leaderboards, :friends)).to be_true
+    end
+
   end
 end

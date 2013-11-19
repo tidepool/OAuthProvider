@@ -67,13 +67,30 @@ module Permissions
         expect(subject.allow?(:connections, :destroy)).to be_false
       end
 
-      it 'anonymous permissions for activities' do
+      it 'guest permissions for activities' do
         expect(subject.allow?(:activities, :index)).to be_false
       end
 
-      it 'anonymous permissions for sleeps' do
+      it 'guest permissions for sleeps' do
         expect(subject.allow?(:sleeps, :index)).to be_false
       end
+
+      it 'guest permissions for friends' do 
+        expect(subject.allow?(:friends, :index)).to be_false
+        expect(subject.allow?(:friends, :find)).to be_false
+        expect(subject.allow?(:friends, :accept)).to be_false
+        expect(subject.allow?(:friends, :pending)).to be_false
+        expect(subject.allow?(:friends, :invite)).to be_false
+        expect(subject.allow?(:friends, :reject)).to be_false
+        expect(subject.allow?(:friends, :unfriend)).to be_false
+
+      end
+
+      it 'guest permissions for leaderboards' do 
+        expect(subject.allow?(:leaderboards, :global)).to be_false
+        expect(subject.allow?(:leaderboards, :friends)).to be_false
+      end
+
 
     end
 

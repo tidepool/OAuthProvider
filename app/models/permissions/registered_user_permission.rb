@@ -24,9 +24,11 @@ module Permissions
           end
         end
 
-        allow :users, [:show, :create, :update, :destroy, :personality, :reset_password, :invite_friends] do |user|
+        allow :users, [:create, :update, :destroy, :personality, :reset_password, :invite_friends] do |user|
           user.id == caller.id 
         end
+
+        allow :users, :show 
 
         allow :recommendations, [:latest, :career, :emotion, :actions] 
 
@@ -41,6 +43,10 @@ module Permissions
         allow :sleeps, :index
 
         allow :friend_surveys, [:create, :results]
+
+        allow :friends, [:index, :accept, :find, :pending, :invite, :reject, :unfriend]
+
+        allow :leaderboards, [:global, :friends]
       end
     end
   end
