@@ -71,10 +71,11 @@ class LeaderboardService
 
     leaderboard = leaders.map do |leader|
       user_id = leader[0].to_s
+      name = users_hash[user_id].name
+      name = (name.nil? || name.empty?) ? users_hash[user_id].email.split('@')[0] : name
       {
         id: users_hash[user_id].id,
-        name: users_hash[user_id].name,
-        email: users_hash[user_id].email,
+        name: name,
         image: users_hash[user_id].image, 
         score: leader[1]
       }
