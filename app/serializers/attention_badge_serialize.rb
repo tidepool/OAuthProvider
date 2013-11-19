@@ -1,5 +1,5 @@
 module AttentionBadgeSerialize
-  def badge_for_score(score)
+  def attention_badge_for_score(score)
     badges = [
       { 
         character: "africangrey",
