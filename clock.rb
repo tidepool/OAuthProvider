@@ -7,9 +7,13 @@ include Clockwork
 handler do |job|
   # do something
   puts "Running #{job}"
-  ConnectionDispatcher.perform_async
+  klass = job.constantize
+  if klass && klass.respond_to?(:perform_async)
+    klass.send(:perform_async)
+  end
 end
 
-update_interval = Integer(ENV["TRACKER_UPDATE_MINUTES"] || 10)
-Rails.logger.info("Starting Clock with #{update_interval} minutes")
-every(update_interval.minutes, 'update_trackers')
+tracker_update_interval = Integer(ENV["TRACKER_UPDATE_MINUTES"] || 10)
+# Rails.logger.info("Starting Clock with #{tracker_update_interval} minutes")
+
+every(tracker_update_interval.minutes, 'ConnectionDispatcher')

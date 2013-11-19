@@ -35,15 +35,10 @@ JSONSTRING
 
       @stages = JSON.parse(stages_json)
 
-      generator_simple = ReactionTimeGenerator.new(@stages[0])
-      generator_complex = ReactionTimeGenerator.new(@stages[1])
-      @sequence_simple = generator_simple.generate["sequence"]
-      @sequence_complex = generator_complex.generate["sequence"]
-
-      # puts "simple"
-      # puts @sequence_simple
-      # puts "complex"
-      # puts @sequence_complex
+      generator_simple = ReactionTimeGenerator.new(nil)
+      generator_complex = ReactionTimeGenerator.new(nil)
+      @sequence_simple = generator_simple.generate(0, @stages[0])["sequence"]
+      @sequence_complex = generator_complex.generate(1, @stages[1])["sequence"]
     end
 
     describe 'simple tests' do

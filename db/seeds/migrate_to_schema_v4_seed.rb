@@ -1,6 +1,8 @@
 class MigrateToSchemaV4Seed
   def create_seed
     puts 'MigrateToSchemaV4: '
+    puts 'Served its purpose, should not be running anymore, returning immediately.'
+    return 
     puts "Migrating all existing authentications to have sync status"
     count = 0
     Authentication.all.each do |conn|

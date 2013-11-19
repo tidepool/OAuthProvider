@@ -1,16 +1,12 @@
-class ImageRankGenerator
-  def initialize(stage_template)
-    @stage_template = stage_template
-  end
-
-  def generate
+class ImageRankGenerator < BaseGenerator
+  def generate(stage_no, stage_template)
     result = {}
-    result["friendly_name"] = @stage_template["friendly_name"]
-    result["instructions"] = @stage_template["instructions"]
-    result["view_name"] = @stage_template["view_name"]
+    result["friendly_name"] = stage_template["friendly_name"]
+    result["instructions"] = stage_template["instructions"]
+    result["view_name"] = stage_template["view_name"]
 
     image_sequence = []
-    image_id_sequence = @stage_template["image_sequence"]
+    image_id_sequence = stage_template["image_sequence"]
     images = Image.where(name: image_id_sequence).to_a
     images.each do |image|
       if (Rails.env.production?)

@@ -62,6 +62,8 @@ GEM
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-import (0.4.1)
+      activerecord (>= 3.0)
     activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -101,6 +103,7 @@ GEM
       mime-types (>= 1.15)
       rest-client (>= 1.5.1)
     dalli (2.6.4)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
@@ -277,12 +280,14 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers!
+  activerecord-import (~> 0.4)
   annotate (>= 2.5.0)
   awesome_print
   bcrypt-ruby (~> 3.0.0)
   blitz
   clockwork
   dalli
+  database_cleaner
   debugger-ruby_core_source (~> 1.2.3)
   doorkeeper!
   dotenv-rails!

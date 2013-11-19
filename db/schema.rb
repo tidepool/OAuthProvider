@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130925171439) do
+ActiveRecord::Schema.define(version: 20131025215510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,16 @@ ActiveRecord::Schema.define(version: 20130925171439) do
 
   add_index "friend_surveys", ["game_id"], name: "index_friend_surveys_on_game_id", using: :btree
 
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "friend_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
+
   create_table "games", force: true do |t|
     t.datetime "date_taken"
     t.integer  "definition_id"
@@ -186,6 +196,14 @@ ActiveRecord::Schema.define(version: 20130925171439) do
   end
 
   add_index "images", ["name"], name: "index_images_on_name", using: :btree
+
+  create_table "leaderboards", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "game_name",  null: false
+    t.float    "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "measurements", force: true do |t|
     t.integer  "user_id",       null: false

@@ -40,6 +40,7 @@ module Permissions
         expect(subject.allow?(:users, :update, target_user)).to be_true
         expect(subject.allow?(:users, :destroy, target_user)).to be_true
         expect(subject.allow?(:users, :personality, target_user)).to be_true
+        expect(subject.allow?(:users, :invite_friends, target_user)).to be_true
       end
 
       it 'registered user permissions for recommendations' do
@@ -64,16 +65,31 @@ module Permissions
         expect(subject.allow?(:connections, :index)).to be_true
         expect(subject.allow?(:connections, :synchronize)).to be_true
         expect(subject.allow?(:connections, :progress)).to be_true
+        expect(subject.allow?(:connections, :destroy)).to be_true
       end
 
-      it 'registered permissions for activities' do
+      it 'registered user permissions for activities' do
         expect(subject.allow?(:activities, :index)).to be_true
       end
 
-      it 'registered permissions for sleeps' do
+      it 'registered user permissions for sleeps' do
         expect(subject.allow?(:sleeps, :index)).to be_true
       end
 
+      it 'registered user permissions for friends' do 
+        expect(subject.allow?(:friends, :index)).to be_true
+        expect(subject.allow?(:friends, :find)).to be_true
+        expect(subject.allow?(:friends, :accept)).to be_true
+        expect(subject.allow?(:friends, :pending)).to be_true
+        expect(subject.allow?(:friends, :invite)).to be_true
+        expect(subject.allow?(:friends, :reject)).to be_true
+        expect(subject.allow?(:friends, :unfriend)).to be_true
+      end
+
+      it 'registered user permissions for leaderboards' do 
+        expect(subject.allow?(:leaderboards, :global)).to be_true
+        expect(subject.allow?(:leaderboards, :friends)).to be_true
+      end
     end
 
     # describe 'caller and target_user are NOT the same user' do

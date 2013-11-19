@@ -34,8 +34,10 @@ module TidepoolAnalyze
         holland6: 'holland6',
         holland6_new: 'holland6_new',
         emo: 'emo',
+        attention_echo: 'attention_echo',
         reaction_time: 'reaction_time',
         reaction_time2: 'reaction_time2',
+        emo_face: 'emo_face',
         capacity: 'capacity',
         survey2: 'survey2',
         survey: 'survey'

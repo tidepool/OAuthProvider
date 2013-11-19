@@ -27,6 +27,65 @@ FactoryGirl.define do
       end
     end
 
+    factory :speed_archetype_rand_scores do 
+      type 'SpeedArchetypeResult'
+      sequence(:time_played) { |n| Time.zone.now - (n * 5.hours) }
+      sequence(:score) do |n| 
+        {
+          "speed_score" => "#{rand 1000}"
+        }
+      end
+    end
+
+    factory :emo_intelligence_result do 
+      type 'EmoIntelligenceResult'
+      score do 
+        {
+               "corrects" => "6",
+               "eq_score" => "3840",
+             "incorrects" => "4",
+           "time_elapsed" => "2100",
+           "reported_mood"=>"sad",
+        "instant_replays" => "7"
+        }
+      end
+      calculations do 
+        {
+          "emo_groups" => {
+             :happy=>{:corrects=>1, :incorrects=>0},
+             :sad=>{:corrects=>1, :incorrects=>0},
+             :angry=>{:corrects=>0, :incorrects=>0},
+             :disgust=>{:corrects=>0, :incorrects=>0},
+             :fear=>{:corrects=>1, :incorrects=>1},
+             :surprise=>{:corrects=>0, :incorrects=>0}
+          }
+        }
+      end
+    end
+
+    factory :attention_result do 
+      type 'AttentionResult'
+      score do 
+        {
+          "attention_score" => "2100"
+        }
+      end
+      calculations do 
+        {
+          "stage_scores" => [
+            {
+              "highest" => 5,
+              "score" => 500
+            },
+            {
+              "highest" => 8,
+              "score" => 1600
+            }
+          ]
+        }
+      end
+    end
+
     factory :speed_archetype_result do 
       type 'SpeedArchetypeResult'
       score do 
@@ -93,6 +152,7 @@ FactoryGirl.define do
   end
 
   factory :personality do 
+    profile_description_id 2
     big5_dimension "high_openness"
     big5_high "openness"
     big5_low "neuroticism"
@@ -114,7 +174,13 @@ FactoryGirl.define do
     sequence(:uid) {|n| "1234#{n}" }
     oauth_token "123456"
     oauth_secret "232323"
-    
+
+    factory :friend_authentications do 
+      # sequence(:image) { |n| "http://example.com/john_image#{n}.jpg" }
+      # sequence(:name) { |n| "John#{n} Doe" }
+      association :user, factory: :friend_user
+    end
+
     factory :fitbit do 
       provider 'fitbit'
       last_accessed Time.zone.now
@@ -178,6 +244,11 @@ FactoryGirl.define do
     password_confirmation "12345678"
     guest false
     admin false
+
+    factory :friend_user do 
+      sequence(:image) { |n| "http://example.com/image#{n}.jpg" }
+      sequence(:name) { |n| "Mary#{n} Doe" }
+    end
 
     factory :admin do
       admin true

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Users API' do 
   include AppConnections
+  include FriendHelpers
 
   before :all do
     find_or_create_app
@@ -9,16 +10,19 @@ describe 'Users API' do
   end
 
   let(:user1) { create(:user) }
-  let(:user2) { create(:user) }
   let(:guest) { create(:guest) }
   let(:admin) { create(:admin) }
   let(:personality) { create(:personality) }
+  let(:personality2) { create(:personality)}
+  let(:user2) { create(:user, personality: personality2) }
   let(:user3) { create(:user, personality: personality) }
   let(:game) { create(:game, user: guest) }
   let(:authentication) { create(:authentication, user: user2) }
   let(:aggregate_result) { create(:aggregate_result, user: user2) }
   let(:sleep_aggregate_result) { create(:aggregate_result, type: 'SleepAggregateResult', user: user2) }
   let(:activity_aggregate_result) { create(:aggregate_result, type: 'ActivityAggregateResult', user: user2) }
+  let(:emo_aggregate_result) { create(:emo_aggregate_result, user: user2) }
+  let(:attention_aggregate_result) { create(:attention_aggregate_result, user: user2)}
 
   it 'shows the users own information' do    
     token = get_conn(user1)
@@ -231,24 +235,112 @@ describe 'Users API' do
     aggregate_result
     sleep_aggregate_result
     activity_aggregate_result
+    emo_aggregate_result
+    attention_aggregate_result
+
     token = get_conn(user2)
     response = token.get("#{@endpoint}/users/-.json")
     result = JSON.parse(response.body, symbolize_names: true)
     user_info = result[:data]
-    user_info[:aggregate_results].length.should == 3
+    user_info[:aggregate_results].length.should == 5
     # Always ensure the first aggregate result is SpeedAggregateResult, because of a backwards compat
     # bug in the iOS client.
     user_info[:aggregate_results][0][:type].should == 'SpeedAggregateResult'
+    user_info[:aggregate_results].each do |result|
+      if result[:type] == "EmoAggregateResult"
+        result[:badge].should_not be_nil
+        result[:badge][:character].should == "trump"
+      elsif result[:type] == "SpeedAggregateResult" 
+        result[:badge].should_not be_nil
+        result[:badge][:character].should == "gorilla"
+      elsif result[:type] == "AttentionAggregateResult" 
+        result[:badge].should_not be_nil
+        result[:scores][:circadian].should_not be_nil 
+        result[:scores][:weekly].should_not be_nil  
+        result[:high_scores].should_not be_nil      
+      end
+    end
+  end
+
+  describe 'Friend and Public Profiles' do 
+    before :each do 
+      aggregate_result
+      sleep_aggregate_result
+      activity_aggregate_result
+      emo_aggregate_result
+      attention_aggregate_result
+    end
+
+    it 'returns the public profile of a user who is not a friend' do 
+      personality
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:friend_status].should == "not_friend"
+      user_info[:personality][:profile_description][:id].should == personality.profile_description.id
+      user_info[:personality][:profile_description][:name].should == personality.profile_description.name
+      user_info[:aggregate_results].should be_nil
+    end
+
+    it 'returns the friend profile of a user who is a friend' do 
+      personality
+      personality2
+      make_friends(user3, user2)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should == user2.email
+      user_info[:friend_status].should == "friend"
+      user_info[:personality][:id].should == personality2.id
+      user_info[:personality][:big5_score].should == personality.big5_score.symbolize_keys
+      user_info[:personality][:holland6_score].should == personality.holland6_score.symbolize_keys
+      user_info[:personality][:profile_description][:id].should == personality.profile_description.id
+      user_info[:personality][:profile_description][:name].should == personality.profile_description.name
+    
+      user_info[:aggregate_results].length.should == 5
+    end
+
+    it 'returns pending for friend_status if the caller invited the user' do 
+      personality
+      invite_friends(user3, user2)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should be_nil
+      user_info[:friend_status].should == "pending"
+      user_info[:personality][:id].should be_nil
+      user_info[:aggregate_results].should be_nil
+    end
+
+    it 'returns invited by for friend_status if the caller is invited by the user' do 
+      personality
+      invite_friends(user2, user3)
+      token = get_conn(user3)
+      response = token.get("#{@endpoint}/users/#{user2.id}.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      user_info = result[:data]
+      user_info[:name].should == user2.email.split('@')[0]
+      user_info[:email].should be_nil
+      user_info[:friend_status].should == "invited_by"
+      user_info[:personality][:id].should be_nil
+      user_info[:aggregate_results].should be_nil
+    end
   end
 
   describe 'Error and Edge Cases' do
-    it 'doesnot show other users information' do 
-      token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/#{guest.id}.json") 
-      response.status.should == 401
-      result = JSON.parse(response.body, symbolize_names: true)
-      result[:status][:code].should == 1000
-    end
+    # it 'doesnot show other users information' do 
+    #   token = get_conn(user1)
+    #   response = token.get("#{@endpoint}/users/#{guest.id}.json") 
+    #   response.status.should == 401
+    #   result = JSON.parse(response.body, symbolize_names: true)
+    #   result[:status][:code].should == 1000
+    # end
 
     it 'doesnot give anonymous access to user info' do 
       token = get_conn()

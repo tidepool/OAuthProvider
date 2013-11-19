@@ -169,7 +169,6 @@ describe RegistrationService do
     auth3 # Has Facebook authentication
     user = @registration_service.register_or_find_from_external(@fitbit_hash, user3.id)
     expect(user.authentications.length).to eq(2)
-    expect(user.authentications[0].provider).to eq('fitbit')
     expect(user.password_digest).to eq(user3.password_digest)
     expect(user.date_of_birth.to_s).to eq("1969-08-20")
   end

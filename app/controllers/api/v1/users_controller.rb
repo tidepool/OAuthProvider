@@ -15,13 +15,21 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def show
-    # user = current_resource
-    user = user_eager_load
-    # user_id = params[:id].nil? || params[:id] == '-' ? caller.id : params[:id]
-    # user = User.eager_load(:personality, :authentications, :aggregate_results).where(id: user_id)
+    if caller == current_resource
+      # The caller is asking about themselves.
+      user = user_eager_load
+      serializer = UserSerializer
+    else
+      # The caller is asking about another user
+      friend_service = FriendsService.new
+      friend_status = friend_service.friend_status(caller, current_resource)
+      serializer = friend_status == :friend ? FriendSerializer : PublicProfileSerializer
+      user = current_resource
+      user.friend_status = friend_status
+    end
 
     respond_to do |format|
-      format.json { render({ json: user, meta: {} }.merge(api_defaults)) }
+      format.json { render({ json: user, serializer: serializer, meta: {} }.merge(api_defaults)) }
     end
   end
 
@@ -47,8 +55,6 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def create
-    # binding.pry_remote
-    # user = User.create_guest_or_registered!(user_attributes)
     registration_service = RegistrationService.new
     user = registration_service.register_guest_or_full!(user_attributes)
 
@@ -85,14 +91,12 @@ class Api::V1::UsersController < Api::V1::ApiController
   end 
 
   private 
-
   def user_eager_load
     user_id = params[:id].nil? || params[:id] == '-' ? caller.id : params[:id]
     user = User.eager_load(:personality, :authentications, :aggregate_results).where(id: user_id).first
   end
 
   def current_resource
-    # binding.pry
     if params[:id]
       target_user_for(params[:id])
     elsif params[:user_id]
@@ -100,22 +104,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     else
       nil
     end
-
-    # if params[:id] == '-' 
-    #   @user ||= caller
-    # elsif params[:id]
-    #   @user ||= User.find(params[:id])
-    # elsif params[:user_id]
-    #   user_id = params[:user_id]
-    #   if user_id && user_id == '-'
-    #     @user ||= caller
-    #   elsif user_id 
-    #     @user ||= User.find(params[:user_id])
-    #   end
-    # else
-    #   @user = nil
-    # end
-    # @user
   end
 
   def user_attributes

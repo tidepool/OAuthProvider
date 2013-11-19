@@ -6,6 +6,7 @@ class Api::V1::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from Api::V1::UnauthorizedError, with: :unauthorized_access
   rescue_from Api::V1::PreconditionFailedError, with: :precondition_failed
+  rescue_from Api::V1::NotAcceptableError, with: :unacceptable_request
   rescue_from ArgumentError, with: :record_invalid
 
   protected
@@ -99,6 +100,16 @@ class Api::V1::ApiController < ApplicationController
     })
     logger.error("UnauthorizedError: #{exception.message}")
     http_status = :unauthorized   
+    respond_with_error(api_status, http_status)     
+  end
+
+  def unacceptable_request(exception)
+    api_status = Hashie::Mash.new({
+      code: 1004,
+      message: exception.message
+    })
+    logger.error("UnacceptableRequest: #{exception.message}")
+    http_status = :not_acceptable   
     respond_with_error(api_status, http_status)     
   end
 end
