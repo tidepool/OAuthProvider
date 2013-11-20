@@ -1,7 +1,7 @@
 class ActivityStreamService
   include Paginate
 
-  def add_activity
+  def add_activity(user_id, activity_record)
 
   end
 
