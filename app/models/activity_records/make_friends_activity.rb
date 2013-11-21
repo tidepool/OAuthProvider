@@ -13,6 +13,6 @@ class MakeFriendsActivity < ActivityRecord
   end
 
   def target
-    :friends
+    :send_all_friends
   end
 end
