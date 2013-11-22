@@ -19,11 +19,11 @@ describe ActivityStreamService do
     end
 
     user1_stream_count = $redis.zcount "activity_stream:#{user1.id}", "-inf", "+inf"
-    user1_stream_count.should == 3
+    user1_stream_count.should == 4
 
     friend_list[0..3].each do |friend|
       stream_count = $redis.zcount "activity_stream:#{friend.id}", "-inf", "+inf"
-      stream_count.should == 3
+      stream_count.should == 4
     end    
 
     friend_list[4..6].each do |friend|

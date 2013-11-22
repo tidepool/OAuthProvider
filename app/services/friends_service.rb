@@ -185,13 +185,14 @@ class FriendsService
         user_id: user_id,
         performed_at: Time.zone.now,
         raw_data: {
-          # friend_name: friend.name, 
-          # friend_id: friend.id
+          friend_name: friend[:name] || friend['name'], 
+          friend_id: friend[:id] || friend['id']
         }
       )
     end
     MakeFriendsActivity.import(activity_list)
-    # TODO: Register the activity optimally!
+    activity_stream = ActivityStreamService.new
+    activity_stream.register_activity(user_id, activity_list)
   end
 
   # List of pending friend requests from other users for the user_id

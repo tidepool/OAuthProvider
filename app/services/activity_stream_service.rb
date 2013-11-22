@@ -2,11 +2,12 @@ class ActivityStreamService
   include Paginate
 
   # http://www.quora.com/Redis/How-efficient-would-Redis-sorted-sets-be-for-a-news-feed-architecture
-  
-  def register_activity(user_id, activity_record)
-    target_method = activity_record.target
-    activity_id = activity_record.id
-    self.send(target_method, user_id, activity_id) if self.respond_to?(target_method)
+
+  # The activities in the set needs to be the same type.  
+  def register_activity(user_id, activity_set)
+    activity_set = Array(activity_set) # Make sure it is a set
+    target_method = activity_set[0].target
+    self.send(target_method, user_id, activity_set) if self.respond_to?(target_method)
   end
 
   def read_activity_stream(user_id, params={})
@@ -19,15 +20,20 @@ class ActivityStreamService
     [activities, api_status]
   end
   
-  def send_all_friends(user_id, activity_id)
+  def send_all_friends(user_id, activity_set)
+    activity_set = Array(activity_set)
     friendships = Friendship.where(user_id: user_id).to_a
-    score = Time.zone.now.to_i 
-    older_score = (Time.zone.now - 3.months).to_i  # Remove items older than 3 months
+
     $redis.pipelined do
-      friendships.each do |friendship|
-        add_to_activity_stream(friendship.friend_id, score, older_score, activity_id)
+      activity_set.each do |activity_record|
+        activity_id = activity_record.id
+        score = Time.zone.now.to_i 
+        older_score = (Time.zone.now - 3.months).to_i  # Remove items older than 3 months
+        friendships.each do |friendship|
+          add_to_activity_stream(friendship.friend_id, score, older_score, activity_id)
+        end
+        add_to_activity_stream(user_id, score, older_score, activity_id)
       end
-      add_to_activity_stream(user_id, score, older_score, activity_id)
     end
   end
 
