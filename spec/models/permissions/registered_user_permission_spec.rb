@@ -90,6 +90,11 @@ module Permissions
         expect(subject.allow?(:leaderboards, :global)).to be_true
         expect(subject.allow?(:leaderboards, :friends)).to be_true
       end
+
+      it 'registered user permissions for activity stream' do 
+        expect(subject.allow?(:activity_stream, :index)).to be_true
+      end
+
     end
 
     # describe 'caller and target_user are NOT the same user' do

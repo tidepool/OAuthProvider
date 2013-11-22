@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025215510) do
+ActiveRecord::Schema.define(version: 20131120012453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20131025215510) do
   add_index "activities", ["date_recorded"], name: "index_activities_on_date_recorded", using: :btree
   add_index "activities", ["provider"], name: "index_activities_on_provider", using: :btree
   add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
+
+  create_table "activity_records", force: true do |t|
+    t.integer  "user_id",      null: false
+    t.datetime "performed_at", null: false
+    t.text     "raw_data"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activity_records", ["performed_at"], name: "index_activity_records_on_performed_at", using: :btree
+  add_index "activity_records", ["user_id"], name: "index_activity_records_on_user_id", using: :btree
 
   create_table "admins", force: true do |t|
     t.string   "email"

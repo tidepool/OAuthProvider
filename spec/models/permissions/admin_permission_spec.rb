@@ -91,5 +91,9 @@ module Permissions
       expect(subject.allow?(:leaderboards, :friends)).to be_true
     end
 
+    it 'admin permissions for activity stream' do 
+      expect(subject.allow?(:activity_stream, :index)).to be_true
+    end
+
   end
 end

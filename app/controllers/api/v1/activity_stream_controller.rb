@@ -25,4 +25,7 @@ class Api::V1::ActivityStreamController < Api::V1::ApiController
     user
   end
 
+  def current_resource
+    target_user
+  end
 end

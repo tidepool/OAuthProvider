@@ -6,7 +6,6 @@ class ActivityStreamService
   def register_activity(user_id, activity_record)
     target_method = activity_record.target
     activity_id = activity_record.id
-
     self.send(target_method, user_id, activity_id) if self.respond_to?(target_method)
   end
 
@@ -20,7 +19,6 @@ class ActivityStreamService
     [activities, api_status]
   end
   
-  private
   def send_all_friends(user_id, activity_id)
     friendships = Friendship.where(user_id: user_id).to_a
     score = Time.zone.now.to_i 
@@ -33,6 +31,7 @@ class ActivityStreamService
     end
   end
 
+  private
   def add_to_activity_stream(user_id, score, old_threshold, activity_id)
     $redis.zadd activity_stream_key(user_id), score, activity_id
     $redis.zremrangebyscore activity_stream_key(user_id), "-inf", old_threshold.to_s
@@ -50,5 +49,4 @@ class ActivityStreamService
   def activity_stream_key(user_id)
     "activity_stream:#{user_id}"
   end
-
 end

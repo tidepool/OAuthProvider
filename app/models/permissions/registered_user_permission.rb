@@ -47,6 +47,8 @@ module Permissions
         allow :friends, [:index, :accept, :find, :pending, :invite, :reject, :unfriend]
 
         allow :leaderboards, [:global, :friends]
+
+        allow :activity_stream, [:index]
       end
     end
   end

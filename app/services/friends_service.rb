@@ -66,6 +66,7 @@ class FriendsService
     end
     Friendship.import(friendships)
     remove_from_temp_lists(user_id, pending_ids_list)
+    register_with_activity_stream(user_id, pending_list)
   end
 
   def reject_invitations(user_id, pending_list)
@@ -175,6 +176,22 @@ class FriendsService
     friend_list.each do |friend_id|
       $redis.srem invited_friends_key(friend_id), user_id
     end
+  end
+
+  def register_with_activity_stream(user_id, pending_list)
+    activity_list = []
+    pending_list.each do |friend|
+      activity_list << MakeFriendsActivity.new(
+        user_id: user_id,
+        performed_at: Time.zone.now,
+        raw_data: {
+          # friend_name: friend.name, 
+          # friend_id: friend.id
+        }
+      )
+    end
+    MakeFriendsActivity.import(activity_list)
+    # TODO: Register the activity optimally!
   end
 
   # List of pending friend requests from other users for the user_id

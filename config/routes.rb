@@ -72,6 +72,8 @@ OAuthProvider::Application.routes.draw do
         post 'friends/unfriend', to: 'friends#unfriend'
 
         get 'games/:game_name/leaderboard', to: 'leaderboards#friends'
+
+        get 'activity_stream', to: 'activity_stream#index'
       end
             
       post 'fitbit', to: 'fitbit_notifications#notify'

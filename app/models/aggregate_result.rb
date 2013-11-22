@@ -44,6 +44,14 @@ class AggregateResult < ActiveRecord::Base
     best_score = self.all_time_best
     if best_score.nil? || score > best_score
       best_score = score 
+
+      raw_data = {
+        score: best_score,
+        game_name: game.name
+      }
+      activity_record = HighScoreActivity.create_from_rawdata(game.user, raw_data)
+      activity_stream = ActivityStreamService.new
+      activity_stream.register_activity(game.user.id, activity_record)
     end
     
     if game
