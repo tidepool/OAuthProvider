@@ -1,50 +1,50 @@
 module AttentionBadgeSerialize
   def attention_badge_for_score(score)
     badges = [
-      { 
-        character: "africangrey",
-        title: "African Grey",
-        description: "If you ever thought intellectual ability was all you needed to succeed, you are up for a \"Big Bang\". It seems you can resonate well with this modern day hero; emotions simply escape you. Understanding emotions is just not a strength at the moment. You can improve your effectiveness by engaging in emotional training and focusing on the strong aspects of your personality."
-      },
       {
-        character: "brownthrasher",
-        title: "Brown Thrasher",
-        description: "The character represented here uses their Low EI for success. The stereotype of the hard-driving salesperson/entrepreneur not only fails to process emotions they practice the art of causing emotional turmoil to their own advantage. Low EI does not mean a lack of success. We encourage you to chose less self-centered means of finding satisfaction and train more for understanding other's emotions."
+        character: "parakeet",
+        title: "Parakeet",
+        description: "Who knows why but your brain kind of got up on the wrong side of the bed today, your attention, your working memory, not where they usually are. These times do come and if for not other reason than to remind us we should take some time off from always having to perform at super-high cognitive levels and maybe just read a book for fun or (*gasp*) sit back and chill with some music."
       },
       {
         character: "cockatiel",
         title: "Cockatiel",
-        description: "Some of the most successful people of our generation were by all appearances very attuned to EI. Well, truth be known it is possible to have some failures in emotional regulation, and still be successful beyond all but the wildest dreams. Your EI is such that with insight, training and openness to areas of strength from your personality there is no limit to your effectiveness."        
+        description: "All right, no use in mincing words, your attention skills are not at your best. But that's okay, we all need to recharge and this may be a great time for you to take some time to catch up on reading, emails and calls."
       },
       {
-        character: "lyrebird",
-        title: "Lyrebird",
-        description: "Perhaps no one demonstrates the malleability of EI more than this man who can easily be argued to have accomplished more with his life than all but a few people ever did. While he certainly wasn’t without rough edges in his ability to understand emotions, he was able to find the emotional support he needed to do the work that has changed our world forever. Given your own variability in EI we suspect you can resonate and even benefit by considering how far you can go by finding and nurturing the support you need."
+        character: "brownthrasher",
+        title: "Brown Thrasher",
+        description: "If we were to guess we would say your brain is operating as if it were a rainy Sunday morning. If it is, you are set, put on a pot of coffee and get the crossword puzzle. But if you need to run out the door to work just realize you are not your sharpest and you want to double check your work."
       },
       {
         character: "mockingbird",
         title: "Mockingbird",
-        description: "You clearly have a high level of ability to understand and manage your emotions. EI is not the only important fact you need to consider as you move toward a life of personal satisfaction and effectiveness. Consider this icon who despite an unbelievable level of EI struggled with his own internal weaknesses and remember to not only consider the emotions of others but also what you need to nurture you own spirit."
+        description: "We aren't concerned that you are going to walk out of your house with your jacket on backwards but your attentional skills aren't at their sharpest either. So if you can take some time to catch up and get ready for the next time you are feeling sharper."
       },
       {
         character: "marshwarbler",
         title: "Marshwarbler",
-        description: "Few people have been able to understand the emotional dreams of people as did the man who brought these dreams onto the silver screen.  A person with such high emotional intelligence can be very pragmatic because of your skills to understand people around you. You can use this to steer groups for forming new ideas and inspiring to achieve dreams."
+        description: "You attention skills have been better. But take this to heart, your brain works in numerous different ways simultaneously. Right now is a better time to take in than to try to be terribly creative. And that's cool."
       },
       {
         character: "myna",
         title: "Myna",
-        description: "Many people of great effectiveness like this icon, you are powerful in the sense that lot of people look to you in times of need. Not only will you guide people with your intelligent advice but you can also express empathy very well. Your strength in emotional intelligence makes you a authentic leader in your field."
-      },
-      {
-        character: "parakeet",
-        title: "Parakeet",
-        description: "Many people of great effectiveness like this icon, you are powerful in the sense that lot of people look to you in times of need. Not only will you guide people with your intelligent advice but you can also express empathy very well. Your strength in emotional intelligence makes you a authentic leader in your field."
+        description: "You are pretty much in the middle ranges of performance on attentional tasks. It's definitely not a time to put yourself out front if you don't have to. Do some new reading, catch up on emails, stay sharp for the next time you are really in high gear."
       },
       {
         character: "starling",
         title: "Starling",
-        description: "Many people of great effectiveness like this icon, you are powerful in the sense that lot of people look to you in times of need. Not only will you guide people with your intelligent advice but you can also express empathy very well. Your strength in emotional intelligence makes you a authentic leader in your field."
+        description: "You have all around solid attentional skills right now. Not your absolute fastest but a good time to take in new information."
+      },
+      {
+        character: "lyrebird",
+        title: "Lyrebird",
+        description: "The pattern of performance we see on ECHO indicates you are functioning well on simple and complex attentional tasks. Maybe not as creative as you would like but it may be a good time to learn some new stuff and to plan for the future."
+      },
+      { 
+        character: "africangrey",
+        title: "African Grey",
+        description: "You are performing at the top of your game in both how much information you can attend to and how well you can perform operations on this new information. Fast, efficient and creative, go for it."
       }
     ]
 
@@ -56,8 +56,8 @@ module AttentionBadgeSerialize
     when 1500..1999 then badges[4]
     when 2000..2999 then badges[5]
     when 3000..3999 then badges[6]
-    when 4000..4999 then badges[6]
-    when 5000..100000 then badges[6]
+    when 4000..4999 then badges[7]
+    when 5000..100000 then badges[8]
     end
   end  
 

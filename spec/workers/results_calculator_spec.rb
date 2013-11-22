@@ -67,8 +67,8 @@ describe ResultsCalculator do
       updated_game.status.should == :results_ready.to_s
       updated_game.results.length.should == 2
 
-      updated_game.results[0].type.should == "SurveyResult"
-      updated_game.results[1].type.should == "ReactionTimeResult"
+      types = updated_game.results.map { |result| result.type }
+      types.should include("SurveyResult", "ReactionTimeResult")
     end
   end
 
@@ -93,8 +93,8 @@ describe ResultsCalculator do
       updated_game.status.should == :results_ready.to_s
       updated_game.results.length.should == 2
 
-      updated_game.results[0].type.should == "SurveyResult"
-      updated_game.results[1].type.should == "SpeedArchetypeResult"
+      types = updated_game.results.map { |result| result.type }
+      types.should include("SurveyResult", "SpeedArchetypeResult")
     end
   end
 
