@@ -24,3 +24,6 @@ And for some other features potentially coming in the future:
 
 ## Design
 
+### MakeFriendsActivity Model
+
+The user who accepts the friendship, will have that activity registered in Postgres(in global table). That user's friends will get the activity in their activity streams. The friends' users will NOT get the activity in their own streams.

@@ -43,4 +43,5 @@ describe FriendsService do
       status.should == :invited_by
     end
   end
+
 end

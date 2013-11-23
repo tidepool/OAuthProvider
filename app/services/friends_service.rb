@@ -190,7 +190,8 @@ class FriendsService
         }
       )
     end
-    MakeFriendsActivity.import(activity_list)
+    return_obj = MakeFriendsActivity.import(activity_list)
+    activity_list = MakeFriendsActivity.where(user_id: user_id).order(created_at: :desc).limit(return_obj[:num_inserts])
     activity_stream = ActivityStreamService.new
     activity_stream.register_activity(user_id, activity_list)
   end
