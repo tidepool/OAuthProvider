@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi, <%= @user.calculated_name %></h1>
+    <p>
+      <%= @friend.calculated_name %> wants to be friends with you at TidePool.
+      <br/>
+      Click this link - tidepool://user/<%=@user.id%> to accept this request.    
+    </p>
+    <p>Thanks and have a great day,</p>
+    <p>Team TidePool</p>
+  </body>
+</html>

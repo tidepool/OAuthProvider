@@ -16,11 +16,11 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Password reset request')
   end
 
-  def friend_invite_email(options)
-    user_id = options[:user_id] || options["user_id"]
-    friend_email = options[:friend_email] || options["friend_email"]
-    @user = User.find(user_id)
-    @url = 'https://itunes.apple.com/us/app/tidepool/id691052387'
-    mail(from: @user.email, to: friend_email, subject: "Join me at Tidepool!")
-  end
+  # def friend_invite_email(options)
+  #   user_id = options[:user_id] || options["user_id"]
+  #   friend_email = options[:friend_email] || options["friend_email"]
+  #   @user = User.find(user_id)
+  #   @url = 'https://itunes.apple.com/us/app/tidepool/id691052387'
+  #   mail(from: @user.email, to: friend_email, subject: "Join me at Tidepool!")
+  # end
 end
