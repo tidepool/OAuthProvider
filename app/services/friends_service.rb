@@ -30,6 +30,7 @@ class FriendsService
       end
       $redis.sadd invited_friends_key(user_id), invited_user_ids
     end
+    send_friend_request_emails(user_id, invited_user_ids)
   end
 
   def find_pending_friends(user_id, params)
@@ -65,7 +66,9 @@ class FriendsService
       friendships << Friendship.new(user_id: friend_id, friend_id: user_id)      
     end
     Friendship.import(friendships)
+
     remove_from_temp_lists(user_id, pending_ids_list)
+    send_friend_accept_emails(user_id, pending_ids_list)
   end
 
   def reject_invitations(user_id, pending_list)
@@ -155,6 +158,20 @@ class FriendsService
       sleep(1.0 / 100.0)
     end
     input.value
+  end
+
+  def send_friend_accept_emails(user_id, friend_list)
+
+    friend_list.each do |friend_id|
+      MailSender.perform_async(:FriendMailer, :friend_accept_email, { user_id: friend_id, friend_id: user_id } )
+    end
+  end
+
+  def send_friend_request_emails(user_id, friend_list)
+
+    friend_list.each do |friend_id|
+      MailSender.perform_async(:FriendMailer, :friend_request_email, { user_id: friend_id, friend_id: user_id } )
+    end
   end
 
   # friend_list is an array of ids

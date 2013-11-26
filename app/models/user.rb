@@ -71,4 +71,11 @@ class User < ActiveRecord::Base
     super
   end
 
+  def calculated_name
+    if self.name.nil? || self.name.empty?
+      self.email.split('@')[0]
+    else
+      self.name
+    end
+  end
 end
