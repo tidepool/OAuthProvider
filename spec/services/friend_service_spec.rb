@@ -43,4 +43,48 @@ describe FriendsService do
       status.should == :invited_by
     end
   end
+
+  describe "Sending emails for invites and accepts" do 
+    before :each do
+      MailSender.stub(:perform_async) do |mailer_klass_name, mailer_method, options|
+        MailSender.new.perform(mailer_klass_name, mailer_method, options)
+      end
+      @friend_service = FriendsService.new    
+    end
+
+    it 'sends email to the friends when they are invited by a user' do 
+      invited_friends = []
+      FriendMailer.any_instance.stub(:friend_request_email) do |options|
+        user_id = options[:user_id] || options["user_id"]
+        friend_id = options[:friend_id] || options["friend_id"]
+        user, friend = User.where(id: [user_id, friend_id]).to_a
+
+        user.should_not be_nil
+        friend.should_not be_nil
+        friend.id.should == user1.id
+        invited_friends << friend
+      end
+
+      invite_list = friend_list.map { |friend| { id: friend.id } }
+      @friend_service.invite_friends(user1.id, invite_list)
+      invited_friends.length.should == friend_list.length
+    end
+
+    it 'sends email to the user when their friend request is accepted' do 
+      accepted_friends = []
+      FriendMailer.any_instance.stub(:friend_accept_email) do |options|
+        user_id = options[:user_id] || options["user_id"]
+        friend_id = options[:friend_id] || options["friend_id"]
+        user, friend = User.where(id: [user_id, friend_id]).to_a
+        user.should_not be_nil
+        user.id.should == user1.id
+        friend.should_not be_nil
+        accepted_friends << friend
+      end
+
+      create_friends(user1, friend_list)
+      accepted_friends.length.should == friend_list.length  
+    end
+
+  end
 end
