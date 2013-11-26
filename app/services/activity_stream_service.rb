@@ -15,7 +15,7 @@ class ActivityStreamService
     activity_ids = $redis.zrevrange activity_stream_key(user_id), ranges[:offset], ranges[:limit] - 1, with_scores: false 
     ranges[:total] = $redis.zcount activity_stream_key(user_id), "-inf", "+inf" 
 
-    activities = ActivityRecord.where(id: activity_ids).to_a
+    activities = ActivityRecord.joins(:user).select("activity_records.*, users.email as user_email, users.name as user_name, users.image as user_image").where(id: activity_ids).to_a
     api_status = ActivityStreamService.generate_status(params, ranges)
     [activities, api_status]
   end

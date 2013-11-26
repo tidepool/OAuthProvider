@@ -9,7 +9,7 @@ describe 'Activity Stream API' do
     @endpoint = '/api/v1'
   end
 
-  let(:user1) { create(:user, name: 'John Doe') }
+  let(:user1) { create(:friend_user, name: 'John Doe') }
   let(:make_friends) { create_list(:make_friends_activity, 5, user: user1)}
   let(:high_score) { create_list(:high_score_activity, 5, user: user1)}
 
@@ -25,9 +25,11 @@ describe 'Activity Stream API' do
       result = JSON.parse(response.body, symbolize_names: true)
       activities = result[:data]
       activities.length.should == 10
-      activities[0][:type].should == "MakeFriendsActivity"
+      types = activities.map { |activity| activity[:type] }
+      types.should include("MakeFriendsActivity", "HighScoreActivity")
       activities[0][:description].should_not be_empty
-
+      activities[0][:user_name].should_not be_nil
+      activities[0][:user_image].should_not be_nil
       status = result[:status]
       status.should == {
              :offset => 0,
