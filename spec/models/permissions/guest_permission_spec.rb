@@ -91,6 +91,23 @@ module Permissions
         expect(subject.allow?(:leaderboards, :friends)).to be_false
       end
 
+      it 'guest permissions for activity stream' do 
+        expect(subject.allow?(:activity_stream, :index)).to be_false
+      end
+
+      it 'guest user permissions for comments' do 
+        expect(subject.allow?(:comments, :index)).to be_false
+        expect(subject.allow?(:comments, :show)).to be_false
+        expect(subject.allow?(:comments, :create)).to be_false
+        expect(subject.allow?(:comments, :update)).to be_false
+        expect(subject.allow?(:comments, :destroy)).to be_false
+      end
+
+      it 'guest user permissions for highfives' do 
+        expect(subject.allow?(:highfives, :index)).to be_false
+        expect(subject.allow?(:highfives, :create)).to be_false
+        expect(subject.allow?(:highfives, :destroy)).to be_false
+      end
 
     end
 

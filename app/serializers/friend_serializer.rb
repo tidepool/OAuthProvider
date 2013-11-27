@@ -1,15 +1,13 @@
 class FriendSerializer < ActiveModel::Serializer
+  include UserNameSerialize
+
   attributes :id, :name, :image, :email, :friend_status
 
   has_one :personality
   has_many :aggregate_results, serializer: AggregateResultSerializer
 
   def name
-    if object.name.nil? || object.name.empty?
-      object.email.split('@')[0]
-    else
-      object.name
-    end
+    object.calculated_name
   end
 
 end

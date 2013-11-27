@@ -72,8 +72,21 @@ OAuthProvider::Application.routes.draw do
         post 'friends/unfriend', to: 'friends#unfriend'
 
         get 'games/:game_name/leaderboard', to: 'leaderboards#friends'
+
+        get 'feeds', to: 'activity_stream#index'
       end
-            
+
+      get 'feeds/:activity_record_id/comments', to: 'comments#index'
+      get 'comments/:id', to: 'comments#show'
+      post 'feeds/:activity_record_id/comments', to: 'comments#create'
+      put  'comments/:id', to: 'comments#update'
+      patch 'comments/:id', to: 'comments#update'
+      delete 'comments/:id', to: 'comments#destroy'
+
+      get 'feeds/:activity_record_id/highfives', to: 'highfives#index'
+      post 'feeds/:activity_record_id/highfives', to: 'highfives#create'
+      delete 'highfives/:id', to: 'highfives#destroy'
+
       post 'fitbit', to: 'fitbit_notifications#notify'
       put 'fitbit', to: 'fitbit_notifications#notify'
 
