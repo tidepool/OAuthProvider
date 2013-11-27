@@ -21,7 +21,7 @@ describe 'Activity Stream API' do
 
     it 'gets a list of activities for a user' do 
       token = get_conn(user1)
-      response = token.get("#{@endpoint}/users/-/activity_stream.json")
+      response = token.get("#{@endpoint}/users/-/feeds.json")
       result = JSON.parse(response.body, symbolize_names: true)
       activities = result[:data]
       activities.length.should == 10

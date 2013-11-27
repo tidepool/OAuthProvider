@@ -95,5 +95,20 @@ module Permissions
       expect(subject.allow?(:activity_stream, :index)).to be_true
     end
 
+    it 'admin permissions for comments' do 
+      expect(subject.allow?(:comments, :index)).to be_true
+      expect(subject.allow?(:comments, :show)).to be_true
+      expect(subject.allow?(:comments, :create)).to be_true
+      expect(subject.allow?(:comments, :update)).to be_true
+      expect(subject.allow?(:comments, :destroy)).to be_true
+    end
+
+    it 'admin permissions for highfives' do 
+      expect(subject.allow?(:highfives, :index)).to be_true
+      expect(subject.allow?(:highfives, :create)).to be_true
+      expect(subject.allow?(:highfives, :destroy)).to be_true
+    end
+
+
   end
 end

@@ -1,5 +1,8 @@
 class ActivityRecord < ActiveRecord::Base
   belongs_to  :user
+  has_many :comments
+  # has_many :highfives
+
   serialize   :raw_data, JSON
 
   def record_usuals(raw_data)
