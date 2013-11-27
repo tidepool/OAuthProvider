@@ -47,6 +47,12 @@ module Permissions
         allow :friends, [:index, :accept, :find, :pending, :invite, :reject, :unfriend]
 
         allow :leaderboards, [:global, :friends]
+
+        allow :activity_stream, [:index]
+
+        allow :comments, [:index, :show, :destroy, :create, :update]
+
+        allow :highfives, [:index, :create, :destroy]
       end
     end
   end
