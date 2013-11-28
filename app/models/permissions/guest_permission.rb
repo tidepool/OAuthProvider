@@ -22,6 +22,8 @@ module Permissions
         end
 
         allow :friend_surveys, [:create, :results]
+
+        allow :profile_description, [:show]
       end
     end
   end

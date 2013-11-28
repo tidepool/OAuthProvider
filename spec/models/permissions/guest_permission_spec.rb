@@ -109,6 +109,10 @@ module Permissions
         expect(subject.allow?(:highfives, :destroy)).to be_false
       end
 
+      it 'guest user permissions for profile_description' do 
+        expect(subject.allow?(:profile_description, :show)).to be_true
+      end
+
     end
 
     # describe 'caller and target_user are not the same user' do

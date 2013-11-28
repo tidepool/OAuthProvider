@@ -53,6 +53,8 @@ module Permissions
         allow :comments, [:index, :show, :destroy, :create, :update]
 
         allow :highfives, [:index, :create, :destroy]
+
+        allow :profile_description, [:show]
       end
     end
   end
