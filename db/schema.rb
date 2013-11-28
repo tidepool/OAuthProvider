@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126224555) do
+ActiveRecord::Schema.define(version: 20131128001537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,9 @@ ActiveRecord::Schema.define(version: 20131126224555) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["activity_record_id"], name: "index_comments_on_activity_record_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "definitions", force: true do |t|
     t.string   "name"
     t.text     "stages"
@@ -214,6 +217,9 @@ ActiveRecord::Schema.define(version: 20131126224555) do
     t.datetime "updated_at"
   end
 
+  add_index "highfives", ["activity_record_id"], name: "index_highfives_on_activity_record_id", using: :btree
+  add_index "highfives", ["user_id"], name: "index_highfives_on_user_id", using: :btree
+
   create_table "images", force: true do |t|
     t.string   "name"
     t.text     "elements"
@@ -231,6 +237,9 @@ ActiveRecord::Schema.define(version: 20131126224555) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "leaderboards", ["game_name"], name: "index_leaderboards_on_game_name", using: :btree
+  add_index "leaderboards", ["user_id"], name: "index_leaderboards_on_user_id", using: :btree
 
   create_table "measurements", force: true do |t|
     t.integer  "user_id",       null: false
@@ -329,6 +338,7 @@ ActiveRecord::Schema.define(version: 20131126224555) do
   end
 
   add_index "profile_descriptions", ["big5_dimension"], name: "index_profile_descriptions_on_big5_dimension", using: :btree
+  add_index "profile_descriptions", ["display_id"], name: "index_profile_descriptions_on_display_id", using: :btree
   add_index "profile_descriptions", ["holland6_dimension"], name: "index_profile_descriptions_on_holland6_dimension", using: :btree
 
   create_table "recommendations", force: true do |t|

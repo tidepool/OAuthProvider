@@ -27,7 +27,6 @@ OAuthProvider::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      # get 'users/finish_login', to: 'users#finish_login'   
       resources :users do 
         get 'personality', to: 'users#personality'
         post 'reset_password', to: 'users#reset_password'
@@ -41,15 +40,11 @@ OAuthProvider::Application.routes.draw do
         post 'preorders', to: 'preorders#create'
 
         get 'results', to: 'results#index'
-        # get 'results/latest', to: 'results#latest'
         get 'results/:id', to: 'results#show'
 
         resources :games do
-          # get 'result' => 'results#show'
           get 'results', to: 'results#index'
-          # post 'result' => 'results#create'
           get 'progress', to: 'results#progress'
-          # get 'latest' => 'results#show'
           put 'event_log', to: 'games#update_event_log'
         end
 
@@ -75,6 +70,8 @@ OAuthProvider::Application.routes.draw do
 
         get 'feeds', to: 'activity_stream#index'
       end
+
+      get 'personality/:title', to: 'profile_description#show'
 
       get 'feeds/:activity_record_id/comments', to: 'comments#index'
       get 'comments/:id', to: 'comments#show'

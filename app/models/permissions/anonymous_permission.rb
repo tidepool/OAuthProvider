@@ -5,6 +5,8 @@ module Permissions
       allow :users, [:create]
       allow :users, [:reset_password]
       allow :friend_surveys, [:create, :results]
+      allow :profile_description, [:show]
+
     end
   end
 end
