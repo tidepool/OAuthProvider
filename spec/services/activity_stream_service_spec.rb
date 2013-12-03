@@ -2,15 +2,12 @@ require 'spec_helper'
 
 describe ActivityStreamService do
   include FriendHelpers
+  include ActivityStreamHelpers
 
   let(:user1) { create(:user, name: 'John Doe') }
   let(:friend_list) { create_list(:friend_user, 7)}
   let(:make_friends_activity) { create_list(:make_friends_activity, 5, user: user1)}
-  let(:high_score_activity) { create_list(:high_score_activity, 5, user: user1)}
-
-  before :each do 
-    
-  end
+  let(:high_score_activities) { create_list(:high_score_activity, 5, user: user1)}
 
   it 'registers a MakeFriendsActivity' do 
     create_friends(user1, friend_list[0..3])
@@ -41,5 +38,24 @@ describe ActivityStreamService do
 
     stream_count = $redis.zcount "activity_stream:#{friend_list[6].id}", "-inf", "+inf"
     stream_count.should == 0
+  end
+
+
+  it 'returns the highfives count for all activity records' do 
+    create_activity(user1.id, high_score_activities)
+    high_score_activities.each_with_index do | activity, i |
+      unless i == 2
+        num_highfives = Random.new.rand(7)
+        (0...num_highfives).each do |i|
+          highfive = activity.highfives.build
+          highfive.user = user1
+          highfive.save!
+        end 
+      end
+    end
+
+    activity_stream = ActivityStreamService.new
+    activity_records, api_status = activity_stream.read_activity_stream(user1.id)
+    activity_records.length.should == 5
   end
 end

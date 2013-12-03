@@ -1,7 +1,7 @@
 class ActivityRecord < ActiveRecord::Base
   belongs_to  :user
   has_many :comments
-  # has_many :highfives
+  has_many :highfives
 
   serialize   :raw_data, JSON
 

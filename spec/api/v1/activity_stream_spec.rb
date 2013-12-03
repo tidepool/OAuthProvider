@@ -30,6 +30,7 @@ describe 'Activity Stream API' do
       activities[0][:description].should_not be_empty
       activities[0][:user_name].should_not be_nil
       activities[0][:user_image].should_not be_nil
+      activities[0][:highfive_count].should_not be_nil
       status = result[:status]
       status.should == {
              :offset => 0,
