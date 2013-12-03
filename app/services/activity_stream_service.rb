@@ -13,13 +13,10 @@ class ActivityStreamService
   def read_activity_stream(user_id, params={})
     ranges = ranges(params)
     activity_ids = $redis.zrevrange activity_stream_key(user_id), ranges[:offset], ranges[:limit] - 1, with_scores: false 
-
     activity_ids = activity_ids.map { |activity_id| activity_id.to_i }
     ranges[:total] = $redis.zcount activity_stream_key(user_id), "-inf", "+inf" 
 
     # activities = ActivityRecord.joins(:user).select("activity_records.*, users.email as user_email, users.name as user_name, users.image as user_image").where(id: activity_ids).to_a
-    # highfive_counts = Highfive.select("count(*) as highfive_count, activity_record_id").where(activity_record_id: activity_ids).group(:activity_record_id).to_a
-
     #   INNER JOIN "highfives" ON "highfives"."activity_record_id" = "activity_records"."id"
     query = %Q[
       SELECT ar.*, users.email as user_email, users.name as user_name, users.image as user_image, highfive.ct as highfive_count

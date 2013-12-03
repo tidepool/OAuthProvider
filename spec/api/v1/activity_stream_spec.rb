@@ -16,7 +16,8 @@ describe 'Activity Stream API' do
   context 'gets a list of activities for a user' do 
     before :each do 
       create_activity(user1.id, make_friends)
-      create_activity(user1.id, high_score)      
+      create_activity(user1.id, high_score)  
+      create_highfives(user1.id, high_score)
     end
 
     it 'gets a list of activities for a user' do 
@@ -27,10 +28,18 @@ describe 'Activity Stream API' do
       activities.length.should == 10
       types = activities.map { |activity| activity[:type] }
       types.should include("MakeFriendsActivity", "HighScoreActivity")
-      activities[0][:description].should_not be_empty
-      activities[0][:user_name].should_not be_nil
-      activities[0][:user_image].should_not be_nil
-      activities[0][:highfive_count].should_not be_nil
+
+      activities.each do |activity| 
+        activity[:description].should_not be_empty
+        activity[:user_name].should_not be_nil
+        activity[:user_image].should_not be_nil
+        activity[:highfive_count].should_not be_nil
+        if activity[:type] == "HighScoreActivity"
+          highfive_count = Highfive.select("count(*) as hcount").where(activity_record_id: activity[:id])[0].hcount
+          activity[:highfive_count].should == highfive_count.to_i
+        end
+      end
+
       status = result[:status]
       status.should == {
              :offset => 0,

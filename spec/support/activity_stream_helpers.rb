@@ -8,4 +8,16 @@ module ActivityStreamHelpers
     end
   end
 
+  def create_highfives(user_id, activities)
+    activities.each_with_index do | activity, i |
+      unless i == 2
+        num_highfives = Random.new.rand(7)
+        (0...num_highfives).each do |i|
+          highfive = activity.highfives.build
+          highfive.user_id = user_id
+          highfive.save!
+        end 
+      end
+    end
+  end
 end

@@ -43,16 +43,7 @@ describe ActivityStreamService do
 
   it 'returns the highfives count for all activity records' do 
     create_activity(user1.id, high_score_activities)
-    high_score_activities.each_with_index do | activity, i |
-      unless i == 2
-        num_highfives = Random.new.rand(7)
-        (0...num_highfives).each do |i|
-          highfive = activity.highfives.build
-          highfive.user = user1
-          highfive.save!
-        end 
-      end
-    end
+    create_highfives(user1.id, high_score_activities)
 
     activity_stream = ActivityStreamService.new
     activity_records, api_status = activity_stream.read_activity_stream(user1.id)
