@@ -20,11 +20,11 @@ class ActivityStreamService
     #   INNER JOIN "highfives" ON "highfives"."activity_record_id" = "activity_records"."id"
     query = %Q[
       SELECT ar.*, users.email as user_email, users.name as user_name, users.image as user_image, highfive.ct as highfive_count
-      FROM "activity_records" ar
-      INNER JOIN "users" ON "users"."id" = "ar"."user_id" 
+      FROM activity_records ar
+      INNER JOIN users ON users.id = ar.user_id 
       LEFT JOIN (
           SELECT activity_record_id, count(*) AS ct
-          FROM "highfives"
+          FROM highfives
           GROUP BY 1
         ) highfive ON highfive.activity_record_id = ar.id
       WHERE "ar"."id" IN #{activity_ids.to_s.gsub(/\[/, '(').gsub(/\]/, ')')}
