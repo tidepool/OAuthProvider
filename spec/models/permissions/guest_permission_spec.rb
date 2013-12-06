@@ -113,6 +113,14 @@ module Permissions
         expect(subject.allow?(:profile_description, :show)).to be_true
       end
 
+      it 'guest user permissions for devices' do 
+        expect(subject.allow?(:devices, :index)).to be_false
+        expect(subject.allow?(:devices, :show)).to be_false
+        expect(subject.allow?(:devices, :create)).to be_false
+        expect(subject.allow?(:devices, :update)).to be_false
+        expect(subject.allow?(:devices, :destroy)).to be_false
+      end
+
     end
 
     # describe 'caller and target_user are not the same user' do

@@ -69,6 +69,13 @@ OAuthProvider::Application.routes.draw do
         get 'games/:game_name/leaderboard', to: 'leaderboards#friends'
 
         get 'feeds', to: 'activity_stream#index'
+
+        get 'devices', to: 'devices#index'
+        get 'devices/:id', to: 'devices#show'
+        post 'devices', to: 'devices#create'
+        put  'devices/:id', to: 'devices#update'
+        patch 'devices/:id', to: 'devices#update'
+        delete 'devices/:id', to: 'devices#destroy'
       end
 
       get 'personality/:title', to: 'profile_description#show'
@@ -79,6 +86,7 @@ OAuthProvider::Application.routes.draw do
       put  'comments/:id', to: 'comments#update'
       patch 'comments/:id', to: 'comments#update'
       delete 'comments/:id', to: 'comments#destroy'
+
 
       get 'feeds/:activity_record_id/highfives', to: 'highfives#index'
       post 'feeds/:activity_record_id/highfives', to: 'highfives#create'

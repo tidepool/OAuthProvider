@@ -65,7 +65,7 @@ will return:
 
 ```  PUT "api/v1/comments/55" ```
 
-where ```55 is the ```comment_id```
+where ```55``` is the ```comment_id```
 
 with 
 
@@ -93,7 +93,7 @@ will return:
 
 ```  DELETE "api/v1/comments/55" ```
 
-where ```55 is the ```comment_id```
+where ```55``` is the ```comment_id```
 
 ### Highfives
 
@@ -148,4 +148,4 @@ will return:
 
 ```  DELETE "api/v1/highfives/55" ```
 
-where ```55 is the ```highfive_id```
+where ```55``` is the ```highfive_id```
