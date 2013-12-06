@@ -113,5 +113,12 @@ module Permissions
       expect(subject.allow?(:profile_description, :show)).to be_true
     end
 
+    it 'admin permissions for devices' do 
+      expect(subject.allow?(:devices, :index)).to be_true
+      expect(subject.allow?(:devices, :show)).to be_true
+      expect(subject.allow?(:devices, :create)).to be_true
+      expect(subject.allow?(:devices, :update)).to be_true
+      expect(subject.allow?(:devices, :destroy)).to be_true
+    end
   end
 end

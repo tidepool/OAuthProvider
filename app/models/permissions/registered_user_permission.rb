@@ -55,6 +55,8 @@ module Permissions
         allow :highfives, [:index, :create, :destroy]
 
         allow :profile_description, [:show]
+
+        allow :devices, [:index, :show, :destroy, :create, :update]
       end
     end
   end

@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :activity_records
   has_one :access_token,  foreign_key: "resource_owner_id", class_name: "Doorkeeper::AccessToken"
+  has_many :devices
 
   has_many :friendships
   has_many :friends, :through => :friendships

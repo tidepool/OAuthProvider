@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128001537) do
+ActiveRecord::Schema.define(version: 20131205233259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,19 @@ ActiveRecord::Schema.define(version: 20131128001537) do
   end
 
   add_index "definitions", ["unique_name"], name: "index_definitions_on_unique_name", unique: true, using: :btree
+
+  create_table "devices", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "os",         null: false
+    t.string   "os_version"
+    t.string   "hardware"
+    t.string   "name"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "emotion_descriptions", force: true do |t|
     t.string   "name",          null: false
