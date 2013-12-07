@@ -10,6 +10,7 @@ describe 'Activity Stream API' do
   end
 
   let(:user1) { create(:friend_user, name: 'John Doe') }
+  let(:user2) { create(:friend_user, name: 'Mary Joe') }
   let(:make_friends) { create_list(:make_friends_activity, 5, user: user1)}
   let(:high_score) { create_list(:high_score_activity, 5, user: user1)}
 
@@ -48,6 +49,14 @@ describe 'Activity Stream API' do
          :next_limit => 20,
               :total => 10
       }
+    end
+
+    it 'gets empty activities if the user has no activities yet' do 
+      token = get_conn(user2)
+      response = token.get("#{@endpoint}/users/-/feeds.json")
+      result = JSON.parse(response.body, symbolize_names: true)
+      activities = result[:data]
+      activities.length.should == 0      
     end
   end
 
