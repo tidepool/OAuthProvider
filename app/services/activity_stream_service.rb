@@ -29,7 +29,11 @@ class ActivityStreamService
         ) highfive ON highfive.activity_record_id = ar.id
       WHERE "ar"."id" IN #{activity_ids.to_s.gsub(/\[/, '(').gsub(/\]/, ')')}
     ]
-    activities = ActivityRecord.find_by_sql(query)
+    if activity_ids.nil? || activity_ids.empty? 
+      activities = []
+    else
+      activities = ActivityRecord.find_by_sql(query) 
+    end
     api_status = ActivityStreamService.generate_status(params, ranges)
     [activities, api_status]
   end
