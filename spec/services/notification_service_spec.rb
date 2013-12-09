@@ -23,7 +23,7 @@ describe NotificationService do
     time = Time.zone.now - 1.days
     nots = create_notifications(user1.id, "John")
     not_service = NotificationService.new
-    notifications = not_service.list_notifications(user1.id) 
+    notifications, api_status = not_service.list_notifications(user1.id) 
     notifications.length.should == nots.length
     notifications.each_with_index do | notification, i |
       notification[:message].should == nots[nots.length - i - 1][:alert]
@@ -37,7 +37,7 @@ describe NotificationService do
     not_service = NotificationService.new
     not_service.clear_notifications(user1.id, time + 1.hours)
     nots = create_notifications(user1.id, "Joe")
-    notifications = not_service.list_notifications(user1.id)    
+    notifications, api_status = not_service.list_notifications(user1.id)    
     notifications.length.should == nots.length * 2
     notifications.each_with_index do | notification, i |
       if i < nots.length

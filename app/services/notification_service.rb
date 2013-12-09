@@ -24,6 +24,8 @@ class NotificationService
   def list_notifications(user_id, params={})
     ranges = ranges(params)
     last_reset_time = ($redis.get(unread_reset_time_key(user_id)) || 0).to_i
+    ranges[:total] = $redis.zcount notifications_key(user_id), "0", "+inf" 
+
     notifications = $redis.zrevrange notifications_key(user_id), ranges[:offset], ranges[:limit] - 1, with_scores: true 
     response = []
     notifications.each do |notification, score|
@@ -34,7 +36,9 @@ class NotificationService
         is_read: is_read
       }
     end
-    response
+
+    api_status = NotificationService.generate_status(params, ranges)
+    [response, api_status]
   end
 
   private

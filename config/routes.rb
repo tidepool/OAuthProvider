@@ -76,6 +76,9 @@ OAuthProvider::Application.routes.draw do
         put  'devices/:id', to: 'devices#update'
         patch 'devices/:id', to: 'devices#update'
         delete 'devices/:id', to: 'devices#destroy'
+
+        get 'notifications', to: 'notifications#index'
+        post 'notifications/clear', to: 'notifications#clear'
       end
 
       get 'personality/:title', to: 'profile_description#show'

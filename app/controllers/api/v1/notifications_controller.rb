@@ -2,19 +2,21 @@ class Api::V1::NotificationsController < Api::V1::ApiController
   doorkeeper_for :all
 
   def index 
-    query = Device.where(user_id: target_user.id)
-    query = query.where(os: params[:os]) unless params[:os].nil?
+    not_service = NotificationService.new
+    notifications, api_status = not_service.list_notifications(target_user.id, params)
 
-    devices, api_status = Device.paginate(query, params) 
-
+    response = {
+      data: notifications,
+      status: api_status
+    }
     respond_to do |format|
-      format.json { render({ json: devices, meta: api_status, each_serializer: DeviceSerializer }.merge(api_defaults))  }
+      format.json { render( json: response.to_json ) }
     end
   end
 
-  def destroy
-    device = Device.find(params[:id])
-    device.destroy!
+  def clear
+    not_service = NotificationService.new
+    not_service.clear_notifications(target_user.id)
 
     respond_to do |format|
       format.json { render({ json: {}, meta: {} }.merge(api_defaults))  }
