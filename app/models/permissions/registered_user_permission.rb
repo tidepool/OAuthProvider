@@ -57,6 +57,8 @@ module Permissions
         allow :profile_description, [:show]
 
         allow :devices, [:index, :show, :destroy, :create, :update]
+
+        allow :notifications, [:index, :clear]
       end
     end
   end

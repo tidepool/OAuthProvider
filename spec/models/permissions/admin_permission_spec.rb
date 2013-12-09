@@ -120,5 +120,11 @@ module Permissions
       expect(subject.allow?(:devices, :update)).to be_true
       expect(subject.allow?(:devices, :destroy)).to be_true
     end
+
+    it 'admin user permissions for notifications' do 
+      expect(subject.allow?(:notifications, :index)).to be_true
+      expect(subject.allow?(:notifications, :clear)).to be_true
+    end
+
   end
 end

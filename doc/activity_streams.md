@@ -54,7 +54,7 @@ Example:
 
 In order to retrieve the activities for the current user:
 
-      GET /users/-/activity_stream?limit=5&offset=0
+      GET /users/-/feeds?limit=5&offset=0
 
 will return:
 

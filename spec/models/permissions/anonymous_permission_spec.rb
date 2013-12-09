@@ -109,5 +109,10 @@ module Permissions
       expect(subject.allow?(:devices, :destroy)).to be_false
     end
 
+    it 'anonymous permissions for notifications' do 
+      expect(subject.allow?(:notifications, :index)).to be_false
+      expect(subject.allow?(:notifications, :clear)).to be_false
+    end
+
   end
 end
