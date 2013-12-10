@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -65,8 +65,7 @@ group :development, :test, :teamcity do
   gem 'blitz'
 end
 
-# Pagination
-# gem 'kaminari'
+gem 'aws-sdk'
 
 # Cron replacement
 gem 'clockwork'
@@ -91,11 +90,8 @@ gem 'slim'
 gem 'foreman'
 
 gem 'unicorn'
-# gem 'thin'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-# gem 'unicorn'
 
