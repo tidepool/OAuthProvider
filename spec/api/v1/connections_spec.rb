@@ -145,7 +145,6 @@ describe 'Connections API' do
     response = token.get("#{@endpoint}/users/-/connections/fitbit/synchronize.json")
     response.status.should == 202        
     api_status = JSON.parse(response.body, symbolize_names: true)
-
     is_done = false
     # Start polling for progress
     response = token.get(api_status[:status][:link])

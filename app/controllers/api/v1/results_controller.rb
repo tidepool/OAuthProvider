@@ -15,11 +15,27 @@ class Api::V1::ResultsController < Api::V1::ApiController
           results: api_v1_user_results_url } )
     results, api_status, http_status = results_service.find_results
 
-    respond_to do |format|
-      format.json { 
-        render( { json: results, status: http_status, meta: api_status }.merge(api_defaults) )
+    if params[:daily]
+      # The below is because we are using ActiveModelSerialization
+      # We don't have any control over the inner serializer (which is ArraySerializer in this case)
+      # The array serializer by default inserts the data and status fields for each array inside the array
+      # which is not what we want.
+      # That's why I have this HACK below!
+
+      response = {
+        data:results,
+        status: api_status
       }
-    end    
+      respond_to do |format|
+        format.json { render( json: response.to_json ) }
+      end
+    else
+      respond_to do |format|
+        format.json { 
+          render( { json: results, status: http_status, meta: api_status }.merge(api_defaults) )
+        }
+      end    
+    end
   end
 
   def show
