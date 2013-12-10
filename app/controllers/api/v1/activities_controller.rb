@@ -9,7 +9,7 @@ class Api::V1::ActivitiesController < Api::V1::ApiController
     activities, api_status = Activity.paginate(query, params)
 
     respond_to do |format|
-      format.json { render({ json: activities, meta: api_status }.merge(api_defaults))  }
+      format.json { render({ json: activities, meta: api_status, each_serializer: ActivitySerializer }.merge(api_defaults))  }
     end
   end
 

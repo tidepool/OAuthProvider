@@ -22,7 +22,6 @@ describe 'Comments API' do
     result = JSON.parse(response.body, symbolize_names: true)
     comments = result[:data]
     comments.length.should == 5
-
     comments[0][:text].should_not be_nil
     comments[0][:user_name].should_not be_nil
     comments[0][:user_image].should_not be_nil

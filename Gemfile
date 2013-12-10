@@ -7,8 +7,12 @@ gem 'rails', '4.0.2'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # Authentication:
-# gem 'doorkeeper', '~> 0.6.7'
-gem 'doorkeeper', :github => 'applicake/doorkeeper'  # For Rails 4rc1 support
+# gem 'doorkeeper', '~> 0.7.0'
+# gem 'doorkeeper', :github => 'applicake/doorkeeper'  # For Rails 4rc1 support
+# There is a bug in the new branches of doorkeeper.
+# Has a temp fix in our fork, but not sure if it is the right fix, for now we will use our branch.
+gem 'doorkeeper', :github => 'tidepool/doorkeeper', :branch => 'v0.7'  
+
 gem 'omniauth', :github => 'tidepool/omniauth' # We need a way to iterate over all providers
 gem 'omniauth-facebook'
 gem 'omniauth-fitbit'
@@ -74,7 +78,8 @@ gem 'clockwork'
 gem 'fitgem'
 
 # API (Serializers)
-gem "active_model_serializers", :github => "rails-api/active_model_serializers"
+# gem "active_model_serializers", :github => "rails-api/active_model_serializers"
+gem "active_model_serializers", "~> 0.8.0"
 
 gem 'jquery-rails'
 
@@ -92,6 +97,6 @@ gem 'foreman'
 gem 'unicorn'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 
